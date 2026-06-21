@@ -1,0 +1,273 @@
+{%- style -%}
+  #home-faq-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: 'var(--color-brand-bg-soft)' }};
+  }
+
+  .home-faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .home-faq-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .home-faq-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .home-faq-title {
+    font-family: var(--font-heading-family);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .home-faq-title em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-faq-subtitle {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .home-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .home-faq-item {
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-brand-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-brand-resting);
+    transition: border-color 0.2s ease;
+  }
+
+  .home-faq-item[open] {
+    border-color: var(--color-brand-primary-hover);
+  }
+
+  .home-faq-question {
+    font-family: var(--font-heading-family);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    padding: 20px 24px;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .home-faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .home-faq-icon {
+    font-size: 20px;
+    transition: transform 0.2s ease;
+    color: var(--color-brand-primary-hover);
+  }
+
+  .home-faq-item[open] .home-faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .home-faq-answer {
+    padding: 0 24px 20px 24px;
+    font-family: var(--font-body-family);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-brand-text-secondary);
+    border-top: 1px solid transparent;
+  }
+
+  .home-faq-item[open] .home-faq-answer {
+    border-top-color: var(--color-brand-border);
+    padding-top: 16px;
+  }
+
+  .home-faq-answer p {
+    margin: 0 0 12px 0;
+  }
+
+  .home-faq-answer p:last-child {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    #home-faq-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-faq-title {
+      font-size: 28px;
+    }
+    .home-faq-question {
+      font-size: 16px;
+      padding: 16px 20px;
+    }
+    .home-faq-answer {
+      padding: 0 20px 16px 20px;
+      font-size: 14px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-faq-{{ section.id }}">
+  <div class="home-faq-container">
+    <div class="home-faq-header">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-faq-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      <h2 class="home-faq-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="home-faq-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="home-faq-list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'faq_item' -%}
+          <details class="home-faq-item" {{ block.shopify_attributes }}>
+            <summary class="home-faq-question">
+              <span>{{ block.settings.question }}</span>
+              <span class="home-faq-icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="home-faq-answer">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "QUESTIONS & ANSWERS"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Frequently Asked <em>Questions</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Find answers to common questions about our parenting workbooks and secure processing fee model."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Your question here?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Your answer here.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this a real company?",
+            "answer": "<p>Yes, <strong>TinyThrive</strong> is a real brand operated by <strong>OUSI PLAY LLC</strong>. We publish premium children's life-skills workbooks. You can reach our support team anytime at <strong>support@tinythrive.com</strong> (we respond in under 24 hours). All transactions on our site are secured by SSL encryption, and every order is fully protected by our 90-Day Money-Back Guarantee.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why is there a digital processing fee?",
+            "answer": "<p>To make our workbooks accessible to as many families as possible, we cover the retail cost of the product itself. The small $1.95 digital processing fee at checkout goes directly to offset secure download hosting costs, merchant processing gate fees, and customer support resources.</p>"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I get my download link?",
+            "answer": "<p>Directly after your payment is processed, you will see a download button on the order confirmation screen. Additionally, we instantly email a secure PDF download link to the address you supplied at checkout. If you do not receive it in 5 minutes, please check your spam folder or email us.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

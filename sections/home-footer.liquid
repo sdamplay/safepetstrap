@@ -1,0 +1,381 @@
+{%- style -%}
+  body.template-index #shopify-section-footer-group,
+  body.template-index .shopify-section-group-footer-group {
+    display: none !important;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer {
+    background-color: var(--color-brand-primary);
+    padding: 72px 32px;
+    position: relative;
+    color: #FFFFFF;
+    font-family: var(--font-body-family);
+  }
+  
+  #wld-home-footer-{{ section.id }} *, 
+  #wld-home-footer-{{ section.id }} *::before, 
+  #wld-home-footer-{{ section.id }} *::after {
+    box-sizing: border-box;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brand-primary);
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 18px;
+    overflow: hidden;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-brand-name {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 18px;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-business-info {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-col-heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-link {
+    font-size: 14px;
+    color: #FFFFFF;
+    line-height: 28px;
+    text-decoration: none;
+    display: block;
+    transition: opacity 0.2s ease;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-link:hover {
+    opacity: 0.8;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-newsletter-heading {
+    font-weight: 700;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 16px 0;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-input-wrap {
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 48px 0 16px;
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: none;
+    font-size: 14px;
+    color: var(--color-brand-text-primary);
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-input-arrow {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--color-brand-primary);
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-signup {
+    display: block;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    background: #FFFFFF;
+    color: var(--color-brand-primary-hover);
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 999px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: var(--shadow-brand-cta);
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-bottom {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    text-align: center;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-payment-icon {
+    width: 38px;
+    height: 24px;
+    display: block;
+    border-radius: 4px;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-copyright {
+    font-size: 12px;
+    color: #FFFFFF;
+    text-align: center;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  #wld-home-footer-{{ section.id }} .home-footer-scrolltop {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: var(--color-brand-primary-hover);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: var(--shadow-brand-cta);
+  }
+
+  @media (max-width: 900px) {
+    #wld-home-footer-{{ section.id }} .home-footer-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    #wld-home-footer-{{ section.id }} .home-footer {
+      padding: 48px 20px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="wld-home-footer-{{ section.id }}">
+  <footer class="home-footer">
+    <div class="home-footer-inner">
+      <div class="home-footer-grid">
+        
+        <!-- Brand column -->
+        <div class="home-footer-col">
+          <div class="home-footer-brand">
+            <div class="home-footer-logo-row">
+              {%- if section.settings.logo != blank -%}
+                <div class="home-footer-logo">
+                  {{ section.settings.logo | image_url: width: 96 | image_tag: widths: '48,96', sizes: '48px', loading: 'lazy', class: 'home-footer-logo-img', alt: section.settings.brand_name }}
+                </div>
+              {%- else -%}
+                <div class="home-footer-logo">{{ section.settings.logo_initials }}</div>
+              {%- endif -%}
+              <p class="home-footer-brand-name">{{ section.settings.brand_name }}</p>
+            </div>
+            
+            <!-- Business Info with LLC and Address -->
+            <div class="home-footer-business-info">
+              Operated by <strong>OUSI PLAY LLC</strong><br>
+              Business Address: {{ section.settings.business_address }}<br>
+              Support Email: {{ section.settings.support_email }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Links column -->
+        <div class="home-footer-col">
+          <h4 class="home-footer-col-heading">Quick Links</h4>
+          <ul class="home-footer-links">
+            <li><a href="{{ section.settings.about_url | default: '/pages/about-us' }}" class="home-footer-link">About Us</a></li>
+            <li><a href="{{ section.settings.contact_url | default: '/pages/contact' }}" class="home-footer-link">Contact Us</a></li>
+            <li><a href="/policies/refund-policy" class="home-footer-link">Refund Policy</a></li>
+            <li><a href="/policies/terms-of-service" class="home-footer-link">Terms of Service</a></li>
+            <li><a href="/policies/shipping-policy" class="home-footer-link">Delivery & Shipping Policy</a></li>
+            <li><a href="/policies/privacy-policy" class="home-footer-link">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter column -->
+        <div class="home-footer-col">
+          <h4 class="home-footer-newsletter-heading">{{ section.settings.newsletter_heading }}</h4>
+          {%- form 'customer', class: 'home-footer-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="home-footer-input-wrap">
+              <input type="email" name="contact[email]" class="home-footer-input" placeholder="Your Email Address" required>
+              <button type="submit" class="home-footer-input-arrow" aria-label="Submit">→</button>
+            </div>
+            <button type="submit" class="home-footer-signup">{{ section.settings.newsletter_button_label }}</button>
+          {%- endform -%}
+        </div>
+
+      </div>
+
+      <div class="home-footer-bottom">
+        <!-- Real payment icons -->
+        <div class="home-footer-payments">
+          {%- assign enabled_payment_types = shop.enabled_payment_types -%}
+          {%- if section.settings.custom_payment_types != blank -%}
+            {%- assign enabled_payment_types = section.settings.custom_payment_types | remove: ' ' | split: ',' -%}
+          {%- endif -%}
+          {%- for type in enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'home-footer-payment-icon' }}
+          {%- endfor -%}
+        </div>
+        
+        <p class="home-footer-copyright">
+          &copy; {{ 'now' | date: '%Y' }}, {{ section.settings.brand_name }}. Operated by OUSI PLAY LLC. All rights reserved.
+        </p>
+      </div>
+      
+      <a href="#wld-home-footer-{{ section.id }}" class="home-footer-scrolltop" aria-label="Scroll to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">↑</a>
+    </div>
+  </footer>
+</div>
+
+{% schema %}
+{
+  "name": "Home Footer Trust Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "TinyThrive"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "text",
+      "id": "logo_initials",
+      "label": "Logo initials (fallback)",
+      "default": "TT"
+    },
+    {
+      "type": "text",
+      "id": "business_address",
+      "label": "Business address",
+      "default": "[LLC Address - Replace before launch]"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "support@tinythrive.com"
+    },
+    {
+      "type": "url",
+      "id": "about_url",
+      "label": "About Us page URL"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact Us page URL"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "JOIN 12,000+ PARENTS GETTING FREE PRINTABLES"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_button_label",
+      "label": "Newsletter button label",
+      "default": "Send Me Freebies"
+    },
+    {
+      "type": "text",
+      "id": "custom_payment_types",
+      "label": "Custom payment icons to show (comma-separated list)",
+      "info": "Leave blank to use shop defaults. Options: visa, master, american_express, paypal, apple_pay, google_pay, shopify_pay, etc."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Footer Trust Block"
+    }
+  ]
+}
+{% endschema %}
+{% comment %} force sync {% endcomment %}

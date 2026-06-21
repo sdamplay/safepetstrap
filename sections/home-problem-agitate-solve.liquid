@@ -1,0 +1,259 @@
+{%- style -%}
+  #home-pas-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+  }
+
+  .home-pas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .home-pas-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 56px auto;
+  }
+
+  .home-pas-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .home-pas-title {
+    font-family: var(--font-heading-family);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .home-pas-title em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-pas-subtitle {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .home-pas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  .home-pas-card {
+    background: var(--color-brand-bg-soft);
+    border: 1px solid var(--color-brand-border);
+    border-radius: 16px;
+    padding: 32px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-brand-resting);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .home-pas-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 122, 130, 0.12);
+  }
+
+  .home-pas-card.solution-card {
+    background-color: var(--color-brand-bg-soft-secondary);
+    border-color: var(--color-brand-primary-hover);
+  }
+
+  .home-pas-card-emoji {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .home-pas-card-title {
+    font-family: var(--font-heading-family);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+  }
+
+  .home-pas-card-text {
+    font-family: var(--font-body-family);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  .home-pas-card.solution-card .home-pas-card-text {
+    color: var(--color-brand-text-primary);
+  }
+
+  @media (max-width: 900px) {
+    #home-pas-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-pas-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .home-pas-header {
+      margin-bottom: 36px;
+    }
+    .home-pas-title {
+      font-size: 28px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-pas-{{ section.id }}">
+  <div class="home-pas-container">
+    <div class="home-pas-header">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-pas-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      <h2 class="home-pas-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="home-pas-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="home-pas-grid">
+      <!-- PROBLEM -->
+      <div class="home-pas-card">
+        <span class="home-pas-card-emoji">😩</span>
+        <h3 class="home-pas-card-title">{{ section.settings.card_1_title }}</h3>
+        <p class="home-pas-card-text">{{ section.settings.card_1_text }}</p>
+      </div>
+
+      <!-- AGITATE -->
+      <div class="home-pas-card">
+        <span class="home-pas-card-emoji">⚡</span>
+        <h3 class="home-pas-card-title">{{ section.settings.card_2_title }}</h3>
+        <p class="home-pas-card-text">{{ section.settings.card_2_text }}</p>
+      </div>
+
+      <!-- SOLVE -->
+      <div class="home-pas-card solution-card">
+        <span class="home-pas-card-emoji">✨</span>
+        <h3 class="home-pas-card-title">{{ section.settings.card_3_title }}</h3>
+        <p class="home-pas-card-text">{{ section.settings.card_3_text }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Problem Agitate Solve",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "THE PARENT CHALLENGE"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Why Teaching Life Skills <em>Feels So Hard</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "We want our kids to be independent, but between screen time tantrums and daily chore battles, it's easy to feel overwhelmed."
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Problem card title",
+      "default": "1. The Nagging Cycle"
+    },
+    {
+      "type": "textarea",
+      "id": "card_1_text",
+      "label": "Problem card body",
+      "default": "You ask them to clean their room or brush their teeth five times. By the fifth time, you're raising your voice, they're crying, and the task still isn't done right."
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Agitate card title",
+      "default": "2. Hidden Power Struggles"
+    },
+    {
+      "type": "textarea",
+      "id": "card_2_text",
+      "label": "Agitate card body",
+      "default": "Without clear visual instructions, kids look at a messy room and feel complete brain freeze. They aren't trying to disobey you; they literally don't know where to start."
+    },
+    {
+      "type": "text",
+      "id": "card_3_title",
+      "label": "Solve card title",
+      "default": "3. The TinyThrive Solution"
+    },
+    {
+      "type": "textarea",
+      "id": "card_3_text",
+      "label": "Solve card body",
+      "default": "Our printable workbooks convert complex tasks (routines, emotional control, organizing) into kid-friendly visual guides. Your child takes the lead, and you finally stop nagging."
+    },
+    {
+      "type": "header",
+      "content": "Design & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Problem Agitate Solve"
+    }
+  ]
+}
+{% endschema %}

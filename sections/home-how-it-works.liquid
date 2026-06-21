@@ -1,0 +1,254 @@
+{%- style -%}
+  #home-how-it-works-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: 'var(--color-brand-bg-soft)' }};
+  }
+
+  .home-how-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .home-how-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 56px auto;
+  }
+
+  .home-how-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .home-how-title {
+    font-family: var(--font-heading-family);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .home-how-title em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-how-subtitle {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .home-how-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    position: relative;
+  }
+
+  .home-how-step {
+    background: #FFFFFF;
+    border: 1px solid var(--color-brand-border);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: var(--shadow-brand-resting);
+    position: relative;
+    z-index: 2;
+  }
+
+  .home-how-step-num {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background-color: var(--color-brand-primary);
+    color: #FFFFFF;
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-brand-cta);
+  }
+
+  .home-how-step-title {
+    font-family: var(--font-heading-family);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 12px 0;
+  }
+
+  .home-how-step-text {
+    font-family: var(--font-body-family);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    #home-how-it-works-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-how-steps {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .home-how-header {
+      margin-bottom: 36px;
+    }
+    .home-how-title {
+      font-size: 28px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-how-it-works-{{ section.id }}">
+  <div class="home-how-inner">
+    <div class="home-how-header">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-how-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      <h2 class="home-how-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="home-how-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="home-how-steps">
+      <!-- Step 1 -->
+      <div class="home-how-step">
+        <div class="home-how-step-num">1</div>
+        <h3 class="home-how-step-title">{{ section.settings.step_1_title }}</h3>
+        <p class="home-how-step-text">{{ section.settings.step_1_text }}</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="home-how-step">
+        <div class="home-how-step-num">2</div>
+        <h3 class="home-how-step-title">{{ section.settings.step_2_title }}</h3>
+        <p class="home-how-step-text">{{ section.settings.step_2_text }}</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="home-how-step">
+        <div class="home-how-step-num">3</div>
+        <h3 class="home-how-step-title">{{ section.settings.step_3_title }}</h3>
+        <p class="home-how-step-text">{{ section.settings.step_3_text }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "SIMPLE PROCESS"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Get Started in <em>Just 3 Steps</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Because these are digital PDF products, you don't have to wait for mail delivery or pay shipping costs. Get started instantly."
+    },
+    {
+      "type": "text",
+      "id": "step_1_title",
+      "label": "Step 1 title",
+      "default": "1. Order Online"
+    },
+    {
+      "type": "textarea",
+      "id": "step_1_text",
+      "label": "Step 1 text",
+      "default": "Claim your FREE workbook and pay the small secure digital processing fee at checkout."
+    },
+    {
+      "type": "text",
+      "id": "step_2_title",
+      "label": "Step 2 title",
+      "default": "2. Instant Email Delivery"
+    },
+    {
+      "type": "textarea",
+      "id": "step_2_text",
+      "label": "Step 2 text",
+      "default": "Check your email inbox immediately after purchase. Your secure PDF download link is delivered in under 2 minutes."
+    },
+    {
+      "type": "text",
+      "id": "step_3_title",
+      "label": "Step 3 title",
+      "default": "3. Print & Use"
+    },
+    {
+      "type": "textarea",
+      "id": "step_3_text",
+      "label": "Step 3 text",
+      "default": "Open the PDF, print the worksheets at home or your local print shop, and hand them to your child to start building life skills!"
+    },
+    {
+      "type": "header",
+      "content": "Design & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works"
+    }
+  ]
+}
+{% endschema %}

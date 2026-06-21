@@ -1,0 +1,362 @@
+{%- style -%}
+  #home-social-proof-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+  }
+
+  .home-social-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .home-social-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 56px auto;
+  }
+
+  .home-social-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .home-social-title {
+    font-family: var(--font-heading-family);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .home-social-title em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-social-subtitle {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .home-social-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .home-social-stat-item {
+    background-color: var(--color-brand-bg-soft);
+    border: 1px solid var(--color-brand-border);
+    border-radius: 12px;
+    padding: 16px 32px;
+    min-width: 180px;
+  }
+
+  .home-social-stat-num {
+    font-family: var(--font-heading-family);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-brand-primary-hover);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .home-social-stat-label {
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    color: var(--color-brand-text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .home-social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+  }
+
+  .home-social-card {
+    background: var(--color-brand-bg-soft);
+    border: 1px solid var(--color-brand-border);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: var(--shadow-brand-resting);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .home-social-stars {
+    color: var(--color-brand-star-gold);
+    font-size: 18px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+
+  .home-social-quote {
+    font-family: var(--font-body-family);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-brand-text-primary);
+    font-style: italic;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+  }
+
+  .home-social-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--color-brand-border);
+    padding-top: 16px;
+  }
+
+  .home-social-author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-social-author-name {
+    font-family: var(--font-heading-family);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+  }
+
+  .home-social-author-tag {
+    font-family: var(--font-body-family);
+    font-size: 12px;
+    color: var(--color-brand-text-secondary);
+  }
+
+  @media (max-width: 900px) {
+    #home-social-proof-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-social-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .home-social-header {
+      margin-bottom: 36px;
+    }
+    .home-social-title {
+      font-size: 28px;
+    }
+    .home-social-stats {
+      gap: 16px;
+    }
+    .home-social-stat-item {
+      width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-social-proof-{{ section.id }}">
+  <div class="home-social-inner">
+    <div class="home-social-header">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-social-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      <h2 class="home-social-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="home-social-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Stats Bar -->
+    {%- if section.settings.show_stats -%}
+      <div class="home-social-stats">
+        <div class="home-social-stat-item">
+          <span class="home-social-stat-num">{{ section.settings.stat_1_num }}</span>
+          <span class="home-social-stat-label">{{ section.settings.stat_1_label }}</span>
+        </div>
+        <div class="home-social-stat-item">
+          <span class="home-social-stat-num">{{ section.settings.stat_2_num }}</span>
+          <span class="home-social-stat-label">{{ section.settings.stat_2_label }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- Testimonials Grid -->
+    <div class="home-social-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'testimonial' -%}
+          <div class="home-social-card" {{ block.shopify_attributes }}>
+            <div class="home-social-stars">
+              {%- for i in (1..block.settings.rating) -%}
+                ★
+              {%- endfor -%}
+            </div>
+            <p class="home-social-quote">
+              "{{ block.settings.quote }}"
+            </p>
+            <div class="home-social-meta">
+              <div class="home-social-author-info">
+                <span class="home-social-author-name">{{ block.settings.author }}</span>
+                {%- if block.settings.tag != blank -%}
+                  <span class="home-social-author-tag">{{ block.settings.tag }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Social Proof",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "CUSTOMER EXPERIENCES"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "What Parents <em>Are Saying</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "[PLACEHOLDER - Replace this subtitle with verified parent statistics, e.g. 'Over 12,000 parents have used our guides to help their kids master basic life skills.']"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show statistics counter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stat_1_num",
+      "label": "Stat 1 Number",
+      "default": "[PLACEHOLDER - e.g. 12,000+]"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "[PLACEHOLDER - e.g. Parents Supported]"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_num",
+      "label": "Stat 2 Number",
+      "default": "[PLACEHOLDER - e.g. 98%]"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "[PLACEHOLDER - e.g. Satisfaction Rate]"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review/Quote",
+          "default": "[PLACEHOLDER - Replace with a real review before launch. Example: 'This workbook gave us an actual plan instead of more bedtime struggles. My son is ahead of where he was, and honestly, so am I.']"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "[PLACEHOLDER - e.g. Sarah M.]"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Author sub-info",
+          "default": "[PLACEHOLDER - e.g. Mom of 2]"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Proof",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,1 +1,427 @@
-{"sections":{"hero_hRhTz6":{"type":"hero","blocks":{"spacer_j7qAp7":{"type":"spacer","settings":{"size":"pixel","percent_size":100,"pixel_size":24,"custom_mobile_size":false,"size_mobile":"percent","percent_size_mobile":100,"pixel_size_mobile":120},"blocks":{}},"marquee_XmRqyc":{"type":"_marquee","settings":{"movement_direction":"normal","inherit_color_scheme":true,"color_scheme":"","transparent_background":true,"padding-block-start":24,"padding-block-end":24,"gap_between_elements":24},"blocks":{"text_wRqMah":{"type":"text","settings":{"text":"<p>Stories that feel like home<\/p>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"h1","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"text_separator":{"type":"text","settings":{"text":"<p>•<\/p>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"h1","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"nowrap","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["text_wRqMah","text_separator"]},"button_ybwxjf":{"type":"button","settings":{"label":"Shop now","link":"shopify:\/\/collections\/all","open_in_new_tab":false,"style_class":"button","width":"fit-content","custom_width":100,"width_mobile":"fit-content","custom_width_mobile":100},"blocks":{}}},"block_order":["spacer_j7qAp7","marquee_XmRqyc","button_ybwxjf"],"name":"t:names.hero_marquee","settings":{"media_type_1":"image","image_1":"shopify:\/\/shop_images\/19dd275f706c8adb3ca4287928487db4.png","media_type_2":"image","stack_media_on_mobile":false,"custom_mobile_media":false,"media_type_1_mobile":"image","media_type_2_mobile":"image","link":"","open_in_new_tab":false,"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"center","vertical_alignment_flex_direction_column":"space-between","gap":32,"section_width":"page-width","section_height":"medium","section_height_custom":50,"color_scheme":"scheme-6","toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"gradient","gradient_direction":"to top","blurred_reflection":false,"reflection_opacity":75,"padding-block-start":0,"padding-block-end":40}},"section_JpEEkW":{"type":"section","blocks":{"group_6iccQj":{"type":"group","name":"t:names.group","settings":{"content_direction":"row","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":0,"width":"fill","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fill","custom_height":100,"inherit_color_scheme":true,"color_scheme":"","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":8,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","link":"","open_in_new_tab":false,"placeholder":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"group_jDm8Af":{"type":"group","name":"t:names.group","settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":12,"width":"fill","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fill","custom_height":100,"inherit_color_scheme":true,"color_scheme":"","background_media":"image","video_position":"cover","background_image":"shopify:\/\/shop_images\/97056ca7394100dc9e291082567c4378.png","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","link":"","open_in_new_tab":false,"placeholder":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"group_CExz4y":{"type":"group","name":"t:names.group","settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":12,"width":"fill","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"inherit_color_scheme":true,"color_scheme":"scheme-5","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":true,"overlay_color":"#00000014","overlay_style":"solid","gradient_direction":"to top","link":"","open_in_new_tab":false,"placeholder":"","padding-block-start":20,"padding-block-end":20,"padding-inline-start":40,"padding-inline-end":40},"blocks":{"spacer_TBmRgX":{"type":"spacer","name":"t:names.spacer","settings":{"size":"pixel","percent_size":100,"pixel_size":80,"custom_mobile_size":true,"size_mobile":"pixel","percent_size_mobile":100,"pixel_size_mobile":160},"blocks":{}},"text_FV4eEY":{"type":"text","name":"t:names.text","settings":{"text":"<p>Nurture your child’s love of reading with gentle narration, colorful illustrations, and playful interactive adventures.<\/p>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"h3","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground-heading)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"text_9pdQBK":{"type":"text","name":"t:names.text","settings":{"text":"<p>Born from a passion for storytelling, we’re devoted to creating a warm, welcoming space for young readers to flourish.<\/p>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"rte","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"spacer_Q4jfQF":{"type":"spacer","name":"t:names.spacer","settings":{"size":"pixel","percent_size":100,"pixel_size":80,"custom_mobile_size":true,"size_mobile":"pixel","percent_size_mobile":100,"pixel_size_mobile":160},"blocks":{}}},"block_order":["spacer_TBmRgX","text_FV4eEY","text_9pdQBK","spacer_Q4jfQF"]}},"block_order":["group_jDm8Af","group_CExz4y"]}},"block_order":["group_6iccQj"],"name":"t:names.custom_section","settings":{"content_direction":"row","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":0,"section_width":"page-width","section_height":"","section_height_custom":50,"color_scheme":"scheme-2","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","padding-block-start":40,"padding-block-end":20}},"product_list_themegen":{"type":"product-list","disabled":false,"blocks":{"static-header":{"type":"_product-list-content","name":"t:names.header","disabled":true,"static":true,"settings":{"content_direction":"row","vertical_on_mobile":false,"horizontal_alignment":"space-between","vertical_alignment":"center","align_baseline":true,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":12,"width":"fit-content","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"inherit_color_scheme":true,"color_scheme":"","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"product_list_text_Bd9pVh":{"type":"_product-list-text","name":"t:names.collection_title","settings":{"text":"<h3>{{ closest.collection.title }}<\/h3>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"custom","font":"var(--font-heading--family)","font_size":"","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["product_list_text_Bd9pVh"]},"static-product-card":{"type":"_product-card","name":"t:names.product_card","static":true,"settings":{"product_card_gap":16,"inherit_color_scheme":true,"color_scheme":"","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"padding-block-start":0,"padding-block-end":16,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"product_card_gallery_PhczVC":{"type":"_product-card-gallery","name":"t:names.product_card_media","settings":{"image_ratio":"portrait","border":"none","border_width":1,"border_opacity":100,"border_radius":8,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"group_McqFAT":{"type":"_product-card-group","name":"t:names.group","settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":4,"width":"fill","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"inherit_color_scheme":true,"color_scheme":"","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","link":"","open_in_new_tab":false,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"text_MEKzFi":{"type":"text","name":"t:names.text","settings":{"text":"<h5>{{ closest.product.title }}<\/h5>","width":"100%","max_width":"normal","alignment":"left","type_preset":"h4","font":"var(--font-body--family)","font_size":"1.125rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"price_37riDf":{"type":"price","name":"t:names.product_price","settings":{"show_sale_price_first":true,"show_installments":false,"show_tax_info":false,"type_preset":"custom","width":"100%","alignment":"left","font":"var(--font-body--family)","font_size":"1.125rem","line_height":"normal","letter_spacing":"normal","case":"none","color":"var(--color-foreground)","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"swatches_87VJC8":{"type":"swatches","name":"t:names.swatches","settings":{"product_swatches_alignment":"flex-start","product_swatches_alignment_mobile":"flex-start","hide_padding":false,"product_swatches_padding_top":4,"product_swatches_padding_bottom":0,"product_swatches_padding_left":0,"product_swatches_padding_right":0},"blocks":{}}},"block_order":["text_MEKzFi","price_37riDf","swatches_87VJC8"]}},"block_order":["product_card_gallery_PhczVC","group_McqFAT"]}},"name":"t:names.products_grid","settings":{"collection":"asset-pack-50532974594-example-products","layout_type":"carousel","carousel_on_mobile":false,"max_products":4,"columns":3,"mobile_columns":"1","mobile_card_size":"60cqw","columns_gap":20,"rows_gap":36,"icons_style":"arrow","icons_shape":"circle","section_width":"page-width","horizontal_alignment":"center","gap":40,"color_scheme":"scheme-2","padding-block-start":20,"padding-block-end":20}},"hero_pjNAy4":{"type":"hero","blocks":{"group_hBqcgn":{"type":"group","name":"t:names.group","settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":16,"width":"custom","custom_width":50,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"inherit_color_scheme":true,"color_scheme":"","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","link":"","open_in_new_tab":false,"placeholder":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"text_wwUwfj":{"type":"text","settings":{"text":"<h2>Interactive story magic<\/h2>","width":"100%","max_width":"narrow","alignment":"left","type_preset":"h1","font":"var(--font-heading--family)","font_size":"4.5rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"balance","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"text_R3Kxc7":{"type":"text","name":"t:names.text","settings":{"text":"<p>Every digital book features vibrant art, friendly narration, and engaging quizzes that spark imagination and build confidence.<\/p>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"custom","font":"var(--font-primary--family)","font_size":"1.125rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"balance","color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"button_Vd78VG":{"type":"button","name":"t:names.button","settings":{"label":"Shop now","link":"shopify:\/\/collections\/all","open_in_new_tab":false,"style_class":"button","width":"fit-content","custom_width":100,"width_mobile":"fit-content","custom_width_mobile":100},"blocks":{}}},"block_order":["text_wwUwfj","text_R3Kxc7","button_Vd78VG"]}},"block_order":["group_hBqcgn"],"name":"t:names.hero","settings":{"media_type_1":"image","image_1":"shopify:\/\/shop_images\/5b86a2af2f15b2f092abfedbde2c48ab.png","media_type_2":"image","stack_media_on_mobile":false,"custom_mobile_media":false,"media_type_1_mobile":"image","media_type_2_mobile":"image","link":"","open_in_new_tab":false,"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"flex-start","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"flex-start","gap":0,"section_width":"page-width","section_height":"medium","section_height_custom":5,"color_scheme":"scheme-6","toggle_overlay":true,"overlay_color":"#03030352","overlay_style":"gradient","gradient_direction":"to bottom","blurred_reflection":false,"reflection_opacity":75,"padding-block-start":72,"padding-block-end":64}},"section_x8mrnx":{"type":"section","blocks":{"group_QGT49U":{"type":"group","name":"t:names.group","settings":{"content_direction":"row","vertical_on_mobile":false,"horizontal_alignment":"center","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"center","gap":4,"width":"fit-content","custom_width":100,"width_mobile":"fill","custom_width_mobile":100,"height":"fit","custom_height":100,"inherit_color_scheme":true,"color_scheme":"","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","link":"","open_in_new_tab":false,"placeholder":"","padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{"icon_6fDkMD":{"type":"icon","name":"t:names.icon","settings":{"icon":"star","width":24,"link":"","open_in_new_tab":false},"blocks":{}},"icon_jPwxht":{"type":"icon","name":"t:names.icon","settings":{"icon":"star","width":24,"link":"","open_in_new_tab":false},"blocks":{}},"icon_BqyFk8":{"type":"icon","name":"t:names.icon","settings":{"icon":"star","width":24,"link":"","open_in_new_tab":false},"blocks":{}},"icon_ytB6b9":{"type":"icon","name":"t:names.icon","settings":{"icon":"star","width":24,"link":"","open_in_new_tab":false},"blocks":{}},"icon_iKWQ4L":{"type":"icon","name":"t:names.icon","settings":{"icon":"star","width":24,"link":"","open_in_new_tab":false},"blocks":{}}},"block_order":["icon_6fDkMD","icon_jPwxht","icon_BqyFk8","icon_ytB6b9","icon_iKWQ4L"]},"text_eFMntb":{"type":"text","settings":{"text":"<p>We believe every child deserves a gentle, joyful introduction to reading in a space that feels safe and inspiring.<\/p>","width":"100%","max_width":"narrow","alignment":"center","type_preset":"h3","font":"var(--font-body--family)","font_size":"1rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}},"button_TmU98M":{"type":"button","settings":{"label":"Shop now →","link":"shopify:\/\/collections\/all","open_in_new_tab":false,"style_class":"link","width":"fit-content","custom_width":100,"width_mobile":"fit-content","custom_width_mobile":100},"blocks":{}}},"block_order":["group_QGT49U","text_eFMntb","button_TmU98M"],"name":"t:names.pull_quote","settings":{"content_direction":"column","vertical_on_mobile":true,"horizontal_alignment":"center","vertical_alignment":"center","align_baseline":false,"horizontal_alignment_flex_direction_column":"center","vertical_alignment_flex_direction_column":"center","gap":40,"section_width":"page-width","section_height":"small","section_height_custom":50,"color_scheme":"scheme-2","background_media":"none","video_position":"cover","background_image_position":"cover","border":"none","border_width":1,"border_opacity":100,"border_radius":0,"toggle_overlay":false,"overlay_color":"#00000026","overlay_style":"solid","gradient_direction":"to top","padding-block-start":64,"padding-block-end":64}},"media_with_content_7nKFKW":{"type":"media-with-content","blocks":{"media":{"type":"_media-without-appearance","static":true,"settings":{"media_type":"image","image":"shopify:\/\/shop_images\/191000ffe60fad6765cc640e676139f0.png","link":"","video_loop":true,"video_autoplay":false,"image_position":"cover","video_position":"cover"},"blocks":{}},"content":{"type":"_content-without-appearance","static":true,"settings":{"horizontal_alignment_flex_direction_column":"flex-start","vertical_alignment_flex_direction_column":"flex-end","gap":24},"blocks":{"text_4iefgW":{"type":"text","name":"t:names.text","settings":{"text":"<p>At Quiet Nook Reads, we invite little dreamers to snuggle in, explore new worlds, and discover stories that speak softly to their hearts.<\/p>","width":"fit-content","max_width":"normal","alignment":"left","type_preset":"h3","font":"var(--font-body--family)","font_size":"1.5rem","line_height":"normal","letter_spacing":"normal","case":"none","wrap":"pretty","color":"var(--color-foreground)","background":false,"background_color":"#00000026","corner_radius":0,"padding-block-start":0,"padding-block-end":0,"padding-inline-start":0,"padding-inline-end":0},"blocks":{}}},"block_order":["text_4iefgW"]}},"name":"t:names.editorial_jumbo_text","settings":{"media_position":"right","media_width":"medium","media_height":"60svh","section_width":"full-width","extend_media":true,"color_scheme":"scheme-3","padding-block-start":0,"padding-block-end":0}}},"order":["hero_hRhTz6","section_JpEEkW","product_list_themegen","hero_pjNAy4","section_x8mrnx","media_with_content_7nKFKW"]}
+{
+  "sections": {
+    "home_hero": {
+      "type": "home-hero",
+      "settings": {
+        "badge_text": "LIMITED TIME OFFER",
+        "headline": "Raise Confident Kids with <em>Life Skills Workbooks</em>",
+        "subheadline": "Practical, step-by-step PDF activities that teach emotional regulation, money basics, and independence. Perfect for ages 4-10.",
+        "cta_label": "Get the bundle risk-free",
+        "cta_url": "/collections/all",
+        "trust_disclosure": "Instant digital delivery — no shipping",
+        "guarantee_text": "90-Day Money-Back Guarantee",
+        "refund_policy_url": "/policies/refund-policy",
+        "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
+      }
+    },
+    "pricing_explainer": {
+      "type": "home-pricing-explainer",
+      "settings": {
+        "badge_text": "HOW IT WORKS",
+        "title": "Our Honest <strong>Free + Small Fee</strong> Model",
+        "lead_text": "The workbook itself is 100% FREE. We charge a small digital processing fee of just $1.95 at checkout.",
+        "body_text": "Why do we do this? We want to put this guide into the hands of as many families as possible without standard retail markups. The small digital processing fee covers secure download servers, processing gateway expenses, and customer email support.",
+        "card_1_title": "Free Workbook",
+        "card_1_text": "Pay $0.00 for the 150+ page PDF guide itself today.",
+        "card_2_title": "Digital Processing Fee",
+        "card_2_text": "A small $1.95 processing fee applies at checkout for instant link generation."
+      }
+    },
+    "problem_agitate_solve": {
+      "type": "home-problem-agitate-solve",
+      "settings": {
+        "badge_text": "THE PARENT CHALLENGE",
+        "title": "Why Teaching Life Skills <em>Feels So Hard</em>",
+        "subtitle": "We want our kids to be independent, but between screen time tantrums and daily chore battles, it's easy to feel overwhelmed.",
+        "card_1_title": "1. The Nagging Cycle",
+        "card_1_text": "You ask them to clean their room or brush their teeth five times. By the fifth time, you're raising your voice, they're crying, and the task still isn't done right.",
+        "card_2_title": "2. Hidden Power Struggles",
+        "card_2_text": "Without clear visual instructions, kids look at a messy room and feel complete brain freeze. They aren't trying to disobey you; they literally don't know where to start.",
+        "card_3_title": "3. The TinyThrive Solution",
+        "card_3_text": "Our printable workbooks convert complex tasks (routines, emotional control, organizing) into kid-friendly visual guides. Your child takes the lead, and you finally stop nagging."
+      }
+    },
+    "how_it_works": {
+      "type": "home-how-it-works",
+      "settings": {
+        "badge_text": "SIMPLE PROCESS",
+        "title": "Get Started in <em>Just 3 Steps</em>",
+        "subtitle": "Because these are digital PDF products, you don't have to wait for mail delivery or pay shipping costs. Get started instantly.",
+        "step_1_title": "1. Order Online",
+        "step_1_text": "Claim your FREE workbook and pay the small secure digital processing fee at checkout.",
+        "step_2_title": "2. Instant Email Delivery",
+        "step_2_text": "Check your email inbox immediately after purchase. Your secure PDF download link is delivered in under 2 minutes.",
+        "step_3_title": "3. Print & Use",
+        "step_3_text": "Open the PDF, print the worksheets at home or your local print shop, and hand them to your child to start building life skills!"
+      }
+    },
+    "product_list_themegen": {
+      "type": "product-list",
+      "disabled": false,
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "disabled": true,
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "center",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_Bd9pVh": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_Bd9pVh"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 16,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 16,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_PhczVC": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "portrait",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 8,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "group_McqFAT": {
+              "type": "_product-card-group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 4,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_MEKzFi": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<h5>{{ closest.product.title }}</h5>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h4",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1.125rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_37riDf": {
+                  "type": "price",
+                  "name": "t:names.product_price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "custom",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1.125rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "swatches_87VJC8": {
+                  "type": "swatches",
+                  "name": "t:names.swatches",
+                  "settings": {
+                    "product_swatches_alignment": "flex-start",
+                    "product_swatches_alignment_mobile": "flex-start",
+                    "hide_padding": false,
+                    "product_swatches_padding_top": 4,
+                    "product_swatches_padding_bottom": 0,
+                    "product_swatches_padding_left": 0,
+                    "product_swatches_padding_right": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_MEKzFi",
+                "price_37riDf",
+                "swatches_87VJC8"
+              ]
+            }
+          },
+          "block_order": [
+            "product_card_gallery_PhczVC",
+            "group_McqFAT"
+          ]
+        }
+      },
+      "settings": {
+        "collection": "asset-pack-50532974594-example-products",
+        "layout_type": "carousel",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 3,
+        "mobile_columns": "1",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 20,
+        "rows_gap": 36,
+        "icons_style": "arrow",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "horizontal_alignment": "center",
+        "gap": 40,
+        "color_scheme": "scheme-2",
+        "padding-block-start": 20,
+        "padding-block-end": 20
+      }
+    },
+    "social_proof": {
+      "type": "home-social-proof",
+      "blocks": {
+        "test_1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "[PLACEHOLDER - Replace with a real review before launch. Example: 'This workbook gave us an actual plan instead of more bedtime struggles. My son is ahead of where he was, and honestly, so am I.']",
+            "author": "[PLACEHOLDER - e.g. Sarah M.]",
+            "tag": "[PLACEHOLDER - e.g. Mom of 2]"
+          }
+        },
+        "test_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "[PLACEHOLDER - Replace with a real review before launch. Example: 'In three weeks my 7-year-old went from meltdowns to making her own breakfast. This bundle changed our mornings.']",
+            "author": "[PLACEHOLDER - e.g. Jessica K.]",
+            "tag": "[PLACEHOLDER - e.g. Verified Buyer]"
+          }
+        },
+        "test_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "[PLACEHOLDER - Replace with a real review before launch. Example: 'Worth every single penny. My kids love these sheets and they think it is a game. Best screen-free activities.']",
+            "author": "[PLACEHOLDER - e.g. Amanda L.]",
+            "tag": "[PLACEHOLDER - e.g. Homeschool Mom]"
+          }
+        }
+      },
+      "block_order": [
+        "test_1",
+        "test_2",
+        "test_3"
+      ],
+      "settings": {
+        "badge_text": "CUSTOMER EXPERIENCES",
+        "title": "What Parents <em>Are Saying</em>",
+        "subtitle": "[PLACEHOLDER - Replace this subtitle with verified parent statistics, e.g. 'Over 12,000 parents have used our guides to help their kids master basic life skills.']",
+        "show_stats": true,
+        "stat_1_num": "[PLACEHOLDER - e.g. 12,000+]",
+        "stat_1_label": "[PLACEHOLDER - e.g. Parents Supported]",
+        "stat_2_num": "[PLACEHOLDER - e.g. 98%]",
+        "stat_2_label": "[PLACEHOLDER - e.g. Satisfaction Rate]"
+      }
+    },
+    "guarantee": {
+      "type": "home-guarantee",
+      "settings": {
+        "title": "Our 90-Day <em>100% Risk-Free</em> Guarantee",
+        "text": "Print the workbook, hand it to your child, and use it for a full 90 days. If you don't see them growing more confident, more independent, and fewer power struggles, just email us and we'll refund every cent of your processing fee. No forms, no hoops, and no questions asked.",
+        "cta_label": "Read Our Refund Policy",
+        "refund_policy_url": "/policies/refund-policy"
+      }
+    },
+    "about_story": {
+      "type": "home-about-story",
+      "settings": {
+        "badge_text": "OUR STORY",
+        "title": "Created by Parents, <em>For Parents</em>",
+        "story_text": "<p>TinyThrive was born out of bedtime routine battles and afternoon chore power struggles. As parents, we wanted to build emotional intelligence and practical routines in our kids, but standard parenting books felt like too much theory and not enough action.</p><p>We designed these printable life-skills workbooks to give parents a simple, visual roadmap that kids love following. It is our mission to support families with clear tools that create peaceful, independent routines.</p>",
+        "cta_label": "Read More About Us",
+        "about_url": "/pages/about-us"
+      }
+    },
+    "faq": {
+      "type": "home-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this a real company?",
+            "answer": "<p>Yes, <strong>TinyThrive</strong> is a real brand operated by <strong>OUSI PLAY LLC</strong>. We publish premium children's life-skills workbooks. You can reach our support team anytime at <strong>support@tinythrive.com</strong> (we respond in under 24 hours). All transactions on our site are secured by SSL encryption, and every order is fully protected by our 90-Day Money-Back Guarantee.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why is there a digital processing fee?",
+            "answer": "<p>To make our workbooks accessible to as many families as possible, we cover the retail cost of the product itself. The small $1.95 digital processing fee at checkout goes directly to offset secure download hosting costs, merchant processing gate fees, and customer support resources.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do I get my download link?",
+            "answer": "<p>Directly after your payment is processed, you will see a download button on the order confirmation screen. Additionally, we instantly email a secure PDF download link to the address you supplied at checkout. If you do not receive it in 5 minutes, please check your spam folder or email us.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "settings": {
+        "badge_text": "QUESTIONS & ANSWERS",
+        "title": "Frequently Asked <em>Questions</em>",
+        "subtitle": "Find answers to common questions about our parenting workbooks and secure processing fee model."
+      }
+    },
+    "home_footer": {
+      "type": "home-footer",
+      "settings": {
+        "brand_name": "TinyThrive",
+        "logo_initials": "TT",
+        "business_address": "[LLC Address - Replace before launch]",
+        "support_email": "support@tinythrive.com",
+        "about_url": "/pages/about-us",
+        "contact_url": "/pages/contact",
+        "newsletter_heading": "JOIN 12,000+ PARENTS GETTING FREE PRINTABLES",
+        "newsletter_button_label": "Send Me Freebies",
+        "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
+      }
+    }
+  },
+  "order": [
+    "home_hero",
+    "pricing_explainer",
+    "problem_agitate_solve",
+    "how_it_works",
+    "product_list_themegen",
+    "social_proof",
+    "guarantee",
+    "about_story",
+    "faq",
+    "home_footer"
+  ]
+} 

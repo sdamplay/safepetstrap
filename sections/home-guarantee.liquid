@@ -1,0 +1,169 @@
+{%- style -%}
+  #home-guarantee-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: 'var(--color-brand-bg-soft)' }};
+  }
+
+  .home-guarantee-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .home-guarantee-badge-wrap {
+    margin-bottom: 24px;
+  }
+
+  .home-guarantee-seal {
+    font-size: 64px;
+    line-height: 1;
+    display: inline-block;
+  }
+
+  .home-guarantee-title {
+    font-family: var(--font-heading-family);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .home-guarantee-title em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-guarantee-text {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-brand-text-secondary);
+    margin: 0 0 32px 0;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .home-guarantee-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-brand-primary-hover);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 999px;
+    box-shadow: var(--shadow-brand-cta);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .home-guarantee-cta:hover {
+    background-color: var(--color-brand-primary);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 600px) {
+    #home-guarantee-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-guarantee-title {
+      font-size: 26px;
+    }
+    .home-guarantee-text {
+      font-size: 15px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-guarantee-{{ section.id }}">
+  <div class="home-guarantee-container">
+    <div class="home-guarantee-badge-wrap">
+      <span class="home-guarantee-seal" aria-hidden="true">🛡️</span>
+    </div>
+    
+    <h2 class="home-guarantee-title">{{ section.settings.title }}</h2>
+    
+    <p class="home-guarantee-text">
+      {{ section.settings.text }}
+    </p>
+    
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.refund_policy_url | default: '/policies/refund-policy' }}" class="home-guarantee-cta">
+        {{ section.settings.cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Guarantee block",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Our 90-Day <em>100% Risk-Free</em> Guarantee"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Guarantee text",
+      "default": "Print the workbook, hand it to your child, and use it for a full 90 days. If you don't see more confidence, more independence, and fewer power struggles, just email us and we'll refund every cent of your processing fee. No forms, no hoops, and no questions asked."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA Label",
+      "default": "Read Our Refund Policy"
+    },
+    {
+      "type": "url",
+      "id": "refund_policy_url",
+      "label": "Refund Policy URL"
+    },
+    {
+      "type": "header",
+      "content": "Design & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Guarantee block"
+    }
+  ]
+}
+{% endschema %}

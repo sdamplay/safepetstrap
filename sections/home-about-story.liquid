@@ -1,0 +1,240 @@
+{%- style -%}
+  #home-about-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+  }
+
+  .home-about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .home-about-image-wrap {
+    width: 100%;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-brand-resting);
+  }
+
+  .home-about-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+  }
+
+  .home-about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .home-about-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .home-about-title {
+    font-family: var(--font-heading-family);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .home-about-title em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-about-text {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+  }
+
+  .home-about-disclosure {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-brand-text-primary);
+    padding: 12px 16px;
+    background-color: var(--color-brand-bg-soft);
+    border-left: 4px solid var(--color-brand-primary-hover);
+    border-radius: 4px;
+    width: 100%;
+  }
+
+  .home-about-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-brand-primary-hover);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 999px;
+    box-shadow: var(--shadow-brand-cta);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .home-about-cta:hover {
+    background-color: var(--color-brand-primary);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 900px) {
+    #home-about-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-about-container {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      text-align: center;
+    }
+    .home-about-content {
+      align-items: center;
+    }
+    .home-about-title {
+      font-size: 28px;
+    }
+    .home-about-disclosure {
+      text-align: left;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-about-{{ section.id }}">
+  <div class="home-about-container">
+    <div class="home-about-image-wrap">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(max-width: 900px) 90vw, 45vw', loading: 'lazy', class: 'home-about-img', alt: section.settings.title | escape }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+    <div class="home-about-content">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-about-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      
+      <h2 class="home-about-title">{{ section.settings.title }}</h2>
+      
+      <div class="home-about-text">
+        {{ section.settings.story_text }}
+      </div>
+
+      <!-- Business Legitimacy Disclosure -->
+      <div class="home-about-disclosure">
+        💼 <strong>TinyThrive</strong> is operated by <strong>OUSI PLAY LLC</strong>. We are a registered business committed to delivering high-quality kids' educational resources honestly and transparently.
+      </div>
+      
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.about_url | default: '/pages/about-us' }}" class="home-about-cta">
+          {{ section.settings.cta_label }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About Brand Story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "OUR STORY"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Created by Parents, <em>For Parents</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "story_text",
+      "label": "Story body text",
+      "default": "<p>TinyThrive was born out of bedtime routine battles and afternoon chore power struggles. As parents, we wanted to build emotional intelligence and practical routines in our kids, but standard parenting books felt like too much theory and not enough action.</p><p>We designed these printable life-skills workbooks to give parents a simple, visual roadmap that kids love following. It is our mission to support families with clear tools that create peaceful, independent routines.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Founder/Brand image"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Read More About Us"
+    },
+    {
+      "type": "url",
+      "id": "about_url",
+      "label": "About Us URL"
+    },
+    {
+      "type": "header",
+      "content": "Design & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Brand Story"
+    }
+  ]
+}
+{% endschema %}

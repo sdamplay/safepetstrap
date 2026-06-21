@@ -1,0 +1,254 @@
+{%- style -%}
+  #home-pricing-explainer-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: #FFFFFF;
+  }
+
+  .home-pricing-explainer-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .home-pricing-card {
+    background-color: var(--color-brand-bg-soft);
+    border: 2px solid var(--color-brand-border);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: var(--shadow-brand-resting);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .home-pricing-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background-color: var(--color-brand-primary-hover);
+  }
+
+  .home-pricing-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .home-pricing-title {
+    font-family: var(--font-heading-family);
+    font-size: 32px;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    font-weight: 700;
+  }
+
+  .home-pricing-title strong {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+    text-transform: uppercase;
+  }
+
+  .home-pricing-lead {
+    font-family: var(--font-body-family);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+  }
+
+  .home-pricing-text {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-brand-text-secondary);
+    margin: 0 0 24px 0;
+  }
+
+  .home-pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .home-pricing-item {
+    background: #FFFFFF;
+    border: 1px solid var(--color-brand-border);
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .home-pricing-item-emoji {
+    font-size: 24px;
+  }
+
+  .home-pricing-item-title {
+    font-family: var(--font-heading-family);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0;
+  }
+
+  .home-pricing-item-text {
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 600px) {
+    #home-pricing-explainer-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-pricing-card {
+      padding: 24px 16px;
+    }
+    .home-pricing-title {
+      font-size: 24px;
+    }
+    .home-pricing-lead {
+      font-size: 18px;
+    }
+    .home-pricing-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-pricing-explainer-{{ section.id }}">
+  <div class="home-pricing-explainer-container">
+    <div class="home-pricing-card">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-pricing-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      
+      <h2 class="home-pricing-title">{{ section.settings.title }}</h2>
+      
+      <p class="home-pricing-lead">
+        {{ section.settings.lead_text }}
+      </p>
+      
+      <p class="home-pricing-text">
+        {{ section.settings.body_text }}
+      </p>
+
+      <div class="home-pricing-grid">
+        <div class="home-pricing-item">
+          <span class="home-pricing-item-emoji">💸</span>
+          <h3 class="home-pricing-item-title">{{ section.settings.card_1_title }}</h3>
+          <p class="home-pricing-item-text">{{ section.settings.card_1_text }}</p>
+        </div>
+        <div class="home-pricing-item">
+          <span class="home-pricing-item-emoji">📩</span>
+          <h3 class="home-pricing-item-title">{{ section.settings.card_2_title }}</h3>
+          <p class="home-pricing-item-text">{{ section.settings.card_2_text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pricing Explainer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "HOW IT WORKS"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Honest <strong>Free + Small Fee</strong> Model"
+    },
+    {
+      "type": "textarea",
+      "id": "lead_text",
+      "label": "Lead disclosure text",
+      "default": "The workbook itself is 100% FREE. We charge a small digital processing fee of just $1.95 at checkout."
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Explainer body",
+      "default": "Why do we do this? We want to put this guide into the hands of as many families as possible without standard retail markups. The small digital processing fee covers secure download servers, processing gateway expenses, and customer email support."
+    },
+    {
+      "type": "text",
+      "id": "card_1_title",
+      "label": "Card 1 title",
+      "default": "Free Workbook"
+    },
+    {
+      "type": "text",
+      "id": "card_1_text",
+      "label": "Card 1 description",
+      "default": "Pay $0.00 for the 150+ page PDF guide itself today."
+    },
+    {
+      "type": "text",
+      "id": "card_2_title",
+      "label": "Card 2 title",
+      "default": "Digital Processing Fee"
+    },
+    {
+      "type": "text",
+      "id": "card_2_text",
+      "label": "Card 2 description",
+      "default": "A small $1.95 processing fee applies at checkout for instant link generation."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pricing Explainer"
+    }
+  ]
+}
+{% endschema %}

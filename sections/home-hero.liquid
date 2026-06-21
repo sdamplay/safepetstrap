@@ -1,0 +1,359 @@
+{%- style -%}
+  #home-hero-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: 'var(--color-brand-bg-soft)' }};
+  }
+
+  .home-hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .home-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .home-hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .home-hero-headline {
+    font-family: var(--font-heading-family);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-brand-text-primary);
+    margin: 0;
+  }
+
+  .home-hero-headline em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-hero-subheadline {
+    font-family: var(--font-body-family);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+  }
+
+  .home-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-brand-primary-hover);
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 999px;
+    box-shadow: var(--shadow-brand-cta);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .home-hero-cta:hover {
+    background-color: var(--color-brand-primary);
+    transform: translateY(-1px);
+  }
+
+  .home-hero-image-wrap {
+    width: 100%;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-brand-resting);
+  }
+
+  .home-hero-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+  }
+
+  /* Trust Strip Styles */
+  .home-hero-trust-strip {
+    border-top: 1px solid var(--color-brand-border);
+    border-bottom: 1px solid var(--color-brand-border);
+    background-color: #FFFFFF;
+    margin-top: 40px;
+    padding: 20px 0;
+  }
+
+  .home-hero-trust-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .home-hero-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-brand-text-primary);
+    font-weight: 500;
+  }
+
+  .home-hero-trust-item svg.icon-check {
+    color: var(--color-brand-primary-hover);
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .home-hero-guarantee-pill {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-brand-bg-soft);
+    border: 1px solid var(--color-brand-border);
+    color: var(--color-brand-text-primary);
+    padding: 6px 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+
+  .home-hero-guarantee-pill:hover {
+    background-color: var(--color-brand-bg-soft-secondary);
+  }
+
+  .home-hero-payment-icons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .home-hero-payment-icon {
+    width: 38px;
+    height: 24px;
+    border-radius: 4px;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    #home-hero-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-hero-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 30px;
+    }
+    .home-hero-content {
+      align-items: center;
+    }
+    .home-hero-headline {
+      font-size: 32px;
+    }
+    .home-hero-subheadline {
+      font-size: 16px;
+    }
+    .home-hero-image-wrap {
+      order: -1;
+    }
+    .home-hero-trust-inner {
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+      justify-content: center;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-hero-{{ section.id }}">
+  <div class="home-hero-container">
+    <div class="home-hero-content">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-hero-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      
+      <h1 class="home-hero-headline">
+        {{ section.settings.headline }}
+      </h1>
+      
+      {%- if section.settings.subheadline != blank -%}
+        <p class="home-hero-subheadline">{{ section.settings.subheadline }}</p>
+      {%- endif -%}
+      
+      {%- if section.settings.cta_label != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="home-hero-cta">
+          {{ section.settings.cta_label }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="home-hero-image-wrap">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(max-width: 768px) 90vw, 50vw', loading: 'eager', fetchpriority: 'high', class: 'home-hero-img', alt: section.settings.headline | escape }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+
+  {% comment %} Directly below the fold: Trust Strip {% endcomment %}
+  <div class="home-hero-trust-strip">
+    <div class="home-hero-trust-inner">
+      {% comment %} (c) Digital-delivery disclosure {% endcomment %}
+      <div class="home-hero-trust-item">
+        <svg class="icon-check" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span>{{ section.settings.trust_disclosure | default: 'Instant digital delivery — no shipping' }}</span>
+      </div>
+
+      {% comment %} (b) Money-back guarantee pill linking to refund policy {% endcomment %}
+      {%- if section.settings.guarantee_text != blank -%}
+        <a href="{{ section.settings.refund_policy_url | default: '/policies/refund-policy' }}" class="home-hero-guarantee-pill">
+          🛡️ {{ section.settings.guarantee_text }}
+        </a>
+      {%- endif -%}
+
+      {% comment %} (a) Real payment icons {% endcomment %}
+      <div class="home-hero-payment-icons">
+        {%- assign enabled_payment_types = shop.enabled_payment_types -%}
+        {%- if section.settings.custom_payment_types != blank -%}
+          {%- assign enabled_payment_types = section.settings.custom_payment_types | remove: ' ' | split: ',' -%}
+        {%- endif -%}
+        {%- for type in enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'home-hero-payment-icon' }}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero with Trust Strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "LIMITED TIME OFFER"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Raise Confident Kids with <em>Life Skills Workbooks</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "subheadline",
+      "label": "Sub-headline",
+      "default": "Practical, step-by-step PDF activities that teach emotional regulation, money basics, and independence. Perfect for ages 4-10."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA label",
+      "default": "Get the bundle risk-free"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "header",
+      "content": "🛡️ Below-Fold Trust Strip"
+    },
+    {
+      "type": "text",
+      "id": "trust_disclosure",
+      "label": "Digital delivery disclosure",
+      "default": "Instant digital delivery — no shipping"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_text",
+      "label": "Guarantee text",
+      "default": "90-Day Money-Back Guarantee"
+    },
+    {
+      "type": "url",
+      "id": "refund_policy_url",
+      "label": "Refund policy page"
+    },
+    {
+      "type": "text",
+      "id": "custom_payment_types",
+      "label": "Custom payment icons to show (comma-separated list)",
+      "info": "Leave blank to use shop defaults. Options: visa, master, american_express, paypal, apple_pay, google_pay, shopify_pay, etc."
+    },
+    {
+      "type": "header",
+      "content": "Spacing & Design"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero with Trust Strip"
+    }
+  ]
+}
+{% endschema %}
