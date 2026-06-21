@@ -24,10 +24,9 @@
     <script src="{{ 'secondary.js' | asset_url }}" defer="defer" data-defer="true" data-is-rtl="{{ is_rtl }}"></script>
     
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
@@ -121,6 +120,25 @@
         --font-heading-scale: {{ settings.heading_scale | times: 1.0 | divided_by: settings.body_scale }};
         --font-heading-line-height: {{ settings.heading_line_height | minus: 1.0 }};
         --font-heading-letter-spacing: {{ settings.heading_letter_spacing | divided_by: 10.0 }}rem;
+
+        /* Force brand font pairings */
+        --font-body-family: 'Inter', sans-serif;
+        --font-heading-family: 'Fraunces', serif;
+        --font-heading-style: normal;
+        --font-heading-weight: 700;
+        --font-body-weight-bold: 700;
+
+        /* Brand Design System Variables */
+        --color-brand-primary: #E89BA0;
+        --color-brand-primary-hover: #D47A82;
+        --color-brand-bg-soft: #FFF5F6;
+        --color-brand-bg-soft-secondary: #FCE4E6;
+        --color-brand-border: #F0D5D8;
+        --color-brand-text-primary: #2D2D2D;
+        --color-brand-text-secondary: #6B6B6B;
+        --color-brand-star-gold: #F5B800;
+        --shadow-brand-resting: 0 4px 16px rgba(212, 122, 130, 0.08);
+        --shadow-brand-cta: 0 2px 8px rgba(232, 155, 160, 0.35);
 
         --color-base-text: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
         --color-shadow: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};

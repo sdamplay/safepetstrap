@@ -8,18 +8,18 @@
 
 :root {
   --drawer-bg-color: #ffffff;
-  --drawer-accent-color: #db8a95; /* Dusty pink/rose from competitor */
-  --drawer-accent-hover: #c97682;
-  --drawer-text-color: #222222;
-  --drawer-text-muted: #787878;
-  --drawer-border-color: #eaeaea;
-  --drawer-price-color: #d15668; /* Contrast pink-red for sale prices */
-  --drawer-savings-color: #d15668; /* Matches competitor's red savings font */
-  --drawer-timer-bg: #e2a0aa; /* Slightly softer pink for the reserved bar */
-  --drawer-gift-bg: #f9ecee; /* Ultra-soft rose background for gift box */
-  --drawer-gift-border: #f0c3c9;
-  --font-stack: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --drawer-accent-color: var(--color-brand-primary);
+  --drawer-accent-hover: var(--color-brand-primary-hover);
+  --drawer-text-color: var(--color-brand-text-primary);
+  --drawer-text-muted: var(--color-brand-text-secondary);
+  --drawer-border-color: var(--color-brand-border);
+  --drawer-price-color: var(--color-brand-primary-hover);
+  --drawer-savings-color: var(--color-brand-primary-hover);
+  --drawer-timer-bg: var(--color-brand-primary);
+  --drawer-gift-bg: var(--color-brand-bg-soft);
+  --drawer-gift-border: var(--color-brand-border);
+  --font-stack: var(--font-body-family);
+  --shadow-light: var(--shadow-brand-resting);
 }
 
 /* Base Drawer Component Overlay & Layout */
@@ -428,7 +428,7 @@ quantity-input {
 
 .cart-drawer-upsell-item[data-in-cart="true"] {
   border-color: var(--drawer-accent-color);
-  background: #faf6f7;
+  background: var(--color-brand-bg-soft-secondary);
 }
 
 .upsell-item__image {
