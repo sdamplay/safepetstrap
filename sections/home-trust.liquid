@@ -1,0 +1,185 @@
+{%- style -%}
+  #home-trust-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+  }
+
+  .home-trust-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .home-trust-inner {
+    background-color: var(--color-brand-bg-soft);
+    border: 1px solid var(--color-brand-border);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: var(--shadow-brand-resting);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .home-trust-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .home-trust-title {
+    font-family: var(--font-heading-family);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .home-trust-body {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    max-width: 650px;
+  }
+
+  .home-trust-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    border-top: 1px solid var(--color-brand-border);
+    padding-top: 20px;
+    width: 100%;
+  }
+
+  .home-trust-stars {
+    color: #F5B800; /* Star rating gold */
+    font-size: 20px;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .home-trust-footer-text {
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-brand-text-primary);
+  }
+
+  @media (max-width: 768px) {
+    #home-trust-{{ section.id }} {
+      padding-top: calc({{ section.settings.padding_top }}px * 0.7);
+      padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.7);
+    }
+    .home-trust-inner {
+      padding: 32px 24px;
+      gap: 20px;
+    }
+    .home-trust-title {
+      font-size: 26px;
+    }
+    .home-trust-body {
+      font-size: 15px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-trust-{{ section.id }}">
+  <div class="home-trust-container">
+    <div class="home-trust-inner">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-trust-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      
+      <h2 class="home-trust-title">{{ section.settings.title }}</h2>
+      
+      <p class="home-trust-body">
+        {{ section.settings.body_text }}
+      </p>
+      
+      <div class="home-trust-footer">
+        <div class="home-trust-stars" aria-hidden="true">★★★★★</div>
+        <span class="home-trust-footer-text">{{ section.settings.footer_text }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust & Philosophy",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "OUR PHILOSOPHY"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Built On Real Parenting Wins, Not Theory"
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "Every guide we create is designed around small, achievable moments that build a child's confidence: tying a shoe, naming a big feeling, finishing a chore without a reminder, or simply learning to pause and breathe. We build TinyThrive's library one win at a time, the same way real growth happens."
+    },
+    {
+      "type": "text",
+      "id": "footer_text",
+      "label": "Footer text",
+      "default": "New reviews coming soon — be one of our first verified customers."
+    },
+    {
+      "type": "header",
+      "content": "Design & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust & Philosophy"
+    }
+  ]
+}
+{% endschema %}

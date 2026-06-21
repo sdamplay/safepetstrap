@@ -23,12 +23,18 @@
     box-shadow: var(--shadow-brand-resting);
   }
 
-  .home-about-image-wrap img {
+  .home-about-image-wrap img,
+  .home-about-image-wrap svg {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
     aspect-ratio: 4/3;
+  }
+
+  .home-about-image-wrap svg.placeholder-svg {
+    background-color: var(--color-brand-bg-soft-secondary);
+    fill: var(--color-brand-primary);
   }
 
   .home-about-content {
@@ -72,16 +78,56 @@
     margin: 0;
   }
 
-  .home-about-disclosure {
-    font-family: var(--font-body-family);
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-brand-text-primary);
-    padding: 12px 16px;
-    background-color: var(--color-brand-bg-soft);
-    border-left: 4px solid var(--color-brand-primary-hover);
-    border-radius: 4px;
+  /* Benefit Row Styles */
+  .home-about-benefits {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     width: 100%;
+    margin-top: 16px;
+    border-top: 1px solid var(--color-brand-border);
+    padding-top: 24px;
+  }
+
+  .home-about-benefit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .home-about-benefit-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background-color: var(--color-brand-bg-soft);
+    color: var(--color-brand-primary-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(212, 122, 130, 0.05);
+  }
+
+  .home-about-benefit-icon-wrap svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--color-brand-primary-hover);
+  }
+
+  .home-about-benefit-text {
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+  }
+
+  .home-about-disclosure-line {
+    font-family: var(--font-body-family);
+    font-size: 12px;
+    color: var(--color-brand-text-secondary);
+    width: 100%;
+    margin-top: 8px;
   }
 
   .home-about-cta {
@@ -122,8 +168,12 @@
     .home-about-title {
       font-size: 28px;
     }
-    .home-about-disclosure {
-      text-align: left;
+    .home-about-benefits {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .home-about-disclosure-line {
+      text-align: center;
     }
   }
 {%- endstyle -%}
@@ -149,10 +199,53 @@
         {{ section.settings.story_text }}
       </div>
 
-      <!-- Business Legitimacy Disclosure -->
-      <div class="home-about-disclosure">
-        💼 <strong>TinyThrive</strong> is operated by <strong>OUSI PLAY LLC</strong>. We are a registered business committed to delivering high-quality kids' educational resources honestly and transparently.
+      <!-- Benefit Row -->
+      <div class="home-about-benefits">
+        <!-- Benefit 1 -->
+        <div class="home-about-benefit-item">
+          <div class="home-about-benefit-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <span class="home-about-benefit-text">{{ section.settings.benefit_1 }}</span>
+        </div>
+        <!-- Benefit 2 -->
+        <div class="home-about-benefit-item">
+          <div class="home-about-benefit-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <span class="home-about-benefit-text">{{ section.settings.benefit_2 }}</span>
+        </div>
+        <!-- Benefit 3 -->
+        <div class="home-about-benefit-item">
+          <div class="home-about-benefit-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <span class="home-about-benefit-text">{{ section.settings.benefit_3 }}</span>
+        </div>
+        <!-- Benefit 4 -->
+        <div class="home-about-benefit-item">
+          <div class="home-about-benefit-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </div>
+          <span class="home-about-benefit-text">{{ section.settings.benefit_4 }}</span>
+        </div>
       </div>
+
+      <!-- Small Disclosure Line -->
+      {%- if section.settings.disclosure_text != blank -%}
+        <div class="home-about-disclosure-line">
+          {{ section.settings.disclosure_text }}
+        </div>
+      {%- endif -%}
       
       {%- if section.settings.cta_label != blank -%}
         <a href="{{ section.settings.about_url | default: '/pages/about-us' }}" class="home-about-cta">
@@ -189,6 +282,36 @@
       "type": "image_picker",
       "id": "image",
       "label": "Founder/Brand image"
+    },
+    {
+      "type": "text",
+      "id": "disclosure_text",
+      "label": "Disclosure Text",
+      "default": "TinyThrive is operated by OUSI PLAY LLC."
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "Instant Access"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "We Stand By Our Work"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "Always Here To Help"
+    },
+    {
+      "type": "text",
+      "id": "benefit_4",
+      "label": "Benefit 4",
+      "default": "Built By Real Parents"
     },
     {
       "type": "text",

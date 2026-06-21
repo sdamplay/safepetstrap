@@ -16,6 +16,42 @@
     --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
     --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
   }
+
+  .kls-announcement-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 8px;
+  }
+  .kls-announcement-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 6px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    min-width: 32px;
+  }
+  .kls-announcement-digits {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .kls-announcement-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  @media screen and (max-width: 749px) {
+    .announcement-bar__content-wrapper {
+      flex-direction: column;
+      gap: 8px !important;
+    }
+    .kls-announcement-timer {
+      margin-left: 0;
+    }
+  }
 {%- endstyle -%}
 
 {% liquid
@@ -129,27 +165,50 @@
                                 assign has_icon = true
                               endif
                             %}
-                            {%- if block.settings.text != blank -%}
-                              <p class="announcement-bar__message{% if has_icon %} announcement-bar__message--mobile-{{ block.settings.mobile_layout }} announcement-bar__message--desktop-{{ block.settings.desktop_layout }}{% endif %}">
-                                {% if block.settings.custom_icon != blank %}
-                                  <img
-                                    src="{{ block.settings.custom_icon | image_url }}"
-                                    {% if block.settings.custom_icon.alt != blank %}
-                                      alt="{{ block.settings.custom_icon.alt | escape }}"
-                                    {% else %}
-                                      role="presentation"
-                                    {% endif %}
-                                    class='announcement-bar__message__custom-icon'
-                                    height="auto"
-                                    width="auto"
-                                    loading="lazy"
-                                  >
-                                {% elsif block.settings.icon != blank %}
-                                  {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon %}
-                                {% endif %}
-                                <span>{{ block.settings.text }}</span>
-                              </p>
-                            {%- endif -%}
+                            <div class="announcement-bar__content-wrapper" style="display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; width: 100%;">
+                              {%- if block.settings.text != blank -%}
+                                <p class="announcement-bar__message{% if has_icon %} announcement-bar__message--mobile-{{ block.settings.mobile_layout }} announcement-bar__message--desktop-{{ block.settings.desktop_layout }}{% endif %}" style="margin: 0;">
+                                  {% if block.settings.custom_icon != blank %}
+                                    <img
+                                      src="{{ block.settings.custom_icon | image_url }}"
+                                      {% if block.settings.custom_icon.alt != blank %}
+                                        alt="{{ block.settings.custom_icon.alt | escape }}"
+                                      {% else %}
+                                        role="presentation"
+                                      {% endif %}
+                                      class='announcement-bar__message__custom-icon'
+                                      height="auto"
+                                      width="auto"
+                                      loading="lazy"
+                                    >
+                                  {% elsif block.settings.icon != blank %}
+                                    {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon %}
+                                  {% endif %}
+                                  <span>{{ block.settings.text }}</span>
+                                </p>
+                              {%- endif -%}
+
+                              {%- if block.settings.countdown_end != blank or block.settings.enable_countdown_demo -%}
+                                <div class="kls-announcement-timer" data-kls-timer data-end="{{ block.settings.countdown_end }}">
+                                  <div class="kls-announcement-block">
+                                    <span class="kls-announcement-digits" data-days>00</span>
+                                    <span class="kls-announcement-label">Days</span>
+                                  </div>
+                                  <div class="kls-announcement-block">
+                                    <span class="kls-announcement-digits" data-hours>00</span>
+                                    <span class="kls-announcement-label">Hrs</span>
+                                  </div>
+                                  <div class="kls-announcement-block">
+                                    <span class="kls-announcement-digits" data-minutes>00</span>
+                                    <span class="kls-announcement-label">Min</span>
+                                  </div>
+                                  <div class="kls-announcement-block">
+                                    <span class="kls-announcement-digits" data-seconds>00</span>
+                                    <span class="kls-announcement-label">Sec</span>
+                                  </div>
+                                </div>
+                              {%- endif -%}
+                            </div>
                           {% when 'discount' %}
                             <button
                               class="announcement-bar__discount announcement-bar__message"
@@ -198,6 +257,54 @@
       btn.classList.remove('success')
     }, 2000)
   }
+
+  function initTimers() {
+    document.querySelectorAll('[data-kls-timer]').forEach(function(timer) {
+      if (timer.dataset.timerInited === 'true') return;
+      timer.dataset.timerInited = 'true';
+
+      var endStr = timer.getAttribute('data-end');
+      var endTime = null;
+      if (endStr) {
+        var parsed = new Date(endStr).getTime();
+        if (!isNaN(parsed)) endTime = parsed;
+      }
+      if (!endTime) {
+        endTime = Date.now() + (2 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000) + (37 * 60 * 1000) + (52 * 1000);
+      }
+      var daysEl = timer.querySelector('[data-days]');
+      var hoursEl = timer.querySelector('[data-hours]');
+      var minutesEl = timer.querySelector('[data-minutes]');
+      var secondsEl = timer.querySelector('[data-seconds]');
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+      function tick() {
+        var diff = endTime - Date.now();
+        if (diff < 0) diff = 0;
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        if (daysEl) daysEl.textContent = pad(d);
+        if (hoursEl) hoursEl.textContent = pad(h);
+        if (minutesEl) minutesEl.textContent = pad(m);
+        if (secondsEl) secondsEl.textContent = pad(s);
+      }
+      tick();
+      setInterval(tick, 1000);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initTimers();
+  });
+  if (document.readyState !== 'loading') {
+    initTimers();
+  }
+  document.addEventListener('shopify:section:load', function(event) {
+    if (event.target.querySelector('[data-kls-timer]')) {
+      initTimers();
+    }
+  });
 </script>
 
 {% schema %}
@@ -428,6 +535,18 @@
           "id": "text",
           "default": "Welcome to our store",
           "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+        },
+        {
+          "type": "text",
+          "id": "countdown_end",
+          "label": "Countdown end (YYYY-MM-DDTHH:MM:SS)",
+          "info": "Leave blank to disable countdown timer. Enter YYYY-MM-DDTHH:MM:SS for countdown."
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_countdown_demo",
+          "label": "Enable demo countdown if end date is blank",
+          "default": false
         },
         {
           "type": "select",

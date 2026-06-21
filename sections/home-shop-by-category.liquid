@@ -1,0 +1,332 @@
+{%- style -%}
+  #home-shop-by-category-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+  }
+
+  .home-category-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .home-category-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 48px auto;
+  }
+
+  .home-category-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .home-category-title {
+    font-family: var(--font-heading-family);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+    line-height: 1.2;
+  }
+
+  .home-category-title em {
+    color: var(--color-brand-primary-hover);
+    font-style: normal;
+  }
+
+  .home-category-subtitle {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    color: var(--color-brand-text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .home-category-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .home-category-card {
+    background-color: var(--color-brand-bg-soft);
+    border: 1px solid var(--color-brand-border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-brand-resting);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .home-category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(212, 122, 130, 0.12);
+  }
+
+  .home-category-image-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-brand-bg-soft-secondary);
+  }
+
+  .home-category-image-wrap img,
+  .home-category-image-wrap svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .home-category-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-text-secondary);
+    position: relative;
+  }
+
+  .home-category-placeholder svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--color-brand-primary);
+    opacity: 0.15;
+  }
+
+  .home-category-placeholder-label {
+    position: absolute;
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--color-brand-primary-hover);
+    text-align: center;
+    padding: 20px;
+  }
+
+  .home-category-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    flex-grow: 1;
+  }
+
+  .home-category-card-title {
+    font-family: var(--font-heading-family);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0;
+  }
+
+  .home-category-card-link {
+    font-family: var(--font-body-family);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-brand-primary-hover);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    transition: color 0.2s ease;
+  }
+
+  .home-category-card:hover .home-category-card-link {
+    color: var(--color-brand-primary);
+  }
+
+  @media (max-width: 900px) {
+    .home-category-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .home-category-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .home-category-title {
+      font-size: 28px;
+    }
+  }
+{%- endstyle -%}
+
+<div id="home-shop-by-category-{{ section.id }}">
+  <div class="home-category-inner">
+    <div class="home-category-header">
+      {%- if section.settings.badge_text != blank -%}
+        <div class="home-category-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+      <h2 class="home-category-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="home-category-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="home-category-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.collection != blank -%}
+          {%- assign collection = collections[block.settings.collection] -%}
+          <a href="{{ collection.url }}" class="home-category-card" {{ block.shopify_attributes }}>
+            <div class="home-category-image-wrap">
+              {%- if collection.image != blank -%}
+                {{ collection.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'home-category-img', alt: collection.title | escape }}
+              {%- elsif collection.products.first.featured_image != blank -%}
+                {{ collection.products.first.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'home-category-img', alt: collection.title | escape }}
+              {%- else -%}
+                {% comment %} Graceful placeholder treatment {% endcomment %}
+                <div class="home-category-placeholder">
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  <div class="home-category-placeholder-label">{{ collection.title }}</div>
+                </div>
+                <script>
+                  console.warn("TinyThrive Homepage: Collection '{{ collection.title }}' (handle: {{ collection.handle }}) has no image set. Please upload a collection image in the Shopify Admin.");
+                </script>
+              {%- endif -%}
+            </div>
+            <div class="home-category-content">
+              <h3 class="home-category-card-title">{{ collection.title }}</h3>
+              <span class="home-category-card-link">
+                Shop Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+        {%- else -%}
+          {% comment %} Demo card if no collection is selected {% endcomment %}
+          <div class="home-category-card">
+            <div class="home-category-image-wrap">
+              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+            <div class="home-category-content">
+              <h3 class="home-category-card-title">Example Collection</h3>
+              <span class="home-category-card-link">
+                Shop Now
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop By Category",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "SHOP BY CATEGORY"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Find The Right Guide For Your Child"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Explore printable workbooks and activity guides across the topics that matter most."
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns on desktop",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Design & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color override"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Category",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

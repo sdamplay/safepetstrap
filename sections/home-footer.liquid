@@ -253,7 +253,9 @@
             <!-- Business Info with LLC and Address -->
             <div class="home-footer-business-info">
               Operated by <strong>OUSI PLAY LLC</strong><br>
-              Business Address: {{ section.settings.business_address }}<br>
+              {%- if section.settings.business_address != blank -%}
+                Business Address: {{ section.settings.business_address }}<br>
+              {%- endif -%}
               Support Email: {{ section.settings.support_email }}
             </div>
           </div>

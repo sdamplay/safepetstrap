@@ -86,12 +86,18 @@
     box-shadow: var(--shadow-brand-resting);
   }
 
-  .home-hero-image-wrap img {
+  .home-hero-image-wrap img,
+  .home-hero-image-wrap svg {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
     aspect-ratio: 4/3;
+  }
+
+  .home-hero-image-wrap svg.placeholder-svg {
+    background-color: var(--color-brand-bg-soft-secondary);
+    fill: var(--color-brand-primary);
   }
 
   /* Trust Strip Styles */

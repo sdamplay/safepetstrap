@@ -3,10 +3,10 @@
     "home_hero": {
       "type": "home-hero",
       "settings": {
-        "badge_text": "LIMITED TIME OFFER",
-        "headline": "Raise Confident Kids with <em>Life Skills Workbooks</em>",
-        "subheadline": "Practical, step-by-step PDF activities that teach emotional regulation, money basics, and independence. Perfect for ages 4-10.",
-        "cta_label": "Get the bundle risk-free",
+        "badge_text": "Digital Tools For Growing Kids",
+        "headline": "Helping Kids Thrive — One Skill At A Time",
+        "subheadline": "Printable guides covering life skills, emotional growth, mindfulness, and more — designed to make growing up a little easier, for kids and parents alike.",
+        "cta_label": "Explore Our Guides",
         "cta_url": "/collections/all",
         "trust_disclosure": "Instant digital delivery — no shipping",
         "guarantee_text": "90-Day Money-Back Guarantee",
@@ -14,351 +14,92 @@
         "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
       }
     },
-    "pricing_explainer": {
-      "type": "home-pricing-explainer",
-      "settings": {
-        "badge_text": "HOW IT WORKS",
-        "title": "Our Honest <strong>Free + Small Fee</strong> Model",
-        "lead_text": "The workbook itself is 100% FREE. We charge a small digital processing fee of just $1.95 at checkout.",
-        "body_text": "Why do we do this? We want to put this guide into the hands of as many families as possible without standard retail markups. The small digital processing fee covers secure download servers, processing gateway expenses, and customer email support.",
-        "card_1_title": "Free Workbook",
-        "card_1_text": "Pay $0.00 for the 150+ page PDF guide itself today.",
-        "card_2_title": "Digital Processing Fee",
-        "card_2_text": "A small $1.95 processing fee applies at checkout for instant link generation."
-      }
-    },
     "problem_agitate_solve": {
       "type": "home-problem-agitate-solve",
       "settings": {
-        "badge_text": "THE PARENT CHALLENGE",
-        "title": "Why Teaching Life Skills <em>Feels So Hard</em>",
-        "subtitle": "We want our kids to be independent, but between screen time tantrums and daily chore battles, it's easy to feel overwhelmed.",
-        "card_1_title": "1. The Nagging Cycle",
-        "card_1_text": "You ask them to clean their room or brush their teeth five times. By the fifth time, you're raising your voice, they're crying, and the task still isn't done right.",
-        "card_2_title": "2. Hidden Power Struggles",
-        "card_2_text": "Without clear visual instructions, kids look at a messy room and feel complete brain freeze. They aren't trying to disobey you; they literally don't know where to start.",
-        "card_3_title": "3. The TinyThrive Solution",
-        "card_3_text": "Our printable workbooks convert complex tasks (routines, emotional control, organizing) into kid-friendly visual guides. Your child takes the lead, and you finally stop nagging."
+        "badge_text": "The Parent Challenge",
+        "title": "Raising Kids Comes With A Lot Of 'Now What?' Moments",
+        "subtitle": "From managing meltdowns to building daily routines, every stage of childhood brings new challenges — and not enough clear answers.",
+        "card_1_title": "The Overwhelm",
+        "card_1_text": "Between tantrums, screen time, and homework, it's easy to feel like you're improvising every day.",
+        "card_2_title": "The Guesswork",
+        "card_2_text": "Parenting advice is everywhere, but turning it into something your child will actually use is the hard part.",
+        "card_3_title": "The TinyThrive Solution",
+        "card_3_text": "Our printable guides turn big parenting goals into simple, kid-friendly activities, so you always know what to hand them next."
       }
+    },
+    "shop_by_category": {
+      "type": "home-shop-by-category",
+      "settings": {
+        "badge_text": "SHOP BY CATEGORY",
+        "title": "Find The Right Guide For Your Child",
+        "subtitle": "Explore printable workbooks and activity guides across the topics that matter most.",
+        "columns_desktop": 3
+      },
+      "blocks": {
+        "block_1": {
+          "type": "collection",
+          "settings": {
+            "collection": "asset-pack-50532974594-example-products"
+          }
+        },
+        "block_2": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        }
+      },
+      "block_order": [
+        "block_1",
+        "block_2"
+      ]
     },
     "how_it_works": {
       "type": "home-how-it-works",
       "settings": {
         "badge_text": "SIMPLE PROCESS",
-        "title": "Get Started in <em>Just 3 Steps</em>",
+        "title": "Get Started in Just 3 Steps",
         "subtitle": "Because these are digital PDF products, you don't have to wait for mail delivery or pay shipping costs. Get started instantly.",
-        "step_1_title": "1. Order Online",
-        "step_1_text": "Claim your FREE workbook and pay the small secure digital processing fee at checkout.",
-        "step_2_title": "2. Instant Email Delivery",
-        "step_2_text": "Check your email inbox immediately after purchase. Your secure PDF download link is delivered in under 2 minutes.",
-        "step_3_title": "3. Print & Use",
-        "step_3_text": "Open the PDF, print the worksheets at home or your local print shop, and hand them to your child to start building life skills!"
-      }
-    },
-    "product_list_themegen": {
-      "type": "product-list",
-      "disabled": false,
-      "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "disabled": true,
-          "static": true,
-          "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "center",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_Bd9pVh": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "custom",
-                "font": "var(--font-heading--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_Bd9pVh"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 16,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 16,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_PhczVC": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "portrait",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 8,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "group_McqFAT": {
-              "type": "_product-card-group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 4,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_MEKzFi": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<h5>{{ closest.product.title }}</h5>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h4",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1.125rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_37riDf": {
-                  "type": "price",
-                  "name": "t:names.product_price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "custom",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1.125rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "swatches_87VJC8": {
-                  "type": "swatches",
-                  "name": "t:names.swatches",
-                  "settings": {
-                    "product_swatches_alignment": "flex-start",
-                    "product_swatches_alignment_mobile": "flex-start",
-                    "hide_padding": false,
-                    "product_swatches_padding_top": 4,
-                    "product_swatches_padding_bottom": 0,
-                    "product_swatches_padding_left": 0,
-                    "product_swatches_padding_right": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_MEKzFi",
-                "price_37riDf",
-                "swatches_87VJC8"
-              ]
-            }
-          },
-          "block_order": [
-            "product_card_gallery_PhczVC",
-            "group_McqFAT"
-          ]
-        }
-      },
-      "settings": {
-        "collection": "asset-pack-50532974594-example-products",
-        "layout_type": "carousel",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 3,
-        "mobile_columns": "1",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 20,
-        "rows_gap": 36,
-        "icons_style": "arrow",
-        "icons_shape": "circle",
-        "section_width": "page-width",
-        "horizontal_alignment": "center",
-        "gap": 40,
-        "color_scheme": "scheme-2",
-        "padding-block-start": 20,
-        "padding-block-end": 20
-      }
-    },
-    "social_proof": {
-      "type": "home-social-proof",
-      "blocks": {
-        "test_1": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "[PLACEHOLDER - Replace with a real review before launch. Example: 'This workbook gave us an actual plan instead of more bedtime struggles. My son is ahead of where he was, and honestly, so am I.']",
-            "author": "[PLACEHOLDER - e.g. Sarah M.]",
-            "tag": "[PLACEHOLDER - e.g. Mom of 2]"
-          }
-        },
-        "test_2": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "[PLACEHOLDER - Replace with a real review before launch. Example: 'In three weeks my 7-year-old went from meltdowns to making her own breakfast. This bundle changed our mornings.']",
-            "author": "[PLACEHOLDER - e.g. Jessica K.]",
-            "tag": "[PLACEHOLDER - e.g. Verified Buyer]"
-          }
-        },
-        "test_3": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "[PLACEHOLDER - Replace with a real review before launch. Example: 'Worth every single penny. My kids love these sheets and they think it is a game. Best screen-free activities.']",
-            "author": "[PLACEHOLDER - e.g. Amanda L.]",
-            "tag": "[PLACEHOLDER - e.g. Homeschool Mom]"
-          }
-        }
-      },
-      "block_order": [
-        "test_1",
-        "test_2",
-        "test_3"
-      ],
-      "settings": {
-        "badge_text": "CUSTOMER EXPERIENCES",
-        "title": "What Parents <em>Are Saying</em>",
-        "subtitle": "[PLACEHOLDER - Replace this subtitle with verified parent statistics, e.g. 'Over 12,000 parents have used our guides to help their kids master basic life skills.']",
-        "show_stats": true,
-        "stat_1_num": "[PLACEHOLDER - e.g. 12,000+]",
-        "stat_1_label": "[PLACEHOLDER - e.g. Parents Supported]",
-        "stat_2_num": "[PLACEHOLDER - e.g. 98%]",
-        "stat_2_label": "[PLACEHOLDER - e.g. Satisfaction Rate]"
-      }
-    },
-    "guarantee": {
-      "type": "home-guarantee",
-      "settings": {
-        "title": "Our 90-Day <em>100% Risk-Free</em> Guarantee",
-        "text": "Print the workbook, hand it to your child, and use it for a full 90 days. If you don't see them growing more confident, more independent, and fewer power struggles, just email us and we'll refund every cent of your processing fee. No forms, no hoops, and no questions asked.",
-        "cta_label": "Read Our Refund Policy",
-        "refund_policy_url": "/policies/refund-policy"
+        "step_1_title": "Order Online",
+        "step_1_text": "Every order includes a small digital processing fee at checkout to cover secure delivery — there's no shipping cost, ever.",
+        "step_2_title": "Instant Email Delivery",
+        "step_2_text": "Check your inbox right after purchase. Your secure download link arrives in under 2 minutes.",
+        "step_3_title": "Print & Use",
+        "step_3_text": "Open the PDF, print at home, and start using it with your child the same day."
       }
     },
     "about_story": {
       "type": "home-about-story",
       "settings": {
         "badge_text": "OUR STORY",
-        "title": "Created by Parents, <em>For Parents</em>",
-        "story_text": "<p>TinyThrive was born out of bedtime routine battles and afternoon chore power struggles. As parents, we wanted to build emotional intelligence and practical routines in our kids, but standard parenting books felt like too much theory and not enough action.</p><p>We designed these printable life-skills workbooks to give parents a simple, visual roadmap that kids love following. It is our mission to support families with clear tools that create peaceful, independent routines.</p>",
-        "cta_label": "Read More About Us",
-        "about_url": "/pages/about-us"
+        "title": "Created By Parents, For Parents",
+        "story_text": "<p>TinyThrive started with one simple goal: turn the parenting advice we wished we'd had sooner into tools real families could actually use. Today we're building a growing collection of printable guides covering everything from daily routines to emotional growth and mindfulness, all designed the same way: simple, visual, and made for kids to actually enjoy.</p>",
+        "disclosure_text": "TinyThrive is operated by OUSI PLAY LLC.",
+        "benefit_1": "Instant Access",
+        "benefit_2": "We Stand By Our Work",
+        "benefit_3": "Always Here To Help",
+        "benefit_4": "Built By Real Parents",
+        "cta_label": "",
+        "about_url": ""
+      }
+    },
+    "trust_section": {
+      "type": "home-trust",
+      "settings": {
+        "badge_text": "OUR PHILOSOPHY",
+        "title": "Built On Real Parenting Wins, Not Theory",
+        "body_text": "Every guide we create is designed around small, achievable moments that build a child's confidence: tying a shoe, naming a big feeling, finishing a chore without a reminder, or simply learning to pause and breathe. We build TinyThrive's library one win at a time, the same way real growth happens.",
+        "footer_text": "New reviews coming soon — be one of our first verified customers."
+      }
+    },
+    "guarantee": {
+      "type": "home-guarantee",
+      "settings": {
+        "title": "Our 90-Day 100% Risk-Free Guarantee",
+        "text": "Try any TinyThrive guide for 90 days. If you don't see real progress, just email us and we'll refund every cent — no forms, no guilt trips.",
+        "cta_label": "Read Our Refund Policy",
+        "refund_policy_url": "/policies/refund-policy"
       }
     },
     "faq": {
@@ -367,33 +108,49 @@
         "faq_1": {
           "type": "faq_item",
           "settings": {
-            "question": "Is this a real company?",
-            "answer": "<p>Yes, <strong>TinyThrive</strong> is a real brand operated by <strong>OUSI PLAY LLC</strong>. We publish premium children's life-skills workbooks. You can reach our support team anytime at <strong>support@tinythrive.com</strong> (we respond in under 24 hours). All transactions on our site are secured by SSL encryption, and every order is fully protected by our 90-Day Money-Back Guarantee.</p>"
+            "question": "What will I receive after I order?",
+            "answer": "<p>Directly after payment, you will receive a secure PDF download link to the address you supplied at checkout. You can print the guide at home or a local print shop and start using it the same day.</p>"
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
-            "question": "Why is there a digital processing fee?",
-            "answer": "<p>To make our workbooks accessible to as many families as possible, we cover the retail cost of the product itself. The small $1.95 digital processing fee at checkout goes directly to offset secure download hosting costs, merchant processing gate fees, and customer support resources.</p>"
+            "question": "What ages are your guides designed for?",
+            "answer": "<p>It varies by guide — check each product page for the recommended age range.</p>"
           }
         },
         "faq_3": {
           "type": "faq_item",
           "settings": {
             "question": "How do I get my download link?",
-            "answer": "<p>Directly after your payment is processed, you will see a download button on the order confirmation screen. Additionally, we instantly email a secure PDF download link to the address you supplied at checkout. If you do not receive it in 5 minutes, please check your spam folder or email us.</p>"
+            "answer": "<p>Directly after your payment is processed, you will see a download button on the order confirmation screen. Additionally, we instantly email a secure PDF download link to your address in under 2 minutes.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why is there a digital processing fee?",
+            "answer": "<p>To make our workbooks accessible, we cover the retail cost of the product itself. The small secure digital processing fee at checkout offsets download hosting costs, secure gateway expenses, and customer email support.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What if a guide doesn't work for my child?",
+            "answer": "<p>Every purchase is protected by our 90-day 100% risk-free guarantee. Try any guide for 90 days, and if you don't see progress, simply email us for a full refund.</p>"
           }
         }
       },
       "block_order": [
         "faq_1",
         "faq_2",
-        "faq_3"
+        "faq_3",
+        "faq_4",
+        "faq_5"
       ],
       "settings": {
         "badge_text": "QUESTIONS & ANSWERS",
-        "title": "Frequently Asked <em>Questions</em>",
+        "title": "Frequently Asked Questions",
         "subtitle": "Find answers to common questions about our parenting workbooks and secure processing fee model."
       }
     },
@@ -402,7 +159,7 @@
       "settings": {
         "brand_name": "TinyThrive",
         "logo_initials": "TT",
-        "business_address": "[LLC Address - Replace before launch]",
+        "business_address": "",
         "support_email": "support@tinythrive.com",
         "about_url": "/pages/about-us",
         "contact_url": "/pages/contact",
@@ -414,14 +171,13 @@
   },
   "order": [
     "home_hero",
-    "pricing_explainer",
     "problem_agitate_solve",
+    "shop_by_category",
     "how_it_works",
-    "product_list_themegen",
-    "social_proof",
-    "guarantee",
     "about_story",
+    "trust_section",
+    "guarantee",
     "faq",
     "home_footer"
   ]
-} 
+}
