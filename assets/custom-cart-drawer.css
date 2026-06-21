@@ -1,0 +1,730 @@
+/**
+ * Shopify AJAX Cart Drawer Stylesheet
+ * Optimized for Conversion Psychology
+ * Modern, clean, responsive, and visual hierarchy optimized.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --drawer-bg-color: #ffffff;
+  --drawer-accent-color: #db8a95; /* Dusty pink/rose from competitor */
+  --drawer-accent-hover: #c97682;
+  --drawer-text-color: #222222;
+  --drawer-text-muted: #787878;
+  --drawer-border-color: #eaeaea;
+  --drawer-price-color: #d15668; /* Contrast pink-red for sale prices */
+  --drawer-savings-color: #d15668; /* Matches competitor's red savings font */
+  --drawer-timer-bg: #e2a0aa; /* Slightly softer pink for the reserved bar */
+  --drawer-gift-bg: #f9ecee; /* Ultra-soft rose background for gift box */
+  --drawer-gift-border: #f0c3c9;
+  --font-stack: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Base Drawer Component Overlay & Layout */
+cart-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  visibility: hidden;
+  transition: visibility 0.3s ease;
+  font-family: var(--font-stack);
+  color: var(--drawer-text-color);
+}
+
+cart-drawer.is-active {
+  visibility: visible;
+}
+
+.cart-drawer__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+cart-drawer.is-active .cart-drawer__overlay {
+  opacity: 1;
+}
+
+.drawer__inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 460px;
+  height: 100%;
+  background: var(--drawer-bg-color);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+}
+
+cart-drawer.is-active .drawer__inner {
+  transform: translateX(0);
+}
+
+/* Header styling */
+.drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--drawer-border-color);
+}
+
+.drawer__heading {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.cart-item-count-badge {
+  color: var(--drawer-accent-color);
+}
+
+.drawer__close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--drawer-text-muted);
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+
+.drawer__close:hover {
+  background: #f5f5f5;
+  color: var(--drawer-text-color);
+}
+
+.drawer__close svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Drawer Body */
+.cart-drawer__body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0 24px;
+  background: #ffffff;
+  scroll-behavior: smooth;
+}
+
+/* 1. Countdown Reservation Bar */
+.cart-timer {
+  background: var(--drawer-timer-bg);
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 16px;
+  margin: 0 -24px 18px -24px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: inset 0 -2px 5px rgba(0,0,0,0.03);
+}
+
+.cart-timer countdown-timer {
+  font-variant-numeric: tabular-nums;
+  margin-left: 2px;
+}
+
+/* 2. Unlocked Free Gift Card */
+.cart-drawer-gift-container {
+  background: var(--drawer-gift-bg);
+  border: 1px dashed var(--drawer-gift-border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-light);
+}
+
+.cart-drawer-gift__progress {
+  margin: 0 0 12px 0;
+  font-size: 14.5px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--drawer-price-color);
+}
+
+.upsell__container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.upsell__image {
+  flex-shrink: 0;
+}
+
+.upsell__image img {
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  display: block;
+}
+
+.upsell__content {
+  flex-grow: 1;
+}
+
+.upsell__title h3 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--drawer-text-color);
+}
+
+.upsell__price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upsell__price .compare-price {
+  text-decoration: line-through;
+  color: var(--drawer-text-muted);
+  font-size: 13px;
+}
+
+.upsell__price .regular-price {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--drawer-price-color);
+}
+
+/* 3. Cart Items List */
+.cart-items {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.cart-drawer-item {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--drawer-border-color);
+  position: relative;
+}
+
+/* Hide gift item from list to avoid repetition */
+.hidden-gift-item {
+  display: none !important;
+}
+
+.cart-item__media {
+  flex-shrink: 0;
+}
+
+.cart-item__image {
+  border-radius: 6px;
+  border: 1px solid var(--drawer-border-color);
+  object-fit: cover;
+  background: #fafafa;
+  display: block;
+}
+
+.cart-drawer-item__right {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart-drawer-item__details-and-delete-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cart-item__details {
+  flex-grow: 1;
+}
+
+.cart-item__name {
+  margin: 0 0 2px 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--drawer-text-color);
+}
+
+.free-today-tag {
+  color: var(--drawer-price-color);
+  font-weight: 700;
+}
+
+.product-option {
+  margin: 0;
+  font-size: 12px;
+  color: var(--drawer-text-muted);
+}
+
+.cart-drawer-item__remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #aaaaaa;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-drawer-item__remove-btn:hover {
+  color: #ff3b30;
+}
+
+.cart-drawer-item__remove-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Quantity Controls & Prices line */
+.cart-drawer-item__quantity-and-prices {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+quantity-input {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--drawer-border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.quantity__button {
+  background: transparent;
+  border: none;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--drawer-text-color);
+  transition: background 0.2s;
+}
+
+.quantity__button:hover {
+  background: #f7f7f7;
+}
+
+.quantity__button svg {
+  width: 10px;
+  height: 10px;
+}
+
+.quantity__input {
+  width: 32px;
+  height: 28px;
+  border: none;
+  border-left: 1.5px solid var(--drawer-border-color);
+  border-right: 1.5px solid var(--drawer-border-color);
+  text-align: center;
+  font-size: 13px;
+  font-family: var(--font-stack);
+  font-weight: 600;
+  color: var(--drawer-text-color);
+  -moz-appearance: textfield;
+}
+
+.quantity__input::-webkit-outer-spin-button,
+.quantity__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cart-item__totals {
+  text-align: right;
+}
+
+.cart-item__price-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.cart-item__discounted-prices {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-item__discounted-prices .compare-price {
+  text-decoration: line-through;
+  color: var(--drawer-text-muted);
+  font-size: 13px;
+}
+
+.cart-item__discounted-prices .regular-price {
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--drawer-price-color);
+}
+
+.cart-drawer-item__saving {
+  font-size: 11.5px;
+  color: var(--drawer-price-color);
+  margin-top: 1px;
+}
+
+/* 4. Digital Upsell Bump Toggles Styling */
+.cart-drawer__upsells-wrapper {
+  padding: 24px 0;
+}
+
+.upsells-heading {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--drawer-text-color);
+}
+
+.cart-drawer__upsells-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-drawer-upsell-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--drawer-border-color);
+  border-radius: 8px;
+  background: #ffffff;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  position: relative;
+}
+
+.cart-drawer-upsell-item[data-in-cart="true"] {
+  border-color: var(--drawer-accent-color);
+  background: #faf6f7;
+}
+
+.upsell-item__image {
+  flex-shrink: 0;
+}
+
+.upsell-item__image img {
+  border-radius: 4px;
+  border: 1px solid var(--drawer-border-color);
+  background: #ffffff;
+  display: block;
+}
+
+.upsell-item__info {
+  flex-grow: 1;
+}
+
+.upsell-item__title {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--drawer-text-color);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.upsell-item__pricing {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.upsell-item__pricing .compare-price {
+  text-decoration: line-through;
+  color: var(--drawer-text-muted);
+  font-size: 12px;
+}
+
+.upsell-item__pricing .regular-price {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--drawer-price-color);
+}
+
+.upsell-item__action {
+  flex-shrink: 0;
+}
+
+/* Switch Toggle Styling */
+.switch-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+}
+
+.switch-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #dfdfdf;
+  transition: background-color 0.25s;
+  border-radius: 34px;
+}
+
+.switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: transform 0.25s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.switch-toggle input:checked + .switch-slider {
+  background-color: var(--drawer-accent-color);
+}
+
+.switch-toggle input:checked + .switch-slider:before {
+  transform: translateX(22px);
+}
+
+/* Loading Spinner Overlay overlaying items */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 6px;
+  transition: opacity 0.2s ease;
+}
+
+.loading-overlay.hidden {
+  display: none !important;
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  animation: rotate 1.4s linear infinite;
+}
+
+.spinner .path {
+  stroke: var(--drawer-accent-color);
+  stroke-linecap: round;
+  stroke-dasharray: 90, 150;
+  stroke-dashoffset: 0;
+  animation: dash 1.4s ease-in-out infinite;
+  stroke-width: 5;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dashoffset: -125;
+  }
+}
+
+/* Empty Drawer State */
+.drawer__empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.cart-drawer__empty-text {
+  font-size: 16px;
+  color: var(--drawer-text-muted);
+  margin-bottom: 20px;
+}
+
+.drawer__close-empty-btn {
+  background: var(--drawer-text-color);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.drawer__close-empty-btn:hover {
+  opacity: 0.9;
+}
+
+/* Drawer Footer */
+.drawer__footer {
+  padding: 24px;
+  border-top: 1px solid var(--drawer-border-color);
+  background: #fbfbfb;
+}
+
+.totals__savings-row,
+.totals__subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.totals__savings-label,
+.totals__subtotal-label {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--drawer-text-muted);
+}
+
+.totals__savings-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--drawer-savings-color);
+}
+
+.totals__subtotal-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--drawer-text-color);
+}
+
+.totals__subtotal-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--drawer-text-color);
+}
+
+/* Red font modifier */
+.font-red {
+  color: var(--drawer-savings-color) !important;
+}
+
+.checkout-disclaimer {
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--drawer-text-muted);
+  text-align: center;
+  margin: 16px 0;
+  font-style: italic;
+}
+
+.cart__ctas {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-primary {
+  width: 100%;
+  background: var(--drawer-accent-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 12px rgba(219, 138, 149, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-primary:hover {
+  background-color: var(--drawer-accent-hover);
+  box-shadow: 0 6px 16px rgba(219, 138, 149, 0.35);
+}
+
+.button-primary:active {
+  transform: scale(0.98);
+}
+
+.additional-checkout-buttons-container {
+  margin-top: 12px;
+}
+
+/* Scroll Lock Helper */
+body.overflow-hidden {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Animations and Utilities */
+.center {
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Responsive Overrides */
+@media screen and (max-width: 480px) {
+  .drawer__inner {
+    max-width: 100%;
+  }
+  .drawer__header {
+    padding: 16px 20px;
+  }
+  .cart-drawer__body {
+    padding: 0 20px;
+  }
+  .drawer__footer {
+    padding: 20px;
+  }
+}

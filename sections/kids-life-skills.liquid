@@ -1,0 +1,873 @@
+{%- comment -%} TinyThrive — Kids Life Skills Landing {%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="wld-kls-root" id="wld-kls-{{ section.id }}">
+
+  {%- if section.settings.show_announcement -%}
+  <section class="kls-announcement">
+    <p class="kls-announcement-message">{{ section.settings.announcement_text }}</p>
+    <div class="kls-announcement-timer" data-kls-timer data-end="{{ section.settings.countdown_end }}">
+      <div class="kls-announcement-block">
+        <span class="kls-announcement-digits" data-days>02</span>
+        <span class="kls-announcement-label">Days</span>
+      </div>
+      <div class="kls-announcement-block">
+        <span class="kls-announcement-digits" data-hours>14</span>
+        <span class="kls-announcement-label">Hrs</span>
+      </div>
+      <div class="kls-announcement-block">
+        <span class="kls-announcement-digits" data-minutes>37</span>
+        <span class="kls-announcement-label">Min</span>
+      </div>
+      <div class="kls-announcement-block">
+        <span class="kls-announcement-digits" data-seconds>52</span>
+        <span class="kls-announcement-label">Sec</span>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  <nav class="kls-nav">
+    <button type="button" class="kls-nav-toggle" data-wld-nav-toggle aria-expanded="false" aria-label="Open menu">
+      <span class="kls-nav-toggle-bar"></span>
+      <span class="kls-nav-toggle-bar"></span>
+      <span class="kls-nav-toggle-bar"></span>
+    </button>
+    <div class="kls-nav-menu" data-wld-nav-menu>
+      <ul class="kls-nav-links">
+        <li><a href="{{ section.settings.nav_link_1_url }}" class="kls-nav-link">{{ section.settings.nav_link_1 }}</a></li>
+        <li><a href="{{ section.settings.nav_link_2_url }}" class="kls-nav-link">{{ section.settings.nav_link_2 }}</a></li>
+        <li><a href="{{ section.settings.nav_link_3_url }}" class="kls-nav-link">{{ section.settings.nav_link_3 }}</a></li>
+      </ul>
+    </div>
+    <a href="/" class="kls-nav-logo">
+      {%- if section.settings.nav_logo_image != blank -%}
+        {{ section.settings.nav_logo_image | image_url: width: 64 | image_tag: widths: '32,64', sizes: '32px', loading: 'eager', class: 'kls-nav-logo-icon-img', alt: section.settings.brand_name }}
+      {%- else -%}
+        <span class="kls-nav-logo-icon"></span>
+      {%- endif -%}
+      <span class="kls-nav-logo-name">{{ section.settings.brand_name }}</span>
+    </a>
+    <div class="kls-nav-icons">
+      <a href="{{ routes.cart_url }}" class="kls-nav-cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 4h2l1.6 9.6a2 2 0 0 0 2 1.65h8.4a2 2 0 0 0 1.97-1.66L20.2 7H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="20" r="1.4" fill="currentColor"/>
+          <circle cx="17" cy="20" r="1.4" fill="currentColor"/>
+        </svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="kls-nav-cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    </div>
+  </nav>
+
+  <section class="kls-hero">
+    <div class="kls-hero-container">
+      <div class="kls-hero-left">
+        <div class="kls-hero-gallery" data-wld-gallery>
+          <div class="kls-hero-image" data-wld-main>
+            {%- if section.settings.hero_main_image != blank -%}
+              {{ section.settings.hero_main_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: section.settings.hero_main_image.alt | default: section.settings.hero_headline }}
+            {%- endif -%}
+            {%- if section.settings.hero_badge_tl != blank -%}
+              <span class="kls-hero-badge kls-hero-badge-tl">{{ section.settings.hero_badge_tl }}</span>
+            {%- endif -%}
+            {%- if section.settings.hero_badge_tc != blank -%}
+              <span class="kls-hero-badge kls-hero-badge-tc">{{ section.settings.hero_badge_tc }}</span>
+            {%- endif -%}
+            {%- if section.settings.hero_badge_tr != blank -%}
+              <span class="kls-hero-badge kls-hero-badge-tr">{{ section.settings.hero_badge_tr }}</span>
+            {%- endif -%}
+          </div>
+          <div class="kls-hero-thumbs">
+            {%- if section.settings.hero_thumb_1 != blank -%}
+              <div class="kls-hero-thumb" data-wld-thumb>
+                {{ section.settings.hero_thumb_1 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 1' }}
+              </div>
+            {%- else -%}
+              <div class="kls-hero-thumb" data-wld-thumb></div>
+            {%- endif -%}
+            {%- if section.settings.hero_thumb_2 != blank -%}
+              <div class="kls-hero-thumb" data-wld-thumb>
+                {{ section.settings.hero_thumb_2 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 2' }}
+              </div>
+            {%- else -%}
+              <div class="kls-hero-thumb" data-wld-thumb></div>
+            {%- endif -%}
+            {%- if section.settings.hero_thumb_3 != blank -%}
+              <div class="kls-hero-thumb" data-wld-thumb>
+                {{ section.settings.hero_thumb_3 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 3' }}
+              </div>
+            {%- else -%}
+              <div class="kls-hero-thumb" data-wld-thumb></div>
+            {%- endif -%}
+            {%- if section.settings.hero_thumb_4 != blank -%}
+              <div class="kls-hero-thumb" data-wld-thumb>
+                {{ section.settings.hero_thumb_4 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 4' }}
+              </div>
+            {%- else -%}
+              <div class="kls-hero-thumb" data-wld-thumb></div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+      <div class="kls-hero-right">
+        <div class="kls-hero-rating">
+          <span class="kls-hero-stars">★★★★★</span>
+          <span class="kls-hero-rating-text">{{ section.settings.hero_rating_text }}</span>
+        </div>
+        <h1 class="kls-hero-headline">{{ section.settings.hero_headline }}</h1>
+        <div class="kls-hero-price-row">
+          <span class="kls-hero-price-sale">{{ section.settings.hero_price_sale }}</span>
+          <span class="kls-hero-price-original">{{ section.settings.hero_price_original }}</span>
+          {%- if section.settings.hero_save_pill != blank -%}
+            <span class="kls-hero-save-pill">{{ section.settings.hero_save_pill }}</span>
+          {%- endif -%}
+        </div>
+        <ul class="kls-hero-benefits">
+          {%- if section.settings.hero_benefit_1 != blank -%}
+            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ section.settings.hero_benefit_1 }}</span></li>
+          {%- endif -%}
+          {%- if section.settings.hero_benefit_2 != blank -%}
+            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ section.settings.hero_benefit_2 }}</span></li>
+          {%- endif -%}
+          {%- if section.settings.hero_benefit_3 != blank -%}
+            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ section.settings.hero_benefit_3 }}</span></li>
+          {%- endif -%}
+        </ul>
+
+        {%- assign product = section.settings.product -%}
+        {%- if product != blank -%}
+          {%- assign variant_1 = product.variants[0] -%}
+          <form action="/cart/add" method="post" enctype="multipart/form-data" class="wld-buyform">
+            <input type="hidden" name="form_type" value="product">
+            <input type="hidden" name="utf8" value="✓">
+            <input type="hidden" name="id" value="{{ variant_1.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="kls-hero-cta" {% unless product.available %}disabled{% endunless %}>
+              {%- if product.available -%}{{ section.settings.hero_cta_label }}{%- else -%}Sold Out{%- endif -%}
+            </button>
+          </form>
+        {%- else -%}
+          <button type="button" class="kls-hero-cta">{{ section.settings.hero_cta_label }}</button>
+          <div class="kls-no-product-notice">⚠️ <strong>Preview mode.</strong> Select a product in section settings to activate Add to Cart.</div>
+        {%- endif -%}
+
+        <div class="kls-hero-trust">
+          <span class="kls-hero-trust-check">✓</span>
+          <span>{{ section.settings.hero_trust_text }}</span>
+        </div>
+        {%- if section.settings.hero_guarantee_pill != blank -%}
+          <span class="kls-hero-guarantee">{{ section.settings.hero_guarantee_pill }}</span>
+        {%- endif -%}
+        <div class="kls-hero-testimonial">
+          <div class="kls-hero-testimonial-top">
+            {%- if section.settings.hero_testimonial_avatar != blank -%}
+              <div class="kls-hero-testimonial-avatar">
+                {{ section.settings.hero_testimonial_avatar | image_url: width: 88 | image_tag: widths: '44,88', sizes: '44px', loading: 'lazy', class: 'kls-avatar-img', alt: section.settings.hero_testimonial_name }}
+              </div>
+            {%- else -%}
+              <div class="kls-hero-testimonial-avatar"></div>
+            {%- endif -%}
+            <p class="kls-hero-testimonial-quote">{{ section.settings.hero_testimonial_quote }}</p>
+          </div>
+          <div class="kls-hero-testimonial-meta">
+            <span class="kls-hero-testimonial-name">{{ section.settings.hero_testimonial_name }}</span>
+            <span class="kls-hero-testimonial-stars">★★★★★</span>
+          </div>
+          <div class="kls-hero-testimonial-dots">
+            <span class="kls-hero-testimonial-dot kls-hero-testimonial-dot-active"></span>
+            <span class="kls-hero-testimonial-dot"></span>
+            <span class="kls-hero-testimonial-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kls-faq">
+    <div class="kls-faq-container">
+      <h2 class="kls-faq-heading">{{ section.settings.faq_heading }}</h2>
+      <div class="kls-faq-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' -%}
+            <details class="kls-faq-row" {{ block.shopify_attributes }}>
+              <summary class="kls-faq-summary">
+                <div class="kls-faq-question">
+                  <span class="kls-faq-emoji">{{ block.settings.emoji }}</span>
+                  <span>{{ block.settings.question }}</span>
+                </div>
+                <span class="kls-faq-chevron">⌄</span>
+              </summary>
+              <div class="kls-faq-answer">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="kls-ready">
+    <div class="kls-ready-inner">
+      <div class="kls-ready-image">
+        {%- if section.settings.ready_image != blank -%}
+          {{ section.settings.ready_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-ready-img', alt: section.settings.ready_heading }}
+        {%- endif -%}
+      </div>
+      <div class="kls-ready-content">
+        <h2 class="kls-ready-heading">{{ section.settings.ready_heading }}</h2>
+        <p class="kls-ready-body">{{ section.settings.ready_body }}</p>
+        <a href="{{ section.settings.ready_cta_url | default: '#wld-kls-' | append: section.id }}" class="kls-ready-cta">{{ section.settings.ready_cta_label }}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="kls-grow">
+    <div class="kls-grow-inner">
+      <div class="kls-grow-content">
+        <h2 class="kls-grow-heading">{{ section.settings.grow_heading }}</h2>
+        <p class="kls-grow-body">{{ section.settings.grow_body }}</p>
+      </div>
+      <div class="kls-grow-image">
+        <p class="kls-grow-quote">{{ section.settings.grow_quote }}</p>
+        <div class="kls-grow-collage">
+          <div class="kls-grow-thumb">
+            {%- if section.settings.grow_thumb_1 != blank -%}
+              {{ section.settings.grow_thumb_1 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 1' }}
+            {%- endif -%}
+          </div>
+          <div class="kls-grow-thumb">
+            {%- if section.settings.grow_thumb_2 != blank -%}
+              {{ section.settings.grow_thumb_2 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 2' }}
+            {%- endif -%}
+          </div>
+          <div class="kls-grow-thumb">
+            {%- if section.settings.grow_thumb_3 != blank -%}
+              {{ section.settings.grow_thumb_3 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 3' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kls-testimonials">
+    <div class="kls-testimonials-inner">
+      <h2 class="kls-testimonials-heading">{{ section.settings.testimonials_heading }}</h2>
+      <div class="kls-testimonials-grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'testimonial' -%}
+            <div class="kls-testimonial-card" {{ block.shopify_attributes }}>
+              <div class="kls-testimonial-badge">"</div>
+              <div class="kls-testimonial-stars">★★★★★</div>
+              <h3 class="kls-testimonial-title">{{ block.settings.title }}</h3>
+              <p class="kls-testimonial-body">{{ block.settings.body }}</p>
+              <p class="kls-testimonial-author"><span class="kls-testimonial-author-name">{{ block.settings.author_name }}</span> | {{ block.settings.author_tag }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="kls-stats">
+    <div class="kls-stats-inner">
+      <div>
+        <h2 class="kls-stats-heading">{{ section.settings.stats_heading }}</h2>
+      </div>
+      <div>
+        <div class="kls-stats-rows">
+          <div class="kls-stat-row">
+            <div class="kls-stat-badge">{{ section.settings.stat_1_value }}</div>
+            <p class="kls-stat-desc">{{ section.settings.stat_1_desc }}</p>
+          </div>
+          <div class="kls-stat-row">
+            <div class="kls-stat-badge">{{ section.settings.stat_2_value }}</div>
+            <p class="kls-stat-desc">{{ section.settings.stat_2_desc }}</p>
+          </div>
+          <div class="kls-stat-row">
+            <div class="kls-stat-badge">{{ section.settings.stat_3_value }}</div>
+            <p class="kls-stat-desc">{{ section.settings.stat_3_desc }}</p>
+          </div>
+        </div>
+        <p class="kls-stats-footnote">{{ section.settings.stats_footnote }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="kls-comparison">
+    <div class="kls-comparison-inner">
+      <h2 class="kls-comparison-heading">{{ section.settings.comparison_heading }}</h2>
+      <div class="kls-comparison-table">
+        <div class="kls-comparison-row kls-comparison-row-header">
+          <div class="kls-comparison-feature">&nbsp;</div>
+          <div class="kls-comparison-brand-header">{{ section.settings.comparison_brand_label }}</div>
+          <div class="kls-comparison-others-header">{{ section.settings.comparison_others_label }}</div>
+        </div>
+        {%- assign features = section.settings.comparison_features | newline_to_br | split: '<br />' -%}
+        {%- for feature in features -%}
+          {%- assign clean = feature | strip -%}
+          {%- if clean != blank -%}
+            <div class="kls-comparison-row">
+              <div class="kls-comparison-feature">{{ clean }}</div>
+              <div class="kls-comparison-cell-brand"><span class="kls-comparison-check">✓</span></div>
+              <div class="kls-comparison-cell-others"><span class="kls-comparison-x">✕</span></div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  <section class="kls-guarantee">
+    <div class="kls-guarantee-inner">
+      <h2 class="kls-guarantee-heading">{{ section.settings.guarantee_heading }}</h2>
+      <p class="kls-guarantee-body">{{ section.settings.guarantee_body }}</p>
+      <a href="{{ section.settings.guarantee_cta_url | default: '#wld-kls-' | append: section.id }}" class="kls-guarantee-cta">{{ section.settings.guarantee_cta_label }}</a>
+    </div>
+  </section>
+
+  <footer class="kls-footer">
+    <div class="kls-footer-inner">
+      <div class="kls-footer-grid">
+        <div class="kls-footer-col">
+          <div class="kls-footer-brand">
+            {%- if section.settings.footer_logo != blank -%}
+              <div class="kls-footer-logo">
+                {{ section.settings.footer_logo | image_url: width: 96 | image_tag: widths: '48,96', sizes: '48px', loading: 'lazy', class: 'kls-footer-logo-img', alt: section.settings.brand_name }}
+              </div>
+            {%- else -%}
+              <div class="kls-footer-logo">{{ section.settings.footer_logo_initials }}</div>
+            {%- endif -%}
+            <p class="kls-footer-brand-name">{{ section.settings.brand_name }}</p>
+          </div>
+        </div>
+        <div class="kls-footer-col">
+          <h4 class="kls-footer-col-heading">{{ section.settings.brand_name }}</h4>
+          <ul class="kls-footer-links">
+            <li><a href="{{ section.settings.footer_link_1_url }}" class="kls-footer-link">{{ section.settings.footer_link_1 }}</a></li>
+            <li><a href="{{ section.settings.footer_link_2_url }}" class="kls-footer-link">{{ section.settings.footer_link_2 }}</a></li>
+            <li><a href="{{ section.settings.footer_link_3_url }}" class="kls-footer-link">{{ section.settings.footer_link_3 }}</a></li>
+            <li><a href="{{ section.settings.footer_link_4_url }}" class="kls-footer-link">{{ section.settings.footer_link_4 }}</a></li>
+            <li><a href="{{ section.settings.footer_link_5_url }}" class="kls-footer-link">{{ section.settings.footer_link_5 }}</a></li>
+          </ul>
+        </div>
+        <div class="kls-footer-col">
+          <h4 class="kls-footer-newsletter-heading">{{ section.settings.newsletter_heading }}</h4>
+          {%- form 'customer', class: 'kls-footer-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="kls-footer-input-wrap">
+              <input type="email" name="contact[email]" class="kls-footer-input" placeholder="Email" required>
+              <button type="submit" class="kls-footer-input-arrow" aria-label="Submit">→</button>
+            </div>
+            <button type="submit" class="kls-footer-signup">{{ section.settings.newsletter_button }}</button>
+          {%- endform -%}
+        </div>
+      </div>
+      <div class="kls-footer-bottom">
+        <div class="kls-footer-payments">
+          {%- for type in shop.enabled_payment_types -%}
+            {{ type | payment_type_svg_tag: class: 'kls-footer-payment-icon' }}
+          {%- endfor -%}
+        </div>
+        <p class="kls-footer-copyright">{{ section.settings.footer_copyright }}</p>
+      </div>
+      <a href="#wld-kls-{{ section.id }}" class="kls-footer-scrolltop" aria-label="Scroll to top">↑</a>
+    </div>
+  </footer>
+
+</div>
+
+<style>
+#wld-kls-{{ section.id }} { font-family: 'Inter', sans-serif; color: #2D2D2D; }
+#wld-kls-{{ section.id }} *, #wld-kls-{{ section.id }} *::before, #wld-kls-{{ section.id }} *::after { box-sizing: border-box; }
+
+/* Announcement */
+#wld-kls-{{ section.id }} .kls-announcement { background-color: #E89BA0; padding: 8px 32px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; min-height: 44px; }
+#wld-kls-{{ section.id }} .kls-announcement-message { color: #FFFFFF; font-size: 14px; font-weight: 500; margin: 0; }
+#wld-kls-{{ section.id }} .kls-announcement-timer { display: flex; align-items: center; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-announcement-block { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px 10px; border: 1px solid #FFFFFF; border-radius: 8px; min-width: 44px; }
+#wld-kls-{{ section.id }} .kls-announcement-digits { color: #FFFFFF; font-size: 16px; font-weight: 700; line-height: 1.1; }
+#wld-kls-{{ section.id }} .kls-announcement-label { color: #FFFFFF; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Nav */
+#wld-kls-{{ section.id }} .kls-nav { background-color: #FFFFFF; height: 72px; padding: 0 32px; border-bottom: 1px solid #F0D5D8; display: flex; align-items: center; justify-content: space-between; position: relative; }
+#wld-kls-{{ section.id }} .kls-nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; width: 40px; height: 40px; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+#wld-kls-{{ section.id }} .kls-nav-toggle-bar { display: block; width: 20px; height: 2px; background-color: #2D2D2D; border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
+#wld-kls-{{ section.id }} .kls-nav-toggle.is-active .kls-nav-toggle-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+#wld-kls-{{ section.id }} .kls-nav-toggle.is-active .kls-nav-toggle-bar:nth-child(2) { opacity: 0; }
+#wld-kls-{{ section.id }} .kls-nav-toggle.is-active .kls-nav-toggle-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+#wld-kls-{{ section.id }} .kls-nav-menu { display: flex; }
+#wld-kls-{{ section.id }} .kls-nav-links { display: flex; align-items: center; gap: 16px; list-style: none; padding: 0; margin: 0; }
+#wld-kls-{{ section.id }} .kls-nav-link { color: #2D2D2D; font-size: 16px; font-weight: 500; text-decoration: none; }
+#wld-kls-{{ section.id }} .kls-nav-link:hover { color: #E89BA0; }
+#wld-kls-{{ section.id }} .kls-nav-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 10px; text-decoration: none; }
+#wld-kls-{{ section.id }} .kls-nav-logo-icon { width: 32px; height: 32px; border-radius: 999px; background-color: #FCE4E6; }
+#wld-kls-{{ section.id }} .kls-nav-logo-icon-img { width: 32px; height: 32px; border-radius: 999px; object-fit: cover; }
+#wld-kls-{{ section.id }} .kls-nav-logo-name { color: #E89BA0; font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; }
+#wld-kls-{{ section.id }} .kls-nav-icons { display: flex; align-items: center; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-nav-cart { position: relative; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; color: #2D2D2D; text-decoration: none; }
+#wld-kls-{{ section.id }} .kls-nav-cart svg { width: 24px; height: 24px; }
+#wld-kls-{{ section.id }} .kls-nav-cart-count { position: absolute; top: -6px; right: -8px; background-color: #E89BA0; color: #FFFFFF; font-size: 10px; font-weight: 700; min-width: 17px; height: 17px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 3px; line-height: 1; }
+
+/* Hero */
+#wld-kls-{{ section.id }} .kls-hero { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-hero-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+#wld-kls-{{ section.id }} .kls-hero-left { display: flex; flex-direction: column; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-hero-image { width: 100%; aspect-ratio: 1/1; background-color: #FFF5F6; border-radius: 16px; position: relative; overflow: hidden; }
+#wld-kls-{{ section.id }} .kls-gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#wld-kls-{{ section.id }} .kls-hero-badge { position: absolute; padding: 6px 12px; background-color: #FFFFFF; color: #2D2D2D; font-size: 12px; font-weight: 600; border-radius: 999px; box-shadow: 0 4px 16px rgba(212, 122, 130, 0.08); z-index: 2; }
+#wld-kls-{{ section.id }} .kls-hero-badge-tl { top: 16px; left: 16px; }
+#wld-kls-{{ section.id }} .kls-hero-badge-tc { bottom: 16px; right: 16px; background-color: #E89BA0; color: #FFFFFF; }
+#wld-kls-{{ section.id }} .kls-hero-badge-tr { top: 16px; right: 16px; }
+#wld-kls-{{ section.id }} .kls-hero-thumbs { display: flex; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-hero-thumb { width: 80px; height: 80px; background-color: #FFF5F6; border-radius: 16px; overflow: hidden; flex-shrink: 0; cursor: pointer; }
+#wld-kls-{{ section.id }} .kls-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#wld-kls-{{ section.id }} .kls-hero-right { display: flex; flex-direction: column; gap: 20px; }
+#wld-kls-{{ section.id }} .kls-hero-rating { display: flex; align-items: center; gap: 8px; }
+#wld-kls-{{ section.id }} .kls-hero-stars { color: #F5B800; font-size: 16px; letter-spacing: 2px; }
+#wld-kls-{{ section.id }} .kls-hero-rating-text { color: #6B6B6B; font-size: 14px; }
+#wld-kls-{{ section.id }} .kls-hero-headline { color: #2D2D2D; font-family: 'Fraunces', serif; font-size: 42px; font-weight: 700; line-height: 1.15; margin: 0; }
+#wld-kls-{{ section.id }} .kls-hero-price-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+#wld-kls-{{ section.id }} .kls-hero-price-sale { color: #D0021B; font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; }
+#wld-kls-{{ section.id }} .kls-hero-price-original { color: #6B6B6B; font-size: 18px; text-decoration: line-through; }
+#wld-kls-{{ section.id }} .kls-hero-save-pill { background-color: #E89BA0; color: #FFFFFF; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+#wld-kls-{{ section.id }} .kls-hero-benefits { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+#wld-kls-{{ section.id }} .kls-hero-benefit { display: flex; align-items: center; gap: 10px; color: #2D2D2D; font-size: 16px; font-weight: 500; }
+#wld-kls-{{ section.id }} .kls-hero-benefit-icon { color: #E89BA0; font-size: 18px; flex-shrink: 0; }
+#wld-kls-{{ section.id }} .kls-hero-cta { background-color: #D47A82; color: #FFFFFF; font-size: 18px; font-weight: 700; text-transform: uppercase; text-decoration: none; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 999px; border: none; cursor: pointer; width: 100%; box-shadow: 0 2px 8px rgba(232, 155, 160, 0.35); letter-spacing: 1px; }
+#wld-kls-{{ section.id }} .kls-hero-trust { display: flex; align-items: center; gap: 8px; color: #6B6B6B; font-size: 14px; }
+#wld-kls-{{ section.id }} .kls-hero-trust-check { color: #E89BA0; font-weight: 700; }
+#wld-kls-{{ section.id }} .kls-hero-guarantee { display: inline-flex; align-self: center; padding: 8px 20px; background-color: #D47A82; color: #FFFFFF; font-size: 14px; font-weight: 600; border-radius: 999px; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial { background-color: #FFF5F6; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 16px rgba(212, 122, 130, 0.08); }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-top { display: flex; gap: 12px; align-items: flex-start; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-avatar { width: 44px; height: 44px; border-radius: 999px; background-color: #FCE4E6; flex-shrink: 0; overflow: hidden; }
+#wld-kls-{{ section.id }} .kls-avatar-img { width: 100%; height: 100%; object-fit: cover; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-quote { color: #2D2D2D; font-size: 14px; font-style: italic; margin: 0; line-height: 1.5; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-meta { display: flex; align-items: center; gap: 10px; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-name { color: #2D2D2D; font-size: 14px; font-weight: 700; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-stars { color: #F5B800; font-size: 14px; letter-spacing: 2px; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-dots { display: flex; gap: 6px; justify-content: center; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-dot { width: 8px; height: 8px; border-radius: 999px; background-color: #FCE4E6; }
+#wld-kls-{{ section.id }} .kls-hero-testimonial-dot-active { background-color: #E89BA0; }
+#wld-kls-{{ section.id }} .kls-no-product-notice { background: #FFF5F6; border: 1px solid #F0D5D8; border-radius: 8px; padding: 12px; font-size: 13px; color: #6B6B6B; margin-top: 8px; }
+
+/* FAQ */
+#wld-kls-{{ section.id }} .kls-faq { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-faq-container { max-width: 800px; margin: 0 auto; }
+#wld-kls-{{ section.id }} .kls-faq-heading { color: #2D2D2D; font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; text-align: center; margin: 0 0 40px 0; line-height: 1.2; }
+#wld-kls-{{ section.id }} .kls-faq-list { display: flex; flex-direction: column; }
+#wld-kls-{{ section.id }} .kls-faq-row { border-bottom: 1px solid #F0D5D8; }
+#wld-kls-{{ section.id }} .kls-faq-row:first-child { border-top: 1px solid #F0D5D8; }
+#wld-kls-{{ section.id }} .kls-faq-summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 0 8px; cursor: pointer; list-style: none; }
+#wld-kls-{{ section.id }} .kls-faq-summary::-webkit-details-marker { display: none; }
+#wld-kls-{{ section.id }} .kls-faq-question { display: flex; align-items: center; gap: 12px; color: #2D2D2D; font-size: 16px; font-weight: 500; }
+#wld-kls-{{ section.id }} .kls-faq-emoji { font-size: 18px; }
+#wld-kls-{{ section.id }} .kls-faq-chevron { color: #6B6B6B; font-size: 14px; font-weight: 700; transition: transform 0.2s; }
+#wld-kls-{{ section.id }} .kls-faq-row[open] .kls-faq-chevron { transform: rotate(180deg); }
+#wld-kls-{{ section.id }} .kls-faq-row:hover .kls-faq-question, #wld-kls-{{ section.id }} .kls-faq-row:hover .kls-faq-chevron { color: #E89BA0; }
+#wld-kls-{{ section.id }} .kls-faq-answer { padding: 0 8px 16px 8px; color: #6B6B6B; font-size: 15px; line-height: 1.6; }
+
+/* Ready */
+#wld-kls-{{ section.id }} .kls-ready { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-ready-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+#wld-kls-{{ section.id }} .kls-ready-image { width: 100%; aspect-ratio: 4/5; background: #FFF5F6; border-radius: 16px; border: 1px solid #F0D5D8; overflow: hidden; }
+#wld-kls-{{ section.id }} .kls-ready-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+#wld-kls-{{ section.id }} .kls-ready-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-ready-heading { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: #2D2D2D; margin: 0; line-height: 1.2; }
+#wld-kls-{{ section.id }} .kls-ready-body { font-size: 16px; color: #6B6B6B; margin: 0; line-height: 1.6; }
+#wld-kls-{{ section.id }} .kls-ready-cta { display: inline-flex; align-items: center; justify-content: center; background: #E89BA0; color: #FFFFFF; font-size: 20px; font-weight: 700; padding: 0 32px; height: 48px; max-width: 200px; width: 100%; border-radius: 999px; border: none; text-decoration: none; cursor: pointer; box-shadow: 0 2px 8px rgba(232, 155, 160, 0.35); margin-top: 8px; }
+#wld-kls-{{ section.id }} .kls-ready-cta:hover { background: #D47A82; }
+
+/* Grow */
+#wld-kls-{{ section.id }} .kls-grow { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-grow-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+#wld-kls-{{ section.id }} .kls-grow-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-grow-heading { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: #2D2D2D; margin: 0; line-height: 1.2; }
+#wld-kls-{{ section.id }} .kls-grow-body { font-size: 16px; color: #6B6B6B; margin: 0; line-height: 1.6; }
+#wld-kls-{{ section.id }} .kls-grow-image { width: 100%; aspect-ratio: 4/3; background: #FFF5F6; border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px; border: 1px solid #F0D5D8; }
+#wld-kls-{{ section.id }} .kls-grow-quote { font-size: 14px; font-style: italic; color: #2D2D2D; line-height: 1.5; margin: 0; padding: 12px 16px; background: #FFFFFF; border-radius: 8px; border-left: 3px solid #E89BA0; }
+#wld-kls-{{ section.id }} .kls-grow-collage { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; flex: 1; }
+#wld-kls-{{ section.id }} .kls-grow-thumb { background: #FCE4E6; border-radius: 8px; min-height: 100px; overflow: hidden; }
+#wld-kls-{{ section.id }} .kls-grow-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Testimonials */
+#wld-kls-{{ section.id }} .kls-testimonials { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-testimonials-inner { max-width: 1200px; margin: 0 auto; }
+#wld-kls-{{ section.id }} .kls-testimonials-heading { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: #2D2D2D; text-align: center; margin: 0 0 48px 0; line-height: 1.2; }
+#wld-kls-{{ section.id }} .kls-testimonials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-testimonial-card { background: #FFF5F6; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(212, 122, 130, 0.08); position: relative; display: flex; flex-direction: column; gap: 12px; }
+#wld-kls-{{ section.id }} .kls-testimonial-stars { color: #F5C518; font-size: 18px; letter-spacing: 2px; }
+#wld-kls-{{ section.id }} .kls-testimonial-badge { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; background: #E89BA0; border-radius: 999px; display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; }
+#wld-kls-{{ section.id }} .kls-testimonial-title { font-size: 16px; font-weight: 700; color: #2D2D2D; margin: 0; line-height: 1.4; }
+#wld-kls-{{ section.id }} .kls-testimonial-body { font-size: 14px; font-style: italic; color: #6B6B6B; margin: 0; line-height: 1.6; flex: 1; }
+#wld-kls-{{ section.id }} .kls-testimonial-author { font-size: 14px; color: #6B6B6B; margin: 0; margin-top: auto; }
+#wld-kls-{{ section.id }} .kls-testimonial-author-name { font-weight: 700; color: #2D2D2D; }
+
+/* Stats */
+#wld-kls-{{ section.id }} .kls-stats { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 40fr 60fr; gap: 48px; align-items: center; }
+#wld-kls-{{ section.id }} .kls-stats-heading { font-family: 'Fraunces', serif; font-size: 32px; font-weight: 700; color: #2D2D2D; margin: 0; line-height: 1.2; }
+#wld-kls-{{ section.id }} .kls-stats-rows { display: flex; flex-direction: column; gap: 16px; }
+#wld-kls-{{ section.id }} .kls-stat-row { display: flex; align-items: center; gap: 20px; }
+#wld-kls-{{ section.id }} .kls-stat-badge { width: 80px; height: 80px; min-width: 80px; border-radius: 999px; border: 3px solid #E89BA0; background: #FFFFFF; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; color: #D47A82; }
+#wld-kls-{{ section.id }} .kls-stat-desc { font-size: 16px; color: #6B6B6B; margin: 0; line-height: 1.5; }
+#wld-kls-{{ section.id }} .kls-stat-desc strong { color: #2D2D2D; font-weight: 700; }
+#wld-kls-{{ section.id }} .kls-stats-footnote { font-size: 12px; font-style: italic; color: #6B6B6B; margin: 24px 0 0 0; line-height: 1.5; }
+
+/* Comparison */
+#wld-kls-{{ section.id }} .kls-comparison { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-comparison-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 40% 60%; gap: 32px; align-items: center; }
+#wld-kls-{{ section.id }} .kls-comparison-heading { font-family: 'Fraunces', serif; font-weight: 700; font-size: 32px; color: #2D2D2D; line-height: 1.2; margin: 0; }
+#wld-kls-{{ section.id }} .kls-comparison-table { border-radius: 16px; overflow: hidden; border: 1px solid #F0D5D8; background: #FFFFFF; box-shadow: 0 4px 16px rgba(212, 122, 130, 0.08); }
+#wld-kls-{{ section.id }} .kls-comparison-row { display: grid; grid-template-columns: 1fr 120px 120px; align-items: center; min-height: 56px; border-bottom: 1px solid #F0D5D8; }
+#wld-kls-{{ section.id }} .kls-comparison-row:last-child { border-bottom: none; }
+#wld-kls-{{ section.id }} .kls-comparison-feature { padding: 12px 20px; font-size: 16px; color: #2D2D2D; font-weight: 500; }
+#wld-kls-{{ section.id }} .kls-comparison-brand-header { background: #E89BA0; color: #FFFFFF; font-size: 14px; font-weight: 700; text-align: center; padding: 16px 8px; height: 100%; display: flex; align-items: center; justify-content: center; }
+#wld-kls-{{ section.id }} .kls-comparison-others-header { background: #FCE4E6; color: #6B6B6B; font-size: 14px; font-weight: 700; text-align: center; padding: 16px 8px; height: 100%; display: flex; align-items: center; justify-content: center; }
+#wld-kls-{{ section.id }} .kls-comparison-cell-brand { background: #FCE4E6; text-align: center; padding: 16px 0; height: 100%; display: flex; align-items: center; justify-content: center; }
+#wld-kls-{{ section.id }} .kls-comparison-check { display: inline-block; width: 24px; height: 24px; border-radius: 999px; background: #E89BA0; color: #FFFFFF; font-size: 14px; font-weight: 700; line-height: 24px; text-align: center; }
+#wld-kls-{{ section.id }} .kls-comparison-cell-others { background: #FFFFFF; text-align: center; padding: 16px 0; height: 100%; display: flex; align-items: center; justify-content: center; }
+#wld-kls-{{ section.id }} .kls-comparison-x { display: inline-block; width: 24px; height: 24px; border-radius: 999px; background: #F0D5D8; color: #6B6B6B; font-size: 14px; font-weight: 700; line-height: 24px; text-align: center; }
+
+/* Guarantee */
+#wld-kls-{{ section.id }} .kls-guarantee { background-color: #FFFFFF; padding: 72px 32px; }
+#wld-kls-{{ section.id }} .kls-guarantee-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+#wld-kls-{{ section.id }} .kls-guarantee-heading { font-family: 'Fraunces', serif; font-weight: 700; font-size: 32px; color: #2D2D2D; line-height: 1.25; margin: 0 0 16px 0; }
+#wld-kls-{{ section.id }} .kls-guarantee-body { font-size: 16px; color: #6B6B6B; line-height: 1.6; margin: 0 0 32px 0; }
+#wld-kls-{{ section.id }} .kls-guarantee-cta { display: inline-block; background: #D47A82; color: #FFFFFF; font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0 32px; height: 52px; line-height: 52px; border-radius: 999px; border: none; text-decoration: none; box-shadow: 0 2px 8px rgba(232, 155, 160, 0.35); cursor: pointer; }
+
+/* Footer */
+#wld-kls-{{ section.id }} .kls-footer { background-color: #E89BA0; padding: 72px 32px; position: relative; }
+#wld-kls-{{ section.id }} .kls-footer-inner { max-width: 1200px; margin: 0 auto; }
+#wld-kls-{{ section.id }} .kls-footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; align-items: start; }
+#wld-kls-{{ section.id }} .kls-footer-brand { display: flex; align-items: center; gap: 12px; }
+#wld-kls-{{ section.id }} .kls-footer-logo { width: 48px; height: 48px; border-radius: 999px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; color: #E89BA0; font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; overflow: hidden; }
+#wld-kls-{{ section.id }} .kls-footer-logo-img { width: 100%; height: 100%; object-fit: cover; }
+#wld-kls-{{ section.id }} .kls-footer-brand-name { font-family: 'Fraunces', serif; font-weight: 700; font-size: 18px; color: #FFFFFF; margin: 0; }
+#wld-kls-{{ section.id }} .kls-footer-col-heading { font-weight: 700; font-size: 16px; color: #FFFFFF; margin: 0 0 16px 0; }
+#wld-kls-{{ section.id }} .kls-footer-links { list-style: none; padding: 0; margin: 0; }
+#wld-kls-{{ section.id }} .kls-footer-link { font-size: 14px; color: #FFFFFF; line-height: 28px; text-decoration: none; display: block; }
+#wld-kls-{{ section.id }} .kls-footer-newsletter-heading { font-weight: 700; font-size: 14px; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 16px 0; }
+#wld-kls-{{ section.id }} .kls-footer-input-wrap { position: relative; margin-bottom: 12px; }
+#wld-kls-{{ section.id }} .kls-footer-input { width: 100%; height: 48px; padding: 0 48px 0 16px; border-radius: 8px; background: #FFFFFF; border: none; font-size: 14px; color: #2D2D2D; }
+#wld-kls-{{ section.id }} .kls-footer-input-arrow { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 999px; background: #E89BA0; color: #FFFFFF; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; }
+#wld-kls-{{ section.id }} .kls-footer-signup { display: block; width: 100%; height: 48px; line-height: 48px; background: #FFFFFF; color: #D47A82; font-weight: 700; font-size: 16px; text-align: center; border-radius: 999px; border: none; text-decoration: none; cursor: pointer; box-shadow: 0 2px 8px rgba(232, 155, 160, 0.35); }
+#wld-kls-{{ section.id }} .kls-footer-bottom { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.25); text-align: center; }
+#wld-kls-{{ section.id }} .kls-footer-payments { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin-bottom: 16px; }
+#wld-kls-{{ section.id }} .kls-footer-payment-icon { width: 38px; height: 24px; display: block; border-radius: 4px; }
+#wld-kls-{{ section.id }} .kls-footer-copyright { font-size: 12px; color: #FFFFFF; text-align: center; margin: 0; }
+#wld-kls-{{ section.id }} .kls-footer-scrolltop { position: absolute; bottom: 24px; right: 24px; width: 36px; height: 36px; border-radius: 999px; background: #D47A82; color: #FFFFFF; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 2px 8px rgba(212, 122, 130, 0.35); }
+
+@media (max-width: 900px) {
+  #wld-kls-{{ section.id }} .kls-hero-container,
+  #wld-kls-{{ section.id }} .kls-ready-inner,
+  #wld-kls-{{ section.id }} .kls-grow-inner,
+  #wld-kls-{{ section.id }} .kls-stats-inner,
+  #wld-kls-{{ section.id }} .kls-comparison-inner { grid-template-columns: 1fr; gap: 32px; }
+  #wld-kls-{{ section.id }} .kls-testimonials-grid { grid-template-columns: 1fr; }
+  #wld-kls-{{ section.id }} .kls-hero-headline { font-size: 32px; }
+  #wld-kls-{{ section.id }} .kls-hero-price-sale { font-size: 28px; }
+  #wld-kls-{{ section.id }} .kls-ready-heading, #wld-kls-{{ section.id }} .kls-grow-heading, #wld-kls-{{ section.id }} .kls-testimonials-heading, #wld-kls-{{ section.id }} .kls-stats-heading, #wld-kls-{{ section.id }} .kls-comparison-heading, #wld-kls-{{ section.id }} .kls-guarantee-heading { font-size: 28px; }
+  #wld-kls-{{ section.id }} .kls-comparison-heading { text-align: center; }
+  #wld-kls-{{ section.id }} .kls-comparison-row { grid-template-columns: 1fr 90px 90px; }
+  #wld-kls-{{ section.id }} .kls-footer-grid { grid-template-columns: 1fr 1fr; }
+
+  #wld-kls-{{ section.id }} .kls-nav-toggle { display: flex; order: 1; }
+  #wld-kls-{{ section.id }} .kls-nav-logo { order: 2; }
+  #wld-kls-{{ section.id }} .kls-nav-icons { order: 3; }
+  #wld-kls-{{ section.id }} .kls-nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: #FFFFFF; border-bottom: 1px solid #F0D5D8; box-shadow: 0 12px 24px rgba(45, 45, 45, 0.08); padding: 8px 20px 16px; z-index: 20; }
+  #wld-kls-{{ section.id }} .kls-nav-menu.is-open { display: flex; }
+  #wld-kls-{{ section.id }} .kls-nav-links { flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; }
+  #wld-kls-{{ section.id }} .kls-nav-links li { width: 100%; }
+  #wld-kls-{{ section.id }} .kls-nav-link { display: block; width: 100%; padding: 12px 4px; border-bottom: 1px solid #F8E8EA; }
+  #wld-kls-{{ section.id }} .kls-nav-links li:last-child .kls-nav-link { border-bottom: none; }
+
+  #wld-kls-{{ section.id }} .kls-hero-badge-tc { max-width: calc(100% - 24px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+
+@media (max-width: 540px) {
+  #wld-kls-{{ section.id }} .kls-announcement { padding: 8px 16px; gap: 10px; }
+  #wld-kls-{{ section.id }} .kls-announcement-timer { gap: 8px; }
+  #wld-kls-{{ section.id }} .kls-announcement-block { min-width: 38px; padding: 3px 8px; }
+  #wld-kls-{{ section.id }} .kls-nav { padding: 0 16px; }
+  #wld-kls-{{ section.id }} .kls-nav-logo-name { font-size: 16px; }
+  #wld-kls-{{ section.id }} .kls-hero, #wld-kls-{{ section.id }} .kls-faq, #wld-kls-{{ section.id }} .kls-ready, #wld-kls-{{ section.id }} .kls-grow, #wld-kls-{{ section.id }} .kls-testimonials, #wld-kls-{{ section.id }} .kls-stats, #wld-kls-{{ section.id }} .kls-comparison, #wld-kls-{{ section.id }} .kls-guarantee, #wld-kls-{{ section.id }} .kls-footer { padding: 48px 20px; }
+  #wld-kls-{{ section.id }} .kls-hero-headline { font-size: 28px; }
+  #wld-kls-{{ section.id }} .kls-hero-thumb { width: 64px; height: 64px; }
+  #wld-kls-{{ section.id }} .kls-hero-badge { font-size: 10px; padding: 4px 8px; }
+  #wld-kls-{{ section.id }} .kls-hero-badge-tl { top: 10px; left: 10px; }
+  #wld-kls-{{ section.id }} .kls-hero-badge-tr { top: 10px; right: 10px; }
+  #wld-kls-{{ section.id }} .kls-hero-badge-tc { bottom: 10px; right: 10px; }
+  #wld-kls-{{ section.id }} .kls-faq-heading { font-size: 26px; margin-bottom: 28px; }
+  #wld-kls-{{ section.id }} .kls-faq-question { font-size: 14px; }
+  #wld-kls-{{ section.id }} .kls-ready-heading, #wld-kls-{{ section.id }} .kls-grow-heading, #wld-kls-{{ section.id }} .kls-testimonials-heading, #wld-kls-{{ section.id }} .kls-stats-heading { font-size: 26px; }
+  #wld-kls-{{ section.id }} .kls-grow-collage { grid-template-columns: 1fr 1fr; }
+  #wld-kls-{{ section.id }} .kls-stat-badge { width: 64px; height: 64px; min-width: 64px; font-size: 20px; }
+  #wld-kls-{{ section.id }} .kls-comparison-heading, #wld-kls-{{ section.id }} .kls-guarantee-heading { font-size: 24px; }
+  #wld-kls-{{ section.id }} .kls-comparison-feature { font-size: 14px; padding: 10px 12px; }
+  #wld-kls-{{ section.id }} .kls-comparison-row { grid-template-columns: 1fr 70px 70px; }
+  #wld-kls-{{ section.id }} .kls-footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+</style>
+
+<script>
+(function() {
+  function initWldSection(sectionId) {
+    var root = document.getElementById('wld-kls-' + sectionId);
+    if (!root || root.dataset.wldInited === 'true') return;
+    root.dataset.wldInited = 'true';
+
+    var timer = root.querySelector('[data-kls-timer]');
+    if (timer) {
+      var endStr = timer.getAttribute('data-end');
+      var endTime = null;
+      if (endStr) {
+        var parsed = new Date(endStr).getTime();
+        if (!isNaN(parsed)) endTime = parsed;
+      }
+      if (!endTime) {
+        endTime = Date.now() + (2 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000) + (37 * 60 * 1000) + (52 * 1000);
+      }
+      var daysEl = timer.querySelector('[data-days]');
+      var hoursEl = timer.querySelector('[data-hours]');
+      var minutesEl = timer.querySelector('[data-minutes]');
+      var secondsEl = timer.querySelector('[data-seconds]');
+      function pad(n) { return n < 10 ? '0' + n : '' + n; }
+      function tick() {
+        var diff = endTime - Date.now();
+        if (diff < 0) diff = 0;
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        if (daysEl) daysEl.textContent = pad(d);
+        if (hoursEl) hoursEl.textContent = pad(h);
+        if (minutesEl) minutesEl.textContent = pad(m);
+        if (secondsEl) secondsEl.textContent = pad(s);
+      }
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    var navToggle = root.querySelector('[data-wld-nav-toggle]');
+    var navMenu = root.querySelector('[data-wld-nav-menu]');
+    if (navToggle && navMenu) {
+      navToggle.addEventListener('click', function() {
+        var isOpen = navMenu.classList.toggle('is-open');
+        navToggle.classList.toggle('is-active', isOpen);
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      navMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          navMenu.classList.remove('is-open');
+          navToggle.classList.remove('is-active');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+      document.addEventListener('click', function(e) {
+        if (!root.contains(e.target)) return;
+        if (navMenu.contains(e.target) || navToggle.contains(e.target)) return;
+        navMenu.classList.remove('is-open');
+        navToggle.classList.remove('is-active');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+  }
+  initWldSection('{{ section.id }}');
+  document.addEventListener('shopify:section:load', function(e) {
+    var match = e.target.id && e.target.id.match(/wld-kls-(.+)$/);
+    if (match) initWldSection(match[1]);
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  function imgOf(el){ return el ? (el.tagName === 'IMG' ? el : el.querySelector('img')) : null; }
+  function wireWldGallery(gallery){
+    var main = imgOf(gallery.querySelector('[data-wld-main]'));
+    if(!main) return;
+    gallery.querySelectorAll('[data-wld-thumb]').forEach(function(el){
+      var fresh = el.cloneNode(true);
+      el.parentNode.replaceChild(fresh, el);
+      fresh.style.cursor = 'pointer';
+      fresh.addEventListener('click', function(){
+        var t = imgOf(fresh);
+        if(!t) return;
+        var src = t.getAttribute('src');
+        if(src){ main.setAttribute('src', src.replace(/([?&])width=\d+/, '$1width=1200')); }
+        main.removeAttribute('srcset');
+      });
+    });
+  }
+  function initWldGalleries(){
+    document.querySelectorAll('[data-wld-gallery]').forEach(wireWldGallery);
+  }
+  initWldGalleries();
+  document.addEventListener('shopify:section:load', initWldGalleries);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "TinyThrive Life Skills",
+  "tag": "section",
+  "class": "wld-section",
+  "settings": [
+    { "type": "header", "content": "🛒 Product & Buy Box" },
+    { "type": "product", "id": "product", "label": "Product (for cart)" },
+
+    { "type": "header", "content": "📣 Announcement Bar" },
+    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "announcement_text", "label": "Message", "default": "FREE Access Ends In:" },
+    { "type": "text", "id": "countdown_end", "label": "Countdown end (YYYY-MM-DDTHH:MM:SS)", "info": "Leave blank for 2d 14h 37m demo timer" },
+
+    { "type": "header", "content": "🧭 Navigation" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "TinyThrive" },
+    { "type": "image_picker", "id": "nav_logo_image", "label": "Nav logo (optional)" },
+    { "type": "text", "id": "nav_link_1", "label": "Link 1", "default": "Home" },
+    { "type": "url", "id": "nav_link_1_url", "label": "Link 1 URL" },
+    { "type": "text", "id": "nav_link_2", "label": "Link 2", "default": "Shop" },
+    { "type": "url", "id": "nav_link_2_url", "label": "Link 2 URL" },
+    { "type": "text", "id": "nav_link_3", "label": "Link 3", "default": "Contact" },
+    { "type": "url", "id": "nav_link_3_url", "label": "Link 3 URL" },
+
+    { "type": "header", "content": "🖼️ Hero Gallery" },
+    { "type": "image_picker", "id": "hero_main_image", "label": "Main hero image" },
+    { "type": "image_picker", "id": "hero_thumb_1", "label": "Thumbnail 1" },
+    { "type": "image_picker", "id": "hero_thumb_2", "label": "Thumbnail 2" },
+    { "type": "image_picker", "id": "hero_thumb_3", "label": "Thumbnail 3" },
+    { "type": "image_picker", "id": "hero_thumb_4", "label": "Thumbnail 4" },
+    { "type": "text", "id": "hero_badge_tl", "label": "Badge top-left", "default": "150+ Pages" },
+    { "type": "text", "id": "hero_badge_tc", "label": "Badge top-center (pink)", "default": "Loved By Busy Parents" },
+    { "type": "text", "id": "hero_badge_tr", "label": "Badge top-right", "default": "6,200+ Happy Parents" },
+
+    { "type": "header", "content": "💰 Hero Buy Box Copy" },
+    { "type": "text", "id": "hero_rating_text", "label": "Rating text", "default": "(2,184 verified reviews)" },
+    { "type": "text", "id": "hero_headline", "label": "Headline", "default": "Raise A Confident, Capable Kid — One 10-Minute Activity At A Time" },
+    { "type": "text", "id": "hero_price_sale", "label": "Sale price", "default": "$0.00" },
+    { "type": "text", "id": "hero_price_original", "label": "Original price", "default": "$58.00" },
+    { "type": "text", "id": "hero_save_pill", "label": "Save pill", "default": "SAVE 100%" },
+    { "type": "text", "id": "hero_benefit_1", "label": "Benefit 1", "default": "150+ pages of age-by-age activities — zero guesswork, zero prep" },
+    { "type": "text", "id": "hero_benefit_2", "label": "Benefit 2", "default": "Turns chores, manners & big feelings into games kids ask for" },
+    { "type": "text", "id": "hero_benefit_3", "label": "Benefit 3", "default": "Built around real child-development milestones, not Pinterest guesses" },
+    { "type": "text", "id": "hero_cta_label", "label": "CTA label", "default": "CLAIM MY FREE BUNDLE" },
+    { "type": "text", "id": "hero_trust_text", "label": "Trust text", "default": "100% digital. Delivered to your inbox in minutes — nothing to wait for, nothing to assemble." },
+    { "type": "text", "id": "hero_guarantee_pill", "label": "Guarantee pill", "default": "90-Day Money-Back Guarantee" },
+
+    { "type": "header", "content": "💬 Hero Testimonial" },
+    { "type": "image_picker", "id": "hero_testimonial_avatar", "label": "Avatar image" },
+    { "type": "textarea", "id": "hero_testimonial_quote", "label": "Quote", "default": "My son used to melt down every morning over getting dressed. Three weeks into this workbook, he picks his own clothes, makes his bed, and told me he's 'a big kid now.' I teared up reading that page." },
+    { "type": "text", "id": "hero_testimonial_name", "label": "Name", "default": "Megan T., mom of 2 (ages 5 & 8)" },
+
+    { "type": "header", "content": "❓ FAQ Section" },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Still Have Questions? We've Got You." },
+    { "type": "paragraph", "content": "Add FAQ items as blocks below." },
+
+    { "type": "header", "content": "🎯 Ready Section (Image + Copy + CTA)" },
+    { "type": "image_picker", "id": "ready_image", "label": "Image" },
+    { "type": "text", "id": "ready_heading", "label": "Heading", "default": "Ready To Swap Power Struggles For 'I Got It, Mom'?" },
+    { "type": "textarea", "id": "ready_body", "label": "Body", "default": "No more reminders. No more nagging. Just print a page, hand it over, and watch your kid take it from there. Every activity quietly builds the confidence, responsibility, and emotional skills behind those proud 'I did it myself' moments." },
+    { "type": "text", "id": "ready_cta_label", "label": "CTA label", "default": "YES — I WANT THE ROADMAP" },
+    { "type": "url", "id": "ready_cta_url", "label": "CTA URL" },
+
+    { "type": "header", "content": "🌱 Grow Section" },
+    { "type": "text", "id": "grow_heading", "label": "Heading", "default": "Stop Guessing 🌱 Start Growing With A Plan ✨" },
+    { "type": "textarea", "id": "grow_body", "label": "Body", "default": "From tying shoelaces to naming big feelings, this bundle walks your child through the exact skills that build independence, one small page at a time. Age-by-age, skill-by-skill, no guesswork required." },
+    { "type": "textarea", "id": "grow_quote", "label": "Quote", "default": "The moment a child finishes something on their own, ties the shoe, makes the bed, says 'I'm frustrated' instead of screaming, something shifts. That quiet pride is where real confidence starts." },
+    { "type": "image_picker", "id": "grow_thumb_1", "label": "Collage thumb 1" },
+    { "type": "image_picker", "id": "grow_thumb_2", "label": "Collage thumb 2" },
+    { "type": "image_picker", "id": "grow_thumb_3", "label": "Collage thumb 3" },
+
+    { "type": "header", "content": "⭐ Testimonials Section" },
+    { "type": "text", "id": "testimonials_heading", "label": "Heading", "default": "Real Parents. Real Mornings That Got Easier." },
+    { "type": "paragraph", "content": "Add testimonial cards as blocks below." },
+
+    { "type": "header", "content": "📊 Stats Section" },
+    { "type": "text", "id": "stats_heading", "label": "Heading", "default": "Trusted By 6,200+ Parents & Teachers Worldwide" },
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 value", "default": "86%" },
+    { "type": "richtext", "id": "stat_1_desc", "label": "Stat 1 desc", "default": "<p>Felt <strong>confident</strong> about what to teach next instead of overwhelmed</p>" },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 value", "default": "92%" },
+    { "type": "richtext", "id": "stat_2_desc", "label": "Stat 2 desc", "default": "<p>Said their child <strong>mastered 3+ new life skills</strong> within the first month</p>" },
+    { "type": "text", "id": "stat_3_value", "label": "Stat 3 value", "default": "97%" },
+    { "type": "richtext", "id": "stat_3_desc", "label": "Stat 3 desc", "default": "<p>Stopped the <strong>late-night parenting spirals</strong> and finally felt like they had a plan</p>" },
+    { "type": "text", "id": "stats_footnote", "label": "Footnote", "default": "*Based on a survey of 2,400+ parents conducted 30 days after starting the workbook. Individual results vary by child." },
+
+    { "type": "header", "content": "📋 Comparison Table" },
+    { "type": "text", "id": "comparison_heading", "label": "Heading", "default": "Why Parents Choose TinyThrive Over Random Printables" },
+    { "type": "text", "id": "comparison_brand_label", "label": "Brand column label", "default": "TinyThrive" },
+    { "type": "text", "id": "comparison_others_label", "label": "Others column label", "default": "Random Printables" },
+    { "type": "textarea", "id": "comparison_features", "label": "Features (one per line)", "default": "Age-by-age roadmap — no guesswork\nStep-by-step instructions, not blank pages\n10-minute activities, zero prep\nBuilt around real child-development milestones\nPrintable progress tracker included\nLifetime access & free updates" },
+
+    { "type": "header", "content": "🏅 Guarantee Section" },
+    { "type": "text", "id": "guarantee_heading", "label": "Heading", "default": "Try It Risk-Free For 90 Days" },
+    { "type": "textarea", "id": "guarantee_body", "label": "Body", "default": "Print it, hand it to your kid, and use it for a full 90 days. If you don't see more confidence, more independence, and fewer power struggles, just email us and we'll refund every cent — no forms, no guilt trips, no 'have you really tried' questions." },
+    { "type": "text", "id": "guarantee_cta_label", "label": "CTA label", "default": "GET MY BUNDLE RISK-FREE" },
+    { "type": "url", "id": "guarantee_cta_url", "label": "CTA URL" },
+
+    { "type": "header", "content": "🦶 Footer" },
+    { "type": "image_picker", "id": "footer_logo", "label": "Footer logo image (optional)" },
+    { "type": "text", "id": "footer_logo_initials", "label": "Footer logo initials (fallback)", "default": "TT" },
+    { "type": "text", "id": "footer_link_1", "label": "Link 1", "default": "About Us" },
+    { "type": "url", "id": "footer_link_1_url", "label": "Link 1 URL" },
+    { "type": "text", "id": "footer_link_2", "label": "Link 2", "default": "Contact Us" },
+    { "type": "url", "id": "footer_link_2_url", "label": "Link 2 URL" },
+    { "type": "text", "id": "footer_link_3", "label": "Link 3", "default": "Refund Policy" },
+    { "type": "url", "id": "footer_link_3_url", "label": "Link 3 URL" },
+    { "type": "text", "id": "footer_link_4", "label": "Link 4", "default": "Terms Of Service" },
+    { "type": "url", "id": "footer_link_4_url", "label": "Link 4 URL" },
+    { "type": "text", "id": "footer_link_5", "label": "Link 5", "default": "Delivery And Shipping Policy" },
+    { "type": "url", "id": "footer_link_5_url", "label": "Link 5 URL" },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "JOIN 12,000+ PARENTS GETTING FREE PRINTABLES" },
+    { "type": "text", "id": "newsletter_button", "label": "Newsletter button label", "default": "Send Me Freebies" },
+    { "type": "text", "id": "footer_copyright", "label": "Copyright", "default": "© 2026, TinyThrive. All rights reserved." }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "💡" },
+        { "type": "text", "id": "question", "label": "Question", "default": "Your question?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Your answer here.</p>" }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Testimonial Card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Great product!" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Loved this product!" },
+        { "type": "text", "id": "author_name", "label": "Author name", "default": "Sarah K." },
+        { "type": "text", "id": "author_tag", "label": "Author tag", "default": "Verified Buyer" }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "TinyThrive Life Skills",
+      "category": "TinyThrive",
+      "blocks": [
+        { "type": "faq", "settings": { "emoji": "💸", "question": "Why is this free today?", "answer": "<p>We want as many families as possible to have this roadmap, so for a limited time we're covering the cost of the workbook itself. You only cover a small digital processing fee to unlock instant access. Once today's batch is gone, it returns to its regular $58 price.</p>" } },
+        { "type": "faq", "settings": { "emoji": "📩", "question": "How will I get my workbook?", "answer": "<p>The moment your order is confirmed, we'll email your download link straight to your inbox. Most parents are printing pages within 10 minutes. Be sure to check your spam folder just in case!</p>" } },
+        { "type": "faq", "settings": { "emoji": "📚", "question": "What's actually inside the bundle?", "answer": "<p>150+ printable pages covering daily routines, money basics, emotional regulation, manners, and problem-solving, organized by age so you never have to guess what comes next.</p>" } },
+        { "type": "faq", "settings": { "emoji": "👶", "question": "What ages is this designed for?", "answer": "<p>Built for ages 3–12. Activities are simple enough for toddlers and flexible enough to challenge older kids too. Print whatever fits your child today.</p>" } },
+        { "type": "faq", "settings": { "emoji": "⏰", "question": "I barely have time to breathe. Can I actually do this?", "answer": "<p>Yes. Every activity is built to take 10 minutes or less. Open the PDF, hand it to your child, done. No planning, no prep, no late-night Pinterest spiral required.</p>" } },
+        { "type": "testimonial", "settings": { "title": "My 8-Year-Old Cooked Breakfast. Alone.", "body": "I'd been meaning to teach her for two years. One Sunday afternoon and a few worksheets later, she made herself eggs and toast, and was beaming the whole time. I actually got emotional. Worth every minute, and it didn't cost me a thing.", "author_name": "Megan L.", "author_tag": "Mom of 2 (ages 5 & 8)" } },
+        { "type": "testimonial", "settings": { "title": "Finally Stopped Comparing My Kid To Instagram Toddlers", "body": "I was in a spiral every night reading about what other 7-year-olds could already do. This gave me an actual plan instead of more guilt. My son is ahead of where he was a month ago, and honestly, so am I.", "author_name": "Luna K.", "author_tag": "Working mom of 3" } },
+        { "type": "testimonial", "settings": { "title": "I Don't Google-Parent At Midnight Anymore", "body": "This is the first resource that actually told me what to teach and when. There's a simple list of skills by age, and my son is already two steps ahead of where his class is starting.", "author_name": "Sarah T.", "author_tag": "Elementary teacher & mom of 2" } }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "templates": ["page", "index", "product"]
+  }
+}
+{% endschema %}

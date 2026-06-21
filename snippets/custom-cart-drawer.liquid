@@ -1,0 +1,326 @@
+{% comment %}
+  Shopify Custom Cart Drawer (Snippet Version)
+  Optimized for "Free + Digital Processing Fee" Digital Funnels
+  No {% schema %} tag. Can be saved in either snippets/ or sections/ directory.
+{% endcomment %}
+
+{%- comment -%}
+  ====================================================================
+  CONFIGURATION SETTINGS (Edit these variables directly)
+  ====================================================================
+{%- endcomment -%}
+{%- assign show_countdown = true -%}
+{%- assign timer_text = "Cart reserved for" -%}
+{%- assign timer_duration = 600 -%}
+
+{%- comment -%} Define your free gift product handle (from Shopify admin) {%- endcomment -%}
+{%- assign free_gift_product_handle = "impulse-control-activities-for-kids" -%}
+{%- assign free_gift_product = all_products[free_gift_product_handle] -%}
+
+{%- comment -%} Define your digital upsells (add product handles here, comma-separated) {%- endcomment -%}
+{%- assign upsell_handles_string = "parenting-guidance-guide,solar-system-busy-book,confidence-and-self-esteem-flashcards,anger-management-for-kids,decision-making-for-kids,lifetime-access-and-updates" -%}
+{%- assign upsell_handles = upsell_handles_string | split: ',' -%}
+{%- assign upsells_heading = "Add extra worksheets to your order:" -%}
+
+{%- assign disclaimer_text = "*Digital delivery is free. Small digital processing fee applied at checkout." -%}
+{%- assign checkout_button_text = "Check out" -%}
+{%- assign empty_cart_text = "Your cart is empty today." -%}
+{%- assign continue_shopping_text = "Continue Shopping" -%}
+{%- comment -%}
+  ====================================================================
+{%- endcomment -%}
+
+<custom-cart-drawer class="cart-drawer{% if cart == empty %} is-empty{% endif %}" id="CartDrawer">
+  <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
+  <div class="drawer__inner" role="dialog" aria-modal="true" aria-label="Your Cart" tabindex="-1">
+    
+    <!-- Drawer Header -->
+    <div class="drawer__header">
+      <h2 class="drawer__heading">
+        Cart &bull; <span class="cart-item-count-badge">{{ cart.item_count }}</span> {% if cart.item_count == 1 %}item{% else %}items{% endif %}
+      </h2>
+      <button class="drawer__close" type="button" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+          <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="cart-drawer__body">
+      
+      <!-- 1. Countdown Reservation Timer -->
+      {%- if show_countdown -%}
+        <div class="cart-timer" id="CartDrawer-Timer">
+          <strong>
+            {{ timer_text }} 
+            <countdown-timer data-duration="{{ timer_duration }}">
+              <span class="timer-minutes">10</span>:<span class="timer-seconds">00</span>
+            </countdown-timer>
+          </strong>
+        </div>
+      {%- endif -%}
+
+      <!-- 2. Unlocked Free Gift Banner & Card -->
+      {%- if free_gift_product != empty -%}
+        {%- assign gift_variant_id = free_gift_product.selected_or_first_available_variant.id -%}
+        {%- assign gift_in_cart = false -%}
+        {%- for item in cart.items -%}
+          {%- if item.variant_id == gift_variant_id -%}
+            {%- assign gift_in_cart = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        <div class="cart-drawer-gift-container" 
+             id="CartDrawer-Gift" 
+             data-gift-variant-id="{{ gift_variant_id }}"
+             data-gift-in-cart="{{ gift_in_cart }}"
+             {% unless gift_in_cart %}style="display: none;"{% endunless %}>
+          <h3 class="cart-drawer-gift__progress center">
+            🎁 Congrats! You unlocked a free gift!
+          </h3>
+          <div class="upsell__container">
+            <div class="upsell__image">
+              <img src="{{ free_gift_product.featured_image | image_url: width: 120 }}" alt="{{ free_gift_product.title }}" loading="lazy" width="60" height="60">
+            </div>
+            <div class="upsell__content">
+              <div class="upsell__title">
+                <h3>{{ free_gift_product.title }}</h3>
+              </div>
+              <div class="upsell__price upsell__price--separate">
+                {%- if free_gift_product.compare_at_price > 0 -%}
+                  <span class="compare-price">{{ free_gift_product.compare_at_price | money }}</span>
+                {%- endif -%}
+                <span class="regular-price FREE-text">FREE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- 3. Cart Items Form -->
+      <form action="{{ routes.cart_url }}" id="CartDrawer-Form" class="cart-drawer__form" method="post">
+        <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
+          {%- if cart != empty -%}
+            <ul class="cart-items list-unstyled">
+              {%- for item in cart.items -%}
+                {%- assign is_gift = false -%}
+                {%- if free_gift_product != empty and item.product.handle == free_gift_product.handle -%}
+                  {%- assign is_gift = true -%}
+                {%- endif -%}
+
+                <li id="CartDrawer-Item-{{ item.index | plus: 1 }}" 
+                    class="cart-drawer-item cart-item cart-item--product-{{ item.product.handle }}{% if is_gift %} hidden-gift-item{% endif %}" 
+                    role="row" 
+                    data-variant-id="{{ item.variant_id }}">
+                  
+                  <div class="loading-overlay hidden">
+                    <div class="loading-overlay__spinner">
+                      <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="cart-item__media" role="cell">
+                    <img class="cart-item__image" src="{{ item.image | image_url: width: 150 }}" alt="{{ item.title | escape }}" loading="lazy" width="75" height="75">
+                  </div>
+
+                  <div class="cart-drawer-item__right">
+                    <div class="cart-drawer-item__details-and-delete-btn">
+                      <div class="cart-item__details">
+                        <h4 class="cart-item__name h4 break">
+                          {{ item.product.title }}
+                          {%- if item.final_price == 0 -%}
+                            <span class="free-today-tag"> (FREE TODAY)</span>
+                          {%- endif -%}
+                        </h4>
+                        {%- if item.product.has_only_default_variant == false -%}
+                          <p class="product-option">{{ item.variant.title }}</p>
+                        {%- endif -%}
+                      </div>
+
+                      <button class="cart-drawer-item__remove-btn" type="button" aria-label="Remove {{ item.product.title }}" data-variant-id="{{ item.variant_id }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true" focusable="false" class="icon icon-remove">
+                          <path d="M14 3h-3.53a3.07 3.07 0 00-.6-1.65C9.44.82 8.8.5 8 .5s-1.44.32-1.87.85A3.06 3.06 0 005.53 3H2a.5.5 0 000 1h1.25v10c0 .28.22.5.5.5h8.5a.5.5 0 00.5-.5V4H14a.5.5 0 000-1zM6.91 1.98c.23-.29.58-.48 1.09-.48s.85.19 1.09.48c.2.24.3.6.36 1.02h-2.9c.05-.42.17-.78.36-1.02zm4.84 11.52h-7.5V4h7.5v9.5z" fill="currentColor"></path>
+                          <path d="M6.55 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5zM9.45 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5z" fill="currentColor"></path>
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div class="cart-drawer-item__quantity-and-prices">
+                      <div class="cart-item__quantity">
+                        <div class="cart-item__quantity-wrapper">
+                          <quantity-input class="quantity cart-quantity">
+                            <button class="quantity__button quantity__button--minus" name="minus" type="button" data-variant-id="{{ item.variant_id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                                <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"></path>
+                              </svg>
+                            </button>
+                            <input class="quantity__input" 
+                                   type="number" 
+                                   name="updates[]" 
+                                   value="{{ item.quantity }}" 
+                                   min="1" 
+                                   data-variant-id="{{ item.variant_id }}"
+                                   aria-label="Quantity for {{ item.product.title }}">
+                            <button class="quantity__button quantity__button--plus" name="plus" type="button" data-variant-id="{{ item.variant_id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                              </svg>
+                            </button>
+                          </quantity-input>
+                        </div>
+                      </div>
+
+                      <div class="cart-item__totals">
+                        <div class="cart-item__price-wrapper">
+                          <div class="cart-item__discounted-prices">
+                            {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
+                              {%- assign compare_price = item.variant.compare_at_price | default: 9500 -%}
+                              {%- assign compare_line_price = compare_price | times: item.quantity -%}
+                              <s class="compare-price">{{ compare_line_price | money }}</s>
+                            {%- endif -%}
+                            
+                            <span class="regular-price">
+                              {%- if item.final_line_price == 0 -%}
+                                0.00 {{ cart.currency.symbol }}
+                              {%- else -%}
+                                {{ item.final_line_price | money }}
+                              {%- endif -%}
+                            </span>
+                          </div>
+                          
+                          {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
+                            {%- assign ref_price = item.variant.compare_at_price | default: 9500 -%}
+                            {%- assign save_amount = ref_price | minus: item.final_price | times: item.quantity -%}
+                            {%- if save_amount > 0 -%}
+                              <span class="cart-drawer-item__saving">
+                                <strong>(You save {{ save_amount | money }})</strong>
+                              </span>
+                            {%- endif -%}
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- else -%}
+            <div class="drawer__empty-content center">
+              <p class="cart-drawer__empty-text">{{ empty_cart_text }}</p>
+              <button class="button drawer__close-empty-btn" type="button" onclick="this.closest('cart-drawer').close()">
+                {{ continue_shopping_text }}
+              </button>
+            </div>
+          {%- endif -%}
+        </div>
+      </form>
+
+      <!-- 4. Digital Upsell Bump Toggles -->
+      {%- if cart != empty and upsell_handles.size > 0 -%}
+        <div class="cart-drawer__upsells-wrapper">
+          <h4 class="upsells-heading">{{ upsells_heading }}</h4>
+          <div class="cart-drawer__upsells-list">
+            {%- for handle in upsell_handles -%}
+              {%- assign upsell_product = all_products[handle] -%}
+              {%- if upsell_product != empty and upsell_product.available -%}
+                {%- assign upsell_variant = upsell_product.selected_or_first_available_variant -%}
+                {%- assign upsell_in_cart = false -%}
+                {%- for item in cart.items -%}
+                  {%- if item.variant_id == upsell_variant.id -%}
+                    {%- assign upsell_in_cart = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+
+                <div class="cart-drawer-upsell-item" 
+                     data-variant-id="{{ upsell_variant.id }}"
+                     data-in-cart="{{ upsell_in_cart }}">
+                  
+                  <div class="upsell-item__image">
+                    <img src="{{ upsell_product.featured_image | image_url: width: 100 }}" alt="{{ upsell_product.title }}" loading="lazy" width="50" height="50">
+                  </div>
+
+                  <div class="upsell-item__info">
+                    <span class="upsell-item__title">{{ upsell_product.title }}</span>
+                    <div class="upsell-item__pricing">
+                      {%- if upsell_product.compare_at_price > upsell_product.price -%}
+                        <s class="compare-price">{{ upsell_product.compare_at_price | money }}</s>
+                      {%- endif -%}
+                      <span class="regular-price">{{ upsell_product.price | money }}</span>
+                    </div>
+                  </div>
+
+                  <div class="upsell-item__action">
+                    <label class="switch-toggle" aria-label="Toggle {{ upsell_product.title }}">
+                      <input type="checkbox" 
+                             class="upsell-toggle-checkbox" 
+                             data-variant-id="{{ upsell_variant.id }}"
+                             {% if upsell_in_cart %}checked{% endif %}>
+                      <span class="switch-slider"></span>
+                    </label>
+                  </div>
+
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="drawer__footer {% if cart == empty %}hidden{% endif %}">
+      
+      <!-- Savings Summary -->
+      {%- assign total_savings = 0 -%}
+      {%- for item in cart.items -%}
+        {%- assign compare_price = item.variant.compare_at_price | default: item.variant.price -%}
+        {%- if compare_price > item.final_price -%}
+          {%- assign item_savings = compare_price | minus: item.final_price | times: item.quantity -%}
+          {%- assign total_savings = total_savings | plus: item_savings -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <div class="totals__savings-row" {% if total_savings == 0 %}style="display: none;"{% endif %}>
+        <span class="totals__savings-label">Savings</span>
+        <span class="totals__savings-value font-red" id="CartDrawer-TotalSavings">
+          -{{ total_savings | money }}
+        </span>
+      </div>
+
+      <!-- Subtotal -->
+      <div class="totals__subtotal-row">
+        <span class="totals__subtotal-label">Subtotal</span>
+        <span class="totals__subtotal-value" id="CartDrawer-TotalSubtotal">
+          {{ cart.total_price | money }}
+        </span>
+      </div>
+
+      <!-- Funnel Disclaimer -->
+      <div class="checkout-disclaimer">
+        {{ disclaimer_text }}
+      </div>
+
+      <!-- Checkout Button -->
+      <div class="cart__ctas">
+        <button type="submit" 
+                name="checkout" 
+                form="CartDrawer-Form" 
+                class="cart__checkout-button button-primary">
+          {{ checkout_button_text }}
+        </button>
+
+        <!-- Express Checkout Buttons -->
+        {%- if additional_checkout_buttons -%}
+          <div class="additional-checkout-buttons-container">
+            {{ content_for_additional_checkout_buttons }}
+          </div>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</custom-cart-drawer>
