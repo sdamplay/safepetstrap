@@ -860,8 +860,8 @@
               "custom_color": "#dd1d1d",
               "icon_scale": 120,
               "icon_spacing": 10,
-              "margin_top": 15,
-              "margin_bottom": 15
+              "margin_top": 0,
+              "margin_bottom": 0
             }
           },
           "68fdc0a0-cd7c-40b9-97b3-a76eb7917a47": {
