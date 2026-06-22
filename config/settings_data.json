@@ -587,7 +587,7 @@
               "product": "impulse-control-activities-for-kids",
               "product_desc": "",
               "goal_type": "subtotal",
-              "requirement": "80",
+              "requirement": "0",
               "locked_progress_text": "You're [amount] away from a free gift!",
               "unlocked_progress_text": "Congrats! You unlocked a free gift 🎉",
               "progress_mobile_text_size": 13,
@@ -762,8 +762,8 @@
               "selected_border_color": "#dd1d1d",
               "border_width": "0.2",
               "show_custom_bg": true,
-              "regular_bg_color": "#FFFFFF",
-              "selected_bg_color": "#FFFFFF",
+              "regular_bg_color": "#ffffff",
+              "selected_bg_color": "#ffffff",
               "margin_top": 0,
               "margin_bottom": 0
             }
@@ -821,8 +821,8 @@
               "selected_border_color": "#dd1d1d",
               "border_width": "0.2",
               "show_custom_bg": true,
-              "regular_bg_color": "#FFFFFF",
-              "selected_bg_color": "#FFFFFF",
+              "regular_bg_color": "#ffffff",
+              "selected_bg_color": "#ffffff",
               "margin_top": 0,
               "margin_bottom": 0
             }
