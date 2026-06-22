@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "home_hero": {
@@ -11,7 +20,10 @@
         "trust_disclosure": "Instant digital delivery — no shipping",
         "guarantee_text": "90-Day Money-Back Guarantee",
         "refund_policy_url": "/policies/refund-policy",
-        "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
+        "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay",
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 0
       }
     },
     "problem_agitate_solve": {
@@ -25,17 +37,14 @@
         "card_2_title": "The Guesswork",
         "card_2_text": "Parenting advice is everywhere, but turning it into something your child will actually use is the hard part.",
         "card_3_title": "The TinyThrive Solution",
-        "card_3_text": "Our printable guides turn big parenting goals into simple, kid-friendly activities, so you always know what to hand them next."
+        "card_3_text": "Our printable guides turn big parenting goals into simple, kid-friendly activities, so you always know what to hand them next.",
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "shop_by_category": {
       "type": "home-shop-by-category",
-      "settings": {
-        "badge_text": "SHOP BY CATEGORY",
-        "title": "Find The Right Guide For Your Child",
-        "subtitle": "Explore printable workbooks and activity guides across the topics that matter most.",
-        "columns_desktop": 3
-      },
       "blocks": {
         "block_1": {
           "type": "collection",
@@ -53,7 +62,16 @@
       "block_order": [
         "block_1",
         "block_2"
-      ]
+      ],
+      "settings": {
+        "badge_text": "SHOP BY CATEGORY",
+        "title": "Find The Right Guide For Your Child",
+        "subtitle": "Explore printable workbooks and activity guides across the topics that matter most.",
+        "columns_desktop": 3,
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "how_it_works": {
       "type": "home-how-it-works",
@@ -66,7 +84,10 @@
         "step_2_title": "Instant Email Delivery",
         "step_2_text": "Check your inbox right after purchase. Your secure download link arrives in under 2 minutes.",
         "step_3_title": "Print & Use",
-        "step_3_text": "Open the PDF, print at home, and start using it with your child the same day."
+        "step_3_text": "Open the PDF, print at home, and start using it with your child the same day.",
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "about_story": {
@@ -81,7 +102,10 @@
         "benefit_3": "Always Here To Help",
         "benefit_4": "Built By Real Parents",
         "cta_label": "",
-        "about_url": ""
+        "about_url": "",
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "trust_section": {
@@ -90,7 +114,10 @@
         "badge_text": "OUR PHILOSOPHY",
         "title": "Built On Real Parenting Wins, Not Theory",
         "body_text": "Every guide we create is designed around small, achievable moments that build a child's confidence: tying a shoe, naming a big feeling, finishing a chore without a reminder, or simply learning to pause and breathe. We build TinyThrive's library one win at a time, the same way real growth happens.",
-        "footer_text": "New reviews coming soon — be one of our first verified customers."
+        "footer_text": "New reviews coming soon — be one of our first verified customers.",
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "guarantee": {
@@ -99,7 +126,10 @@
         "title": "Our 90-Day 100% Risk-Free Guarantee",
         "text": "Try any TinyThrive guide for 90 days. If you don't see real progress, just email us and we'll refund every cent — no forms, no guilt trips.",
         "cta_label": "Read Our Refund Policy",
-        "refund_policy_url": "/policies/refund-policy"
+        "refund_policy_url": "/policies/refund-policy",
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "faq": {
@@ -151,13 +181,17 @@
       "settings": {
         "badge_text": "QUESTIONS & ANSWERS",
         "title": "Frequently Asked Questions",
-        "subtitle": "Find answers to common questions about our parenting workbooks and secure processing fee model."
+        "subtitle": "Find answers to common questions about our parenting workbooks and secure processing fee model.",
+        "bg_color": "",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "home_footer": {
       "type": "home-footer",
       "settings": {
         "brand_name": "TinyThrive",
+        "logo": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart_504b8d25-3e4f-4c83-b8ee-c30ad638637d.png",
         "logo_initials": "TT",
         "business_address": "",
         "support_email": "support@tinythrive.com",
