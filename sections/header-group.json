@@ -92,7 +92,7 @@
       "settings": {
         "display_id": false,
         "visibility": "always-display",
-        "custom_liquid": "<style>div#shopify-section-sections--21167174910087__fe1c8c67-b84c-4466-a515-70df3134c1c0 {\n    display: none !important;\n}\ndiv#shopify-section-sections--21167174910087__header {\n    display: none !important;\n}\n#wld-kls-template--21170068357255__kids_life_skills_pMNmYd .kls-ready-cta {     max-width: fit-content !important;\n    display: table !important;\n}\n</style>",
+        "custom_liquid": "<style>div#shopify-section-sections--21167174910087__fe1c8c67-b84c-4466-a515-70df3134c1c0 {\n    display: none !important;\n}\ndiv#shopify-section-sections--21167174910087__header {\n    display: none !important;\n}\n#wld-kls-template--21170068357255__kids_life_skills_pMNmYd .kls-ready-cta {     max-width: fit-content !important;\n    display: table !important;\n}\n\ndiv#shopify-section-template--21170068357255__b321ab88-2b59-4dba-bade-54885c874ca5 {\n    display: none !important;\n}\n\ndiv#shopify-section-sections--21167174877319__footer {\n    display: none !important;\n}\n</style>",
         "color_scheme": "background-1",
         "padding_top": 0,
         "padding_bottom": 0
