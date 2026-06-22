@@ -149,17 +149,6 @@
       "name": "TinyThrive Life Skills",
       "settings": {
         "product": "kids-life-skills",
-        "show_announcement": true,
-        "announcement_text": "Mother's Day Sale Ends in:",
-        "countdown_end": "",
-        "brand_name": "Tiny Thrive",
-        "nav_logo_image": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart_504b8d25-3e4f-4c83-b8ee-c30ad638637d.png",
-        "nav_link_1": "Home",
-        "nav_link_1_url": "/",
-        "nav_link_2": "Shop",
-        "nav_link_2_url": "shopify://collections/frontpage",
-        "nav_link_3": "Contact",
-        "nav_link_3_url": "shopify://pages/contact",
         "hero_main_image": "shopify://shop_images/260609_0001_image_edit_7987.png",
         "hero_thumb_1": "shopify://shop_images/5.png",
         "hero_thumb_2": "shopify://shop_images/4.png",
@@ -210,22 +199,7 @@
         "guarantee_heading": "Try It Risk-Free For 90 Days",
         "guarantee_body": "Print it, hand it to your kid, and use it for a full 90 days. If you don't see more confidence, more independence, and fewer power struggles, just email us and we'll refund every cent — no forms, no guilt trips, no 'have you really tried' questions.",
         "guarantee_cta_label": "GET MY BUNDLE RISK-FREE",
-        "guarantee_cta_url": "",
-        "footer_logo": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart_504b8d25-3e4f-4c83-b8ee-c30ad638637d.png",
-        "footer_logo_initials": "TT",
-        "footer_link_1": "About Us",
-        "footer_link_1_url": "shopify://pages/about-us",
-        "footer_link_2": "Contact Us",
-        "footer_link_2_url": "shopify://pages/contact",
-        "footer_link_3": "Refund Policy",
-        "footer_link_3_url": "shopify://policies/privacy-policy",
-        "footer_link_4": "Terms Of Service",
-        "footer_link_4_url": "shopify://policies/terms-of-service",
-        "footer_link_5": "Delivery And Shipping Policy",
-        "footer_link_5_url": "shopify://policies/shipping-policy",
-        "newsletter_heading": "JOIN 12,000+ PARENTS GETTING FREE PRINTABLES",
-        "newsletter_button": "Send Me Freebies",
-        "footer_copyright": "© 2026, TinyThrive. All rights reserved."
+        "guarantee_cta_url": ""
       }
     },
     "b321ab88-2b59-4dba-bade-54885c874ca5": {
@@ -263,25 +237,12 @@
         "padding_top": 36,
         "padding_bottom": 24
       }
-    },
-    "custom_liquid_Lf9fEP": {
-      "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
-      "settings": {
-        "display_id": false,
-        "visibility": "always-display",
-        "custom_liquid": "<style>div#shopify-section-sections--21167174910087__fe1c8c67-b84c-4466-a515-70df3134c1c0 {\n    display: none !important;\n}\ndiv#shopify-section-sections--21167174910087__header {\n    display: none !important;\n}\n#wld-kls-template--21170068357255__kids_life_skills_pMNmYd .kls-ready-cta {     max-width: fit-content !important;\n    display: table !important;\n}\n\ndiv#shopify-section-template--21170068357255__b321ab88-2b59-4dba-bade-54885c874ca5 {\n    display: none !important;\n}\n\ndiv#shopify-section-sections--21167174877319__footer {\n    display: none !important;\n}\n</style>",
-        "color_scheme": "background-1",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
     }
   },
   "order": [
     "main",
     "kids_life_skills_pMNmYd",
     "b321ab88-2b59-4dba-bade-54885c874ca5",
-    "related-products",
-    "custom_liquid_Lf9fEP"
+    "related-products"
   ]
 }
