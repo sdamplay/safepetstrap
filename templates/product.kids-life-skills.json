@@ -84,10 +84,162 @@
         "padding_top": 36,
         "padding_bottom": 24
       }
+    },
+    "kids_life_skills_fbciPi": {
+      "type": "kids-life-skills",
+      "blocks": {
+        "faq_9Hm7eg": {
+          "type": "faq",
+          "settings": {
+            "emoji": "💸",
+            "question": "Why is this free today?",
+            "answer": "<p>We want as many families as possible to have this roadmap, so for a limited time we're covering the cost of the workbook itself. You only cover a small digital processing fee to unlock instant access. Once today's batch is gone, it returns to its regular $58 price.</p>"
+          }
+        },
+        "faq_gVECWV": {
+          "type": "faq",
+          "settings": {
+            "emoji": "📩",
+            "question": "How will I get my workbook?",
+            "answer": "<p>The moment your order is confirmed, we'll email your download link straight to your inbox. Most parents are printing pages within 10 minutes. Be sure to check your spam folder just in case!</p>"
+          }
+        },
+        "faq_Eqiqng": {
+          "type": "faq",
+          "settings": {
+            "emoji": "📚",
+            "question": "What's actually inside the bundle?",
+            "answer": "<p>150+ printable pages covering daily routines, money basics, emotional regulation, manners, and problem-solving, organized by age so you never have to guess what comes next.</p>"
+          }
+        },
+        "faq_KFWydY": {
+          "type": "faq",
+          "settings": {
+            "emoji": "👶",
+            "question": "What ages is this designed for?",
+            "answer": "<p>Built for ages 3–12. Activities are simple enough for toddlers and flexible enough to challenge older kids too. Print whatever fits your child today.</p>"
+          }
+        },
+        "faq_hHGbCA": {
+          "type": "faq",
+          "settings": {
+            "emoji": "⏰",
+            "question": "I barely have time to breathe. Can I actually do this?",
+            "answer": "<p>Yes. Every activity is built to take 10 minutes or less. Open the PDF, hand it to your child, done. No planning, no prep, no late-night Pinterest spiral required.</p>"
+          }
+        },
+        "testimonial_rwawtz": {
+          "type": "testimonial",
+          "settings": {
+            "title": "My 8-Year-Old Cooked Breakfast. Alone.",
+            "body": "I'd been meaning to teach her for two years. One Sunday afternoon and a few worksheets later, she made herself eggs and toast, and was beaming the whole time. I actually got emotional. Worth every minute, and it didn't cost me a thing.",
+            "author_name": "Megan L.",
+            "author_tag": "Mom of 2 (ages 5 & 8)"
+          }
+        },
+        "testimonial_4DUaYW": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Finally Stopped Comparing My Kid To Instagram Toddlers",
+            "body": "I was in a spiral every night reading about what other 7-year-olds could already do. This gave me an actual plan instead of more guilt. My son is ahead of where he was a month ago, and honestly, so am I.",
+            "author_name": "Luna K.",
+            "author_tag": "Working mom of 3"
+          }
+        },
+        "testimonial_qcatqQ": {
+          "type": "testimonial",
+          "settings": {
+            "title": "I Don't Google-Parent At Midnight Anymore",
+            "body": "This is the first resource that actually told me what to teach and when. There's a simple list of skills by age, and my son is already two steps ahead of where his class is starting.",
+            "author_name": "Sarah T.",
+            "author_tag": "Elementary teacher & mom of 2"
+          }
+        }
+      },
+      "block_order": [
+        "faq_9Hm7eg",
+        "faq_gVECWV",
+        "faq_Eqiqng",
+        "faq_KFWydY",
+        "faq_hHGbCA",
+        "testimonial_rwawtz",
+        "testimonial_4DUaYW",
+        "testimonial_qcatqQ"
+      ],
+      "name": "TinyThrive Life Skills",
+      "settings": {
+        "product": "",
+        "show_announcement": true,
+        "announcement_text": "FREE Access Ends In:",
+        "countdown_end": "",
+        "brand_name": "TinyThrive",
+        "nav_link_1": "Home",
+        "nav_link_1_url": "",
+        "nav_link_2": "Shop",
+        "nav_link_2_url": "",
+        "nav_link_3": "Contact",
+        "nav_link_3_url": "",
+        "hero_badge_tl": "150+ Pages",
+        "hero_badge_tc": "Loved By Busy Parents",
+        "hero_badge_tr": "6,200+ Happy Parents",
+        "hero_rating_text": "(2,184 verified reviews)",
+        "hero_headline": "Raise A Confident, Capable Kid — One 10-Minute Activity At A Time",
+        "hero_price_sale": "$0.00",
+        "hero_price_original": "$58.00",
+        "hero_save_pill": "SAVE 100%",
+        "hero_benefit_1": "150+ pages of age-by-age activities — zero guesswork, zero prep",
+        "hero_benefit_2": "Turns chores, manners & big feelings into games kids ask for",
+        "hero_benefit_3": "Built around real child-development milestones, not Pinterest guesses",
+        "hero_cta_label": "CLAIM MY FREE BUNDLE",
+        "hero_trust_text": "100% digital. Delivered to your inbox in minutes — nothing to wait for, nothing to assemble.",
+        "hero_guarantee_pill": "90-Day Money-Back Guarantee",
+        "hero_testimonial_quote": "My son used to melt down every morning over getting dressed. Three weeks into this workbook, he picks his own clothes, makes his bed, and told me he's 'a big kid now.' I teared up reading that page.",
+        "hero_testimonial_name": "Megan T., mom of 2 (ages 5 & 8)",
+        "faq_heading": "Still Have Questions? We've Got You.",
+        "ready_heading": "Ready To Swap Power Struggles For 'I Got It, Mom'?",
+        "ready_body": "No more reminders. No more nagging. Just print a page, hand it over, and watch your kid take it from there. Every activity quietly builds the confidence, responsibility, and emotional skills behind those proud 'I did it myself' moments.",
+        "ready_cta_label": "YES — I WANT THE ROADMAP",
+        "ready_cta_url": "",
+        "grow_heading": "Stop Guessing 🌱 Start Growing With A Plan ✨",
+        "grow_body": "From tying shoelaces to naming big feelings, this bundle walks your child through the exact skills that build independence, one small page at a time. Age-by-age, skill-by-skill, no guesswork required.",
+        "grow_quote": "The moment a child finishes something on their own, ties the shoe, makes the bed, says 'I'm frustrated' instead of screaming, something shifts. That quiet pride is where real confidence starts.",
+        "testimonials_heading": "Real Parents. Real Mornings That Got Easier.",
+        "stats_heading": "Trusted By 6,200+ Parents & Teachers Worldwide",
+        "stat_1_value": "86%",
+        "stat_1_desc": "<p>Felt <strong>confident</strong> about what to teach next instead of overwhelmed</p>",
+        "stat_2_value": "92%",
+        "stat_2_desc": "<p>Said their child <strong>mastered 3+ new life skills</strong> within the first month</p>",
+        "stat_3_value": "97%",
+        "stat_3_desc": "<p>Stopped the <strong>late-night parenting spirals</strong> and finally felt like they had a plan</p>",
+        "stats_footnote": "*Based on a survey of 2,400+ parents conducted 30 days after starting the workbook. Individual results vary by child.",
+        "comparison_heading": "Why Parents Choose TinyThrive Over Random Printables",
+        "comparison_brand_label": "TinyThrive",
+        "comparison_others_label": "Random Printables",
+        "comparison_features": "Age-by-age roadmap — no guesswork\nStep-by-step instructions, not blank pages\n10-minute activities, zero prep\nBuilt around real child-development milestones\nPrintable progress tracker included\nLifetime access & free updates",
+        "guarantee_heading": "Try It Risk-Free For 90 Days",
+        "guarantee_body": "Print it, hand it to your kid, and use it for a full 90 days. If you don't see more confidence, more independence, and fewer power struggles, just email us and we'll refund every cent — no forms, no guilt trips, no 'have you really tried' questions.",
+        "guarantee_cta_label": "GET MY BUNDLE RISK-FREE",
+        "guarantee_cta_url": "",
+        "footer_logo_initials": "TT",
+        "footer_link_1": "About Us",
+        "footer_link_1_url": "",
+        "footer_link_2": "Contact Us",
+        "footer_link_2_url": "",
+        "footer_link_3": "Refund Policy",
+        "footer_link_3_url": "",
+        "footer_link_4": "Terms Of Service",
+        "footer_link_4_url": "",
+        "footer_link_5": "Delivery And Shipping Policy",
+        "footer_link_5_url": "",
+        "newsletter_heading": "JOIN 12,000+ PARENTS GETTING FREE PRINTABLES",
+        "newsletter_button": "Send Me Freebies",
+        "footer_copyright": "© 2026, TinyThrive. All rights reserved."
+      }
     }
   },
   "order": [
     "main",
-    "related-products"
+    "related-products",
+    "kids_life_skills_fbciPi"
   ]
 }
