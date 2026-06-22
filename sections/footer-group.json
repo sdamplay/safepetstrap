@@ -14,16 +14,6 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "fc645871-d789-4cfa-8584-4f8a29b6ce92": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "alignment": "center",
-            "url": "",
-            "width_desktop": 4,
-            "width_mobile": "2"
-          }
-        },
         "1c647602-cc00-4009-a058-976435c8ee9e": {
           "type": "link_list",
           "settings": {
@@ -47,7 +37,6 @@
         }
       },
       "block_order": [
-        "fc645871-d789-4cfa-8584-4f8a29b6ce92",
         "1c647602-cc00-4009-a058-976435c8ee9e",
         "24f208fd-0898-43eb-af23-d74f8420ab37"
       ],
@@ -58,7 +47,7 @@
         "enable_country_selector": false,
         "enable_language_selector": true,
         "payment_enable": true,
-        "enabled_payment_types": "",
+        "enabled_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay",
         "show_policy": false,
         "branding_text": "Powered by Shopify",
         "margin_top": 0,
