@@ -77,10 +77,10 @@
         "products_mega_menu_display_collection_images": true,
         "products_mega_menu_display_collection_images_on_mobile": true,
         "mobile_menu_title": "Menu",
-        "secondary_menu": "",
-        "menu_color_scheme": "background-1",
+        "secondary_menu": "footer",
+        "menu_color_scheme": "accent-1",
         "mobile_logo_position": "center",
-        "display_search": true,
+        "display_search": false,
         "margin_bottom": 0,
         "padding_top": 20,
         "padding_bottom": 20
