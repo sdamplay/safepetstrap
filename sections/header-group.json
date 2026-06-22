@@ -85,10 +85,23 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "custom_liquid_nth9mf": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<style>div#shopify-section-sections--21167174910087__fe1c8c67-b84c-4466-a515-70df3134c1c0 {\n    display: none !important;\n}\ndiv#shopify-section-sections--21167174910087__header {\n    display: none !important;\n}\n#wld-kls-template--21170068357255__kids_life_skills_pMNmYd .kls-ready-cta {     max-width: fit-content !important;\n    display: table !important;\n}\n</style>",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
     "fe1c8c67-b84c-4466-a515-70df3134c1c0",
-    "header"
+    "header",
+    "custom_liquid_nth9mf"
   ]
 }
