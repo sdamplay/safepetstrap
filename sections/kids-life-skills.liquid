@@ -52,7 +52,7 @@
       <span class="kls-nav-logo-name">{{ section.settings.brand_name }}</span>
     </a>
     <div class="kls-nav-icons">
-      <a href="{{ routes.cart_url }}" class="kls-nav-cart" aria-label="Cart">
+      <a href="{{ routes.cart_url }}" class="kls-nav-cart" aria-label="Cart" role="button" aria-haspopup="dialog">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M3 4h2l1.6 9.6a2 2 0 0 0 2 1.65h8.4a2 2 0 0 0 1.97-1.66L20.2 7H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           <circle cx="9" cy="20" r="1.4" fill="currentColor"/>
@@ -143,15 +143,23 @@
         {%- assign product = section.settings.product -%}
         {%- if product != blank -%}
           {%- assign variant_1 = product.variants[0] -%}
-          <form action="/cart/add" method="post" enctype="multipart/form-data" class="wld-buyform">
-            <input type="hidden" name="form_type" value="product">
-            <input type="hidden" name="utf8" value="✓">
-            <input type="hidden" name="id" value="{{ variant_1.id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="kls-hero-cta" {% unless product.available %}disabled{% endunless %}>
-              {%- if product.available -%}{{ section.settings.hero_cta_label }}{%- else -%}Sold Out{%- endif -%}
-            </button>
-          </form>
+          <product-form class="product-form" data-section="{{ section.id }}">
+            <div class="product-form__error-message-wrapper" role="alert" hidden>
+              <span class="product-form__error-message"></span>
+            </div>
+            {%- form 'product', product, id: 'wld-buyform-id', class: 'wld-buyform', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ variant_1.id }}" class="product-variant-id">
+              <input type="hidden" name="quantity" value="1">
+              <button type="submit" name="add" class="kls-hero-cta" {% unless product.available %}disabled{% endunless %}>
+                <span>{%- if product.available -%}{{ section.settings.hero_cta_label }}{%- else -%}Sold Out{%- endif -%}</span>
+                <div class="loading-overlay__spinner hidden">
+                  <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                  </svg>
+                </div>
+              </button>
+            {%- endform -%}
+          </product-form>
         {%- else -%}
           <button type="button" class="kls-hero-cta">{{ section.settings.hero_cta_label }}</button>
           <div class="kls-no-product-notice">⚠️ <strong>Preview mode.</strong> Select a product in section settings to activate Add to Cart.</div>
@@ -675,6 +683,23 @@
         navMenu.classList.remove('is-open');
         navToggle.classList.remove('is-active');
         navToggle.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    var cartIcon = root.querySelector('.kls-nav-cart');
+    if (cartIcon) {
+      var openCart = function(e) {
+        var cartDrawer = document.querySelector('cart-drawer') || document.querySelector('custom-cart-drawer');
+        if (cartDrawer && typeof cartDrawer.open === 'function') {
+          e.preventDefault();
+          cartDrawer.open(cartIcon);
+        }
+      };
+      cartIcon.addEventListener('click', openCart);
+      cartIcon.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          openCart(e);
+        }
       });
     }
   }
