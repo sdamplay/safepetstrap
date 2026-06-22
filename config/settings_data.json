@@ -680,7 +680,7 @@
             "settings": {
               "image_size": "20",
               "image_link": false,
-              "title_size": "1.5",
+              "title_size": "1.3",
               "title_link": false,
               "displayed_variants": "compact",
               "prices_position": "right",
