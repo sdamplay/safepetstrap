@@ -23,7 +23,7 @@
             "text_alignment": "center",
             "mobile_text_size": 16,
             "desktop_text_size": 20,
-            "icon": "storefront",
+            "icon": "",
             "filled_icon": false,
             "mobile_icon_size": 20,
             "desktop_icon_size": 26,
