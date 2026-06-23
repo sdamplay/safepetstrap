@@ -571,7 +571,7 @@
             "type": "custom_liquid",
             "settings": {
               "position": "body",
-              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}</style>"
+              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}\n.cart-drawer-item .quantity {\n    display: none !important;}\n.cart-drawer-item__quantity-and-prices {\n    margin-top: 0px !important;}\n</style>"
             }
           },
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e": {
@@ -622,8 +622,8 @@
               "show_custom_bg": false,
               "regular_bg_color": "#f2f2f2",
               "selected_bg_color": "#f2f2f2",
-              "margin_top": 3,
-              "margin_bottom": 0
+              "margin_top": 9,
+              "margin_bottom": 9
             }
           },
           "product_upsells_K3pr7Y": {
@@ -700,7 +700,7 @@
               "enable_savings": true,
               "savings_text": "<strong>(You save [amount])</strong>",
               "savings_color": "text",
-              "quantity_font_size": 14,
+              "quantity_font_size": 10,
               "quantity_container_padding": 0,
               "quantity_corner_radius": 6,
               "quantity_border_width": 1,
@@ -714,6 +714,38 @@
               "quantity_outline_btns": false,
               "quantity_btns_icon_size": 50,
               "margin_top": 9,
+              "margin_bottom": 0
+            }
+          },
+          "text_with_icon_Te766A": {
+            "type": "text_with_icon",
+            "settings": {
+              "position": "body",
+              "mobile_text_size": 14,
+              "desktop_text_size": 16,
+              "alignment": "center",
+              "text_color": "#121212",
+              "text_1": "<strong>❤️ Parents also added these for only $1.49</strong>",
+              "text_2": "",
+              "text_3": "",
+              "icon_scale": 120,
+              "icon_color": "#121212",
+              "icon_1": "",
+              "filled_icon_1": false,
+              "icon_2": "check_circle",
+              "filled_icon_2": false,
+              "icon_3": "check_circle",
+              "filled_icon_3": false,
+              "width": "100%",
+              "direction": "horizontal",
+              "column_gap": 3,
+              "enable_bg": false,
+              "bg_color": "#f3f3f3",
+              "corner_radius": 40,
+              "padding": 3,
+              "border_size": 0,
+              "border_color": "#b7b7b7",
+              "margin_top": 15,
               "margin_bottom": 0
             }
           },
@@ -770,10 +802,10 @@
               "regular_border_color": "#e6e6e6",
               "selected_border_color": "#dd1d1d",
               "border_width": "0.1",
-              "show_custom_bg": true,
+              "show_custom_bg": false,
               "regular_bg_color": "#ffffff",
               "selected_bg_color": "#ffffff",
-              "margin_top": 0,
+              "margin_top": 9,
               "margin_bottom": 0
             }
           },
@@ -829,7 +861,7 @@
               "regular_border_color": "#e6e6e6",
               "selected_border_color": "#dd1d1d",
               "border_width": "0.2",
-              "show_custom_bg": true,
+              "show_custom_bg": false,
               "regular_bg_color": "#ffffff",
               "selected_bg_color": "#ffffff",
               "margin_top": 0,
@@ -888,6 +920,7 @@
           "gift_m9GXA3",
           "product_upsells_K3pr7Y",
           "097b7b4f-c0b8-4073-a06b-e6d49a5aad20",
+          "text_with_icon_Te766A",
           "product_upsells_RyVKPQ",
           "product_upsells_dwAFX9",
           "4f3e2a5f-006d-40ed-8370-49b15e0e427d",
@@ -895,7 +928,7 @@
           "68fdc0a0-cd7c-40b9-97b3-a76eb7917a47"
         ],
         "settings": {
-          "test_mode": false,
+          "test_mode": true,
           "heading_text": "Cart • [count] items",
           "heading_alignment": "flex-start",
           "desktop_width": "normal",
