@@ -13,9 +13,10 @@
     "disable_inspect": true,
     "country_list_function": "block",
     "country_list": "",
-    "logo": "shopify://shop_images/Screenshot_2026-06-20_at_9.10.18_AM.png",
+    "logo": "shopify://shop_images/Tiny_Thrive_1.png",
     "logo_width": 200,
-    "mobile_logo_width": 130,
+    "mobile_logo_width": 180,
+    "favicon": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
     "colors_solid_button_labels": "#ffffff",
     "colors_accent_1": "#E89BA0",
     "gradient_accent_1": "",
@@ -566,15 +567,22 @@
       "cart-drawer": {
         "type": "cart-drawer",
         "blocks": {
+          "custom_liquid_NexyVz": {
+            "type": "custom_liquid",
+            "settings": {
+              "position": "body",
+              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}</style>"
+            }
+          },
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e": {
             "type": "countdown_timer",
             "settings": {
               "timer_text": "<strong>Cart reserved for [timer]</strong>",
               "timer_duration": 250,
-              "font_size": "1.4",
+              "font_size": "1.2",
               "color_scheme": "accent-1",
               "margin_top": 0,
-              "margin_bottom": 15
+              "margin_bottom": 0
             }
           },
           "gift_m9GXA3": {
@@ -591,18 +599,18 @@
               "requirement": "0",
               "locked_progress_text": "You're [amount] away from a free gift!",
               "unlocked_progress_text": "Congrats! You unlocked a free gift 🎉",
-              "progress_mobile_text_size": 13,
+              "progress_mobile_text_size": 14,
               "progress_desktop_text_size": 15,
               "show_image_locked_overlay": true,
               "show_image": true,
-              "image_size": "5",
+              "image_size": "4.25",
               "image_corner_radius": 2,
               "title_size": "1.2",
               "desc_size": "1.2",
               "price_position": "separate",
               "displayed_price": "text",
               "displayed_price_text": "FREE",
-              "price_size": "1.4",
+              "price_size": "1.6",
               "hide_compare_price": false,
               "show_variant_picker": false,
               "corner_radius": 6,
@@ -614,8 +622,8 @@
               "show_custom_bg": false,
               "regular_bg_color": "#f2f2f2",
               "selected_bg_color": "#f2f2f2",
-              "margin_top": 15,
-              "margin_bottom": 15
+              "margin_top": 3,
+              "margin_bottom": 0
             }
           },
           "product_upsells_K3pr7Y": {
@@ -717,7 +725,7 @@
               "display_product_handles": "",
               "style": "toggle_switch",
               "btn_position": "right",
-              "toggle_element": "button",
+              "toggle_element": "container",
               "add_btn_label": "<strong>Add</strong>",
               "hide_in_cart_items": true,
               "stacking": "row",
@@ -741,15 +749,15 @@
               "product_3_percentage_discount": "0",
               "product_3_fixed_amount_discount": "0",
               "show_images": true,
-              "images_size": "5",
+              "images_size": "4.25",
               "images_corner_radius": 6,
               "title_size": "1.2",
               "title_link": false,
-              "desc_size": "1.2",
+              "desc_size": "1.05",
               "price_position": "next_to_title",
               "price_size": "1.4",
               "hide_compare_price": false,
-              "show_variant_picker": true,
+              "show_variant_picker": false,
               "update_prices": false,
               "skip_unavailable": false,
               "container_title": "",
@@ -761,7 +769,7 @@
               "show_border": false,
               "regular_border_color": "#e6e6e6",
               "selected_border_color": "#dd1d1d",
-              "border_width": "0.2",
+              "border_width": "0.1",
               "show_custom_bg": true,
               "regular_bg_color": "#ffffff",
               "selected_bg_color": "#ffffff",
@@ -800,7 +808,7 @@
               "product_3_percentage_discount": "0",
               "product_3_fixed_amount_discount": "0",
               "show_images": true,
-              "images_size": "5",
+              "images_size": "4.25",
               "images_corner_radius": 6,
               "title_size": "1.2",
               "title_link": false,
@@ -875,6 +883,7 @@
           }
         },
         "block_order": [
+          "custom_liquid_NexyVz",
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e",
           "gift_m9GXA3",
           "product_upsells_K3pr7Y",
@@ -886,7 +895,7 @@
           "68fdc0a0-cd7c-40b9-97b3-a76eb7917a47"
         ],
         "settings": {
-          "test_mode": false,
+          "test_mode": true,
           "heading_text": "Cart • [count] items",
           "heading_alignment": "flex-start",
           "desktop_width": "normal",
