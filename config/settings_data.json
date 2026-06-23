@@ -877,8 +877,8 @@
             "type": "payment_badges",
             "settings": {
               "enabled_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay",
-              "margin_top": 12,
-              "margin_bottom": 12
+              "margin_top": 6,
+              "margin_bottom": 6
             }
           }
         },
