@@ -481,7 +481,7 @@
         "pay_now_button_label": "Complete Purchase"
       },
       "shipping": {
-        "shipping_method_title": "Shipping method",
+        "shipping_method_title": "Billing method",
         "title": "Digital Processing Fee"
       },
       "payment": {
@@ -493,6 +493,15 @@
       },
       "order_summary": {
         "shipping_label": "Digital Processing Fee"
+      },
+      "thank_you": {
+        "shipping_method_title": "Billing method"
+      },
+      "review": {
+        "blocks": {
+          "shipping_method_title": "Billing method",
+          "change_shipping_method_link_label": "Change billing method"
+        }
       }
     }
   },
@@ -590,5 +599,12 @@
     "volume_pricing": "Volume pricing",
     "volume_pricing_available": "Volume pricing available",
     "your_cart_is_empty": "Your cart is empty"
+  },
+  "customer_accounts": {
+    "order_details": {
+      "shipping": {
+        "method": "Billing method"
+      }
+    }
   }
 }
