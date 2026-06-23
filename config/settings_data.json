@@ -571,7 +571,7 @@
             "type": "custom_liquid",
             "settings": {
               "position": "body",
-              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}</style>"
+              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}</style>"
             }
           },
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e": {
