@@ -14,6 +14,15 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "text_JFaWEy": {
+          "type": "text",
+          "settings": {
+            "heading": "",
+            "subtext": "<p><strong>TinyThrive </strong>is a brand of OUSI PLAY LLC. Registered in WY.</p><p><strong>🇺🇸 Proudly American</strong></p>",
+            "width_desktop": 3,
+            "width_mobile": "2"
+          }
+        },
         "1c647602-cc00-4009-a058-976435c8ee9e": {
           "type": "link_list",
           "settings": {
@@ -37,6 +46,7 @@
         }
       },
       "block_order": [
+        "text_JFaWEy",
         "1c647602-cc00-4009-a058-976435c8ee9e",
         "24f208fd-0898-43eb-af23-d74f8420ab37"
       ],
