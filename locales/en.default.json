@@ -489,7 +489,7 @@
         "card_security_notice": "All transactions are secure and encrypted. Your order includes free returns and 24/7 access to our award-winning customer service"
       },
       "delivery_options": {
-        "shipping_address": "Shipping Address"
+        "shipping_address": "Billing Address"
       },
       "order_summary": {
         "shipping_label": "Digital Processing Fee"
