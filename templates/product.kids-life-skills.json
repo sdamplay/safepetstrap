@@ -273,12 +273,131 @@
         "padding_top": 36,
         "padding_bottom": 24
       }
+    },
+    "social_proof_toast_m3B7bY": {
+      "type": "social-proof-toast",
+      "blocks": {
+        "testimonial_notification_yXfpwF": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "A",
+            "name_descriptor": "Amanda K. | Mom of 2 (ages 4 & 6)",
+            "quote": "No more morning tantrums. They actually get dressed and pack their own backpacks now.",
+            "avatar_image": "shopify://shop_images/503854332_24320464580871077_5616424560795469632_n.jpg"
+          }
+        },
+        "testimonial_notification_MfqiFE": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "J",
+            "name_descriptor": "Jessica P. | Former screen-time negotiator",
+            "quote": "Instead of begging for the iPad, they started doing the offline challenges on page 42!"
+          }
+        },
+        "testimonial_notification_GY79NG": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Marcus D. | Dad of active 5yo twins",
+            "quote": "Bedtime used to take 2 hours. The routine checklist turned it into a 15-minute breeze.",
+            "avatar_image": "shopify://shop_images/465729162_9025030114195092_3416494419900385600_n.jpg"
+          }
+        },
+        "testimonial_notification_Lr7Anb": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "R",
+            "name_descriptor": "Rachel W. | Mom of sibling rivals (5 & 7)",
+            "quote": "They actually shared toys without me refereeing. Sibling peace is real!",
+            "avatar_image": "shopify://shop_images/468084724_10161796300893363_1221233087399433715_n.jpg"
+          }
+        },
+        "testimonial_notification_mHFBiV": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "K",
+            "name_descriptor": "Katie M. | Mom of messy 8yo boy",
+            "quote": "He cleaned his entire room without being asked once. I had to double-check it!",
+            "avatar_image": "shopify://shop_images/731068459_3500681523431647_893546762399973601_n.jpg"
+          }
+        },
+        "testimonial_notification_96WJRj": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "E",
+            "name_descriptor": "Emily S. | Work-from-home mom",
+            "quote": "I got a solid hour of quiet focus time while my 6-year-old built the chore chart.",
+            "avatar_image": "shopify://shop_images/clipboard-image-1782740726.png"
+          }
+        },
+        "testimonial_notification_NfHUDM": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "H",
+            "name_descriptor": "Haley J. | Mom of sensitive 7yo",
+            "quote": "The 'calm down zone' template helped us stop three major tantrums this week."
+          }
+        },
+        "testimonial_notification_AxwjaT": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "T",
+            "name_descriptor": "Todd F. | Dad of 9yo daughter",
+            "quote": "She's budgeting her own allowance now instead of asking me to buy random toys.",
+            "avatar_image": "shopify://shop_images/560021979_122144154296841003_602520310554262690_n.jpg"
+          }
+        },
+        "testimonial_notification_a3YitL": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "N",
+            "name_descriptor": "Nicole V. | Mom of picky 5yo",
+            "quote": "She tried three new vegetables this week without us having to make a deal. Magic."
+          }
+        },
+        "testimonial_notification_bK4X3j": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "D",
+            "name_descriptor": "Daniel S. | Dad of shy 6yo",
+            "quote": "His confidence soared. He walked up to the cashier and ordered his own ice cream!"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_notification_yXfpwF",
+        "testimonial_notification_MfqiFE",
+        "testimonial_notification_GY79NG",
+        "testimonial_notification_Lr7Anb",
+        "testimonial_notification_mHFBiV",
+        "testimonial_notification_96WJRj",
+        "testimonial_notification_NfHUDM",
+        "testimonial_notification_AxwjaT",
+        "testimonial_notification_a3YitL",
+        "testimonial_notification_bK4X3j"
+      ],
+      "name": "Social Proof Toast",
+      "settings": {
+        "enable": true,
+        "position": "bottom-left",
+        "bg_color": "#FFF5F6",
+        "accent_color": "#E89BA0",
+        "text_color": "#2D2D2D",
+        "text_secondary_color": "#6B6B6B",
+        "star_color": "#F5B800",
+        "font_size_quote": 13,
+        "font_size_author": 11,
+        "first_show_delay": 6,
+        "between_delay": 10,
+        "show_duration": 5
+      }
     }
   },
   "order": [
     "main",
     "kids_life_skills_pMNmYd",
     "b321ab88-2b59-4dba-bade-54885c874ca5",
-    "related-products"
+    "related-products",
+    "social_proof_toast_m3B7bY"
   ]
 }
