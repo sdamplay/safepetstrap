@@ -62,7 +62,6 @@
       font-family: 'Inter', sans-serif;
       box-sizing: border-box;
       text-align: left;
-      --font-size-base: {{ section.settings.font_size_base | default: 13 }}px;
     }
 
     .social-proof-card__avatar {
@@ -98,7 +97,7 @@
     }
 
     .social-proof-card__quote {
-      font-size: var(--font-size-base);
+      font-size: {{ section.settings.font_size_quote | default: 13 }}px;
       font-style: italic;
       line-height: 1.4;
       margin: 0;
@@ -110,7 +109,7 @@
     }
 
     .social-proof-card__author {
-      font-size: calc(var(--font-size-base) - 2px);
+      font-size: {{ section.settings.font_size_author | default: 11 }}px;
       color: {{ section.settings.text_secondary_color }};
       margin: 0;
       font-weight: 400;
@@ -169,13 +168,20 @@
         padding: 12px;
         gap: 10px;
         border-radius: 12px;
-        --font-size-base: calc({{ section.settings.font_size_base | default: 13 }}px - 1px);
       }
       
       .social-proof-card__avatar {
         width: 36px;
         height: 36px;
         font-size: 16px;
+      }
+
+      .social-proof-card__quote {
+        font-size: calc({{ section.settings.font_size_quote | default: 13 }}px - 1px);
+      }
+
+      .social-proof-card__author {
+        font-size: calc({{ section.settings.font_size_author | default: 11 }}px - 1px);
       }
     }
   {% endstyle %}
@@ -578,13 +584,23 @@
     },
     {
       "type": "range",
-      "id": "font_size_base",
-      "min": 11,
-      "max": 18,
+      "id": "font_size_quote",
+      "min": 10,
+      "max": 24,
       "step": 1,
       "unit": "px",
-      "label": "Base Font Size",
+      "label": "Quote Font Size",
       "default": 13
+    },
+    {
+      "type": "range",
+      "id": "font_size_author",
+      "min": 9,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Name & Descriptor Font Size",
+      "default": 11
     },
     {
       "type": "header",
