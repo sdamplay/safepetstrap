@@ -903,7 +903,7 @@
         "text_secondary_color": "#6b6b6b",
         "star_color": "#f5b800",
         "font_size_base": 12,
-        "first_show_delay": 2,
+        "first_show_delay": 6,
         "between_delay": 15,
         "show_duration": 5
       }
