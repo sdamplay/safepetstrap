@@ -411,17 +411,9 @@
                 <button type="button" class="social-proof-card__dismiss" aria-label="Dismiss">&times;</button>
               </div>
             `;
-          } else if (item.type === 'stat_notification') {
-            return `
-              <div class="social-proof-card social-proof-card--stat">
-                <div class="social-proof-card__emoji">${escapeHtml(item.emoji)}</div>
-                <div class="social-proof-card__content">
-                  <p class="social-proof-card__stat-msg">${escapeHtml(item.stat_message)}</p>
-                </div>
-                <button type="button" class="social-proof-card__dismiss" aria-label="Dismiss">&times;</button>
-              </div>
-            `;
           }
+          return '';
+        }
         showBlockPreview(blockId) {
           if (this.timer) {
             clearTimeout(this.timer);
@@ -656,25 +648,6 @@
           "info": "Keep it under 90-100 characters so it fits neatly in 1-2 lines."
         }
       ]
-    },
-    {
-      "type": "stat_notification",
-      "name": "Stat Notification",
-      "settings": [
-        {
-          "type": "text",
-          "id": "emoji",
-          "label": "Emoji/Icon",
-          "default": "🎁"
-        },
-        {
-          "type": "text",
-          "id": "stat_message",
-          "label": "Stat Message",
-          "default": "Today's free bundles claimed: 0",
-          "info": "Update this number yourself from your real order count — never leave an inflated or guessed number here."
-        }
-      ]
     }
   ],
   "presets": [
@@ -711,13 +684,6 @@
             "initial": "M",
             "name_descriptor": "Megan T. | Mom of 2 (ages 5 & 8)",
             "quote": "He picks his own clothes, makes his bed, and told me he's 'a big kid now.'"
-          }
-        },
-        {
-          "type": "stat_notification",
-          "settings": {
-            "emoji": "🎁",
-            "stat_message": "Today's free bundles claimed: 0"
           }
         }
       ]
