@@ -897,11 +897,12 @@
       "settings": {
         "enable": true,
         "position": "bottom-left",
-        "bg_color": "#FFF5F6",
-        "accent_color": "#E89BA0",
-        "text_color": "#2D2D2D",
-        "text_secondary_color": "#6B6B6B",
-        "star_color": "#F5B800",
+        "bg_color": "#fff5f6",
+        "accent_color": "#e89ba0",
+        "text_color": "#2d2d2d",
+        "text_secondary_color": "#6b6b6b",
+        "star_color": "#f5b800",
+        "font_size_base": 12,
         "first_show_delay": 2,
         "between_delay": 15,
         "show_duration": 5
