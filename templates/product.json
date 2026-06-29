@@ -851,7 +851,8 @@
           "settings": {
             "initial": "A",
             "name_descriptor": "Amanda K. | Mom of 2 (ages 4 & 6)",
-            "quote": "No more morning tantrums. They actually get dressed and pack their own backpacks now."
+            "quote": "No more morning tantrums. They actually get dressed and pack their own backpacks now.",
+            "avatar_image": "shopify://shop_images/503854332_24320464580871077_5616424560795469632_n.jpg"
           }
         },
         "testimonial_notification_xYhF4M": {
@@ -867,7 +868,8 @@
           "settings": {
             "initial": "M",
             "name_descriptor": "Marcus D. | Dad of active 5yo twins",
-            "quote": "Bedtime used to take 2 hours. The routine checklist turned it into a 15-minute breeze."
+            "quote": "Bedtime used to take 2 hours. The routine checklist turned it into a 15-minute breeze.",
+            "avatar_image": "shopify://shop_images/465729162_9025030114195092_3416494419900385600_n.jpg"
           }
         },
         "testimonial_notification_YcF73M": {
@@ -875,7 +877,8 @@
           "settings": {
             "initial": "R",
             "name_descriptor": "Rachel W. | Mom of sibling rivals (5 & 7)",
-            "quote": "They actually shared toys without me refereeing. Sibling peace is real!"
+            "quote": "They actually shared toys without me refereeing. Sibling peace is real!",
+            "avatar_image": "shopify://shop_images/731068459_3500681523431647_893546762399973601_n.jpg"
           }
         },
         "testimonial_notification_7LNwGA": {
@@ -891,7 +894,16 @@
           "settings": {
             "initial": "E",
             "name_descriptor": "Emily S. | Work-from-home mom",
-            "quote": "I got a solid hour of quiet focus time while my 6-year-old built the chore chart."
+            "quote": "I got a solid hour of quiet focus time while my 6-year-old built the chore chart.",
+            "avatar_image": "shopify://shop_images/468084724_10161796300893363_1221233087399433715_n.jpg"
+          }
+        },
+        "testimonial_notification_qA6ztD": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Megan L. | Mom of 2",
+            "quote": "Loved it!"
           }
         },
         "testimonial_notification_z3TpWT": {
@@ -899,7 +911,8 @@
           "settings": {
             "initial": "H",
             "name_descriptor": "Haley J. | Mom of sensitive 7yo",
-            "quote": "The 'calm down zone' template helped us stop three major tantrums this week."
+            "quote": "The 'calm down zone' template helped us stop three major tantrums this week.",
+            "avatar_image": "shopify://shop_images/731068459_3500681523431647_893546762399973601_n.jpg"
           }
         },
         "testimonial_notification_CcDWBq": {
@@ -934,6 +947,7 @@
         "testimonial_notification_YcF73M",
         "testimonial_notification_7LNwGA",
         "testimonial_notification_wMKMJz",
+        "testimonial_notification_qA6ztD",
         "testimonial_notification_z3TpWT",
         "testimonial_notification_CcDWBq",
         "testimonial_notification_jc6RKc",
@@ -943,11 +957,11 @@
       "settings": {
         "enable": true,
         "position": "bottom-left",
-        "bg_color": "#FFF5F6",
-        "accent_color": "#E89BA0",
-        "text_color": "#2D2D2D",
-        "text_secondary_color": "#6B6B6B",
-        "star_color": "#F5B800",
+        "bg_color": "#fff5f6",
+        "accent_color": "#e89ba0",
+        "text_color": "#2d2d2d",
+        "text_secondary_color": "#6b6b6b",
+        "star_color": "#f5b800",
         "font_size_quote": 13,
         "font_size_author": 11,
         "first_show_delay": 6,
