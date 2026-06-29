@@ -62,6 +62,7 @@
       font-family: 'Inter', sans-serif;
       box-sizing: border-box;
       text-align: left;
+      --font-size-base: {{ section.settings.font_size_base | default: 13 }}px;
     }
 
     .social-proof-card__avatar {
@@ -97,7 +98,7 @@
     }
 
     .social-proof-card__quote {
-      font-size: 13px;
+      font-size: var(--font-size-base);
       font-style: italic;
       line-height: 1.4;
       margin: 0;
@@ -109,7 +110,7 @@
     }
 
     .social-proof-card__author {
-      font-size: 11px;
+      font-size: calc(var(--font-size-base) - 2px);
       color: {{ section.settings.text_secondary_color }};
       margin: 0;
       font-weight: 400;
@@ -148,7 +149,7 @@
     }
 
     .social-proof-card__stat-msg {
-      font-size: 13px;
+      font-size: var(--font-size-base);
       font-weight: 500;
       line-height: 1.4;
       margin: 0;
@@ -168,24 +169,13 @@
         padding: 12px;
         gap: 10px;
         border-radius: 12px;
+        --font-size-base: calc({{ section.settings.font_size_base | default: 13 }}px - 1px);
       }
       
       .social-proof-card__avatar {
         width: 36px;
         height: 36px;
         font-size: 16px;
-      }
-      
-      .social-proof-card__quote {
-        font-size: 12px;
-      }
-      
-      .social-proof-card__author {
-        font-size: 10px;
-      }
-      
-      .social-proof-card__stat-msg {
-        font-size: 12px;
       }
     }
   {% endstyle %}
@@ -564,6 +554,16 @@
       "id": "star_color",
       "label": "Star Color",
       "default": "#F5B800"
+    },
+    {
+      "type": "range",
+      "id": "font_size_base",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Base Font Size",
+      "default": 13
     },
     {
       "type": "header",
