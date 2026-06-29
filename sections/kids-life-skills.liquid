@@ -17,11 +17,81 @@
     font-size: {{ section.settings.font_size_base | default: 16 }}px;
   }
 
-  /* Scale headline sizes relative to the base font size */
+  /* Headline styling overrides */
   #wld-kls-{{ section.id }} .kls-hero-headline {
-    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 2.625);
+    font-size: {{ section.settings.headline_font_size | default: 42 }}px;
+    color: {{ section.settings.headline_color | default: '#2D2D2D' }};
+    margin-top: {{ section.settings.headline_margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.headline_margin_bottom | default: 0 }}px;
   }
 
+  /* Rating styling overrides */
+  #wld-kls-{{ section.id }} .kls-hero-stars {
+    font-size: {{ section.settings.rating_font_size | default: 16 }}px;
+    color: {{ section.settings.rating_star_color | default: '#F5B800' }};
+  }
+  #wld-kls-{{ section.id }} .kls-hero-rating-text {
+    font-size: calc({{ section.settings.rating_font_size | default: 16 }}px - 2px);
+    color: {{ section.settings.rating_color | default: '#6B6B6B' }};
+  }
+  #wld-kls-{{ section.id }} .kls-hero-rating {
+    margin-top: {{ section.settings.rating_margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.rating_margin_bottom | default: 0 }}px;
+  }
+
+  /* Price styling overrides */
+  #wld-kls-{{ section.id }} .kls-hero-price-row {
+    margin-top: {{ section.settings.price_margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.price_margin_bottom | default: 0 }}px;
+  }
+  #wld-kls-{{ section.id }} .kls-hero-price-sale {
+    font-size: {{ section.settings.price_sale_font_size | default: 32 }}px;
+    color: {{ section.settings.price_sale_color | default: '#D0021B' }};
+  }
+  #wld-kls-{{ section.id }} .kls-hero-price-original {
+    font-size: {{ section.settings.price_original_font_size | default: 18 }}px;
+    color: {{ section.settings.price_original_color | default: '#6B6B6B' }};
+  }
+
+  /* Benefits list styling overrides */
+  #wld-kls-{{ section.id }} .kls-hero-benefits {
+    margin-top: {{ section.settings.benefits_margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.benefits_margin_bottom | default: 0 }}px;
+  }
+  #wld-kls-{{ section.id }} .kls-hero-benefit {
+    font-size: {{ section.settings.benefits_font_size | default: 16 }}px;
+    color: {{ section.settings.benefits_color | default: '#2D2D2D' }};
+  }
+  #wld-kls-{{ section.id }} .kls-hero-benefit-icon {
+    color: {{ section.settings.benefits_icon_color | default: '#E89BA0' }};
+  }
+
+  /* CTA Button styling overrides */
+  #wld-kls-{{ section.id }} .kls-hero-cta {
+    font-size: {{ section.settings.cta_font_size | default: 18 }}px;
+    background-color: {{ section.settings.cta_bg_color | default: '#D47A82' }};
+    color: {{ section.settings.cta_text_color | default: '#FFFFFF' }};
+  }
+  #wld-kls-{{ section.id }} .product-form.main-product-form {
+    margin-top: {{ section.settings.cta_margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.cta_margin_bottom | default: 0 }}px;
+  }
+
+  /* Testimonial Card styling overrides */
+  #wld-kls-{{ section.id }} .kls-hero-testimonial {
+    background-color: {{ section.settings.testimonial_bg_color | default: '#FFF5F6' }};
+    color: {{ section.settings.testimonial_text_color | default: '#2D2D2D' }};
+    margin-top: {{ section.settings.testimonial_margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.testimonial_margin_bottom | default: 0 }}px;
+  }
+  #wld-kls-{{ section.id }} .kls-hero-testimonial-quote {
+    color: {{ section.settings.testimonial_text_color | default: '#2D2D2D' }};
+  }
+  #wld-kls-{{ section.id }} .kls-hero-testimonial-name {
+    color: {{ section.settings.testimonial_text_color | default: '#2D2D2D' }};
+  }
+
+  /* General scaling fallback for other sections */
   #wld-kls-{{ section.id }} .kls-faq-heading,
   #wld-kls-{{ section.id }} .kls-testimonials-heading,
   #wld-kls-{{ section.id }} .kls-ready-heading,
@@ -32,15 +102,6 @@
     font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 2.0);
   }
 
-  #wld-kls-{{ section.id }} .kls-hero-price-sale {
-    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 2.0);
-  }
-
-  #wld-kls-{{ section.id }} .kls-hero-price-original {
-    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 1.125);
-  }
-
-  #wld-kls-{{ section.id }} .kls-hero-benefit,
   #wld-kls-{{ section.id }} .kls-faq-question,
   #wld-kls-{{ section.id }} .kls-ready-body,
   #wld-kls-{{ section.id }} .kls-grow-body,
@@ -51,8 +112,6 @@
   }
 
   #wld-kls-{{ section.id }} .kls-hero-trust,
-  #wld-kls-{{ section.id }} .kls-hero-testimonial-quote,
-  #wld-kls-{{ section.id }} .kls-hero-testimonial-name,
   #wld-kls-{{ section.id }} .kls-testimonial-author,
   #wld-kls-{{ section.id }} .kls-stats-footnote {
     font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 0.875);
@@ -515,7 +574,7 @@
     { "type": "url", "id": "guarantee_cta_url", "label": "CTA URL" },
     {
       "type": "header",
-      "content": "📐 Layout & Typography"
+      "content": "📐 General Layout & Typography"
     },
     {
       "type": "range",
@@ -540,7 +599,7 @@
     {
       "type": "range",
       "id": "margin_top",
-      "min": 0,
+      "min": -100,
       "max": 100,
       "step": 4,
       "unit": "px",
@@ -550,7 +609,7 @@
     {
       "type": "range",
       "id": "margin_bottom",
-      "min": 0,
+      "min": -100,
       "max": 100,
       "step": 4,
       "unit": "px",
@@ -578,6 +637,276 @@
       "id": "text_color",
       "label": "Text Color",
       "default": "#2D2D2D"
+    },
+    {
+      "type": "header",
+      "content": "💬 Overrides: Headline"
+    },
+    {
+      "type": "range",
+      "id": "headline_font_size",
+      "min": 14,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Headline Font Size",
+      "default": 42
+    },
+    {
+      "type": "color",
+      "id": "headline_color",
+      "label": "Headline Color",
+      "default": "#2D2D2D"
+    },
+    {
+      "type": "range",
+      "id": "headline_margin_top",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Headline Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "headline_margin_bottom",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Headline Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "⭐ Overrides: Rating"
+    },
+    {
+      "type": "range",
+      "id": "rating_font_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Rating Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "rating_color",
+      "label": "Rating Text Color",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "color",
+      "id": "rating_star_color",
+      "label": "Rating Star Color",
+      "default": "#F5B800"
+    },
+    {
+      "type": "range",
+      "id": "rating_margin_top",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Rating Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "rating_margin_bottom",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Rating Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "💰 Overrides: Price Row"
+    },
+    {
+      "type": "range",
+      "id": "price_sale_font_size",
+      "min": 14,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Sale Price Font Size",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "price_sale_color",
+      "label": "Sale Price Color",
+      "default": "#D0021B"
+    },
+    {
+      "type": "range",
+      "id": "price_original_font_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Original Price Font Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "price_original_color",
+      "label": "Original Price Color",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "range",
+      "id": "price_margin_top",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Price Row Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "price_margin_bottom",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Price Row Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "♥ Overrides: Benefits List"
+    },
+    {
+      "type": "range",
+      "id": "benefits_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Benefits Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "benefits_color",
+      "label": "Benefits Text Color",
+      "default": "#2D2D2D"
+    },
+    {
+      "type": "color",
+      "id": "benefits_icon_color",
+      "label": "Benefits Icon Color",
+      "default": "#E89BA0"
+    },
+    {
+      "type": "range",
+      "id": "benefits_margin_top",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Benefits Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "benefits_margin_bottom",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Benefits Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "🛍️ Overrides: Buy Box Button (CTA)"
+    },
+    {
+      "type": "range",
+      "id": "cta_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "CTA Font Size",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA Button Background",
+      "default": "#D47A82"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "cta_margin_top",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "CTA Button Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "cta_margin_bottom",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "CTA Button Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "💬 Overrides: Testimonial Card"
+    },
+    {
+      "type": "color",
+      "id": "testimonial_bg_color",
+      "label": "Testimonial Card Background",
+      "default": "#FFF5F6"
+    },
+    {
+      "type": "color",
+      "id": "testimonial_text_color",
+      "label": "Testimonial Card Text Color",
+      "default": "#2D2D2D"
+    },
+    {
+      "type": "range",
+      "id": "testimonial_margin_top",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Testimonial Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "testimonial_margin_bottom",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Testimonial Margin Bottom",
+      "default": 0
     }
   ],
   "blocks": [
