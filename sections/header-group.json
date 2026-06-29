@@ -14,13 +14,33 @@
     "fe1c8c67-b84c-4466-a515-70df3134c1c0": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_a4nNFe": {
+          "type": "announcement",
+          "settings": {
+            "text": "<strong>Mother's Day Sale Ends in:</strong>",
+            "countdown_end": "",
+            "enable_countdown_demo": false,
+            "text_alignment": "center",
+            "mobile_text_size": 10,
+            "desktop_text_size": 20,
+            "icon": "",
+            "filled_icon": false,
+            "mobile_icon_size": 10,
+            "desktop_icon_size": 26,
+            "desktop_layout": "horizontal",
+            "mobile_layout": "horizontal",
+            "hidden_products": "",
+            "enable_specific_display": false,
+            "displayed_products": ""
+          }
+        },
         "sections--21450414096679__fe1c8c67-b84c-4466-a515-70df3134c1c0-announcement-1": {
           "type": "announcement",
           "settings": {
-            "text": "Mother's Day Sale Ends in:",
+            "text": "",
             "countdown_end": "",
             "enable_countdown_demo": true,
-            "text_alignment": "center",
+            "text_alignment": "left",
             "mobile_text_size": 16,
             "desktop_text_size": 20,
             "icon": "",
@@ -36,25 +56,26 @@
         }
       },
       "block_order": [
+        "announcement_a4nNFe",
         "sections--21450414096679__fe1c8c67-b84c-4466-a515-70df3134c1c0-announcement-1"
       ],
       "settings": {
-        "columns_desktop": 1,
-        "columns_mobile": 1,
+        "columns_desktop": 2,
+        "columns_mobile": 2,
         "desktop_spacing": 28,
-        "mobile_spacing": 16,
+        "mobile_spacing": 0,
         "show_separator": false,
         "color_scheme": "accent-1",
         "slider_mobile": true,
         "slider_desktop": false,
-        "type": "loop",
+        "type": "slide",
         "autoplay": false,
         "autoplay_speed": 3,
         "hidden_products": "",
         "enable_specific_display": false,
         "displayed_products": "",
-        "padding_top": 16,
-        "padding_bottom": 16,
+        "padding_top": 10,
+        "padding_bottom": 10,
         "custom_colors_background": "#dd1d1d",
         "custom_gradient_background": "",
         "custom_colors_text": "#ffffff"

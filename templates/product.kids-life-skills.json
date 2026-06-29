@@ -60,8 +60,8 @@
         "trust_badge_size": "medium",
         "mobile_padding_top": 0,
         "mobile_padding_bottom": 16,
-        "desktop_padding_top": 36,
-        "desktop_padding_bottom": 36
+        "desktop_padding_top": 0,
+        "desktop_padding_bottom": 0
       }
     },
     "kids_life_skills_pMNmYd": {
@@ -148,7 +148,7 @@
       "custom_css": [],
       "name": "TinyThrive Life Skills",
       "settings": {
-        "product": "kids-life-skills",
+        "product": "kids-skills",
         "hero_main_image": "shopify://shop_images/260609_0001_image_edit_7987.png",
         "hero_thumb_1": "shopify://shop_images/5.png",
         "hero_thumb_2": "shopify://shop_images/4.png",
