@@ -6,6 +6,59 @@
 
 <div class="wld-kls-root" id="wld-kls-{{ section.id }}">
 
+{% style %}
+  #wld-kls-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | default: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 0 }}px;
+    margin-top: {{ section.settings.margin_top | default: 0 }}px;
+    margin-bottom: {{ section.settings.margin_bottom | default: 0 }}px;
+    background-color: {{ section.settings.bg_color | default: '#FFFFFF' }};
+    color: {{ section.settings.text_color | default: '#2D2D2D' }};
+    font-size: {{ section.settings.font_size_base | default: 16 }}px;
+  }
+
+  /* Scale headline sizes relative to the base font size */
+  #wld-kls-{{ section.id }} .kls-hero-headline {
+    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 2.625);
+  }
+
+  #wld-kls-{{ section.id }} .kls-faq-heading,
+  #wld-kls-{{ section.id }} .kls-testimonials-heading,
+  #wld-kls-{{ section.id }} .kls-ready-heading,
+  #wld-kls-{{ section.id }} .kls-grow-heading,
+  #wld-kls-{{ section.id }} .kls-stats-heading,
+  #wld-kls-{{ section.id }} .kls-comparison-heading,
+  #wld-kls-{{ section.id }} .kls-guarantee-heading {
+    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 2.0);
+  }
+
+  #wld-kls-{{ section.id }} .kls-hero-price-sale {
+    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 2.0);
+  }
+
+  #wld-kls-{{ section.id }} .kls-hero-price-original {
+    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 1.125);
+  }
+
+  #wld-kls-{{ section.id }} .kls-hero-benefit,
+  #wld-kls-{{ section.id }} .kls-faq-question,
+  #wld-kls-{{ section.id }} .kls-ready-body,
+  #wld-kls-{{ section.id }} .kls-grow-body,
+  #wld-kls-{{ section.id }} .kls-grow-quote,
+  #wld-kls-{{ section.id }} .kls-testimonial-body,
+  #wld-kls-{{ section.id }} .kls-guarantee-body {
+    font-size: {{ section.settings.font_size_base | default: 16 }}px;
+  }
+
+  #wld-kls-{{ section.id }} .kls-hero-trust,
+  #wld-kls-{{ section.id }} .kls-hero-testimonial-quote,
+  #wld-kls-{{ section.id }} .kls-hero-testimonial-name,
+  #wld-kls-{{ section.id }} .kls-testimonial-author,
+  #wld-kls-{{ section.id }} .kls-stats-footnote {
+    font-size: calc({{ section.settings.font_size_base | default: 16 }}px * 0.875);
+  }
+{% endstyle %}
+
   
   {{ 'kids-life-skills.css' | asset_url | stylesheet_tag }}
 
@@ -459,7 +512,73 @@
     { "type": "text", "id": "guarantee_heading", "label": "Heading", "default": "Try It Risk-Free For 90 Days" },
     { "type": "textarea", "id": "guarantee_body", "label": "Body", "default": "Print it, hand it to your kid, and use it for a full 90 days. If you don't see more confidence, more independence, and fewer power struggles, just email us and we'll refund every cent — no forms, no guilt trips, no 'have you really tried' questions." },
     { "type": "text", "id": "guarantee_cta_label", "label": "CTA label", "default": "GET MY BUNDLE RISK-FREE" },
-    { "type": "url", "id": "guarantee_cta_url", "label": "CTA URL" }
+    { "type": "url", "id": "guarantee_cta_url", "label": "CTA URL" },
+    {
+      "type": "header",
+      "content": "📐 Layout & Typography"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Margin Bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "font_size_base",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Base Font Size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#2D2D2D"
+    }
   ],
   "blocks": [
     {
