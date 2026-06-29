@@ -1027,6 +1027,23 @@
           "custom_colors_solid_button_text": "#121212",
           "custom_colors_outline_button": "#ffffff"
         }
+      },
+      "social-proof-toast": {
+        "type": "social-proof-toast",
+        "settings": {
+          "enable": false,
+          "position": "bottom-left",
+          "bg_color": "#fff5f6",
+          "accent_color": "#e89ba0",
+          "text_color": "#2d2d2d",
+          "text_secondary_color": "#6b6b6b",
+          "star_color": "#f5b800",
+          "font_size_quote": 13,
+          "font_size_author": 11,
+          "first_show_delay": 6,
+          "between_delay": 15,
+          "show_duration": 5
+        }
       }
     },
     "content_for_index": [],

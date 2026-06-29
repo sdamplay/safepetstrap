@@ -843,66 +843,113 @@
         "padding_bottom": 0
       }
     },
-    "social_proof_toast_eTkbGY": {
+    "social_proof_toast_BhALL6": {
       "type": "social-proof-toast",
       "blocks": {
-        "testimonial_notification_AhaYFc": {
+        "testimonial_notification_zDkWkJ": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "A",
+            "name_descriptor": "Amanda K. | Mom of 2 (ages 4 & 6)",
+            "quote": "No more morning tantrums. They actually get dressed and pack their own backpacks now."
+          }
+        },
+        "testimonial_notification_xYhF4M": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "J",
+            "name_descriptor": "Jessica P. | Former screen-time negotiator",
+            "quote": "Instead of begging for the iPad, they started doing the offline challenges on page 42!"
+          }
+        },
+        "testimonial_notification_zxkTyn": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "M",
-            "name_descriptor": "Megan L. | Mom of 2 (ages 5 & 8)",
-            "quote": "She made herself eggs and toast and was beaming the whole time. I actually got emotional."
+            "name_descriptor": "Marcus D. | Dad of active 5yo twins",
+            "quote": "Bedtime used to take 2 hours. The routine checklist turned it into a 15-minute breeze."
           }
         },
-        "testimonial_notification_bGNycM": {
+        "testimonial_notification_YcF73M": {
           "type": "testimonial_notification",
           "settings": {
-            "initial": "L",
-            "name_descriptor": "Luna K. | Working mom of 3",
-            "quote": "This gave me an actual plan instead of more guilt. My son is ahead of where he was a month ago."
+            "initial": "R",
+            "name_descriptor": "Rachel W. | Mom of sibling rivals (5 & 7)",
+            "quote": "They actually shared toys without me refereeing. Sibling peace is real!"
           }
         },
-        "testimonial_notification_kNxWVU": {
+        "testimonial_notification_7LNwGA": {
           "type": "testimonial_notification",
           "settings": {
-            "initial": "S",
-            "name_descriptor": "Sarah T. | Elementary teacher & mom of 2",
-            "quote": "There's a simple list of skills by age, and my son is already two steps ahead."
+            "initial": "K",
+            "name_descriptor": "Katie M. | Mom of messy 8yo boy",
+            "quote": "He cleaned his entire room without being asked once. I had to double-check it!"
           }
         },
-        "testimonial_notification_GVeGQ4": {
+        "testimonial_notification_wMKMJz": {
           "type": "testimonial_notification",
           "settings": {
-            "initial": "M",
-            "name_descriptor": "Megan T. | Mom of 2 (ages 5 & 8)",
-            "quote": "He picks his own clothes, makes his bed, and told me he's 'a big kid now.'"
+            "initial": "E",
+            "name_descriptor": "Emily S. | Work-from-home mom",
+            "quote": "I got a solid hour of quiet focus time while my 6-year-old built the chore chart."
           }
         },
-        "stat_notification_gwzQcN": {
-          "type": "stat_notification",
+        "testimonial_notification_z3TpWT": {
+          "type": "testimonial_notification",
           "settings": {
-            "emoji": "🎁",
-            "stat_message": "Today's free bundles claimed: 0"
+            "initial": "H",
+            "name_descriptor": "Haley J. | Mom of sensitive 7yo",
+            "quote": "The 'calm down zone' template helped us stop three major tantrums this week."
+          }
+        },
+        "testimonial_notification_CcDWBq": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "T",
+            "name_descriptor": "Todd F. | Dad of 9yo daughter",
+            "quote": "She's budgeting her own allowance now instead of asking me to buy random toys."
+          }
+        },
+        "testimonial_notification_jc6RKc": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "N",
+            "name_descriptor": "Nicole V. | Mom of picky 5yo",
+            "quote": "She tried three new vegetables this week without us having to make a deal. Magic."
+          }
+        },
+        "testimonial_notification_feT4EY": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "D",
+            "name_descriptor": "Daniel S. | Dad of shy 6yo",
+            "quote": "His confidence soared. He walked up to the cashier and ordered his own ice cream!"
           }
         }
       },
       "block_order": [
-        "testimonial_notification_AhaYFc",
-        "testimonial_notification_bGNycM",
-        "testimonial_notification_kNxWVU",
-        "testimonial_notification_GVeGQ4",
-        "stat_notification_gwzQcN"
+        "testimonial_notification_zDkWkJ",
+        "testimonial_notification_xYhF4M",
+        "testimonial_notification_zxkTyn",
+        "testimonial_notification_YcF73M",
+        "testimonial_notification_7LNwGA",
+        "testimonial_notification_wMKMJz",
+        "testimonial_notification_z3TpWT",
+        "testimonial_notification_CcDWBq",
+        "testimonial_notification_jc6RKc",
+        "testimonial_notification_feT4EY"
       ],
       "name": "Social Proof Toast",
       "settings": {
         "enable": true,
         "position": "bottom-left",
-        "bg_color": "#fff5f6",
-        "accent_color": "#e89ba0",
-        "text_color": "#2d2d2d",
-        "text_secondary_color": "#6b6b6b",
-        "star_color": "#f5b800",
-        "font_size_base": 12,
+        "bg_color": "#FFF5F6",
+        "accent_color": "#E89BA0",
+        "text_color": "#2D2D2D",
+        "text_secondary_color": "#6B6B6B",
+        "star_color": "#F5B800",
+        "font_size_quote": 13,
+        "font_size_author": 11,
         "first_show_delay": 6,
         "between_delay": 15,
         "show_duration": 5
@@ -917,6 +964,6 @@
     "4fc05ee5-1c30-4863-b88f-81cb6fa7c41a",
     "55bd100e-3bbd-426c-a5cf-eed7b2a3706f",
     "b321ab88-2b59-4dba-bade-54885c874ca5",
-    "social_proof_toast_eTkbGY"
+    "social_proof_toast_BhALL6"
   ]
 }
