@@ -422,7 +422,24 @@
               </div>
             `;
           }
-          return '';
+        showBlockPreview(blockId) {
+          if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+          }
+          
+          const item = this.data.find(item => item.id === blockId);
+          if (!item) return;
+          
+          this.container.innerHTML = this.renderItem(item);
+          this.container.classList.remove('social-proof-toast--hidden');
+          this.container.classList.add('social-proof-toast--visible');
+          this.visible = true;
+        }
+
+        resumeAfterPreview() {
+          if (this.timer) clearTimeout(this.timer);
+          this.scheduleNext(this.settings.betweenDelay * 1000);
         }
 
         destroy() {
@@ -488,6 +505,18 @@
           if (e.target.querySelector('.social-proof-toast-container') && window.socialProofToastManager) {
             window.socialProofToastManager.destroy();
             window.socialProofToastManager = null;
+          }
+        });
+        document.addEventListener('shopify:block:select', (e) => {
+          if (window.socialProofToastManager) {
+            const blockId = e.detail.blockId;
+            window.socialProofToastManager.showBlockPreview(blockId);
+          }
+        });
+        document.addEventListener('shopify:block:deselect', (e) => {
+          if (window.socialProofToastManager) {
+            window.socialProofToastManager.hide();
+            window.socialProofToastManager.resumeAfterPreview();
           }
         });
       }
