@@ -912,7 +912,7 @@
             "initial": "H",
             "name_descriptor": "Haley J. | Mom of sensitive 7yo",
             "quote": "The 'calm down zone' template helped us stop three major tantrums this week.",
-            "avatar_image": "shopify://shop_images/731068459_3500681523431647_893546762399973601_n.jpg"
+            "avatar_image": "shopify://shop_images/560021979_122144154296841003_602520310554262690_n.jpg"
           }
         },
         "testimonial_notification_CcDWBq": {
@@ -928,7 +928,8 @@
           "settings": {
             "initial": "N",
             "name_descriptor": "Nicole V. | Mom of picky 5yo",
-            "quote": "She tried three new vegetables this week without us having to make a deal. Magic."
+            "quote": "She tried three new vegetables this week without us having to make a deal. Magic.",
+            "avatar_image": "shopify://shop_images/clipboard-image-1782740726.png"
           }
         },
         "testimonial_notification_feT4EY": {
@@ -962,11 +963,11 @@
         "text_color": "#2d2d2d",
         "text_secondary_color": "#6b6b6b",
         "star_color": "#f5b800",
-        "font_size_quote": 13,
+        "font_size_quote": 12,
         "font_size_author": 11,
-        "first_show_delay": 6,
+        "first_show_delay": 4,
         "between_delay": 15,
-        "show_duration": 5
+        "show_duration": 7
       }
     }
   },
