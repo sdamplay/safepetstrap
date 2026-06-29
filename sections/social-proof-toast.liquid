@@ -1,0 +1,698 @@
+{%- if section.settings.enable -%}
+  {% style %}
+    .social-proof-toast-container {
+      position: fixed;
+      z-index: 9990;
+      max-width: 300px;
+      width: 100%;
+      pointer-events: none;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .social-proof-toast--bottom-left {
+      left: 20px;
+      bottom: 20px;
+      transform: translateY(30px);
+    }
+
+    .social-proof-toast--bottom-right {
+      right: 20px;
+      bottom: 20px;
+      transform: translateY(30px);
+    }
+
+    .social-proof-toast-container.social-proof-toast--visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .social-proof-toast--bottom-left.social-proof-toast--visible {
+      transform: translateY(0);
+    }
+
+    .social-proof-toast--bottom-right.social-proof-toast--visible {
+      transform: translateY(0);
+    }
+
+    .social-proof-toast-container.social-proof-toast--hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .social-proof-toast--bottom-left.social-proof-toast--hidden {
+      transform: translateY(30px);
+    }
+
+    .social-proof-toast--bottom-right.social-proof-toast--hidden {
+      transform: translateY(30px);
+    }
+
+    .social-proof-card {
+      position: relative;
+      background-color: {{ section.settings.bg_color }};
+      border-left: 4px solid {{ section.settings.accent_color }};
+      border-radius: 16px;
+      box-shadow: 0 4px 16px rgba(212, 122, 130, 0.08);
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      color: {{ section.settings.text_color }};
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    .social-proof-card__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--avatar-bg, #FCE4E6);
+      color: {{ section.settings.accent_color }};
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 18px;
+      flex-shrink: 0;
+      user-select: none;
+    }
+
+    .social-proof-card__content {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-right: 12px;
+    }
+
+    .social-proof-card__stars {
+      color: {{ section.settings.star_color }};
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+
+    .social-proof-card__quote {
+      font-size: 13px;
+      font-style: italic;
+      line-height: 1.4;
+      margin: 0;
+      color: {{ section.settings.text_color }};
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .social-proof-card__author {
+      font-size: 11px;
+      color: {{ section.settings.text_secondary_color }};
+      margin: 0;
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .social-proof-card__dismiss {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      color: {{ section.settings.text_secondary_color }};
+      padding: 4px;
+      transition: color 0.2s;
+      user-select: none;
+    }
+
+    .social-proof-card__dismiss:hover {
+      color: {{ section.settings.text_color }};
+    }
+
+    .social-proof-card--stat {
+      align-items: center;
+    }
+
+    .social-proof-card__emoji {
+      font-size: 24px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .social-proof-card__stat-msg {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+      margin: 0;
+      color: {{ section.settings.text_color }};
+    }
+
+    @media screen and (max-width: 539px) {
+      .social-proof-toast-container {
+        left: 7.5vw !important;
+        right: 7.5vw !important;
+        width: 85vw !important;
+        max-width: none !important;
+        bottom: calc(15px + var(--sticky-atc-offset, 0px)) !important;
+      }
+      
+      .social-proof-card {
+        padding: 12px;
+        gap: 10px;
+        border-radius: 12px;
+      }
+      
+      .social-proof-card__avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+      
+      .social-proof-card__quote {
+        font-size: 12px;
+      }
+      
+      .social-proof-card__author {
+        font-size: 10px;
+      }
+      
+      .social-proof-card__stat-msg {
+        font-size: 12px;
+      }
+    }
+  {% endstyle %}
+
+  <div id="SocialProofToast-{{ section.id }}" class="social-proof-toast-container social-proof-toast--{{ section.settings.position }} social-proof-toast--hidden" aria-live="polite" aria-atomic="true"></div>
+
+  <script id="SocialProofData-{{ section.id }}" type="application/json">
+    [
+      {%- for block in section.blocks -%}
+        {
+          "id": {{ block.id | json }},
+          "type": {{ block.type | json }},
+          "initial": {{ block.settings.initial | json }},
+          "name_descriptor": {{ block.settings.name_descriptor | json }},
+          "quote": {{ block.settings.quote | json }},
+          "emoji": {{ block.settings.emoji | json }},
+          "stat_message": {{ block.settings.stat_message | json }}
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  </script>
+
+  <script>
+    (function() {
+      class SocialProofToastManager {
+        constructor(sectionId, settings, data) {
+          this.sectionId = sectionId;
+          this.settings = settings;
+          this.data = data;
+          this.container = document.getElementById(`SocialProofToast-${sectionId}`);
+          
+          if (!this.container || !this.settings.enable || this.data.length === 0) return;
+          
+          this.sessionCapKey = `sp_shown_count_${sectionId}`;
+          this.dismissedKey = `sp_dismissed_${sectionId}`;
+          
+          this.shownCount = parseInt(sessionStorage.getItem(this.sessionCapKey) || '0', 10);
+          this.dismissedIds = JSON.parse(sessionStorage.getItem(this.dismissedKey) || '[]');
+          
+          this.queue = this.data.filter(item => !this.dismissedIds.includes(item.id));
+          if (this.queue.length === 0) return;
+          
+          this.shuffle(this.queue);
+          this.currentIndex = 0;
+          
+          this.timer = null;
+          this.isDrawerOpen = false;
+          this.visible = false;
+          
+          this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+          this.handleDrawerClose = this.handleDrawerClose.bind(this);
+          this.init();
+        }
+
+        shuffle(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+        }
+
+        init() {
+          if (this.shownCount >= 5) {
+            return;
+          }
+
+          document.addEventListener('dialog:open', this.handleDrawerOpen, true);
+          document.addEventListener('dialog:close', this.handleDrawerClose, true);
+          
+          document.addEventListener('cart-drawer:open', this.handleDrawerOpen);
+          document.addEventListener('cart-drawer:close', this.handleDrawerClose);
+          
+          this.observeCartDrawer();
+
+          this.updateStickyOffset();
+          this.resizeHandler = () => this.updateStickyOffset();
+          window.addEventListener('resize', this.resizeHandler);
+          window.addEventListener('scroll', this.resizeHandler);
+
+          this.scheduleNext(this.settings.firstShowDelay * 1000);
+        }
+
+        observeCartDrawer() {
+          const drawerComponent = document.querySelector('cart-drawer-component');
+          if (drawerComponent) {
+            const dialog = drawerComponent.querySelector('dialog');
+            if (dialog) {
+              this.drawerObserver = new MutationObserver(() => {
+                if (dialog.open) {
+                  this.handleDrawerOpen();
+                } else {
+                  this.handleDrawerClose();
+                }
+              });
+              this.drawerObserver.observe(dialog, { attributes: true, attributeFilter: ['open'] });
+            }
+          }
+        }
+
+        updateStickyOffset() {
+          if (window.innerWidth >= 540) {
+            document.documentElement.style.setProperty('--sticky-atc-offset', '0px');
+            return;
+          }
+          const stickyAtc = document.querySelector('sticky-atc, .sticky-atc');
+          if (stickyAtc) {
+            const rect = stickyAtc.getBoundingClientRect();
+            if (rect.height > 0 && rect.bottom >= window.innerHeight - 10) {
+              document.documentElement.style.setProperty('--sticky-atc-offset', `${rect.height}px`);
+              return;
+            }
+          }
+          document.documentElement.style.setProperty('--sticky-atc-offset', '0px');
+        }
+
+        isCartDrawerCurrentlyOpen() {
+          const dialog = document.querySelector('cart-drawer-component dialog');
+          if (dialog && dialog.open) return true;
+          
+          const customDrawer = document.querySelector('custom-cart-drawer');
+          if (customDrawer && customDrawer.classList.contains('is-active')) return true;
+          
+          const activeDrawer = document.querySelector('.cart-drawer.is-active, .drawer.is-active');
+          if (activeDrawer) return true;
+          
+          return false;
+        }
+
+        handleDrawerOpen() {
+          this.isDrawerOpen = true;
+          if (this.visible) {
+            this.hide();
+          }
+          if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+          }
+        }
+
+        handleDrawerClose() {
+          this.isDrawerOpen = false;
+          if (!this.visible && this.shownCount < 5) {
+            this.scheduleNext(1000);
+          }
+        }
+
+        scheduleNext(ms) {
+          if (this.timer) clearTimeout(this.timer);
+          if (this.shownCount >= 5) return;
+          
+          this.timer = setTimeout(() => {
+            if (this.isDrawerOpen || this.isCartDrawerCurrentlyOpen()) {
+              this.scheduleNext(2000);
+            } else {
+              this.showNext();
+            }
+          }, ms);
+        }
+
+        showNext() {
+          if (this.shownCount >= 5) return;
+          if (this.queue.length === 0) return;
+          
+          const item = this.queue[this.currentIndex];
+          
+          this.container.innerHTML = this.renderItem(item);
+          
+          const dismissBtn = this.container.querySelector('.social-proof-card__dismiss');
+          if (dismissBtn) {
+            dismissBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              this.dismissItem(item.id);
+            });
+          }
+          
+          this.updateStickyOffset();
+          
+          this.container.classList.remove('social-proof-toast--hidden');
+          this.container.classList.add('social-proof-toast--visible');
+          this.visible = true;
+          
+          this.shownCount++;
+          sessionStorage.setItem(this.sessionCapKey, this.shownCount.toString());
+          
+          this.timer = setTimeout(() => {
+            this.hide();
+            this.currentIndex = (this.currentIndex + 1) % this.queue.length;
+            this.scheduleNext(this.settings.betweenDelay * 1000);
+          }, this.settings.showDuration * 1000);
+        }
+
+        hide() {
+          this.container.classList.remove('social-proof-toast--visible');
+          this.container.classList.add('social-proof-toast--hidden');
+          this.visible = false;
+        }
+
+        dismissItem(id) {
+          this.hide();
+          
+          if (!this.dismissedIds.includes(id)) {
+            this.dismissedIds.push(id);
+            sessionStorage.setItem(this.dismissedKey, JSON.stringify(this.dismissedIds));
+          }
+          
+          this.queue = this.queue.filter(item => item.id !== id);
+          
+          if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
+          }
+          
+          if (this.queue.length > 0) {
+            this.currentIndex = this.currentIndex % this.queue.length;
+            this.scheduleNext(this.settings.betweenDelay * 1000);
+          }
+        }
+
+        renderItem(item) {
+          if (item.type === 'testimonial_notification') {
+            const colors = ['#FFFCEB', '#FFF0F1', '#FFF5E6', '#EAF8F8', '#F0F4FF', '#FCE4E6'];
+            const charCode = item.initial ? item.initial.charCodeAt(0) : 0;
+            const avatarBg = colors[charCode % colors.length];
+            
+            return `
+              <div class="social-proof-card" style="--avatar-bg: ${avatarBg};">
+                <div class="social-proof-card__avatar">${escapeHtml(item.initial)}</div>
+                <div class="social-proof-card__content">
+                  <div class="social-proof-card__stars">★★★★★</div>
+                  <p class="social-proof-card__quote">"${escapeHtml(item.quote)}"</p>
+                  <p class="social-proof-card__author">${escapeHtml(item.name_descriptor)}</p>
+                </div>
+                <button type="button" class="social-proof-card__dismiss" aria-label="Dismiss">&times;</button>
+              </div>
+            `;
+          } else if (item.type === 'stat_notification') {
+            return `
+              <div class="social-proof-card social-proof-card--stat">
+                <div class="social-proof-card__emoji">${escapeHtml(item.emoji)}</div>
+                <div class="social-proof-card__content">
+                  <p class="social-proof-card__stat-msg">${escapeHtml(item.stat_message)}</p>
+                </div>
+                <button type="button" class="social-proof-card__dismiss" aria-label="Dismiss">&times;</button>
+              </div>
+            `;
+          }
+          return '';
+        }
+
+        destroy() {
+          document.removeEventListener('dialog:open', this.handleDrawerOpen, true);
+          document.removeEventListener('dialog:close', this.handleDrawerClose, true);
+          document.removeEventListener('cart-drawer:open', this.handleDrawerOpen);
+          document.removeEventListener('cart-drawer:close', this.handleDrawerClose);
+          
+          if (this.resizeHandler) {
+            window.removeEventListener('resize', this.resizeHandler);
+            window.removeEventListener('scroll', this.resizeHandler);
+          }
+          if (this.drawerObserver) {
+            this.drawerObserver.disconnect();
+          }
+          if (this.timer) {
+            clearTimeout(this.timer);
+          }
+        }
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/>/g, '&gt;')
+                  .replace(/"/g, '&quot;')
+                  .replace(/'/g, '&#039;');
+      }
+
+      function initSocialProof() {
+        const sectionId = '{{ section.id }}';
+        const dataEl = document.getElementById(`SocialProofData-${sectionId}`);
+        if (!dataEl) return;
+        
+        try {
+          const data = JSON.parse(dataEl.textContent);
+          const settings = {
+            enable: {{ section.settings.enable | json }},
+            position: {{ section.settings.position | json }},
+            firstShowDelay: {{ section.settings.first_show_delay | json }},
+            betweenDelay: {{ section.settings.between_delay | json }},
+            showDuration: {{ section.settings.show_duration | json }}
+          };
+
+          if (window.socialProofToastManager) {
+            window.socialProofToastManager.destroy();
+          }
+          window.socialProofToastManager = new SocialProofToastManager(sectionId, settings, data);
+        } catch(e) {
+          console.error('Social Proof: error parsing json blocks', e);
+        }
+      }
+
+      window.addEventListener('DOMContentLoaded', initSocialProof);
+      if (Shopify.designMode) {
+        document.addEventListener('shopify:section:load', (e) => {
+          if (e.target.querySelector('.social-proof-toast-container')) {
+            initSocialProof();
+          }
+        });
+        document.addEventListener('shopify:section:unload', (e) => {
+          if (e.target.querySelector('.social-proof-toast-container') && window.socialProofToastManager) {
+            window.socialProofToastManager.destroy();
+            window.socialProofToastManager = null;
+          }
+        });
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Social Proof Toast",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable Widget",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position on Desktop",
+      "options": [
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "bottom-left"
+    },
+    {
+      "type": "header",
+      "content": "Aesthetics"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFF5F6"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Stripe Color",
+      "default": "#E89BA0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#2D2D2D"
+    },
+    {
+      "type": "color",
+      "id": "text_secondary_color",
+      "label": "Secondary Text Color",
+      "default": "#6B6B6B"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star Color",
+      "default": "#F5B800"
+    },
+    {
+      "type": "header",
+      "content": "Timing"
+    },
+    {
+      "type": "range",
+      "id": "first_show_delay",
+      "min": 2,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "label": "Initial Delay",
+      "default": 6,
+      "info": "Seconds to wait after page load before displaying the first notification."
+    },
+    {
+      "type": "range",
+      "id": "between_delay",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Time Between Notifications",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "show_duration",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "unit": "s",
+      "label": "Toast Display Duration",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial_notification",
+      "name": "Testimonial Notification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "initial",
+          "label": "Customer Initial",
+          "default": "M",
+          "info": "1-2 characters max"
+        },
+        {
+          "type": "text",
+          "id": "name_descriptor",
+          "label": "Name + Descriptor",
+          "default": "Megan L. | Mom of 2"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Loved it!",
+          "info": "Keep it under 90-100 characters so it fits neatly in 1-2 lines."
+        }
+      ]
+    },
+    {
+      "type": "stat_notification",
+      "name": "Stat Notification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji/Icon",
+          "default": "🎁"
+        },
+        {
+          "type": "text",
+          "id": "stat_message",
+          "label": "Stat Message",
+          "default": "Today's free bundles claimed: 0",
+          "info": "Update this number yourself from your real order count — never leave an inflated or guessed number here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Proof Toast",
+      "blocks": [
+        {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Megan L. | Mom of 2 (ages 5 & 8)",
+            "quote": "She made herself eggs and toast and was beaming the whole time. I actually got emotional."
+          }
+        },
+        {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "L",
+            "name_descriptor": "Luna K. | Working mom of 3",
+            "quote": "This gave me an actual plan instead of more guilt. My son is ahead of where he was a month ago."
+          }
+        },
+        {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "S",
+            "name_descriptor": "Sarah T. | Elementary teacher & mom of 2",
+            "quote": "There's a simple list of skills by age, and my son is already two steps ahead."
+          }
+        },
+        {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Megan T. | Mom of 2 (ages 5 & 8)",
+            "quote": "He picks his own clothes, makes his bed, and told me he's 'a big kid now.'"
+          }
+        },
+        {
+          "type": "stat_notification",
+          "settings": {
+            "emoji": "🎁",
+            "stat_message": "Today's free bundles claimed: 0"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
