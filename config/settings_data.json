@@ -585,7 +585,7 @@
               "margin_bottom": 0
             }
           },
-          "gift_m9GXA3": {
+          "gift_X6KbcY": {
             "type": "gift",
             "settings": {
               "position": "body",
@@ -596,23 +596,23 @@
               "product": "impulse-control-activities-for-kids",
               "product_desc": "",
               "goal_type": "quantity",
-              "requirement": "0",
+              "requirement": "1",
               "locked_progress_text": "You're [amount] away from a free gift!",
-              "unlocked_progress_text": "Congrats! You unlocked a FREE gift 🎉",
-              "progress_mobile_text_size": 14,
+              "unlocked_progress_text": "Congrats! You unlocked a free gift!🎉",
+              "progress_mobile_text_size": 13,
               "progress_desktop_text_size": 15,
               "show_image_locked_overlay": true,
               "show_image": true,
-              "image_size": "4.25",
+              "image_size": "5",
               "image_corner_radius": 2,
-              "title_size": "1.2",
+              "title_size": "1.4",
               "desc_size": "1.2",
               "price_position": "separate",
-              "displayed_price": "text",
+              "displayed_price": "number",
               "displayed_price_text": "FREE",
-              "price_size": "1.6",
+              "price_size": "1.4",
               "hide_compare_price": false,
-              "show_variant_picker": false,
+              "show_variant_picker": true,
               "corner_radius": 6,
               "show_box_shadow": false,
               "show_border": true,
@@ -622,8 +622,8 @@
               "show_custom_bg": false,
               "regular_bg_color": "#f2f2f2",
               "selected_bg_color": "#f2f2f2",
-              "margin_top": 9,
-              "margin_bottom": 9
+              "margin_top": 15,
+              "margin_bottom": 15
             }
           },
           "product_upsells_K3pr7Y": {
@@ -725,7 +725,7 @@
               "desktop_text_size": 16,
               "alignment": "center",
               "text_color": "#121212",
-              "text_1": "❤️ Parents also added these for only $4.97",
+              "text_1": "❤️ Parents also added these for only $4.95",
               "text_2": "",
               "text_3": "",
               "icon_scale": 120,
@@ -917,7 +917,7 @@
         "block_order": [
           "custom_liquid_NexyVz",
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e",
-          "gift_m9GXA3",
+          "gift_X6KbcY",
           "product_upsells_K3pr7Y",
           "097b7b4f-c0b8-4073-a06b-e6d49a5aad20",
           "text_with_icon_Te766A",
