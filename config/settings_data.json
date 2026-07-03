@@ -596,7 +596,7 @@
               "product": "impulse-control-activities-for-kids",
               "product_desc": "",
               "goal_type": "quantity",
-              "requirement": "1",
+              "requirement": "0",
               "locked_progress_text": "You're [amount] away from a free gift!",
               "unlocked_progress_text": "Congrats! You unlocked a FREE gift 🎉",
               "progress_mobile_text_size": 14,
