@@ -485,7 +485,7 @@
         "title": "Billing"
       },
       "payment": {
-        "title": "Secure Checkout",
+        "title": "Summary",
         "card_security_notice": "All transactions are secure and encrypted. Your order includes free returns and 24/7 access to our award-winning customer service"
       },
       "delivery_options": {
