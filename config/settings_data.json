@@ -10,7 +10,7 @@
 {
   "current": {
     "animations_type": "RfaaO6tc35zLKcDRUCltKqx5sXmgAgKrTClqXyYJb4nkV8I/xi1BjoFOTSDWYyy7mYpaz8tdnUIuo33R4J1YMCHzsxfvRzZwl1pYsCp5+ZuhAvfjIMeuWwVa/Z18t/GmA6L4Wm7s3a5VRGakCsshnlvnWEZ6+yhYLS7h7Kg2oDgY9rhPIOdVKLYbOPSC+DKe0ST+z2XaAEg/X/70GpBodknSyBSv780BkNSlsn53aBN6G01kcGetmqrBwLdIKuSbtvUEVz6c6I9vwn2Ni5mGBYObqP9R5Gu85tetSC3V4z2OWL6Xj1w2hcfcITSk615rP4GL8XEH3aej6YsmyAYMs0Ux/t9IFZPbwreRhb4sjhAhW67LoVTOYXnOPbm6/AXr6RmBPpj6l6/DgaBGR4ednszWnbI03fR+Kvp0cqFcsmNpCMxrl1X3oCjFizIw8yDE",
-    "disable_inspect": true,
+    "disable_inspect": false,
     "country_list_function": "block",
     "country_list": "",
     "logo": "shopify://shop_images/Tiny_Thrive_1.png",
