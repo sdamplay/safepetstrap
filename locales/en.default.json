@@ -478,7 +478,8 @@
       },
       "general": {
         "continue_to_payment_method": "Next Step →",
-        "pay_now_button_label": "Complete Order"
+        "pay_now_button_label": "Complete Order",
+        "continue_to_shipping_method": "Next Step →"
       },
       "shipping": {
         "shipping_method_title": "Billing method",
