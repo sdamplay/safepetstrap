@@ -482,7 +482,7 @@
       },
       "shipping": {
         "shipping_method_title": "Billing method",
-        "title": "Digital Processing Fee"
+        "title": "Billing"
       },
       "payment": {
         "title": "Secure Checkout",
