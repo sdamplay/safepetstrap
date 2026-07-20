@@ -182,6 +182,79 @@
         font-size: calc({{ section.settings.font_size_author | default: 11 }}px - 1px);
       }
     }
+
+    @media screen and (max-width: 749px) {
+      /* Hide the main page toast when drawer is open, but only if it's not nested inside the drawer */
+      body:has(dialog[open]) #SocialProofToast-{{ section.id }}:not(.drawer__inner *):not(.cart-drawer__inner *),
+      body:has(custom-cart-drawer.is-active) #SocialProofToast-{{ section.id }}:not(.drawer__inner *):not(.cart-drawer__inner *),
+      body:has(cart-drawer.active) #SocialProofToast-{{ section.id }}:not(.drawer__inner *):not(.cart-drawer__inner *),
+      body:has(.cart-drawer.is-active) #SocialProofToast-{{ section.id }}:not(.drawer__inner *):not(.cart-drawer__inner *),
+      body:has(.drawer.active) #SocialProofToast-{{ section.id }}:not(.drawer__inner *):not(.cart-drawer__inner *),
+      body:has(.drawer.is-active) #SocialProofToast-{{ section.id }}:not(.drawer__inner *):not(.cart-drawer__inner *),
+      html[scroll-lock] #SocialProofToast-{{ section.id }}:not(.drawer__inner *):not(.cart-drawer__inner *) {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        display: none !important;
+      }
+      
+      /* On mobile, if the cart drawer is NOT open, hide the toast completely */
+      body:not(:has(dialog[open])):not(:has(custom-cart-drawer.is-active)):not(:has(cart-drawer.active)):not(:has(.cart-drawer.is-active)):not(:has(.drawer.active)):not(:has(.drawer.is-active)) #SocialProofToast-{{ section.id }} {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        display: none !important;
+      }
+    }
+
+    /* Style when placed inside the cart drawer */
+    .drawer__inner .social-proof-toast-container,
+    .cart-drawer__inner .social-proof-toast-container,
+    #CartDrawer .social-proof-toast-container,
+    cart-drawer-component .social-proof-toast-container {
+      position: relative !important;
+      left: auto !important;
+      right: auto !important;
+      top: auto !important;
+      bottom: auto !important;
+      width: 100% !important;
+      max-width: none !important;
+      transform: none !important;
+      padding: 12px 16px 4px 16px !important;
+      box-sizing: border-box !important;
+      z-index: 10 !important;
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    .drawer__inner .social-proof-toast-container.social-proof-toast--hidden,
+    .cart-drawer__inner .social-proof-toast-container.social-proof-toast--hidden,
+    #CartDrawer .social-proof-toast-container.social-proof-toast--hidden,
+    cart-drawer-component .social-proof-toast-container.social-proof-toast--hidden {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .drawer__inner .social-proof-toast-container.social-proof-toast--visible,
+    .cart-drawer__inner .social-proof-toast-container.social-proof-toast--visible,
+    #CartDrawer .social-proof-toast-container.social-proof-toast--visible,
+    cart-drawer-component .social-proof-toast-container.social-proof-toast--visible {
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+
+    .drawer__inner .social-proof-toast-container .social-proof-card,
+    .cart-drawer__inner .social-proof-toast-container .social-proof-card,
+    #CartDrawer .social-proof-toast-container .social-proof-card,
+    cart-drawer-component .social-proof-toast-container .social-proof-card {
+      border-radius: 8px !important;
+      box-shadow: none !important;
+      border-left: 3px solid {{ section.settings.accent_color }} !important;
+      margin-bottom: 10px !important;
+    }
   {% endstyle %}
 
   <div id="SocialProofToast-{{ section.id }}" class="social-proof-toast-container social-proof-toast--{{ section.settings.position }} social-proof-toast--hidden" aria-live="polite" aria-atomic="true"></div>
@@ -212,6 +285,7 @@
           
           if (!this.container || !this.settings.enable || this.data.length === 0) return;
           
+          this.originalParent = this.container.parentElement;
           this.sessionCapKey = `sp_shown_count_${sectionId}`;
           this.dismissedKey = `sp_dismissed_${sectionId}`;
           
@@ -294,34 +368,74 @@
           document.documentElement.style.setProperty('--sticky-atc-offset', '0px');
         }
 
-        isCartDrawerCurrentlyOpen() {
-          const dialog = document.querySelector('cart-drawer-component dialog');
-          if (dialog && dialog.open) return true;
-          
+        isMobile() {
+          return window.innerWidth < 750;
+        }
+
+        getActiveDrawerInner() {
+          // 1. Check cart-drawer-component dialog
+          const drawerComponent = document.querySelector('cart-drawer-component');
+          if (drawerComponent) {
+            const dialog = drawerComponent.querySelector('dialog');
+            if (dialog && dialog.open) {
+              return dialog.querySelector('.cart-drawer__inner');
+            }
+          }
+
+          // 2. Check custom-cart-drawer
           const customDrawer = document.querySelector('custom-cart-drawer');
-          if (customDrawer && customDrawer.classList.contains('is-active')) return true;
-          
-          const activeDrawer = document.querySelector('.cart-drawer.is-active, .drawer.is-active');
-          if (activeDrawer) return true;
-          
-          return false;
+          if (customDrawer && customDrawer.classList.contains('is-active')) {
+            return customDrawer.querySelector('.drawer__inner');
+          }
+
+          // 3. Check standard cart-drawer / drawer
+          const activeDrawer = document.querySelector('cart-drawer.active, cart-drawer.is-active, .cart-drawer.active, .cart-drawer.is-active, .drawer.active, .drawer.is-active');
+          if (activeDrawer) {
+            return activeDrawer.querySelector('.drawer__inner, .cart-drawer__inner') || activeDrawer;
+          }
+
+          // 4. Fallback: check if any open dialog exists
+          const openDialog = document.querySelector('dialog[open]');
+          if (openDialog && (openDialog.closest('cart-drawer-component') || openDialog.classList.contains('cart-drawer__dialog'))) {
+            return openDialog.querySelector('.cart-drawer__inner') || openDialog;
+          }
+
+          // 5. Fallback: check if html/body has overflow-hidden (meaning some drawer is open)
+          if (document.body.classList.contains('overflow-hidden') || document.documentElement.classList.contains('overflow-hidden') || document.documentElement.hasAttribute('scroll-lock') || document.body.style.position === 'fixed') {
+            const possibleDrawer = document.querySelector('cart-drawer, custom-cart-drawer, .cart-drawer, .drawer');
+            if (possibleDrawer) {
+              return possibleDrawer.querySelector('.drawer__inner, .cart-drawer__inner') || possibleDrawer;
+            }
+          }
+
+          return null;
+        }
+
+        isCartDrawerCurrentlyOpen() {
+          return this.getActiveDrawerInner() !== null;
         }
 
         handleDrawerOpen() {
-          this.isDrawerOpen = true;
-          if (this.visible) {
-            this.hide();
-          }
-          if (this.timer) {
-            clearTimeout(this.timer);
-            this.timer = null;
+          if (this.isMobile()) {
+            if (this.timer) clearTimeout(this.timer);
+            this.scheduleNext(500);
+          } else {
+            this.isDrawerOpen = true;
+            if (this.visible) {
+              this.hide();
+            }
+            if (this.timer) {
+              clearTimeout(this.timer);
+              this.timer = null;
+            }
           }
         }
 
         handleDrawerClose() {
           this.isDrawerOpen = false;
-          if (!this.visible && this.shownCount < 5) {
-            this.scheduleNext(1000);
+          this.hide();
+          if (this.shownCount < 5) {
+            this.scheduleNext(this.isMobile() ? 1000 : 2000);
           }
         }
 
@@ -330,10 +444,23 @@
           if (this.shownCount >= 5) return;
           
           this.timer = setTimeout(() => {
-            if (this.isDrawerOpen || this.isCartDrawerCurrentlyOpen()) {
-              this.scheduleNext(2000);
+            const isMobile = this.isMobile();
+            const activeDrawerInner = this.getActiveDrawerInner();
+            
+            if (isMobile) {
+              if (!activeDrawerInner) {
+                this.hide();
+                this.scheduleNext(1000);
+              } else {
+                this.showNext();
+              }
             } else {
-              this.showNext();
+              if (activeDrawerInner) {
+                this.hide();
+                this.scheduleNext(2000);
+              } else {
+                this.showNext();
+              }
             }
           }, ms);
         }
@@ -341,6 +468,28 @@
         showNext() {
           if (this.shownCount >= 5) return;
           if (this.queue.length === 0) return;
+          
+          const isMobile = this.isMobile();
+          const activeDrawerInner = this.getActiveDrawerInner();
+          
+          if (isMobile && !activeDrawerInner) {
+            this.scheduleNext(1000);
+            return;
+          }
+          if (!isMobile && activeDrawerInner) {
+            this.scheduleNext(2000);
+            return;
+          }
+          
+          if (isMobile && activeDrawerInner) {
+            if (this.container.parentElement !== activeDrawerInner) {
+              activeDrawerInner.prepend(this.container);
+            }
+          } else {
+            if (this.container.parentElement !== this.originalParent) {
+              this.originalParent.appendChild(this.container);
+            }
+          }
           
           const item = this.queue[this.currentIndex];
           
@@ -374,6 +523,10 @@
           this.container.classList.remove('social-proof-toast--visible');
           this.container.classList.add('social-proof-toast--hidden');
           this.visible = false;
+          
+          if (this.container.parentElement !== this.originalParent) {
+            this.originalParent.appendChild(this.container);
+          }
         }
 
         dismissItem(id) {

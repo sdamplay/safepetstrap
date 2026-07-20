@@ -474,20 +474,18 @@
         "contact_method_title": "Email or Phone"
       },
       "marketing": {
-        "accept_marketing_checkbox_label": "Send me live tracking and order updates",
-        "accept_sms_checkbox_label": "Text me with order updates"
+        "accept_marketing_checkbox_label": "Send me live tracking and order updates"
       },
       "general": {
-        "continue_to_payment_method": "Next Step →",
-        "pay_now_button_label": "Complete Order",
-        "continue_to_shipping_method": "Next Step →"
+        "continue_to_payment_method": "Confirm Shipping Selection",
+        "pay_now_button_label": "Complete Order"
       },
       "shipping": {
         "shipping_method_title": "Billing method",
-        "title": "Billing"
+        "title": "Digital Processing Fee"
       },
       "payment": {
-        "title": "Summary",
+        "title": "Secure Checkout",
         "card_security_notice": "All transactions are secure and encrypted. Your order includes free returns and 24/7 access to our award-winning customer service"
       },
       "delivery_options": {
