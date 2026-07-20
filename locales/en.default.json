@@ -477,7 +477,7 @@
         "accept_marketing_checkbox_label": "Send me live tracking and order updates"
       },
       "general": {
-        "continue_to_payment_method": "Confirm Shipping Selection",
+        "continue_to_payment_method": "Next Step →",
         "pay_now_button_label": "Complete Order"
       },
       "shipping": {
