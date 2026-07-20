@@ -154,41 +154,17 @@
 
     @media screen and (max-width: 539px) {
       .social-proof-toast-container {
-        position: relative !important;
-        left: auto !important;
-        right: auto !important;
-        width: 100% !important;
+        left: 12px !important;
+        right: 12px !important;
+        width: calc(100% - 24px) !important;
         max-width: none !important;
-        bottom: auto !important;
-        transform: none !important;
-        padding: 0 16px !important;
-        box-sizing: border-box !important;
-        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease !important;
-        z-index: 10 !important;
-        overflow: hidden !important;
-        max-height: 0 !important;
-        opacity: 0 !important;
-        display: block !important;
-      }
-      
-      .social-proof-toast-container.social-proof-toast--visible {
-        max-height: 150px !important;
-        opacity: 1 !important;
-        padding: 12px 16px 4px 16px !important;
-      }
-
-      .social-proof-toast-container.social-proof-toast--hidden {
-        max-height: 0 !important;
-        opacity: 0 !important;
-        padding: 0 16px !important;
+        bottom: calc(12px + var(--sticky-atc-offset, 0px)) !important;
       }
       
       .social-proof-card {
-        padding: 12px !important;
-        gap: 12px !important;
-        border-radius: 12px !important;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
-        box-sizing: border-box !important;
+        padding: 12px 14px;
+        gap: 12px;
+        border-radius: 12px;
       }
       
       .social-proof-card__avatar {
@@ -251,7 +227,6 @@
           this.timer = null;
           this.isDrawerOpen = false;
           this.visible = false;
-          this.isMobile = window.innerWidth < 540;
           
           this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
           this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -273,53 +248,12 @@
           this.observeCartDrawer();
 
           this.updateStickyOffset();
-          this.resizeHandler = () => {
-            const wasMobile = this.isMobile;
-            this.isMobile = window.innerWidth < 540;
-            if (wasMobile !== this.isMobile) {
-              if (this.timer) {
-                clearTimeout(this.timer);
-                this.timer = null;
-              }
-              this.hide();
-              this.checkAndPositionContainer();
-              if (this.isMobile) {
-                if (this.isCartDrawerCurrentlyOpen()) {
-                  this.scheduleNext(1000);
-                }
-              } else {
-                if (!this.isCartDrawerCurrentlyOpen()) {
-                  this.scheduleNext(this.settings.betweenDelay * 1000);
-                }
-              }
-            }
-            this.updateStickyOffset();
-          };
+          this.resizeHandler = () => this.updateStickyOffset();
           window.addEventListener('resize', this.resizeHandler);
           window.addEventListener('scroll', this.resizeHandler);
 
-          this.checkAndPositionContainer();
-
-          if (!this.isMobile) {
+          if (!this.isCartDrawerCurrentlyOpen()) {
             this.scheduleNext(this.settings.firstShowDelay * 1000);
-          } else if (this.isCartDrawerCurrentlyOpen()) {
-            this.scheduleNext(1000);
-          }
-        }
-
-        checkAndPositionContainer() {
-          if (!this.isMobile) {
-            if (this.container.parentNode !== document.body) {
-              document.body.appendChild(this.container);
-            }
-            return;
-          }
-
-          const drawerInner = document.querySelector('.drawer__inner, .cart-drawer__inner');
-          if (drawerInner) {
-            if (this.container.parentNode !== drawerInner) {
-              drawerInner.prepend(this.container);
-            }
           }
         }
 
@@ -327,7 +261,6 @@
           const targetNode = document.body;
           const config = { 
             attributes: true, 
-            childList: true, 
             subtree: true, 
             attributeFilter: ['class', 'open'] 
           };
@@ -336,7 +269,6 @@
           
           this.drawerObserver = new MutationObserver(() => {
             const isOpen = this.isCartDrawerCurrentlyOpen();
-            this.checkAndPositionContainer();
             if (isOpen !== lastOpenState) {
               lastOpenState = isOpen;
               if (isOpen) {
@@ -351,10 +283,6 @@
         }
 
         updateStickyOffset() {
-          if (window.innerWidth >= 540) {
-            document.documentElement.style.setProperty('--sticky-atc-offset', '0px');
-            return;
-          }
           const stickyAtc = document.querySelector('sticky-atc, .sticky-atc');
           if (stickyAtc) {
             const rect = stickyAtc.getBoundingClientRect();
@@ -384,38 +312,19 @@
 
         handleDrawerOpen() {
           this.isDrawerOpen = true;
-          this.checkAndPositionContainer();
-          
-          if (this.isMobile) {
-            if (!this.visible && this.shownCount < 5) {
-              this.scheduleNext(1000);
-            }
-          } else {
-            if (this.visible) {
-              this.hide();
-            }
-            if (this.timer) {
-              clearTimeout(this.timer);
-              this.timer = null;
-            }
+          if (this.visible) {
+            this.hide();
+          }
+          if (this.timer) {
+            clearTimeout(this.timer);
+            this.timer = null;
           }
         }
 
         handleDrawerClose() {
           this.isDrawerOpen = false;
-          
-          if (this.isMobile) {
-            if (this.visible) {
-              this.hide();
-            }
-            if (this.timer) {
-              clearTimeout(this.timer);
-              this.timer = null;
-            }
-          } else {
-            if (!this.visible && this.shownCount < 5) {
-              this.scheduleNext(1000);
-            }
+          if (!this.visible && this.shownCount < 5) {
+            this.scheduleNext(1000);
           }
         }
 
@@ -425,21 +334,10 @@
           
           this.timer = setTimeout(() => {
             const isCurrentlyOpen = this.isCartDrawerCurrentlyOpen();
-            if (this.isMobile) {
-              if (!isCurrentlyOpen) {
-                if (this.timer) {
-                  clearTimeout(this.timer);
-                  this.timer = null;
-                }
-              } else {
-                this.showNext();
-              }
+            if (this.isDrawerOpen || isCurrentlyOpen) {
+              this.scheduleNext(2000);
             } else {
-              if (this.isDrawerOpen || isCurrentlyOpen) {
-                this.scheduleNext(2000);
-              } else {
-                this.showNext();
-              }
+              this.showNext();
             }
           }, ms);
         }
@@ -461,7 +359,6 @@
           }
           
           this.updateStickyOffset();
-          this.checkAndPositionContainer();
           
           this.container.classList.remove('social-proof-toast--hidden');
           this.container.classList.add('social-proof-toast--visible');
@@ -537,7 +434,6 @@
           const item = this.data.find(item => item.id === blockId);
           if (!item) return;
           
-          this.checkAndPositionContainer();
           this.container.innerHTML = this.renderItem(item);
           this.container.classList.remove('social-proof-toast--hidden');
           this.container.classList.add('social-proof-toast--visible');
