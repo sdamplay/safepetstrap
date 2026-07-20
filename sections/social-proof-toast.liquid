@@ -154,17 +154,41 @@
 
     @media screen and (max-width: 539px) {
       .social-proof-toast-container {
-        left: 12px !important;
-        right: 12px !important;
-        width: calc(100% - 24px) !important;
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100% !important;
         max-width: none !important;
-        bottom: calc(12px + var(--sticky-atc-offset, 0px)) !important;
+        bottom: auto !important;
+        transform: none !important;
+        padding: 0 16px !important;
+        box-sizing: border-box !important;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease !important;
+        z-index: 10 !important;
+        overflow: hidden !important;
+        max-height: 0 !important;
+        opacity: 0 !important;
+        display: block !important;
+      }
+      
+      .social-proof-toast-container.social-proof-toast--visible {
+        max-height: 150px !important;
+        opacity: 1 !important;
+        padding: 12px 16px 4px 16px !important;
+      }
+
+      .social-proof-toast-container.social-proof-toast--hidden {
+        max-height: 0 !important;
+        opacity: 0 !important;
+        padding: 0 16px !important;
       }
       
       .social-proof-card {
-        padding: 12px 14px;
-        gap: 12px;
-        border-radius: 12px;
+        padding: 12px !important;
+        gap: 12px !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+        box-sizing: border-box !important;
       }
       
       .social-proof-card__avatar {
@@ -227,6 +251,7 @@
           this.timer = null;
           this.isDrawerOpen = false;
           this.visible = false;
+          this.isMobile = window.innerWidth < 540;
           
           this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
           this.handleDrawerClose = this.handleDrawerClose.bind(this);
@@ -245,37 +270,84 @@
             return;
           }
 
-          document.addEventListener('dialog:open', this.handleDrawerOpen, true);
-          document.addEventListener('dialog:close', this.handleDrawerClose, true);
-          
-          document.addEventListener('cart-drawer:open', this.handleDrawerOpen);
-          document.addEventListener('cart-drawer:close', this.handleDrawerClose);
-          
           this.observeCartDrawer();
 
           this.updateStickyOffset();
-          this.resizeHandler = () => this.updateStickyOffset();
+          this.resizeHandler = () => {
+            const wasMobile = this.isMobile;
+            this.isMobile = window.innerWidth < 540;
+            if (wasMobile !== this.isMobile) {
+              if (this.timer) {
+                clearTimeout(this.timer);
+                this.timer = null;
+              }
+              this.hide();
+              this.checkAndPositionContainer();
+              if (this.isMobile) {
+                if (this.isCartDrawerCurrentlyOpen()) {
+                  this.scheduleNext(1000);
+                }
+              } else {
+                if (!this.isCartDrawerCurrentlyOpen()) {
+                  this.scheduleNext(this.settings.betweenDelay * 1000);
+                }
+              }
+            }
+            this.updateStickyOffset();
+          };
           window.addEventListener('resize', this.resizeHandler);
           window.addEventListener('scroll', this.resizeHandler);
 
-          this.scheduleNext(this.settings.firstShowDelay * 1000);
+          this.checkAndPositionContainer();
+
+          if (!this.isMobile) {
+            this.scheduleNext(this.settings.firstShowDelay * 1000);
+          } else if (this.isCartDrawerCurrentlyOpen()) {
+            this.scheduleNext(1000);
+          }
+        }
+
+        checkAndPositionContainer() {
+          if (!this.isMobile) {
+            if (this.container.parentNode !== document.body) {
+              document.body.appendChild(this.container);
+            }
+            return;
+          }
+
+          const drawerInner = document.querySelector('.drawer__inner, .cart-drawer__inner');
+          if (drawerInner) {
+            if (this.container.parentNode !== drawerInner) {
+              drawerInner.prepend(this.container);
+            }
+          }
         }
 
         observeCartDrawer() {
-          const drawerComponent = document.querySelector('cart-drawer-component');
-          if (drawerComponent) {
-            const dialog = drawerComponent.querySelector('dialog');
-            if (dialog) {
-              this.drawerObserver = new MutationObserver(() => {
-                if (dialog.open) {
-                  this.handleDrawerOpen();
-                } else {
-                  this.handleDrawerClose();
-                }
-              });
-              this.drawerObserver.observe(dialog, { attributes: true, attributeFilter: ['open'] });
+          const targetNode = document.body;
+          const config = { 
+            attributes: true, 
+            childList: true, 
+            subtree: true, 
+            attributeFilter: ['class', 'open'] 
+          };
+          
+          let lastOpenState = this.isCartDrawerCurrentlyOpen();
+          
+          this.drawerObserver = new MutationObserver(() => {
+            const isOpen = this.isCartDrawerCurrentlyOpen();
+            this.checkAndPositionContainer();
+            if (isOpen !== lastOpenState) {
+              lastOpenState = isOpen;
+              if (isOpen) {
+                this.handleDrawerOpen();
+              } else {
+                this.handleDrawerClose();
+              }
             }
-          }
+          });
+          
+          this.drawerObserver.observe(targetNode, config);
         }
 
         updateStickyOffset() {
@@ -299,9 +371,12 @@
           if (dialog && dialog.open) return true;
           
           const customDrawer = document.querySelector('custom-cart-drawer');
-          if (customDrawer && customDrawer.classList.contains('is-active')) return true;
+          if (customDrawer && (customDrawer.classList.contains('is-active') || customDrawer.classList.contains('active'))) return true;
           
-          const activeDrawer = document.querySelector('.cart-drawer.is-active, .drawer.is-active');
+          const cartDrawer = document.querySelector('cart-drawer');
+          if (cartDrawer && (cartDrawer.classList.contains('is-active') || cartDrawer.classList.contains('active'))) return true;
+
+          const activeDrawer = document.querySelector('.cart-drawer.is-active, .drawer.is-active, .cart-drawer.active, .drawer.active');
           if (activeDrawer) return true;
           
           return false;
@@ -309,19 +384,38 @@
 
         handleDrawerOpen() {
           this.isDrawerOpen = true;
-          if (this.visible) {
-            this.hide();
-          }
-          if (this.timer) {
-            clearTimeout(this.timer);
-            this.timer = null;
+          this.checkAndPositionContainer();
+          
+          if (this.isMobile) {
+            if (!this.visible && this.shownCount < 5) {
+              this.scheduleNext(1000);
+            }
+          } else {
+            if (this.visible) {
+              this.hide();
+            }
+            if (this.timer) {
+              clearTimeout(this.timer);
+              this.timer = null;
+            }
           }
         }
 
         handleDrawerClose() {
           this.isDrawerOpen = false;
-          if (!this.visible && this.shownCount < 5) {
-            this.scheduleNext(1000);
+          
+          if (this.isMobile) {
+            if (this.visible) {
+              this.hide();
+            }
+            if (this.timer) {
+              clearTimeout(this.timer);
+              this.timer = null;
+            }
+          } else {
+            if (!this.visible && this.shownCount < 5) {
+              this.scheduleNext(1000);
+            }
           }
         }
 
@@ -330,10 +424,22 @@
           if (this.shownCount >= 5) return;
           
           this.timer = setTimeout(() => {
-            if (this.isDrawerOpen || this.isCartDrawerCurrentlyOpen()) {
-              this.scheduleNext(2000);
+            const isCurrentlyOpen = this.isCartDrawerCurrentlyOpen();
+            if (this.isMobile) {
+              if (!isCurrentlyOpen) {
+                if (this.timer) {
+                  clearTimeout(this.timer);
+                  this.timer = null;
+                }
+              } else {
+                this.showNext();
+              }
             } else {
-              this.showNext();
+              if (this.isDrawerOpen || isCurrentlyOpen) {
+                this.scheduleNext(2000);
+              } else {
+                this.showNext();
+              }
             }
           }, ms);
         }
@@ -355,6 +461,7 @@
           }
           
           this.updateStickyOffset();
+          this.checkAndPositionContainer();
           
           this.container.classList.remove('social-proof-toast--hidden');
           this.container.classList.add('social-proof-toast--visible');
@@ -420,6 +527,7 @@
           }
           return '';
         }
+
         showBlockPreview(blockId) {
           if (this.timer) {
             clearTimeout(this.timer);
@@ -429,6 +537,7 @@
           const item = this.data.find(item => item.id === blockId);
           if (!item) return;
           
+          this.checkAndPositionContainer();
           this.container.innerHTML = this.renderItem(item);
           this.container.classList.remove('social-proof-toast--hidden');
           this.container.classList.add('social-proof-toast--visible');
@@ -441,11 +550,6 @@
         }
 
         destroy() {
-          document.removeEventListener('dialog:open', this.handleDrawerOpen, true);
-          document.removeEventListener('dialog:close', this.handleDrawerClose, true);
-          document.removeEventListener('cart-drawer:open', this.handleDrawerOpen);
-          document.removeEventListener('cart-drawer:close', this.handleDrawerClose);
-          
           if (this.resizeHandler) {
             window.removeEventListener('resize', this.resizeHandler);
             window.removeEventListener('scroll', this.resizeHandler);
