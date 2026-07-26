@@ -494,10 +494,7 @@
         "shipping_address": "Billing Address"
       },
       "order_summary": {
-        "shipping_label": "Digital Processing Fee",
-        "discount_order_stacking": {
-          "one": "Processing fee discount"
-        }
+        "shipping_label": "Digital Processing Fee"
       },
       "thank_you": {
         "shipping_method_title": "Billing method"
