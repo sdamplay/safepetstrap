@@ -351,6 +351,28 @@
             quantityInput.value = quantity;
           }
         }
+
+        // Update landing page pricing texts
+        var salePriceText = document.querySelector('.kls-hero-price-sale');
+        var originalPriceText = document.querySelector('.kls-hero-price-original');
+        var savePillText = document.querySelector('.kls-hero-save-pill');
+
+        if (salePriceText) {
+          var tier = radio.value;
+          if (tier === '1') {
+            salePriceText.textContent = 'FREE';
+            if (originalPriceText) originalPriceText.textContent = '$29.95';
+            if (savePillText) savePillText.textContent = 'SAVE 100%';
+          } else if (tier === '2') {
+            salePriceText.textContent = '$17.95';
+            if (originalPriceText) originalPriceText.textContent = '$60.00';
+            if (savePillText) savePillText.textContent = 'SAVE 70%';
+          } else if (tier === '3') {
+            salePriceText.textContent = '$24.95';
+            if (originalPriceText) originalPriceText.textContent = '$120.00';
+            if (savePillText) savePillText.textContent = 'SAVE 80%';
+          }
+        }
       }
 
       radioButtons.forEach(function(radio) {

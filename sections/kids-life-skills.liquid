@@ -238,6 +238,8 @@
               >
               <input type="hidden" name="quantity" value="1">
 
+              {%- render 'safepet-variant-selector', product: product -%}
+
               <div class="product-form__buttons">
                 <button
                   id="ProductSubmitButton-{{ section.id }}"
