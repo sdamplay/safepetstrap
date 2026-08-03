@@ -1,9 +1,16 @@
 {% comment %}
   SafePet Strap - High-Converting 3-Tier Custom Variant Selector
-  Optimized for CRO, Free + Shipping funnel, and mobile/desktop responsiveness.
+  Optimized for CRO, Direct Response, and exact Funnelish layout replication.
 {% endcomment %}
 
 <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
+  
+  <!-- Table Header Bar: Item / Price -->
+  <div class="safepet-table-header">
+    <span class="safepet-th-item">Item</span>
+    <span class="safepet-th-price">Price</span>
+  </div>
+
   <div class="safepet-variant-selector">
 
     <!-- TIER 1: Basic -->
@@ -25,7 +32,7 @@
           <span class="safepet-tier-title">1 Seat Belt</span>
         </div>
         <div class="safepet-tier-right">
-          <span class="safepet-tier-price-free">FREE <span class="safepet-shipping-tag">+ Shipping</span></span>
+          <span class="safepet-tier-price-free">FREE + Shipping</span>
         </div>
       </div>
     </label>
@@ -46,7 +53,7 @@
       </div>
       <div class="safepet-tier-content">
         <div class="safepet-tier-left">
-          <span class="safepet-tier-title">2 Seat Belts <span class="safepet-value-badge">(Value $60)</span></span>
+          <span class="safepet-tier-title">2 Seat Belts (Value $60)</span>
         </div>
         <div class="safepet-tier-right">
           <span class="safepet-tier-price">$ 17.95</span>
@@ -54,7 +61,7 @@
       </div>
     </label>
 
-    <!-- TIER 3: Irresistible Offer (Default Selected) -->
+    <!-- TIER 3: Irresistible Offer (3x Variant Selected by Default) -->
     <div class="safepet-tier-card-wrapper safepet-tier-featured-wrap">
       <label class="safepet-tier-card safepet-tier-featured" for="safepet-tier-3-{{ section.id }}">
         
@@ -82,7 +89,7 @@
           </div>
           <div class="safepet-tier-content">
             <div class="safepet-tier-left">
-              <span class="safepet-tier-title safepet-title-bold">3 Seat Belts + 2 Gifts <span class="safepet-value-badge-red">(Value $120)</span></span>
+              <span class="safepet-tier-title safepet-title-bold">3 Seat Belts + 2 Gifts (Value $120)</span>
             </div>
             <div class="safepet-tier-right">
               <span class="safepet-tier-price-highlight">$ 24.95</span>
@@ -96,10 +103,12 @@
           <!-- Item 1: eBook -->
           <div class="safepet-bundle-item">
             <div class="safepet-bundle-img-box">
-              <svg class="safepet-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              <svg viewBox="0 0 64 64" fill="none" class="safepet-gift-svg">
+                <rect x="10" y="8" width="44" height="48" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
+                <path d="M18 20h28M18 28h28M18 36h20" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="40" cy="42" r="6" fill="#E53935"/>
+                <path d="M38 42l1.5 1.5L43 40" stroke="#FFF" stroke-width="1.5"/>
               </svg>
-              <span class="safepet-item-tag">eBook</span>
             </div>
             <div class="safepet-bundle-info">
               <span class="safepet-bundle-name">Dog Training Secrets</span>
@@ -113,10 +122,12 @@
           <!-- Item 2: 3-Pack Seat Belts -->
           <div class="safepet-bundle-item">
             <div class="safepet-bundle-img-box">
-              <svg class="safepet-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              <svg viewBox="0 0 64 64" fill="none" class="safepet-gift-svg">
+                <path d="M16 12v36M24 12v36M32 12v36" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
+                <rect x="12" y="32" width="24" height="12" rx="3" fill="#E53935"/>
+                <circle cx="48" cy="24" r="10" fill="#DC2626"/>
+                <text x="48" y="27" font-size="9" fill="#FFF" font-weight="bold" text-anchor="middle">3x</text>
               </svg>
-              <span class="safepet-item-tag">3x Pack</span>
             </div>
             <div class="safepet-bundle-info">
               <span class="safepet-bundle-name">3-Pack Seat Belts</span>
@@ -127,16 +138,17 @@
 
           <div class="safepet-plus-sign">+</div>
 
-          <!-- Item 3: Collapsible Bowl -->
+          <!-- Item 3: Orange Collapsible Dog Bowl -->
           <div class="safepet-bundle-item">
-            <div class="safepet-bundle-img-box safepet-bowl-box">
-              <svg class="safepet-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M20 12v3a5 5 0 01-5 5H9a5 5 0 01-5-5v-3m16 0A5 5 0 0015 7H9a5 5 0 00-5 5m16 0H4" />
+            <div class="safepet-bundle-img-box">
+              <svg viewBox="0 0 64 64" fill="none" class="safepet-gift-svg">
+                <ellipse cx="32" cy="28" rx="22" ry="8" fill="#FB923C" stroke="#EA580C" stroke-width="2"/>
+                <path d="M10 28c0 10 10 18 22 18s22-8 22-18" fill="#F97316" stroke="#EA580C" stroke-width="2"/>
+                <ellipse cx="32" cy="28" rx="14" ry="5" fill="#FED7AA"/>
               </svg>
-              <span class="safepet-item-tag">Travel Bowl</span>
             </div>
             <div class="safepet-bundle-info">
-              <span class="safepet-bundle-name">Orange Collapsible Dog Bowl</span>
+              <span class="safepet-bundle-name">Orange Collapsible Bowl</span>
               <span class="safepet-strike-price">($14.95 Value)</span>
               <span class="safepet-free-text">FREE</span>
             </div>
@@ -151,17 +163,33 @@
 </div>
 
 <style>
-  /* SafePet Strap Variant Selector Styling */
+  /* SafePet Strap Table Header & Variant Selector Styling */
   .safepet-variant-selector-wrapper {
     width: 100%;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .safepet-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px 8px 4px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 12px;
+  }
+
+  .safepet-th-item,
+  .safepet-th-price {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #111827;
   }
 
   .safepet-variant-selector {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   /* Shared Tier Card Styles */
@@ -169,19 +197,18 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 14px 16px;
+    padding: 12px 14px;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 1px solid #d1d5db;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     user-select: none;
   }
 
   .safepet-tier-card:hover {
-    border-color: #d1d5db;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    border-color: #9ca3af;
   }
 
   /* Input & Custom Radio */
@@ -201,7 +228,7 @@
   .safepet-radio-custom {
     width: 20px;
     height: 20px;
-    border: 2px solid #9ca3af;
+    border: 2px solid #6b7280;
     border-radius: 50%;
     display: inline-block;
     position: relative;
@@ -210,7 +237,7 @@
   }
 
   .safepet-tier-input-wrap input[type="radio"]:checked + .safepet-radio-custom {
-    border-color: #e53935;
+    border-color: #2563eb;
   }
 
   .safepet-tier-input-wrap input[type="radio"]:checked + .safepet-radio-custom::after {
@@ -222,7 +249,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #e53935;
+    background-color: #2563eb;
   }
 
   /* Content Row Layout */
@@ -241,50 +268,30 @@
 
   .safepet-title-bold {
     font-weight: 800;
-    font-size: 1rem;
-  }
-
-  .safepet-value-badge {
-    font-size: 0.85rem;
-    color: #6b7280;
-    font-weight: 500;
-    margin-left: 4px;
-  }
-
-  .safepet-value-badge-red {
-    font-size: 0.85rem;
-    color: #dc2626;
-    font-weight: 700;
-    margin-left: 4px;
+    font-size: 0.95rem;
   }
 
   .safepet-tier-price-free {
-    font-weight: 800;
-    font-size: 1rem;
-    color: #16a34a;
-  }
-
-  .safepet-shipping-tag {
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: #4b5563;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #111827;
   }
 
   .safepet-tier-price {
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #111827;
   }
 
   .safepet-tier-price-highlight {
     font-weight: 900;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: #111827;
   }
 
   /* TIER 3 (FEATURED / IRRESISTIBLE OFFER) STYLING */
   .safepet-tier-featured-wrap {
-    margin-top: 6px;
+    margin-top: 4px;
   }
 
   .safepet-tier-featured {
@@ -292,10 +299,10 @@
     flex-direction: column;
     align-items: stretch;
     background-color: #ffff00 !important; /* Bright Yellow */
-    border: 3px solid #e53935 !important;  /* Thick Red Border */
-    padding: 20px 16px 16px 16px;
-    box-shadow: 0 4px 14px rgba(229, 57, 53, 0.25);
-    border-radius: 10px;
+    border: 2px solid #e53935 !important;
+    padding: 18px 14px 14px 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
     overflow: hidden;
   }
 
@@ -312,26 +319,26 @@
     left: 0;
     background-color: #e53935;
     color: #ffffff;
-    font-size: 0.72rem;
-    font-weight: 800;
-    padding: 3px 10px;
-    border-bottom-right-radius: 8px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    padding: 3px 8px;
+    border-bottom-right-radius: 6px;
     letter-spacing: 0.5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    text-transform: uppercase;
   }
 
   .safepet-badge-top-right {
     position: absolute;
-    top: -2px;
-    right: -2px;
+    top: 0;
+    right: 0;
     background-color: #dc2626;
     color: #ffffff;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 900;
-    padding: 4px 14px;
-    border-bottom-left-radius: 10px;
+    padding: 4px 12px;
+    border-bottom-left-radius: 8px;
     letter-spacing: 1px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    text-transform: uppercase;
   }
 
   /* Visual Gift Bundle Grid */
@@ -339,9 +346,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 2px dashed rgba(229, 57, 53, 0.4);
+    margin-top: 12px;
+    padding-top: 10px;
     gap: 4px;
   }
 
@@ -351,44 +357,23 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background: #ffffff;
-    padding: 8px 4px;
-    border-radius: 6px;
-    border: 1px solid #f3f4f6;
+    background: transparent;
+    padding: 4px 2px;
   }
 
   .safepet-bundle-img-box {
-    position: relative;
-    width: 48px;
-    height: 48px;
-    background: #f9fafb;
-    border-radius: 6px;
+    width: 54px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 6px;
-    color: #e53935;
+    margin-bottom: 4px;
   }
 
-  .safepet-bowl-box {
-    color: #f97316;
-  }
-
-  .safepet-placeholder-icon {
-    width: 26px;
-    height: 26px;
-  }
-
-  .safepet-item-tag {
-    position: absolute;
-    bottom: -4px;
-    background: #111827;
-    color: #fff;
-    font-size: 0.55rem;
-    font-weight: 700;
-    padding: 1px 4px;
-    border-radius: 3px;
-    text-transform: uppercase;
+  .safepet-gift-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   .safepet-bundle-info {
@@ -399,40 +384,37 @@
   }
 
   .safepet-bundle-name {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     font-weight: 700;
     color: #111827;
-    line-height: 1.1;
-    min-height: 24px;
-    display: flex;
-    align-items: center;
+    display: none; /* Hidden for clean visual layout matching Screenshot 2 */
   }
 
   .safepet-strike-price {
     text-decoration: line-through;
     color: #dc2626;
-    font-size: 0.65rem;
-    font-weight: 600;
+    font-size: 0.78rem;
+    font-weight: 800;
   }
 
   .safepet-free-text {
     color: #16a34a;
     font-weight: 900;
-    font-size: 0.75rem;
+    font-size: 0.95rem;
     letter-spacing: 0.5px;
   }
 
   .safepet-just-price {
     color: #16a34a;
     font-weight: 900;
-    font-size: 0.72rem;
+    font-size: 0.92rem;
   }
 
   .safepet-plus-sign {
     color: #e53935;
     font-weight: 900;
-    font-size: 1.2rem;
-    padding: 0 2px;
+    font-size: 1.5rem;
+    padding: 0 4px;
   }
 
   /* Responsive Adjustments */
@@ -441,18 +423,18 @@
       font-size: 0.85rem;
     }
     .safepet-title-bold {
-      font-size: 0.88rem;
-    }
-    .safepet-bundle-name {
-      font-size: 0.62rem;
+      font-size: 0.85rem;
     }
     .safepet-bundle-img-box {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
     }
-    .safepet-placeholder-icon {
-      width: 22px;
-      height: 22px;
+    .safepet-strike-price {
+      font-size: 0.7rem;
+    }
+    .safepet-free-text,
+    .safepet-just-price {
+      font-size: 0.85rem;
     }
   }
 </style>
@@ -470,7 +452,6 @@
           var variantId = this.getAttribute('data-variant-id');
           var quantity = this.getAttribute('data-quantity');
           
-          // Update Shopify main hidden variant / quantity inputs if present
           var form = this.closest('form') || document.querySelector('form[action*="/cart/add"]');
           if (form) {
             var variantInput = form.querySelector('input[name="id"]');

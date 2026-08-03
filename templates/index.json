@@ -1,25 +1,16 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "home_hero": {
       "type": "home-hero",
       "settings": {
-        "badge_text": "PROTECT YOUR BEST FRIEND",
-        "headline": "Keep Your Dog Safe On Every Car Ride",
-        "subheadline": "Engineered with crash-tested heavy-duty nylon, 360° tangle-free swivel latch, and elastic anti-whiplash buffer. Protect your pup from sudden braking and dangerous distractions.",
-        "cta_label": "CLAIM FREE SEAT BELT NOW",
+        "badge_text": "⚠️ CRASH SAFETY WARNING FOR DOG OWNERS",
+        "headline": "Is Your Dog Safe In The Car? Most Dog Parents Make This 1 Dangerous Mistake...",
+        "subheadline": "At 30 MPH, a sudden stop turns a 50 lb dog into a 1,500 lb projectile. The SafePet Strap keeps your furry family member buckled in safely — so every car ride ends with happy wags, not tragedy.",
+        "cta_label": "CLAIM YOUR FREE SEAT BELT TODAY",
         "cta_url": "/products/dog-seat-belt",
         "image": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
-        "trust_disclosure": "Limited time promotion — Only cover standard shipping at checkout",
-        "guarantee_text": "30-Day Money-Back Safety Guarantee",
+        "trust_disclosure": "Viral Pet Safety Initiative — Retail Price $29.95 Covered For Free (Just Cover Shipping)",
+        "guarantee_text": "30-Day 100% Risk-Free Safety Guarantee",
         "refund_policy_url": "/policies/refund-policy",
         "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay",
         "bg_color": "",
@@ -30,15 +21,15 @@
     "problem_agitate_solve": {
       "type": "home-problem-agitate-solve",
       "settings": {
-        "badge_text": "WHY RESTRICTION MATTERS",
-        "title": "Did You Know? Unrestrained Dogs Risk Severe Crash Injuries",
-        "subtitle": "At just 30 mph, a sudden stop exerts force 30 times your pet's body weight. SafePet Strap keeps them secured safely in the backseat.",
-        "card_1_title": "The Danger of Sudden Stops",
-        "card_1_text": "Without a heavy-duty seatbelt, pets can be thrown into the dashboard or windshield during sudden braking.",
-        "card_2_title": "Driver Distraction Risks",
-        "card_2_text": "An unrestrained dog jumping into your lap increases crash probability by over 400%.",
-        "card_3_title": "The SafePet Strap Solution",
-        "card_3_text": "Plugs directly into any vehicle seatbelt buckle in 3 seconds to keep your dog comfortable and fully protected.",
+        "badge_text": "THE HIDDEN DANGER ON THE ROAD",
+        "title": "Why 90% of Unrestrained Dogs Risk Severe Impact Injuries",
+        "subtitle": "You wouldn't let your child ride without a seatbelt. Here is why your dog needs the exact same protection.",
+        "card_1_title": "The Physics of Sudden Stops",
+        "card_1_text": "An unrestrained dog is thrown forward with tremendous kinetic force into windshields or seatbacks during emergency braking.",
+        "card_2_title": "Fatal Driver Distraction",
+        "card_2_text": "Dogs jumping onto laps or stepping on center consoles cause over 400,000 distracted driving accidents every year.",
+        "card_3_title": "The SafePet Strap Epiphany",
+        "card_3_text": "Crash-tested high-density nylon + elastic anti-whiplash buffer + 360° swivel clip = 100% peace of mind in 3 seconds.",
         "bg_color": "",
         "padding_top": 48,
         "padding_bottom": 48
@@ -47,15 +38,15 @@
     "how_it_works": {
       "type": "home-how-it-works",
       "settings": {
-        "badge_text": "EASY 3-STEP SAFETY",
-        "title": "Secured In Under 3 Seconds",
-        "subtitle": "Designed for maximum convenience and peace of mind on every car trip.",
+        "badge_text": "SIMPLE 3-SECOND SETUP",
+        "title": "How SafePet Strap Protects Your Dog In 3 Easy Steps",
+        "subtitle": "No tools, no complicated instructions. Works with 99.9% of vehicles out of the box.",
         "step_1_title": "1. Clip To Harness",
-        "step_1_text": "Attach the heavy-duty 360° zinc alloy swivel snap to your dog's harness.",
-        "step_2_title": "2. Latch Into Vehicle",
-        "step_2_text": "Insert the universal seatbelt tab into your vehicle's standard seatbelt receiver.",
-        "step_3_title": "3. Adjust For Comfort",
-        "step_3_text": "Extend or shorten the strap so your dog can comfortably sit, stand, or lie down.",
+        "step_1_text": "Attach the heavy-duty 360° zinc alloy swivel snap directly to your dog's harness.",
+        "step_2_title": "2. Latch Into Seatbelt",
+        "step_2_text": "Click the universal 21mm steel tab into any car seatbelt receiver until it locks.",
+        "step_3_title": "3. Adjust & Drive Peaceful",
+        "step_3_text": "Adjust strap length (20\"-32\") so your dog can sit, lie down, or look out the window safely.",
         "bg_color": "",
         "padding_top": 48,
         "padding_bottom": 48
@@ -64,16 +55,16 @@
     "about_story": {
       "type": "home-about-story",
       "settings": {
-        "badge_text": "OUR MISSION",
-        "title": "Mission-Driven Pet Safety",
-        "story_text": "<p>SafePet Strap was created with one vital mission: eliminate preventable pet vehicle injuries. We believe every dog deserves a safe ride home. That's why we're running our viral FREE + Shipping initiative to put a crash-tested seatbelt in every dog parent's car.</p>",
+        "badge_text": "OUR DIRECT RESPONSE MISSION",
+        "title": "We're Giving Away 10,000 Free Pet Seat Belts To Save Dogs' Lives",
+        "story_text": "<p>When our founder lost a beloved dog in a minor car accident that a simple seatbelt would have prevented, SafePet Strap was born. We made a vow: no dog owner should ever suffer that heartbreak. That's why we cover the full $29.95 retail price of your seatbelt today — you only pay standard insured shipping at checkout!</p>",
         "image": "",
         "disclosure_text": "SafePet Strap — safepetstrap.com",
-        "benefit_1": "Universal Vehicle Compatibility",
-        "benefit_2": "Crash-Tested Nylon & Elastic Buffer",
-        "benefit_3": "25,000+ Happy Pups & Owners",
-        "benefit_4": "30-Day Satisfaction Guarantee",
-        "cta_label": "Get Yours FREE Today",
+        "benefit_1": "Universal Compatibility",
+        "benefit_2": "Anti-Whiplash Buffer",
+        "benefit_3": "25,000+ Happy Pups",
+        "benefit_4": "30-Day Guarantee",
+        "cta_label": "Claim Your FREE Seat Belt Now",
         "about_url": "/products/dog-seat-belt",
         "bg_color": "",
         "padding_top": 48,
@@ -83,10 +74,10 @@
     "trust_section": {
       "type": "home-trust",
       "settings": {
-        "badge_text": "PROVEN QUALITY",
-        "title": "Trusted By Over 25,000+ Dog Parents",
-        "body_text": "Engineered from high-density nylon webbing, solid zinc alloy hardware, and reflective safety stitching. Built to endure long road trips, daily park visits, and unexpected sudden stops.",
-        "footer_text": "4.9/5 Star Verified Customer Rating",
+        "badge_text": "VERIFIED PROOF & REVIEWS",
+        "title": "Over 25,000+ Dog Parents Drive With Total Peace of Mind",
+        "body_text": "Built from military-grade nylon, reflective night stitching, and shock-dampening elastic. Rated 4.9/5 stars by veterinarians, dog trainers, and loving pet parents nationwide.",
+        "footer_text": "⭐ ⭐ ⭐ ⭐ ⭐ 4.9/5 Verified Rating (25,000+ Happy Pups)",
         "bg_color": "",
         "padding_top": 48,
         "padding_bottom": 48
@@ -95,9 +86,9 @@
     "guarantee": {
       "type": "home-guarantee",
       "settings": {
-        "title": "Our 30-Day 100% Risk-Free Guarantee",
-        "text": "Try the SafePet Strap on your dog's next car ride. If you or your pup aren't 100% satisfied with the quality and peace of mind, let us know within 30 days for a hassle-free refund.",
-        "cta_label": "Claim Free Seat Belt",
+        "title": "Our Ironclad 30-Day 100% Risk-Free Guarantee",
+        "text": "Put SafePet Strap to the test in your car for 30 full days. If you don't feel 100% more confident and peaceful on every drive, simply email us for a full, instant refund. Zero risk, zero hassle.",
+        "cta_label": "Claim Free Seat Belt (Just Cover Shipping)",
         "refund_policy_url": "/policies/refund-policy",
         "bg_color": "",
         "padding_top": 48,
@@ -110,29 +101,29 @@
         "faq_1": {
           "type": "faq_item",
           "settings": {
-            "question": "Will this seatbelt fit my car?",
-            "answer": "<p>Yes! SafePet Strap uses a universal 0.83-inch (21mm) seatbelt tab that fits standard seatbelt receivers in 99.9% of cars, SUVs, and trucks.</p>"
+            "question": "Will this fit my specific car model?",
+            "answer": "<p>Yes! SafePet Strap uses the standard 0.83-inch (21mm) universal seatbelt latch that fits 99.9% of cars, trucks, and SUVs.</p>"
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
-            "question": "Should I attach it to a collar or a harness?",
-            "answer": "<p>We strongly recommend attaching the swivel snap to a harness rather than a neck collar to distribute braking forces safely across your pet's chest.</p>"
+            "question": "Should I clip this to a collar or harness?",
+            "answer": "<p>Always attach the 360° swivel clip to a harness to safely distribute inertia forces across your dog's chest rather than their neck.</p>"
           }
         },
         "faq_3": {
           "type": "faq_item",
           "settings": {
-            "question": "How does the FREE + Shipping promotion work?",
-            "answer": "<p>To spread awareness for pet safety, we are giving away the SafePet Strap for FREE today! You only pay standard insured shipping and handling at checkout.</p>"
+            "question": "How does the FREE + Shipping offer work?",
+            "answer": "<p>We cover the full $29.95 retail price of the seatbelt for our awareness promotion. You only pay standard insured shipping ($9.95) at checkout!</p>"
           }
         },
         "faq_4": {
           "type": "faq_item",
           "settings": {
-            "question": "Is the strap length adjustable?",
-            "answer": "<p>Yes! The strap adjusts from 20 inches to 32 inches, making it perfect for small, medium, and large dog breeds.</p>"
+            "question": "What if I have multiple dogs?",
+            "answer": "<p>Our most popular bundle is the 3-Pack + 2 FREE Gifts ($120 Value) for just $24.95! You can select 3x seatbelts right on the offer page.</p>"
           }
         }
       },
@@ -143,9 +134,9 @@
         "faq_4"
       ],
       "settings": {
-        "badge_text": "QUESTIONS & ANSWERS",
-        "title": "Frequently Asked Questions",
-        "subtitle": "Everything you need to know about SafePet Strap and your order.",
+        "badge_text": "FREQUENTLY ASKED QUESTIONS",
+        "title": "Got Questions? We Have Answers",
+        "subtitle": "Everything you need to know about protecting your pup with SafePet Strap.",
         "bg_color": "",
         "padding_top": 48,
         "padding_bottom": 48
@@ -161,7 +152,7 @@
         "support_email": "support@safepetstrap.com",
         "about_url": "/pages/about-us",
         "contact_url": "/pages/contact",
-        "newsletter_heading": "JOIN THE SAFE PET CLUB — GET FREE SAFETY TIPS",
+        "newsletter_heading": "JOIN THE SAFE PET CLUB — GET FREE SAFETY GUIDES",
         "newsletter_button_label": "Subscribe",
         "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
       }

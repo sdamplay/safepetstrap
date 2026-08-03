@@ -703,14 +703,6 @@
 
             {%- when 'variant_picker' -%}
               {% render 'safepet-variant-selector', product: product, block: block, section: section %}
-              {% render 'product-variant-picker', 
-                product: product, 
-                block: block, 
-                product_form_id: product_form_id, 
-                sizing_chart_append: sizing_chart_append, 
-                sizing_chart_html: sizing_chart_html,
-                has_filtering: has_filtering
-              %}
             {%- when 'buy_buttons' -%}
               {%- render 'buy-buttons',
                  block: block,
