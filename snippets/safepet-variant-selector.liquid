@@ -1,196 +1,151 @@
-{% comment %}
-  SafePet Strap - High-Converting 3-Tier Custom Variant Selector
-  Optimized for CRO, Direct Response, and exact Funnelish layout replication.
-{% endcomment %}
-
 {% assign v0_id = product.variants[0].id | default: '' %}
 {% assign v1_id = product.variants[1].id | default: v0_id %}
 {% assign v2_id = product.variants[2].id | default: v0_id %}
 
 <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
-  
-  <!-- Table Header Bar: Item / Price -->
-  <div class="safepet-table-header">
-    <span class="safepet-th-item">Item</span>
-    <span class="safepet-th-price">Price</span>
-  </div>
-
-  <div class="safepet-variant-selector">
-
-    <!-- TIER 1: Basic -->
-    <label class="safepet-tier-card safepet-tier-basic" for="safepet-tier-1-{{ section.id }}">
-      <div class="safepet-tier-input-wrap">
-        <input 
-          type="radio" 
-          id="safepet-tier-1-{{ section.id }}" 
-          name="safepet_variant_tier" 
-          value="1"
-          data-variant-id="{{ v0_id }}"
-          data-quantity="1"
-          data-price="0.00"
-        >
-        <span class="safepet-radio-custom"></span>
-      </div>
-      <div class="safepet-tier-content">
-        <div class="safepet-tier-left">
-          <span class="safepet-tier-title">1 Seat Belt</span>
+  <div class="quantity-breaks">
+    <div class="quantity-breaks-container" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+      
+      <!-- TIER 1 -->
+      <input 
+        type="radio" 
+        id="safepet-tier-1-{{ section.id }}" 
+        name="safepet_variant_tier" 
+        value="1"
+        data-variant-id="{{ v0_id }}"
+        data-quantity="1"
+        data-price="0.00"
+        style="display: none;"
+      >
+      <label class="quantity-break safepet-qty-break-card" for="safepet-tier-1-{{ section.id }}">
+        <span class="safepet-custom-radio-dot"></span>
+        <div class="quantity-break__image-and-content" style="width: 100%;">
+          <div class="quantity-break__content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="quantity-break__left">
+              <span class="quantity-break__label-text" style="font-size: 0.95rem; font-weight: 700; color: #111827;">1 Seat Belt</span>
+            </div>
+            <div class="quantity-break__right">
+              <span class="quantity-break__price" style="font-size: 0.95rem; font-weight: 700; color: #111827;">FREE + Shipping</span>
+            </div>
+          </div>
         </div>
-        <div class="safepet-tier-right">
-          <span class="safepet-tier-price-free">FREE</span>
-        </div>
-      </div>
-    </label>
+      </label>
 
-    <!-- TIER 2: Upsell -->
-    <label class="safepet-tier-card safepet-tier-upsell" for="safepet-tier-2-{{ section.id }}">
-      <div class="safepet-tier-input-wrap">
-        <input 
-          type="radio" 
-          id="safepet-tier-2-{{ section.id }}" 
-          name="safepet_variant_tier" 
-          value="2"
-          data-variant-id="{{ v1_id }}"
-          data-quantity="2"
-          data-price="17.95"
-        >
-        <span class="safepet-radio-custom"></span>
-      </div>
-      <div class="safepet-tier-content">
-        <div class="safepet-tier-left">
-          <span class="safepet-tier-title">2 Seat Belts (Value $60)</span>
+      <!-- TIER 2 -->
+      <input 
+        type="radio" 
+        id="safepet-tier-2-{{ section.id }}" 
+        name="safepet_variant_tier" 
+        value="2"
+        data-variant-id="{{ v1_id }}"
+        data-quantity="2"
+        data-price="17.95"
+        style="display: none;"
+      >
+      <label class="quantity-break safepet-qty-break-card" for="safepet-tier-2-{{ section.id }}">
+        <span class="safepet-custom-radio-dot"></span>
+        <div class="quantity-break__image-and-content" style="width: 100%;">
+          <div class="quantity-break__content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div class="quantity-break__left">
+              <span class="quantity-break__label-text" style="font-size: 0.95rem; font-weight: 700; color: #111827;">2 Seat Belts (Value $60)</span>
+            </div>
+            <div class="quantity-break__right">
+              <span class="quantity-break__price" style="font-size: 0.95rem; font-weight: 700; color: #111827;">$ 17.95</span>
+            </div>
+          </div>
         </div>
-        <div class="safepet-tier-right">
-          <span class="safepet-tier-price">$ 17.95</span>
-        </div>
-      </div>
-    </label>
+      </label>
 
-    <!-- TIER 3: Irresistible Offer (3x Variant Selected by Default) -->
-    <div class="safepet-tier-card-wrapper safepet-tier-featured-wrap">
-      <label class="safepet-tier-card safepet-tier-featured" for="safepet-tier-3-{{ section.id }}">
-        
+      <!-- TIER 3: Featured Yellow Card -->
+      <input 
+        type="radio" 
+        id="safepet-tier-3-{{ section.id }}" 
+        name="safepet_variant_tier" 
+        value="3" 
+        checked
+        data-variant-id="{{ v2_id }}"
+        data-quantity="3"
+        data-price="24.95"
+        style="display: none;"
+      >
+      <label class="quantity-break safepet-qty-break-card safepet-tier-featured" for="safepet-tier-3-{{ section.id }}">
         <!-- Badges -->
-        <div class="safepet-badge-top-left">
-          BEST SELLING 🔥
-        </div>
-        <div class="safepet-badge-top-right">
-          SALE!
-        </div>
-
-        <div class="safepet-tier-header-row">
-          <div class="safepet-tier-input-wrap">
-            <input 
-              type="radio" 
-              id="safepet-tier-3-{{ section.id }}" 
-              name="safepet_variant_tier" 
-              value="3" 
-              checked
-              data-variant-id="{{ v2_id }}"
-              data-quantity="3"
-              data-price="24.95"
-            >
-            <span class="safepet-radio-custom"></span>
-          </div>
-          <div class="safepet-tier-content">
-            <div class="safepet-tier-left">
-              <span class="safepet-tier-title safepet-title-bold">3 Seat Belts + 2 Gifts (Value $120)</span>
-            </div>
-            <div class="safepet-tier-right">
-              <span class="safepet-tier-price-highlight">$ 24.95</span>
+        <span class="safepet-badge-top-left">BEST SELLING 🔥</span>
+        <span class="safepet-badge-top-right">SALE!</span>
+        
+        <div class="safepet-tier-header-row" style="display: flex; align-items: center; width: 100%;">
+          <span class="safepet-custom-radio-dot"></span>
+          <div class="quantity-break__image-and-content" style="width: 100%;">
+            <div class="quantity-break__content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <div class="quantity-break__left">
+                <span class="quantity-break__label-text" style="font-size: 0.95rem; font-weight: 800; color: #111827;">3 Seat Belts + 2 Gifts (Value $120)</span>
+              </div>
+              <div class="quantity-break__right">
+                <span class="quantity-break__price" style="font-size: 1.05rem; font-weight: 900; color: #111827;">$ 24.95</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Visual Gift Bundle Image Underneath Variant 3 -->
+        <!-- GIF Inside the Card -->
         <div class="safepet-bundle-gif-wrap">
           <img src="https://cdn.shopify.com/s/files/1/0817/3469/7190/files/3-seat-offer.gif?v=1785785350" alt="3 Seat Belts + 2 Gifts Bundle" class="safepet-bundle-gif" loading="lazy">
         </div>
-
       </label>
-    </div>
 
+    </div>
   </div>
 </div>
 
 <style>
-  /* SafePet Strap Table Header & Variant Selector Styling */
   .safepet-variant-selector-wrapper {
     width: 100%;
-    margin: 1rem 0 1.5rem 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 1.2rem 0;
   }
 
-  .safepet-table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 4px 8px 4px;
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 12px;
-  }
-
-  .safepet-th-item,
-  .safepet-th-price {
-    font-size: 0.95rem;
-    font-weight: 800;
-    color: #111827;
-  }
-
-  .safepet-variant-selector {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* Shared Tier Card Styles */
-  .safepet-tier-card {
+  .safepet-qty-break-card {
     position: relative;
     display: flex;
     align-items: center;
-    padding: 12px 14px;
+    padding: 14px 16px;
     border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    background-color: #ffffff;
     border: 1px solid #d1d5db;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
     user-select: none;
+    gap: 12px;
   }
 
-  .safepet-tier-card:hover {
+  .safepet-qty-break-card:hover {
     border-color: #9ca3af;
   }
 
-  /* Input & Custom Radio */
-  .safepet-tier-input-wrap {
-    display: flex;
-    align-items: center;
-    margin-right: 12px;
-  }
-
-  .safepet-tier-input-wrap input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .safepet-radio-custom {
+  /* Custom radio dot matching Shrine PRO */
+  .safepet-custom-radio-dot {
     width: 20px;
     height: 20px;
-    border: 2px solid #6b7280;
+    border: 2px solid #9ca3af;
     border-radius: 50%;
     display: inline-block;
     position: relative;
-    transition: all 0.2s ease;
-    background: #fff;
+    background: #ffffff;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease;
   }
 
-  .safepet-tier-input-wrap input[type="radio"]:checked + .safepet-radio-custom {
+  /* Checked states via radio siblings */
+  input[name="safepet_variant_tier"]:checked + .safepet-qty-break-card {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 1px #2563eb;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-qty-break-card .safepet-custom-radio-dot {
     border-color: #2563eb;
   }
 
-  .safepet-tier-input-wrap input[type="radio"]:checked + .safepet-radio-custom::after {
+  input[name="safepet_variant_tier"]:checked + .safepet-qty-break-card .safepet-custom-radio-dot::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -202,74 +157,30 @@
     background-color: #2563eb;
   }
 
-  /* Content Row Layout */
-  .safepet-tier-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .safepet-tier-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #111827;
-  }
-
-  .safepet-title-bold {
-    font-weight: 800;
-    font-size: 0.95rem;
-  }
-
-  .safepet-tier-price-free {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #111827;
-  }
-
-  .safepet-tier-price {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #111827;
-  }
-
-  .safepet-tier-price-highlight {
-    font-weight: 900;
-    font-size: 1.05rem;
-    color: #111827;
-  }
-
-  /* TIER 3 (FEATURED / IRRESISTIBLE OFFER) STYLING */
-  .safepet-tier-featured-wrap {
-    margin-top: 4px;
-  }
-
+  /* TIER 3 (FEATURED YELLOW CARD) STYLING */
   .safepet-tier-featured {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     background-color: #ffff00 !important; /* Bright Yellow */
     border: 2px solid #e53935 !important;
-    padding: 28px 12px 14px 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
-    overflow: hidden;
+    padding: 26px 16px 14px 16px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
   }
 
-  .safepet-tier-header-row {
-    display: flex;
-    align-items: center;
-    width: 100%;
+  input[name="safepet_variant_tier"]:checked + .safepet-tier-featured {
+    border-color: #e53935 !important;
+    box-shadow: 0 0 0 1px #e53935 !important;
   }
 
-  /* Top Badges */
+  /* Top Badges for Featured Card */
   .safepet-badge-top-left {
     position: absolute;
     top: 0;
     left: 0;
     background-color: #e53935;
     color: #ffffff;
-    font-size: 0.68rem;
+    font-size: 10px;
     font-weight: 900;
     padding: 3px 8px;
     border-bottom-right-radius: 6px;
@@ -284,24 +195,35 @@
     right: 0;
     background-color: #dc2626;
     color: #ffffff;
-    font-size: 0.68rem;
+    font-size: 10px;
     font-weight: 900;
-    padding: 4px 12px;
-    border-bottom-left-radius: 8px;
-    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-bottom-left-radius: 6px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     z-index: 2;
   }
 
-  /* Visual Gift Bundle GIF */
+  .safepet-badge-top-right::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 20px 0;
+    border-color: transparent #dc2626 transparent transparent;
+  }
+
+  /* Visual Gift Bundle GIF styling */
   .safepet-bundle-gif-wrap {
     width: 100%;
     margin-top: 12px;
     border-radius: 4px;
     overflow: hidden;
-    border: 1.5px solid #e53935;
+    border: 1px solid #e5d83c;
     background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   }
 
   .safepet-bundle-gif {
@@ -310,20 +232,19 @@
     display: block;
   }
 
-  /* Responsive Adjustments */
+  /* Responsive styling */
   @media (max-width: 480px) {
-    .safepet-tier-card {
-      padding: 10px 10px;
+    .safepet-qty-break-card {
+      padding: 12px 12px;
     }
     .safepet-tier-featured {
-      padding: 28px 10px 12px 10px !important;
+      padding: 26px 12px 12px 12px !important;
     }
-    .safepet-tier-title, .safepet-title-bold {
-      font-size: 0.82rem;
-      line-height: 1.25;
+    .quantity-break__label-text {
+      font-size: 0.88rem !important;
     }
-    .safepet-tier-price-free, .safepet-tier-price, .safepet-tier-price-highlight {
-      font-size: 0.85rem;
+    .quantity-break__price {
+      font-size: 0.88rem !important;
     }
   }
 </style>
