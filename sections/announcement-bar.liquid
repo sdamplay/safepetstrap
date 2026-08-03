@@ -43,6 +43,11 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
+  @media screen and (min-width: 750px) {
+    .announcement-bar__message {
+      white-space: nowrap;
+    }
+  }
   @media screen and (max-width: 749px) {
     .announcement-bar__content-wrapper {
       flex-direction: column;
@@ -270,7 +275,7 @@
         if (!isNaN(parsed)) endTime = parsed;
       }
       if (!endTime) {
-        endTime = Date.now() + (2 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000) + (37 * 60 * 1000) + (52 * 1000);
+        endTime = Date.now() + (3 * 60 * 60 * 1000) + (4 * 1000);
       }
       var daysEl = timer.querySelector('[data-days]');
       var hoursEl = timer.querySelector('[data-hours]');
