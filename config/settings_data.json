@@ -1033,8 +1033,8 @@
         "settings": {
           "enable": false,
           "position": "bottom-left",
-          "bg_color": "#fff5f6",
-          "accent_color": "#e89ba0",
+          "bg_color": "#fff5f5",
+          "accent_color": "#e53935",
           "text_color": "#2d2d2d",
           "text_secondary_color": "#6b6b6b",
           "star_color": "#f5b800",
