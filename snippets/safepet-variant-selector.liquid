@@ -1,196 +1,250 @@
-{% comment %}
-  SafePet Strap - High-Converting 3-Tier Custom Variant Selector
-  Optimized for CRO, Direct Response, and exact Funnelish layout replication.
-{% endcomment %}
-
 {% assign v0_id = product.variants[0].id | default: '' %}
 {% assign v1_id = product.variants[1].id | default: v0_id %}
 {% assign v2_id = product.variants[2].id | default: v0_id %}
 
 <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
+  <h3 class="safepet-selector-heading">Select the best package for your dog:</h3>
   
-  <!-- Table Header Bar: Item / Price -->
-  <div class="safepet-table-header">
-    <span class="safepet-th-item">Item</span>
-    <span class="safepet-th-price">Price</span>
-  </div>
-
-  <div class="safepet-variant-selector">
-
-    <!-- TIER 1: Basic -->
-    <label class="safepet-tier-card safepet-tier-basic" for="safepet-tier-1-{{ section.id }}">
-      <div class="safepet-tier-input-wrap">
-        <input 
-          type="radio" 
-          id="safepet-tier-1-{{ section.id }}" 
-          name="safepet_variant_tier" 
-          value="1"
-          data-variant-id="{{ v0_id }}"
-          data-quantity="1"
-          data-price="0.00"
-        >
-        <span class="safepet-radio-custom"></span>
-      </div>
-      <div class="safepet-tier-content">
-        <div class="safepet-tier-left">
-          <span class="safepet-tier-title">1 Seat Belt</span>
+  <div class="safepet-packages-list">
+    
+    <!-- TIER 1: 1 Pack -->
+    <label class="safepet-pkg-card" for="safepet-tier-1-{{ section.id }}">
+      <input 
+        type="radio" 
+        id="safepet-tier-1-{{ section.id }}" 
+        name="safepet_variant_tier" 
+        value="1"
+        data-variant-id="{{ v0_id }}"
+        data-quantity="1"
+        data-price="0.00"
+        style="display: none;"
+      >
+      <div class="safepet-pkg-main-row">
+        <div class="safepet-pkg-left">
+          <div class="safepet-pkg-radio-circle"></div>
+          <div class="safepet-pkg-info">
+            <span class="safepet-pkg-title">1 Pack — Starter Pack</span>
+            <span class="safepet-pkg-subtitle">Perfect to protect one pup</span>
+          </div>
         </div>
-        <div class="safepet-tier-right">
-          <span class="safepet-tier-price-free">FREE</span>
+        <div class="safepet-pkg-right">
+          <span class="safepet-pkg-price safepet-price-free">FREE</span>
+          <span class="safepet-pkg-compare">Normally $29.95</span>
         </div>
       </div>
     </label>
 
-    <!-- TIER 2: Upsell -->
-    <label class="safepet-tier-card safepet-tier-upsell" for="safepet-tier-2-{{ section.id }}">
-      <div class="safepet-tier-input-wrap">
-        <input 
-          type="radio" 
-          id="safepet-tier-2-{{ section.id }}" 
-          name="safepet_variant_tier" 
-          value="2"
-          data-variant-id="{{ v1_id }}"
-          data-quantity="2"
-          data-price="17.95"
-        >
-        <span class="safepet-radio-custom"></span>
-      </div>
-      <div class="safepet-tier-content">
-        <div class="safepet-tier-left">
-          <span class="safepet-tier-title">2 Seat Belts (Value $60)</span>
+    <!-- TIER 2: 2 Packs -->
+    <label class="safepet-pkg-card" for="safepet-tier-2-{{ section.id }}">
+      <input 
+        type="radio" 
+        id="safepet-tier-2-{{ section.id }}" 
+        name="safepet_variant_tier" 
+        value="2"
+        data-variant-id="{{ v1_id }}"
+        data-quantity="2"
+        data-price="17.95"
+        style="display: none;"
+      >
+      <!-- Top Badge -->
+      <span class="safepet-pkg-badge safepet-badge-orange">MOST ORDERED</span>
+      
+      <div class="safepet-pkg-main-row">
+        <div class="safepet-pkg-left">
+          <div class="safepet-pkg-radio-circle"></div>
+          <div class="safepet-pkg-info">
+            <span class="safepet-pkg-title">2 Packs — Double Safety</span>
+            <span class="safepet-pkg-subtitle">Keep both family cars equipped</span>
+          </div>
         </div>
-        <div class="safepet-tier-right">
-          <span class="safepet-tier-price">$ 17.95</span>
+        <div class="safepet-pkg-right">
+          <span class="safepet-pkg-price">$17.95</span>
+          <span class="safepet-pkg-unit-badge">$8.97/each</span>
         </div>
       </div>
     </label>
 
-    <!-- TIER 3: Irresistible Offer (3x Variant Selected by Default) -->
-    <div class="safepet-tier-card-wrapper safepet-tier-featured-wrap">
-      <label class="safepet-tier-card safepet-tier-featured" for="safepet-tier-3-{{ section.id }}">
-        
-        <!-- Badges -->
-        <div class="safepet-badge-top-left">
-          BEST SELLING 🔥
-        </div>
-        <div class="safepet-badge-top-right">
-          SALE!
-        </div>
-
-        <div class="safepet-tier-header-row">
-          <div class="safepet-tier-input-wrap">
-            <input 
-              type="radio" 
-              id="safepet-tier-3-{{ section.id }}" 
-              name="safepet_variant_tier" 
-              value="3" 
-              checked
-              data-variant-id="{{ v2_id }}"
-              data-quantity="3"
-              data-price="24.95"
-            >
-            <span class="safepet-radio-custom"></span>
-          </div>
-          <div class="safepet-tier-content">
-            <div class="safepet-tier-left">
-              <span class="safepet-tier-title safepet-title-bold">3 Seat Belts + 2 Gifts (Value $120)</span>
-            </div>
-            <div class="safepet-tier-right">
-              <span class="safepet-tier-price-highlight">$ 24.95</span>
-            </div>
+    <!-- TIER 3: 3 Packs (Default Selected) -->
+    <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-3-{{ section.id }}">
+      <input 
+        type="radio" 
+        id="safepet-tier-3-{{ section.id }}" 
+        name="safepet_variant_tier" 
+        value="3" 
+        checked
+        data-variant-id="{{ v2_id }}"
+        data-quantity="3"
+        data-price="24.95"
+        style="display: none;"
+      >
+      <!-- Top Badge -->
+      <span class="safepet-pkg-badge safepet-badge-red">BEST VALUE + GIFT</span>
+      
+      <div class="safepet-pkg-main-row">
+        <div class="safepet-pkg-left">
+          <div class="safepet-pkg-radio-circle"></div>
+          <div class="safepet-pkg-info">
+            <span class="safepet-pkg-title">3 Packs — SafePet Bundle</span>
+            <span class="safepet-pkg-subtitle">Complete protection + Free Gifts</span>
+            <span class="safepet-pkg-gift-alert">+ 🎁Free Gifts with Your Order</span>
           </div>
         </div>
-
-        <!-- Visual Gift Bundle Image Underneath Variant 3 -->
-        <div class="safepet-bundle-gif-wrap">
-          <img src="https://cdn.shopify.com/s/files/1/0817/3469/7190/files/3-seat-offer.gif?v=1785785350" alt="3 Seat Belts + 2 Gifts Bundle" class="safepet-bundle-gif" loading="lazy">
+        <div class="safepet-pkg-right">
+          <span class="safepet-pkg-price">$24.95</span>
+          <span class="safepet-pkg-unit-badge">$8.31/each</span>
         </div>
+      </div>
 
-      </label>
-    </div>
+      <!-- Animated GIF inside Card -->
+      <div class="safepet-pkg-gif-wrap">
+        <img src="https://cdn.shopify.com/s/files/1/0817/3469/7190/files/3-seat-offer.gif?v=1785785350" alt="3 Pack Bundle Offer" class="safepet-pkg-gif" loading="lazy">
+      </div>
+    </label>
 
   </div>
 </div>
 
 <style>
-  /* SafePet Strap Table Header & Variant Selector Styling */
   .safepet-variant-selector-wrapper {
     width: 100%;
-    margin: 1rem 0 1.5rem 0;
+    margin: 1.5rem 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   }
 
-  .safepet-table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 4px 8px 4px;
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 12px;
-  }
-
-  .safepet-th-item,
-  .safepet-th-price {
-    font-size: 0.95rem;
+  .safepet-selector-heading {
+    font-size: 1.15rem;
     font-weight: 800;
     color: #111827;
+    margin: 0 0 1rem 0;
+    text-align: left;
   }
 
-  .safepet-variant-selector {
+  .safepet-packages-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
+    width: 100%;
   }
 
-  /* Shared Tier Card Styles */
-  .safepet-tier-card {
+  /* Package Card Base */
+  .safepet-pkg-card {
     position: relative;
     display: flex;
-    align-items: center;
-    padding: 12px 14px;
-    border-radius: 8px;
+    flex-direction: column;
+    padding: 20px 24px;
+    border-radius: 16px;
+    border: 1.5px solid #e5e7eb;
+    background-color: #fbfbfd;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    background-color: #ffffff;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     user-select: none;
   }
 
-  .safepet-tier-card:hover {
-    border-color: #9ca3af;
+  .safepet-pkg-card:hover {
+    border-color: #cbd5e1;
+    background-color: #fafafc;
   }
 
-  /* Input & Custom Radio */
-  .safepet-tier-input-wrap {
+  .safepet-pkg-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .safepet-pkg-left {
     display: flex;
     align-items: center;
-    margin-right: 12px;
+    gap: 16px;
   }
 
-  .safepet-tier-input-wrap input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .safepet-radio-custom {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #6b7280;
+  /* Radio Circle Indicator */
+  .safepet-pkg-radio-circle {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #94a3b8;
     border-radius: 50%;
-    display: inline-block;
+    background-color: #ffffff;
     position: relative;
+    flex-shrink: 0;
     transition: all 0.2s ease;
-    background: #fff;
   }
 
-  .safepet-tier-input-wrap input[type="radio"]:checked + .safepet-radio-custom {
-    border-color: #2563eb;
+  .safepet-pkg-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .safepet-tier-input-wrap input[type="radio"]:checked + .safepet-radio-custom::after {
+  .safepet-pkg-title {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1f2937;
+    line-height: 1.2;
+  }
+
+  .safepet-pkg-subtitle {
+    font-size: 0.85rem;
+    color: #6b7280;
+    line-height: 1.3;
+  }
+
+  .safepet-pkg-gift-alert {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #16a34a;
+    margin-top: 2px;
+  }
+
+  .safepet-pkg-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .safepet-pkg-price {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #111827;
+    line-height: 1;
+  }
+
+  .safepet-price-free {
+    color: #e53935;
+  }
+
+  .safepet-pkg-compare {
+    font-size: 0.78rem;
+    text-decoration: line-through;
+    color: #9ca3af;
+  }
+
+  /* Green Unit Price Badge */
+  .safepet-pkg-unit-badge {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #16a34a;
+    background-color: #e8f5e9;
+    padding: 3px 8px;
+    border-radius: 9999px;
+  }
+
+  /* SELECTED CARD STATES */
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card {
+    border-color: #e53935;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.05);
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle {
+    border-color: #e53935;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -199,112 +253,59 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #2563eb;
-  }
-
-  /* Content Row Layout */
-  .safepet-tier-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .safepet-tier-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #111827;
-  }
-
-  .safepet-title-bold {
-    font-weight: 800;
-    font-size: 0.95rem;
-  }
-
-  .safepet-tier-price-free {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #111827;
-  }
-
-  .safepet-tier-price {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #111827;
-  }
-
-  .safepet-tier-price-highlight {
-    font-weight: 900;
-    font-size: 1.05rem;
-    color: #111827;
-  }
-
-  /* TIER 3 (FEATURED / IRRESISTIBLE OFFER) STYLING */
-  .safepet-tier-featured-wrap {
-    margin-top: 4px;
-  }
-
-  .safepet-tier-featured {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    background-color: #ffff00 !important; /* Bright Yellow */
-    border: 2px solid #e53935 !important;
-    padding: 28px 12px 14px 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .safepet-tier-header-row {
-    display: flex;
-    align-items: center;
-    width: 100%;
-  }
-
-  /* Top Badges */
-  .safepet-badge-top-left {
-    position: absolute;
-    top: 0;
-    left: 0;
     background-color: #e53935;
-    color: #ffffff;
-    font-size: 0.68rem;
-    font-weight: 900;
-    padding: 3px 8px;
-    border-bottom-right-radius: 6px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    z-index: 2;
   }
 
-  .safepet-badge-top-right {
+  /* Badges positioning */
+  .safepet-pkg-badge {
     position: absolute;
-    top: 0;
-    right: 0;
-    background-color: #dc2626;
-    color: #ffffff;
+    top: -12px;
+    left: 24px;
     font-size: 0.68rem;
-    font-weight: 900;
-    padding: 4px 12px;
-    border-bottom-left-radius: 8px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    z-index: 2;
+    font-weight: 800;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    z-index: 3;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
 
-  /* Visual Gift Bundle GIF */
-  .safepet-bundle-gif-wrap {
+  .safepet-badge-orange {
+    background-color: #d97706; /* Muted Gold / Orange */
+  }
+
+  .safepet-badge-red {
+    background-color: #dc2626; /* Vibrant Red */
+  }
+
+  /* Card 3: Featured Yellow Card styling */
+  .safepet-pkg-featured {
+    background-color: #fffde6;
+    border-color: #fef08a;
+  }
+
+  .safepet-pkg-featured:hover {
+    background-color: #fffde0;
+    border-color: #fde047;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-featured {
+    border-color: #e53935;
+    background-color: #fffde6;
+  }
+
+  /* Gif layout inside Card 3 */
+  .safepet-pkg-gif-wrap {
     width: 100%;
-    margin-top: 12px;
-    border-radius: 4px;
+    margin-top: 14px;
+    border-radius: 10px;
     overflow: hidden;
-    border: 1.5px solid #e53935;
-    background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border: 1px solid #fef08a;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
   }
 
-  .safepet-bundle-gif {
+  .safepet-pkg-gif {
     width: 100%;
     height: auto;
     display: block;
@@ -312,18 +313,21 @@
 
   /* Responsive Adjustments */
   @media (max-width: 480px) {
-    .safepet-tier-card {
-      padding: 10px 10px;
+    .safepet-pkg-card {
+      padding: 16px 18px;
     }
-    .safepet-tier-featured {
-      padding: 28px 10px 12px 10px !important;
+    .safepet-pkg-title {
+      font-size: 0.95rem;
     }
-    .safepet-tier-title, .safepet-title-bold {
-      font-size: 0.82rem;
-      line-height: 1.25;
+    .safepet-pkg-subtitle {
+      font-size: 0.8rem;
     }
-    .safepet-tier-price-free, .safepet-tier-price, .safepet-tier-price-highlight {
-      font-size: 0.85rem;
+    .safepet-pkg-price {
+      font-size: 1.15rem;
+    }
+    .safepet-pkg-radio-circle {
+      width: 20px;
+      height: 20px;
     }
   }
 </style>
