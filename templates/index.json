@@ -12,126 +12,96 @@
     "home_hero": {
       "type": "home-hero",
       "settings": {
-        "badge_text": "Digital Tools For Growing Kids",
-        "headline": "Helping Kids Thrive — One Skill At A Time",
-        "subheadline": "Printable guides covering life skills, emotional growth, mindfulness, and more — designed to make growing up a little easier, for kids and parents alike.",
-        "cta_label": "Explore Our Guides",
-        "cta_url": "/collections/all",
-        "image": "shopify://shop_images/Gemini_Generated_Image_w7rl6xw7rl6xw7rl.jpg",
-        "trust_disclosure": "Instant digital delivery — no shipping",
-        "guarantee_text": "90-Day Money-Back Guarantee",
+        "badge_text": "PROTECT YOUR BEST FRIEND",
+        "headline": "Keep Your Dog Safe On Every Car Ride",
+        "subheadline": "Engineered with crash-tested heavy-duty nylon, 360° tangle-free swivel latch, and elastic anti-whiplash buffer. Protect your pup from sudden braking and dangerous distractions.",
+        "cta_label": "CLAIM FREE SEAT BELT NOW",
+        "cta_url": "/products/dog-seat-belt",
+        "image": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
+        "trust_disclosure": "Limited time promotion — Only cover standard shipping at checkout",
+        "guarantee_text": "30-Day Money-Back Safety Guarantee",
         "refund_policy_url": "/policies/refund-policy",
         "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay",
         "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 0
+        "padding_top": 48,
+        "padding_bottom": 32
       }
     },
     "problem_agitate_solve": {
       "type": "home-problem-agitate-solve",
       "settings": {
-        "badge_text": "The Parent Challenge",
-        "title": "Raising Kids Comes With A Lot Of 'Now What?' Moments",
-        "subtitle": "From managing meltdowns to building daily routines, every stage of childhood brings new challenges — and not enough clear answers.",
-        "card_1_title": "The Overwhelm",
-        "card_1_text": "Between tantrums, screen time, and homework, it's easy to feel like you're improvising every day.",
-        "card_2_title": "The Guesswork",
-        "card_2_text": "Parenting advice is everywhere, but turning it into something your child will actually use is the hard part.",
-        "card_3_title": "The TinyThrive Solution",
-        "card_3_text": "Our printable guides turn big parenting goals into simple, kid-friendly activities, so you always know what to hand them next.",
+        "badge_text": "WHY RESTRICTION MATTERS",
+        "title": "Did You Know? Unrestrained Dogs Risk Severe Crash Injuries",
+        "subtitle": "At just 30 mph, a sudden stop exerts force 30 times your pet's body weight. SafePet Strap keeps them secured safely in the backseat.",
+        "card_1_title": "The Danger of Sudden Stops",
+        "card_1_text": "Without a heavy-duty seatbelt, pets can be thrown into the dashboard or windshield during sudden braking.",
+        "card_2_title": "Driver Distraction Risks",
+        "card_2_text": "An unrestrained dog jumping into your lap increases crash probability by over 400%.",
+        "card_3_title": "The SafePet Strap Solution",
+        "card_3_text": "Plugs directly into any vehicle seatbelt buckle in 3 seconds to keep your dog comfortable and fully protected.",
         "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
-    "shop_by_category": {
-      "type": "home-shop-by-category",
-      "blocks": {
-        "block_1": {
-          "type": "collection",
-          "settings": {
-            "collection": "asset-pack-50532974594-example-products"
-          }
-        },
-        "block_2": {
-          "type": "collection",
-          "settings": {
-            "collection": "frontpage"
-          }
-        }
-      },
-      "block_order": [
-        "block_1",
-        "block_2"
-      ],
-      "settings": {
-        "badge_text": "SHOP BY CATEGORY",
-        "title": "Find The Right Guide For Your Child",
-        "subtitle": "Explore printable workbooks and activity guides across the topics that matter most.",
-        "columns_desktop": 3,
-        "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "how_it_works": {
       "type": "home-how-it-works",
       "settings": {
-        "badge_text": "SIMPLE PROCESS",
-        "title": "Get Started in Just 3 Steps",
-        "subtitle": "Because these are digital PDF products, you don't have to wait for mail delivery or pay shipping costs. Get started instantly.",
-        "step_1_title": "Order Online",
-        "step_1_text": "Every order includes a small digital processing fee at checkout to cover secure delivery — there's no shipping cost, ever.",
-        "step_2_title": "Instant Email Delivery",
-        "step_2_text": "Check your inbox right after purchase. Your secure download link arrives in under 2 minutes.",
-        "step_3_title": "Print & Use",
-        "step_3_text": "Open the PDF, print at home, and start using it with your child the same day.",
+        "badge_text": "EASY 3-STEP SAFETY",
+        "title": "Secured In Under 3 Seconds",
+        "subtitle": "Designed for maximum convenience and peace of mind on every car trip.",
+        "step_1_title": "1. Clip To Harness",
+        "step_1_text": "Attach the heavy-duty 360° zinc alloy swivel snap to your dog's harness.",
+        "step_2_title": "2. Latch Into Vehicle",
+        "step_2_text": "Insert the universal seatbelt tab into your vehicle's standard seatbelt receiver.",
+        "step_3_title": "3. Adjust For Comfort",
+        "step_3_text": "Extend or shorten the strap so your dog can comfortably sit, stand, or lie down.",
         "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "about_story": {
       "type": "home-about-story",
       "settings": {
-        "badge_text": "OUR STORY",
-        "title": "Created By Parents, For Parents",
-        "story_text": "<p>TinyThrive started with one simple goal: turn the parenting advice we wished we'd had sooner into tools real families could actually use. Today we're building a growing collection of printable guides covering everything from daily routines to emotional growth and mindfulness, all designed the same way: simple, visual, and made for kids to actually enjoy.</p>",
-        "image": "shopify://shop_images/Gemini_Generated_Image_w7rl6xw7rl6xw7rl.jpg",
-        "disclosure_text": "TinyThrive is operated by OUSI PLAY LLC.",
-        "benefit_1": "Instant Access",
-        "benefit_2": "We Stand By Our Work",
-        "benefit_3": "Always Here To Help",
-        "benefit_4": "Built By Real Parents",
-        "cta_label": "",
-        "about_url": "",
+        "badge_text": "OUR MISSION",
+        "title": "Mission-Driven Pet Safety",
+        "story_text": "<p>SafePet Strap was created with one vital mission: eliminate preventable pet vehicle injuries. We believe every dog deserves a safe ride home. That's why we're running our viral FREE + Shipping initiative to put a crash-tested seatbelt in every dog parent's car.</p>",
+        "image": "",
+        "disclosure_text": "SafePet Strap — safepetstrap.com",
+        "benefit_1": "Universal Vehicle Compatibility",
+        "benefit_2": "Crash-Tested Nylon & Elastic Buffer",
+        "benefit_3": "25,000+ Happy Pups & Owners",
+        "benefit_4": "30-Day Satisfaction Guarantee",
+        "cta_label": "Get Yours FREE Today",
+        "about_url": "/products/dog-seat-belt",
         "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "trust_section": {
       "type": "home-trust",
       "settings": {
-        "badge_text": "OUR PHILOSOPHY",
-        "title": "Built On Real Parenting Wins, Not Theory",
-        "body_text": "Every guide we create is designed around small, achievable moments that build a child's confidence: tying a shoe, naming a big feeling, finishing a chore without a reminder, or simply learning to pause and breathe. We build TinyThrive's library one win at a time, the same way real growth happens.",
-        "footer_text": "New reviews coming soon — be one of our first verified customers.",
+        "badge_text": "PROVEN QUALITY",
+        "title": "Trusted By Over 25,000+ Dog Parents",
+        "body_text": "Engineered from high-density nylon webbing, solid zinc alloy hardware, and reflective safety stitching. Built to endure long road trips, daily park visits, and unexpected sudden stops.",
+        "footer_text": "4.9/5 Star Verified Customer Rating",
         "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "guarantee": {
       "type": "home-guarantee",
       "settings": {
-        "title": "Our 90-Day 100% Risk-Free Guarantee",
-        "text": "Try any TinyThrive guide for 90 days. If you don't see real progress, just email us and we'll refund every cent — no forms, no guilt trips.",
-        "cta_label": "Read Our Refund Policy",
+        "title": "Our 30-Day 100% Risk-Free Guarantee",
+        "text": "Try the SafePet Strap on your dog's next car ride. If you or your pup aren't 100% satisfied with the quality and peace of mind, let us know within 30 days for a hassle-free refund.",
+        "cta_label": "Claim Free Seat Belt",
         "refund_policy_url": "/policies/refund-policy",
         "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "faq": {
@@ -140,36 +110,29 @@
         "faq_1": {
           "type": "faq_item",
           "settings": {
-            "question": "What will I receive after I order?",
-            "answer": "<p>Directly after payment, you will receive a secure PDF download link to the address you supplied at checkout. You can print the guide at home or a local print shop and start using it the same day.</p>"
+            "question": "Will this seatbelt fit my car?",
+            "answer": "<p>Yes! SafePet Strap uses a universal 0.83-inch (21mm) seatbelt tab that fits standard seatbelt receivers in 99.9% of cars, SUVs, and trucks.</p>"
           }
         },
         "faq_2": {
           "type": "faq_item",
           "settings": {
-            "question": "What ages are your guides designed for?",
-            "answer": "<p>It varies by guide — check each product page for the recommended age range.</p>"
+            "question": "Should I attach it to a collar or a harness?",
+            "answer": "<p>We strongly recommend attaching the swivel snap to a harness rather than a neck collar to distribute braking forces safely across your pet's chest.</p>"
           }
         },
         "faq_3": {
           "type": "faq_item",
           "settings": {
-            "question": "How do I get my download link?",
-            "answer": "<p>Directly after your payment is processed, you will see a download button on the order confirmation screen. Additionally, we instantly email a secure PDF download link to your address in under 2 minutes.</p>"
+            "question": "How does the FREE + Shipping promotion work?",
+            "answer": "<p>To spread awareness for pet safety, we are giving away the SafePet Strap for FREE today! You only pay standard insured shipping and handling at checkout.</p>"
           }
         },
         "faq_4": {
           "type": "faq_item",
           "settings": {
-            "question": "Why is there a digital processing fee?",
-            "answer": "<p>To make our workbooks accessible, we cover the retail cost of the product itself. The small secure digital processing fee at checkout offsets download hosting costs, secure gateway expenses, and customer email support.</p>"
-          }
-        },
-        "faq_5": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What if a guide doesn't work for my child?",
-            "answer": "<p>Every purchase is protected by our 90-day 100% risk-free guarantee. Try any guide for 90 days, and if you don't see progress, simply email us for a full refund.</p>"
+            "question": "Is the strap length adjustable?",
+            "answer": "<p>Yes! The strap adjusts from 20 inches to 32 inches, making it perfect for small, medium, and large dog breeds.</p>"
           }
         }
       },
@@ -177,30 +140,29 @@
         "faq_1",
         "faq_2",
         "faq_3",
-        "faq_4",
-        "faq_5"
+        "faq_4"
       ],
       "settings": {
         "badge_text": "QUESTIONS & ANSWERS",
         "title": "Frequently Asked Questions",
-        "subtitle": "Find answers to common questions about our parenting workbooks and secure processing fee model.",
+        "subtitle": "Everything you need to know about SafePet Strap and your order.",
         "bg_color": "",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "home_footer": {
       "type": "home-footer",
       "settings": {
-        "brand_name": "TinyThrive",
-        "logo": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart_504b8d25-3e4f-4c83-b8ee-c30ad638637d.png",
-        "logo_initials": "TT",
-        "business_address": "",
-        "support_email": "support@tinythrive.com",
+        "brand_name": "SafePet Strap",
+        "logo": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
+        "logo_initials": "SPS",
+        "business_address": "SafePet Strap, safepetstrap.com",
+        "support_email": "support@safepetstrap.com",
         "about_url": "/pages/about-us",
         "contact_url": "/pages/contact",
-        "newsletter_heading": "JOIN 12,000+ PARENTS GETTING FREE PRINTABLES",
-        "newsletter_button_label": "Send Me Freebies",
+        "newsletter_heading": "JOIN THE SAFE PET CLUB — GET FREE SAFETY TIPS",
+        "newsletter_button_label": "Subscribe",
         "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
       }
     }
@@ -208,7 +170,6 @@
   "order": [
     "home_hero",
     "problem_agitate_solve",
-    "shop_by_category",
     "how_it_works",
     "about_story",
     "trust_section",

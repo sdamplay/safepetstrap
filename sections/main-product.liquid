@@ -698,7 +698,11 @@
                 share_link: share_url
               %}
 
+            {%- when 'safepet_variant_selector' -%}
+              {% render 'safepet-variant-selector', product: product, block: block, section: section %}
+
             {%- when 'variant_picker' -%}
+              {% render 'safepet-variant-selector', product: product, block: block, section: section %}
               {% render 'product-variant-picker', 
                 product: product, 
                 block: block, 
