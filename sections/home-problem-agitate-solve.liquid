@@ -82,31 +82,44 @@
     border: 2px solid #E53935;
   }
 
+  .home-pas-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    width: 100%;
+  }
+
   .home-pas-card-emoji {
     font-size: 36px;
-    margin-bottom: 20px;
-    display: block;
+    line-height: 1 !important;
+    margin: 0;
+    display: inline-block;
   }
 
   .home-pas-card-title {
-    font-family: var(--font-heading-family);
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--color-brand-text-primary);
-    margin: 0 0 16px 0;
+    font-family: var(--font-heading-family), -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.35 !important;
+    margin: 0;
+    word-break: break-word;
+    display: block;
   }
 
   .home-pas-card-text {
-    font-family: var(--font-body-family);
+    font-family: var(--font-body-family), -apple-system, sans-serif;
     font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-brand-text-secondary);
+    line-height: 1.6 !important;
+    color: #4B5563;
     margin: 0;
     flex-grow: 1;
   }
 
   .home-pas-card.solution-card .home-pas-card-text {
-    color: var(--color-brand-text-primary);
+    color: #111827;
   }
 
   @media (max-width: 900px) {
@@ -142,22 +155,28 @@
     <div class="home-pas-grid">
       <!-- PROBLEM -->
       <div class="home-pas-card">
-        <span class="home-pas-card-emoji">😩</span>
-        <h3 class="home-pas-card-title">{{ section.settings.card_1_title }}</h3>
+        <div class="home-pas-card-header">
+          <span class="home-pas-card-emoji">😩</span>
+          <h3 class="home-pas-card-title">{{ section.settings.card_1_title }}</h3>
+        </div>
         <p class="home-pas-card-text">{{ section.settings.card_1_text }}</p>
       </div>
 
       <!-- AGITATE -->
       <div class="home-pas-card">
-        <span class="home-pas-card-emoji">⚡</span>
-        <h3 class="home-pas-card-title">{{ section.settings.card_2_title }}</h3>
+        <div class="home-pas-card-header">
+          <span class="home-pas-card-emoji">⚡</span>
+          <h3 class="home-pas-card-title">{{ section.settings.card_2_title }}</h3>
+        </div>
         <p class="home-pas-card-text">{{ section.settings.card_2_text }}</p>
       </div>
 
       <!-- SOLVE -->
       <div class="home-pas-card solution-card">
-        <span class="home-pas-card-emoji">✨</span>
-        <h3 class="home-pas-card-title">{{ section.settings.card_3_title }}</h3>
+        <div class="home-pas-card-header">
+          <span class="home-pas-card-emoji">✨</span>
+          <h3 class="home-pas-card-title">{{ section.settings.card_3_title }}</h3>
+        </div>
         <p class="home-pas-card-text">{{ section.settings.card_3_text }}</p>
       </div>
     </div>
