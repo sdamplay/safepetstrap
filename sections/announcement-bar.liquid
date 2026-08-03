@@ -18,30 +18,42 @@
   }
 
   .kls-announcement-timer {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     margin-left: 8px;
+    vertical-align: middle;
   }
   .kls-announcement-block {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2px 6px;
+    padding: 3px 6px;
     border: 1px solid currentColor;
     border-radius: 4px;
-    min-width: 32px;
+    min-width: 36px;
+    box-sizing: border-box;
+    line-height: 1 !important;
   }
   .kls-announcement-digits {
     font-size: 13px;
-    font-weight: 700;
-    line-height: 1.1;
+    font-weight: 800;
+    line-height: 1.15 !important;
+    display: block;
+    margin: 0;
+    padding: 0;
   }
   .kls-announcement-label {
     font-size: 8px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    line-height: 1.15 !important;
+    display: block;
+    margin-top: 1px;
+    padding: 0;
+    opacity: 0.9;
   }
   @media screen and (min-width: 750px) {
     .announcement-bar__message {

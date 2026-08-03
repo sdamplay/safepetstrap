@@ -94,3 +94,49 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, in
   border: 1px solid var(--color-brand-border) !important;
   font-weight: 600 !important;
 }
+
+/* Site-Wide Typography Anti-Overlap & Hierarchy Safety Rules */
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5,
+.footer-block__heading,
+.collection-hero__title,
+.template-search__header,
+.title, .title-wrapper-with-link .title {
+  line-height: 1.35 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.6rem !important;
+  position: relative !important;
+  display: block !important;
+  word-break: break-word !important;
+}
+
+p, .rte p, .footer-block__details-content p, .template-search p {
+  line-height: 1.6 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.75rem !important;
+  position: relative !important;
+  display: block !important;
+}
+
+.footer-block__details-content p:last-child,
+.rte p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.footer-block__heading + .footer-block__details-content,
+.footer-block__heading + .footer__newsletter {
+  margin-top: 0.75rem !important;
+  display: block !important;
+  position: relative !important;
+}
+
+/* Fix catalog / search page empty/no products title overlap */
+.template-search__results,
+.collection-product-count,
+.product-count {
+  display: block !important;
+  position: relative !important;
+  margin-top: 1rem !important;
+  line-height: 1.5 !important;
+}
+
