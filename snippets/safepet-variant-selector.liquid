@@ -3,6 +3,10 @@
   Optimized for CRO, Direct Response, and exact Funnelish layout replication.
 {% endcomment %}
 
+{% assign v0_id = product.variants[0].id | default: '' %}
+{% assign v1_id = product.variants[1].id | default: v0_id %}
+{% assign v2_id = product.variants[2].id | default: v0_id %}
+
 <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
   
   <!-- Table Header Bar: Item / Price -->
@@ -21,7 +25,7 @@
           id="safepet-tier-1-{{ section.id }}" 
           name="safepet_variant_tier" 
           value="1"
-          data-variant-id="{{ product.variants[0].id | default: '' }}"
+          data-variant-id="{{ v0_id }}"
           data-quantity="1"
           data-price="0.00"
         >
@@ -32,7 +36,7 @@
           <span class="safepet-tier-title">1 Seat Belt</span>
         </div>
         <div class="safepet-tier-right">
-          <span class="safepet-tier-price-free">FREE + Shipping</span>
+          <span class="safepet-tier-price-free">FREE</span>
         </div>
       </div>
     </label>
@@ -45,7 +49,7 @@
           id="safepet-tier-2-{{ section.id }}" 
           name="safepet_variant_tier" 
           value="2"
-          data-variant-id="{{ product.variants[1].id | default: '' }}"
+          data-variant-id="{{ v1_id }}"
           data-quantity="2"
           data-price="17.95"
         >
@@ -81,7 +85,7 @@
               name="safepet_variant_tier" 
               value="3" 
               checked
-              data-variant-id="{{ product.variants[2].id | default: '' }}"
+              data-variant-id="{{ v2_id }}"
               data-quantity="3"
               data-price="24.95"
             >
@@ -100,18 +104,26 @@
         <!-- Visual Gift Bundle Grid Underneath Variant 3 -->
         <div class="safepet-bundle-visuals-grid">
           
-          <!-- Item 1: eBook -->
+          <!-- Item 1: eBook Cover -->
           <div class="safepet-bundle-item">
             <div class="safepet-bundle-img-box">
-              <svg viewBox="0 0 64 64" fill="none" class="safepet-gift-svg">
-                <rect x="10" y="8" width="44" height="48" rx="4" fill="#FEE2E2" stroke="#DC2626" stroke-width="2"/>
-                <path d="M18 20h28M18 28h28M18 36h20" stroke="#DC2626" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="40" cy="42" r="6" fill="#E53935"/>
-                <path d="M38 42l1.5 1.5L43 40" stroke="#FFF" stroke-width="1.5"/>
+              <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="safepet-gift-svg">
+                <!-- Book Cover Background -->
+                <rect width="100" height="120" rx="6" fill="#FFFDF0" stroke="#E5E7EB" stroke-width="2"/>
+                <rect x="0" y="0" width="100" height="24" fill="#FEE2E2"/>
+                <text x="50" y="16" font-size="9" fill="#DC2626" font-weight="bold" text-anchor="middle">Dog Training</text>
+                <rect x="10" y="28" width="80" height="20" rx="3" fill="#E53935"/>
+                <text x="50" y="42" font-size="13" fill="#FFFFFF" font-weight="900" text-anchor="middle" letter-spacing="0.5">SECRETS</text>
+                <text x="50" y="56" font-size="6" fill="#4B5563" font-weight="bold" text-anchor="middle">90 Dog Tricks To Engage & Bond</text>
+                <!-- Dog Graphic Box -->
+                <rect x="25" y="62" width="50" height="42" rx="4" fill="#E5E7EB"/>
+                <circle cx="50" cy="80" r="14" fill="#9CA3AF"/>
+                <path d="M42 75c0-4 16-4 16 0" stroke="#111827" stroke-width="2"/>
+                <!-- Heart Logo -->
+                <path d="M50 106 c-2-2-6-5-6-8 0-2 2-4 4-4 2 0 2 1 2 2 0-1 0-2 2-2 2 0 4 2 4 4 0 3-4 6-6 8z" fill="#DC2626"/>
               </svg>
             </div>
             <div class="safepet-bundle-info">
-              <span class="safepet-bundle-name">Dog Training Secrets</span>
               <span class="safepet-strike-price">($29.95 Value)</span>
               <span class="safepet-free-text">FREE</span>
             </div>
@@ -122,15 +134,21 @@
           <!-- Item 2: 3-Pack Seat Belts -->
           <div class="safepet-bundle-item">
             <div class="safepet-bundle-img-box">
-              <svg viewBox="0 0 64 64" fill="none" class="safepet-gift-svg">
-                <path d="M16 12v36M24 12v36M32 12v36" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
-                <rect x="12" y="32" width="24" height="12" rx="3" fill="#E53935"/>
-                <circle cx="48" cy="24" r="10" fill="#DC2626"/>
-                <text x="48" y="27" font-size="9" fill="#FFF" font-weight="bold" text-anchor="middle">3x</text>
+              <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="safepet-gift-svg">
+                <!-- 3-Pack Red Badge -->
+                <ellipse cx="50" cy="18" rx="30" ry="12" fill="#FFFFFF" stroke="#DC2626" stroke-width="3"/>
+                <text x="50" y="22" font-size="12" fill="#DC2626" font-weight="900" text-anchor="middle">3 Pack</text>
+                <!-- Seatbelt Straps -->
+                <path d="M35 38 L30 105" stroke="#111827" stroke-width="8" stroke-linecap="round"/>
+                <path d="M50 38 L50 105" stroke="#111827" stroke-width="8" stroke-linecap="round"/>
+                <path d="M65 38 L70 105" stroke="#111827" stroke-width="8" stroke-linecap="round"/>
+                <!-- Zinc Clips -->
+                <rect x="25" y="98" width="10" height="14" rx="2" fill="#9CA3AF" stroke="#4B5563" stroke-width="1.5"/>
+                <rect x="45" y="98" width="10" height="14" rx="2" fill="#9CA3AF" stroke="#4B5563" stroke-width="1.5"/>
+                <rect x="65" y="98" width="10" height="14" rx="2" fill="#9CA3AF" stroke="#4B5563" stroke-width="1.5"/>
               </svg>
             </div>
             <div class="safepet-bundle-info">
-              <span class="safepet-bundle-name">3-Pack Seat Belts</span>
               <span class="safepet-strike-price">($74.85 Value)</span>
               <span class="safepet-just-price">Just $24.95</span>
             </div>
@@ -141,14 +159,17 @@
           <!-- Item 3: Orange Collapsible Dog Bowl -->
           <div class="safepet-bundle-item">
             <div class="safepet-bundle-img-box">
-              <svg viewBox="0 0 64 64" fill="none" class="safepet-gift-svg">
-                <ellipse cx="32" cy="28" rx="22" ry="8" fill="#FB923C" stroke="#EA580C" stroke-width="2"/>
-                <path d="M10 28c0 10 10 18 22 18s22-8 22-18" fill="#F97316" stroke="#EA580C" stroke-width="2"/>
-                <ellipse cx="32" cy="28" rx="14" ry="5" fill="#FED7AA"/>
+              <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="safepet-gift-svg">
+                <!-- Outer Rim -->
+                <ellipse cx="50" cy="50" rx="38" ry="18" fill="#F97316" stroke="#EA580C" stroke-width="3"/>
+                <!-- Inner Bowl Wall Rings -->
+                <ellipse cx="50" cy="54" rx="30" ry="13" fill="#FB923C" stroke="#EA580C" stroke-width="2"/>
+                <ellipse cx="50" cy="57" rx="22" ry="9" fill="#FFEDD5" stroke="#EA580C" stroke-width="1.5"/>
+                <!-- Carabiner Ring -->
+                <rect x="8" y="44" width="10" height="14" rx="5" fill="none" stroke="#9CA3AF" stroke-width="3"/>
               </svg>
             </div>
             <div class="safepet-bundle-info">
-              <span class="safepet-bundle-name">Orange Collapsible Bowl</span>
               <span class="safepet-strike-price">($14.95 Value)</span>
               <span class="safepet-free-text">FREE</span>
             </div>
@@ -364,8 +385,8 @@
   }
 
   .safepet-bundle-img-box {
-    width: 54px;
-    height: 54px;
+    width: 60px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -383,13 +404,6 @@
     flex-direction: column;
     align-items: center;
     gap: 1px;
-  }
-
-  .safepet-bundle-name {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #111827;
-    display: none; /* Hidden for clean visual layout matching Screenshot 2 */
   }
 
   .safepet-strike-price {
@@ -442,8 +456,8 @@
       padding: 0 1px;
     }
     .safepet-bundle-img-box {
-      width: 40px;
-      height: 40px;
+      width: 46px;
+      height: 54px;
     }
     .safepet-strike-price {
       font-size: 0.68rem;
@@ -457,30 +471,43 @@
 
 <script>
   (function() {
-    document.addEventListener('DOMContentLoaded', function() {
+    function initVariantSelector() {
       var container = document.getElementById('safepet-variant-selector-{{ section.id }}');
       if (!container) return;
 
       var radioButtons = container.querySelectorAll('input[name="safepet_variant_tier"]');
       
+      function updateForm(radio) {
+        var variantId = radio.getAttribute('data-variant-id');
+        var quantity = radio.getAttribute('data-quantity');
+        
+        var form = radio.closest('form') || document.querySelector('form[action*="/cart/add"]');
+        if (form) {
+          var variantInput = form.querySelector('input[name="id"]');
+          if (variantInput && variantId && variantId !== '') {
+            variantInput.value = variantId;
+          }
+          var quantityInput = form.querySelector('input[name="quantity"]');
+          if (quantityInput && quantity) {
+            quantityInput.value = quantity;
+          }
+        }
+      }
+
       radioButtons.forEach(function(radio) {
         radio.addEventListener('change', function() {
-          var variantId = this.getAttribute('data-variant-id');
-          var quantity = this.getAttribute('data-quantity');
-          
-          var form = this.closest('form') || document.querySelector('form[action*="/cart/add"]');
-          if (form) {
-            var variantInput = form.querySelector('input[name="id"]');
-            if (variantInput && variantId) {
-              variantInput.value = variantId;
-            }
-            var quantityInput = form.querySelector('input[name="quantity"]');
-            if (quantityInput && quantity) {
-              quantityInput.value = quantity;
-            }
-          }
+          updateForm(this);
         });
+        if (radio.checked) {
+          updateForm(radio);
+        }
       });
-    });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVariantSelector);
+    } else {
+      initVariantSelector();
+    }
   })();
 </script>
