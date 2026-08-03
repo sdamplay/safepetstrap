@@ -270,7 +270,7 @@
         if (!isNaN(parsed)) endTime = parsed;
       }
       if (!endTime) {
-        endTime = Date.now() + (2 * 24 * 60 * 60 * 1000) + (14 * 60 * 60 * 1000) + (37 * 60 * 1000) + (52 * 1000);
+        endTime = Date.now() + (3 * 60 * 60 * 1000) + (4 * 1000);
       }
       var daysEl = timer.querySelector('[data-days]');
       var hoursEl = timer.querySelector('[data-hours]');
@@ -284,7 +284,17 @@
         var h = Math.floor((diff % 86400000) / 3600000);
         var m = Math.floor((diff % 3600000) / 60000);
         var s = Math.floor((diff % 60000) / 1000);
-        if (daysEl) daysEl.textContent = pad(d);
+        if (daysEl) {
+          daysEl.textContent = pad(d);
+          var daysBlock = daysEl.closest('.kls-announcement-block');
+          if (daysBlock) {
+            if (d === 0) {
+              daysBlock.style.display = 'none';
+            } else {
+              daysBlock.style.display = '';
+            }
+          }
+        }
         if (hoursEl) hoursEl.textContent = pad(h);
         if (minutesEl) minutesEl.textContent = pad(m);
         if (secondsEl) secondsEl.textContent = pad(s);
