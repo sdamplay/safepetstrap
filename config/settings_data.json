@@ -1054,11 +1054,6 @@
         "settings": {
           "allowed_templates": ""
         }
-      },
-      "14826766009936288847": {
-        "type": "shopify://apps/discounty/blocks/sdk/d65eb522-0d94-499f-9831-d4b3301f5340",
-        "disabled": false,
-        "settings": {}
       }
     }
   },
