@@ -1,8 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-product",
-      "disabled": true,
       "blocks": {
         "title": {
           "type": "title",
@@ -40,9 +48,6 @@
             "custom_badge_text": "🚨 FREE + Shipping Initiative",
             "icon_1": "redeem",
             "filled_icon_1": false,
-            "price_font_size": 24,
-            "compare_price_font_size": 16,
-            "alignment": "left",
             "margin_top": 0,
             "margin_bottom": 12
           }
@@ -62,14 +67,6 @@
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": false,
-            "atc_button_style": "primary",
-            "atc_custom_icon": "",
-            "atc_custom_icon_filled": false,
-            "atc_icon_position": "left",
-            "atc_icon_scale": 100,
-            "atc_animate_button": "none",
-            "atc_subtext": "🔒 256-Bit Encrypted Checkout | 30-Day Money Back Guarantee",
-            "custom_atc_text": "CLAIM YOUR FREE SEAT BELT NOW",
             "margin_top": 12,
             "margin_bottom": 15
           }
@@ -83,6 +80,7 @@
         "safepet_variant_selector",
         "buy_buttons"
       ],
+      "disabled": true,
       "settings": {
         "display_id": false,
         "enable_sticky_info": true,

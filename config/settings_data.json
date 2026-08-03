@@ -13,10 +13,10 @@
     "disable_inspect": false,
     "country_list_function": "block",
     "country_list": "",
-    "logo": "shopify://shop_images/Tiny_Thrive_1.png",
-    "logo_width": 200,
-    "mobile_logo_width": 180,
-    "favicon": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
+    "logo": "shopify://shop_images/SafePet_1260x_2x_copy_2.png",
+    "logo_width": 180,
+    "mobile_logo_width": 140,
+    "favicon": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart_copy.png",
     "colors_solid_button_labels": "#ffffff",
     "colors_accent_1": "#E53935",
     "gradient_accent_1": "",
@@ -1046,16 +1046,7 @@
         }
       }
     },
-    "content_for_index": [],
-    "blocks": {
-      "3667842014806057753": {
-        "type": "shopify://apps/one-click-upsell/blocks/app-embed/bfe6e378-b73a-4871-b8d3-7d6ede22678e",
-        "disabled": false,
-        "settings": {
-          "allowed_templates": ""
-        }
-      }
-    }
+    "content_for_index": []
   },
   "presets": {
     "Default": {
