@@ -7,23 +7,23 @@
   
   <div class="safepet-packages-list">
     
-    <!-- TIER 1: 1 Pack -->
+    <!-- TIER 1: 1 Seat Belt -->
+    <input 
+      type="radio" 
+      id="safepet-tier-1-{{ section.id }}" 
+      name="safepet_variant_tier" 
+      value="1"
+      data-variant-id="{{ v0_id }}"
+      data-quantity="1"
+      data-price="0.00"
+      style="display: none;"
+    >
     <label class="safepet-pkg-card" for="safepet-tier-1-{{ section.id }}">
-      <input 
-        type="radio" 
-        id="safepet-tier-1-{{ section.id }}" 
-        name="safepet_variant_tier" 
-        value="1"
-        data-variant-id="{{ v0_id }}"
-        data-quantity="1"
-        data-price="0.00"
-        style="display: none;"
-      >
       <div class="safepet-pkg-main-row">
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">1 Pack — Starter Pack</span>
+            <span class="safepet-pkg-title">1 Seat Belt — Starter Pack</span>
             <span class="safepet-pkg-subtitle">Perfect to protect one pup</span>
           </div>
         </div>
@@ -34,18 +34,18 @@
       </div>
     </label>
 
-    <!-- TIER 2: 2 Packs -->
+    <!-- TIER 2: 2 Seat Belts -->
+    <input 
+      type="radio" 
+      id="safepet-tier-2-{{ section.id }}" 
+      name="safepet_variant_tier" 
+      value="2"
+      data-variant-id="{{ v1_id }}"
+      data-quantity="2"
+      data-price="17.95"
+      style="display: none;"
+    >
     <label class="safepet-pkg-card" for="safepet-tier-2-{{ section.id }}">
-      <input 
-        type="radio" 
-        id="safepet-tier-2-{{ section.id }}" 
-        name="safepet_variant_tier" 
-        value="2"
-        data-variant-id="{{ v1_id }}"
-        data-quantity="2"
-        data-price="17.95"
-        style="display: none;"
-      >
       <!-- Top Badge -->
       <span class="safepet-pkg-badge safepet-badge-orange">MOST ORDERED</span>
       
@@ -53,7 +53,7 @@
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">2 Packs — Double Safety</span>
+            <span class="safepet-pkg-title">2 Seat Belts — Double Safety</span>
             <span class="safepet-pkg-subtitle">Keep both family cars equipped</span>
           </div>
         </div>
@@ -64,19 +64,19 @@
       </div>
     </label>
 
-    <!-- TIER 3: 3 Packs (Default Selected) -->
+    <!-- TIER 3: 3 Seat Belts (Default Selected) -->
+    <input 
+      type="radio" 
+      id="safepet-tier-3-{{ section.id }}" 
+      name="safepet_variant_tier" 
+      value="3" 
+      checked
+      data-variant-id="{{ v2_id }}"
+      data-quantity="3"
+      data-price="24.95"
+      style="display: none;"
+    >
     <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-3-{{ section.id }}">
-      <input 
-        type="radio" 
-        id="safepet-tier-3-{{ section.id }}" 
-        name="safepet_variant_tier" 
-        value="3" 
-        checked
-        data-variant-id="{{ v2_id }}"
-        data-quantity="3"
-        data-price="24.95"
-        style="display: none;"
-      >
       <!-- Top Badge -->
       <span class="safepet-pkg-badge safepet-badge-red">BEST VALUE + GIFT</span>
       
@@ -84,7 +84,7 @@
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">3 Packs — SafePet Bundle</span>
+            <span class="safepet-pkg-title">3 Seat Belts — SafePet Bundle</span>
             <span class="safepet-pkg-subtitle">Complete protection + Free Gifts</span>
             <span class="safepet-pkg-gift-alert">+ 🎁Free Gifts with Your Order</span>
           </div>
@@ -183,6 +183,7 @@
     font-weight: 800;
     color: #1f2937;
     line-height: 1.2;
+    transition: color 0.2s ease;
   }
 
   .safepet-pkg-subtitle {
