@@ -65,6 +65,11 @@
   #wld-kls-{{ section.id }} .kls-hero-benefit-icon {
     color: {{ section.settings.benefits_icon_color | default: '#E89BA0' }};
   }
+  @media screen and (max-width: 767px) {
+    #wld-kls-{{ section.id }} .kls-hero-benefit {
+      font-size: 12px !important;
+    }
+  }
 
   /* CTA Button styling overrides */
   #wld-kls-{{ section.id }} .kls-hero-cta {
