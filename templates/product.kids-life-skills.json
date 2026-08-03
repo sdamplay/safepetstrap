@@ -1,403 +1,235 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "main-product",
-      "disabled": true,
-      "custom_css": [],
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "rating_stars": {
+          "type": "rating_stars",
+          "settings": {
+            "rating": 4.9,
+            "star_color": "#ffcc00",
+            "bg_stars_style": "full",
+            "bg_star_color": "#ececec",
+            "label": "⭐ 4.9/5 (25,000+ Happy Pups)",
+            "size": 16,
+            "alignment": "flex-start",
+            "scroll_id": "",
+            "margin_top": 0,
+            "margin_bottom": 8
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "accent-1",
+            "compare_price_color": "text",
+            "displayed_badge": "sale",
+            "icon_scale": 140,
+            "custom_badge_text": "🚨 FREE + Shipping Initiative",
+            "icon_1": "redeem",
+            "filled_icon_1": false,
+            "price_font_size": 24,
+            "compare_price_font_size": 16,
+            "alignment": "left",
+            "margin_top": 0,
+            "margin_bottom": 12
+          }
+        },
+        "safepet_variant_selector": {
+          "type": "safepet_variant_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "atc_button_style": "primary",
+            "atc_custom_icon": "",
+            "atc_custom_icon_filled": false,
+            "atc_icon_position": "left",
+            "atc_icon_scale": 100,
+            "atc_animate_button": "none",
+            "atc_subtext": "🔒 256-Bit Encrypted Checkout | 30-Day Money Back Guarantee",
+            "custom_atc_text": "CLAIM YOUR FREE SEAT BELT NOW",
+            "margin_top": 12,
+            "margin_bottom": 16
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating_stars",
+        "price",
+        "safepet_variant_selector",
+        "buy_buttons"
+      ],
       "settings": {
         "display_id": false,
         "enable_sticky_info": true,
-        "display_variant_image_first": false,
-        "disable_prepend": true,
-        "hide_variants": false,
-        "variant_image_filtering": "none",
-        "image_zoom": "none",
-        "thumbnails_ratio": "square",
-        "arrows_color_scheme": "inverse",
-        "transparent_arrows": false,
-        "dots_color_scheme": "inverse",
-        "video_player": "play_btn",
-        "enable_video_looping": false,
-        "autoplay_videos_pause_btn": false,
-        "video_sound_btn": false,
-        "video_timeline": false,
-        "play_btn_color_scheme": "accent-1",
-        "sound_btn_color_scheme": "inverse",
-        "timeline_color": "accent-1",
         "media_size": "medium",
         "media_position": "left",
-        "gallery_layout": "thumbnail_slider",
-        "desktop_thumbnails_position": "bottom",
-        "desktop_thumbnails_count": 5,
-        "desktop_vertical_thumbnails_width": 16,
-        "desktop_vertical_thumbnails_hide_arrows": false,
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "desktop_arrows_position": "hidden",
-        "mobile_media_corner_radius": 0,
-        "mobile_spacing_pixels": 0,
-        "mobile_arrows_position": "sides",
-        "mobile_pagination": "dots_overlay",
-        "mobile_thumbnails_position": "hidden",
-        "mobile_thumbnails_count": 5,
-        "mobile_vertical_thumbnails_width": 22,
-        "mobile_vertical_thumbnails_hide_arrows": true,
-        "mobile_scroll_padding_percentage": 0,
-        "mobile_scroll_padding_pixels": 14,
-        "enable_mobile_outher_spacing": false,
-        "mobile_slides_container_width": 100,
-        "mobile_slides_inner_width": 100,
-        "trust_badge_position": "top-right",
-        "trust_badge_size": "medium",
-        "mobile_padding_top": 0,
-        "mobile_padding_bottom": 16,
-        "desktop_padding_top": 0,
-        "desktop_padding_bottom": 0
+        "gallery_layout": "thumbnail_slider"
       }
     },
-    "kids_life_skills_pMNmYd": {
-      "type": "kids-life-skills",
+    "problem_agitate_solve": {
+      "type": "home-problem-agitate-solve",
+      "settings": {
+        "badge_text": "THE HIDDEN DANGER ON THE ROAD",
+        "title": "Why 90% of Unrestrained Dogs Risk Severe Impact Injuries",
+        "subtitle": "You wouldn't let your child ride without a seatbelt. Here is why your dog needs the exact same protection.",
+        "card_1_title": "The Physics of Sudden Stops",
+        "card_1_text": "An unrestrained dog is thrown forward with tremendous kinetic force into windshields or seatbacks during emergency braking.",
+        "card_2_title": "Fatal Driver Distraction",
+        "card_2_text": "Dogs jumping onto laps or stepping on center consoles cause over 400,000 distracted driving accidents every year.",
+        "card_3_title": "The SafePet Strap Epiphany",
+        "card_3_text": "Crash-tested high-density nylon + elastic anti-whiplash buffer + 360° swivel clip = 100% peace of mind in 3 seconds.",
+        "bg_color": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "how_it_works": {
+      "type": "home-how-it-works",
+      "settings": {
+        "badge_text": "SIMPLE 3-SECOND SETUP",
+        "title": "How SafePet Strap Protects Your Dog In 3 Easy Steps",
+        "subtitle": "No tools, no complicated instructions. Works with 99.9% of vehicles out of the box.",
+        "step_1_title": "1. Clip To Harness",
+        "step_1_text": "Attach the heavy-duty 360° zinc alloy swivel snap directly to your dog's harness.",
+        "step_2_title": "2. Latch Into Seatbelt",
+        "step_2_text": "Click the universal 21mm steel tab into any car seatbelt receiver until it locks.",
+        "step_3_title": "3. Adjust & Drive Peaceful",
+        "step_3_text": "Adjust strap length (20\"-32\") so your dog can sit, lie down, or look out the window safely.",
+        "bg_color": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "about_story": {
+      "type": "home-about-story",
+      "settings": {
+        "badge_text": "OUR DIRECT RESPONSE MISSION",
+        "title": "We're Giving Away 10,000 Free Pet Seat Belts To Save Dogs' Lives",
+        "story_text": "<p>When our founder lost a beloved dog in a minor car accident that a simple seatbelt would have prevented, SafePet Strap was born. We made a vow: no dog owner should ever suffer that heartbreak. That's why we cover the full $29.95 retail price of your seatbelt today — you only pay standard insured shipping at checkout!</p>",
+        "image": "",
+        "disclosure_text": "SafePet Strap — safepetstrap.com",
+        "benefit_1": "Universal Compatibility",
+        "benefit_2": "Anti-Whiplash Buffer",
+        "benefit_3": "25,000+ Happy Pups",
+        "benefit_4": "30-Day Guarantee",
+        "cta_label": "Claim Your FREE Seat Belt Now",
+        "about_url": "/products/dog-seat-belt",
+        "bg_color": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "trust_section": {
+      "type": "home-trust",
+      "settings": {
+        "badge_text": "VERIFIED PROOF & REVIEWS",
+        "title": "Over 25,000+ Dog Parents Drive With Total Peace of Mind",
+        "body_text": "Built from military-grade nylon, reflective night stitching, and shock-dampening elastic. Rated 4.9/5 stars by veterinarians, dog trainers, and loving pet parents nationwide.",
+        "footer_text": "⭐ ⭐ ⭐ ⭐ ⭐ 4.9/5 Verified Rating (25,000+ Happy Pups)",
+        "bg_color": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "guarantee": {
+      "type": "home-guarantee",
+      "settings": {
+        "title": "Our Ironclad 30-Day 100% Risk-Free Guarantee",
+        "text": "Put SafePet Strap to the test in your car for 30 full days. If you don't feel 100% more confident and peaceful on every drive, simply email us for a full, instant refund. Zero risk, zero hassle.",
+        "cta_label": "Claim Free Seat Belt (Just Cover Shipping)",
+        "refund_policy_url": "/policies/refund-policy",
+        "bg_color": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "faq": {
+      "type": "home-faq",
       "blocks": {
-        "faq_TkDYTA": {
-          "type": "faq",
+        "faq_1": {
+          "type": "faq_item",
           "settings": {
-            "emoji": "💸",
-            "question": "Why is this free today?",
-            "answer": "<p>We want as many families as possible to have this roadmap, so for a limited time we're covering the cost of the workbook itself. You only cover a small digital processing fee to unlock instant access. Once today's batch is gone, it returns to its regular $58 price.</p>"
+            "question": "Will this fit my specific car model?",
+            "answer": "<p>Yes! SafePet Strap uses the standard 0.83-inch (21mm) universal seatbelt latch that fits 99.9% of cars, trucks, and SUVs.</p>"
           }
         },
-        "faq_RHjUTa": {
-          "type": "faq",
+        "faq_2": {
+          "type": "faq_item",
           "settings": {
-            "emoji": "📩",
-            "question": "How will I get my workbook?",
-            "answer": "<p>The moment your order is confirmed, we'll email your download link straight to your inbox. Most parents are printing pages within 10 minutes. Be sure to check your spam folder just in case!</p>"
+            "question": "Should I clip this to a collar or harness?",
+            "answer": "<p>Always attach the 360° swivel clip to a harness to safely distribute inertia forces across your dog's chest rather than their neck.</p>"
           }
         },
-        "faq_xfQdDW": {
-          "type": "faq",
+        "faq_3": {
+          "type": "faq_item",
           "settings": {
-            "emoji": "📚",
-            "question": "What's actually inside the bundle?",
-            "answer": "<p>150+ printable pages covering daily routines, money basics, emotional regulation, manners, and problem-solving, organized by age so you never have to guess what comes next.</p>"
+            "question": "How does the FREE + Shipping offer work?",
+            "answer": "<p>We cover the full $29.95 retail price of the seatbelt for our awareness promotion. You only pay standard insured shipping ($9.95) at checkout!</p>"
           }
         },
-        "faq_3m4wGU": {
-          "type": "faq",
+        "faq_4": {
+          "type": "faq_item",
           "settings": {
-            "emoji": "👶",
-            "question": "What ages is this designed for?",
-            "answer": "<p>Built for ages 2–12. Activities are simple enough for toddlers and flexible enough to challenge older kids too. Print whatever fits your child today.</p>"
-          }
-        },
-        "faq_ktMHfj": {
-          "type": "faq",
-          "settings": {
-            "emoji": "⏰",
-            "question": "I barely have time to breathe. Can I actually do this?",
-            "answer": "<p>Yes. Every activity is built to take 10 minutes or less. Open the PDF, hand it to your child, done. No planning, no prep, no late-night Pinterest spiral required.</p>"
-          }
-        },
-        "testimonial_JEwrYm": {
-          "type": "testimonial",
-          "settings": {
-            "title": "My 8-Year-Old Cooked Breakfast. Alone.",
-            "body": "I'd been meaning to teach her for two years. One Sunday afternoon and a few worksheets later, she made herself eggs and toast, and was beaming the whole time. I actually got emotional. Worth every minute, and it didn't cost me a thing.",
-            "author_name": "Megan L.",
-            "author_tag": "Mom of 2 (ages 5 & 8)"
-          }
-        },
-        "testimonial_AQJbh3": {
-          "type": "testimonial",
-          "settings": {
-            "title": "Finally Stopped Comparing My Kid To Instagram Toddlers",
-            "body": "I was in a spiral every night reading about what other 7-year-olds could already do. This gave me an actual plan instead of more guilt. My son is ahead of where he was a month ago, and honestly, so am I.",
-            "author_name": "Luna K.",
-            "author_tag": "Working mom of 3"
-          }
-        },
-        "testimonial_EiyaeU": {
-          "type": "testimonial",
-          "settings": {
-            "title": "I Don't Google-Parent At Midnight Anymore",
-            "body": "This is the first resource that actually told me what to teach and when. There's a simple list of skills by age, and my son is already two steps ahead of where his class is starting.",
-            "author_name": "Sarah T.",
-            "author_tag": "Elementary teacher & mom of 2"
+            "question": "What if I have multiple dogs?",
+            "answer": "<p>Our most popular bundle is the 3-Pack + 2 FREE Gifts ($120 Value) for just $24.95! You can select 3x seatbelts right on the offer page.</p>"
           }
         }
       },
       "block_order": [
-        "faq_TkDYTA",
-        "faq_RHjUTa",
-        "faq_xfQdDW",
-        "faq_3m4wGU",
-        "faq_ktMHfj",
-        "testimonial_JEwrYm",
-        "testimonial_AQJbh3",
-        "testimonial_EiyaeU"
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
       ],
-      "custom_css": [],
-      "name": "TinyThrive Life Skills",
       "settings": {
-        "product": "kids-skills",
-        "hero_main_image": "shopify://shop_images/Untitled_design_42_1.png",
-        "hero_thumb_1": "shopify://shop_images/5.png",
-        "hero_thumb_2": "shopify://shop_images/4.png",
-        "hero_thumb_3": "shopify://shop_images/Untitled_design_43_1.png",
-        "hero_thumb_4": "shopify://shop_images/260609_0008_image_edit_4048.png",
-        "hero_badge_tl": "150+ Pages",
-        "hero_badge_tc": "Loved By Busy Parents",
-        "hero_badge_tr": "6,200+ Happy Parents",
-        "hero_rating_text": "(2,184 verified reviews)",
-        "hero_headline": "Raise A Confident, Capable Kid — One 10-Minute Activity At A Time",
-        "hero_price_sale": "$0.00",
-        "hero_price_original": "37.00",
-        "hero_save_pill": "SAVE 100%",
-        "hero_benefit_1": "Age 2-12 Guide — Exact steps at every age",
-        "hero_benefit_2": "Teach Tonight — Instant download, no prep",
-        "hero_benefit_3": "For Tired Moms — Clear guidance, zero fluff",
-        "hero_cta_label": "CLAIM MY FREE BUNDLE",
-        "hero_trust_text": "100% digital. Delivered to your inbox in minutes — nothing to wait for, nothing to assemble.",
-        "hero_guarantee_pill": "90-Day Money-Back Guarantee",
-        "hero_testimonial_avatar": "shopify://shop_images/Screenshot_2026-02-16_195029.png",
-        "hero_testimonial_quote": "My son used to melt down every morning over getting dressed. Three weeks into this workbook, he picks his own clothes, makes his bed, and told me he's 'a big kid now.' I teared up reading that page.",
-        "hero_testimonial_name": "Megan T., mom of 2 (ages 5 & 8)",
-        "faq_heading": "Still Have Questions? We've Got You.",
-        "ready_image": "shopify://shop_images/ezgif.com-optimize_6.gif",
-        "ready_heading": "Ready To Swap Power Struggles For 'I Got It, Mom'?",
-        "ready_body": "No more reminders. No more nagging. Just print a page, hand it over, and watch your kid take it from there. Every activity quietly builds the confidence, responsibility, and emotional skills behind those proud 'I did it myself' moments.",
-        "ready_cta_label": "👉 Yes, Send My Kid's Roadmap",
-        "ready_cta_url": "",
-        "grow_heading": "Stop Guessing 🌱 Start Growing With A Plan ✨",
-        "grow_body": "From tying shoelaces to naming big feelings, this bundle walks your child through the exact skills that build independence, one small page at a time. Age-by-age, skill-by-skill, no guesswork required.",
-        "grow_quote": "The moment a child finishes something on their own, ties the shoe, makes the bed, says 'I'm frustrated' instead of screaming, something shifts. That quiet pride is where real confidence starts.",
-        "grow_thumb_1": "shopify://shop_images/260610_0002_image_edit_5623.png",
-        "grow_thumb_2": "shopify://shop_images/260610_0001_image_edit_4923.png",
-        "grow_thumb_3": "shopify://shop_images/260610_0003_image_edit_6493.png",
-        "testimonials_heading": "Real Parents. Real Mornings That Got Easier.",
-        "stats_heading": "Trusted By 6,200+ Parents & Teachers Worldwide",
-        "stat_1_value": "86%",
-        "stat_1_desc": "<p>Felt <strong>confident</strong> about what to teach next instead of overwhelmed</p>",
-        "stat_2_value": "92%",
-        "stat_2_desc": "<p>Said their child <strong>mastered 3+ new life skills</strong> within the first month</p>",
-        "stat_3_value": "97%",
-        "stat_3_desc": "<p>Stopped the <strong>late-night parenting spirals</strong> and finally felt like they had a plan</p>",
-        "stats_footnote": "*Based on a survey of 2,400+ parents conducted 30 days after starting the workbook. Individual results vary by child.",
-        "comparison_heading": "Why Parents Choose TinyThrive Over Random Printables",
-        "comparison_brand_label": "Tiny Thrive",
-        "comparison_others_label": "Random Prints",
-        "comparison_features": "Age-by-age roadmap — no guesswork\nStep-by-step instructions, not blank pages\n10-minute activities, zero prep\nBuilt around real child-development milestones\nPrintable progress tracker included\nLifetime access & free updates",
-        "guarantee_heading": "Try It Risk-Free For 90 Days",
-        "guarantee_body": "Print it, hand it to your kid, and use it for a full 90 days. If you don't see more confidence, more independence, and fewer power struggles, just email us and we'll refund every cent — no forms, no guilt trips, no 'have you really tried' questions.",
-        "guarantee_cta_label": "GET MY BUNDLE RISK-FREE",
-        "guarantee_cta_url": "",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "margin_top": -40,
-        "margin_bottom": 0,
-        "font_size_base": 16,
-        "bg_color": "#ffffff",
-        "text_color": "#2d2d2d",
-        "headline_font_size": 20,
-        "headline_color": "#2d2d2d",
-        "headline_margin_top": -14,
-        "headline_margin_bottom": 0,
-        "rating_font_size": 16,
-        "rating_color": "#6b6b6b",
-        "rating_star_color": "#f5b800",
-        "rating_margin_top": 0,
-        "rating_margin_bottom": 0,
-        "price_sale_font_size": 32,
-        "price_sale_color": "#d0021b",
-        "price_original_font_size": 18,
-        "price_original_color": "#6b6b6b",
-        "price_margin_top": -10,
-        "price_margin_bottom": 0,
-        "benefits_font_size": 16,
-        "benefits_color": "#2d2d2d",
-        "benefits_icon_color": "#e89ba0",
-        "benefits_margin_top": -10,
-        "benefits_margin_bottom": 0,
-        "cta_font_size": 18,
-        "cta_bg_color": "#d47a82",
-        "cta_text_color": "#ffffff",
-        "cta_margin_top": 0,
-        "cta_margin_bottom": 0,
-        "testimonial_bg_color": "#fff5f6",
-        "testimonial_text_color": "#2d2d2d",
-        "testimonial_margin_top": 0,
-        "testimonial_margin_bottom": 0
+        "badge_text": "FREQUENTLY ASKED QUESTIONS",
+        "title": "Got Questions? We Have Answers",
+        "subtitle": "Everything you need to know about protecting your pup with SafePet Strap.",
+        "bg_color": "",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
-    "b321ab88-2b59-4dba-bade-54885c874ca5": {
-      "type": "section-divider",
+    "home_footer": {
+      "type": "home-footer",
       "settings": {
-        "visibility": "always-display",
-        "shape": "waves_3",
-        "flip_horizontal": false,
-        "flip_vertical": false,
-        "shape_color": "accent-1",
-        "custom_shape_color": "#dd1d1d",
-        "background_color": "background-1",
-        "custom_background_color": "#ffffff",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "disabled": true,
-      "settings": {
-        "display_id": false,
-        "title": "You may also like",
-        "title_highlight_color": "#6d388b",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "color_scheme": "background-1",
-        "image_ratio": "adapt",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": false,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 24
-      }
-    },
-    "social_proof_toast_m3B7bY": {
-      "type": "social-proof-toast",
-      "blocks": {
-        "testimonial_notification_yXfpwF": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "A",
-            "name_descriptor": "Amanda K. | Mom of 2 (ages 4 & 6)",
-            "quote": "No more morning tantrums. They actually get dressed and pack their own backpacks now.",
-            "avatar_image": "shopify://shop_images/503854332_24320464580871077_5616424560795469632_n.jpg"
-          }
-        },
-        "testimonial_notification_MfqiFE": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "J",
-            "name_descriptor": "Jessica P. | Former screen-time negotiator",
-            "quote": "Instead of begging for the iPad, they started doing the offline challenges on page 42!"
-          }
-        },
-        "testimonial_notification_GY79NG": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "M",
-            "name_descriptor": "Marcus D. | Dad of active 5yo twins",
-            "quote": "Bedtime used to take 2 hours. The routine checklist turned it into a 15-minute breeze.",
-            "avatar_image": "shopify://shop_images/465729162_9025030114195092_3416494419900385600_n.jpg"
-          }
-        },
-        "testimonial_notification_Lr7Anb": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "R",
-            "name_descriptor": "Rachel W. | Mom of sibling rivals (5 & 7)",
-            "quote": "They actually shared toys without me refereeing. Sibling peace is real!",
-            "avatar_image": "shopify://shop_images/468084724_10161796300893363_1221233087399433715_n.jpg"
-          }
-        },
-        "testimonial_notification_mHFBiV": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "K",
-            "name_descriptor": "Katie M. | Mom of messy 8yo boy",
-            "quote": "He cleaned his entire room without being asked once. I had to double-check it!",
-            "avatar_image": "shopify://shop_images/731068459_3500681523431647_893546762399973601_n.jpg"
-          }
-        },
-        "testimonial_notification_96WJRj": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "E",
-            "name_descriptor": "Emily S. | Work-from-home mom",
-            "quote": "I got a solid hour of quiet focus time while my 6-year-old built the chore chart.",
-            "avatar_image": "shopify://shop_images/clipboard-image-1782740726.png"
-          }
-        },
-        "testimonial_notification_NfHUDM": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "H",
-            "name_descriptor": "Haley J. | Mom of sensitive 7yo",
-            "quote": "The 'calm down zone' template helped us stop three major tantrums this week."
-          }
-        },
-        "testimonial_notification_AxwjaT": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "T",
-            "name_descriptor": "Todd F. | Dad of 9yo daughter",
-            "quote": "She's budgeting her own allowance now instead of asking me to buy random toys.",
-            "avatar_image": "shopify://shop_images/560021979_122144154296841003_602520310554262690_n.jpg"
-          }
-        },
-        "testimonial_notification_a3YitL": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "N",
-            "name_descriptor": "Nicole V. | Mom of picky 5yo",
-            "quote": "She tried three new vegetables this week without us having to make a deal. Magic."
-          }
-        },
-        "testimonial_notification_bK4X3j": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "D",
-            "name_descriptor": "Daniel S. | Dad of shy 6yo",
-            "quote": "His confidence soared. He walked up to the cashier and ordered his own ice cream!"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_notification_yXfpwF",
-        "testimonial_notification_MfqiFE",
-        "testimonial_notification_GY79NG",
-        "testimonial_notification_Lr7Anb",
-        "testimonial_notification_mHFBiV",
-        "testimonial_notification_96WJRj",
-        "testimonial_notification_NfHUDM",
-        "testimonial_notification_AxwjaT",
-        "testimonial_notification_a3YitL",
-        "testimonial_notification_bK4X3j"
-      ],
-      "name": "Social Proof Toast",
-      "settings": {
-        "enable": true,
-        "position": "bottom-left",
-        "bg_color": "#fff5f6",
-        "accent_color": "#e89ba0",
-        "text_color": "#2d2d2d",
-        "text_secondary_color": "#6b6b6b",
-        "star_color": "#f5b800",
-        "font_size_quote": 13,
-        "font_size_author": 11,
-        "first_show_delay": 6,
-        "between_delay": 10,
-        "show_duration": 5
+        "brand_name": "SafePet Strap",
+        "logo": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
+        "logo_initials": "SPS",
+        "business_address": "SafePet Strap, safepetstrap.com",
+        "support_email": "support@safepetstrap.com",
+        "about_url": "/pages/about-us",
+        "contact_url": "/pages/contact",
+        "newsletter_heading": "JOIN THE SAFE PET CLUB — GET FREE SAFETY GUIDES",
+        "newsletter_button_label": "Subscribe",
+        "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
       }
     }
   },
   "order": [
     "main",
-    "kids_life_skills_pMNmYd",
-    "b321ab88-2b59-4dba-bade-54885c874ca5",
-    "related-products",
-    "social_proof_toast_m3B7bY"
+    "problem_agitate_solve",
+    "how_it_works",
+    "about_story",
+    "trust_section",
+    "guarantee",
+    "faq",
+    "home_footer"
   ]
 }
