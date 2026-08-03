@@ -18,7 +18,7 @@
           "type": "text",
           "settings": {
             "heading": "",
-            "subtext": "<p><strong>TinyThrive </strong>is a brand of OUSI PLAY LLC. Registered in WY.</p><p><strong>🇺🇸 Proudly American</strong></p>",
+            "subtext": "<p><strong>SafePet Strap </strong>(safepetstrap.com) — Operated by OUSI PLAY LLC.</p><p><strong>🇺🇸 Proudly American</strong></p>",
             "width_desktop": 3,
             "width_mobile": "2"
           }
@@ -63,7 +63,7 @@
         "margin_top": 0,
         "padding_top": 32,
         "padding_bottom": 20,
-        "custom_colors_background": "#121212",
+        "custom_colors_background": "#111827",
         "custom_gradient_background": "",
         "custom_colors_text": "#ffffff",
         "custom_colors_solid_button_background": "#ffffff",

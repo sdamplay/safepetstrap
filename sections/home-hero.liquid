@@ -178,16 +178,27 @@
     .home-hero-container {
       grid-template-columns: 1fr;
       text-align: center;
-      gap: 30px;
+      gap: 24px;
     }
     .home-hero-content {
       align-items: center;
+      width: 100%;
     }
     .home-hero-headline {
-      font-size: 32px;
+      font-size: 28px;
+      line-height: 1.2;
+      word-break: break-word;
     }
     .home-hero-subheadline {
+      font-size: 15px;
+    }
+    .home-hero-cta {
+      width: 100%;
+      box-sizing: border-box;
       font-size: 16px;
+      padding: 16px 20px;
+      text-align: center;
+      justify-content: center;
     }
     .home-hero-image-wrap {
       order: -1;
@@ -195,8 +206,26 @@
     .home-hero-trust-inner {
       flex-direction: column;
       text-align: center;
-      gap: 16px;
+      gap: 14px;
       justify-content: center;
+    }
+    .home-hero-guarantee-pill {
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: center;
+      text-align: center;
+      word-break: break-word;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .home-hero-headline {
+      font-size: 24px;
+    }
+    .home-hero-badge {
+      font-size: 11px;
+      padding: 5px 12px;
+      word-break: break-word;
     }
   }
 {%- endstyle -%}
@@ -217,7 +246,7 @@
       {%- endif -%}
       
       {%- if section.settings.cta_label != blank -%}
-        <a href="{{ section.settings.cta_url }}" class="home-hero-cta">
+        <a href="{{ section.settings.cta_url | default: '/products/dog-seat-belt' }}" class="home-hero-cta">
           {{ section.settings.cta_label }}
         </a>
       {%- endif -%}

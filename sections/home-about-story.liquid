@@ -172,13 +172,22 @@
     }
     .home-about-content {
       align-items: center;
+      width: 100%;
     }
     .home-about-title {
       font-size: 28px;
     }
+    .home-about-cta {
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 16px;
+      padding: 16px 20px;
+      text-align: center;
+      justify-content: center;
+    }
     .home-about-benefits {
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 12px;
     }
     .home-about-disclosure-line {
       text-align: center;
@@ -256,7 +265,7 @@
       {%- endif -%}
       
       {%- if section.settings.cta_label != blank -%}
-        <a href="{{ section.settings.about_url | default: '/pages/about-us' }}" class="home-about-cta">
+        <a href="{{ section.settings.about_url | default: '/products/dog-seat-belt' }}" class="home-about-cta">
           {{ section.settings.cta_label }}
         </a>
       {%- endif -%}
@@ -272,19 +281,19 @@
       "type": "text",
       "id": "badge_text",
       "label": "Badge text",
-      "default": "OUR STORY"
+      "default": "OUR DIRECT RESPONSE MISSION"
     },
     {
       "type": "inline_richtext",
       "id": "title",
       "label": "Title",
-      "default": "Created by Parents, <em>For Parents</em>"
+      "default": "We're Giving Away 10,000 Free Pet Seat Belts To Save Dogs' Lives"
     },
     {
       "type": "richtext",
       "id": "story_text",
       "label": "Story body text",
-      "default": "<p>TinyThrive was born out of bedtime routine battles and afternoon chore power struggles. As parents, we wanted to build emotional intelligence and practical routines in our kids, but standard parenting books felt like too much theory and not enough action.</p><p>We designed these printable life-skills workbooks to give parents a simple, visual roadmap that kids love following. It is our mission to support families with clear tools that create peaceful, independent routines.</p>"
+      "default": "<p>When our founder lost a beloved dog in a minor car accident that a simple seatbelt would have prevented, SafePet Strap was born. We made a vow: no dog owner should ever suffer that heartbreak. That's why we cover the full $29.95 retail price of your seatbelt today — you only pay standard insured shipping at checkout!</p>"
     },
     {
       "type": "image_picker",
@@ -295,7 +304,7 @@
       "type": "text",
       "id": "disclosure_text",
       "label": "Disclosure Text",
-      "default": "TinyThrive is operated by OUSI PLAY LLC."
+      "default": "SafePet Strap — safepetstrap.com"
     },
     {
       "type": "text",

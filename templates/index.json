@@ -89,6 +89,7 @@
         "title": "Our Ironclad 30-Day 100% Risk-Free Guarantee",
         "text": "Put SafePet Strap to the test in your car for 30 full days. If you don't feel 100% more confident and peaceful on every drive, simply email us for a full, instant refund. Zero risk, zero hassle.",
         "cta_label": "Claim Free Seat Belt (Just Cover Shipping)",
+        "cta_url": "/products/dog-seat-belt",
         "refund_policy_url": "/policies/refund-policy",
         "bg_color": "",
         "padding_top": 48,
@@ -116,7 +117,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How does the FREE + Shipping offer work?",
-            "answer": "<p>We cover the full $29.95 retail price of the seatbelt for our awareness promotion. You only pay standard insured shipping ($9.95) at checkout!</p>"
+            "answer": "<p>We cover the full $29.95 retail price of the seatbelt for our awareness promotion. You only pay standard insured shipping at checkout!</p>"
           }
         },
         "faq_4": {
