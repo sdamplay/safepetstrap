@@ -23,6 +23,9 @@
     gap: 8px;
     margin-left: 8px;
   }
+  .kls-announcement-timer.demo-timer-no-days .kls-announcement-block:first-child {
+    display: none !important;
+  }
   .kls-announcement-block {
     display: flex;
     flex-direction: column;
@@ -42,6 +45,11 @@
     font-size: 8px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+  }
+  @media screen and (min-width: 750px) {
+    .announcement-bar__message {
+      white-space: nowrap;
+    }
   }
   @media screen and (max-width: 749px) {
     .announcement-bar__content-wrapper {
@@ -189,7 +197,7 @@
                               {%- endif -%}
 
                               {%- if block.settings.countdown_end != blank or block.settings.enable_countdown_demo -%}
-                                <div class="kls-announcement-timer" data-kls-timer data-end="{{ block.settings.countdown_end }}">
+                                <div class="kls-announcement-timer{% if block.settings.countdown_end == blank %} demo-timer-no-days{% endif %}" data-kls-timer data-end="{{ block.settings.countdown_end }}">
                                   <div class="kls-announcement-block">
                                     <span class="kls-announcement-digits" data-days>00</span>
                                     <span class="kls-announcement-label">Days</span>
