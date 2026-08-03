@@ -18,12 +18,11 @@
 
   .home-faq-badge {
     display: inline-block;
-    padding: 6px 16px;
-    background-color: #FEF2F2;
-    color: #DC2626;
-    border: 1px solid #FCA5A5;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
     border-radius: 999px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -33,21 +32,21 @@
   .home-faq-title {
     font-family: var(--font-heading-family);
     font-size: 36px;
-    font-weight: 800;
-    color: #111827;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
     margin: 0 0 16px 0;
     line-height: 1.2;
   }
 
   .home-faq-title em {
-    color: #E53935;
+    color: var(--color-brand-primary-hover);
     font-style: normal;
   }
 
   .home-faq-subtitle {
     font-family: var(--font-body-family);
     font-size: 16px;
-    color: #4B5563;
+    color: var(--color-brand-text-secondary);
     margin: 0;
     line-height: 1.5;
   }
@@ -60,23 +59,22 @@
 
   .home-faq-item {
     background-color: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--color-brand-border);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-brand-resting);
+    transition: border-color 0.2s ease;
   }
 
   .home-faq-item[open] {
-    border-color: #E53935;
-    box-shadow: 0 4px 16px rgba(229, 57, 53, 0.1);
+    border-color: var(--color-brand-primary-hover);
   }
 
   .home-faq-question {
     font-family: var(--font-heading-family);
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
-    color: #111827;
+    color: var(--color-brand-text-primary);
     padding: 20px 24px;
     cursor: pointer;
     list-style: none;
@@ -93,8 +91,7 @@
   .home-faq-icon {
     font-size: 20px;
     transition: transform 0.2s ease;
-    color: #E53935;
-    font-weight: 800;
+    color: var(--color-brand-primary-hover);
   }
 
   .home-faq-item[open] .home-faq-icon {

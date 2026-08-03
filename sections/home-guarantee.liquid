@@ -51,24 +51,22 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #E53935;
-    color: #FFFFFF !important;
+    background-color: var(--color-brand-primary-hover);
+    color: #FFFFFF;
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
     text-decoration: none;
-    padding: 16px 36px;
+    padding: 14px 32px;
     border-radius: 999px;
-    box-shadow: 0 4px 16px rgba(229, 57, 53, 0.35);
-    transition: all 0.2s ease;
+    box-shadow: var(--shadow-brand-cta);
+    transition: background-color 0.2s ease, transform 0.1s ease;
     cursor: pointer;
     border: none;
-    letter-spacing: 0.5px;
   }
 
   .home-guarantee-cta:hover {
-    background-color: #DC2626;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.45);
+    background-color: var(--color-brand-primary);
+    transform: translateY(-1px);
   }
 
   @media (max-width: 600px) {
@@ -85,8 +83,10 @@
     .home-guarantee-cta {
       width: 100%;
       box-sizing: border-box;
+      font-size: 16px;
       padding: 16px 20px;
-      font-size: 15px;
+      text-align: center;
+      justify-content: center;
     }
   }
 {%- endstyle -%}
@@ -104,7 +104,7 @@
     </p>
     
     {%- if section.settings.cta_label != blank -%}
-      <a href="{{ section.settings.cta_url | default: '/products/dog-seat-belt' }}" class="home-guarantee-cta">
+      <a href="{{ section.settings.cta_url | default: section.settings.refund_policy_url | default: '/products/dog-seat-belt' }}" class="home-guarantee-cta">
         {{ section.settings.cta_label }}
       </a>
     {%- endif -%}

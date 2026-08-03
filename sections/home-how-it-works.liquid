@@ -19,12 +19,11 @@
 
   .home-how-badge {
     display: inline-block;
-    padding: 6px 16px;
-    background-color: #FEF2F2;
-    color: #DC2626;
-    border: 1px solid #FCA5A5;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
     border-radius: 999px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -34,21 +33,21 @@
   .home-how-title {
     font-family: var(--font-heading-family);
     font-size: 36px;
-    font-weight: 800;
-    color: #111827;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
     margin: 0 0 16px 0;
     line-height: 1.2;
   }
 
   .home-how-title em {
-    color: #E53935;
+    color: var(--color-brand-primary-hover);
     font-style: normal;
   }
 
   .home-how-subtitle {
     font-family: var(--font-body-family);
     font-size: 16px;
-    color: #4B5563;
+    color: var(--color-brand-text-secondary);
     margin: 0;
     line-height: 1.5;
   }
@@ -56,17 +55,17 @@
   .home-how-steps {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 32px;
+    gap: 40px;
     position: relative;
   }
 
   .home-how-step {
     background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    border: 1px solid var(--color-brand-border);
     border-radius: 16px;
     padding: 32px;
     text-align: center;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-brand-resting);
     position: relative;
     z-index: 2;
   }
@@ -75,16 +74,16 @@
     width: 48px;
     height: 48px;
     border-radius: 999px;
-    background-color: #E53935;
+    background-color: var(--color-brand-primary);
     color: #FFFFFF;
     font-family: var(--font-heading-family);
-    font-weight: 800;
+    font-weight: 700;
     font-size: 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.35);
+    box-shadow: var(--shadow-brand-cta);
   }
 
   .home-how-step-title {
@@ -119,9 +118,10 @@
       font-size: 28px;
     }
   }
+
   @media (max-width: 480px) {
     .home-how-step {
-      padding: 20px 16px;
+      padding: 24px 20px;
     }
     .home-how-title {
       font-size: 24px;

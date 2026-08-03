@@ -19,12 +19,11 @@
 
   .home-pas-badge {
     display: inline-block;
-    padding: 6px 16px;
-    background-color: #FEF2F2;
-    color: #DC2626;
-    border: 1px solid #FCA5A5;
+    padding: 6px 14px;
+    background-color: var(--color-brand-bg-soft-secondary);
+    color: var(--color-brand-primary-hover);
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
     border-radius: 999px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -34,21 +33,21 @@
   .home-pas-title {
     font-family: var(--font-heading-family);
     font-size: 36px;
-    font-weight: 800;
-    color: #111827;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
     margin: 0 0 16px 0;
     line-height: 1.2;
   }
 
   .home-pas-title em {
-    color: #E53935;
+    color: var(--color-brand-primary-hover);
     font-style: normal;
   }
 
   .home-pas-subtitle {
     font-family: var(--font-body-family);
     font-size: 16px;
-    color: #4B5563;
+    color: var(--color-brand-text-secondary);
     margin: 0;
     line-height: 1.5;
   }
@@ -60,66 +59,52 @@
   }
 
   .home-pas-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--color-brand-bg-soft);
+    border: 1px solid var(--color-brand-border);
     border-radius: 16px;
     padding: 32px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-brand-resting);
     display: flex;
     flex-direction: column;
     height: 100%;
-    position: relative;
   }
 
   .home-pas-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(229, 57, 53, 0.12);
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.12);
   }
 
   .home-pas-card.solution-card {
-    background-color: #FEF2F2;
-    border: 2px solid #E53935;
-  }
-
-  .home-pas-card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 16px;
-    width: 100%;
+    background-color: var(--color-brand-bg-soft-secondary);
+    border-color: var(--color-brand-primary-hover);
   }
 
   .home-pas-card-emoji {
     font-size: 36px;
-    line-height: 1 !important;
-    margin: 0;
-    display: inline-block;
-  }
-
-  .home-pas-card-title {
-    font-family: var(--font-heading-family), -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: #111827;
-    line-height: 1.35 !important;
-    margin: 0;
-    word-break: break-word;
+    margin-bottom: 20px;
     display: block;
   }
 
+  .home-pas-card-title {
+    font-family: var(--font-heading-family);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-brand-text-primary);
+    margin: 0 0 16px 0;
+  }
+
   .home-pas-card-text {
-    font-family: var(--font-body-family), -apple-system, sans-serif;
+    font-family: var(--font-body-family);
     font-size: 15px;
-    line-height: 1.6 !important;
-    color: #4B5563;
+    line-height: 1.6;
+    color: var(--color-brand-text-secondary);
     margin: 0;
     flex-grow: 1;
   }
 
   .home-pas-card.solution-card .home-pas-card-text {
-    color: #111827;
+    color: var(--color-brand-text-primary);
   }
 
   @media (max-width: 900px) {
@@ -138,9 +123,10 @@
       font-size: 28px;
     }
   }
+
   @media (max-width: 480px) {
     .home-pas-card {
-      padding: 20px 16px;
+      padding: 24px 20px;
     }
     .home-pas-title {
       font-size: 24px;
@@ -163,28 +149,22 @@
     <div class="home-pas-grid">
       <!-- PROBLEM -->
       <div class="home-pas-card">
-        <div class="home-pas-card-header">
-          <span class="home-pas-card-emoji">😩</span>
-          <h3 class="home-pas-card-title">{{ section.settings.card_1_title }}</h3>
-        </div>
+        <span class="home-pas-card-emoji">😩</span>
+        <h3 class="home-pas-card-title">{{ section.settings.card_1_title }}</h3>
         <p class="home-pas-card-text">{{ section.settings.card_1_text }}</p>
       </div>
 
       <!-- AGITATE -->
       <div class="home-pas-card">
-        <div class="home-pas-card-header">
-          <span class="home-pas-card-emoji">⚡</span>
-          <h3 class="home-pas-card-title">{{ section.settings.card_2_title }}</h3>
-        </div>
+        <span class="home-pas-card-emoji">⚡</span>
+        <h3 class="home-pas-card-title">{{ section.settings.card_2_title }}</h3>
         <p class="home-pas-card-text">{{ section.settings.card_2_text }}</p>
       </div>
 
       <!-- SOLVE -->
       <div class="home-pas-card solution-card">
-        <div class="home-pas-card-header">
-          <span class="home-pas-card-emoji">✨</span>
-          <h3 class="home-pas-card-title">{{ section.settings.card_3_title }}</h3>
-        </div>
+        <span class="home-pas-card-emoji">✨</span>
+        <h3 class="home-pas-card-title">{{ section.settings.card_3_title }}</h3>
         <p class="home-pas-card-text">{{ section.settings.card_3_text }}</p>
       </div>
     </div>
