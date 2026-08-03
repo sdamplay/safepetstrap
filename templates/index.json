@@ -9,7 +9,7 @@
         "cta_label": "CLAIM YOUR FREE SEAT BELT TODAY",
         "cta_url": "/products/dog-seat-belt",
         "image": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
-        "trust_disclosure": "Viral Pet Safety Initiative — Retail Price $29.95 Covered For Free (Just Cover Shipping)",
+        "trust_disclosure": "Viral Pet Safety Initiative — Retail Price $29.95 Covered 100% For Free Today",
         "guarantee_text": "30-Day 100% Risk-Free Safety Guarantee",
         "refund_policy_url": "/policies/refund-policy",
         "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay",
@@ -57,7 +57,7 @@
       "settings": {
         "badge_text": "OUR DIRECT RESPONSE MISSION",
         "title": "We're Giving Away 10,000 Free Pet Seat Belts To Save Dogs' Lives",
-        "story_text": "<p>When our founder lost a beloved dog in a minor car accident that a simple seatbelt would have prevented, SafePet Strap was born. We made a vow: no dog owner should ever suffer that heartbreak. That's why we cover the full $29.95 retail price of your seatbelt today — you only pay standard insured shipping at checkout!</p>",
+        "story_text": "<p>When our founder lost a beloved dog in a minor car accident that a simple seatbelt would have prevented, SafePet Strap was born. We made a vow: no dog owner should ever suffer that heartbreak. That's why we are giving away 10,000 pet seat belts for 100% FREE today during our national campaign!</p>",
         "image": "",
         "disclosure_text": "SafePet Strap — safepetstrap.com",
         "benefit_1": "Universal Compatibility",
@@ -88,7 +88,7 @@
       "settings": {
         "title": "Our Ironclad 30-Day 100% Risk-Free Guarantee",
         "text": "Put SafePet Strap to the test in your car for 30 full days. If you don't feel 100% more confident and peaceful on every drive, simply email us for a full, instant refund. Zero risk, zero hassle.",
-        "cta_label": "Claim Free Seat Belt (Just Cover Shipping)",
+        "cta_label": "CLAIM YOUR FREE SEAT BELT NOW",
         "cta_url": "/products/dog-seat-belt",
         "refund_policy_url": "/policies/refund-policy",
         "bg_color": "",
@@ -116,15 +116,15 @@
         "faq_3": {
           "type": "faq_item",
           "settings": {
-            "question": "How does the FREE + Shipping offer work?",
-            "answer": "<p>We cover the full $29.95 retail price of the seatbelt for our awareness promotion. You only pay standard insured shipping at checkout!</p>"
+            "question": "How does the FREE offer work?",
+            "answer": "<p>We cover the full $29.95 retail price of the seatbelt for our awareness promotion today. Select your seatbelt and click claim to get yours 100% FREE!</p>"
           }
         },
         "faq_4": {
           "type": "faq_item",
           "settings": {
             "question": "What if I have multiple dogs?",
-            "answer": "<p>Our most popular bundle is the 3-Pack + 2 FREE Gifts ($120 Value) for just $24.95! You can select 3x seatbelts right on the offer page.</p>"
+            "answer": "<p>Our most popular bundle is the 3-Pack + 2 FREE Gifts ($120 Value) for FREE! You can select 3x seatbelts right on the offer page.</p>"
           }
         }
       },
@@ -142,21 +142,6 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
-    },
-    "home_footer": {
-      "type": "home-footer",
-      "settings": {
-        "brand_name": "SafePet Strap",
-        "logo": "shopify://shop_images/png-clipart-heart-red-icon-symbol-red-heart-red-heart-illustration-love-heart.png",
-        "logo_initials": "SPS",
-        "business_address": "SafePet Strap, safepetstrap.com",
-        "support_email": "support@safepetstrap.com",
-        "about_url": "/pages/about-us",
-        "contact_url": "/pages/contact",
-        "newsletter_heading": "JOIN THE SAFE PET CLUB — GET FREE SAFETY GUIDES",
-        "newsletter_button_label": "Subscribe",
-        "custom_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay"
-      }
     }
   },
   "order": [
@@ -166,7 +151,6 @@
     "about_story",
     "trust_section",
     "guarantee",
-    "faq",
-    "home_footer"
+    "faq"
   ]
 }
