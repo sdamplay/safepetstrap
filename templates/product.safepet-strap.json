@@ -46,6 +46,13 @@
             "margin_bottom": 12
           }
         },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+            "full_width_classic": false,
+            "atc_append": "none"
+          }
+        },
         "safepet_variant_selector": {
           "type": "safepet_variant_selector",
           "settings": {}
@@ -71,6 +78,7 @@
         "title",
         "rating_stars",
         "price",
+        "quantity_selector",
         "safepet_variant_selector",
         "buy_buttons"
       ],
