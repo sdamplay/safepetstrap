@@ -21,7 +21,7 @@
             "countdown_end": "",
             "enable_countdown_demo": false,
             "text_alignment": "center",
-            "mobile_text_size": 12,
+            "mobile_text_size": 10,
             "desktop_text_size": 20,
             "icon": "",
             "filled_icon": false,
