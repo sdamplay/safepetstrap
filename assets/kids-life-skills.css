@@ -14,7 +14,7 @@
 .wld-kls-root .kls-hero-thumbs { display: flex; gap: 16px; }
 .wld-kls-root .kls-hero-thumb { width: 80px; height: 80px; background-color: var(--color-brand-bg-soft); border-radius: 16px; overflow: hidden; flex-shrink: 0; cursor: pointer; }
 .wld-kls-root .kls-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.wld-kls-root .kls-hero-right { display: flex; flex-direction: column; gap: 20px; }
+.wld-kls-root .kls-hero-right { display: flex; flex-direction: column; gap: 10px; }
 .wld-kls-root .kls-hero-rating { display: flex; align-items: center; gap: 8px; }
 .wld-kls-root .kls-hero-stars { color: var(--color-brand-star-gold); font-size: 16px; letter-spacing: 2px; }
 .wld-kls-root .kls-hero-rating-text { color: var(--color-brand-text-secondary); font-size: 14px; }
@@ -29,7 +29,7 @@
 .wld-kls-root .kls-hero-cta { background-color: var(--color-brand-primary-hover); color: #FFFFFF; font-size: 18px; font-weight: 700; text-transform: uppercase; text-decoration: none; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 999px; border: none; cursor: pointer; width: 100%; box-shadow: 0 2px 8px var(--shadow-brand-cta); letter-spacing: 1px; }
 .wld-kls-root .kls-hero-trust { display: flex; align-items: center; gap: 8px; color: var(--color-brand-text-secondary); font-size: 14px; }
 .wld-kls-root .kls-hero-trust-check { color: var(--color-brand-primary); font-weight: 700; }
-.wld-kls-root .kls-hero-guarantee { display: inline-flex; align-self: center; padding: 8px 20px; background-color: var(--color-brand-primary-hover); color: #FFFFFF; font-size: 14px; font-weight: 600; border-radius: 999px; }
+.wld-kls-root .kls-hero-guarantee { display: inline-flex; align-self: center; padding: 0; background-color: transparent; color: #e53935; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 .wld-kls-root .kls-hero-testimonial { background-color: var(--color-brand-bg-soft); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 16px var(--shadow-brand-resting); }
 .wld-kls-root .kls-hero-testimonial-top { display: flex; gap: 12px; align-items: flex-start; }
 .wld-kls-root .kls-hero-testimonial-avatar { width: 44px; height: 44px; border-radius: 999px; background-color: var(--color-brand-bg-soft-secondary); flex-shrink: 0; overflow: hidden; }
