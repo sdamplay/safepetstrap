@@ -364,16 +364,6 @@
               {{ section.settings.grow_thumb_1 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 1' }}
             {%- endif -%}
           </div>
-          <div class="kls-grow-thumb">
-            {%- if section.settings.grow_thumb_2 != blank -%}
-              {{ section.settings.grow_thumb_2 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 2' }}
-            {%- endif -%}
-          </div>
-          <div class="kls-grow-thumb">
-            {%- if section.settings.grow_thumb_3 != blank -%}
-              {{ section.settings.grow_thumb_3 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 3' }}
-            {%- endif -%}
-          </div>
         </div>
       </div>
     </div>
