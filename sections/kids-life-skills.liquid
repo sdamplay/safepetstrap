@@ -296,13 +296,28 @@
           <span class="kls-hero-guarantee">{{ section.settings.hero_guarantee_pill }}</span>
         {%- endif -%}
         <div class="kls-hero-testimonial">
+          {%- capture testimonial_image -%}
+            <div class="kls-hero-testimonial-image">
+              {%- if section.settings.hero_testimonial_image != blank -%}
+                {{ section.settings.hero_testimonial_image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-hero-testimonial-img', alt: 'Testimonial review proof' }}
+              {%- else -%}
+                <img src="{{ 'hero-testimonial-proof.jpg' | asset_url }}" alt="Car crash safety proof" class="kls-hero-testimonial-img" loading="lazy">
+              {%- endif -%}
+            </div>
+          {%- endcapture -%}
+
+          {%- if section.settings.hero_testimonial_image_position == 'above' -%}
+            {{ testimonial_image }}
+          {%- endif -%}
+
           <div class="kls-hero-testimonial-top">
             <p class="kls-hero-testimonial-quote">{{ section.settings.hero_testimonial_quote }}</p>
           </div>
-          <!-- Testimonial Proof Image -->
-          <div class="kls-hero-testimonial-image">
-            <img src="{{ 'hero-testimonial-proof.jpg' | asset_url }}" alt="Car crash safety proof" class="kls-hero-testimonial-img" loading="lazy">
-          </div>
+
+          {%- if section.settings.hero_testimonial_image_position == 'below' or section.settings.hero_testimonial_image_position == blank -%}
+            {{ testimonial_image }}
+          {%- endif -%}
+
           <div class="kls-hero-testimonial-meta">
             {%- if section.settings.hero_testimonial_avatar != blank -%}
               <div class="kls-hero-testimonial-avatar">
@@ -521,6 +536,17 @@
     { "type": "image_picker", "id": "hero_testimonial_avatar", "label": "Avatar image" },
     { "type": "textarea", "id": "hero_testimonial_quote", "label": "Quote", "default": "My son used to melt down every morning over getting dressed. Three weeks into this workbook, he picks his own clothes, makes his bed, and told me he's 'a big kid now.' I teared up reading that page." },
     { "type": "text", "id": "hero_testimonial_name", "label": "Name", "default": "Megan T., mom of 2 (ages 5 & 8)" },
+    { "type": "image_picker", "id": "hero_testimonial_image", "label": "Testimonial review image" },
+    {
+      "type": "select",
+      "id": "hero_testimonial_image_position",
+      "label": "Review image position",
+      "options": [
+        { "value": "above", "label": "Above review text" },
+        { "value": "below", "label": "Below review text" }
+      ],
+      "default": "below"
+    },
 
     { "type": "header", "content": "❓ FAQ Section" },
     { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Still Have Questions? We've Got You." },
