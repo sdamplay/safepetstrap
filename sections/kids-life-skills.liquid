@@ -296,6 +296,12 @@
           <span class="kls-hero-guarantee">{{ section.settings.hero_guarantee_pill }}</span>
         {%- endif -%}
         <div class="kls-hero-testimonial">
+          <!-- Emotion Architecture: Badge Alerts -->
+          <div class="kls-hero-testimonial-badges">
+            <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🚨 REAL ACCIDENT SURVIVOR</span>
+            <span class="kls-badge-verified">✓ Verified Life Saved</span>
+          </div>
+
           {%- capture testimonial_image -%}
             <div class="kls-hero-testimonial-image">
               {%- if section.settings.hero_testimonial_image != blank -%}
@@ -311,7 +317,7 @@
           {%- endif -%}
 
           <div class="kls-hero-testimonial-top">
-            <p class="kls-hero-testimonial-quote">{{ section.settings.hero_testimonial_quote }}</p>
+            <p class="kls-hero-testimonial-quote">“{{ section.settings.hero_testimonial_quote }}”</p>
           </div>
 
           {%- if section.settings.hero_testimonial_image_position == 'below' or section.settings.hero_testimonial_image_position == blank -%}
@@ -324,8 +330,13 @@
                 {{ section.settings.hero_testimonial_avatar | image_url: width: 88 | image_tag: widths: '44,88', sizes: '44px', loading: 'lazy', class: 'kls-avatar-img', alt: section.settings.hero_testimonial_name }}
               </div>
             {%- endif -%}
-            <span class="kls-hero-testimonial-name">{{ section.settings.hero_testimonial_name }}</span>
-            <span class="kls-hero-testimonial-stars">★★★★★</span>
+            <div class="kls-hero-testimonial-author-info">
+              <span class="kls-hero-testimonial-name">{{ section.settings.hero_testimonial_name }}</span>
+              <div class="kls-hero-testimonial-subline">
+                <span class="kls-hero-testimonial-stars">★★★★★</span>
+                <span class="kls-verified-buyer-text">Verified Buyer</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
