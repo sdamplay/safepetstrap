@@ -139,7 +139,7 @@
   .wld-kls-root .kls-ready-inner,
   .wld-kls-root .kls-grow-inner,
   .wld-kls-root .kls-stats-inner,
-  .wld-kls-root .kls-comparison-inner { grid-template-columns: 1fr; gap: 32px; }
+  .wld-kls-root .kls-comparison-inner { grid-template-columns: 1fr; gap: 0px; }
   .wld-kls-root .kls-testimonials-grid { grid-template-columns: 1fr; }
   .wld-kls-root .kls-hero-headline { font-size: 32px; }
   .wld-kls-root .kls-hero-price-sale { font-size: 28px; }
