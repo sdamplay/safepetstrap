@@ -297,16 +297,14 @@
         {%- endif -%}
         <div class="kls-hero-testimonial">
           <div class="kls-hero-testimonial-top">
+            <p class="kls-hero-testimonial-quote">{{ section.settings.hero_testimonial_quote }}</p>
+          </div>
+          <div class="kls-hero-testimonial-meta">
             {%- if section.settings.hero_testimonial_avatar != blank -%}
               <div class="kls-hero-testimonial-avatar">
                 {{ section.settings.hero_testimonial_avatar | image_url: width: 88 | image_tag: widths: '44,88', sizes: '44px', loading: 'lazy', class: 'kls-avatar-img', alt: section.settings.hero_testimonial_name }}
               </div>
-            {%- else -%}
-              <div class="kls-hero-testimonial-avatar"></div>
             {%- endif -%}
-            <p class="kls-hero-testimonial-quote">{{ section.settings.hero_testimonial_quote }}</p>
-          </div>
-          <div class="kls-hero-testimonial-meta">
             <span class="kls-hero-testimonial-name">{{ section.settings.hero_testimonial_name }}</span>
             <span class="kls-hero-testimonial-stars">★★★★★</span>
           </div>
