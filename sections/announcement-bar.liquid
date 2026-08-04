@@ -62,22 +62,31 @@
   }
   @media screen and (max-width: 749px) {
     .announcement-bar__content-wrapper {
-      flex-direction: column;
-      gap: 4px !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 6px !important;
+      padding: 3px 6px !important;
+    }
+    .announcement-bar__message {
+      font-size: 12px !important;
+      white-space: nowrap !important;
     }
     .kls-announcement-timer {
       margin-left: 0;
-      gap: 4px;
+      gap: 3px;
+      flex-shrink: 0;
     }
     .kls-announcement-block {
-      min-width: 28px;
-      padding: 1px 3px;
+      min-width: 25px;
+      padding: 1px 2px;
     }
     .kls-announcement-digits {
-      font-size: 11px;
+      font-size: 10px;
     }
     .kls-announcement-label {
-      font-size: 7px;
+      font-size: 6px;
     }
   }
 {%- endstyle -%}
