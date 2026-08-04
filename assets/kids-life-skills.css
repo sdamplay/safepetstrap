@@ -33,6 +33,8 @@
 .wld-kls-root .kls-hero-testimonial { background-color: var(--color-brand-bg-soft); border-radius: 16px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 4px 16px var(--shadow-brand-resting); }
 .wld-kls-root .kls-hero-testimonial-top { display: block; }
 .wld-kls-root .kls-hero-testimonial-avatar { width: 32px; height: 32px; border-radius: 999px; background-color: var(--color-brand-bg-soft-secondary); flex-shrink: 0; overflow: hidden; }
+.wld-kls-root .kls-hero-testimonial-image { width: 100%; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--color-brand-border); background-color: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+.wld-kls-root .kls-hero-testimonial-img { width: 100%; height: auto; display: block; object-fit: cover; }
 .wld-kls-root .kls-avatar-img { width: 100%; height: 100%; object-fit: cover; }
 .wld-kls-root .kls-hero-testimonial-quote { color: var(--color-brand-text-primary); font-size: 14px; font-style: italic; margin: 0; line-height: 1.5; }
 .wld-kls-root .kls-hero-testimonial-meta { display: flex; align-items: center; gap: 10px; }

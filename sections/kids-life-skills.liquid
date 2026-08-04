@@ -299,6 +299,10 @@
           <div class="kls-hero-testimonial-top">
             <p class="kls-hero-testimonial-quote">{{ section.settings.hero_testimonial_quote }}</p>
           </div>
+          <!-- Testimonial Proof Image -->
+          <div class="kls-hero-testimonial-image">
+            <img src="{{ 'hero-testimonial-proof.jpg' | asset_url }}" alt="Car crash safety proof" class="kls-hero-testimonial-img" loading="lazy">
+          </div>
           <div class="kls-hero-testimonial-meta">
             {%- if section.settings.hero_testimonial_avatar != blank -%}
               <div class="kls-hero-testimonial-avatar">
