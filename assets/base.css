@@ -184,4 +184,8 @@ p, .rte p, .footer-block__details-content p, .template-search p {
   display: inline-block !important;
 }
 
+.drawer__header {
+  padding: 10px !important;
+}
+
 

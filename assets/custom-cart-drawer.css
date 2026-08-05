@@ -747,3 +747,7 @@ body.overflow-hidden {
   margin: 8px 0 !important;
 }
 
+.drawer__header {
+  padding: 10px !important;
+}
+
