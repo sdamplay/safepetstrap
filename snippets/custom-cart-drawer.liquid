@@ -28,6 +28,16 @@
   .drawer__inner .drawer__header {
     padding: 10px !important;
   }
+
+  /* Empty cart drawer background color fix */
+  .drawer__inner-empty,
+  .cart-drawer.is-empty,
+  .cart-drawer.is-empty .drawer__inner,
+  .cart-drawer.is-empty .drawer__inner-empty,
+  #CartDrawer.is-empty .drawer__inner,
+  #CartDrawer.is-empty .drawer__inner-empty {
+    background-color: #ffffff !important;
+  }
 </style>
 
 {%- comment -%}

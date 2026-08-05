@@ -48,6 +48,27 @@
   .drawer__inner .drawer__header {
     padding: 10px !important;
   }
+
+  /* Empty cart drawer background color fix */
+  .drawer__inner-empty,
+  .cart-drawer.is-empty,
+  .cart-drawer.is-empty .drawer__inner,
+  .cart-drawer.is-empty .drawer__inner-empty,
+  #CartDrawer.is-empty .drawer__inner,
+  #CartDrawer.is-empty .drawer__inner-empty {
+    background-color: #ffffff !important;
+  }
+  
+  {% if section.settings.enable_body_bg %}
+    .drawer__inner-empty,
+    .cart-drawer.is-empty,
+    .cart-drawer.is-empty .drawer__inner,
+    .cart-drawer.is-empty .drawer__inner-empty,
+    #CartDrawer.is-empty .drawer__inner,
+    #CartDrawer.is-empty .drawer__inner-empty {
+      background-color: {{ section.settings.body_bg_color }} !important;
+    }
+  {% endif %}
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}{% if section.settings.test_mode %} active{% endif %} cart-drawer--desktop-width-{{ section.settings.desktop_width }} cart-drawer--mobile-width-{{ section.settings.mobile_width }}" data-type='modal'>
