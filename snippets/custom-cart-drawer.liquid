@@ -150,8 +150,12 @@
 
                     <div class="cart-drawer-item__quantity-and-prices">
                       <div class="cart-item__quantity">
-                        <div class="cart-item__quantity-wrapper">
-                          <quantity-input class="quantity cart-quantity">
+                        <div class="cart-item__quantity-wrapper" style="display: flex; align-items: center; gap: 8px;">
+                          <span class="cart-item__qty-display" style="font-size: 13px; font-weight: 600; color: #4b5563; background: #f3f4f6; padding: 4px 10px; border-radius: 6px; border: 1px solid #e5e7eb; letter-spacing: 0.5px;">
+                            Qty: {{ item.quantity }}
+                          </span>
+                          
+                          <quantity-input class="quantity cart-quantity" style="display: none !important;">
                             <button class="quantity__button quantity__button--minus" name="minus" type="button" data-variant-id="{{ item.variant_id }}">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
                                 <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"></path>

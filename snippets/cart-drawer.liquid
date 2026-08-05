@@ -301,19 +301,15 @@
 
                                 <div class='cart-drawer-item__quantity-and-prices{% if block.settings.prices_position == 'left' %} cart-drawer-item__quantity-and-prices--reverse{% endif %}{% if has_props != false %} cart-drawer-item__quantity-and-prices--has-props{% endif %}'>
                                   <div class="cart-item__quantity">
-                                    <div class="cart-item__quantity-wrapper">
+                                    <div class="cart-item__quantity-wrapper" style="display: flex; align-items: center; gap: 8px;">
+                                      <span class="cart-item__qty-display" style="font-size: 13px; font-weight: 600; color: #4b5563; background: #f3f4f6; padding: 4px 10px; border-radius: 6px; border: 1px solid #e5e7eb; letter-spacing: 0.5px;">
+                                        Qty: {{ item.quantity }}
+                                      </span>
+                                      
                                       <quantity-input 
                                         class="quantity cart-quantity color-{{ block.settings.quantity_container_color_scheme }}{% if block.settings.quantity_round_btns %} cart-quantity--round-btns{% endif %}{% if block.settings.quantity_outline_btns %} cart-quantity--outline-btns{% endif %}"
                                         style='
-                                          --font-size:{{ block.settings.quantity_font_size | divided_by: 10.0 }}rem;
-                                          --border-width:0.{{ block.settings.quantity_border_width }}rem;
-                                          --border-color:{{ block.settings.quantity_border_color }};
-                                          --corner-radius:{{ block.settings.quantity_corner_radius | divided_by: 10.0 }}rem;
-                                          --container-padding:{{ block.settings.quantity_container_padding }}em;
-                                          --input-padding:{{ block.settings.quantity_input_padding }}em;
-                                          --separator-opacity:{{ block.settings.quantity_separators_opacity | divided_by: 100.0 }};
-                                          --padding:{{ block.settings.quantity_padding }}em;
-                                          --icon-size:{{ block.settings.quantity_btns_icon_size | divided_by: 100.0 }}em;
+                                          display: none !important;
                                         '
                                       >
                                         <button class="quantity__button quantity__button--minus no-js-hidden color-{{ block.settings.quantity_btns_color_scheme }}" name="minus" type="button">
