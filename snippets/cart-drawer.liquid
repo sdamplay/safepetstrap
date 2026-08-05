@@ -24,6 +24,24 @@
       background: {{ section.settings.footer_bg_color }};
     }
   {% endif %}
+
+  /* Force hide quantity steppers and display clean badges in Cart Drawer */
+  .cart-drawer quantity-input,
+  #CartDrawer quantity-input,
+  .cart-drawer-item__quantity-and-prices quantity-input,
+  .cart-item__quantity quantity-input {
+    display: none !important;
+  }
+  .cart-drawer .cart-item__qty-display {
+    display: inline-block !important;
+  }
+  .cart-drawer__totals__row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 8px 0 !important;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}{% if section.settings.test_mode %} active{% endif %} cart-drawer--desktop-width-{{ section.settings.desktop_width }} cart-drawer--mobile-width-{{ section.settings.mobile_width }}" data-type='modal'>
