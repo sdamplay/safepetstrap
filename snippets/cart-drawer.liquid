@@ -50,23 +50,29 @@
   }
 
   /* Empty cart drawer background color fix */
-  .drawer__inner-empty,
-  .cart-drawer.is-empty,
-  .cart-drawer.is-empty .drawer__inner,
-  .cart-drawer.is-empty .drawer__inner-empty,
-  #CartDrawer.is-empty .drawer__inner,
-  #CartDrawer.is-empty .drawer__inner-empty {
+  cart-drawer.is-empty,
+  cart-drawer.is-empty .cart-drawer,
+  cart-drawer.is-empty .drawer__inner,
+  cart-drawer.is-empty .drawer__inner-empty,
+  cart-drawer.is-empty .cart-drawer__warnings,
+  custom-cart-drawer.is-empty,
+  custom-cart-drawer.is-empty .drawer__inner,
+  custom-cart-drawer.is-empty .drawer__inner-empty {
     background-color: #ffffff !important;
+    background: #ffffff !important;
   }
   
   {% if section.settings.enable_body_bg %}
-    .drawer__inner-empty,
-    .cart-drawer.is-empty,
-    .cart-drawer.is-empty .drawer__inner,
-    .cart-drawer.is-empty .drawer__inner-empty,
-    #CartDrawer.is-empty .drawer__inner,
-    #CartDrawer.is-empty .drawer__inner-empty {
+    cart-drawer.is-empty,
+    cart-drawer.is-empty .cart-drawer,
+    cart-drawer.is-empty .drawer__inner,
+    cart-drawer.is-empty .drawer__inner-empty,
+    cart-drawer.is-empty .cart-drawer__warnings,
+    custom-cart-drawer.is-empty,
+    custom-cart-drawer.is-empty .drawer__inner,
+    custom-cart-drawer.is-empty .drawer__inner-empty {
       background-color: {{ section.settings.body_bg_color }} !important;
+      background: {{ section.settings.body_bg_color }} !important;
     }
   {% endif %}
 </style>
