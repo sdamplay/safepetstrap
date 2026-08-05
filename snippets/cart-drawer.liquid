@@ -42,6 +42,12 @@
     width: 100% !important;
     margin: 8px 0 !important;
   }
+  .drawer__header,
+  .cart-drawer .drawer__header,
+  #CartDrawer .drawer__header,
+  .drawer__inner .drawer__header {
+    padding: 10px !important;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}{% if section.settings.test_mode %} active{% endif %} cart-drawer--desktop-width-{{ section.settings.desktop_width }} cart-drawer--mobile-width-{{ section.settings.mobile_width }}" data-type='modal'>
