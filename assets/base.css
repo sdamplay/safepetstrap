@@ -140,3 +140,48 @@ p, .rte p, .footer-block__details-content p, .template-search p {
   line-height: 1.5 !important;
 }
 
+/* Custom Cart Drawer Layout Overrides */
+.cart-drawer quantity-input,
+.cart-drawer .quantity,
+.cart-drawer-item .quantity,
+.cart-drawer-item quantity-input,
+.cart-drawer-item__quantity-and-prices quantity-input,
+.cart-drawer-item__quantity-and-prices .quantity,
+#CartDrawer quantity-input,
+#CartDrawer .quantity,
+.cart-item__quantity quantity-input {
+  display: none !important;
+}
+
+.cart-drawer .cart-item__qty-display,
+.cart-drawer-item .cart-item__qty-display,
+#CartDrawer .cart-item__qty-display {
+  display: inline-block !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #4b5563 !important;
+  background: #f3f4f6 !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  border: 1px solid #e5e7eb !important;
+  letter-spacing: 0.5px !important;
+}
+
+.cart-drawer__totals__row,
+.cart-drawer__totals__row--spaced,
+.cart-drawer__totals__row--center,
+.cart-drawer__total-savings {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 10px 0 !important;
+  font-size: inherit !important;
+}
+
+.cart-drawer__totals__row span,
+.cart-drawer__total-savings span {
+  display: inline-block !important;
+}
+
+
