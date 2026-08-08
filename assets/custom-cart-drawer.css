@@ -729,16 +729,7 @@ body.overflow-hidden {
   }
 }
 
-/* Force hide quantity steppers and display clean badges in Cart Drawer */
-.cart-drawer quantity-input,
-#CartDrawer quantity-input,
-.cart-drawer-item__quantity-and-prices quantity-input,
-.cart-item__quantity quantity-input {
-  display: none !important;
-}
-.cart-drawer .cart-item__qty-display {
-  display: inline-block !important;
-}
+
 .cart-drawer__totals__row {
   display: flex !important;
   justify-content: space-between !important;

@@ -5,16 +5,7 @@
 {% endcomment %}
 
 <style>
-  /* Force hide quantity steppers and display clean badges in Cart Drawer */
-  .cart-drawer quantity-input,
-  #CartDrawer quantity-input,
-  .cart-drawer-item__quantity-and-prices quantity-input,
-  .cart-item__quantity quantity-input {
-    display: none !important;
-  }
-  .cart-drawer .cart-item__qty-display {
-    display: inline-block !important;
-  }
+
   .cart-drawer__totals__row {
     display: flex !important;
     justify-content: space-between !important;
@@ -184,7 +175,7 @@
 
                   <div class="cart-drawer-item__right">
                     <div class="cart-drawer-item__details-and-delete-btn">
-                      <div class="cart-item__details">
+                      <div class="cart-item__details" style="width: 100%;">
                         <h4 class="cart-item__name h4 break">
                           {{ item.product.title }}
                           {%- if item.final_price == 0 -%}
@@ -192,7 +183,28 @@
                           {%- endif -%}
                         </h4>
                         {%- if item.product.has_only_default_variant == false -%}
-                          <p class="product-option">{{ item.variant.title }}</p>
+                          <div class="cart-drawer-item__options-and-price" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; margin-top: 4px; width: 100%;">
+                            <p class="product-option" style="margin: 0; flex-grow: 1;">{{ item.variant.title }}</p>
+                            <div class="cart-item__totals-inline" style="flex-shrink: 0; text-align: right; margin-top: -2px;">
+                              <div class="cart-item__price-wrapper">
+                                <div class="cart-item__discounted-prices" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+                                  {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
+                                    {%- assign compare_price = item.variant.compare_at_price | default: 9500 -%}
+                                    {%- assign compare_line_price = compare_price | times: item.quantity -%}
+                                    <s class="compare-price" style="font-size: 11px; text-decoration: line-through; opacity: 0.6; color: #9ca3af;">{{ compare_line_price | money }}</s>
+                                  {%- endif -%}
+                                  
+                                  <span class="regular-price" style="font-size: 14px; font-weight: 600; color: #dc2626;">
+                                    {%- if item.final_line_price == 0 -%}
+                                      0.00 {{ cart.currency.symbol }}
+                                    {%- else -%}
+                                      {{ item.final_line_price | money }}
+                                    {%- endif -%}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         {%- endif -%}
                       </div>
 
@@ -204,65 +216,63 @@
                       </button>
                     </div>
 
-                    <div class="cart-drawer-item__quantity-and-prices">
-                      <div class="cart-item__quantity">
-                        <div class="cart-item__quantity-wrapper" style="display: flex; align-items: center; gap: 8px;">
-                          <span class="cart-item__qty-display" style="font-size: 13px; font-weight: 600; color: #4b5563; background: #f3f4f6; padding: 4px 10px; border-radius: 6px; border: 1px solid #e5e7eb; letter-spacing: 0.5px;">
-                            Qty: {{ item.quantity }}
-                          </span>
-                          
-                          <quantity-input class="quantity cart-quantity" style="display: none !important;">
-                            <button class="quantity__button quantity__button--minus" name="minus" type="button" data-variant-id="{{ item.variant_id }}">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
-                                <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"></path>
-                              </svg>
-                            </button>
-                            <input class="quantity__input" 
-                                   type="number" 
-                                   name="updates[]" 
-                                   value="{{ item.quantity }}" 
-                                   min="1" 
-                                   data-variant-id="{{ item.variant_id }}"
-                                   aria-label="Quantity for {{ item.product.title }}">
-                            <button class="quantity__button quantity__button--plus" name="plus" type="button" data-variant-id="{{ item.variant_id }}">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
-                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
-                              </svg>
-                            </button>
-                          </quantity-input>
-                        </div>
-                      </div>
-
-                      <div class="cart-item__totals">
-                        <div class="cart-item__price-wrapper">
-                          <div class="cart-item__discounted-prices">
-                            {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
-                              {%- assign compare_price = item.variant.compare_at_price | default: 9500 -%}
-                              {%- assign compare_line_price = compare_price | times: item.quantity -%}
-                              <s class="compare-price">{{ compare_line_price | money }}</s>
-                            {%- endif -%}
-                            
-                            <span class="regular-price">
-                              {%- if item.final_line_price == 0 -%}
-                                0.00 {{ cart.currency.symbol }}
-                              {%- else -%}
-                                {{ item.final_line_price | money }}
-                              {%- endif -%}
-                            </span>
+                      {%- if item.product.has_only_default_variant -%}
+                      <div class="cart-drawer-item__quantity-and-prices">
+                        <div class="cart-item__quantity">
+                          <div class="cart-item__quantity-wrapper">
+                            <quantity-input class="quantity cart-quantity">
+                              <button class="quantity__button quantity__button--minus" name="minus" type="button" data-variant-id="{{ item.variant_id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                                  <path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"></path>
+                                </svg>
+                              </button>
+                              <input class="quantity__input" 
+                                     type="number" 
+                                     name="updates[]" 
+                                     value="{{ item.quantity }}" 
+                                     min="1" 
+                                     data-variant-id="{{ item.variant_id }}"
+                                     aria-label="Quantity for {{ item.product.title }}">
+                              <button class="quantity__button quantity__button--plus" name="plus" type="button" data-variant-id="{{ item.variant_id }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                                  <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                </svg>
+                              </button>
+                            </quantity-input>
                           </div>
-                          
-                          {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
-                            {%- assign ref_price = item.variant.compare_at_price | default: 9500 -%}
-                            {%- assign save_amount = ref_price | minus: item.final_price | times: item.quantity -%}
-                            {%- if save_amount > 0 -%}
-                              <span class="cart-drawer-item__saving">
-                                <strong>(You save {{ save_amount | money }})</strong>
+                        </div>
+  
+                        <div class="cart-item__totals">
+                          <div class="cart-item__price-wrapper">
+                            <div class="cart-item__discounted-prices">
+                              {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
+                                {%- assign compare_price = item.variant.compare_at_price | default: 9500 -%}
+                                {%- assign compare_line_price = compare_price | times: item.quantity -%}
+                                <s class="compare-price">{{ compare_line_price | money }}</s>
+                              {%- endif -%}
+                              
+                              <span class="regular-price">
+                                {%- if item.final_line_price == 0 -%}
+                                  0.00 {{ cart.currency.symbol }}
+                                {%- else -%}
+                                  {{ item.final_line_price | money }}
+                                {%- endif -%}
                               </span>
+                            </div>
+                            
+                            {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
+                              {%- assign ref_price = item.variant.compare_at_price | default: 9500 -%}
+                              {%- assign save_amount = ref_price | minus: item.final_price | times: item.quantity -%}
+                              {%- if save_amount > 0 -%}
+                                <span class="cart-drawer-item__saving">
+                                  <strong>(You save {{ save_amount | money }})</strong>
+                                </span>
+                              {%- endif -%}
                             {%- endif -%}
-                          {%- endif -%}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      {%- endif -%}
                   </div>
                 </li>
               {%- endfor -%}

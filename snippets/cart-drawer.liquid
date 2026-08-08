@@ -26,16 +26,7 @@
     }
   {% endif %}
 
-  /* Force hide quantity steppers and display clean badges in Cart Drawer */
-  .cart-drawer quantity-input,
-  #CartDrawer quantity-input,
-  .cart-drawer-item__quantity-and-prices quantity-input,
-  .cart-item__quantity quantity-input {
-    display: none !important;
-  }
-  .cart-drawer .cart-item__qty-display {
-    display: inline-block !important;
-  }
+
   .cart-drawer__totals__row {
     display: flex !important;
     justify-content: space-between !important;
@@ -307,49 +298,70 @@
                                       or item.selling_plan_allocation != null
                                     -%}
                                       {% assign has_props = true %}
-                                      <dl>
-                                        {%- if item.product.has_only_default_variant == false -%}
-                                          {% if block.settings.displayed_variants == 'compact' %}
-                                            <div class="product-option">
-                                              {{ item.options_with_values | map: 'value' | join: ' / ' }}
-                                            </div>
-                                          {% else %}
-                                            {%- for option in item.options_with_values -%}
+                                      <div class="cart-drawer-item__options-and-price" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; margin-top: 4px; width: 100%;">
+                                        <dl style="margin: 0; padding: 0; flex-grow: 1;">
+                                          {%- if item.product.has_only_default_variant == false -%}
+                                            {% if block.settings.displayed_variants == 'compact' %}
                                               <div class="product-option">
-                                                <dt>{{ option.name }}:</dt>
+                                                {{ item.options_with_values | map: 'value' | join: ' / ' }}
+                                              </div>
+                                            {% else %}
+                                              {%- for option in item.options_with_values -%}
+                                                <div class="product-option">
+                                                  <dt>{{ option.name }}:</dt>
+                                                  <dd>
+                                                    {{ option.value -}}
+                                                    {%- unless forloop.last %}, {% endunless %}
+                                                  </dd>
+                                                </div>
+                                              {%- endfor -%}
+                                            {% endif %}
+                                          {%- endif -%}
+        
+                                          {%- for property in item.properties -%}
+                                            {%- assign property_first_char = property.first | slice: 0 -%}
+                                            {%- if property.last != blank and property_first_char != '_' -%}
+                                              <div class="product-option">
+                                                <dt>{{ property.first }}:</dt>
                                                 <dd>
-                                                  {{ option.value -}}
-                                                  {%- unless forloop.last %}, {% endunless %}
+                                                  {%- if property.last contains '/uploads/' -%}
+                                                    <a
+                                                      href="{{ property.last }}"
+                                                      class="link"
+                                                      target="_blank"
+                                                      aria-describedby="a11y-new-window-message"
+                                                    >
+                                                      {{ property.last | split: '/' | last }}
+                                                    </a>
+                                                  {%- else -%}
+                                                    {{ property.last }}
+                                                  {%- endif -%}
                                                 </dd>
                                               </div>
-                                            {%- endfor -%}
-                                          {% endif %}
-                                        {%- endif -%}
-        
-                                        {%- for property in item.properties -%}
-                                          {%- assign property_first_char = property.first | slice: 0 -%}
-                                          {%- if property.last != blank and property_first_char != '_' -%}
-                                            <div class="product-option">
-                                              <dt>{{ property.first }}:</dt>
-                                              <dd>
-                                                {%- if property.last contains '/uploads/' -%}
-                                                  <a
-                                                    href="{{ property.last }}"
-                                                    class="link"
-                                                    target="_blank"
-                                                    aria-describedby="a11y-new-window-message"
-                                                  >
-                                                    {{ property.last | split: '/' | last }}
-                                                  </a>
-                                                {%- else -%}
-                                                  {{ property.last }}
-                                                {%- endif -%}
-                                              </dd>
+                                            {%- endif -%}
+                                          {%- endfor -%}
+                                        </dl>
+                                        {%- if item.product.has_only_default_variant == false -%}
+                                          <div class="cart-item__totals-inline" style="flex-shrink: 0; text-align: right; margin-top: 2px;">
+                                            <div class="cart-item__price-wrapper">
+                                              {% if display_compare %}
+                                                <div class="cart-item__discounted-prices" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+                                                  <s class="cart-item__old-price price--end compare-price color-foreground-{{ block.settings.compare_price_color }}" style="font-size: 11px; text-decoration: line-through; opacity: 0.6;">
+                                                    {{ compare_price | money }}
+                                                  </s>
+                                                  <span class="price--end regular-price accent-color-{{ block.settings.price_color }}" style="font-size: 14px; font-weight: 600; color: #dc2626;">
+                                                    {{ item.final_line_price | money }}
+                                                  </span>
+                                                </div>
+                                              {% else %}
+                                                <span class="price--end regular-price accent-color-{{ block.settings.price_color }}" style="font-size: 14px; font-weight: 600; color: #111827;">
+                                                  {{ item.original_line_price | money }}
+                                                </span>
+                                              {% endif %}
                                             </div>
-                                          {%- endif -%}
-                                        {%- endfor -%}
-                                      </dl>
-        
+                                          </div>
+                                        {%- endif -%}
+                                      </div>
                                       <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
                                     {%- endif -%}
                                   </div>
@@ -368,17 +380,22 @@
                                   </cart-remove-button>
                                 </div>
 
+                                {%- if item.product.has_only_default_variant -%}
                                 <div class='cart-drawer-item__quantity-and-prices{% if block.settings.prices_position == 'left' %} cart-drawer-item__quantity-and-prices--reverse{% endif %}{% if has_props != false %} cart-drawer-item__quantity-and-prices--has-props{% endif %}'>
                                   <div class="cart-item__quantity">
-                                    <div class="cart-item__quantity-wrapper" style="display: flex; align-items: center; gap: 8px;">
-                                      <span class="cart-item__qty-display" style="font-size: 13px; font-weight: 600; color: #4b5563; background: #f3f4f6; padding: 4px 10px; border-radius: 6px; border: 1px solid #e5e7eb; letter-spacing: 0.5px;">
-                                        Qty: {{ item.quantity }}
-                                      </span>
-                                      
+                                    <div class="cart-item__quantity-wrapper">
                                       <quantity-input 
                                         class="quantity cart-quantity color-{{ block.settings.quantity_container_color_scheme }}{% if block.settings.quantity_round_btns %} cart-quantity--round-btns{% endif %}{% if block.settings.quantity_outline_btns %} cart-quantity--outline-btns{% endif %}"
                                         style='
-                                          display: none !important;
+                                          --font-size:{{ block.settings.quantity_font_size | divided_by: 10.0 }}rem;
+                                          --border-width:0.{{ block.settings.quantity_border_width }}rem;
+                                          --border-color:{{ block.settings.quantity_border_color }};
+                                          --corner-radius:{{ block.settings.quantity_corner_radius | divided_by: 10.0 }}rem;
+                                          --container-padding:{{ block.settings.quantity_container_padding }}em;
+                                          --input-padding:{{ block.settings.quantity_input_padding }}em;
+                                          --separator-opacity:{{ block.settings.quantity_separators_opacity | divided_by: 100.0 }};
+                                          --padding:{{ block.settings.quantity_padding }}em;
+                                          --icon-size:{{ block.settings.quantity_btns_icon_size | divided_by: 100.0 }}em;
                                         '
                                       >
                                         <button class="quantity__button quantity__button--minus no-js-hidden color-{{ block.settings.quantity_btns_color_scheme }}" name="minus" type="button">
@@ -494,6 +511,7 @@
                                       {%- endif -%}
                                     </div>
                                   </div>
+                                {%- endif -%}
                                 </div>
                               </div>
                             </li>
