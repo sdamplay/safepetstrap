@@ -59,26 +59,30 @@
   }
 
   /* Empty cart drawer background color fix */
+  cart-drawer.is-empty,
+  cart-drawer.is-empty .cart-drawer {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
   .drawer__inner-empty,
   .cart-drawer__warnings,
   .cart-drawer__empty-content,
-  cart-drawer.is-empty,
-  cart-drawer.is-empty .cart-drawer,
   cart-drawer.is-empty .drawer__inner,
-  custom-cart-drawer.is-empty,
   custom-cart-drawer.is-empty .drawer__inner {
     background-color: #ffffff !important;
     background: #ffffff !important;
   }
   
   {% if section.settings.enable_body_bg %}
+    cart-drawer.is-empty,
+    cart-drawer.is-empty .cart-drawer {
+      background-color: transparent !important;
+      background: transparent !important;
+    }
     .drawer__inner-empty,
     .cart-drawer__warnings,
     .cart-drawer__empty-content,
-    cart-drawer.is-empty,
-    cart-drawer.is-empty .cart-drawer,
     cart-drawer.is-empty .drawer__inner,
-    custom-cart-drawer.is-empty,
     custom-cart-drawer.is-empty .drawer__inner {
       background-color: {{ section.settings.body_bg_color }} !important;
       background: {{ section.settings.body_bg_color }} !important;
