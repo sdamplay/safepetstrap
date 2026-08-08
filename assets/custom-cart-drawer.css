@@ -744,11 +744,11 @@ body.overflow-hidden {
   justify-content: space-between !important;
   align-items: center !important;
   width: 100% !important;
-  margin: 8px 0 !important;
+  margin: 2px !important;
 }
 
 .drawer__header {
-  padding: 10px !important;
+  padding: 5px !important;
 }
 
 .drawer__heading {
@@ -757,6 +757,12 @@ body.overflow-hidden {
 @media screen and (min-width: 750px) {
   .drawer__heading {
     font-size: var(--heading-size-desktop) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cart-drawer-item .cart-item__image {
+    max-width: 80% !important;
   }
 }
 

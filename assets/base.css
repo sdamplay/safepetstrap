@@ -175,7 +175,7 @@ p, .rte p, .footer-block__details-content p, .template-search p {
   justify-content: space-between !important;
   align-items: center !important;
   width: 100% !important;
-  margin: 10px 0 !important;
+  margin: 2px !important;
   font-size: inherit !important;
 }
 
@@ -185,7 +185,7 @@ p, .rte p, .footer-block__details-content p, .template-search p {
 }
 
 .drawer__header {
-  padding: 10px !important;
+  padding: 5px !important;
 }
 
 .drawer__heading {
@@ -194,6 +194,12 @@ p, .rte p, .footer-block__details-content p, .template-search p {
 @media screen and (min-width: 750px) {
   .drawer__heading {
     font-size: var(--heading-size-desktop) !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cart-drawer-item .cart-item__image {
+    max-width: 80% !important;
   }
 }
 

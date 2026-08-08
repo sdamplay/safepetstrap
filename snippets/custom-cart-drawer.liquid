@@ -20,13 +20,18 @@
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
-    margin: 8px 0 !important;
+    margin: 2px !important;
   }
   .drawer__header,
   .cart-drawer .drawer__header,
   #CartDrawer .drawer__header,
   .drawer__inner .drawer__header {
-    padding: 10px !important;
+    padding: 5px !important;
+  }
+  @media screen and (max-width: 749px) {
+    .cart-drawer-item .cart-item__image {
+      max-width: 80% !important;
+    }
   }
   .cart-drawer__footer,
   .drawer__footer {
