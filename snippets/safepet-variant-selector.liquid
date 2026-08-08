@@ -16,6 +16,7 @@
       data-variant-id="{{ v0_id }}"
       data-quantity="1"
       data-price="0.00"
+      data-variant-img="{% if product.variants[0].image != blank %}{{ product.variants[0].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
       style="display: none;"
     >
     <label class="safepet-pkg-card" for="safepet-tier-1-{{ section.id }}">
@@ -43,6 +44,7 @@
       data-variant-id="{{ v1_id }}"
       data-quantity="1"
       data-price="17.95"
+      data-variant-img="{% if product.variants[1].image != blank %}{{ product.variants[1].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
       style="display: none;"
     >
     <label class="safepet-pkg-card" for="safepet-tier-2-{{ section.id }}">
@@ -74,6 +76,7 @@
       data-variant-id="{{ v2_id }}"
       data-quantity="1"
       data-price="24.95"
+      data-variant-img="{% if product.variants[2].image != blank %}{{ product.variants[2].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
       style="display: none;"
     >
     <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-3-{{ section.id }}">
@@ -352,6 +355,13 @@
           if (quantityInput && quantity) {
             quantityInput.value = quantity;
           }
+        }
+
+        var variantImg = radio.getAttribute('data-variant-img');
+        var heroImg = document.querySelector('.kls-hero-image img.kls-gallery-img') || document.querySelector('.kls-hero-image img');
+        if (heroImg && variantImg && variantImg !== '') {
+          heroImg.src = variantImg;
+          heroImg.srcset = variantImg;
         }
 
         // Update landing page pricing texts
