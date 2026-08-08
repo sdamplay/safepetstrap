@@ -912,9 +912,11 @@
         ],
         "custom_css": [],
         "settings": {
-          "test_mode": true,
+          "test_mode": false,
           "heading_text": "Cart • [count] items",
           "heading_alignment": "flex-start",
+          "heading_size_desktop": 24,
+          "heading_size_mobile": 20,
           "desktop_width": "normal",
           "mobile_width": "full",
           "enable_header_bg": true,
