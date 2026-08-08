@@ -188,6 +188,15 @@ p, .rte p, .footer-block__details-content p, .template-search p {
   padding: 10px !important;
 }
 
+.drawer__heading {
+  font-size: var(--heading-size-mobile) !important;
+}
+@media screen and (min-width: 750px) {
+  .drawer__heading {
+    font-size: var(--heading-size-desktop) !important;
+  }
+}
+
 .cart-drawer__footer,
 .drawer__footer {
   margin-bottom: -20px !important;

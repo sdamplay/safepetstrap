@@ -48,6 +48,14 @@
   .drawer__inner .drawer__header {
     padding: 10px !important;
   }
+  .drawer__heading {
+    font-size: var(--heading-size-mobile) !important;
+  }
+  @media screen and (min-width: 750px) {
+    .drawer__heading {
+      font-size: var(--heading-size-desktop) !important;
+    }
+  }
   .cart-drawer__footer,
   .drawer__footer {
     margin-bottom: -20px !important;
@@ -125,7 +133,7 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-      <div class="drawer__header" style='--alignment:{{ section.settings.heading_alignment }}'>
+      <div class="drawer__header" style="--alignment:{{ section.settings.heading_alignment }}; --heading-size-desktop: {{ section.settings.heading_size_desktop | default: 24 }}px; --heading-size-mobile: {{ section.settings.heading_size_mobile | default: 20 }}px;">
         <h2 class="drawer__heading">
           {% liquid
             assign non_upsell_count = cart.item_count
