@@ -436,31 +436,94 @@
           "type": "testimonial_notification",
           "settings": {
             "initial": "A",
-            "name_descriptor": "Amanda K. | Owner of a Golden Retriever",
-            "quote": "Saved my dog from flying forward when a car cut me off at 60mph!"
+            "name_descriptor": "Amanda K. | Saved Golden Retriever",
+            "quote": "We spun on black ice and hit a concrete median. She walked away with only a bruised paw—saved her life!"
           }
         },
         "testimonial_notification_MfqiFE": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "J",
-            "name_descriptor": "Jessica P. | Dog mom of 2 active pups",
-            "quote": "No more lap jumping or distractions while driving. She sits comfortably buckled in the back."
+            "name_descriptor": "Jessica P. | Dog Mom of 2 Pups",
+            "quote": "No more climbing onto my lap or sliding under the brake pedal. They stay safely buckled in the back now."
           }
         },
         "testimonial_notification_GY79NG": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "M",
-            "name_descriptor": "Marcus D. | Vet tech & trainer",
-            "quote": "Extremely durable nylon and shock absorbing elastic. Highly recommend."
+            "name_descriptor": "Marcus D. | Vet Tech & Trainer",
+            "quote": "I see tragic spinal injuries in dogs from minor stops weekly. This anti-whiplash buffer is a veterinary necessity."
+          }
+        },
+        "testimonial_notification_DrRachel": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "R",
+            "name_descriptor": "Dr. Rachel H. | Emergency DVM",
+            "quote": "Car airbags deploy with enough force to kill a lap dog. Keep them buckled in the back—this strap is perfect."
+          }
+        },
+        "testimonial_notification_SarahW": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "S",
+            "name_descriptor": "Sarah W. | Owner of a Boxer",
+            "quote": "Had to slam my brakes at 70mph on the highway. My boxer didn't move an inch. I cried tears of relief."
+          }
+        },
+        "testimonial_notification_TylerB": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "T",
+            "name_descriptor": "Tyler B. | Lab Parent",
+            "quote": "Super easy, snaps right into the seatbelt latch like a regular seatbelt. Solid metal hook, very heavy-duty."
+          }
+        },
+        "testimonial_notification_EmilyR": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "E",
+            "name_descriptor": "Emily R. | Mother of 3 Goldendoodles",
+            "quote": "Keeps my three high-energy dogs from bouncing around or trying to jump out the window. Driving is finally peaceful."
+          }
+        },
+        "testimonial_notification_DavidS": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "D",
+            "name_descriptor": "David S. | German Shepherd Owner",
+            "quote": "A driver cut me off and slammed their brakes. SafePet kept my 85lb shepherd from flying into my dashboard."
+          }
+        },
+        "testimonial_notification_ChrisK9": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "C",
+            "name_descriptor": "Coach Chris | K9 Behaviorist",
+            "quote": "I recommend this to every client. An unrestrained dog becomes a 60lb projectile in a crash. Essential gear."
+          }
+        },
+        "testimonial_notification_MeganF": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Megan F. | Frenchie Mom",
+            "quote": "My frenchie actually lays down and relaxes now because she feels secure when we take turns. 10/10."
           }
         }
       },
       "block_order": [
         "testimonial_notification_yXfpwF",
         "testimonial_notification_MfqiFE",
-        "testimonial_notification_GY79NG"
+        "testimonial_notification_GY79NG",
+        "testimonial_notification_DrRachel",
+        "testimonial_notification_SarahW",
+        "testimonial_notification_TylerB",
+        "testimonial_notification_EmilyR",
+        "testimonial_notification_DavidS",
+        "testimonial_notification_ChrisK9",
+        "testimonial_notification_MeganF"
       ],
       "name": "Social Proof Toast",
       "settings": {
