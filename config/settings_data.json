@@ -573,7 +573,7 @@
             "type": "custom_liquid",
             "settings": {
               "position": "body",
-              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}\n.drawer.active .drawer__inner {\n    background: white !important;}\n</style>"
+              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}\n.drawer.active .drawer__inner {\n    background: white !important;}\n.drawer__header,\n.cart-drawer .drawer__header,\n#CartDrawer .drawer__header,\n.drawer__inner .drawer__header {\n  padding: 5px !important;\n}\n\n.drawer__heading {\n  font-size: 20px !important; /* Font size on mobile */\n}\n@media screen and (min-width: 750px) {\n  .drawer__heading {\n    font-size: 24px !important; /* Font size on desktop */\n  }\n}\n\n.cart-drawer__totals__row,\n.cart-drawer__totals__row--spaced,\n.cart-drawer__totals__row--center,\n.cart-drawer__total-savings {\n  margin: 2px !important;\n}\n\n.cart-drawer__footer,\n.drawer__footer {\n  margin-bottom: 0px !important;\n}\n\n.cart-drawer__body {\n    padding: 0 1rem !important;\n}\n</style>"
             }
           },
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e": {
@@ -597,8 +597,8 @@
               "icon": "local_shipping",
               "icon_filled": false,
               "accent_color": "accent-1",
-              "margin_top": 15,
-              "margin_bottom": 15
+              "margin_top": 0,
+              "margin_bottom": 0
             }
           },
           "gift_X6KbcY": {
@@ -638,8 +638,8 @@
               "show_custom_bg": false,
               "regular_bg_color": "#f2f2f2",
               "selected_bg_color": "#f2f2f2",
-              "margin_top": 15,
-              "margin_bottom": 15
+              "margin_top": 0,
+              "margin_bottom": 3
             }
           },
           "product_upsells_K3pr7Y": {
@@ -648,7 +648,7 @@
               "position": "footer",
               "display": "globally",
               "display_product_handles": "",
-              "style": "add_button",
+              "style": "toggle_switch",
               "btn_position": "right",
               "toggle_element": "container",
               "add_btn_label": "<strong>Add</strong>",
@@ -659,7 +659,7 @@
               "product_list": [
                 "lifetime-replacement-warranty"
               ],
-              "prdouct_1_preselected": false,
+              "prdouct_1_preselected": true,
               "product_1_desc": "",
               "product_1_percentage_discount": "0",
               "product_1_fixed_amount_discount": "0",
@@ -672,7 +672,7 @@
               "product_3_percentage_discount": "0",
               "product_3_fixed_amount_discount": "0",
               "show_images": true,
-              "images_size": "3.5",
+              "images_size": "4.25",
               "images_corner_radius": 6,
               "title_size": "1.2",
               "title_link": false,
@@ -690,7 +690,7 @@
               "corner_radius": 0,
               "show_box_shadow": false,
               "show_border": false,
-              "regular_border_color": "#F5F5F5",
+              "regular_border_color": "#f5f5f5",
               "selected_border_color": "#dd1d1d",
               "border_width": "0.2",
               "show_custom_bg": true,
@@ -733,38 +733,6 @@
               "margin_bottom": 0
             }
           },
-          "text_with_icon_Te766A": {
-            "type": "text_with_icon",
-            "settings": {
-              "position": "body",
-              "mobile_text_size": 20,
-              "desktop_text_size": 20,
-              "alignment": "center",
-              "text_color": "#121212",
-              "text_1": "<strong>❤️ Dog Parents Also Added</strong>",
-              "text_2": "",
-              "text_3": "",
-              "icon_scale": 120,
-              "icon_color": "#121212",
-              "icon_1": "",
-              "filled_icon_1": false,
-              "icon_2": "check_circle",
-              "filled_icon_2": false,
-              "icon_3": "check_circle",
-              "filled_icon_3": false,
-              "width": "100%",
-              "direction": "horizontal",
-              "column_gap": 3,
-              "enable_bg": false,
-              "bg_color": "#f3f3f3",
-              "corner_radius": 40,
-              "padding": 3,
-              "border_size": 0,
-              "border_color": "#b7b7b7",
-              "margin_top": 15,
-              "margin_bottom": 0
-            }
-          },
           "product_upsells_8mxVNc": {
             "type": "product_upsells",
             "settings": {
@@ -780,7 +748,9 @@
               "accent_color": "accent-1",
               "color_scheme": "background-1",
               "product_list": [
-                "personalized-id-tag"
+                "personalized-id-tag",
+                "the-pet-emergency-car-window-sticker",
+                "safepet-gps-tracker"
               ],
               "prdouct_1_preselected": false,
               "product_1_desc": "",
@@ -795,7 +765,7 @@
               "product_3_percentage_discount": "0",
               "product_3_fixed_amount_discount": "0",
               "show_images": true,
-              "images_size": "3.5",
+              "images_size": "4.25",
               "images_corner_radius": 6,
               "title_size": "1.2",
               "title_link": false,
@@ -806,7 +776,7 @@
               "show_variant_picker": false,
               "update_prices": false,
               "skip_unavailable": false,
-              "container_title": "",
+              "container_title": "❤️ Dog Parents Also Added",
               "container_title_position": "outside",
               "container_title_mobile_text_size": 20,
               "container_title_desktop_text_size": 20,
@@ -817,9 +787,9 @@
               "selected_border_color": "#dd1d1d",
               "border_width": "0.2",
               "show_custom_bg": false,
-              "regular_bg_color": "#FFE0E0",
+              "regular_bg_color": "#ffe0e0",
               "selected_bg_color": "#ffffff",
-              "margin_top": 9,
+              "margin_top": 21,
               "margin_bottom": 0
             }
           },
@@ -838,9 +808,7 @@
               "accent_color": "accent-1",
               "color_scheme": "background-1",
               "product_list": [
-                "the-pet-emergency-car-window-sticker",
-                "safepet-3-in-1-pet-brush",
-                "safepet-gps-tracker"
+                "safepet-3-in-1-pet-brush"
               ],
               "prdouct_1_preselected": false,
               "product_1_desc": "",
@@ -877,9 +845,9 @@
               "selected_border_color": "#dd1d1d",
               "border_width": "0.2",
               "show_custom_bg": false,
-              "regular_bg_color": "#FFE0E0",
+              "regular_bg_color": "#ffe0e0",
               "selected_bg_color": "#ffffff",
-              "margin_top": 9,
+              "margin_top": 0,
               "margin_bottom": 0
             }
           },
@@ -936,15 +904,15 @@
           "gift_X6KbcY",
           "product_upsells_K3pr7Y",
           "097b7b4f-c0b8-4073-a06b-e6d49a5aad20",
-          "text_with_icon_Te766A",
           "product_upsells_8mxVNc",
           "product_upsells_RyVKPQ",
           "4f3e2a5f-006d-40ed-8370-49b15e0e427d",
           "0935e47c-9604-4faa-b47a-d61ca49c0c16",
           "68fdc0a0-cd7c-40b9-97b3-a76eb7917a47"
         ],
+        "custom_css": [],
         "settings": {
-          "test_mode": false,
+          "test_mode": true,
           "heading_text": "Cart • [count] items",
           "heading_alignment": "flex-start",
           "desktop_width": "normal",
