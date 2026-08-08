@@ -88,6 +88,17 @@
       background: {{ section.settings.body_bg_color }} !important;
     }
   {% endif %}
+
+  /* Hide sections when cart is empty to prevent overlap/leakage */
+  cart-drawer.is-empty .drawer__header,
+  cart-drawer.is-empty .cart-drawer__body,
+  cart-drawer.is-empty .drawer__footer {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
 </style>
 
 <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}{% if section.settings.test_mode %} active{% endif %} cart-drawer--desktop-width-{{ section.settings.desktop_width }} cart-drawer--mobile-width-{{ section.settings.mobile_width }}" data-type='modal'>

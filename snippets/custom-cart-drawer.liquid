@@ -51,6 +51,16 @@
     background-color: #ffffff !important;
     background: #ffffff !important;
   }
+
+  /* Hide standard header/footer when custom cart drawer is empty (keeps body to render empty content) */
+  custom-cart-drawer.is-empty .drawer__header,
+  custom-cart-drawer.is-empty .drawer__footer {
+    display: none !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
 </style>
 
 {%- comment -%}
