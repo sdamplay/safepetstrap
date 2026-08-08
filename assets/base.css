@@ -183,4 +183,12 @@ p, .rte p, .footer-block__details-content p, .template-search p {
   margin-bottom: -20px !important;
 }
 
+/* Spacing adjustments for upsell blocks in cart drawer */
+.cart-drawer-upsells-container {
+  margin-top: 8px !important;
+}
+.cart-drawer__upsells-wrapper {
+  padding: 8px 0 !important;
+}
+
 
