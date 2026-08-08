@@ -483,25 +483,25 @@
         "continue_to_shipping_method": "Next Step →"
       },
       "shipping": {
-        "shipping_method_title": "Billing method",
-        "title": "Billing"
+        "shipping_method_title": "Shipping method",
+        "title": "Shipping"
       },
       "payment": {
         "title": "Summary",
         "card_security_notice": "All transactions are secure and encrypted. Your order includes free returns and 24/7 access to our award-winning customer service"
       },
       "delivery_options": {
-        "shipping_address": "Billing Address"
+        "shipping_address": "Shipping Address"
       },
       "order_summary": {
-        "shipping_label": "Digital Processing Fee"
+        "shipping_label": "Shipping & Handling"
       },
       "thank_you": {
-        "shipping_method_title": "Billing method"
+        "shipping_method_title": "Shipping method"
       },
       "review": {
         "blocks": {
-          "shipping_method_title": "Billing method",
+          "shipping_method_title": "Shipping method",
           "change_shipping_method_link_label": "Change billing method"
         }
       }
@@ -605,7 +605,7 @@
   "customer_accounts": {
     "order_details": {
       "shipping": {
-        "method": "Billing method"
+        "method": "Shipping method"
       }
     }
   }

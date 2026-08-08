@@ -752,11 +752,11 @@ body.overflow-hidden {
 }
 
 .drawer__heading {
-  font-size: var(--heading-size-mobile) !important;
+  font-size: var(--heading-size-mobile, 20px) !important;
 }
 @media screen and (min-width: 750px) {
   .drawer__heading {
-    font-size: var(--heading-size-desktop) !important;
+    font-size: var(--heading-size-desktop, 24px) !important;
   }
 }
 

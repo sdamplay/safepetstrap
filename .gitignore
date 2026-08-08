@@ -1,0 +1,5 @@
+scratch/
+.shopify/
+.DS_Store
+*.log
+config/settings_data.json.bak
