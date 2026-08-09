@@ -543,6 +543,17 @@
       50% { transform: scale(1.025); }
       100% { transform: scale(1); }
     }
+    
+    @media screen and (max-width: 480px) {
+      .checkout-upsell-modal-overlay {
+        align-items: flex-start !important;
+        padding-top: 15px !important;
+      }
+      .checkout-upsell-modal-card {
+        max-height: 95vh !important;
+        margin: 0 auto;
+      }
+    }
   </style>
 
   <script>
