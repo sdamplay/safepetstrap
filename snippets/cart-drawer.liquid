@@ -360,7 +360,7 @@
                                           <div class="cart-item__totals-inline" style="flex-shrink: 0; text-align: right; margin-top: 2px;">
                                             <div class="cart-item__price-wrapper">
                                               {% if display_compare %}
-                                                <div class="cart-item__discounted-prices" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+                                                <div class="cart-item__discounted-prices" style="display: flex; align-items: center; gap: 4px;">
                                                   <s class="cart-item__old-price price--end compare-price color-foreground-{{ block.settings.compare_price_color }}" style="font-size: 11px; text-decoration: line-through; opacity: 0.6;">
                                                     {{ compare_price | money }}
                                                   </s>

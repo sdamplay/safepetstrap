@@ -199,7 +199,7 @@
                             <p class="product-option" style="margin: 0; flex-grow: 1;">{{ item.variant.title }}</p>
                             <div class="cart-item__totals-inline" style="flex-shrink: 0; text-align: right; margin-top: -2px;">
                               <div class="cart-item__price-wrapper">
-                                <div class="cart-item__discounted-prices" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
+                                <div class="cart-item__discounted-prices" style="display: flex; align-items: center; gap: 4px;">
                                   {%- if item.variant.compare_at_price > item.variant.price or item.final_price == 0 -%}
                                     {%- assign compare_price = item.variant.compare_at_price | default: 9500 -%}
                                     {%- assign compare_line_price = compare_price | times: item.quantity -%}
