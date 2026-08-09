@@ -870,7 +870,7 @@
               "subtotal_text_size": 16,
               "display_discounts": false,
               "discounts_label": "<strong>Discounts:</strong>",
-              "discounts_alignment": "flex-start",
+              "discounts_alignment": "center",
               "margin_top": 0,
               "margin_bottom": 0
             }
