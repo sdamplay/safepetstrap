@@ -103,19 +103,40 @@
         
         <!-- Variant / Size Selection -->
         <div class="checkout-upsell-variants-wrap">
-          <span class="checkout-upsell-variants-label">Select Your Dog's Size:</span>
+          <div class="checkout-upsell-variants-header">
+            <span class="checkout-upsell-variants-label">Select Your Dog's Size:</span>
+            <span class="size-chart__integrated-inline">
+              <tool-tip-trigger class="tool-tip-trigger" data-tool-tip="size-chart">
+                <div class="tool-tip-trigger__title">
+                  Size chart
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-size-chart" viewBox="0 0 64 64">
+                    <path d="M22.39 33.53c-7.46 0-13.5-3.9-13.5-8.72s6-8.72 13.5-8.72 13.5 3.9 13.5 8.72a12 12 0 0 1-.22 1.73"></path>
+                    <ellipse cx="22.39" cy="24.81" rx="3.28" ry="2.12"></ellipse>
+                    <path d="M8.89 24.81V38.5c0 7.9 6.4 9.41 14.3 9.41h31.92V33.53H22.39M46.78 33.53v7.44M38.65 33.53v7.44M30.52 33.53v7.44M22.39 33.53v7.44"></path>
+                  </svg>
+                </div>
+                <span class="tool-tip-trigger__content" data-tool-tip-content="">
+                  <p><img src="{{ 'harness-size-chart.jpg' | asset_url }}" alt="Harness Size Chart"></p>
+                </span>
+              </tool-tip-trigger>
+            </span>
+          </div>
           
           <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills">
             {%- if upsell_product != blank -%}
+              {%- assign active_set = false -%}
               {%- for variant in upsell_product.variants -%}
-                <button type="button" 
-                        class="checkout-upsell-size-pill{% if forloop.first %} active{% endif %}" 
-                        data-variant-id="{{ variant.id }}">
-                  {{ variant.title }}
-                </button>
+                {%- assign title_upper = variant.title | upcase -%}
+                {%- if title_upper != 'XS' -%}
+                  <button type="button" 
+                          class="checkout-upsell-size-pill{% if active_set == false %} active{% endif %}" 
+                          data-variant-id="{{ variant.id }}">
+                    {{ variant.title }}
+                  </button>
+                  {%- assign active_set = true -%}
+                {%- endif -%}
               {%- endfor -%}
             {%- else -%}
-              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846451430">XS</button>
               <button type="button" class="checkout-upsell-size-pill active" data-variant-id="48139846418662">S</button>
               <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846484198">M</button>
               <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846516966">L</button>
@@ -123,41 +144,41 @@
             {%- endif -%}
           </div>
           
-          <span class="checkout-upsell-size-guide-toggle" id="checkoutUpsellSizeGuideToggle">📏 View Size Chart</span>
+          <span class="checkout-upsell-size-guide-toggle" id="checkoutUpsellSizeGuideToggle">📏 View Sizing Table</span>
           
           <table class="checkout-upsell-size-guide-table" id="checkoutUpsellSizeGuideTable">
             <thead>
               <tr>
                 <th>Size</th>
                 <th>Chest Girth</th>
-                <th>Dog Weight</th>
+                <th>Neck Girth</th>
+                <th>Suggested Weight</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>XS</strong></td>
-                <td>11" - 15"</td>
-                <td>5 - 10 lbs</td>
-              </tr>
-              <tr>
                 <td><strong>S</strong></td>
-                <td>15" - 20"</td>
-                <td>10 - 20 lbs</td>
+                <td>49-64 cm</td>
+                <td>28-43 cm</td>
+                <td>8-15 lbs</td>
               </tr>
               <tr>
                 <td><strong>M</strong></td>
-                <td>20" - 27"</td>
-                <td>20 - 50 lbs</td>
+                <td>55-71 cm</td>
+                <td>30-51 cm</td>
+                <td>15-35 lbs</td>
               </tr>
               <tr>
                 <td><strong>L</strong></td>
-                <td>27" - 34"</td>
-                <td>50 - 80 lbs</td>
+                <td>66-89 cm</td>
+                <td>34-59 cm</td>
+                <td>35-66 lbs</td>
               </tr>
               <tr>
                 <td><strong>XL</strong></td>
-                <td>34" - 42"</td>
-                <td>80 - 120 lbs</td>
+                <td>78-101 cm</td>
+                <td>50-81 cm</td>
+                <td>66-110 lbs</td>
               </tr>
             </tbody>
           </table>
@@ -554,6 +575,100 @@
         margin: 0 auto;
       }
     }
+    
+    /* Integrated Size Chart Tooltip Styles */
+    .checkout-upsell-variants-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .checkout-upsell-variants-header .checkout-upsell-variants-label {
+      margin-bottom: 0 !important;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: 750;
+      color: #374151;
+    }
+    .size-chart__integrated-inline {
+      display: inline-block;
+    }
+    .tool-tip-trigger {
+      position: relative;
+      display: inline-block;
+    }
+    .tool-tip-trigger__title {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #dc2626;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .tool-tip-trigger__title svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2px;
+    }
+    .tool-tip-trigger__content {
+      display: none;
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      background-color: #ffffff;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      padding: 10px;
+      z-index: 1000000;
+    }
+    @media screen and (max-width: 480px) {
+      .tool-tip-trigger__content {
+        width: 260px;
+      }
+    }
+    .tool-tip-trigger__content p {
+      margin: 0;
+    }
+    .tool-tip-trigger__content img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+    }
+    .tool-tip-trigger__content::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: #ffffff transparent transparent transparent;
+    }
+    .tool-tip-trigger__content::before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 7px;
+      border-style: solid;
+      border-color: #e5e7eb transparent transparent transparent;
+      z-index: -1;
+    }
+    @media screen and (min-width: 769px) {
+      .tool-tip-trigger:hover .tool-tip-trigger__content {
+        display: block;
+      }
+    }
   </style>
 
   <script>
@@ -599,9 +714,27 @@
           sizeGuideToggle.addEventListener('click', function() {
             sizeGuideTable.classList.toggle('active');
             if (sizeGuideTable.classList.contains('active')) {
-              sizeGuideToggle.textContent = '❌ Close Size Chart';
+              sizeGuideToggle.textContent = '❌ Close Sizing Table';
             } else {
-              sizeGuideToggle.textContent = '📏 View Size Chart';
+              sizeGuideToggle.textContent = '📏 View Sizing Table';
+            }
+          });
+        }
+
+        // Tooltip click selection (for mobile tap support)
+        var tooltipTrigger = modal.querySelector('.tool-tip-trigger');
+        if (tooltipTrigger) {
+          var tooltipContent = tooltipTrigger.querySelector('.tool-tip-trigger__content');
+          tooltipTrigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (tooltipContent) {
+              var isVisible = window.getComputedStyle(tooltipContent).display === 'block';
+              tooltipContent.style.display = isVisible ? 'none' : 'block';
+            }
+          });
+          document.addEventListener('click', function() {
+            if (tooltipContent) {
+              tooltipContent.style.display = 'none';
             }
           });
         }
