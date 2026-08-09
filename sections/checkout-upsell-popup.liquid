@@ -11,26 +11,63 @@
   {%- endif -%}
 
   {%- assign product_title = section.settings.product_title_override | default: upsell_product.title -%}
+  {%- if product_title == blank -%}
+    {%- assign product_title = "SafePet Heavy-Duty Chest Harness" -%}
+  {%- endif -%}
+
   {%- assign product_image = upsell_product.featured_image | default: 'a066ed7ecb67a06a034c860220b45268.jpg' -%}
+
+  {%- assign product_price = section.settings.product_price -%}
+  {%- if product_price == blank and upsell_product != blank -%}
+    {%- assign product_price = upsell_product.price | money -%}
+  {%- endif -%}
+  {%- if product_price == blank -%}
+    {%- assign product_price = "$27.95" -%}
+  {%- endif -%}
+
+  {%- assign compare_price = section.settings.product_compare_price -%}
+  {%- if compare_price == blank and upsell_product != blank -%}
+    {%- assign compare_price = upsell_product.compare_at_price | money -%}
+  {%- endif -%}
+  {%- if compare_price == blank -%}
+    {%- assign compare_price = "$42.99" -%}
+  {%- endif -%}
+
+  {%- assign trigger_ids = "" -%}
+  {%- if section.settings.trigger_products != blank -%}
+    {%- for prod in section.settings.trigger_products -%}
+      {%- if forloop.first -%}
+        {%- assign trigger_ids = prod.id | append: "" -%}
+      {%- else -%}
+        {%- assign trigger_ids = trigger_ids | append: "," | append: prod.id -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
 
   <div class="checkout-upsell-modal-overlay" id="checkoutUpsellPopup" aria-hidden="true" role="dialog">
     <div class="checkout-upsell-modal-card">
       
       <!-- Red Urgency Header -->
-      <div class="checkout-upsell-header-banner">
-        {{ section.settings.heading | escape }}
-      </div>
+      {%- if section.settings.heading != blank -%}
+        <div class="checkout-upsell-header-banner">
+          {{ section.settings.heading | escape }}
+        </div>
+      {%- endif -%}
       
       <div class="checkout-upsell-modal-body">
         <!-- Main Headline -->
-        <h3 class="checkout-upsell-headline">
-          {{ section.settings.subheading | escape }}
-        </h3>
+        {%- if section.settings.subheading != blank -%}
+          <h3 class="checkout-upsell-headline">
+            {{ section.settings.subheading | escape }}
+          </h3>
+        {%- endif -%}
         
         <!-- Collar Warning Box -->
-        <div class="checkout-upsell-warning-box">
-          {{ section.settings.warning_text | newline_to_br }}
-        </div>
+        {%- if section.settings.warning_text != blank -%}
+          <div class="checkout-upsell-warning-box">
+            {{ section.settings.warning_text | newline_to_br }}
+          </div>
+        {%- endif -%}
         
         <!-- Product Display Info -->
         <div class="checkout-upsell-product-row">
@@ -46,19 +83,21 @@
             <h4 class="checkout-upsell-product-title">{{ product_title }}</h4>
             
             <div class="checkout-upsell-price-row">
-              <span class="checkout-upsell-price-sale">{{ section.settings.product_price }}</span>
-              <span class="checkout-upsell-price-compare">{{ section.settings.product_compare_price }}</span>
+              <span class="checkout-upsell-price-sale">{{ product_price }}</span>
+              <span class="checkout-upsell-price-compare">{{ compare_price }}</span>
               <span class="checkout-upsell-price-discount-pill">Save 35%</span>
             </div>
             
-            <ul class="checkout-upsell-bullets">
-              {%- assign bullets = section.settings.benefits | split: "\n" -%}
-              {%- for bullet in bullets -%}
-                {%- if bullet != blank -%}
-                  <li>{{ bullet | strip }}</li>
-                {%- endif -%}
-              {%- endfor -%}
-            </ul>
+            {%- if section.settings.benefits != blank -%}
+              <ul class="checkout-upsell-bullets">
+                {%- assign bullets = section.settings.benefits | split: "\n" -%}
+                {%- for bullet in bullets -%}
+                  {%- if bullet != blank -%}
+                    <li>{{ bullet | strip }}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
           </div>
         </div>
         
@@ -130,9 +169,11 @@
         <button type="button" class="checkout-upsell-add-btn" id="checkoutUpsellAddBtn">
           {{ section.settings.add_btn_text | escape }}
         </button>
-        <span class="checkout-upsell-add-btn-subtext">
-          {{ section.settings.add_btn_subtext | escape }}
-        </span>
+        {%- if section.settings.add_btn_subtext != blank -%}
+          <span class="checkout-upsell-add-btn-subtext">
+            {{ section.settings.add_btn_subtext | escape }}
+          </span>
+        {%- endif -%}
         <button type="button" class="checkout-upsell-skip-btn" id="checkoutUpsellSkipBtn">
           {{ section.settings.skip_btn_text | escape }}
         </button>
@@ -191,7 +232,7 @@
       color: #ffffff;
       text-align: center;
       padding: 12px 16px;
-      font-size: 13px;
+      font-size: {{ section.settings.font_size_banner }}px;
       font-weight: 800;
       letter-spacing: 0.06em;
       text-transform: uppercase;
@@ -199,7 +240,7 @@
     
     /* Content container */
     .checkout-upsell-modal-body {
-      padding: 24px;
+      padding: 10px;
       overflow-y: auto;
       flex-grow: 1;
       text-align: left;
@@ -208,7 +249,7 @@
     /* Main Headline */
     .checkout-upsell-headline {
       color: #111827;
-      font-size: 19px;
+      font-size: {{ section.settings.font_size_headline }}px;
       font-weight: 800;
       line-height: 1.35;
       margin: 0 0 6px 0;
@@ -232,7 +273,7 @@
       border-left: 4px solid #ef4444;
       border-radius: 8px;
       padding: 12px 14px;
-      font-size: 12.5px;
+      font-size: {{ section.settings.font_size_warning }}px;
       line-height: 1.45;
       color: #991b1b;
       margin-bottom: 20px;
@@ -257,8 +298,8 @@
     }
     
     .checkout-upsell-product-media {
-      width: 125px;
-      height: 125px;
+      width: {{ section.settings.image_size }}px;
+      height: {{ section.settings.image_size }}px;
       flex-shrink: 0;
       border-radius: 12px;
       overflow: hidden;
@@ -277,7 +318,7 @@
     
     .checkout-upsell-product-title {
       color: #111827;
-      font-size: 15px;
+      font-size: {{ section.settings.font_size_title }}px;
       font-weight: 750;
       margin: 0 0 6px 0;
       line-height: 1.3;
@@ -297,12 +338,12 @@
     }
     .checkout-upsell-price-sale {
       color: #dc2626;
-      font-size: 19px;
+      font-size: {{ section.settings.font_size_price }}px;
       font-weight: 800;
     }
     .checkout-upsell-price-compare {
       color: #9ca3af;
-      font-size: 13.5px;
+      font-size: {{ section.settings.font_size_compare }}px;
       text-decoration: line-through;
     }
     .checkout-upsell-price-discount-pill {
@@ -320,7 +361,7 @@
       margin: 0;
       padding: 0;
       list-style: none;
-      font-size: 12.5px;
+      font-size: {{ section.settings.font_size_bullets }}px;
       color: #4b5563;
       line-height: 1.5;
     }
@@ -440,7 +481,7 @@
       border: none;
       border-radius: 8px;
       padding: 15px 24px;
-      font-size: 15px;
+      font-size: {{ section.settings.font_size_add_btn }}px;
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.35);
@@ -469,7 +510,7 @@
       background: none;
       border: none;
       color: #9ca3af;
-      font-size: 12.5px;
+      font-size: {{ section.settings.font_size_skip_btn }}px;
       font-weight: 500;
       text-decoration: underline;
       margin-top: 14px;
@@ -508,6 +549,7 @@
     (function() {
       // Config data attributes fallback
       var upsellProductId = {{ upsell_product.id | default: 9810334613734 }};
+      var triggerProductIds = [{% if trigger_ids != blank %}{{ trigger_ids }}{% endif %}];
       
       var activeVariantId = null;
       var interceptedCheckoutBtn = null;
@@ -574,7 +616,12 @@
                   return item.product_id === upsellProductId;
                 });
                 
-                if (hasHarness || cart.item_count === 0) {
+                // Check if trigger product list is empty, or if at least one trigger product is in the cart
+                var hasTriggerProduct = triggerProductIds.length === 0 || cart.items.some(function(item) {
+                  return triggerProductIds.indexOf(item.product_id) !== -1;
+                });
+                
+                if (hasHarness || !hasTriggerProduct || cart.item_count === 0) {
                   // Direct checkout
                   submitCheckout(checkoutBtn);
                 } else {
@@ -668,6 +715,10 @@
   "name": "Checkout Upsell Popup",
   "settings": [
     {
+      "type": "header",
+      "content": "Triggers & Products"
+    },
+    {
       "type": "checkbox",
       "id": "enable",
       "label": "Enable Upsell Popup",
@@ -679,10 +730,48 @@
       "label": "Upsell Product"
     },
     {
+      "type": "product_list",
+      "id": "trigger_products",
+      "label": "Trigger Products",
+      "info": "Select the products that must be in the cart to trigger this upsell. Leave blank to trigger for all products."
+    },
+    {
+      "type": "header",
+      "content": "Image & Layout Customization"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "min": 80,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Product Image Size",
+      "default": 125
+    },
+    {
+      "type": "header",
+      "content": "Heading Banner Text Settings"
+    },
+    {
       "type": "text",
       "id": "heading",
       "label": "Heading banner text",
       "default": "🚨 WAIT! COMPLETE YOUR PUP'S CAR SAFETY & SAVE 35%"
+    },
+    {
+      "type": "range",
+      "id": "font_size_banner",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Banner Font Size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Main Headline Text Settings"
     },
     {
       "type": "text",
@@ -691,10 +780,38 @@
       "default": "Never Attach a Car Seat Belt Directly to Your Dog's Collar..."
     },
     {
+      "type": "range",
+      "id": "font_size_headline",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Headline Font Size",
+      "default": 19
+    },
+    {
+      "type": "header",
+      "content": "Warning Callout Text Settings"
+    },
+    {
       "type": "textarea",
       "id": "warning_text",
       "label": "Warning Callout Text",
       "default": "⚠️ COLLAR DANGER: A sudden stop at even 20mph puts up to 600 lbs of pressure on your dog's neck, risking permanent trachea damage.\n\nEmergency Vets always recommend using a chest harness in the car to distribute force safely."
+    },
+    {
+      "type": "range",
+      "id": "font_size_warning",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Warning Callout Font Size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Product Info Settings"
     },
     {
       "type": "text",
@@ -703,10 +820,30 @@
       "default": "SafePet Heavy-Duty Chest Harness"
     },
     {
+      "type": "range",
+      "id": "font_size_title",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Product Title Font Size",
+      "default": 15
+    },
+    {
       "type": "text",
       "id": "product_price",
       "label": "Product Price to Display",
       "default": "$27.95"
+    },
+    {
+      "type": "range",
+      "id": "font_size_price",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Sale Price Font Size",
+      "default": 19
     },
     {
       "type": "text",
@@ -715,16 +852,50 @@
       "default": "$42.99"
     },
     {
+      "type": "range",
+      "id": "font_size_compare",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Compare Price Font Size",
+      "default": 13
+    },
+    {
       "type": "textarea",
       "id": "benefits",
       "label": "Product Benefits (One per line)",
       "default": "Safe chest force distribution\nSoft padded breathable mesh\nHeavy-duty reflective nylon\nLockable quick-release snaps"
     },
     {
+      "type": "range",
+      "id": "font_size_bullets",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Benefits Font Size",
+      "default": 13
+    },
+    {
+      "type": "header",
+      "content": "Action Buttons Settings"
+    },
+    {
       "type": "text",
       "id": "add_btn_text",
       "label": "Add Button Text",
       "default": "YES, ADD TO MY ORDER & CHECKOUT ➔"
+    },
+    {
+      "type": "range",
+      "id": "font_size_add_btn",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Add Button Font Size",
+      "default": 15
     },
     {
       "type": "text",
@@ -737,6 +908,16 @@
       "id": "skip_btn_text",
       "label": "Skip Button Text",
       "default": "No thanks, proceed to checkout without harness"
+    },
+    {
+      "type": "range",
+      "id": "font_size_skip_btn",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Skip Button Font Size",
+      "default": 13
     }
   ]
 }
