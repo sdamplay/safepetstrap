@@ -87,21 +87,10 @@
               <span class="checkout-upsell-price-compare">{{ compare_price }}</span>
               <span class="checkout-upsell-price-discount-pill">Save 35%</span>
             </div>
-            
-            {%- if section.settings.benefits != blank -%}
-              <ul class="checkout-upsell-bullets">
-                {%- assign bullets = section.settings.benefits | split: "\n" -%}
-                {%- for bullet in bullets -%}
-                  {%- if bullet != blank -%}
-                    <li>{{ bullet | strip }}</li>
-                  {%- endif -%}
-                {%- endfor -%}
-              </ul>
-            {%- endif -%}
           </div>
         </div>
         
-        <!-- Variant / Size Selection -->
+        <!-- Variant / Size Selection (Moved above benefits bullets for mobile viewability) -->
         <div class="checkout-upsell-variants-wrap">
           <div class="checkout-upsell-variants-header">
             <span class="checkout-upsell-variants-label">Select Your Dog's Size:</span>
@@ -148,18 +137,30 @@
             {%- endif -%}
           </div>
         </div>
+
+        <!-- Benefits bullets (Moved below variants selector) -->
+        {%- if section.settings.benefits != blank -%}
+          <ul class="checkout-upsell-bullets">
+            {%- assign bullets = section.settings.benefits | split: "\n" -%}
+            {%- for bullet in bullets -%}
+              {%- if bullet != blank -%}
+                <li>{{ bullet | strip }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
       
       <!-- Actions Footer -->
       <div class="checkout-upsell-modal-footer">
         <button type="button" class="checkout-upsell-add-btn" id="checkoutUpsellAddBtn">
-          {{ section.settings.add_btn_text | escape }}
+          <span>{{ section.settings.add_btn_text | escape }}</span>
+          {%- if section.settings.add_btn_subtext != blank -%}
+            <span class="checkout-upsell-add-btn-subtext">
+              {{ section.settings.add_btn_subtext | escape }}
+            </span>
+          {%- endif -%}
         </button>
-        {%- if section.settings.add_btn_subtext != blank -%}
-          <span class="checkout-upsell-add-btn-subtext">
-            {{ section.settings.add_btn_subtext | escape }}
-          </span>
-        {%- endif -%}
         <button type="button" class="checkout-upsell-skip-btn" id="checkoutUpsellSkipBtn">
           {{ section.settings.skip_btn_text | escape }}
         </button>
@@ -448,25 +449,25 @@
       background-color: #f9fafb;
       color: #374151;
       font-weight: bold;
-    }
-    
-    /* Actions/Footer */
+    }    /* Actions/Footer */
     .checkout-upsell-modal-footer {
-      padding: 0 24px 24px 24px;
+      padding: 12px;
       border-top: 1px solid #f3f4f6;
-      padding-top: 20px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      gap: 10px;
       align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
     }
     
     .checkout-upsell-add-btn {
-      width: 100%;
+      flex: 1.5;
       background-color: #dc2626;
       color: #ffffff;
       border: none;
-      border-radius: 8px;
-      padding: 15px 24px;
+      border-radius: 25px !important;
+      padding: 12px 16px;
       font-size: {{ section.settings.font_size_add_btn }}px;
       font-weight: 800;
       cursor: pointer;
@@ -476,6 +477,12 @@
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.02em;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      line-height: 1.25;
+      min-height: 50px;
     }
     .checkout-upsell-add-btn:hover {
       background-color: #b91c1c;
@@ -483,51 +490,41 @@
     }
     
     .checkout-upsell-add-btn-subtext {
-      font-size: 11.5px;
-      color: #16a34a;
-      font-weight: 700;
-      margin-top: 6px;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+      margin-top: 2px;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.02em;
+      display: block;
     }
     
     .checkout-upsell-skip-btn {
-      background: none;
-      border: none;
-      color: #9ca3af;
+      flex: 1;
+      background: #ffffff;
+      border: 1.5px solid rgb(38, 38, 38);
+      border-radius: 25px !important;
+      color: rgb(38, 38, 38);
       font-size: {{ section.settings.font_size_skip_btn }}px;
-      font-weight: 500;
-      text-decoration: underline;
-      margin-top: 14px;
+      font-weight: 700;
+      text-decoration: none !important;
+      padding: 12px 16px;
       cursor: pointer;
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
       outline: none;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.25;
+      min-height: 50px;
+      margin-top: 0 !important;
     }
     .checkout-upsell-skip-btn:hover {
-      color: #4b5563;
-    }
-    
-    /* Spinner */
-    .checkout-upsell-spinner {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      border-top-color: #ffffff;
-      animation: checkout-upsell-spin 1s ease-in-out infinite;
-      margin-right: 8px;
-      vertical-align: middle;
-    }
-    
-    @keyframes checkout-upsell-spin {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes checkout-upsell-pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.025); }
-      100% { transform: scale(1); }
+      background-color: #f9fafb;
+      color: #111827;
+      border-color: #111827;
     }
     
     @media screen and (max-width: 480px) {
@@ -539,6 +536,20 @@
         max-height: 95vh !important;
         margin: 0 auto;
       }
+      .checkout-upsell-modal-footer {
+        padding: 8px !important;
+        gap: 6px !important;
+      }
+      .checkout-upsell-add-btn,
+      .checkout-upsell-skip-btn {
+        padding: 8px 10px !important;
+        min-height: 44px !important;
+        font-size: 13px !important;
+      }
+      .checkout-upsell-add-btn-subtext {
+        font-size: 9px !important;
+      }
+    }
     }
     
     /* Size Chart Popup Modal styling */
