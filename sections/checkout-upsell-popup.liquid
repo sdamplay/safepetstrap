@@ -1,0 +1,745 @@
+{%- comment -%}
+  Checkout Upsell Popup Section
+  Intercepts clicks on the cart drawer's checkout button.
+  Shows a high-converting chest harness upsell popup before proceeding.
+{%- endcomment -%}
+
+{%- if section.settings.enable -%}
+  {%- assign upsell_product = all_products[section.settings.upsell_product] -%}
+  {%- if upsell_product == blank -%}
+    {%- assign upsell_product = all_products['harness'] -%}
+  {%- endif -%}
+
+  {%- assign product_title = section.settings.product_title_override | default: upsell_product.title -%}
+  {%- assign product_image = upsell_product.featured_image | default: 'a066ed7ecb67a06a034c860220b45268.jpg' -%}
+
+  <div class="checkout-upsell-modal-overlay" id="checkoutUpsellPopup" aria-hidden="true" role="dialog">
+    <div class="checkout-upsell-modal-card">
+      
+      <!-- Red Urgency Header -->
+      <div class="checkout-upsell-header-banner">
+        {{ section.settings.heading | escape }}
+      </div>
+      
+      <div class="checkout-upsell-modal-body">
+        <!-- Main Headline -->
+        <h3 class="checkout-upsell-headline">
+          {{ section.settings.subheading | escape }}
+        </h3>
+        
+        <!-- Collar Warning Box -->
+        <div class="checkout-upsell-warning-box">
+          {{ section.settings.warning_text | newline_to_br }}
+        </div>
+        
+        <!-- Product Display Info -->
+        <div class="checkout-upsell-product-row">
+          <div class="checkout-upsell-product-media">
+            {%- if upsell_product != blank -%}
+              <img src="{{ product_image | image_url: width: 300 }}" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
+            {%- else -%}
+              <img src="https://cdn.shopify.com/s/files/1/0817/3469/7190/files/a066ed7ecb67a06a034c860220b45268.jpg?v=1786263205" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
+            {%- endif -%}
+          </div>
+          
+          <div class="checkout-upsell-product-info">
+            <h4 class="checkout-upsell-product-title">{{ product_title }}</h4>
+            
+            <div class="checkout-upsell-price-row">
+              <span class="checkout-upsell-price-sale">{{ section.settings.product_price }}</span>
+              <span class="checkout-upsell-price-compare">{{ section.settings.product_compare_price }}</span>
+              <span class="checkout-upsell-price-discount-pill">Save 35%</span>
+            </div>
+            
+            <ul class="checkout-upsell-bullets">
+              {%- assign bullets = section.settings.benefits | split: "\n" -%}
+              {%- for bullet in bullets -%}
+                {%- if bullet != blank -%}
+                  <li>{{ bullet | strip }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+        
+        <!-- Variant / Size Selection -->
+        <div class="checkout-upsell-variants-wrap">
+          <span class="checkout-upsell-variants-label">Select Your Dog's Size:</span>
+          
+          <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills">
+            {%- if upsell_product != blank -%}
+              {%- for variant in upsell_product.variants -%}
+                <button type="button" 
+                        class="checkout-upsell-size-pill{% if forloop.first %} active{% endif %}" 
+                        data-variant-id="{{ variant.id }}">
+                  {{ variant.title }}
+                </button>
+              {%- endfor -%}
+            {%- else -%}
+              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846451430">XS</button>
+              <button type="button" class="checkout-upsell-size-pill active" data-variant-id="48139846418662">S</button>
+              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846484198">M</button>
+              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846516966">L</button>
+              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846549734">XL</button>
+            {%- endif -%}
+          </div>
+          
+          <span class="checkout-upsell-size-guide-toggle" id="checkoutUpsellSizeGuideToggle">📏 View Size Chart</span>
+          
+          <table class="checkout-upsell-size-guide-table" id="checkoutUpsellSizeGuideTable">
+            <thead>
+              <tr>
+                <th>Size</th>
+                <th>Chest Girth</th>
+                <th>Dog Weight</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>XS</strong></td>
+                <td>11" - 15"</td>
+                <td>5 - 10 lbs</td>
+              </tr>
+              <tr>
+                <td><strong>S</strong></td>
+                <td>15" - 20"</td>
+                <td>10 - 20 lbs</td>
+              </tr>
+              <tr>
+                <td><strong>M</strong></td>
+                <td>20" - 27"</td>
+                <td>20 - 50 lbs</td>
+              </tr>
+              <tr>
+                <td><strong>L</strong></td>
+                <td>27" - 34"</td>
+                <td>50 - 80 lbs</td>
+              </tr>
+              <tr>
+                <td><strong>XL</strong></td>
+                <td>34" - 42"</td>
+                <td>80 - 120 lbs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- Actions Footer -->
+      <div class="checkout-upsell-modal-footer">
+        <button type="button" class="checkout-upsell-add-btn" id="checkoutUpsellAddBtn">
+          {{ section.settings.add_btn_text | escape }}
+        </button>
+        <span class="checkout-upsell-add-btn-subtext">
+          {{ section.settings.add_btn_subtext | escape }}
+        </span>
+        <button type="button" class="checkout-upsell-skip-btn" id="checkoutUpsellSkipBtn">
+          {{ section.settings.skip_btn_text | escape }}
+        </button>
+      </div>
+      
+    </div>
+  </div>
+
+  <style>
+    /* Modal Overlay styling */
+    .checkout-upsell-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(17, 24, 39, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 999999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .checkout-upsell-modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    /* Modal Card styling */
+    .checkout-upsell-modal-card {
+      background-color: #ffffff;
+      width: 92%;
+      max-width: 550px;
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(229, 231, 235, 0.5);
+      font-family: inherit;
+    }
+    .checkout-upsell-modal-overlay.active .checkout-upsell-modal-card {
+      transform: scale(1);
+    }
+    
+    /* Danger/Urgency Header */
+    .checkout-upsell-header-banner {
+      background-color: #dc2626;
+      color: #ffffff;
+      text-align: center;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    
+    /* Content container */
+    .checkout-upsell-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex-grow: 1;
+      text-align: left;
+    }
+    
+    /* Main Headline */
+    .checkout-upsell-headline {
+      color: #111827;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0 0 6px 0;
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+    
+    .checkout-upsell-subheading {
+      color: #4b5563;
+      font-size: 13.5px;
+      font-weight: 500;
+      line-height: 1.4;
+      margin: 0 0 16px 0;
+      text-align: center;
+    }
+    
+    /* Collar Danger Warning Box */
+    .checkout-upsell-warning-box {
+      background-color: #fef2f2;
+      border: 1px solid #fee2e2;
+      border-left: 4px solid #ef4444;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: #991b1b;
+      margin-bottom: 20px;
+    }
+    .checkout-upsell-warning-box p {
+      margin: 0;
+    }
+    
+    /* Product Block */
+    .checkout-upsell-product-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    @media screen and (max-width: 480px) {
+      .checkout-upsell-product-row {
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        text-align: center;
+      }
+    }
+    
+    .checkout-upsell-product-media {
+      width: 125px;
+      height: 125px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+      background-color: #f9fafb;
+    }
+    .checkout-upsell-product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .checkout-upsell-product-info {
+      flex-grow: 1;
+    }
+    
+    .checkout-upsell-product-title {
+      color: #111827;
+      font-size: 15px;
+      font-weight: 750;
+      margin: 0 0 6px 0;
+      line-height: 1.3;
+    }
+    
+    /* Pricing */
+    .checkout-upsell-price-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    @media screen and (max-width: 480px) {
+      .checkout-upsell-price-row {
+        justify-content: center;
+      }
+    }
+    .checkout-upsell-price-sale {
+      color: #dc2626;
+      font-size: 19px;
+      font-weight: 800;
+    }
+    .checkout-upsell-price-compare {
+      color: #9ca3af;
+      font-size: 13.5px;
+      text-decoration: line-through;
+    }
+    .checkout-upsell-price-discount-pill {
+      background-color: #dcfce7;
+      color: #15803d;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+    
+    /* Bullet Points */
+    .checkout-upsell-bullets {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 12.5px;
+      color: #4b5563;
+      line-height: 1.5;
+    }
+    .checkout-upsell-bullets li {
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    @media screen and (max-width: 480px) {
+      .checkout-upsell-bullets li {
+        justify-content: center;
+      }
+    }
+    .checkout-upsell-bullets li::before {
+      content: "✓";
+      color: #16a34a;
+      font-weight: bold;
+    }
+    
+    /* Variant Selection */
+    .checkout-upsell-variants-wrap {
+      border-top: 1px solid #f3f4f6;
+      padding-top: 16px;
+      margin-bottom: 8px;
+    }
+    .checkout-upsell-variants-label {
+      font-size: 13px;
+      font-weight: 750;
+      color: #374151;
+      margin-bottom: 8px;
+      display: block;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .checkout-upsell-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .checkout-upsell-size-pill {
+      background-color: #ffffff;
+      border: 2px solid #e5e7eb;
+      color: #111827;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+    .checkout-upsell-size-pill:hover {
+      border-color: #9ca3af;
+    }
+    .checkout-upsell-size-pill.active {
+      border-color: #dc2626;
+      background-color: #fef2f2;
+      color: #dc2626;
+    }
+    
+    /* Size Guide Toggle */
+    .checkout-upsell-size-guide-toggle {
+      display: block;
+      text-align: center;
+      font-size: 11.5px;
+      color: #dc2626;
+      text-decoration: underline;
+      margin-top: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    
+    /* Size Guide Table */
+    .checkout-upsell-size-guide-table {
+      display: none;
+      width: 100%;
+      margin-top: 12px;
+      border-collapse: collapse;
+      font-size: 11px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .checkout-upsell-size-guide-table.active {
+      display: table;
+    }
+    .checkout-upsell-size-guide-table th, 
+    .checkout-upsell-size-guide-table td {
+      padding: 6px 8px;
+      border: 1px solid #e5e7eb;
+      text-align: center;
+    }
+    .checkout-upsell-size-guide-table th {
+      background-color: #f9fafb;
+      color: #374151;
+      font-weight: bold;
+    }
+    
+    /* Actions/Footer */
+    .checkout-upsell-modal-footer {
+      padding: 0 24px 24px 24px;
+      border-top: 1px solid #f3f4f6;
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .checkout-upsell-add-btn {
+      width: 100%;
+      background-color: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 15px 24px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.35);
+      transition: all 0.2s ease;
+      animation: checkout-upsell-pulse 2s infinite;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .checkout-upsell-add-btn:hover {
+      background-color: #b91c1c;
+      box-shadow: 0 6px 8px -1px rgba(220, 38, 38, 0.45);
+    }
+    
+    .checkout-upsell-add-btn-subtext {
+      font-size: 11.5px;
+      color: #16a34a;
+      font-weight: 700;
+      margin-top: 6px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    
+    .checkout-upsell-skip-btn {
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: underline;
+      margin-top: 14px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      outline: none;
+    }
+    .checkout-upsell-skip-btn:hover {
+      color: #4b5563;
+    }
+    
+    /* Spinner */
+    .checkout-upsell-spinner {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: checkout-upsell-spin 1s ease-in-out infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    @keyframes checkout-upsell-spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes checkout-upsell-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.025); }
+      100% { transform: scale(1); }
+    }
+  </style>
+
+  <script>
+    (function() {
+      // Config data attributes fallback
+      var upsellProductId = {{ upsell_product.id | default: 9810334613734 }};
+      
+      var activeVariantId = null;
+      var interceptedCheckoutBtn = null;
+      var bypassPopup = false;
+      
+      function initUpsellPopup() {
+        var modal = document.getElementById('checkoutUpsellPopup');
+        var addBtn = document.getElementById('checkoutUpsellAddBtn');
+        var skipBtn = document.getElementById('checkoutUpsellSkipBtn');
+        var pillsContainer = document.getElementById('checkoutUpsellVariantPills');
+        var sizeGuideToggle = document.getElementById('checkoutUpsellSizeGuideToggle');
+        var sizeGuideTable = document.getElementById('checkoutUpsellSizeGuideTable');
+        
+        if (!modal) return;
+        
+        // Initialize default active variant ID
+        var activePill = pillsContainer.querySelector('.checkout-upsell-size-pill.active');
+        if (activePill) {
+          activeVariantId = activePill.getAttribute('data-variant-id');
+        }
+        
+        // Size pills click selection
+        pillsContainer.addEventListener('click', function(event) {
+          var pill = event.target.closest('.checkout-upsell-size-pill');
+          if (pill) {
+            pillsContainer.querySelectorAll('.checkout-upsell-size-pill').forEach(function(p) {
+              p.classList.remove('active');
+            });
+            pill.classList.add('active');
+            activeVariantId = pill.getAttribute('data-variant-id');
+          }
+        });
+        
+        // Size Guide Toggle
+        if (sizeGuideToggle && sizeGuideTable) {
+          sizeGuideToggle.addEventListener('click', function() {
+            sizeGuideTable.classList.toggle('active');
+            if (sizeGuideTable.classList.contains('active')) {
+              sizeGuideToggle.textContent = '❌ Close Size Chart';
+            } else {
+              sizeGuideToggle.textContent = '📏 View Size Chart';
+            }
+          });
+        }
+        
+        // Intercept Checkout Click
+        document.addEventListener('click', function(event) {
+          if (bypassPopup) return;
+          
+          var checkoutBtn = event.target.closest('#CartDrawer-Checkout') || 
+                            event.target.closest('.cart__checkout-button') ||
+                            (event.target.closest('button[name="checkout"]') || event.target.closest('input[name="checkout"]'));
+          if (checkoutBtn) {
+            // Check if cart already has the upsell product
+            event.preventDefault();
+            event.stopPropagation();
+            
+            interceptedCheckoutBtn = checkoutBtn;
+            
+            fetch(window.Shopify.routes.root + 'cart.js')
+              .then(function(res) { return res.json(); })
+              .then(function(cart) {
+                var hasHarness = cart.items.some(function(item) {
+                  return item.product_id === upsellProductId;
+                });
+                
+                if (hasHarness || cart.item_count === 0) {
+                  // Direct checkout
+                  submitCheckout(checkoutBtn);
+                } else {
+                  // Open modal
+                  modal.classList.add('active');
+                  modal.setAttribute('aria-hidden', 'false');
+                }
+              })
+              .catch(function() {
+                // Fallback direct checkout
+                submitCheckout(checkoutBtn);
+              });
+          }
+        }, true); // Use capture phase to intercept before theme scripts!
+        
+        // Add to Order & Checkout
+        addBtn.addEventListener('click', function() {
+          if (!activeVariantId) return;
+          
+          addBtn.disabled = true;
+          addBtn.innerHTML = '<span class="checkout-upsell-spinner"></span> ADDING TO ORDER...';
+          
+          var data = {
+            id: activeVariantId,
+            quantity: 1
+          };
+          
+          fetch(window.Shopify.routes.root + 'cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          })
+          .then(function(res) { return res.json(); })
+          .then(function() {
+            submitCheckout(interceptedCheckoutBtn);
+          })
+          .catch(function() {
+            // Fallback checkout on fail
+            submitCheckout(interceptedCheckoutBtn);
+          });
+        });
+        
+        // Skip and Proceed
+        skipBtn.addEventListener('click', function() {
+          modal.classList.remove('active');
+          modal.setAttribute('aria-hidden', 'true');
+          submitCheckout(interceptedCheckoutBtn);
+        });
+        
+        // Close modal when clicking backdrop
+        modal.addEventListener('click', function(event) {
+          if (event.target === modal) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            submitCheckout(interceptedCheckoutBtn);
+          }
+        });
+      }
+      
+      function submitCheckout(button) {
+        bypassPopup = true;
+        var form = button ? button.closest('form') : null;
+        if (!form) {
+          form = document.querySelector('form[action*="/cart"]') || document.querySelector('form[action="/checkout"]');
+        }
+        if (form) {
+          var checkoutInput = form.querySelector('input[name="checkout"]');
+          if (!checkoutInput) {
+            checkoutInput = document.createElement('input');
+            checkoutInput.type = 'hidden';
+            checkoutInput.name = 'checkout';
+            checkoutInput.value = 'Checkout';
+            form.appendChild(checkoutInput);
+          }
+          form.submit();
+        } else {
+          window.location.href = '/checkout';
+        }
+      }
+      
+      // Load event listener
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initUpsellPopup);
+      } else {
+        initUpsellPopup();
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Checkout Upsell Popup",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable Upsell Popup",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "upsell_product",
+      "label": "Upsell Product"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading banner text",
+      "default": "🚨 WAIT! COMPLETE YOUR PUP'S CAR SAFETY & SAVE 35%"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Main Headline text",
+      "default": "Never Attach a Car Seat Belt Directly to Your Dog's Collar..."
+    },
+    {
+      "type": "textarea",
+      "id": "warning_text",
+      "label": "Warning Callout Text",
+      "default": "⚠️ COLLAR DANGER: A sudden stop at even 20mph puts up to 600 lbs of pressure on your dog's neck, risking permanent trachea damage.\n\nEmergency Vets always recommend using a chest harness in the car to distribute force safely."
+    },
+    {
+      "type": "text",
+      "id": "product_title_override",
+      "label": "Product Title Override",
+      "default": "SafePet Heavy-Duty Chest Harness"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Product Price to Display",
+      "default": "$27.95"
+    },
+    {
+      "type": "text",
+      "id": "product_compare_price",
+      "label": "Product Compare Price",
+      "default": "$42.99"
+    },
+    {
+      "type": "textarea",
+      "id": "benefits",
+      "label": "Product Benefits (One per line)",
+      "default": "Safe chest force distribution\nSoft padded breathable mesh\nHeavy-duty reflective nylon\nLockable quick-release snaps"
+    },
+    {
+      "type": "text",
+      "id": "add_btn_text",
+      "label": "Add Button Text",
+      "default": "YES, ADD TO MY ORDER & CHECKOUT ➔"
+    },
+    {
+      "type": "text",
+      "id": "add_btn_subtext",
+      "label": "Add Button Subtext",
+      "default": "+ Free Shipping Included"
+    },
+    {
+      "type": "text",
+      "id": "skip_btn_text",
+      "label": "Skip Button Text",
+      "default": "No thanks, proceed to checkout without harness"
+    }
+  ]
+}
+{% endschema %}
