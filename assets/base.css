@@ -191,4 +191,12 @@ p, .rte p, .footer-block__details-content p, .template-search p {
   padding: 8px 0 !important;
 }
 
+/* Mobile version section padding override */
+@media screen and (max-width: 749px) {
+  .section-sections--22122637033702__fe1c8c67-b84c-4466-a515-70df3134c1c0-padding {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
+}
+
 
