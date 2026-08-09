@@ -108,12 +108,7 @@
             <span class="size-chart__integrated-inline">
               <tool-tip-trigger class="tool-tip-trigger" data-tool-tip="size-chart">
                 <div class="tool-tip-trigger__title">
-                  Size chart
-                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-size-chart" viewBox="0 0 64 64">
-                    <path d="M22.39 33.53c-7.46 0-13.5-3.9-13.5-8.72s6-8.72 13.5-8.72 13.5 3.9 13.5 8.72a12 12 0 0 1-.22 1.73"></path>
-                    <ellipse cx="22.39" cy="24.81" rx="3.28" ry="2.12"></ellipse>
-                    <path d="M8.89 24.81V38.5c0 7.9 6.4 9.41 14.3 9.41h31.92V33.53H22.39M46.78 33.53v7.44M38.65 33.53v7.44M30.52 33.53v7.44M22.39 33.53v7.44"></path>
-                  </svg>
+                  📏 View Sizing Table
                 </div>
                 <span class="tool-tip-trigger__content" data-tool-tip-content="">
                   <p><img src="{{ 'harness-size-chart.jpg' | asset_url }}" alt="Harness Size Chart"></p>
@@ -143,45 +138,6 @@
               <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846549734">XL</button>
             {%- endif -%}
           </div>
-          
-          <span class="checkout-upsell-size-guide-toggle" id="checkoutUpsellSizeGuideToggle">📏 View Sizing Table</span>
-          
-          <table class="checkout-upsell-size-guide-table" id="checkoutUpsellSizeGuideTable">
-            <thead>
-              <tr>
-                <th>Size</th>
-                <th>Chest Girth</th>
-                <th>Neck Girth</th>
-                <th>Suggested Weight</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>S</strong></td>
-                <td>49-64 cm</td>
-                <td>28-43 cm</td>
-                <td>8-15 lbs</td>
-              </tr>
-              <tr>
-                <td><strong>M</strong></td>
-                <td>55-71 cm</td>
-                <td>30-51 cm</td>
-                <td>15-35 lbs</td>
-              </tr>
-              <tr>
-                <td><strong>L</strong></td>
-                <td>66-89 cm</td>
-                <td>34-59 cm</td>
-                <td>35-66 lbs</td>
-              </tr>
-              <tr>
-                <td><strong>XL</strong></td>
-                <td>78-101 cm</td>
-                <td>50-81 cm</td>
-                <td>66-110 lbs</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
       
@@ -686,8 +642,6 @@
         var addBtn = document.getElementById('checkoutUpsellAddBtn');
         var skipBtn = document.getElementById('checkoutUpsellSkipBtn');
         var pillsContainer = document.getElementById('checkoutUpsellVariantPills');
-        var sizeGuideToggle = document.getElementById('checkoutUpsellSizeGuideToggle');
-        var sizeGuideTable = document.getElementById('checkoutUpsellSizeGuideTable');
         
         if (!modal) return;
         
@@ -709,17 +663,7 @@
           }
         });
         
-        // Size Guide Toggle
-        if (sizeGuideToggle && sizeGuideTable) {
-          sizeGuideToggle.addEventListener('click', function() {
-            sizeGuideTable.classList.toggle('active');
-            if (sizeGuideTable.classList.contains('active')) {
-              sizeGuideToggle.textContent = '❌ Close Sizing Table';
-            } else {
-              sizeGuideToggle.textContent = '📏 View Sizing Table';
-            }
-          });
-        }
+
 
         // Tooltip click selection (for mobile tap support)
         var tooltipTrigger = modal.querySelector('.tool-tip-trigger');
