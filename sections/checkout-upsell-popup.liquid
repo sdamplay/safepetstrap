@@ -50,7 +50,11 @@
       <!-- Red Urgency Header -->
       {%- if section.settings.heading != blank -%}
         <div class="checkout-upsell-header-banner">
-          {{ section.settings.heading | escape }}
+          <span class="checkout-upsell-header-text">{{ section.settings.heading | escape }}</span>
+          <span class="checkout-upsell-timer-wrap">
+            <span class="checkout-upsell-timer-label">⏰ Expires in:</span>
+            <span class="checkout-upsell-timer-time" id="checkoutUpsellTimer">10:00</span>
+          </span>
         </div>
       {%- endif -%}
       
@@ -218,11 +222,32 @@
       background-color: #dc2626;
       color: #ffffff;
       text-align: center;
-      padding: 12px 16px;
+      padding: 10px 16px;
       font-size: {{ section.settings.font_size_banner }}px;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .checkout-upsell-timer-wrap {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.92em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 900;
+    }
+    
+    .checkout-upsell-timer-time {
+      font-variant-numeric: tabular-nums;
+      color: #FFFF00; /* Bright Yellow accent */
     }
     
     /* Content container */
@@ -657,6 +682,33 @@
       var activeVariantId = null;
       var interceptedCheckoutBtn = null;
       var bypassPopup = false;
+      var timerInterval = null;
+      
+      function startCountdown() {
+        var timerEl = document.getElementById('checkoutUpsellTimer');
+        if (!timerEl) return;
+        
+        if (timerInterval) clearInterval(timerInterval);
+        
+        var duration = 600; // 10 minutes in seconds
+        function updateTimer() {
+          var minutes = Math.floor(duration / 60);
+          var seconds = duration % 60;
+          
+          minutes = minutes < 10 ? '0' + minutes : minutes;
+          seconds = seconds < 10 ? '0' + seconds : seconds;
+          
+          timerEl.textContent = minutes + ':' + seconds;
+          
+          if (--duration < 0) {
+            clearInterval(timerInterval);
+            timerEl.textContent = "00:00";
+          }
+        }
+        
+        updateTimer();
+        timerInterval = setInterval(updateTimer, 1000);
+      }
       
       function initUpsellPopup() {
         var modal = document.getElementById('checkoutUpsellPopup');
@@ -665,6 +717,11 @@
         var pillsContainer = document.getElementById('checkoutUpsellVariantPills');
         
         if (!modal) return;
+        
+        // If modal is already active (e.g. editor preview), start countdown
+        if (modal.classList.contains('active')) {
+          startCountdown();
+        }
         
         // Initialize default active variant ID
         var activePill = pillsContainer.querySelector('.checkout-upsell-size-pill.active');
@@ -749,6 +806,7 @@
                   // Open modal
                   modal.classList.add('active');
                   modal.setAttribute('aria-hidden', 'false');
+                  startCountdown(); // Start urgency countdown
                 }
               })
               .catch(function() {
@@ -870,7 +928,7 @@
       "type": "range",
       "id": "image_size",
       "min": 80,
-      "max": 200,
+      "max": 700,
       "step": 5,
       "unit": "px",
       "label": "Product Image Size",
