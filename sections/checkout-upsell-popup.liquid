@@ -273,7 +273,7 @@
     .checkout-upsell-product-row {
       display: flex;
       gap: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 0 !important;
     }
     @media screen and (max-width: 480px) {
       .checkout-upsell-product-row {
@@ -371,8 +371,6 @@
     
     /* Variant Selection */
     .checkout-upsell-variants-wrap {
-      border-top: 1px solid #f3f4f6;
-      padding-top: 16px;
       margin-bottom: 8px;
     }
     .checkout-upsell-variants-label {
@@ -567,11 +565,13 @@
       justify-content: center;
       align-items: center;
       opacity: 0;
+      visibility: hidden; /* Hidden by default */
       pointer-events: none;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
     }
     .checkout-upsell-size-popup-overlay.active {
       opacity: 1;
+      visibility: visible; /* Visible only when active */
       pointer-events: auto;
     }
     .checkout-upsell-size-popup-card {
