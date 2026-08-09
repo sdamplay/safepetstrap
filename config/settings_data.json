@@ -1043,8 +1043,8 @@
           "product_price": "$27.95",
           "product_compare_price": "$42.99",
           "benefits": "Safe chest force distribution\nSoft padded breathable mesh\nHeavy-duty reflective nylon\nLockable quick-release snaps",
-          "add_btn_text": "YES, ADD TO MY ORDER & CHECKOUT ➔",
-          "add_btn_subtext": "+ Free Shipping Included",
+          "add_btn_text": "YES, ADD TO MY ORDER ➔",
+          "add_btn_subtext": "+ Fast Shipping Included",
           "skip_btn_text": "No thanks, proceed to checkout without harness"
         }
       }
