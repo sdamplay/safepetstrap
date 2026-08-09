@@ -101,20 +101,6 @@
             </span>
           </div>
           
-          <!-- Size Chart Popup Modal -->
-          <div class="checkout-upsell-size-popup-overlay" id="checkoutUpsellSizePopup" aria-hidden="true" role="dialog">
-            <div class="checkout-upsell-size-popup-card">
-              <button type="button" class="checkout-upsell-size-popup-close" id="checkoutUpsellSizePopupClose" aria-label="Close Size Chart">×</button>
-              <div class="checkout-upsell-size-popup-body">
-                {%- if section.settings.size_chart_image != blank -%}
-                  <img src="{{ section.settings.size_chart_image | image_url: width: 800 }}" alt="Harness Size Chart" loading="lazy">
-                {%- else -%}
-                  <img src="{{ 'harness-size-chart.jpg' | asset_url }}" alt="Harness Size Chart" loading="lazy">
-                {%- endif -%}
-              </div>
-            </div>
-          </div>
-          
           <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills">
             {%- if upsell_product != blank -%}
               {%- assign active_set = false -%}
@@ -166,6 +152,20 @@
         </button>
       </div>
       
+    </div>
+  </div>
+
+  <!-- Size Chart Popup Modal (Moved outside the main card container to prevent clipping and layout rendering issues) -->
+  <div class="checkout-upsell-size-popup-overlay" id="checkoutUpsellSizePopup" aria-hidden="true" role="dialog">
+    <div class="checkout-upsell-size-popup-card">
+      <button type="button" class="checkout-upsell-size-popup-close" id="checkoutUpsellSizePopupClose" aria-label="Close Size Chart">×</button>
+      <div class="checkout-upsell-size-popup-body">
+        {%- if section.settings.size_chart_image != blank -%}
+          <img src="{{ section.settings.size_chart_image | image_url: width: 800 }}" alt="Harness Size Chart" loading="lazy">
+        {%- else -%}
+          <img src="{{ 'harness-size-chart.jpg' | asset_url }}" alt="Harness Size Chart" loading="lazy">
+        {%- endif -%}
+      </div>
     </div>
   </div>
 
