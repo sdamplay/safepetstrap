@@ -1030,6 +1030,23 @@
           "between_delay": 15,
           "show_duration": 5
         }
+      },
+      "checkout-upsell-popup": {
+        "type": "checkout-upsell-popup",
+        "settings": {
+          "enable": true,
+          "upsell_product": "harness",
+          "heading": "🚨 WAIT! COMPLETE YOUR PUP'S CAR SAFETY & SAVE 35%",
+          "subheading": "Never Attach a Car Seat Belt Directly to Your Dog's Collar...",
+          "warning_text": "⚠️ COLLAR DANGER: A sudden stop at even 20mph puts up to 600 lbs of pressure on your dog's neck, risking permanent trachea damage.\n\nEmergency Vets always recommend using a chest harness in the car to distribute force safely.",
+          "product_title_override": "SafePet Heavy-Duty Chest Harness",
+          "product_price": "$27.95",
+          "product_compare_price": "$42.99",
+          "benefits": "Safe chest force distribution\nSoft padded breathable mesh\nHeavy-duty reflective nylon\nLockable quick-release snaps",
+          "add_btn_text": "YES, ADD TO MY ORDER & CHECKOUT ➔",
+          "add_btn_subtext": "+ Free Shipping Included",
+          "skip_btn_text": "No thanks, proceed to checkout without harness"
+        }
       }
     },
     "content_for_index": []
