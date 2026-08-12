@@ -132,8 +132,12 @@
       <div class="kls-hero-left">
         <div class="kls-hero-gallery" data-wld-gallery>
           <div class="kls-hero-image" data-wld-main>
-            {%- if section.settings.hero_main_image != blank -%}
-              {{ section.settings.hero_main_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: section.settings.hero_main_image.alt | default: section.settings.hero_headline }}
+            {%- assign hero_image = section.settings.hero_main_image -%}
+            {%- if template.name == 'product' and product.featured_image != blank -%}
+              {%- assign hero_image = product.featured_image -%}
+            {%- endif -%}
+            {%- if hero_image != blank -%}
+              {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: hero_image.alt | default: section.settings.hero_headline }}
             {%- endif -%}
             {%- if section.settings.hero_badge_tl != blank -%}
               <span class="kls-hero-badge kls-hero-badge-tl">{{ section.settings.hero_badge_tl }}</span>
@@ -329,7 +333,9 @@
               {%- if section.settings.hero_testimonial_image != blank -%}
                 {{ section.settings.hero_testimonial_image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-hero-testimonial-img', alt: 'Testimonial review proof' }}
               {%- else -%}
-                <img src="{{ 'hero-testimonial-proof.jpg' | asset_url }}" alt="Car crash safety proof" class="kls-hero-testimonial-img" loading="lazy">
+                {%- if template.name != 'product' or product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
+                  <img src="{{ 'hero-testimonial-proof.jpg' | asset_url }}" alt="Car crash safety proof" class="kls-hero-testimonial-img" loading="lazy">
+                {%- endif -%}
               {%- endif -%}
             </div>
           {%- endcapture -%}
