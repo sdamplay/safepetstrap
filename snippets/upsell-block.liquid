@@ -75,6 +75,14 @@
           assign percentage_left = 100.0 | minus: percentage_discount | divided_by: 100.0
           assign fixed_discount = block.settings.product_3_fixed_amount_discount | times: 100.0
         endif
+
+        assign is_personalized = false
+        assign title_handle = product.handle | downcase
+        assign title_upper = product.title | downcase
+        if title_handle contains 'personalized' or title_upper contains 'personalized'
+          assign is_personalized = true
+        endif
+
         assign price = product.first_available_variant.price | times: percentage_left | minus: fixed_discount
         assign compare_price = product.first_available_variant.price
         if product.first_available_variant.compare_at_price > product.first_available_variant.price
@@ -271,6 +279,7 @@
                   class="upsell__add-btn button button--has-spinner"
                   form="{{ product_form_id }}"
                   id="DisplayedSubmitBtn-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}"
+                  {% if is_personalized %}data-personalized-trigger="true"{% endif %}
                   {% if product.first_available_variant.available == false %}
                     disabled
                   {% endif %}
@@ -304,6 +313,10 @@
                   data-type: 'add-to-cart-form'
                 -%}
                   <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
+                  {%- if is_personalized -%}
+                    <input type="hidden" name="properties[Dog's Name]" value="" data-prop-dog-name>
+                    <input type="hidden" name="properties[Phone Number]" value="" data-prop-phone>
+                  {%- endif -%}
                   <button type='submit' class='hidden'>+</button>
                 {%- endform -%}
               </product-form>
@@ -386,3 +399,257 @@
     }
   </style>
 {% endif %}
+
+{%- if item_count > 0 -%}
+  <!-- Personalized ID Tag Modal Prompt -->
+  <div class="personalized-tag-popup-overlay" id="personalizedTagPopup" aria-hidden="true" role="dialog">
+    <div class="personalized-tag-popup-card">
+      <button type="button" class="personalized-tag-popup-close" id="personalizedTagPopupClose" aria-label="Close">×</button>
+      <div class="personalized-tag-popup-header">
+        <h4>Personalize Your ID Tag</h4>
+        <p>Please enter the details you want engraved on the tag.</p>
+      </div>
+      <div class="personalized-tag-popup-body">
+        <div class="personalized-field-group">
+          <label for="personalizedDogName">Dog's Name *</label>
+          <input type="text" id="personalizedDogName" placeholder="e.g. Max" maxlength="20" required>
+        </div>
+        <div class="personalized-field-group">
+          <label for="personalizedPhone">Phone Number *</label>
+          <input type="tel" id="personalizedPhone" placeholder="e.g. 123-456-7890" maxlength="25" required>
+        </div>
+        <div class="personalized-error-message" id="personalizedErrorMessage"></div>
+      </div>
+      <div class="personalized-tag-popup-footer">
+        <button type="button" class="personalized-btn-cancel" id="personalizedBtnCancel">Cancel</button>
+        <button type="button" class="personalized-btn-submit" id="personalizedBtnSubmit">Confirm & Add</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .personalized-tag-popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .personalized-tag-popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .personalized-tag-popup-card {
+      background-color: #ffffff;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      padding: 24px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      transform: scale(0.95);
+      transition: transform 0.25s ease;
+      font-family: inherit;
+    }
+    .personalized-tag-popup-overlay.active .personalized-tag-popup-card {
+      transform: scale(1);
+    }
+    .personalized-tag-popup-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #9ca3af;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px;
+    }
+    .personalized-tag-popup-close:hover {
+      color: #4b5563;
+    }
+    .personalized-tag-popup-header h4 {
+      margin: 0 0 8px 0;
+      font-size: 18px;
+      font-weight: 800;
+      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .personalized-tag-popup-header p {
+      margin: 0 0 20px 0;
+      font-size: 13px;
+      color: #6b7280;
+    }
+    .personalized-field-group {
+      margin-bottom: 16px;
+    }
+    .personalized-field-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .personalized-field-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #111827;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .personalized-field-group input:focus {
+      border-color: #dc2626;
+    }
+    .personalized-error-message {
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: -8px;
+      margin-bottom: 12px;
+      display: none;
+    }
+    .personalized-tag-popup-footer {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .personalized-btn-cancel {
+      flex: 1;
+      background-color: #ffffff;
+      border: 1.5px solid rgb(38, 38, 38);
+      color: rgb(38, 38, 38);
+      padding: 12px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .personalized-btn-cancel:hover {
+      background-color: #f9fafb;
+    }
+    .personalized-btn-submit {
+      flex: 1.5;
+      background-color: #dc2626;
+      border: none;
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 25px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.3);
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .personalized-btn-submit:hover {
+      background-color: #b91c1c;
+      box-shadow: 0 6px 8px -1px rgba(220, 38, 38, 0.4);
+    }
+  </style>
+
+  <script>
+    (function() {
+      var currentTriggerBtn = null;
+      
+      document.addEventListener('click', function(event) {
+        var trigger = event.target.closest('[data-personalized-trigger="true"]');
+        if (!trigger) return;
+        
+        event.preventDefault();
+        event.stopPropagation();
+        
+        currentTriggerBtn = trigger;
+        
+        var overlay = document.getElementById('personalizedTagPopup');
+        if (overlay) {
+          overlay.classList.add('active');
+          overlay.setAttribute('aria-hidden', 'false');
+          
+          document.getElementById('personalizedDogName').value = '';
+          document.getElementById('personalizedPhone').value = '';
+          var errorEl = document.getElementById('personalizedErrorMessage');
+          errorEl.textContent = '';
+          errorEl.style.display = 'none';
+        }
+      }, true);
+      
+      function closePersonalizedModal() {
+        var overlay = document.getElementById('personalizedTagPopup');
+        if (overlay) {
+          overlay.classList.remove('active');
+          overlay.setAttribute('aria-hidden', 'true');
+        }
+        currentTriggerBtn = null;
+      }
+      
+      document.getElementById('personalizedTagPopupClose').addEventListener('click', closePersonalizedModal);
+      document.getElementById('personalizedBtnCancel').addEventListener('click', closePersonalizedModal);
+      
+      document.getElementById('personalizedTagPopup').addEventListener('click', function(e) {
+        if (e.target === this) {
+          closePersonalizedModal();
+        }
+      });
+      
+      document.getElementById('personalizedBtnSubmit').addEventListener('click', function() {
+        if (!currentTriggerBtn) return;
+        
+        var dogName = document.getElementById('personalizedDogName').value.trim();
+        var phone = document.getElementById('personalizedPhone').value.trim();
+        var errorEl = document.getElementById('personalizedErrorMessage');
+        
+        if (!dogName || !phone) {
+          errorEl.textContent = 'Please fill out both fields.';
+          errorEl.style.display = 'block';
+          return;
+        }
+        
+        errorEl.textContent = '';
+        errorEl.style.display = 'none';
+        
+        var formId = currentTriggerBtn.getAttribute('form');
+        var form = document.getElementById(formId);
+        if (form) {
+          var nameInput = form.querySelector('[data-prop-dog-name]');
+          var phoneInput = form.querySelector('[data-prop-phone]');
+          
+          if (nameInput) nameInput.value = dogName;
+          if (phoneInput) phoneInput.value = phone;
+          
+          closePersonalizedModal();
+          
+          var productFormEl = form.closest('product-form');
+          if (productFormEl) {
+            var submitEvent = new Event('submit', { bubbles: true, cancelable: true });
+            form.dispatchEvent(submitEvent);
+          } else {
+            form.submit();
+          }
+        }
+      });
+    })();
+  </script>
+{%- endif -%}
