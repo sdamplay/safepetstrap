@@ -1,3 +1,4 @@
+{%- if product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
 {% assign v0_id = product.variants[0].id | default: '' %}
 {% assign v1_id = product.variants[1].id | default: v0_id %}
 {% assign v2_id = product.variants[2].id | default: v0_id %}
@@ -404,3 +405,323 @@
     }
   })();
 </script>
+{%- else -%}
+  <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
+    
+    <!-- Custom Personalization Fields for ID Tag Page -->
+    {%- if product.handle == 'personalized-id-tag' -%}
+      <div class="safepet-custom-fields-wrap">
+        <h4 class="safepet-custom-fields-title">Personalize Your ID Tag</h4>
+        <div class="safepet-custom-field-group">
+          <label for="idTagDogName">Dog's Name *</label>
+          <input type="text" id="idTagDogName" name="properties[Dog's Name]" placeholder="e.g. Max" maxlength="20" required>
+        </div>
+        <div class="safepet-custom-field-group">
+          <label for="idTagPhone">Tag Phone Number *</label>
+          <input type="tel" id="idTagPhone" name="properties[Tag Phone Number]" placeholder="e.g. 123-456-7890" maxlength="25" required>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- Standard Option Pills Selector -->
+    {%- unless product.has_only_default_variant -%}
+      <div class="safepet-standard-variants">
+        {%- for option in product.options_with_values -%}
+          <div class="safepet-variant-option" data-option-index="{{ forloop.index0 }}">
+            <div class="safepet-option-header-row">
+              <span class="safepet-variant-option-label">Select {{ option.name }}:</span>
+              {%- if product.handle == 'harness' and option.name == 'Size' -%}
+                <button type="button" class="safepet-size-chart-trigger" id="harnessPageSizeChartTrigger">
+                  📏 View Sizing Table
+                </button>
+              {%- endif -%}
+            </div>
+            
+            <div class="safepet-variant-pills">
+              {%- for value in option.values -%}
+                {%- assign active = false -%}
+                {%- if option.selected_value == value -%}
+                  {%- assign active = true -%}
+                {%- endif -%}
+                {%- if product.handle == 'harness' and value == 'XS' -%}
+                  {%- continue -%}
+                {%- endif -%}
+                <button type="button" 
+                        class="safepet-variant-pill{% if active %} active{% endif %}" 
+                        data-value="{{ value | escape }}">
+                  {{ value }}
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endunless -%}
+  </div>
+
+  {%- if product.handle == 'harness' -%}
+    <!-- Sizing Table Modal for Harness Page -->
+    <div class="safepet-harness-size-modal" id="harnessPageSizeModal" aria-hidden="true" role="dialog">
+      <div class="safepet-harness-size-card">
+        <button type="button" class="safepet-harness-size-close" id="harnessPageSizeClose">×</button>
+        <div class="safepet-harness-size-body">
+          <img src="{{ 'harness-size-chart.jpg' | asset_url }}" alt="Harness Sizing Table" loading="lazy">
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <style>
+    /* Styling for standard variants & personalization inputs */
+    .safepet-variant-selector-wrapper {
+      margin-bottom: 20px;
+      font-family: inherit;
+    }
+    .safepet-custom-fields-wrap {
+      background-color: #f9fafb;
+      padding: 16px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      margin-bottom: 20px;
+    }
+    .safepet-custom-fields-title {
+      margin: 0 0 12px 0;
+      font-size: 14px;
+      font-weight: 800;
+      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .safepet-custom-field-group {
+      margin-bottom: 12px;
+    }
+    .safepet-custom-field-group:last-child {
+      margin-bottom: 0;
+    }
+    .safepet-custom-field-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #374151;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .safepet-custom-field-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .safepet-custom-field-group input:focus {
+      border-color: #dc2626;
+    }
+    
+    .safepet-variant-option {
+      margin-bottom: 16px;
+    }
+    .safepet-option-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .safepet-variant-option-label {
+      font-size: 13px;
+      font-weight: 750;
+      color: #111827;
+      text-transform: uppercase;
+    }
+    .safepet-size-chart-trigger {
+      background: none;
+      border: none;
+      color: #dc2626;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+    .safepet-variant-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .safepet-variant-pill {
+      background-color: #ffffff;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      color: #374151;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: 50px;
+      text-align: center;
+    }
+    .safepet-variant-pill.active {
+      border-color: #dc2626;
+      color: #dc2626;
+      background-color: rgba(220, 38, 38, 0.03);
+    }
+    
+    /* Sizing modal on page */
+    .safepet-harness-size-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .safepet-harness-size-modal.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .safepet-harness-size-card {
+      background-color: #ffffff;
+      width: 90%;
+      max-width: 480px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.25s ease;
+    }
+    .safepet-harness-size-modal.active .safepet-harness-size-card {
+      transform: scale(1);
+    }
+    .safepet-harness-size-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #9ca3af;
+      cursor: pointer;
+      line-height: 1;
+      z-index: 10;
+    }
+    .safepet-harness-size-close:hover {
+      color: #111827;
+    }
+    .safepet-harness-size-body img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+
+  <script>
+    (function() {
+      var productVariants = {{ product.variants | json }};
+      var wrapper = document.getElementById('safepet-variant-selector-{{ section.id }}');
+      if (!wrapper) return;
+      
+      var form = wrapper.closest('form');
+      if (!form) return;
+      
+      var variantIdInput = form.querySelector('.product-variant-id');
+      
+      function updateVariant() {
+        var selectedValues = [];
+        wrapper.querySelectorAll('.safepet-variant-option').forEach(function(optionEl) {
+          var activePill = optionEl.querySelector('.safepet-variant-pill.active');
+          if (activePill) {
+            selectedValues.push(activePill.getAttribute('data-value'));
+          }
+        });
+        
+        var matchedVariant = productVariants.find(function(variant) {
+          return selectedValues.every(function(val, idx) {
+            var optKey = 'option' + (idx + 1);
+            return variant[optKey] === val;
+          });
+        });
+        
+        if (matchedVariant && variantIdInput) {
+          variantIdInput.value = matchedVariant.id;
+          
+          var atcBtn = form.querySelector('[type="submit"]');
+          if (atcBtn) {
+            if (matchedVariant.available) {
+              atcBtn.removeAttribute('disabled');
+              var btnText = atcBtn.querySelector('.main-atc__label__text');
+              if (btnText) btnText.textContent = "ADD TO CART";
+            } else {
+              atcBtn.setAttribute('disabled', 'true');
+              var btnText = atcBtn.querySelector('.main-atc__label__text');
+              if (btnText) btnText.textContent = "SOLD OUT";
+            }
+          }
+        }
+      }
+      
+      wrapper.querySelectorAll('.safepet-variant-pill').forEach(function(pill) {
+        pill.addEventListener('click', function() {
+          var container = pill.closest('.safepet-variant-pills');
+          container.querySelectorAll('.safepet-variant-pill').forEach(function(p) {
+            p.classList.remove('active');
+          });
+          pill.classList.add('active');
+          updateVariant();
+        });
+      });
+      
+      if (form && form.querySelector('[name="properties[Dog\'s Name]"]')) {
+        form.addEventListener('submit', function(e) {
+          var dogName = form.querySelector('[name="properties[Dog\'s Name]"]').value.trim();
+          var phone = form.querySelector('[name="properties[Tag Phone Number]"]').value.trim();
+          
+          if (!dogName || !phone) {
+            e.preventDefault();
+            e.stopPropagation();
+            alert('Please fill out your Dog\'s Name and Tag Phone Number before adding to cart.');
+          }
+        });
+      }
+      
+      var trigger = document.getElementById('harnessPageSizeChartTrigger');
+      var modal = document.getElementById('harnessPageSizeModal');
+      var closeBtn = document.getElementById('harnessPageSizeClose');
+      
+      if (trigger && modal) {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          modal.classList.add('active');
+          modal.setAttribute('aria-hidden', 'false');
+        });
+        
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+          });
+        }
+        
+        modal.addEventListener('click', function(e) {
+          if (e.target === this) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }
+    })();
+  </script>
+{%- endif -%}
