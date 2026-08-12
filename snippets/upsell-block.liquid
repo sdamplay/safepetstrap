@@ -315,7 +315,7 @@
                   <input type="hidden" name="id" value="{{ product.first_available_variant.id }}">
                   {%- if is_personalized -%}
                     <input type="hidden" name="properties[Dog's Name]" value="" data-prop-dog-name>
-                    <input type="hidden" name="properties[Phone Number]" value="" data-prop-phone>
+                    <input type="hidden" name="properties[Tag Phone Number]" value="" data-prop-phone>
                   {%- endif -%}
                   <button type='submit' class='hidden'>+</button>
                 {%- endform -%}
@@ -415,7 +415,7 @@
           <input type="text" id="personalizedDogName" placeholder="e.g. Max" maxlength="20" required>
         </div>
         <div class="personalized-field-group">
-          <label for="personalizedPhone">Phone Number *</label>
+          <label for="personalizedPhone">Tag Phone Number *</label>
           <input type="tel" id="personalizedPhone" placeholder="e.g. 123-456-7890" maxlength="25" required>
         </div>
         <div class="personalized-error-message" id="personalizedErrorMessage"></div>
