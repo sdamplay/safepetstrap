@@ -1,0 +1,552 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "rating_stars": {
+          "type": "rating_stars",
+          "settings": {
+            "rating": 4.9,
+            "star_color": "#ffcc00",
+            "bg_stars_style": "full",
+            "bg_star_color": "#ececec",
+            "label": "\u2b50 4.9/5 (25,000+ Happy Pups)",
+            "size": 16,
+            "alignment": "flex-start",
+            "scroll_id": "",
+            "margin_top": 0,
+            "margin_bottom": 9
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "accent-1",
+            "compare_price_color": "text",
+            "displayed_badge": "sale",
+            "icon_scale": 140,
+            "custom_badge_text": "\ud83d\udea8 FREE + Shipping Initiative",
+            "icon_1": "redeem",
+            "filled_icon_1": false,
+            "icon_2": "check_circle",
+            "filled_icon_2": false,
+            "margin_top": 0,
+            "margin_bottom": 12
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+            "full_width_classic": false,
+            "atc_append": "none",
+            "atc_append_heights": "stretch-quantity",
+            "enable_quantity_discounts": false,
+            "style": "normal",
+            "headline": "BUNDLE & SAVE",
+            "preselected": "option_1",
+            "display_selected_indicator": true,
+            "border_radius": 10,
+            "border_width": 2,
+            "color_scheme": "accent-1",
+            "enable_variant_selectors": true,
+            "enable_variant_selectors_on_quantity_of_1": false,
+            "update_prices": false,
+            "skip_unavailable": false,
+            "full_width_pickers": false,
+            "hide_pickers_overlay": true,
+            "pickers_label": "",
+            "image_width": 70,
+            "space_images": true,
+            "vertical_images_position": "top",
+            "vertical_prices_layout": "vertical",
+            "option_1_quantity": 1,
+            "option_1_badge": "",
+            "option_1_badge_style": "1",
+            "option_1_badge_color": "accent-1",
+            "option_1_label": "Buy [quantity]",
+            "option_1_benefit": "",
+            "option_1_benefit_position": "top",
+            "option_1_benefit_style": "outlined",
+            "option_1_benefit_color": "accent-1",
+            "option_1_caption": "You save [amount_saved]",
+            "option_1_percentage_off_text": "0",
+            "option_1_fixed_amount_off": "0",
+            "option_1_price_text": "[price]",
+            "option_1_compare_price": "compare_price",
+            "option_1_compare_price_text": "[compare_price]",
+            "option_2_quantity": 2,
+            "option_2_badge": "",
+            "option_2_badge_style": "1",
+            "option_2_badge_color": "accent-1",
+            "option_2_label": "Buy [quantity]",
+            "option_2_benefit": "",
+            "option_2_benefit_position": "top",
+            "option_2_benefit_style": "outlined",
+            "option_2_benefit_color": "accent-1",
+            "option_2_caption": "You save [amount_saved]",
+            "option_2_percentage_off_text": "0",
+            "option_2_fixed_amount_off": "0",
+            "option_2_price_text": "[price]",
+            "option_2_compare_price": "compare_price",
+            "option_2_compare_price_text": "[compare_price]",
+            "option_3_quantity": 3,
+            "option_3_badge": "",
+            "option_3_badge_style": "1",
+            "option_3_badge_color": "accent-1",
+            "option_3_label": "Buy [quantity]",
+            "option_3_benefit": "",
+            "option_3_benefit_position": "top",
+            "option_3_benefit_style": "outlined",
+            "option_3_benefit_color": "accent-1",
+            "option_3_caption": "You save [amount_saved]",
+            "option_3_percentage_off_text": "0",
+            "option_3_fixed_amount_off": "0",
+            "option_3_price_text": "[price]",
+            "option_3_compare_price": "compare_price",
+            "option_3_compare_price_text": "[compare_price]",
+            "option_4_quantity": 4,
+            "option_4_badge": "",
+            "option_4_badge_style": "1",
+            "option_4_badge_color": "accent-1",
+            "option_4_label": "Buy [quantity]",
+            "option_4_benefit": "",
+            "option_4_benefit_position": "top",
+            "option_4_benefit_style": "outlined",
+            "option_4_benefit_color": "accent-1",
+            "option_4_caption": "You save [amount_saved]",
+            "option_4_percentage_off_text": "0",
+            "option_4_fixed_amount_off": "0",
+            "option_4_price_text": "[price]",
+            "option_4_compare_price": "compare_price",
+            "option_4_compare_price_text": "[compare_price]",
+            "margin_top": 15,
+            "margin_bottom": 15
+          }
+        },
+        "safepet_variant_selector": {
+          "type": "safepet_variant_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "skip_cart": false,
+            "uppercase_text": true,
+            "icon_scale": 120,
+            "icon_spacing": 10,
+            "display_price": false,
+            "enable_custom_color": false,
+            "custom_color": "#dd1d1d",
+            "enable_secondary_btn": false,
+            "secondary_btn_label": "Buy It Now",
+            "secondary_btn_enable_custom_color": false,
+            "secondary_btn_custom_color": "#dd1d1d",
+            "margin_top": 12,
+            "margin_bottom": 15
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating_stars",
+        "price",
+        "quantity_selector",
+        "safepet_variant_selector",
+        "buy_buttons"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_id": false,
+        "enable_sticky_info": true,
+        "display_variant_image_first": false,
+        "disable_prepend": false,
+        "hide_variants": false,
+        "variant_image_filtering": "none",
+        "image_zoom": "none",
+        "thumbnails_ratio": "square",
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": false,
+        "dots_color_scheme": "inverse",
+        "video_player": "play_btn",
+        "enable_video_looping": false,
+        "autoplay_videos_pause_btn": false,
+        "video_sound_btn": false,
+        "video_timeline": false,
+        "play_btn_color_scheme": "accent-1",
+        "sound_btn_color_scheme": "inverse",
+        "timeline_color": "accent-1",
+        "media_size": "medium",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "desktop_thumbnails_position": "bottom",
+        "desktop_thumbnails_count": 5,
+        "desktop_vertical_thumbnails_width": 16,
+        "desktop_vertical_thumbnails_hide_arrows": false,
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "desktop_arrows_position": "hidden",
+        "mobile_media_corner_radius": 12,
+        "mobile_spacing_pixels": 0,
+        "mobile_arrows_position": "sides",
+        "mobile_pagination": "dots_overlay",
+        "mobile_thumbnails_position": "hidden",
+        "mobile_thumbnails_count": 5,
+        "mobile_vertical_thumbnails_width": 22,
+        "mobile_vertical_thumbnails_hide_arrows": true,
+        "mobile_scroll_padding_percentage": 0,
+        "mobile_scroll_padding_pixels": 16,
+        "enable_mobile_outher_spacing": false,
+        "mobile_slides_container_width": 100,
+        "mobile_slides_inner_width": 100,
+        "trust_badge_position": "top-right",
+        "trust_badge_size": "medium",
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 16,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36
+      }
+    },
+    "kids_life_skills_pMNmYd": {
+      "type": "kids-life-skills",
+      "blocks": {
+        "faq_TkDYTA": {
+          "type": "faq",
+          "settings": {
+            "emoji": "\ud83d\udcb8",
+            "question": "How far does the tracking work?",
+            "answer": "<p>Unlike Bluetooth tags that limit you to 30 feet, the SafePet GPS Tracker uses cellular network triangulation and satellite GPS to provide unlimited tracking range worldwide.</p>"
+          }
+        },
+        "faq_RHjUTa": {
+          "type": "faq",
+          "settings": {
+            "emoji": "\ud83d\udce9",
+            "question": "Is there a monthly subscription fee?",
+            "answer": "<p>Yes, a small data connection fee is required to keep the cellular SIM card inside active. Plans start at just $4.95/month, which is a small price for your dog's safety.</p>"
+          }
+        },
+        "faq_xfQdDW": {
+          "type": "faq",
+          "settings": {
+            "emoji": "\ud83d\udc15",
+            "question": "Is it heavy for small dogs?",
+            "answer": "<p>Not at all! Weighing less than 1 ounce, it is designed ergonomically to fit pets of all sizes comfortably without any neck strain.</p>"
+          }
+        },
+        "faq_3m4wGU": {
+          "type": "faq",
+          "settings": {
+            "emoji": "\u2764\ufe0f",
+            "question": "What if I have multiple dogs?",
+            "answer": "<p>Our most popular bundle is the 3-Pack + 2 FREE Gifts ($120 Value) for just $24.95! You can select 3x seatbelts right on the offer page.</p>"
+          }
+        },
+        "faq_ktMHfj": {
+          "type": "faq",
+          "settings": {
+            "emoji": "\u23f0",
+            "question": "What is your return policy?",
+            "answer": "<p>We offer a 30-day 100% money back guarantee. If you or your dog don't absolutely love the SafePet Strap, let us know and we'll refund you.</p>"
+          }
+        },
+        "testimonial_JEwrYm": {
+          "type": "testimonial",
+          "settings": {
+            "title": "I sat on the shoulder and cried from pure relief...",
+            "body": "My husky is a runner, and when the gate blew open during a storm, my heart sank. I opened the tracking app and saw she was running down 4th street. I drove straight there and called her in. The tracker saved her life.",
+            "author_name": "Megan L.",
+            "author_tag": "Husky owner"
+          }
+        },
+        "testimonial_AQJbh3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "He slid under the fence and got lost in the woods.",
+            "body": "Living next to a state park means lots of wildlife. One day he chased a deer and vanished. I tracked him 1 mile deep into the woods directly to where his collar got caught. Found him safe and sound.",
+            "author_name": "Luna K.",
+            "author_tag": "Active dog mom"
+          }
+        },
+        "testimonial_EiyaeU": {
+          "type": "testimonial",
+          "settings": {
+            "title": "I see the tragic results of lost dogs weekly.",
+            "body": "As a rescue volunteer, I see how hard it is to find lost dogs without active tags. Microchips only work if someone finds them; GPS lets YOU find them. This is the device I tell every pet parent to get.",
+            "author_name": "Sarah T.",
+            "author_tag": "Rescue Trainer"
+          }
+        }
+      },
+      "block_order": [
+        "faq_TkDYTA",
+        "faq_RHjUTa",
+        "faq_xfQdDW",
+        "faq_3m4wGU",
+        "faq_ktMHfj",
+        "testimonial_JEwrYm",
+        "testimonial_AQJbh3",
+        "testimonial_EiyaeU"
+      ],
+      "custom_css": [],
+      "name": "SafePet Landing Copy",
+      "settings": {
+        "product": "safepet-gps-tracker",
+        "hero_main_image": "shopify://shop_images/clipboard-image-1785799440.png",
+        "hero_badge_tl": "Military Grade",
+        "hero_badge_tc": "Loved By Dog Owners",
+        "hero_badge_tr": "25,000+ Happy Pups",
+        "hero_rating_text": "(2,184 verified reviews)",
+        "hero_headline": "Never Lose Track Of Your Best Friend. Real-Time GPS Tracking & Total Peace Of Mind.",
+        "hero_price_sale": "",
+        "hero_price_original": "",
+        "hero_save_pill": "",
+        "hero_benefit_1": "Real-Time Tracking \u2014 Locates your dog instantly via app",
+        "hero_benefit_2": "100% Waterproof & Rugged \u2014 Built for heavy outdoor play",
+        "hero_benefit_3": "Geo-Fence Alerts \u2014 Notifies you instantly if your pup wanders off",
+        "hero_cta_label": "GET REAL-TIME GPS TRACKER",
+        "hero_trust_text": "Protect your best friend from wandering off.",
+        "hero_guarantee_pill": "30-Day Money-Back Guarantee",
+        "hero_testimonial_avatar": "shopify://shop_images/Woman_and_dog_in_car_202608041118_1.jpg",
+        "hero_testimonial_quote": "Milo got out of the yard last Tuesday. Previously, I would have panicked and spent hours searching. With this GPS tracker, I opened the app, saw he was two streets over sniffing a fire hydrant, and got him back in 5 minutes flat. Essential safety device.",
+        "hero_testimonial_name": "David K. & Milo",
+        "faq_heading": "GPS Tracker Frequently Asked Questions",
+        "ready_heading": "Never Live In Fear of a Lost Pet Again",
+        "ready_body": "One open gate. One loud firework. That's all it takes for your dog to run. Give yourself complete peace of mind knowing you can pinpoint their location instantly from your phone.",
+        "ready_cta_label": "\ud83d\udc49 Yes, Protect My Pet Now",
+        "ready_cta_url": "",
+        "grow_heading": "Compact Design \u26a1 Cutting-Edge GPS Coverage",
+        "grow_body": "Combining advanced cellular and satellite tracking technology in a featherlight, waterproof case that attaches securely to any collar or harness.",
+        "grow_quote": "A lost pet is a parent's worst nightmare. Active GPS tracking changes the story from tragedy to reunion in minutes.",
+        "testimonials_heading": "Real Dog Parents. Real Wags.",
+        "stats_heading": "Trusted By 15,000+ Smart Pet Owners",
+        "stat_1_value": "99%",
+        "stat_1_desc": "<p>Accuracy rate in locating lost pets instantly</p>",
+        "stat_2_value": "100%",
+        "stat_2_desc": "<p>Waterproof and dirt-resistant active casing</p>",
+        "stat_3_value": "10 Days",
+        "stat_3_desc": "<p>Battery life on a single fast micro-USB charge</p>",
+        "stats_footnote": "*Individual results vary by dog.",
+        "comparison_heading": "Why SafePet GPS Tracker Beats Cheap Bluetooth Tags",
+        "comparison_brand_label": "SafePet GPS Tracker",
+        "comparison_others_label": "Bluetooth Tags (AirTags)",
+        "comparison_features": "Unlimited satellite GPS range\nReal-time active location updates\n100% waterproof rugged build\nInstant boundary escape alerts\nFits any collar or harness\n30-Day risk-free trial",
+        "guarantee_heading": "Try It Risk-Free For 30 Days",
+        "guarantee_body": "Use it on every walk. If you aren't completely amazed by the real-time tracking accuracy, email us for a full refund.",
+        "guarantee_cta_label": "GET MY GPS TRACKER RISK-FREE",
+        "guarantee_cta_url": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "margin_top": -40,
+        "margin_bottom": 0,
+        "font_size_base": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#2d2d2d",
+        "headline_font_size": 20,
+        "headline_color": "#2d2d2d",
+        "headline_margin_top": -14,
+        "headline_margin_bottom": 0,
+        "rating_font_size": 16,
+        "rating_color": "#6b6b6b",
+        "rating_star_color": "#f5b800",
+        "rating_margin_top": 0,
+        "rating_margin_bottom": 0,
+        "price_sale_font_size": 32,
+        "price_sale_color": "#d0021b",
+        "price_original_font_size": 18,
+        "price_original_color": "#6b6b6b",
+        "price_margin_top": -10,
+        "price_margin_bottom": 0,
+        "benefits_font_size": 16,
+        "benefits_color": "#2d2d2d",
+        "benefits_icon_color": "#e53935",
+        "benefits_margin_top": -10,
+        "benefits_margin_bottom": 0,
+        "cta_font_size": 18,
+        "cta_bg_color": "#e53935",
+        "cta_text_color": "#ffffff",
+        "cta_margin_top": 0,
+        "cta_margin_bottom": 0,
+        "testimonial_bg_color": "#fff5f5",
+        "testimonial_text_color": "#2d2d2d",
+        "testimonial_margin_top": 0,
+        "testimonial_margin_bottom": 0
+      }
+    },
+    "b321ab88-2b59-4dba-bade-54885c874ca5": {
+      "type": "section-divider",
+      "settings": {
+        "visibility": "always-display",
+        "shape": "waves_3",
+        "flip_horizontal": false,
+        "flip_vertical": false,
+        "shape_color": "accent-1",
+        "custom_shape_color": "#dd1d1d",
+        "background_color": "background-1",
+        "custom_background_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "display_id": false,
+        "title": "You may also like",
+        "title_highlight_color": "#6d388b",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "social_proof_toast_m3B7bY": {
+      "type": "social-proof-toast",
+      "blocks": {
+        "testimonial_notification_yXfpwF": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "A",
+            "name_descriptor": "Amanda K. | Saved Golden Retriever",
+            "quote": "We spun on black ice and hit a concrete median. She walked away with only a bruised paw\u2014saved her life!"
+          }
+        },
+        "testimonial_notification_MfqiFE": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "J",
+            "name_descriptor": "Jessica P. | Dog Mom of 2 Pups",
+            "quote": "No more climbing onto my lap or sliding under the brake pedal. They stay safely buckled in the back now."
+          }
+        },
+        "testimonial_notification_GY79NG": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Marcus D. | Vet Tech & Trainer",
+            "quote": "I see tragic spinal injuries in dogs from minor stops weekly. This anti-whiplash buffer is a veterinary necessity."
+          }
+        },
+        "testimonial_notification_DrRachel": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "R",
+            "name_descriptor": "Dr. Rachel H. | Emergency DVM",
+            "quote": "Car airbags deploy with enough force to kill a lap dog. Keep them buckled in the back\u2014this strap is perfect."
+          }
+        },
+        "testimonial_notification_SarahW": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "S",
+            "name_descriptor": "Sarah W. | Owner of a Boxer",
+            "quote": "Had to slam my brakes at 70mph on the highway. My boxer didn't move an inch. I cried tears of relief."
+          }
+        },
+        "testimonial_notification_TylerB": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "T",
+            "name_descriptor": "Tyler B. | Lab Parent",
+            "quote": "Super easy, snaps right into the seatbelt latch like a regular seatbelt. Solid metal hook, very heavy-duty."
+          }
+        },
+        "testimonial_notification_EmilyR": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "E",
+            "name_descriptor": "Emily R. | Mother of 3 Goldendoodles",
+            "quote": "Keeps my three high-energy dogs from bouncing around or trying to jump out the window. Driving is finally peaceful."
+          }
+        },
+        "testimonial_notification_DavidS": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "D",
+            "name_descriptor": "David S. | German Shepherd Owner",
+            "quote": "A driver cut me off and slammed their brakes. SafePet kept my 85lb shepherd from flying into my dashboard."
+          }
+        },
+        "testimonial_notification_ChrisK9": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "C",
+            "name_descriptor": "Coach Chris | K9 Behaviorist",
+            "quote": "I recommend this to every client. An unrestrained dog becomes a 60lb projectile in a crash. Essential gear."
+          }
+        },
+        "testimonial_notification_MeganF": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Megan F. | Frenchie Mom",
+            "quote": "My frenchie actually lays down and relaxes now because she feels secure when we take turns. 10/10."
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_notification_yXfpwF",
+        "testimonial_notification_MfqiFE",
+        "testimonial_notification_GY79NG",
+        "testimonial_notification_DrRachel",
+        "testimonial_notification_SarahW",
+        "testimonial_notification_TylerB",
+        "testimonial_notification_EmilyR",
+        "testimonial_notification_DavidS",
+        "testimonial_notification_ChrisK9",
+        "testimonial_notification_MeganF"
+      ],
+      "name": "Social Proof Toast",
+      "settings": {
+        "enable": true,
+        "position": "bottom-left",
+        "bg_color": "#fff5f5",
+        "accent_color": "#e53935",
+        "text_color": "#2d2d2d",
+        "text_secondary_color": "#6b6b6b",
+        "star_color": "#f5b800",
+        "font_size_quote": 13,
+        "font_size_author": 11,
+        "first_show_delay": 6,
+        "between_delay": 10,
+        "show_duration": 5
+      }
+    }
+  },
+  "order": [
+    "main",
+    "kids_life_skills_pMNmYd",
+    "b321ab88-2b59-4dba-bade-54885c874ca5",
+    "related-products",
+    "social_proof_toast_m3B7bY"
+  ]
+}

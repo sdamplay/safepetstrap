@@ -184,10 +184,28 @@
         </div>
         <h1 class="kls-hero-headline">{{ section.settings.hero_headline }}</h1>
         <div class="kls-hero-price-row">
-          <span class="kls-hero-price-sale">{{ section.settings.hero_price_sale }}</span>
-          <span class="kls-hero-price-original">{{ section.settings.hero_price_original }}</span>
+          <span class="kls-hero-price-sale">
+            {%- if section.settings.hero_price_sale != blank -%}
+              {{ section.settings.hero_price_sale }}
+            {%- else -%}
+              {{ product.price | money }}
+            {%- endif -%}
+          </span>
+          <span class="kls-hero-price-original">
+            {%- if section.settings.hero_price_original != blank -%}
+              {{ section.settings.hero_price_original }}
+            {%- else -%}
+              {%- if product.compare_at_price > product.price -%}
+                {{ product.compare_at_price | money }}
+              {%- endif -%}
+            {%- endif -%}
+          </span>
           {%- if section.settings.hero_save_pill != blank -%}
             <span class="kls-hero-save-pill">{{ section.settings.hero_save_pill }}</span>
+          {%- elsif product.compare_at_price > product.price -%}
+            {%- assign save_amount = product.compare_at_price | minus: product.price -%}
+            {%- assign save_percent = save_amount | times: 100 | divided_by: product.compare_at_price -%}
+            <span class="kls-hero-save-pill">SAVE {{ save_percent }}%</span>
           {%- endif -%}
         </div>
         <ul class="kls-hero-benefits">
@@ -202,7 +220,11 @@
           {%- endif -%}
         </ul>
 
-        {%- assign product = section.settings.product -%}
+        {%- assign current_product = product -%}
+        {%- if template.name != 'product' and section.settings.product != blank -%}
+          {%- assign current_product = section.settings.product -%}
+        {%- endif -%}
+        {%- assign product = current_product -%}
         {%- if product != blank -%}
           {%- assign product_form_id = 'ProductForm-' | append: section.id -%}
           <product-form
