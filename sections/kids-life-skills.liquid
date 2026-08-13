@@ -125,6 +125,227 @@
 
   
   {{ 'kids-life-skills.css' | asset_url | stylesheet_tag }}
+{%- comment -%} SAFE PET DYNAMIC COPY OVERRIDES START {%- endcomment -%}
+{%- assign is_seatbelt = false -%}
+{%- if product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' or product.handle == blank -%}
+  {%- assign is_seatbelt = true -%}
+{%- endif -%}
+
+{%- assign kls_hero_headline = kls_hero_headline -%}
+{%- assign kls_hero_benefit_1 = kls_hero_benefit_1 -%}
+{%- assign kls_hero_benefit_2 = kls_hero_benefit_2 -%}
+{%- assign kls_hero_benefit_3 = kls_hero_benefit_3 -%}
+{%- assign kls_hero_cta_label = kls_hero_cta_label -%}
+{%- assign kls_hero_trust_text = kls_hero_trust_text -%}
+{%- assign kls_hero_testimonial_quote = kls_hero_testimonial_quote -%}
+{%- assign kls_hero_testimonial_name = kls_hero_testimonial_name -%}
+{%- assign kls_stats_heading = kls_stats_heading -%}
+{%- assign kls_stat_1_value = kls_stat_1_value -%}
+{%- assign kls_stat_1_desc = kls_stat_1_desc -%}
+{%- assign kls_stat_2_value = kls_stat_2_value -%}
+{%- assign kls_stat_2_desc = kls_stat_2_desc -%}
+{%- assign kls_stat_3_value = kls_stat_3_value -%}
+{%- assign kls_stat_3_desc = kls_stat_3_desc -%}
+{%- assign kls_ready_heading = kls_ready_heading -%}
+{%- assign kls_ready_body = kls_ready_body -%}
+{%- assign kls_ready_cta_label = kls_ready_cta_label -%}
+{%- assign kls_comparison_heading = kls_comparison_heading -%}
+{%- assign kls_comparison_brand_label = kls_comparison_brand_label -%}
+{%- assign kls_comparison_others_label = kls_comparison_others_label -%}
+{%- assign kls_comparison_features = kls_comparison_features -%}
+{%- assign kls_guarantee_heading = kls_guarantee_heading -%}
+{%- assign kls_guarantee_body = kls_guarantee_body -%}
+{%- assign kls_guarantee_cta_label = kls_guarantee_cta_label -%}
+{%- assign kls_grow_heading = kls_grow_heading -%}
+{%- assign kls_grow_body = kls_grow_body -%}
+{%- assign kls_grow_quote = kls_grow_quote -%}
+{%- assign kls_faq_heading = kls_faq_heading -%}
+
+{%- if template.name == 'product' and is_seatbelt == false -%}
+  {%- if product.handle == 'safepet-3-in-1-pet-brush' -%}
+    {%- assign kls_hero_headline = "Groom, De-Shed & Massage Your Pet! The One-Click Self-Cleaning Brush Pets Actually Love." -%}
+    {%- assign kls_hero_benefit_1 = "One-Click Self-Cleaning — Retractable bristles discard hair instantly" -%}
+    {%- assign kls_hero_benefit_2 = "Gentle Deshedding Pins — Removes loose undercoat without scratching" -%}
+    {%- assign kls_hero_benefit_3 = "Soothing Massage Tips — Promotes healthy circulation & shiny coat" -%}
+    {%- assign kls_hero_cta_label = "GET MY 3-IN-1 PET BRUSH" -%}
+    {%- assign kls_hero_trust_text = "Keep your home hair-free and your pet groomed." -%}
+    {%- assign kls_hero_testimonial_name = "Jessica T. & Bella" -%}
+    {%- assign kls_hero_testimonial_quote = "Bella hates regular wire brushes because they scratch her skin. This brush has soft massage tips and she purrs/wags the whole time! The best part is the one-click cleanup. You press the button and the hair slides right off in a neat disk. No more picking at wire bristles!" -%}
+    {%- assign kls_stats_heading = "Trusted By 22,000+ Happy Pups" -%}
+    {%- assign kls_stat_1_value = "95%" -%}
+    {%- assign kls_stat_1_desc = "<p>Reduction in loose shedding hair around the house</p>" -%}
+    {%- assign kls_stat_2_value = "2 Sec" -%}
+    {%- assign kls_stat_2_desc = "<p>One-click self-cleaning cleanup time</p>" -%}
+    {%- assign kls_stat_3_value = "100%" -%}
+    {%- assign kls_stat_3_desc = "<p>Gentle massage tip safety protection rate</p>" -%}
+    {%- assign kls_ready_heading = "Say Goodbye To Pet Hair On Your Furniture" -%}
+    {%- assign kls_ready_body = "Tired of finding pet hair on your clothes, sofas, and carpets? Regular brushing with the SafePet 3-in-1 Brush removes loose undercoat before it falls off on your furniture." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Send My Pet Brush" -%}
+    {%- assign kls_comparison_heading = "Why Pet Parents Choose SafePet Brush Over Cheap Slicker Brushes" -%}
+    {%- assign kls_comparison_brand_label = "SafePet 3-in-1 Brush" -%}
+    {%- assign kls_comparison_others_label = "Generic Wire Brushes" -%}
+    {%- assign kls_comparison_features = "One-click self-cleaning mechanism\nCoated massage tips prevent scratches\nFine curved deshedding wire pins\nErgonomic anti-slip comfort grip\nSuitable for dogs & cats (long/short hair)\n30-Day risk-free trial" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 30 Days" -%}
+    {%- assign kls_guarantee_body = "Brush your pet daily. If they don't absolutely love the massage feeling, or if the one-click cleaning isn't the easiest thing ever, return it for a full refund." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY BRUSH RISK-FREE" -%}
+    {%- assign kls_grow_heading = "Retractable Cleaning Plate 🐾 Safe Coated Pins" -%}
+    {%- assign kls_grow_body = "Featuring 140° bent wire pins coated with protective rubber tips that reach deep into the undercoat to lift loose hair without scratching skin." -%}
+    {%- assign kls_grow_quote = "Regular grooming isn't just about looks. It removes trapped dirt, prevents painful mats, and distributes healthy skin oils." -%}
+    {%- assign kls_faq_heading = "3-in-1 Pet Brush Frequently Asked Questions" -%}
+  {%- elsif product.handle == 'safepet-gps-tracker' -%}
+    {%- assign kls_hero_headline = "Never Lose Track Of Your Best Friend. Real-Time GPS Tracking & Total Peace Of Mind." -%}
+    {%- assign kls_hero_benefit_1 = "Real-Time Tracking — Locates your dog instantly via app" -%}
+    {%- assign kls_hero_benefit_2 = "100% Waterproof & Rugged — Built for heavy outdoor play" -%}
+    {%- assign kls_hero_benefit_3 = "Geo-Fence Alerts — Notifies you instantly if your pup wanders off" -%}
+    {%- assign kls_hero_cta_label = "GET REAL-TIME GPS TRACKER" -%}
+    {%- assign kls_hero_trust_text = "Protect your best friend from wandering off." -%}
+    {%- assign kls_hero_testimonial_name = "David K. & Milo" -%}
+    {%- assign kls_hero_testimonial_quote = "Milo got out of the yard last Tuesday. Previously, I would have panicked and spent hours searching. With this GPS tracker, I opened the app, saw he was two streets over sniffing a fire hydrant, and got him back in 5 minutes flat. Essential safety device." -%}
+    {%- assign kls_stats_heading = "Trusted By 15,000+ Smart Pet Owners" -%}
+    {%- assign kls_stat_1_value = "99%" -%}
+    {%- assign kls_stat_1_desc = "<p>Accuracy rate in locating lost pets instantly</p>" -%}
+    {%- assign kls_stat_2_value = "100%" -%}
+    {%- assign kls_stat_2_desc = "<p>Waterproof and dirt-resistant active casing</p>" -%}
+    {%- assign kls_stat_3_value = "10 Days" -%}
+    {%- assign kls_stat_3_desc = "<p>Battery life on a single fast micro-USB charge</p>" -%}
+    {%- assign kls_ready_heading = "Never Live In Fear of a Lost Pet Again" -%}
+    {%- assign kls_ready_body = "One open gate. One loud firework. That's all it takes for your dog to run. Give yourself complete peace of mind knowing you can pinpoint their location instantly from your phone." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Protect My Pet Now" -%}
+    {%- assign kls_comparison_heading = "Why SafePet GPS Tracker Beats Cheap Bluetooth Tags" -%}
+    {%- assign kls_comparison_brand_label = "SafePet GPS Tracker" -%}
+    {%- assign kls_comparison_others_label = "Bluetooth Tags (AirTags)" -%}
+    {%- assign kls_comparison_features = "Unlimited satellite GPS range\nReal-time active location updates\n100% waterproof rugged build\nInstant boundary escape alerts\nFits any collar or harness\n30-Day risk-free trial" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 30 Days" -%}
+    {%- assign kls_guarantee_body = "Use it on every walk. If you aren't completely amazed by the real-time tracking accuracy, email us for a full refund." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY GPS TRACKER RISK-FREE" -%}
+    {%- assign kls_grow_heading = "Compact Design ⚡ Cutting-Edge GPS Coverage" -%}
+    {%- assign kls_grow_body = "Combining advanced cellular and satellite tracking technology in a featherlight, waterproof case that attaches securely to any collar or harness." -%}
+    {%- assign kls_grow_quote = "A lost pet is a parent's worst nightmare. Active GPS tracking changes the story from tragedy to reunion in minutes." -%}
+    {%- assign kls_faq_heading = "GPS Tracker Frequently Asked Questions" -%}
+  {%- elsif product.handle == 'safepet-shammy-dog-towel' -%}
+    {%- assign kls_hero_headline = "Dry Your Soggy Dog in Seconds! The Ultra-Absorbent Shammy Towel That Soaks Up Mud & Water Like Magic." -%}
+    {%- assign kls_hero_benefit_1 = "10x Super Absorption — Soaks up water & mud instantly" -%}
+    {%- assign kls_hero_benefit_2 = "Dual Hand Pockets — Easy grip for drying bellies & paws" -%}
+    {%- assign kls_hero_benefit_3 = "Ultra-Soft Microfiber — Gentle on fur and quick-drying" -%}
+    {%- assign kls_hero_cta_label = "CLAIM MY SHAMMY TOWEL" -%}
+    {%- assign kls_hero_trust_text = "Make bath time and rainy walks a breeze." -%}
+    {%- assign kls_hero_testimonial_name = "Emily R. & Buster" -%}
+    {%- assign kls_hero_testimonial_quote = "Buster loves mud, but I hate the wet dog smell and muddy paws on my carpets. This towel absorbs water like a sponge! The hand pockets make it so easy to dry his chest and underbelly. It is a game-changer after walks." -%}
+    {%- assign kls_stats_heading = "Trusted By 20,000+ Happy Pups" -%}
+    {%- assign kls_stat_1_value = "10x" -%}
+    {%- assign kls_stat_1_desc = "<p>Faster drying speed than generic cotton towels</p>" -%}
+    {%- assign kls_stat_2_value = "8x" -%}
+    {%- assign kls_stat_2_desc = "<p>Soaks up times its weight in water and mud</p>" -%}
+    {%- assign kls_stat_3_value = "500+" -%}
+    {%- assign kls_stat_3_desc = "<p>Machine washes without losing absorption power</p>" -%}
+    {%- assign kls_ready_heading = "No More Wet Dog Smell In Your Home" -%}
+    {%- assign kls_ready_body = "Bath time shouldn't end with your dog shaking water all over your clean walls and furniture. Dry them in seconds with the ultra-absorbent microfiber shammy." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Send My Shammy Towel" -%}
+    {%- assign kls_comparison_heading = "Why Dog Parents Choose SafePet Shammy Over Cheap Towels" -%}
+    {%- assign kls_comparison_brand_label = "SafePet Shammy" -%}
+    {%- assign kls_comparison_others_label = "Generic Towels" -%}
+    {%- assign kls_comparison_features = "10x absorption microfiber structure\nDual hand pockets for full control\nGentle massage texture pets love\nQuick dry material prevents odors\nMachine washable and durable\n30-Day money-back guarantee" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 30 Days" -%}
+    {%- assign kls_guarantee_body = "Use it after bath time or rainy walks. If it doesn't dry your dog faster and easier than any towel you've owned, return it for a full refund." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY TOWEL RISK-FREE" -%}
+    {%- assign kls_grow_heading = "Super Microfiber Technology 🐾 Dual-Grip Control" -%}
+    {%- assign kls_grow_body = "Featuring dual-end pockets that allow you to wrap the towel around your dog and apply gentle friction to dry their legs and undercarriage easily." -%}
+    {%- assign kls_grow_quote = "Bath time is only half the battle. A quick, comfortable dry prevents chills and eliminates the dreaded wet-dog odor." -%}
+    {%- assign kls_faq_heading = "Shammy Towel Frequently Asked Questions" -%}
+  {%- elsif product.handle == 'the-pet-emergency-car-window-sticker' -%}
+    {%- assign kls_hero_headline = "In An Accident, Who Speaks For Your Dog? Save Your Pet's Life With This Highly Visible Emergency Window Alert." -%}
+    {%- assign kls_hero_benefit_1 = "Highly Visible Bright Yellow — Instantly alerts first responders" -%}
+    {%- assign kls_hero_benefit_2 = "Write-In Customization — List number of dogs/cats and contact info" -%}
+    {%- assign kls_hero_benefit_3 = "Weatherproof UV-Resistant Vinyl — Fades-resistant, sticks inside or out" -%}
+    {%- assign kls_hero_cta_label = "SEND MY EMERGENCY STICKER" -%}
+    {%- assign kls_hero_trust_text = "Ensure first responders save your pet in an emergency." -%}
+    {%- assign kls_hero_testimonial_name = "Marcus G. & Bella" -%}
+    {%- assign kls_hero_testimonial_quote = "I was in a fender bender and was knocked unconscious. First responders saw this bright sticker on my window, checked the backseat, and took care of my scared pup. It speaks for them when you can't. Every pet owner needs one on their car." -%}
+    {%- assign kls_stats_heading = "Trusted By 30,000+ Safety-Conscious Owners" -%}
+    {%- assign kls_stat_1_value = "60%" -%}
+    {%- assign kls_stat_1_desc = "<p>First responder search time reduction rate</p>" -%}
+    {%- assign kls_stat_2_value = "100%" -%}
+    {%- assign kls_stat_2_desc = "<p>Reflective night-visible vinyl material safety</p>" -%}
+    {%- assign kls_stat_3_value = "UV" -%}
+    {%- assign kls_stat_3_desc = "<p>Weatherproof protection against sun, rain, and snow</p>" -%}
+    {%- assign kls_ready_heading = "Speak For Them When You Can't" -%}
+    {%- assign kls_ready_body = "If you're ever incapacitated in a car crash or house fire, first responders won't know to search for your pet unless there's a clear alert. Put this highly visible decal on your window to save their life." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Send My Window Sticker" -%}
+    {%- assign kls_comparison_heading = "Why Dog Parents Choose SafePet Decal Over Paper Alerts" -%}
+    {%- assign kls_comparison_brand_label = "SafePet Emergency Sticker" -%}
+    {%- assign kls_comparison_others_label = "Standard Paper Decals" -%}
+    {%- assign kls_comparison_features = "Highly visible traffic-grade yellow vinyl\nReflective night-visible material coating\nUV-resistant weatherproof adhesive\nWrite-on spaces for name/phone/count\nPeel-and-stick application leaves no residue\n30-Day risk-free trial" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 30 Days" -%}
+    {%- assign kls_guarantee_body = "Stick it to your car window or front door. If you aren't completely satisfied with the visibility and adhesive strength, email us for a full refund." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY STICKER RISK-FREE" -%}
+    {%- assign kls_grow_heading = "Traffic-Grade Reflective Vinyl 🐾 Custom Write-On" -%}
+    {%- assign kls_grow_body = "Engineered from premium vinyl that reflects light at night, ensuring emergency crews see the notice 24/7. Easily write details with a permanent marker." -%}
+    {%- assign kls_grow_quote = "In an emergency, seconds count. A visible window decal immediately shifts responder focus to rescuing your trapped pet." -%}
+    {%- assign kls_faq_heading = "Emergency Window Sticker Frequently Asked Questions" -%}
+  {%- elsif product.handle == 'personalized-id-tag' -%}
+    {%- assign kls_hero_headline = "Your Dog's Best Chance of Coming Home. Custom Engraved Heavy-Duty Personalized ID Tag." -%}
+    {%- assign kls_hero_benefit_1 = "Deep Laser Engraving — Won't fade or scratch off over time" -%}
+    {%- assign kls_hero_benefit_2 = "Personalized Styling — Custom name and phone engraving options" -%}
+    {%- assign kls_hero_benefit_3 = "Premium Zinc Alloy — Lightweight, durable, and rust-proof" -%}
+    {%- assign kls_hero_cta_label = "PERSONALIZE MY ID TAG" -%}
+    {%- assign kls_hero_trust_text = "Give your dog a voice if they ever wander away." -%}
+    {%- assign kls_hero_testimonial_name = "Lisa M. & Cooper" -%}
+    {%- assign kls_hero_testimonial_quote = "Cooper got lost during a camping trip and ran off. Luckily, someone found him shivering by a stream and saw his custom ID tag. They called my cell phone immediately. The deep laser engraving was perfectly readable even after he swam. It brought my baby home." -%}
+    {%- assign kls_stats_heading = "Trusted By 25,000+ Safe Dog Owners" -%}
+    {%- assign kls_stat_1_value = "90%" -%}
+    {%- assign kls_stat_1_desc = "<p>Increase in lost pets returned safely with ID tags</p>" -%}
+    {%- assign kls_stat_2_value = "0.5mm" -%}
+    {%- assign kls_stat_2_desc = "<p>Deep laser engraving depth for lifetime legibility</p>" -%}
+    {%- assign kls_stat_3_value = "0" -%}
+    {%- assign kls_stat_3_desc = "<p>Rattle noise with custom protective silencer bounds</p>" -%}
+    {%- assign kls_ready_heading = "Don't Let Your Dog Become a Statistic" -%}
+    {%- assign kls_ready_body = "Thousands of pets go missing daily. A microchip is great, but it requires someone finding them and taking them to a vet. An engraved ID tag lets anyone call you instantly to reunite you." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Personalize My ID Tag" -%}
+    {%- assign kls_comparison_heading = "Why SafePet ID Tags Beat Cheap Store Tags" -%}
+    {%- assign kls_comparison_brand_label = "SafePet ID Tag" -%}
+    {%- assign kls_comparison_others_label = "Cheap Engraved Tags" -%}
+    {%- assign kls_comparison_features = "0.5mm deep military-grade laser engraving\nRust-proof heavy-duty zinc alloy base\nClear font legibility that won't scratch off\nIncludes custom noise silencer border\nUniversal strong split-ring attachment\n30-Day risk-free trial" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 30 Days" -%}
+    {%- assign kls_guarantee_body = "Attach it to their collar. If you aren't completely happy with the engraving depth and durability, email us for a full refund." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY ID TAG RISK-FREE" -%}
+    {%- assign kls_grow_heading = "Premium Laser Engraving 🐾 Solid Alloy Build" -%}
+    {%- assign kls_grow_body = "Crafted from heavy-duty zinc alloy with deep laser engraving that remains perfectly readable through water, mud, and active scratching." -%}
+    {%- assign kls_grow_quote = "An ID tag is a simple, low-cost safety insurance. It gives your dog a voice to tell others exactly how to contact you." -%}
+    {%- assign kls_faq_heading = "Personalized ID Tag Frequently Asked Questions" -%}
+  {%- elsif product.handle == 'harness' -%}
+    {%- assign kls_hero_headline = "Stop Choking Your Dog! The Ergonomic No-Pull Chest Harness That Distributes Pressure Safely." -%}
+    {%- assign kls_hero_benefit_1 = "No-Pull & No-Choke — Distributes tension across the chest, not the throat" -%}
+    {%- assign kls_hero_benefit_2 = "Reflective Safe Stitching — Visible during night-time walks" -%}
+    {%- assign kls_hero_benefit_3 = "Easy-Fit Adjustability — 4-point adjusters for custom snug fits" -%}
+    {%- assign kls_hero_cta_label = "GET MY NO-PULL HARNESS" -%}
+    {%- assign kls_hero_trust_text = "Protect your dog's neck and joints on every walk." -%}
+    {%- assign kls_hero_testimonial_name = "Sarah J. & Rocky" -%}
+    {%- assign kls_hero_testimonial_quote = "Rocky used to pull constantly, choking himself until he coughed. Walks were a nightmare. This harness changed everything. It distributes the pressure across his chest, so he stopped pulling immediately. No more choking, no more strain on my shoulders. Highly recommend!" -%}
+    {%- assign kls_stats_heading = "Trusted By 20,000+ Active Pups" -%}
+    {%- assign kls_stat_1_value = "100%" -%}
+    {%- assign kls_stat_1_desc = "<p>Reduction in neck strain injury risks compared to collars</p>" -%}
+    {%- assign kls_stat_2_value = "5 Sec" -%}
+    {%- assign kls_stat_2_desc = "<p>Easy snap on and off secure clip lock time</p>" -%}
+    {%- assign kls_stat_3_value = "3M" -%}
+    {%- assign kls_stat_3_desc = "<p>Reflective thread night visibility distance safety</p>" -%}
+    {%- assign kls_ready_heading = "Make Walks a Joy Again" -%}
+    {%- assign kls_ready_body = "Stop wrestling with your dog on every walk. Give them the comfort of an ergonomic chest harness that stops pulling safely without choking." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Send My Dog's Harness" -%}
+    {%- assign kls_comparison_heading = "Why Dog Parents Choose SafePet Harness Over Regular Collars" -%}
+    {%- assign kls_comparison_brand_label = "SafePet Harness" -%}
+    {%- assign kls_comparison_others_label = "Standard Collars" -%}
+    {%- assign kls_comparison_features = "Ergonomic no-choke chest design\nStops active pulling safely and gently\nReflective night-visible safe stitching\nComfortable breathable mesh padding\nHeavy-duty alloy leash attachment D-ring\n30-Day risk-free trial" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 30 Days" -%}
+    {%- assign kls_guarantee_body = "Walk your dog daily. If it doesn't stop their pulling and choking, or if you aren't completely satisfied, email us for a full refund." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY HARNESS RISK-FREE" -%}
+    {%- assign kls_grow_heading = "Ergonomic Chest Distribution 🐾 Breathable Mesh" -%}
+    {%- assign kls_grow_body = "Engineered to redirect pulling forces from the throat to the chest area, protecting your dog's delicate windpipe and neck joints." -%}
+    {%- assign kls_grow_quote = "Choking your dog with a collar can cause permanent tracheal damage. A chest harness distributes the force safely across their body." -%}
+    {%- assign kls_faq_heading = "No-Pull Harness Frequently Asked Questions" -%}
+  {%- endif -%}
+{%- endif -%}
+{%- comment -%} SAFE PET DYNAMIC COPY OVERRIDES END {%- endcomment -%}
+
 
 
   <section class="kls-hero">
@@ -137,7 +358,7 @@
               {%- assign hero_image = product.featured_image -%}
             {%- endif -%}
             {%- if hero_image != blank -%}
-              {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: hero_image.alt | default: section.settings.hero_headline }}
+              {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: hero_image.alt | default: kls_hero_headline }}
             {%- endif -%}
             {%- if section.settings.hero_badge_tl != blank -%}
               <span class="kls-hero-badge kls-hero-badge-tl">{{ section.settings.hero_badge_tl }}</span>
@@ -186,7 +407,7 @@
           <span class="kls-hero-stars">★★★★★</span>
           <span class="kls-hero-rating-text">{{ section.settings.hero_rating_text }}</span>
         </div>
-        <h1 class="kls-hero-headline">{{ section.settings.hero_headline }}</h1>
+        <h1 class="kls-hero-headline">{{ kls_hero_headline }}</h1>
         <div class="kls-hero-price-row">
           <span class="kls-hero-price-sale">
             {%- if section.settings.hero_price_sale != blank -%}
@@ -213,14 +434,14 @@
           {%- endif -%}
         </div>
         <ul class="kls-hero-benefits">
-          {%- if section.settings.hero_benefit_1 != blank -%}
-            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ section.settings.hero_benefit_1 }}</span></li>
+          {%- if kls_hero_benefit_1 != blank -%}
+            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ kls_hero_benefit_1 }}</span></li>
           {%- endif -%}
-          {%- if section.settings.hero_benefit_2 != blank -%}
-            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ section.settings.hero_benefit_2 }}</span></li>
+          {%- if kls_hero_benefit_2 != blank -%}
+            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ kls_hero_benefit_2 }}</span></li>
           {%- endif -%}
-          {%- if section.settings.hero_benefit_3 != blank -%}
-            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ section.settings.hero_benefit_3 }}</span></li>
+          {%- if kls_hero_benefit_3 != blank -%}
+            <li class="kls-hero-benefit"><span class="kls-hero-benefit-icon">♥</span><span>{{ kls_hero_benefit_3 }}</span></li>
           {%- endif -%}
         </ul>
 
@@ -290,7 +511,7 @@
                       {%- if product.selected_or_first_available_variant.available == false -%}
                         {{ 'products.product.sold_out' | t }}
                       {%- else -%}
-                        {{ section.settings.hero_cta_label }}
+                        {{ kls_hero_cta_label }}
                       {%- endif -%}
                     </span>
                   </span>
@@ -310,13 +531,13 @@
             {%- endform -%}
           </product-form>
         {%- else -%}
-          <button type="button" class="kls-hero-cta">{{ section.settings.hero_cta_label }}</button>
+          <button type="button" class="kls-hero-cta">{{ kls_hero_cta_label }}</button>
           <div class="kls-no-product-notice">⚠️ <strong>Preview mode.</strong> Select a product in section settings to activate Add to Cart.</div>
         {%- endif -%}
 
         <div class="kls-hero-trust">
           <span class="kls-hero-trust-check">✓</span>
-          <span>{{ section.settings.hero_trust_text }}</span>
+          <span>{{ kls_hero_trust_text }}</span>
         </div>
         {%- if section.settings.hero_guarantee_pill != blank -%}
           <span class="kls-hero-guarantee">{{ section.settings.hero_guarantee_pill }}</span>
@@ -345,7 +566,7 @@
           {%- endif -%}
 
           <div class="kls-hero-testimonial-top">
-            <p class="kls-hero-testimonial-quote">“{{ section.settings.hero_testimonial_quote }}”</p>
+            <p class="kls-hero-testimonial-quote">“{{ kls_hero_testimonial_quote }}”</p>
           </div>
 
           {%- if section.settings.hero_testimonial_image_position == 'below' or section.settings.hero_testimonial_image_position == blank -%}
@@ -355,11 +576,11 @@
           <div class="kls-hero-testimonial-meta">
             {%- if section.settings.hero_testimonial_avatar != blank -%}
               <div class="kls-hero-testimonial-avatar">
-                {{ section.settings.hero_testimonial_avatar | image_url: width: 88 | image_tag: widths: '44,88', sizes: '44px', loading: 'lazy', class: 'kls-avatar-img', alt: section.settings.hero_testimonial_name }}
+                {{ section.settings.hero_testimonial_avatar | image_url: width: 88 | image_tag: widths: '44,88', sizes: '44px', loading: 'lazy', class: 'kls-avatar-img', alt: kls_hero_testimonial_name }}
               </div>
             {%- endif -%}
             <div class="kls-hero-testimonial-author-info">
-              <span class="kls-hero-testimonial-name">{{ section.settings.hero_testimonial_name }}</span>
+              <span class="kls-hero-testimonial-name">{{ kls_hero_testimonial_name }}</span>
               <div class="kls-hero-testimonial-subline">
                 <span class="kls-hero-testimonial-stars">★★★★★</span>
                 <span class="kls-verified-buyer-text">Verified Buyer</span>
@@ -373,7 +594,7 @@
 
   <section class="kls-faq">
     <div class="kls-faq-container">
-      <h2 class="kls-faq-heading">{{ section.settings.faq_heading }}</h2>
+      <h2 class="kls-faq-heading">{{ kls_faq_heading }}</h2>
       <div class="kls-faq-list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'faq' -%}
@@ -381,11 +602,11 @@
               <summary class="kls-faq-summary">
                 <div class="kls-faq-question">
                   <span class="kls-faq-emoji">{{ block.settings.emoji }}</span>
-                  <span>{{ block.settings.question }}</span>
+                  <span>{{ faq_question }}</span>
                 </div>
                 <span class="kls-faq-chevron">⌄</span>
               </summary>
-              <div class="kls-faq-answer">{{ block.settings.answer }}</div>
+              <div class="kls-faq-answer">{{ faq_answer }}</div>
             </details>
           {%- endif -%}
         {%- endfor -%}
@@ -397,13 +618,13 @@
     <div class="kls-ready-inner">
       <div class="kls-ready-image">
         {%- if section.settings.ready_image != blank -%}
-          {{ section.settings.ready_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-ready-img', alt: section.settings.ready_heading }}
+          {{ section.settings.ready_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-ready-img', alt: kls_ready_heading }}
         {%- endif -%}
       </div>
       <div class="kls-ready-content">
-        <h2 class="kls-ready-heading">{{ section.settings.ready_heading }}</h2>
-        <p class="kls-ready-body">{{ section.settings.ready_body }}</p>
-        <a href="{{ section.settings.ready_cta_url | default: '#wld-kls-' | append: section.id }}" class="kls-ready-cta">{{ section.settings.ready_cta_label }}</a>
+        <h2 class="kls-ready-heading">{{ kls_ready_heading }}</h2>
+        <p class="kls-ready-body">{{ kls_ready_body }}</p>
+        <a href="{{ section.settings.ready_cta_url | default: '#wld-kls-' | append: section.id }}" class="kls-ready-cta">{{ kls_ready_cta_label }}</a>
       </div>
     </div>
   </section>
@@ -411,11 +632,11 @@
   <section class="kls-grow">
     <div class="kls-grow-inner">
       <div class="kls-grow-content">
-        <h2 class="kls-grow-heading">{{ section.settings.grow_heading }}</h2>
-        <p class="kls-grow-body">{{ section.settings.grow_body }}</p>
+        <h2 class="kls-grow-heading">{{ kls_grow_heading }}</h2>
+        <p class="kls-grow-body">{{ kls_grow_body }}</p>
       </div>
       <div class="kls-grow-image">
-        <p class="kls-grow-quote">{{ section.settings.grow_quote }}</p>
+        <p class="kls-grow-quote">{{ kls_grow_quote }}</p>
         <div class="kls-grow-collage">
           <div class="kls-grow-thumb">
             {%- if section.settings.grow_thumb_1 != blank -%}
@@ -433,12 +654,122 @@
       <div class="kls-testimonials-grid">
         {%- for block in section.blocks -%}
           {%- if block.type == 'testimonial' -%}
+            {%- assign test_title = block.settings.title -%}
+            {%- assign test_body = block.settings.body -%}
+            {%- assign test_author_name = block.settings.author_name -%}
+            {%- assign test_author_tag = block.settings.author_tag -%}
+            {%- if template.name == 'product' and is_seatbelt == false -%}
+              {%- assign loop_idx = forloop.index | plus: 0 -%}
+              {%- if product.handle == 'safepet-3-in-1-pet-brush' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "No more loose hair on the couch!" -%}
+                  {%- assign test_body = "Our golden retriever sheds constantly. Brushing her for 5 minutes a day with this has completely cut down the tumbleweeds of hair in our living room." -%}
+                  {%- assign test_author_name = "Megan L." -%}
+                  {%- assign test_author_tag = "Golden retriever owner" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "Pressing the button is so satisfying!" -%}
+                  {%- assign test_body = "I used to hate cleaning wire brushes with my fingers. Now I just click the button and dump the hair disk in the trash. It takes two seconds." -%}
+                  {%- assign test_author_name = "Luna K." -%}
+                  {%- assign test_author_tag = "Corgi mom" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "Recommended by my pet clinic." -%}
+                  {%- assign test_body = "Brushing out mats can be painful, but the massage tips make this a relaxing experience for anxious pets. I recommend it to all my clients." -%}
+                  {%- assign test_author_name = "Sarah T." -%}
+                  {%- assign test_author_tag = "Vet Assistant" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'safepet-gps-tracker' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "I sat on the shoulder and cried from pure relief..." -%}
+                  {%- assign test_body = "My husky is a runner, and when the gate blew open during a storm, my heart sank. I opened the tracking app and saw she was running down 4th street. I drove straight there and called her in. The tracker saved her life." -%}
+                  {%- assign test_author_name = "Megan L." -%}
+                  {%- assign test_author_tag = "Husky owner" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "He slid under the fence and got lost in the woods." -%}
+                  {%- assign test_body = "Living next to a state park means lots of wildlife. One day he chased a deer and vanished. I tracked him 1 mile deep into the woods directly to where his collar got caught. Found him safe and sound." -%}
+                  {%- assign test_author_name = "Luna K." -%}
+                  {%- assign test_author_tag = "Active dog mom" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "I see the tragic results of lost dogs weekly." -%}
+                  {%- assign test_body = "As a rescue volunteer, I see how hard it is to find lost dogs without active tags. Microchips only work if someone finds them; GPS lets YOU find them. This is the device I tell every pet parent to get." -%}
+                  {%- assign test_author_name = "Sarah T." -%}
+                  {%- assign test_author_tag = "Rescue Trainer" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'safepet-shammy-dog-towel' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "It saved my white rugs!" -%}
+                  {%- assign test_body = "My Lab loves running through wet grass. This towel sits by the back door now. Muddy paws are dry and clean in under 30 seconds before he can even step onto the rug." -%}
+                  {%- assign test_author_name = "Megan L." -%}
+                  {%- assign test_author_tag = "Lab mom" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "He actually sits still for drying now." -%}
+                  {%- assign test_body = "Buster used to run away shaking water everywhere. The soft microfiber texture feels like a gentle massage, so he actually stands still and enjoys being dried." -%}
+                  {%- assign test_author_name = "Luna K." -%}
+                  {%- assign test_author_tag = "Golden retriever owner" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "A must-have for rainy season." -%}
+                  {%- assign test_body = "As a professional groomer, I've used dozens of towels. The absorption speed of this shammy is unmatched. It cuts drying times in half and keeps dogs warm." -%}
+                  {%- assign test_author_name = "Sarah T." -%}
+                  {%- assign test_author_tag = "Pet Groomer" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'the-pet-emergency-car-window-sticker' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "Firefighters saw it and saved my cats!" -%}
+                  {%- assign test_body = "There was a grease fire in my kitchen. The firefighters saw the emergency decal on my front storm window and immediately went in to find my two scared cats. It works." -%}
+                  {%- assign test_author_name = "Megan L." -%}
+                  {%- assign test_author_tag = "Cat Mom" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "Gives me peace of mind on road trips." -%}
+                  {%- assign test_body = "Driving long distances with my dog always makes me anxious about crashes. Having this sticker visible makes me feel secure knowing he won't be left behind." -%}
+                  {%- assign test_author_name = "Luna K." -%}
+                  {%- assign test_author_tag = "Dog owner" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "A must-have safety product." -%}
+                  {%- assign test_body = "As a paramedic, I always look for pet stickers when responding to accidents. It tells us exactly how many animals to search for in the vehicle." -%}
+                  {%- assign test_author_name = "Sarah T." -%}
+                  {%- assign test_author_tag = "EMT First Responder" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'personalized-id-tag' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "Reunited in under 15 minutes!" -%}
+                  {%- assign test_body = "Cooper got out of our back gate. A neighbor down the street saw him, checked his tag, and called my number. I had him back before I even realized he was gone." -%}
+                  {%- assign test_author_name = "Megan L." -%}
+                  {%- assign test_author_tag = "Retriever Mom" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "Very solid, no noise!" -%}
+                  {%- assign test_body = "The tag is thick and sturdy. The engraving is deep and clear. The rubber border is great because it prevents the metal from rattling against his food bowl." -%}
+                  {%- assign test_author_name = "Luna K." -%}
+                  {%- assign test_author_tag = "Bulldog Owner" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "Essential for every pet." -%}
+                  {%- assign test_body = "As a trainer, I see many dogs lose their collars or tags. This heavy-duty alloy split ring is strong and won't pull open. Highly recommended." -%}
+                  {%- assign test_author_name = "Sarah T." -%}
+                  {%- assign test_author_tag = "Dog Trainer" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'harness' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "Walks are finally enjoyable!" -%}
+                  {%- assign test_body = "Rocky used to drag me down the sidewalk. Now he walks calmly beside me. I can finally walk him with one hand without my arm hurting." -%}
+                  {%- assign test_author_name = "Megan L." -%}
+                  {%- assign test_author_tag = "Retriever Mom" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "Snaps on in 3 seconds!" -%}
+                  {%- assign test_body = "I hate complicated harnesses with too many straps. This one is super simple. Over the head, click the buckle, and we are ready to go." -%}
+                  {%- assign test_author_name = "Luna K." -%}
+                  {%- assign test_author_tag = "Boxer Owner" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "Vet recommended." -%}
+                  {%- assign test_body = "Tracheal collapse is common in pulling dogs. I recommend this chest harness design to all my patients to protect their breathing." -%}
+                  {%- assign test_author_name = "Sarah T." -%}
+                  {%- assign test_author_tag = "Veterinarian" -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
             <div class="kls-testimonial-card" {{ block.shopify_attributes }}>
               <div class="kls-testimonial-badge">"</div>
               <div class="kls-testimonial-stars">★★★★★</div>
-              <h3 class="kls-testimonial-title">{{ block.settings.title }}</h3>
-              <p class="kls-testimonial-body">{{ block.settings.body }}</p>
-              <p class="kls-testimonial-author"><span class="kls-testimonial-author-name">{{ block.settings.author_name }}</span> | {{ block.settings.author_tag }}</p>
+              <h3 class="kls-testimonial-title">{{ test_title }}</h3>
+              <p class="kls-testimonial-body">{{ test_body }}</p>
+              <p class="kls-testimonial-author"><span class="kls-testimonial-author-name">{{ test_author_name }}</span> | {{ test_author_tag }}</p>
             </div>
           {%- endif -%}
         {%- endfor -%}
@@ -449,21 +780,21 @@
   <section class="kls-stats">
     <div class="kls-stats-inner">
       <div>
-        <h2 class="kls-stats-heading">{{ section.settings.stats_heading }}</h2>
+        <h2 class="kls-stats-heading">{{ kls_stats_heading }}</h2>
       </div>
       <div>
         <div class="kls-stats-rows">
           <div class="kls-stat-row">
-            <div class="kls-stat-badge">{{ section.settings.stat_1_value }}</div>
-            <p class="kls-stat-desc">{{ section.settings.stat_1_desc }}</p>
+            <div class="kls-stat-badge">{{ kls_stat_1_value }}</div>
+            <p class="kls-stat-desc">{{ kls_stat_1_desc }}</p>
           </div>
           <div class="kls-stat-row">
-            <div class="kls-stat-badge">{{ section.settings.stat_2_value }}</div>
-            <p class="kls-stat-desc">{{ section.settings.stat_2_desc }}</p>
+            <div class="kls-stat-badge">{{ kls_stat_2_value }}</div>
+            <p class="kls-stat-desc">{{ kls_stat_2_desc }}</p>
           </div>
           <div class="kls-stat-row">
-            <div class="kls-stat-badge">{{ section.settings.stat_3_value }}</div>
-            <p class="kls-stat-desc">{{ section.settings.stat_3_desc }}</p>
+            <div class="kls-stat-badge">{{ kls_stat_3_value }}</div>
+            <p class="kls-stat-desc">{{ kls_stat_3_desc }}</p>
           </div>
         </div>
         <p class="kls-stats-footnote">{{ section.settings.stats_footnote }}</p>
@@ -473,14 +804,14 @@
 
   <section class="kls-comparison">
     <div class="kls-comparison-inner">
-      <h2 class="kls-comparison-heading">{{ section.settings.comparison_heading }}</h2>
+      <h2 class="kls-comparison-heading">{{ kls_comparison_heading }}</h2>
       <div class="kls-comparison-table">
         <div class="kls-comparison-row kls-comparison-row-header">
           <div class="kls-comparison-feature">&nbsp;</div>
-          <div class="kls-comparison-brand-header">{{ section.settings.comparison_brand_label }}</div>
-          <div class="kls-comparison-others-header">{{ section.settings.comparison_others_label }}</div>
+          <div class="kls-comparison-brand-header">{{ kls_comparison_brand_label }}</div>
+          <div class="kls-comparison-others-header">{{ kls_comparison_others_label }}</div>
         </div>
-        {%- assign features = section.settings.comparison_features | newline_to_br | split: '<br />' -%}
+        {%- assign features = kls_comparison_features | newline_to_br | split: '<br />' -%}
         {%- for feature in features -%}
           {%- assign clean = feature | strip -%}
           {%- if clean != blank -%}
@@ -497,9 +828,9 @@
 
   <section class="kls-guarantee">
     <div class="kls-guarantee-inner">
-      <h2 class="kls-guarantee-heading">{{ section.settings.guarantee_heading }}</h2>
-      <p class="kls-guarantee-body">{{ section.settings.guarantee_body }}</p>
-      <a href="{{ section.settings.guarantee_cta_url | default: '#wld-kls-' | append: section.id }}" class="kls-guarantee-cta">{{ section.settings.guarantee_cta_label }}</a>
+      <h2 class="kls-guarantee-heading">{{ kls_guarantee_heading }}</h2>
+      <p class="kls-guarantee-body">{{ kls_guarantee_body }}</p>
+      <a href="{{ section.settings.guarantee_cta_url | default: '#wld-kls-' | append: section.id }}" class="kls-guarantee-cta">{{ kls_guarantee_cta_label }}</a>
     </div>
   </section>
 
