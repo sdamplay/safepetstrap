@@ -127,43 +127,44 @@
   {{ 'kids-life-skills.css' | asset_url | stylesheet_tag }}
 {%- comment -%} SAFE PET DYNAMIC COPY OVERRIDES START {%- endcomment -%}
 {%- assign is_seatbelt = false -%}
-{%- if product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' or product.handle == blank -%}
+{%- assign handle_lower = product.handle | downcase -%}
+{%- if handle_lower contains 'seat-belt' or handle_lower contains 'seatbelt' or handle_lower == 'safepet-strap' or handle_lower == 'safe-pet-strap' or product.handle == blank -%}
   {%- assign is_seatbelt = true -%}
 {%- endif -%}
 
-{%- assign kls_hero_headline = kls_hero_headline -%}
-{%- assign kls_hero_benefit_1 = kls_hero_benefit_1 -%}
-{%- assign kls_hero_benefit_2 = kls_hero_benefit_2 -%}
-{%- assign kls_hero_benefit_3 = kls_hero_benefit_3 -%}
-{%- assign kls_hero_cta_label = kls_hero_cta_label -%}
-{%- assign kls_hero_trust_text = kls_hero_trust_text -%}
-{%- assign kls_hero_testimonial_quote = kls_hero_testimonial_quote -%}
-{%- assign kls_hero_testimonial_name = kls_hero_testimonial_name -%}
-{%- assign kls_stats_heading = kls_stats_heading -%}
-{%- assign kls_stat_1_value = kls_stat_1_value -%}
-{%- assign kls_stat_1_desc = kls_stat_1_desc -%}
-{%- assign kls_stat_2_value = kls_stat_2_value -%}
-{%- assign kls_stat_2_desc = kls_stat_2_desc -%}
-{%- assign kls_stat_3_value = kls_stat_3_value -%}
-{%- assign kls_stat_3_desc = kls_stat_3_desc -%}
-{%- assign kls_ready_heading = kls_ready_heading -%}
-{%- assign kls_ready_body = kls_ready_body -%}
-{%- assign kls_ready_cta_label = kls_ready_cta_label -%}
-{%- assign kls_comparison_heading = kls_comparison_heading -%}
-{%- assign kls_comparison_brand_label = kls_comparison_brand_label -%}
-{%- assign kls_comparison_others_label = kls_comparison_others_label -%}
-{%- assign kls_comparison_features = kls_comparison_features -%}
-{%- assign kls_guarantee_heading = kls_guarantee_heading -%}
-{%- assign kls_guarantee_body = kls_guarantee_body -%}
-{%- assign kls_guarantee_cta_label = kls_guarantee_cta_label -%}
-{%- assign kls_grow_heading = kls_grow_heading -%}
-{%- assign kls_grow_body = kls_grow_body -%}
-{%- assign kls_grow_quote = kls_grow_quote -%}
-{%- assign kls_faq_heading = kls_faq_heading -%}
+{%- assign kls_hero_headline = section.settings.hero_headline -%}
+{%- assign kls_hero_benefit_1 = section.settings.hero_benefit_1 -%}
+{%- assign kls_hero_benefit_2 = section.settings.hero_benefit_2 -%}
+{%- assign kls_hero_benefit_3 = section.settings.hero_benefit_3 -%}
+{%- assign kls_hero_cta_label = section.settings.hero_cta_label -%}
+{%- assign kls_hero_trust_text = section.settings.hero_trust_text -%}
+{%- assign kls_hero_testimonial_quote = section.settings.hero_testimonial_quote -%}
+{%- assign kls_hero_testimonial_name = section.settings.hero_testimonial_name -%}
+{%- assign kls_stats_heading = section.settings.stats_heading -%}
+{%- assign kls_stat_1_value = section.settings.stat_1_value -%}
+{%- assign kls_stat_1_desc = section.settings.stat_1_desc -%}
+{%- assign kls_stat_2_value = section.settings.stat_2_value -%}
+{%- assign kls_stat_2_desc = section.settings.stat_2_desc -%}
+{%- assign kls_stat_3_value = section.settings.stat_3_value -%}
+{%- assign kls_stat_3_desc = section.settings.stat_3_desc -%}
+{%- assign kls_ready_heading = section.settings.ready_heading -%}
+{%- assign kls_ready_body = section.settings.ready_body -%}
+{%- assign kls_ready_cta_label = section.settings.ready_cta_label -%}
+{%- assign kls_comparison_heading = section.settings.comparison_heading -%}
+{%- assign kls_comparison_brand_label = section.settings.comparison_brand_label -%}
+{%- assign kls_comparison_others_label = section.settings.comparison_others_label -%}
+{%- assign kls_comparison_features = section.settings.comparison_features -%}
+{%- assign kls_guarantee_heading = section.settings.guarantee_heading -%}
+{%- assign kls_guarantee_body = section.settings.guarantee_body -%}
+{%- assign kls_guarantee_cta_label = section.settings.guarantee_cta_label -%}
+{%- assign kls_grow_heading = section.settings.grow_heading -%}
+{%- assign kls_grow_body = section.settings.grow_body -%}
+{%- assign kls_grow_quote = section.settings.grow_quote -%}
+{%- assign kls_faq_heading = section.settings.faq_heading -%}
 
-{%- assign kls_hero_price_sale = kls_hero_price_sale -%}
-{%- assign kls_hero_price_original = kls_hero_price_original -%}
-{%- assign kls_hero_save_pill = kls_hero_save_pill -%}
+{%- assign kls_hero_price_sale = section.settings.hero_price_sale -%}
+{%- assign kls_hero_price_original = section.settings.hero_price_original -%}
+{%- assign kls_hero_save_pill = section.settings.hero_save_pill -%}
 
 {%- if template.name == 'product' and is_seatbelt == false -%}
   {%- assign kls_hero_price_sale = "" -%}
@@ -252,7 +253,7 @@
     {%- assign kls_comparison_heading = "Why Dog Parents Choose SafePet Shammy Over Cheap Towels" -%}
     {%- assign kls_comparison_brand_label = "SafePet Shammy" -%}
     {%- assign kls_comparison_others_label = "Generic Towels" -%}
-    {%- assign kls_comparison_features = "10x absorption microfiber structure\nDual hand pockets for full control\nGentle massage texture pets love\nQuick dry material prevents odors\nMachine washable and durable\n30-Day money-back guarantee" -%}
+    {%- assign kls_comparison_features = "10x absorption microfiber structure\nDual hand pockets for full control\nGentne massage texture pets love\nQuick dry material prevents odors\nMachine washable and durable\n30-Day money-back guarantee" -%}
     {%- assign kls_guarantee_heading = "Try It Risk-Free For 30 Days" -%}
     {%- assign kls_guarantee_body = "Use it after bath time or rainy walks. If it doesn't dry your dog faster and easier than any towel you've owned, return it for a full refund." -%}
     {%- assign kls_guarantee_cta_label = "GET MY TOWEL RISK-FREE" -%}
