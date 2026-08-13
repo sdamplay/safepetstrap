@@ -258,8 +258,8 @@
           "type": "faq",
           "settings": {
             "emoji": "\u2764\ufe0f",
-            "question": "What if I have multiple dogs?",
-            "answer": "<p>Our most popular bundle is the 3-Pack + 2 FREE Gifts ($120 Value) for just $24.95! You can select 3x seatbelts right on the offer page.</p>"
+            "question": "Does it dry quickly between uses?",
+            "answer": "<p>Yes! The specialized microfiber dry cells release moisture rapidly, preventing damp mildew odors from building up.</p>"
           }
         },
         "faq_ktMHfj": {
@@ -267,7 +267,7 @@
           "settings": {
             "emoji": "\u23f0",
             "question": "What is your return policy?",
-            "answer": "<p>We offer a 30-day 100% money back guarantee. If you or your dog don't absolutely love the SafePet Strap, let us know and we'll refund you.</p>"
+            "answer": "<p>We offer a 30-day 100% money back guarantee. If you don't absolutely love the shammy towel, let us know for a full refund.</p>"
           }
         },
         "testimonial_JEwrYm": {
@@ -312,7 +312,7 @@
       "name": "SafePet Landing Copy",
       "settings": {
         "product": "safepet-shammy-dog-towel",
-        "hero_main_image": "shopify://shop_images/clipboard-image-1785799440.png",
+        "hero_main_image": "",
         "hero_badge_tl": "Military Grade",
         "hero_badge_tc": "Loved By Dog Owners",
         "hero_badge_tr": "25,000+ Happy Pups",
@@ -432,98 +432,53 @@
     "social_proof_toast_m3B7bY": {
       "type": "social-proof-toast",
       "blocks": {
-        "testimonial_notification_yXfpwF": {
+        "toast_block_0": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "A",
-            "name_descriptor": "Amanda K. | Saved Golden Retriever",
-            "quote": "We spun on black ice and hit a concrete median. She walked away with only a bruised paw\u2014saved her life!"
+            "name_descriptor": "Amanda K. | Lab Parent",
+            "quote": "Buster is a mud magnet. This shammy towel dries his chest and paws completely in 20 seconds."
           }
         },
-        "testimonial_notification_MfqiFE": {
+        "toast_block_1": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "J",
-            "name_descriptor": "Jessica P. | Dog Mom of 2 Pups",
-            "quote": "No more climbing onto my lap or sliding under the brake pedal. They stay safely buckled in the back now."
+            "name_descriptor": "Jessica P. | Golden Mom",
+            "quote": "Super absorbent! It holds so much water. The hand pockets give you perfect control to dry bellies."
           }
         },
-        "testimonial_notification_GY79NG": {
+        "toast_block_2": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "M",
-            "name_descriptor": "Marcus D. | Vet Tech & Trainer",
-            "quote": "I see tragic spinal injuries in dogs from minor stops weekly. This anti-whiplash buffer is a veterinary necessity."
+            "name_descriptor": "Marcus D. | Professional Groomer",
+            "quote": "Cuts my drying time in half. Dries thick double-coats with ease. Soft material dogs love."
           }
         },
-        "testimonial_notification_DrRachel": {
+        "toast_block_3": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "R",
-            "name_descriptor": "Dr. Rachel H. | Emergency DVM",
-            "quote": "Car airbags deploy with enough force to kill a lap dog. Keep them buckled in the back\u2014this strap is perfect."
+            "name_descriptor": "Dr. Rachel H. | Veterinarian DVM",
+            "quote": "Dries wet dogs quickly to prevent drafts and wicks moisture far better than cotton towels."
           }
         },
-        "testimonial_notification_SarahW": {
+        "toast_block_4": {
           "type": "testimonial_notification",
           "settings": {
             "initial": "S",
-            "name_descriptor": "Sarah W. | Owner of a Boxer",
-            "quote": "Had to slam my brakes at 70mph on the highway. My boxer didn't move an inch. I cried tears of relief."
-          }
-        },
-        "testimonial_notification_TylerB": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "T",
-            "name_descriptor": "Tyler B. | Lab Parent",
-            "quote": "Super easy, snaps right into the seatbelt latch like a regular seatbelt. Solid metal hook, very heavy-duty."
-          }
-        },
-        "testimonial_notification_EmilyR": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "E",
-            "name_descriptor": "Emily R. | Mother of 3 Goldendoodles",
-            "quote": "Keeps my three high-energy dogs from bouncing around or trying to jump out the window. Driving is finally peaceful."
-          }
-        },
-        "testimonial_notification_DavidS": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "D",
-            "name_descriptor": "David S. | German Shepherd Owner",
-            "quote": "A driver cut me off and slammed their brakes. SafePet kept my 85lb shepherd from flying into my dashboard."
-          }
-        },
-        "testimonial_notification_ChrisK9": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "C",
-            "name_descriptor": "Coach Chris | K9 Behaviorist",
-            "quote": "I recommend this to every client. An unrestrained dog becomes a 60lb projectile in a crash. Essential gear."
-          }
-        },
-        "testimonial_notification_MeganF": {
-          "type": "testimonial_notification",
-          "settings": {
-            "initial": "M",
-            "name_descriptor": "Megan F. | Frenchie Mom",
-            "quote": "My frenchie actually lays down and relaxes now because she feels secure when we take turns. 10/10."
+            "name_descriptor": "Sarah W. | Corgi Owner",
+            "quote": "Best towel for rainy season. Sits by my backdoor and saves my white rugs every single time."
           }
         }
       },
       "block_order": [
-        "testimonial_notification_yXfpwF",
-        "testimonial_notification_MfqiFE",
-        "testimonial_notification_GY79NG",
-        "testimonial_notification_DrRachel",
-        "testimonial_notification_SarahW",
-        "testimonial_notification_TylerB",
-        "testimonial_notification_EmilyR",
-        "testimonial_notification_DavidS",
-        "testimonial_notification_ChrisK9",
-        "testimonial_notification_MeganF"
+        "toast_block_0",
+        "toast_block_1",
+        "toast_block_2",
+        "toast_block_3",
+        "toast_block_4"
       ],
       "name": "Social Proof Toast",
       "settings": {
