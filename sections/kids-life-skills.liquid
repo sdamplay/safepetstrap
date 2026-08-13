@@ -161,7 +161,15 @@
 {%- assign kls_grow_quote = kls_grow_quote -%}
 {%- assign kls_faq_heading = kls_faq_heading -%}
 
+{%- assign kls_hero_price_sale = kls_hero_price_sale -%}
+{%- assign kls_hero_price_original = kls_hero_price_original -%}
+{%- assign kls_hero_save_pill = kls_hero_save_pill -%}
+
 {%- if template.name == 'product' and is_seatbelt == false -%}
+  {%- assign kls_hero_price_sale = "" -%}
+  {%- assign kls_hero_price_original = "" -%}
+  {%- assign kls_hero_save_pill = "" -%}
+  
   {%- if product.handle == 'safepet-3-in-1-pet-brush' -%}
     {%- assign kls_hero_headline = "Groom, De-Shed & Massage Your Pet! The One-Click Self-Cleaning Brush Pets Actually Love." -%}
     {%- assign kls_hero_benefit_1 = "One-Click Self-Cleaning — Retractable bristles discard hair instantly" -%}
@@ -410,23 +418,23 @@
         <h1 class="kls-hero-headline">{{ kls_hero_headline }}</h1>
         <div class="kls-hero-price-row">
           <span class="kls-hero-price-sale">
-            {%- if section.settings.hero_price_sale != blank -%}
-              {{ section.settings.hero_price_sale }}
+            {%- if kls_hero_price_sale != blank and kls_hero_price_sale != "$0.00" and kls_hero_price_sale != "0.00" -%}
+              {{ kls_hero_price_sale }}
             {%- else -%}
               {{ product.price | money }}
             {%- endif -%}
           </span>
           <span class="kls-hero-price-original">
-            {%- if section.settings.hero_price_original != blank -%}
-              {{ section.settings.hero_price_original }}
+            {%- if kls_hero_price_original != blank and kls_hero_price_original != "$0.00" and kls_hero_price_original != "0.00" -%}
+              {{ kls_hero_price_original }}
             {%- else -%}
               {%- if product.compare_at_price > product.price -%}
                 {{ product.compare_at_price | money }}
               {%- endif -%}
             {%- endif -%}
           </span>
-          {%- if section.settings.hero_save_pill != blank -%}
-            <span class="kls-hero-save-pill">{{ section.settings.hero_save_pill }}</span>
+          {%- if kls_hero_save_pill != blank -%}
+            <span class="kls-hero-save-pill">{{ kls_hero_save_pill }}</span>
           {%- elsif product.compare_at_price > product.price -%}
             {%- assign save_amount = product.compare_at_price | minus: product.price -%}
             {%- assign save_percent = save_amount | times: 100 | divided_by: product.compare_at_price -%}
@@ -598,6 +606,114 @@
       <div class="kls-faq-list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'faq' -%}
+            {%- assign faq_question = block.settings.question -%}
+            {%- assign faq_answer = block.settings.answer -%}
+            {%- if template.name == 'product' and is_seatbelt == false -%}
+              {%- assign loop_idx = forloop.index | plus: 0 -%}
+              {%- if product.handle == 'safepet-3-in-1-pet-brush' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "How does the cleaning button work?" -%}
+                  {%- assign faq_answer = "<p>When you finish brushing, simply press the button on the back. The plate pushes forward, retracting the bristles and leaving the hair in a neat, easy-to-discard disk.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "Will this scratch my pet's skin?" -%}
+                  {%- assign faq_answer = "<p>No! Every wire bristle is capped with a round rubber massage bead, making it extremely gentle on sensitive skin while still removing loose undercoat.</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "Does it work on short-haired pets?" -%}
+                  {%- assign faq_answer = "<p>Yes! The curved pins are designed to grab loose hair and dander from both long-haired and short-haired coats, making it great for cats and dogs alike.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "How often should I brush my pet?" -%}
+                  {%- assign faq_answer = "<p>For best results and to reduce shedding by up to 95%, we recommend a quick 5-minute brushing session daily.</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "Is the handle comfortable?" -%}
+                  {%- assign faq_answer = "<p>Yes, it features an ergonomic, non-slip silicone grip that prevents hand and wrist strain during grooming.</p>" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'safepet-gps-tracker' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "How far does the tracking work?" -%}
+                  {%- assign faq_answer = "<p>Unlike Bluetooth tags that limit you to 30 feet, the SafePet GPS Tracker uses cellular network triangulation and satellite GPS to provide unlimited range worldwide.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "Is there a monthly subscription fee?" -%}
+                  {%- assign faq_answer = "<p>Yes, a small data connection fee is required to keep the cellular SIM card inside active. Plans start at just $4.95/month, which is a small price for your dog's safety.</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "Is it heavy for small dogs?" -%}
+                  {%- assign faq_answer = "<p>Not at all! Weighing less than 1 ounce, it is designed ergonomically to fit pets of all sizes comfortability without strain.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "How long does the battery last?" -%}
+                  {%- assign faq_answer = "<p>The active battery lasts up to 10 days on a single charge, and you will receive a low-battery notification directly on your smartphone.</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "Is it completely waterproof?" -%}
+                  {%- assign faq_answer = "<p>Yes! Rated IPX7 waterproof, it stands up to heavy rain, mud, puddles, and active swimming in lakes or pools.</p>" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'safepet-shammy-dog-towel' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "How do the hand pockets help?" -%}
+                  {%- assign faq_answer = "<p>The built-in pockets at each end allow you to securely grip the towel and easily dry hard-to-reach areas like your dog's underbelly, chest, and paws with full control.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "Can it be machine washed?" -%}
+                  {%- assign faq_answer = "<p>Yes! It is fully machine washable. We recommend washing it in cold water and air drying or tumble drying on low to preserve the microfiber absorption cells.</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "What size dogs is this for?" -%}
+                  {%- assign faq_answer = "<p>Our shammy towel is sized at 31" x 14", which is perfect for drying dogs of all sizes—from toy poodles to large retrievers.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "Does it dry quickly between uses?" -%}
+                  {%- assign faq_answer = "<p>Yes! The specialized microfiber dry cells release moisture rapidly, preventing damp mildew odors from building up.</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "What is your return policy?" -%}
+                  {%- assign faq_answer = "<p>We offer a 30-day 100% money back guarantee. If you don't absolutely love the shammy towel, let us know for a full refund.</p>" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'the-pet-emergency-car-window-sticker' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "Where should I place the sticker?" -%}
+                  {%- assign faq_answer = "<p>We recommend placing it on the driver-side rear window or the rear windshield where it is highly visible to cars behind you and first responders approaching.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "What should I write on it?" -%}
+                  {%- assign faq_answer = "<p>Use a permanent marker to fill in the number of dogs/cats inside the vehicle, your emergency contact name, and phone number.</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "Can it be used on home doors?" -%}
+                  {%- assign faq_answer = "<p>Absolutely! It sticks perfectly to glass storm doors, front doors, or windows to alert firefighters in case of a residential fire.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "Will it fade in the sun?" -%}
+                  {%- assign faq_answer = "<p>No, made from premium UV-resistant vinyl, it won't peel, fade, or crack under intense summer sun or freezing winter.</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "Does it leave residue when removed?" -%}
+                  {%- assign faq_answer = "<p>The sticker uses a residue-free static/adhesive blend that peels off cleanly without damaging window glass.</p>" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'personalized-id-tag' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "How do I enter my engraving details?" -%}
+                  {%- assign faq_answer = "<p>When you click "ADD" in the cart drawer or product page, a custom pop-up will ask for your dog's name and phone number.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "Will the text wear off over time?" -%}
+                  {%- assign faq_answer = "<p>No! Unlike cheap printed tags, we use deep laser engraving that burns the text 0.5mm into the metal, making it scratch-resistant and readable for life.</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "Does the tag rust in water?" -%}
+                  {%- assign faq_answer = "<p>No, the premium zinc alloy base is treated with a corrosion-resistant coating, making it completely waterproof and rust-proof.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "What is the silencer ring?" -%}
+                  {%- assign faq_answer = "<p>It is a custom silicone border that wraps around the tag, preventing clinking noise against metal food bowls.</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "What hook attachment does it use?" -%}
+                  {%- assign faq_answer = "<p>Includes a heavy-duty stainless steel split ring that holds securely without bending open.</p>" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'harness' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "How does the no-pull design work?" -%}
+                  {%- assign faq_answer = "<p>By distributing leash tension across the chest and ribcage, the harness stops the choking response, making it easier to guide your dog without causing neck strain.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "What sizes are available?" -%}
+                  {%- assign faq_answer = "<p>We offer four sizes: Small, Medium, Large, and X-Large. Check our Sizing Table popover next to size selection to measure your dog's chest girth.</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "Is it reflective at night?" -%}
+                  {%- assign faq_answer = "<p>Yes, the harness features double-stitched 3M reflective threads along all straps, making your dog highly visible to drivers during night walks.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "Is the harness adjustable?" -%}
+                  {%- assign faq_answer = "<p>Yes! It features 4 easy adjustment points (2 at the neck and 2 at the chest) to ensure a snug, comfortable fit for your dog.</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "What is your return policy?" -%}
+                  {%- assign faq_answer = "<p>We offer a 30-day 100% money back guarantee. If you don't absolutely love the harness, let us know for a full refund.</p>" -%}
+                {%- endif -%}
+              {%- endif -%}
+            {%- endif -%}
             <details class="kls-faq-row" {{ block.shopify_attributes }}>
               <summary class="kls-faq-summary">
                 <div class="kls-faq-question">
