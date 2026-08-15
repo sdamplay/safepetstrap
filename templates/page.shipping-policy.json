@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-policy",
+      "settings": {
+        "title": "Delivery & Shipping Policy",
+        "content": "<p>We want to ensure your pet safety gear arrives quickly and safely. This policy outlines our delivery methods, processing times, and shipping fees.</p><h3>1. Order Processing Times</h3><ul><li>All standard and promotional orders are processed, packaged, and shipped within <strong>1 to 3 business days</strong> from our warehouse.</li><li>For custom laser-engraved products (like our Personalized ID Tag), please allow an additional <strong>1-2 business days</strong> for production.</li></ul><h3>2. Shipping Methods &amp; Delivery Times</h3><ul><li><strong>Standard Insured Shipping:</strong> Delivery typically takes <strong>7 to 15 business days</strong> depending on your location.</li><li>Tracking details are automatically emailed to you the second your package leaves our warehouse facility, allowing you to follow your delivery online.</li></ul><h3>3. Shipping &amp; Handling Fees</h3><ul><li><strong>Promotional Free Items:</strong> Our promotional \"FREE\" items are subject to a flat-rate shipping and handling fee of <strong>$9.95 per item</strong>. This fee covers priority fulfillment, premium packaging, safe transit insurance, and carrier rates.</li><li>Shipping fees are calculated dynamically and displayed during checkout Step 2 and 3.</li></ul>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-policy",
+      "settings": {
+        "title": "Terms of Service",
+        "content": "<p>Welcome to <strong>safepetstrap.com</strong>. These Terms of Service govern your use of our website and purchases of our pet safety gear. By visiting or buying from our store, you agree to comply with and be bound by these terms.</p><h3>1. Use of Website</h3><p>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence.</p><h3>2. Pricing &amp; Promotional Terms</h3><ul><li><strong>FREE + Shipping Promotions:</strong> Our promotional \"FREE\" offers are subject to limits of a maximum of 5 items per customer to prevent resale abuse. Orders exceeding this limit are subject to cancellation or adjustments at our discretion.</li><li><strong>Shipping Fees:</strong> You agree to cover the shipping and handling fee of $9.95 per promotional item. This fee is calculated and displayed prior to final order completion on Step 2 and 3 of our checkout.</li></ul><h3>3. Billing &amp; Account Information</h3><p>We reserve the right to refuse any order you place with us. You agree to provide current, complete, and accurate purchase and account information for all purchases made at our store.</p><h3>4. Contact Details</h3><p>Questions about the Terms of Service should be sent to us at <strong>support@safepetstrap.com</strong>.</p>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

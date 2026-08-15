@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-policy",
+      "settings": {
+        "title": "Refund Policy & 30-Day Guarantee",
+        "content": "<p>At SafePet, we stand behind our products. We want you and your furry companion to feel 100% safe and confident during every drive. That is why we offer a <strong>30-Day Money-Back Guarantee</strong> on all our active pet safety gear.</p><h3>How it works:</h3><ul><li><strong>30-Day Testing Period:</strong> You have 30 days from the date of delivery to test our products in your car with your dog.</li><li><strong>Promotional FREE Items:</strong> For promotional FREE items (where customers only cover shipping &amp; handling), please note that the $9.95 shipping and handling fee is non-refundable as it goes directly toward warehouse fulfillment, packaging, and carrier fees. However, we will gladly replace any damaged, incorrect, or defective items free of charge.</li><li><strong>Standard Items:</strong> If you purchased a standard priced item and want a refund, we will refund the full purchase price of the product.</li></ul><h3>How to initiate a return:</h3><ol><li>Email us at <strong>support@safepetstrap.com</strong> with your order number and the reason for your return.</li><li>Our customer care team will respond within 24 hours with a return authorization number and return instructions.</li><li>Do not send packages back to our warehouse address without prior authorization, as they will not be processed.</li></ol>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

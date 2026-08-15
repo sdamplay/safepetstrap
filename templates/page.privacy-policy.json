@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-policy",
+      "settings": {
+        "title": "Privacy Policy",
+        "content": "<p>At SafePet, we respect your privacy and are committed to protecting the personal data you share with us. This policy details how we collect, use, and protect your information when you visit and buy from <strong>safepetstrap.com</strong>.</p><h3>1. Personal Data We Collect</h3><p>We collect essential personal information when you interact with our store, including:</p><ul><li><strong>Order Information:</strong> Your name, billing address, shipping address, payment details, email address, and phone number to fulfill transactions.</li><li><strong>Frictionless Checkout Data:</strong> If you fill out your name, email, or phone number on Step 1 of our checkout but do not complete the purchase, we capture this information for abandoned cart email/SMS recovery campaigns.</li><li><strong>Customization Fields:</strong> Personalization information like your Dog's Name and phone number for laser engraving on custom tags.</li></ul><h3>2. How We Use Your Information</h3><p>We use the collected data to:</p><ul><li>Fulfill orders and send tracking updates.</li><li>Provide customer support.</li><li>Send marketing communications (newsletters and promotional SMS alerts) if you opted in. You can opt out at any time by clicking 'Unsubscribe' or replying 'STOP'.</li></ul><h3>3. Security &amp; Encryption</h3><p>Your payment information is encrypted using secure socket layer technology (SSL) and stored with AES-256 encryption. We never sell or rent your personal information to third-party data brokers.</p>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
