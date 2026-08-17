@@ -48,75 +48,20 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "atc_style": "classic",
-            "atc_button_color": "accent-1",
-            "atc_custom_button_color": "#dd1d1d",
-            "atc_custom_button_text_color": "#ffffff",
-            "atc_custom_button_hover_color": "#c41313",
-            "atc_custom_button_hover_text_color": "#ffffff",
-            "atc_icon": "none",
-            "atc_icon_position": "left",
-            "atc_icon_color": "accent-1",
-            "atc_label": "DOWNLOAD INSTANTLY - $9.95",
             "show_dynamic_checkout": false,
-            "sticky_atc": "none",
-            "sticky_atc_mobile": "none",
-            "sticky_atc_price": true,
-            "sticky_atc_price_position": "left",
-            "sticky_atc_price_size": "medium",
-            "sticky_atc_button_size": "medium",
-            "sticky_atc_badge": false,
-            "margin_top": 15,
+            "skip_cart": false,
+            "uppercase_text": true,
+            "icon_scale": 120,
+            "icon_spacing": 10,
+            "display_price": false,
+            "enable_custom_color": false,
+            "custom_color": "#dd1d1d",
+            "enable_secondary_btn": false,
+            "secondary_btn_label": "Download Instantly",
+            "secondary_btn_enable_custom_color": false,
+            "secondary_btn_custom_color": "#dd1d1d",
+            "margin_top": 12,
             "margin_bottom": 15
-          }
-        },
-        "description": {
-          "type": "description",
-          "settings": {
-            "display": "full",
-            "margin_top": 15,
-            "margin_bottom": 15
-          }
-        },
-        "trust_badges": {
-          "type": "trust_badges",
-          "settings": {
-            "layout": "grid",
-            "badge_1_icon": "lock",
-            "badge_1_heading": "Instant Digital Delivery",
-            "badge_1_text": "Delivered to your email immediately",
-            "badge_2_icon": "check_circle",
-            "badge_2_heading": "100% Satisfaction Guarantee",
-            "badge_2_text": "30-Day Money-Back Guarantee",
-            "badge_3_icon": "favorite",
-            "badge_3_heading": "Vet-Approved Methodology",
-            "badge_3_text": "Gentle & 100% force-free",
-            "margin_top": 15,
-            "margin_bottom": 15
-          }
-        },
-        "accordion_1": {
-          "type": "accordion_row",
-          "settings": {
-            "heading": "How do I receive the e-book after ordering?",
-            "content": "<p>Immediately after checkout, you will receive an instant download link on your order confirmation page, and a permanent PDF copy will be sent to your email address. You can open and read it instantly on your iPhone, Android, iPad, Mac, or PC.</p>",
-            "default_open": true
-          }
-        },
-        "accordion_2": {
-          "type": "accordion_row",
-          "settings": {
-            "heading": "Will this 7-day protocol work for my dog's breed or age?",
-            "content": "<p>Yes! The Calm Passenger protocol uses biological desensitization and positive reinforcement suitable for puppies, high-energy working breeds, rescue dogs, and senior dogs alike.</p>",
-            "default_open": false
-          }
-        },
-        "accordion_3": {
-          "type": "accordion_row",
-          "settings": {
-            "heading": "Do I need the SafePet Strap seatbelt for this method?",
-            "content": "<p>The training exercises in Day 3 through 7 utilize physical kinetic anchoring (which the SafePet Strap provides) to stabilize your dog's inner ear vestibular system and prevent seat scrambling. We strongly recommend using the SafePet Strap with a supportive chest harness for maximum results.</p>",
-            "default_open": false
           }
         }
       },
@@ -124,22 +69,164 @@
         "title",
         "rating_stars",
         "price",
-        "buy_buttons",
-        "description",
-        "trust_badges",
-        "accordion_1",
-        "accordion_2",
-        "accordion_3"
+        "buy_buttons"
       ],
       "settings": {
-        "media_size": "medium",
+        "display_id": false,
+        "enable_sticky_info": true,
+        "display_variant_image_first": false,
+        "disable_prepend": false,
+        "hide_variants": false,
+        "variant_image_filtering": "none",
+        "image_zoom": "none",
+        "thumbnails_ratio": "square",
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": false,
+        "dots_color_scheme": "inverse",
+        "video_player": "play_btn",
         "enable_video_looping": false,
+        "autoplay_videos_pause_btn": false,
+        "video_sound_btn": false,
+        "video_timeline": false,
+        "play_btn_color_scheme": "accent-1",
+        "sound_btn_color_scheme": "inverse",
+        "timeline_color": "accent-1",
+        "media_size": "medium",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "desktop_thumbnails_position": "bottom",
+        "desktop_thumbnails_count": 5,
+        "desktop_vertical_thumbnails_width": 16,
+        "desktop_vertical_thumbnails_hide_arrows": false,
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "desktop_arrows_position": "hidden",
+        "mobile_media_corner_radius": 12,
+        "mobile_spacing_pixels": 0,
+        "mobile_arrows_position": "sides",
+        "mobile_pagination": "dots_overlay",
+        "mobile_thumbnails_position": "hidden",
+        "mobile_thumbnails_count": 5,
+        "mobile_vertical_thumbnails_width": 22,
+        "mobile_vertical_thumbnails_hide_arrows": true,
+        "mobile_scroll_padding_percentage": 0,
+        "mobile_scroll_padding_pixels": 16,
+        "enable_mobile_outher_spacing": false,
+        "mobile_slides_container_width": 100,
+        "mobile_slides_inner_width": 100,
+        "trust_badge_position": "top-right",
+        "trust_badge_size": "medium",
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 16,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36
+      }
+    },
+    "kids_life_skills_pMNmYd": {
+      "type": "kids-life-skills",
+      "blocks": {
+        "faq_0": {
+          "type": "faq",
+          "settings": {
+            "emoji": "⚡",
+            "question": "How do I receive the e-book after purchasing?",
+            "answer": "<p>Immediately after checkout, an instant download link will appear on your confirmation page, and a permanent PDF copy will be sent to your email address. You can read it on your iPhone, Android, iPad, Mac, or PC.</p>"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🐕",
+            "question": "Will this 7-day protocol work for my dog's breed or age?",
+            "answer": "<p>Yes! The Calm Passenger protocol uses biological desensitization and positive reinforcement suitable for puppies, high-energy working breeds, rescue dogs, and senior dogs alike.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🚗",
+            "question": "Do I need the SafePet Strap seatbelt for this method?",
+            "answer": "<p>The training exercises in Day 3 through 7 utilize physical kinetic anchoring to stabilize your dog's inner ear vestibular system and prevent seat scrambling. We strongly recommend pairing the method with the SafePet Strap and a supportive chest harness.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🛡️",
+            "question": "Is there a money-back guarantee?",
+            "answer": "<p>Yes! We offer a 100% 30-Day Money-Back Guarantee. If you don't see a dramatic transformation in your dog's car riding behavior, simply contact us for a full refund.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_0",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ],
+      "name": "Frequently Asked Questions",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "heading_size": "h2",
+        "heading_alignment": "center",
+        "color_scheme": "background-1",
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "social_proof_toast_m3B7bY": {
+      "type": "social-proof-toast",
+      "blocks": {
+        "toast_0": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "J",
+            "name_descriptor": "James R. | Golden Retriever Dad",
+            "quote": "Day 4 was the breakthrough! Max stopped whining completely and laid down peacefully in the back."
+          }
+        },
+        "toast_1": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "S",
+            "name_descriptor": "Sarah T. | Rescue Dog Mom",
+            "quote": "The lick mat technique on Day 2 cured her engine panic. Now she runs to the car happily!"
+          }
+        },
+        "toast_2": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "D",
+            "name_descriptor": "Dr. Emily W. | DVM Veterinarian",
+            "quote": "Vestibular stabilization with the SafePet Strap is the #1 way to eliminate canine motion sickness."
+          }
+        }
+      },
+      "block_order": [
+        "toast_0",
+        "toast_1",
+        "toast_2"
+      ],
+      "name": "Social Proof Toast",
+      "settings": {
+        "enable": true,
+        "position": "bottom-left",
+        "bg_color": "#fff5f5",
+        "accent_color": "#e53935",
+        "text_color": "#2d2d2d",
+        "text_secondary_color": "#6b6b6b",
+        "star_color": "#f5b800",
+        "font_size_quote": 13,
+        "font_size_author": 11,
+        "first_show_delay": 6,
+        "between_delay": 10,
+        "show_duration": 5
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "kids_life_skills_pMNmYd",
+    "social_proof_toast_m3B7bY"
   ]
 }
