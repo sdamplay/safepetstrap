@@ -1,0 +1,145 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "rating_stars": {
+          "type": "rating_stars",
+          "settings": {
+            "rating": 4.9,
+            "star_color": "#ffcc00",
+            "bg_stars_style": "full",
+            "bg_star_color": "#ececec",
+            "label": "⭐ 4.9/5 (Vet-Approved Blueprint)",
+            "size": 16,
+            "alignment": "flex-start",
+            "scroll_id": "",
+            "margin_top": 0,
+            "margin_bottom": 9
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "accent-1",
+            "compare_price_color": "text",
+            "displayed_badge": "sale",
+            "icon_scale": 140,
+            "custom_badge_text": "⚡ Instant Digital Download",
+            "icon_1": "redeem",
+            "filled_icon_1": false,
+            "icon_2": "check_circle",
+            "filled_icon_2": false,
+            "margin_top": 0,
+            "margin_bottom": 12
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "atc_style": "classic",
+            "atc_button_color": "accent-1",
+            "atc_custom_button_color": "#dd1d1d",
+            "atc_custom_button_text_color": "#ffffff",
+            "atc_custom_button_hover_color": "#c41313",
+            "atc_custom_button_hover_text_color": "#ffffff",
+            "atc_icon": "none",
+            "atc_icon_position": "left",
+            "atc_icon_color": "accent-1",
+            "atc_label": "DOWNLOAD INSTANTLY - $9.95",
+            "show_dynamic_checkout": false,
+            "sticky_atc": "none",
+            "sticky_atc_mobile": "none",
+            "sticky_atc_price": true,
+            "sticky_atc_price_position": "left",
+            "sticky_atc_price_size": "medium",
+            "sticky_atc_button_size": "medium",
+            "sticky_atc_badge": false,
+            "margin_top": 15,
+            "margin_bottom": 15
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "display": "full",
+            "margin_top": 15,
+            "margin_bottom": 15
+          }
+        },
+        "trust_badges": {
+          "type": "trust_badges",
+          "settings": {
+            "layout": "grid",
+            "badge_1_icon": "lock",
+            "badge_1_heading": "Instant Digital Delivery",
+            "badge_1_text": "Delivered to your email immediately",
+            "badge_2_icon": "check_circle",
+            "badge_2_heading": "100% Satisfaction Guarantee",
+            "badge_2_text": "30-Day Money-Back Guarantee",
+            "badge_3_icon": "favorite",
+            "badge_3_heading": "Vet-Approved Methodology",
+            "badge_3_text": "Gentle & 100% force-free",
+            "margin_top": 15,
+            "margin_bottom": 15
+          }
+        },
+        "accordion_1": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "How do I receive the e-book after ordering?",
+            "content": "<p>Immediately after checkout, you will receive an instant download link on your order confirmation page, and a permanent PDF copy will be sent to your email address. You can open and read it instantly on your iPhone, Android, iPad, Mac, or PC.</p>",
+            "default_open": true
+          }
+        },
+        "accordion_2": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Will this 7-day protocol work for my dog's breed or age?",
+            "content": "<p>Yes! The Calm Passenger protocol uses biological desensitization and positive reinforcement suitable for puppies, high-energy working breeds, rescue dogs, and senior dogs alike.</p>",
+            "default_open": false
+          }
+        },
+        "accordion_3": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Do I need the SafePet Strap seatbelt for this method?",
+            "content": "<p>The training exercises in Day 3 through 7 utilize physical kinetic anchoring (which the SafePet Strap provides) to stabilize your dog's inner ear vestibular system and prevent seat scrambling. We strongly recommend using the SafePet Strap with a supportive chest harness for maximum results.</p>",
+            "default_open": false
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating_stars",
+        "price",
+        "buy_buttons",
+        "description",
+        "trust_badges",
+        "accordion_1",
+        "accordion_2",
+        "accordion_3"
+      ],
+      "settings": {
+        "media_size": "medium",
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
