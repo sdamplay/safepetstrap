@@ -425,10 +425,23 @@
                 {%- if product.handle == 'harness' and value == 'XS' -%}
                   {%- continue -%}
                 {%- endif -%}
+                {%- assign weight_sub = '' -%}
+                {%- if product.handle == 'harness' and option.name == 'Size' -%}
+                  {%- assign val_up = value | upcase -%}
+                  {%- case val_up -%}
+                    {%- when 'S' -%}{%- assign weight_sub = '18–28 lbs' -%}
+                    {%- when 'M' -%}{%- assign weight_sub = '28–50 lbs' -%}
+                    {%- when 'L' -%}{%- assign weight_sub = '45–70 lbs' -%}
+                    {%- when 'XL' -%}{%- assign weight_sub = '70–132 lbs' -%}
+                  {%- endcase -%}
+                {%- endif -%}
                 <button type="button" 
-                        class="safepet-variant-pill{% if active %} active{% endif %}" 
+                        class="safepet-variant-pill{% if active %} active{% endif %}{% if weight_sub != blank %} safepet-variant-pill--with-weight{% endif %}" 
                         data-value="{{ value | escape }}">
-                  {{ value }}
+                  <span class="safepet-pill-name">{{ value }}</span>
+                  {%- if weight_sub != blank -%}
+                    <span class="safepet-pill-weight">{{ weight_sub }}</span>
+                  {%- endif -%}
                 </button>
               {%- endfor -%}
             </div>
@@ -531,7 +544,7 @@
     .safepet-variant-pill {
       background-color: #ffffff;
       border: 1.5px solid #d1d5db;
-      border-radius: 6px;
+      border-radius: 8px;
       color: #374151;
       padding: 8px 16px;
       font-size: 13px;
@@ -540,11 +553,39 @@
       transition: all 0.2s ease;
       min-width: 50px;
       text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .safepet-variant-pill--with-weight {
+      flex-direction: column;
+      padding: 6px 14px;
+      min-width: 72px;
+      gap: 2px;
+    }
+    .safepet-pill-name {
+      font-size: 13.5px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .safepet-pill-weight {
+      font-size: 10px;
+      font-weight: 600;
+      color: #6b7280;
+      line-height: 1;
+      white-space: nowrap;
     }
     .safepet-variant-pill.active {
       border-color: #dc2626;
       color: #dc2626;
-      background-color: rgba(220, 38, 38, 0.03);
+      background-color: #fef2f2;
+    }
+    .safepet-variant-pill.active .safepet-pill-name {
+      color: #dc2626;
+    }
+    .safepet-variant-pill.active .safepet-pill-weight {
+      color: #b91c1c;
+      font-weight: 700;
     }
     
     /* Sizing modal on page */
