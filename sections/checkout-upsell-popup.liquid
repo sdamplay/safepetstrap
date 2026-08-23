@@ -76,10 +76,10 @@
         <!-- Product Display Info -->
         <div class="checkout-upsell-product-row">
           <div class="checkout-upsell-product-media">
-            {%- if upsell_product != blank -%}
-              <img src="{{ product_image | image_url: width: 300 }}" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
+            {%- if upsell_product != blank and upsell_product.featured_image != blank -%}
+              <img src="{{ product_image | image_url: width: 350 }}" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
             {%- else -%}
-              <img src="https://cdn.shopify.com/s/files/1/0817/3469/7190/files/a066ed7ecb67a06a034c860220b45268.jpg?v=1786263205" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
+              <img src="{{ 'harness-car-safety-hero.jpg' | asset_url }}" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
             {%- endif -%}
           </div>
           
