@@ -24,11 +24,10 @@
       <!-- Dog's Name Field -->
       <div class="safepet-tag-field">
         <div class="safepet-tag-field-header">
-          <label for="safepetTagInputName">Dog's Name <span class="safepet-tag-required">*</span></label>
+          <label for="safepetTagInputName">🐶 Dog's Name <span class="safepet-tag-required">*</span></label>
           <span class="safepet-tag-counter" id="safepetNameCounter">0/20</span>
         </div>
         <div class="safepet-tag-input-wrap">
-          <span class="safepet-tag-input-icon">🐶</span>
           <input 
             type="text" 
             id="safepetTagInputName" 
@@ -43,11 +42,10 @@
       <!-- Tag Phone Number Field -->
       <div class="safepet-tag-field">
         <div class="safepet-tag-field-header">
-          <label for="safepetTagInputPhone">Tag Phone Number <span class="safepet-tag-required">*</span></label>
+          <label for="safepetTagInputPhone">📞 Tag Phone Number <span class="safepet-tag-required">*</span></label>
           <span class="safepet-tag-counter" id="safepetPhoneCounter">0/25</span>
         </div>
         <div class="safepet-tag-input-wrap">
-          <span class="safepet-tag-input-icon">📞</span>
           <input 
             type="tel" 
             id="safepetTagInputPhone" 
@@ -229,43 +227,40 @@
 
   .safepet-tag-input-wrap {
     position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .safepet-tag-input-icon {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
+    width: 100%;
+    display: block;
   }
 
   .safepet-tag-input-wrap input {
-    width: 100%;
-    padding: 13px 14px 13px 46px;
-    border: 1.5px solid #d1d5db;
-    border-radius: 10px;
-    font-size: 15px;
-    color: #111827;
-    background-color: #ffffff;
-    outline: none;
-    box-sizing: border-box;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    font-family: inherit;
+    width: 100% !important;
+    padding: 13px 16px !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 10px !important;
+    font-size: 15.5px !important;
+    color: #111827 !important;
+    -webkit-text-fill-color: #111827 !important;
+    opacity: 1 !important;
+    background-color: #ffffff !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
+    font-family: inherit !important;
+    line-height: 1.4 !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
   }
 
   .safepet-tag-input-wrap input::placeholder {
-    color: #9ca3af;
-    font-size: 13.5px;
+    color: #9ca3af !important;
+    -webkit-text-fill-color: #9ca3af !important;
+    font-size: 14px !important;
+    opacity: 1 !important;
   }
 
   .safepet-tag-input-wrap input:focus {
-    border-color: #dc2626;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+    background-color: #ffffff !important;
   }
 
   .safepet-tag-input-wrap input.has-error {
