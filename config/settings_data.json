@@ -838,7 +838,7 @@
         ],
         "custom_css": [],
         "settings": {
-          "test_mode": true,
+          "test_mode": false,
           "heading_text": "Cart • [count] items",
           "heading_alignment": "flex-start",
           "heading_size_desktop": 24,
