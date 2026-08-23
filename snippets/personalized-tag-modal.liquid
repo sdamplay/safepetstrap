@@ -1,0 +1,643 @@
+<!-- SafePet Strap - Personalized ID Tag Engraving Modal -->
+<div class="safepet-tag-modal-backdrop" id="safepetTagModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="safepetTagModalTitle">
+  <div class="safepet-tag-modal-card">
+    <!-- Close Button -->
+    <button type="button" class="safepet-tag-modal-close" id="safepetTagModalClose" aria-label="Close personalization popup">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <!-- Modal Header -->
+    <div class="safepet-tag-modal-header">
+      <div class="safepet-tag-modal-badge">
+        <span class="safepet-tag-badge-icon">✨</span>
+        <span>FREE CUSTOM LASER ENGRAVING</span>
+      </div>
+      <h3 class="safepet-tag-modal-title" id="safepetTagModalTitle">Personalize Your ID Tag</h3>
+      <p class="safepet-tag-modal-subtitle">Enter your dog's details below to be engraved directly onto your stainless steel safety tag.</p>
+    </div>
+
+    <!-- Modal Form Body -->
+    <div class="safepet-tag-modal-body">
+      <!-- Dog's Name Field -->
+      <div class="safepet-tag-field">
+        <div class="safepet-tag-field-header">
+          <label for="safepetTagInputName">Dog's Name <span class="safepet-tag-required">*</span></label>
+          <span class="safepet-tag-counter" id="safepetNameCounter">0/20</span>
+        </div>
+        <div class="safepet-tag-input-wrap">
+          <span class="safepet-tag-input-icon">🐶</span>
+          <input 
+            type="text" 
+            id="safepetTagInputName" 
+            placeholder="e.g. Max or Bella" 
+            maxlength="20" 
+            autocomplete="off"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Tag Phone Number Field -->
+      <div class="safepet-tag-field">
+        <div class="safepet-tag-field-header">
+          <label for="safepetTagInputPhone">Tag Phone Number <span class="safepet-tag-required">*</span></label>
+          <span class="safepet-tag-counter" id="safepetPhoneCounter">0/25</span>
+        </div>
+        <div class="safepet-tag-input-wrap">
+          <span class="safepet-tag-input-icon">📞</span>
+          <input 
+            type="tel" 
+            id="safepetTagInputPhone" 
+            placeholder="e.g. (555) 123-4567" 
+            maxlength="25" 
+            autocomplete="off"
+            required
+          >
+        </div>
+      </div>
+
+      <!-- Error Alert Message -->
+      <div class="safepet-tag-error-alert" id="safepetTagErrorAlert" role="alert" style="display: none;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span id="safepetTagErrorText">Please fill in both your dog's name and phone number.</span>
+      </div>
+    </div>
+
+    <!-- Modal Footer Actions -->
+    <div class="safepet-tag-modal-footer">
+      <button type="button" class="safepet-tag-btn-cancel" id="safepetTagBtnCancel">
+        Cancel
+      </button>
+      <button type="button" class="safepet-tag-btn-confirm" id="safepetTagBtnConfirm">
+        <span class="safepet-btn-text">Confirm & Add to Cart</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* SafePet Tag Modal - Root Styles */
+  .safepet-tag-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(17, 24, 39, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2147483647 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+  }
+
+  .safepet-tag-modal-backdrop.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .safepet-tag-modal-card {
+    background-color: #ffffff;
+    color: #111827;
+    width: 100%;
+    max-width: 440px;
+    border-radius: 18px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding: 26px 24px;
+    box-sizing: border-box;
+    transform: scale(0.94) translateY(8px);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .safepet-tag-modal-backdrop.is-active .safepet-tag-modal-card {
+    transform: scale(1) translateY(0);
+  }
+
+  /* Close Button */
+  .safepet-tag-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f3f4f6;
+    color: #4b5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s, transform 0.15s;
+    padding: 0;
+    z-index: 2;
+  }
+
+  .safepet-tag-modal-close:hover {
+    background-color: #e5e7eb;
+    color: #111827;
+    transform: scale(1.05);
+  }
+
+  /* Header */
+  .safepet-tag-modal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #dcfce7;
+    color: #15803d;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    margin-bottom: 12px;
+  }
+
+  .safepet-tag-badge-icon {
+    font-size: 12px;
+  }
+
+  .safepet-tag-modal-title {
+    margin: 0 0 6px 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .safepet-tag-modal-subtitle {
+    margin: 0 0 20px 0;
+    font-size: 13.5px;
+    color: #6b7280;
+    line-height: 1.45;
+  }
+
+  /* Form Fields */
+  .safepet-tag-field {
+    margin-bottom: 16px;
+  }
+
+  .safepet-tag-field-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .safepet-tag-field-header label {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .safepet-tag-required {
+    color: #dc2626;
+  }
+
+  .safepet-tag-counter {
+    font-size: 11.5px;
+    color: #9ca3af;
+    font-weight: 600;
+  }
+
+  .safepet-tag-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .safepet-tag-input-icon {
+    position: absolute;
+    left: 12px;
+    font-size: 15px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .safepet-tag-input-wrap input {
+    width: 100%;
+    padding: 12px 14px 12px 38px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 14.5px;
+    color: #111827;
+    background-color: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    font-family: inherit;
+  }
+
+  .safepet-tag-input-wrap input::placeholder {
+    color: #9ca3af;
+    font-size: 13.5px;
+  }
+
+  .safepet-tag-input-wrap input:focus {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+  }
+
+  .safepet-tag-input-wrap input.has-error {
+    border-color: #dc2626 !important;
+    background-color: #fff5f5 !important;
+  }
+
+  /* Error Alert */
+  .safepet-tag-error-alert {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    animation: safepetShake 0.3s ease-in-out;
+  }
+
+  @keyframes safepetShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-4px); }
+    40%, 80% { transform: translateX(4px); }
+  }
+
+  /* Footer Actions */
+  .safepet-tag-modal-footer {
+    display: flex;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .safepet-tag-btn-cancel {
+    flex: 1;
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    text-align: center;
+    font-family: inherit;
+  }
+
+  .safepet-tag-btn-cancel:hover {
+    background-color: #e5e7eb;
+    color: #111827;
+  }
+
+  .safepet-tag-btn-confirm {
+    flex: 1.8;
+    background-color: #dc2626;
+    color: #ffffff !important;
+    border: none;
+    padding: 13px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.28);
+    transition: background-color 0.15s, transform 0.15s, box-shadow 0.15s;
+    text-align: center;
+    font-family: inherit;
+  }
+
+  .safepet-tag-btn-confirm:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.38);
+    transform: translateY(-1px);
+  }
+
+  .safepet-tag-btn-confirm:active {
+    transform: translateY(0);
+  }
+
+  /* Mobile Adjustments */
+  @media screen and (max-width: 480px) {
+    .safepet-tag-modal-card {
+      padding: 22px 18px;
+      border-radius: 16px;
+    }
+    .safepet-tag-modal-title {
+      font-size: 18px;
+    }
+    .safepet-tag-modal-footer {
+      flex-direction: column-reverse;
+      gap: 8px;
+    }
+    .safepet-tag-btn-confirm,
+    .safepet-tag-btn-cancel {
+      width: 100%;
+      flex: none;
+      padding: 12px 14px;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    // Singleton Personalization Modal Controller
+    window.SafePetTagModal = {
+      activeButton: null,
+      activeForm: null,
+      isInitialized: false,
+
+      init: function() {
+        var modal = document.getElementById('safepetTagModal');
+        if (!modal) return;
+
+        // Ensure modal is portaled to document.body outside any transformed containers
+        if (modal.parentNode !== document.body) {
+          document.body.appendChild(modal);
+        }
+
+        if (this.isInitialized) return;
+        this.isInitialized = true;
+
+        var self = this;
+        var nameInput = document.getElementById('safepetTagInputName');
+        var phoneInput = document.getElementById('safepetTagInputPhone');
+        var nameCounter = document.getElementById('safepetNameCounter');
+        var phoneCounter = document.getElementById('safepetPhoneCounter');
+        var closeBtn = document.getElementById('safepetTagModalClose');
+        var cancelBtn = document.getElementById('safepetTagBtnCancel');
+        var confirmBtn = document.getElementById('safepetTagBtnConfirm');
+
+        // Character counter listeners
+        if (nameInput && nameCounter) {
+          nameInput.addEventListener('input', function() {
+            nameCounter.textContent = this.value.length + '/20';
+            this.classList.remove('has-error');
+            self.hideError();
+          });
+          nameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              phoneInput.focus();
+            }
+          });
+        }
+
+        if (phoneInput && phoneCounter) {
+          phoneInput.addEventListener('input', function() {
+            phoneCounter.textContent = this.value.length + '/25';
+            this.classList.remove('has-error');
+            self.hideError();
+          });
+          phoneInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              self.confirm();
+            }
+          });
+        }
+
+        // Close handlers
+        if (closeBtn) closeBtn.addEventListener('click', function() { self.close(); });
+        if (cancelBtn) cancelBtn.addEventListener('click', function() { self.close(); });
+
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            self.close();
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+            self.close();
+          }
+        });
+
+        if (confirmBtn) {
+          confirmBtn.addEventListener('click', function() {
+            self.confirm();
+          });
+        }
+
+        // Global Event Delegation for Personalized Add Buttons
+        document.addEventListener('click', function(e) {
+          var trigger = e.target.closest('[data-personalized-trigger="true"]');
+          if (!trigger) return;
+
+          // If already filled and marked ready, let Shrine Pro process standard click
+          if (trigger.dataset.personalizedReady === 'true') {
+            return;
+          }
+
+          // Intercept click and open personalization modal
+          e.preventDefault();
+          e.stopPropagation();
+
+          var formId = trigger.getAttribute('form');
+          var form = formId ? document.getElementById(formId) : trigger.closest('form');
+          if (!form) {
+            var upsellParent = trigger.closest('cart-drawer-upsell, [data-handle*="personalized"]');
+            if (upsellParent) {
+              form = upsellParent.querySelector('form');
+            }
+          }
+
+          self.open(trigger, form);
+        }, true);
+      },
+
+      open: function(button, form) {
+        var modal = document.getElementById('safepetTagModal');
+        if (!modal) {
+          this.init();
+          modal = document.getElementById('safepetTagModal');
+        }
+        if (!modal) return;
+
+        this.activeButton = button;
+        this.activeForm = form;
+
+        // Reset inputs or pull existing values if any
+        var nameInput = document.getElementById('safepetTagInputName');
+        var phoneInput = document.getElementById('safepetTagInputPhone');
+        var nameCounter = document.getElementById('safepetNameCounter');
+        var phoneCounter = document.getElementById('safepetPhoneCounter');
+
+        var existingName = '';
+        var existingPhone = '';
+
+        if (form) {
+          var propNameEl = form.querySelector('[data-prop-dog-name], input[name="properties[Dog\'s Name]"]');
+          var propPhoneEl = form.querySelector('[data-prop-phone], input[name="properties[Tag Phone Number]"]');
+          if (propNameEl) existingName = propNameEl.value;
+          if (propPhoneEl) existingPhone = propPhoneEl.value;
+        }
+
+        if (nameInput) {
+          nameInput.value = existingName;
+          nameInput.classList.remove('has-error');
+          if (nameCounter) nameCounter.textContent = existingName.length + '/20';
+        }
+        if (phoneInput) {
+          phoneInput.value = existingPhone;
+          phoneInput.classList.remove('has-error');
+          if (phoneCounter) phoneCounter.textContent = existingPhone.length + '/25';
+        }
+
+        this.hideError();
+
+        modal.classList.add('is-active');
+        modal.setAttribute('aria-hidden', 'false');
+
+        // Focus input smoothly
+        setTimeout(function() {
+          if (nameInput) nameInput.focus();
+        }, 100);
+      },
+
+      close: function() {
+        var modal = document.getElementById('safepetTagModal');
+        if (modal) {
+          modal.classList.remove('is-active');
+          modal.setAttribute('aria-hidden', 'true');
+        }
+        this.activeButton = null;
+        this.activeForm = null;
+      },
+
+      showError: function(msg) {
+        var alertEl = document.getElementById('safepetTagErrorAlert');
+        var textEl = document.getElementById('safepetTagErrorText');
+        if (alertEl && textEl) {
+          textEl.textContent = msg || 'Please fill in both required fields.';
+          alertEl.style.display = 'flex';
+        }
+      },
+
+      hideError: function() {
+        var alertEl = document.getElementById('safepetTagErrorAlert');
+        if (alertEl) {
+          alertEl.style.display = 'none';
+        }
+      },
+
+      confirm: function() {
+        var nameInput = document.getElementById('safepetTagInputName');
+        var phoneInput = document.getElementById('safepetTagInputPhone');
+
+        var dogName = nameInput ? nameInput.value.trim() : '';
+        var phone = phoneInput ? phoneInput.value.trim() : '';
+
+        var hasError = false;
+
+        if (!dogName) {
+          if (nameInput) nameInput.classList.add('has-error');
+          hasError = true;
+        }
+        if (!phone) {
+          if (phoneInput) phoneInput.classList.add('has-error');
+          hasError = true;
+        }
+
+        if (hasError) {
+          this.showError('Please enter both your dog\'s name and phone number.');
+          if (!dogName && nameInput) nameInput.focus();
+          else if (!phone && phoneInput) phoneInput.focus();
+          return;
+        }
+
+        var form = this.activeForm;
+        var btn = this.activeButton;
+
+        if (form) {
+          // Update or create hidden properties in the target form
+          var propNameEl = form.querySelector('[data-prop-dog-name], input[name="properties[Dog\'s Name]"]');
+          if (!propNameEl) {
+            propNameEl = document.createElement('input');
+            propNameEl.type = 'hidden';
+            propNameEl.name = "properties[Dog's Name]";
+            propNameEl.setAttribute('data-prop-dog-name', '');
+            form.appendChild(propNameEl);
+          }
+          propNameEl.value = dogName;
+
+          var propPhoneEl = form.querySelector('[data-prop-phone], input[name="properties[Tag Phone Number]"]');
+          if (!propPhoneEl) {
+            propPhoneEl = document.createElement('input');
+            propPhoneEl.type = 'hidden';
+            propPhoneEl.name = "properties[Tag Phone Number]";
+            propPhoneEl.setAttribute('data-prop-phone', '');
+            form.appendChild(propPhoneEl);
+          }
+          propPhoneEl.value = phone;
+
+          // Close modal smoothly
+          this.close();
+
+          // Mark button as ready and trigger native Shrine Pro AJAX submission
+          if (btn) {
+            btn.dataset.personalizedReady = 'true';
+            btn.click();
+            setTimeout(function() {
+              delete btn.dataset.personalizedReady;
+            }, 1000);
+          } else {
+            var submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+              submitBtn.click();
+            } else {
+              form.submit();
+            }
+          }
+        } else {
+          this.close();
+        }
+      }
+    };
+
+    // Initialize on DOM ready and after any Shopify section renders
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        window.SafePetTagModal.init();
+      });
+    } else {
+      window.SafePetTagModal.init();
+    }
+
+    document.addEventListener('shopify:section:load', function() {
+      window.SafePetTagModal.init();
+    });
+  })();
+</script>
