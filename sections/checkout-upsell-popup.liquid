@@ -159,10 +159,12 @@
         <!-- Benefits bullets (Moved below variants selector) -->
         {%- if section.settings.benefits != blank -%}
           <ul class="checkout-upsell-bullets">
-            {%- assign bullets = section.settings.benefits | split: "\n" -%}
+            {%- assign formatted_benefits = section.settings.benefits | newline_to_br | replace: '<br />', '|||' | replace: '<br/>', '|||' | replace: '<br>', '|||' -%}
+            {%- assign bullets = formatted_benefits | split: '|||' -%}
             {%- for bullet in bullets -%}
-              {%- if bullet != blank -%}
-                <li>{{ bullet | strip }}</li>
+              {%- assign clean_bullet = bullet | strip -%}
+              {%- if clean_bullet != blank -%}
+                <li>{{ clean_bullet }}</li>
               {%- endif -%}
             {%- endfor -%}
           </ul>
@@ -398,28 +400,26 @@
     
     /* Bullet Points */
     .checkout-upsell-bullets {
-      margin: 0;
+      margin: 8px 0 6px 0;
       padding: 0;
       list-style: none;
       font-size: {{ section.settings.font_size_bullets }}px;
-      color: #4b5563;
-      line-height: 1.5;
+      color: #374151;
+      line-height: 1.45;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
     }
     .checkout-upsell-bullets li {
-      margin-bottom: 5px;
+      margin: 0;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 6px;
-    }
-    @media screen and (max-width: 480px) {
-      .checkout-upsell-bullets li {
-        justify-content: center;
-      }
+      text-align: left;
     }
     .checkout-upsell-bullets li::before {
-      content: "✓";
-      color: #16a34a;
-      font-weight: bold;
+      display: none;
     }
     
     /* Variant Selection */
