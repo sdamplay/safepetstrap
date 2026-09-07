@@ -52,8 +52,8 @@
         <div class="checkout-upsell-header-banner">
           <span class="checkout-upsell-header-text">{{ section.settings.heading | escape }}</span>
           <span class="checkout-upsell-timer-wrap">
-            <span class="checkout-upsell-timer-label">⏰ Expires in:</span>
-            <span class="checkout-upsell-timer-time" id="checkoutUpsellTimer">10:00</span>
+            <span class="checkout-upsell-timer-label">⏰ Reserved for:</span>
+            <span class="checkout-upsell-timer-time" id="checkoutUpsellTimer">04:59</span>
           </span>
         </div>
       {%- endif -%}
@@ -147,6 +147,12 @@
                 <span class="checkout-pill-weight">70–132 lbs</span>
               </button>
             {%- endif -%}
+          </div>
+
+          <!-- 100% Perfect Fit Guarantee Badge -->
+          <div class="checkout-upsell-fit-guarantee">
+            <span class="checkout-upsell-fit-icon">🛡️</span>
+            <span><strong>100% Perfect-Fit Guarantee:</strong> Free exchange if it doesn't fit (No return needed!)</span>
           </div>
         </div>
 
@@ -518,29 +524,45 @@
       background-color: #f9fafb;
       color: #374151;
       font-weight: bold;
-    }    /* Actions/Footer */
+    }    .checkout-upsell-fit-guarantee {
+      margin-top: 8px;
+      background-color: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      color: #166534;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    /* Actions/Footer - Direct Response Stacked Hierarchy */
     .checkout-upsell-modal-footer {
-      padding: 12px;
+      padding: 12px 16px;
       border-top: 1px solid #f3f4f6;
       display: flex;
-      flex-direction: row;
-      gap: 10px;
+      flex-direction: column;
+      gap: 8px;
       align-items: center;
       justify-content: center;
       background-color: #ffffff;
     }
     
     .checkout-upsell-add-btn {
-      flex: 1.5;
+      width: 100%;
       background-color: #dc2626;
       color: #ffffff;
       border: none;
-      border-radius: 25px !important;
-      padding: 12px 16px;
+      border-radius: 30px !important;
+      padding: 13px 18px;
       font-size: {{ section.settings.font_size_add_btn }}px;
-      font-weight: 800;
+      font-weight: 850;
       cursor: pointer;
-      box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.35);
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
       transition: all 0.2s ease;
       animation: checkout-upsell-pulse 2s infinite;
       text-align: center;
@@ -555,14 +577,15 @@
     }
     .checkout-upsell-add-btn:hover {
       background-color: #b91c1c;
-      box-shadow: 0 6px 8px -1px rgba(220, 38, 38, 0.45);
+      box-shadow: 0 6px 16px rgba(220, 38, 38, 0.45);
+      transform: translateY(-1px);
     }
     
     .checkout-upsell-add-btn-subtext {
-      font-size: 10px;
+      font-size: 10.5px;
       color: rgba(255, 255, 255, 0.95);
       font-weight: 600;
-      margin-top: 2px;
+      margin-top: 3px;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.02em;
@@ -570,30 +593,23 @@
     }
     
     .checkout-upsell-skip-btn {
-      flex: 1;
-      background: #ffffff;
-      border: 1.5px solid rgb(38, 38, 38);
-      border-radius: 25px !important;
-      color: rgb(38, 38, 38);
+      background: none;
+      border: none;
+      color: #6b7280;
       font-size: {{ section.settings.font_size_skip_btn }}px;
-      font-weight: 700;
-      text-decoration: none !important;
-      padding: 12px 16px;
+      font-weight: 600;
+      text-decoration: underline;
+      padding: 4px 8px;
       cursor: pointer;
       transition: all 0.2s ease;
       outline: none;
       text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1.25;
-      min-height: 50px;
+      line-height: 1.3;
       margin-top: 0 !important;
     }
     .checkout-upsell-skip-btn:hover {
-      background-color: #f9fafb;
       color: #111827;
-      border-color: #111827;
+      text-decoration: underline;
     }
     
     @media screen and (max-width: 480px) {
@@ -736,7 +752,7 @@
         
         if (timerInterval) clearInterval(timerInterval);
         
-        var duration = 600; // 10 minutes in seconds
+        var duration = 299; // 4 minutes 59 seconds
         function updateTimer() {
           var minutes = Math.floor(duration / 60);
           var seconds = duration % 60;
