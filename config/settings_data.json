@@ -573,7 +573,7 @@
             "type": "custom_liquid",
             "settings": {
               "position": "body",
-              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 0px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}\n.drawer.active .drawer__inner {\n    background: white !important;}\n.drawer__header,\n.cart-drawer .drawer__header,\n#CartDrawer .drawer__header,\n.drawer__inner .drawer__header {\n  padding: 5px !important;\n}\n\n.drawer__heading {\n  font-size: 20px !important; /* Font size on mobile */\n}\n@media screen and (min-width: 750px) {\n  .drawer__heading {\n    font-size: 24px !important; /* Font size on desktop */\n  }\n}\n\n.cart-drawer__totals__row,\n.cart-drawer__totals__row--spaced,\n.cart-drawer__totals__row--center,\n.cart-drawer__total-savings {\n  margin: 2px !important;\n}\n\n.cart-drawer__footer,\n.drawer__footer {\n  margin-bottom: 0px !important;\n}\n\n.cart-drawer__body {\n    padding: 0 1rem !important;\n}\n</style>"
+              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 10px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}\n.drawer.active .drawer__inner {\n    background: white !important;}\n.drawer__header,\n.cart-drawer .drawer__header,\n#CartDrawer .drawer__header,\n.drawer__inner .drawer__header {\n  padding: 5px !important;\n}\n\n.drawer__heading {\n  font-size: 20px !important; /* Font size on mobile */\n}\n@media screen and (min-width: 750px) {\n  .drawer__heading {\n    font-size: 24px !important; /* Font size on desktop */\n  }\n}\n\n.cart-drawer__totals__row,\n.cart-drawer__totals__row--spaced,\n.cart-drawer__totals__row--center,\n.cart-drawer__total-savings {\n  margin: 2px !important;\n}\n\n.cart-drawer__footer,\n.drawer__footer {\n  margin-bottom: 0px !important;\n}\n\n.cart-drawer__body {\n    padding: 0 1rem !important;\n}\n</style>"
             }
           },
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e": {
@@ -774,7 +774,7 @@
               "show_custom_bg": false,
               "regular_bg_color": "#ffe0e0",
               "selected_bg_color": "#ffffff",
-              "margin_top": 21,
+              "margin_top": 0,
               "margin_bottom": 0
             }
           },
@@ -793,8 +793,8 @@
               "accent_color": "accent-1",
               "color_scheme": "background-1",
               "product_list": [
-                "safepet-3-in-1-pet-brush",
-                "safepet-shammy-dog-towel"
+                "safepet-shammy-dog-towel",
+                "safepet-3-in-1-pet-brush"
               ],
               "prdouct_1_preselected": false,
               "product_1_desc": "",
@@ -897,7 +897,7 @@
         ],
         "custom_css": [],
         "settings": {
-          "test_mode": false,
+          "test_mode": true,
           "heading_text": "Cart • [count] items",
           "heading_alignment": "flex-start",
           "heading_size_desktop": 24,
