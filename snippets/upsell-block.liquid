@@ -88,6 +88,10 @@
         if product.first_available_variant.compare_at_price > product.first_available_variant.price
           assign compare_price = product.first_available_variant.compare_at_price
         endif
+        assign savings_pct = 0
+        if compare_price > price
+          assign savings_pct = compare_price | minus: price | times: 100.0 | divided_by: compare_price | round
+        endif
         
         assign variants_available_arr = product.variants | map: 'available'
         assign variants_option1_arr = product.variants | map: 'option1'
@@ -174,9 +178,15 @@
                     {% if block.settings.title_link %}</a>{% endif %}
                   </h3>
                   {% if block.settings.price_position == 'next_to_title' %}
-                    <div class='upsell__price'>
-                      <span class='regular-price'>{{ price | money }}</span>
-                      <span class='compare-price{% unless compare_price > price %} hidden{% endunless %}'>{{ compare_price | money }}</span>
+                    <div class='upsell__price upsell-pro-deal-price' data-price-drop-ready='true'>
+                      <span class='upsell-price-was compare-price{% unless compare_price > price %} hidden{% endunless %}'>
+                        <span class='upsell-price-was-val'>{{ compare_price | money }}</span>
+                        <span class='upsell-strikethrough-bar'></span>
+                      </span>
+                      <span class='upsell-price-now regular-price'>{{ price | money }}</span>
+                      {% if savings_pct > 0 %}
+                        <span class='upsell-deal-badge'>-{{ savings_pct }}%</span>
+                      {% endif %}
                     </div>
                   {% endif %}
                 </div>
@@ -248,9 +258,15 @@
                   {% endif %}
                 {% endunless %}
                 {% if block.settings.price_position == 'separate' %}
-                  <div class='upsell__price upsell__price--separate'>
-                    <span class='regular-price'>{{ price | money }}</span>
-                    <span class='compare-price{% unless compare_price > price %} hidden{% endunless %}'>{{ compare_price | money }}</span>
+                  <div class='upsell__price upsell__price--separate upsell-pro-deal-price' data-price-drop-ready='true'>
+                    <span class='upsell-price-was compare-price{% unless compare_price > price %} hidden{% endunless %}'>
+                      <span class='upsell-price-was-val'>{{ compare_price | money }}</span>
+                      <span class='upsell-strikethrough-bar'></span>
+                    </span>
+                    <span class='upsell-price-now regular-price'>{{ price | money }}</span>
+                    {% if savings_pct > 0 %}
+                      <span class='upsell-deal-badge'>-{{ savings_pct }}%</span>
+                    {% endif %}
                   </div>
                 {% endif %}
               </div>
@@ -276,7 +292,7 @@
                 <button
                   type="submit"
                   name="add"
-                  class="upsell__add-btn button button--has-spinner"
+                  class="upsell__add-btn button button--has-spinner{% if is_personalized %} upsell__customize-btn{% endif %}"
                   form="{{ product_form_id }}"
                   id="DisplayedSubmitBtn-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}"
                   {% if is_personalized %}data-personalized-trigger="true"{% endif %}
@@ -284,9 +300,13 @@
                     disabled
                   {% endif %}
                 >
-                  <span>
+                  <span class="upsell__btn-text">
                     {%- if product.first_available_variant.available -%}
-                      {{ block.settings.add_btn_label }}
+                      {%- if is_personalized -%}
+                        Customize
+                      {%- else -%}
+                        +&nbsp;Add
+                      {%- endif -%}
                     {%- else -%}
                       {{ 'products.product.sold_out' | t }}
                     {%- endif -%}
@@ -399,3 +419,298 @@
     }
   </style>
 {% endif %}
+
+<style>
+  /* --- SafePet ⚡ One-Time Cart Deals & Pro Price Drop Styles --- */
+  .cart-drawer .upsell__outside-title {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #111827 !important;
+    text-align: left !important;
+    margin: 16px 0 8px 2px !important;
+    padding: 0 !important;
+    letter-spacing: -0.01em !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  /* When Block 1 is visible, hide heading on Block 2 to avoid duplicate title */
+  #UpsellsBlock--product_upsells_8mxVNc:not([style*="display: none"]):not([style*="display:none"]) ~ #UpsellsBlock--product_upsells_Wxiz6t .upsell__outside-title {
+    display: none !important;
+  }
+
+  .cart-drawer .upsell {
+    margin-bottom: 8px !important;
+  }
+
+  .cart-drawer .upsell__container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  .cart-drawer .upsell__container:hover {
+    border-color: #d1d5db !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .cart-drawer .upsell__image {
+    flex-shrink: 0 !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    background: #f9fafb !important;
+  }
+
+  .cart-drawer .upsell__image img,
+  .cart-drawer .upsell__image .upsell__image__img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .cart-drawer .upsell__content {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .cart-drawer .upsell__title h3 {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    margin: 0 0 4px 0 !important;
+    color: #111827 !important;
+    white-space: normal !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* Single Line Button Guarantee (+ Add or Customize) */
+  .cart-drawer .upsell__add-btn {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    flex-shrink: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-width: 72px !important;
+    width: auto !important;
+    padding: 8px 14px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.02em !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    background: #111827 !important;
+    color: #ffffff !important;
+    border: none !important;
+    transition: background-color 0.2s ease, transform 0.15s ease !important;
+  }
+
+  .cart-drawer .upsell__add-btn:hover:not([disabled]) {
+    background: #000000 !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .cart-drawer .upsell__add-btn:active:not([disabled]) {
+    transform: translateY(0) !important;
+  }
+
+  .cart-drawer .upsell__btn-text {
+    white-space: nowrap !important;
+    word-break: keep-all !important;
+    display: inline !important;
+    line-height: 1 !important;
+  }
+
+  .cart-drawer .upsell__customize-btn {
+    background: #111827 !important;
+    min-width: 86px !important;
+  }
+
+  /* --- Pro Price Drop Animation --- */
+  .upsell-pro-deal-price {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 6px !important;
+    line-height: 1 !important;
+    position: relative !important;
+  }
+
+  /* 1. Was / Old Price (initially prominent, then struck through) */
+  .upsell-pro-deal-price .upsell-price-was {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+    color: #6b7280 !important;
+    transition: color 0.3s ease, transform 0.3s ease !important;
+    order: 1 !important;
+  }
+
+  .upsell-pro-deal-price .upsell-strikethrough-bar {
+    position: absolute !important;
+    left: 0 !important;
+    top: 50% !important;
+    width: 0% !important;
+    height: 1.5px !important;
+    background: #dc2626 !important;
+    transform: translateY(-50%) !important;
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    pointer-events: none !important;
+  }
+
+  /* 2. Now / Deal Price (initially prepared, then drops and pops) */
+  .upsell-pro-deal-price .upsell-price-now {
+    display: inline-block !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #dc2626 !important;
+    order: 2 !important;
+    opacity: 0 !important;
+    transform: translateY(-6px) scale(0.92) !important;
+    transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    will-change: transform, opacity !important;
+  }
+
+  /* 3. Deal Badge Pill */
+  .upsell-pro-deal-price .upsell-deal-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    order: 3 !important;
+    background: #fef2f2 !important;
+    color: #dc2626 !important;
+    border: 1px solid #fecaca !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    padding: 1px 5px !important;
+    border-radius: 4px !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0.02em !important;
+    opacity: 0 !important;
+    transform: scale(0.7) !important;
+    transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  }
+
+  /* --- TRIGGERED DISCOUNT STATE (Cascaded via JS) --- */
+  .upsell-pro-deal-price.is-discounted .upsell-price-was {
+    color: #9ca3af !important;
+    transform: scale(0.95) !important;
+  }
+
+  .upsell-pro-deal-price.is-discounted .upsell-strikethrough-bar {
+    width: 100% !important;
+  }
+
+  .upsell-pro-deal-price.is-discounted .upsell-price-now {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+  }
+
+  .upsell-pro-deal-price.is-discounted .upsell-deal-badge {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+
+  /* Fallback: if product has no compare price or reduced motion */
+  .upsell-pro-deal-price .upsell-price-was.hidden ~ .upsell-price-now,
+  @media (prefers-reduced-motion: reduce) {
+    .upsell-pro-deal-price .upsell-price-now {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    .upsell-pro-deal-price .upsell-price-was {
+      color: #9ca3af !important;
+      text-decoration: line-through !important;
+    }
+    .upsell-pro-deal-price .upsell-strikethrough-bar {
+      width: 100% !important;
+    }
+    .upsell-pro-deal-price .upsell-deal-badge {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.__safepetPriceDropInit) return;
+    window.__safepetPriceDropInit = true;
+
+    function runPriceDropAnimation() {
+      var drawer = document.querySelector('cart-drawer, #CartDrawer');
+      if (!drawer) return;
+
+      var isDrawerOpen = drawer.classList.contains('active') || 
+                         drawer.classList.contains('is-active') || 
+                         drawer.getAttribute('aria-hidden') === 'false';
+
+      if (!isDrawerOpen) {
+        // Reset when drawer closes so next open animates freshly
+        var activeElements = document.querySelectorAll('.upsell-pro-deal-price.is-discounted');
+        for (var i = 0; i < activeElements.length; i++) {
+          activeElements[i].classList.remove('is-discounted');
+        }
+        return;
+      }
+
+      // Micro-delay (420ms) after drawer slide-in finishes
+      setTimeout(function() {
+        var priceElements = document.querySelectorAll('.upsell-pro-deal-price:not(.is-discounted)');
+        priceElements.forEach(function(el, index) {
+          setTimeout(function() {
+            el.classList.add('is-discounted');
+          }, index * 75); // Domino cascade across deals
+        });
+      }, 420);
+    }
+
+    function attachPriceDropObserver() {
+      var drawer = document.querySelector('cart-drawer, #CartDrawer');
+      if (!drawer) return;
+
+      if (drawer.__priceDropObserverAttached) return;
+      drawer.__priceDropObserverAttached = true;
+
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          if (m.type === 'attributes' && (m.attributeName === 'class' || m.attributeName === 'aria-hidden')) {
+            runPriceDropAnimation();
+          }
+        });
+      });
+
+      observer.observe(drawer, { attributes: true });
+
+      // Run on initial check
+      runPriceDropAnimation();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachPriceDropObserver);
+    } else {
+      attachPriceDropObserver();
+    }
+
+    document.addEventListener('cart-drawer:open', runPriceDropAnimation);
+    document.addEventListener('cart:open', runPriceDropAnimation);
+    document.addEventListener('shopify:section:load', function() {
+      attachPriceDropObserver();
+      runPriceDropAnimation();
+    });
+  })();
+</script>

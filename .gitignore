@@ -3,3 +3,4 @@ scratch/
 .DS_Store
 *.log
 config/settings_data.json.bak
+n8n-*.json
