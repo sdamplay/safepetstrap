@@ -87,17 +87,48 @@
             <h4 class="checkout-upsell-product-title">{{ product_title }}</h4>
             
             <div class="checkout-upsell-price-row">
-              <span class="checkout-upsell-price-sale">{{ product_price }}</span>
-              <span class="checkout-upsell-price-compare">{{ compare_price }}</span>
-              <span class="checkout-upsell-price-discount-pill">Save 35%</span>
+              <span class="checkout-upsell-price-sale" id="checkoutUpsellDisplayPrice">{{ product_price }}</span>
+              <span class="checkout-upsell-price-compare" id="checkoutUpsellDisplayCompare">{{ compare_price }}</span>
+              <span class="checkout-upsell-price-discount-pill" id="checkoutUpsellDisplayDiscount">Save 35%</span>
             </div>
+          </div>
+        </div>
+
+        <!-- Quantity Selection (1x vs 2x) -->
+        <div class="checkout-upsell-qty-wrap">
+          <div class="checkout-upsell-qty-header">
+            <span class="checkout-upsell-qty-label">1. Choose Quantity:</span>
+          </div>
+          <div class="checkout-upsell-qty-grid">
+            <button type="button" class="checkout-upsell-qty-card active" id="checkoutUpsellQty1" data-qty="1">
+              <div class="checkout-upsell-qty-card-row">
+                <span class="checkout-upsell-qty-card-title">1x Harness</span>
+                <span class="checkout-upsell-qty-radio"></span>
+              </div>
+              <div class="checkout-upsell-qty-card-sub">
+                <span class="checkout-upsell-qty-card-desc">Single Pup</span>
+                <span class="checkout-upsell-qty-card-price" id="checkoutUpsellQty1Price">{{ product_price }}</span>
+              </div>
+            </button>
+            
+            <button type="button" class="checkout-upsell-qty-card" id="checkoutUpsellQty2" data-qty="2">
+              <span class="checkout-upsell-qty-badge">POPULAR DEAL</span>
+              <div class="checkout-upsell-qty-card-row">
+                <span class="checkout-upsell-qty-card-title">2x Harnesses</span>
+                <span class="checkout-upsell-qty-radio"></span>
+              </div>
+              <div class="checkout-upsell-qty-card-sub">
+                <span class="checkout-upsell-qty-card-desc">2 Dogs / Backup</span>
+                <span class="checkout-upsell-qty-card-price" id="checkoutUpsellQty2Price">$49.90</span>
+              </div>
+            </button>
           </div>
         </div>
         
         <!-- Variant / Size Selection (Moved above benefits bullets for mobile viewability) -->
         <div class="checkout-upsell-variants-wrap">
           <div class="checkout-upsell-variants-header">
-            <span class="checkout-upsell-variants-label">Select Your Dog's Size:</span>
+            <span class="checkout-upsell-variants-label" id="checkoutUpsellSizeLabel1">Select Your Dog's Size:</span>
             <span class="size-chart__integrated-inline">
               <button type="button" class="checkout-upsell-size-chart-trigger" id="checkoutUpsellSizeChartTrigger">
                 📏 View Sizing Table
@@ -105,7 +136,8 @@
             </span>
           </div>
           
-          <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills">
+          <!-- Dog 1 Size Pills -->
+          <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills1">
             {%- if upsell_product != blank -%}
               {%- assign active_set = false -%}
               {%- for variant in upsell_product.variants -%}
@@ -120,7 +152,8 @@
                   {%- endcase -%}
                   <button type="button" 
                           class="checkout-upsell-size-pill{% if active_set == false %} active{% endif %}" 
-                          data-variant-id="{{ variant.id }}">
+                          data-variant-id="{{ variant.id }}"
+                          data-size="{{ title_upper }}">
                     <span class="checkout-pill-title">{{ variant.title }}</span>
                     {%- if weight_sub != blank -%}
                       <span class="checkout-pill-weight">{{ weight_sub }}</span>
@@ -130,23 +163,76 @@
                 {%- endif -%}
               {%- endfor -%}
             {%- else -%}
-              <button type="button" class="checkout-upsell-size-pill active" data-variant-id="48139846418662">
+              <button type="button" class="checkout-upsell-size-pill active" data-variant-id="48139846418662" data-size="S">
                 <span class="checkout-pill-title">S</span>
                 <span class="checkout-pill-weight">10–28 lbs</span>
               </button>
-              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846484198">
+              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846484198" data-size="M">
                 <span class="checkout-pill-title">M</span>
                 <span class="checkout-pill-weight">28–50 lbs</span>
               </button>
-              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846516966">
+              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846516966" data-size="L">
                 <span class="checkout-pill-title">L</span>
                 <span class="checkout-pill-weight">45–70 lbs</span>
               </button>
-              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846549734">
+              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846549734" data-size="XL">
                 <span class="checkout-pill-title">XL</span>
                 <span class="checkout-pill-weight">70–132 lbs</span>
               </button>
             {%- endif -%}
+          </div>
+
+          <!-- Dog 2 Size Selector (Expands dynamically when 2x is chosen) -->
+          <div class="checkout-upsell-dog2-wrap" id="checkoutUpsellDog2Wrap" style="display: none;">
+            <div class="checkout-upsell-variants-header checkout-upsell-dog2-header">
+              <span class="checkout-upsell-variants-label">🐶 Dog #2 Size:</span>
+              <span class="checkout-upsell-dog2-hint">Mix & match any size</span>
+            </div>
+            
+            <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills2">
+              {%- if upsell_product != blank -%}
+                {%- assign active_set2 = false -%}
+                {%- for variant in upsell_product.variants -%}
+                  {%- assign title_upper = variant.title | upcase -%}
+                  {%- if title_upper != 'XS' -%}
+                    {%- assign weight_sub = '' -%}
+                    {%- case title_upper -%}
+                      {%- when 'S' -%}{%- assign weight_sub = '10–28 lbs' -%}
+                      {%- when 'M' -%}{%- assign weight_sub = '28–50 lbs' -%}
+                      {%- when 'L' -%}{%- assign weight_sub = '45–70 lbs' -%}
+                      {%- when 'XL' -%}{%- assign weight_sub = '70–132 lbs' -%}
+                    {%- endcase -%}
+                    <button type="button" 
+                            class="checkout-upsell-size-pill{% if title_upper == 'M' or active_set2 == false %} active{% endif %}" 
+                            data-variant-id="{{ variant.id }}"
+                            data-size="{{ title_upper }}">
+                      <span class="checkout-pill-title">{{ variant.title }}</span>
+                      {%- if weight_sub != blank -%}
+                        <span class="checkout-pill-weight">{{ weight_sub }}</span>
+                      {%- endif -%}
+                    </button>
+                    {%- if title_upper == 'M' -%}{%- assign active_set2 = true -%}{%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- else -%}
+                <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846418662" data-size="S">
+                  <span class="checkout-pill-title">S</span>
+                  <span class="checkout-pill-weight">10–28 lbs</span>
+                </button>
+                <button type="button" class="checkout-upsell-size-pill active" data-variant-id="48139846484198" data-size="M">
+                  <span class="checkout-pill-title">M</span>
+                  <span class="checkout-pill-weight">28–50 lbs</span>
+                </button>
+                <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846516966" data-size="L">
+                  <span class="checkout-pill-title">L</span>
+                  <span class="checkout-pill-weight">45–70 lbs</span>
+                </button>
+                <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846549734" data-size="XL">
+                  <span class="checkout-pill-title">XL</span>
+                  <span class="checkout-pill-weight">70–132 lbs</span>
+                </button>
+              {%- endif -%}
+            </div>
           </div>
 
           <!-- 100% Perfect Fit Guarantee Badge -->
@@ -174,9 +260,9 @@
       <!-- Actions Footer -->
       <div class="checkout-upsell-modal-footer">
         <button type="button" class="checkout-upsell-add-btn" id="checkoutUpsellAddBtn">
-          <span>{{ section.settings.add_btn_text | escape }}</span>
+          <span id="checkoutUpsellAddBtnText">{{ section.settings.add_btn_text | escape }}</span>
           {%- if section.settings.add_btn_subtext != blank -%}
-            <span class="checkout-upsell-add-btn-subtext">
+            <span class="checkout-upsell-add-btn-subtext" id="checkoutUpsellAddBtnSubtext">
               {{ section.settings.add_btn_subtext | escape }}
             </span>
           {%- endif -%}
@@ -422,6 +508,136 @@
       display: none;
     }
     
+    /* Quantity Selection Grid */
+    .checkout-upsell-qty-wrap {
+      margin-bottom: 12px;
+    }
+    .checkout-upsell-qty-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .checkout-upsell-qty-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #374151;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .checkout-upsell-qty-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .checkout-upsell-qty-card {
+      background: #ffffff;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      text-align: left;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      outline: none;
+    }
+    .checkout-upsell-qty-card:hover {
+      border-color: #9ca3af;
+    }
+    .checkout-upsell-qty-card.active {
+      border-color: #dc2626 !important;
+      background: #fff5f5 !important;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.12);
+    }
+    .checkout-upsell-qty-card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .checkout-upsell-qty-card-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.2;
+    }
+    .checkout-upsell-qty-card.active .checkout-upsell-qty-card-title {
+      color: #dc2626;
+    }
+    .checkout-upsell-qty-radio {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1.5px solid #d1d5db;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .checkout-upsell-qty-card.active .checkout-upsell-qty-radio {
+      border-color: #dc2626;
+      background: #dc2626;
+    }
+    .checkout-upsell-qty-card.active .checkout-upsell-qty-radio::after {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+    .checkout-upsell-qty-card-sub {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .checkout-upsell-qty-card-desc {
+      font-size: 10.5px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    .checkout-upsell-qty-card-price {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #111827;
+    }
+    .checkout-upsell-qty-badge {
+      position: absolute;
+      top: -7px;
+      right: 8px;
+      background-color: #16a34a;
+      color: #ffffff;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* Dog 2 Size Container */
+    .checkout-upsell-dog2-wrap {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed #e5e7eb;
+    }
+    .checkout-upsell-dog2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .checkout-upsell-dog2-hint {
+      font-size: 10.5px;
+      color: #6b7280;
+      font-style: italic;
+    }
+
     /* Variant Selection */
     .checkout-upsell-variants-wrap {
       margin-bottom: 8px;
@@ -741,10 +957,43 @@
       var upsellProductId = {{ upsell_product.id | default: 9810334613734 }};
       var triggerProductIds = [{% if trigger_ids != blank %}{{ trigger_ids }}{% endif %}];
       
-      var activeVariantId = null;
+      var currentQty = 1;
+      var activeVariantId1 = null;
+      var activeVariantId2 = null;
+      var activeSize1 = 'S';
+      var activeSize2 = 'M';
+      var unitPrice = parseFloat("{{ product_price }}".replace(/[^0-9.]/g, '')) || 24.95;
+      var unitCompare = parseFloat("{{ compare_price }}".replace(/[^0-9.]/g, '')) || 42.99;
       var interceptedCheckoutBtn = null;
       var bypassPopup = false;
       var timerInterval = null;
+
+      function updateUpsellPricingAndCTA() {
+        var displayPriceEl = document.getElementById('checkoutUpsellDisplayPrice');
+        var displayCompareEl = document.getElementById('checkoutUpsellDisplayCompare');
+        var addBtnMain = document.getElementById('checkoutUpsellAddBtnText');
+        var addBtnSub = document.getElementById('checkoutUpsellAddBtnSubtext');
+        var sizeLabel1 = document.getElementById('checkoutUpsellSizeLabel1');
+        var dog2Wrap = document.getElementById('checkoutUpsellDog2Wrap');
+        
+        var totalPrice = (unitPrice * currentQty).toFixed(2);
+        var totalCompare = (unitCompare * currentQty).toFixed(2);
+        
+        if (displayPriceEl) displayPriceEl.textContent = '$' + totalPrice;
+        if (displayCompareEl) displayCompareEl.textContent = '$' + totalCompare;
+        
+        if (currentQty === 1) {
+          if (sizeLabel1) sizeLabel1.textContent = "Select Your Dog's Size:";
+          if (dog2Wrap) dog2Wrap.style.display = 'none';
+          if (addBtnMain) addBtnMain.textContent = "{{ section.settings.add_btn_text | escape }} ($" + totalPrice + ")";
+          if (addBtnSub) addBtnSub.textContent = "✓ Size " + activeSize1 + " Selected • 100% Perfect Fit Guarantee";
+        } else {
+          if (sizeLabel1) sizeLabel1.textContent = "🐶 Dog #1 Size:";
+          if (dog2Wrap) dog2Wrap.style.display = 'block';
+          if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 2x HARNESSES TO ORDER ($" + totalPrice + ")";
+          if (addBtnSub) addBtnSub.textContent = "✓ Sizes (" + activeSize1 + " & " + activeSize2 + ") Selected • 100% Perfect Fit Guarantee";
+        }
+      }
       
       function startCountdown() {
         var timerEl = document.getElementById('checkoutUpsellTimer');
@@ -776,7 +1025,10 @@
         var modal = document.getElementById('checkoutUpsellPopup');
         var addBtn = document.getElementById('checkoutUpsellAddBtn');
         var skipBtn = document.getElementById('checkoutUpsellSkipBtn');
-        var pillsContainer = document.getElementById('checkoutUpsellVariantPills');
+        var qtyCard1 = document.getElementById('checkoutUpsellQty1');
+        var qtyCard2 = document.getElementById('checkoutUpsellQty2');
+        var pillsContainer1 = document.getElementById('checkoutUpsellVariantPills1');
+        var pillsContainer2 = document.getElementById('checkoutUpsellVariantPills2');
         
         if (!modal) return;
         
@@ -784,24 +1036,80 @@
         if (modal.classList.contains('active')) {
           startCountdown();
         }
-        
-        // Initialize default active variant ID
-        var activePill = pillsContainer.querySelector('.checkout-upsell-size-pill.active');
-        if (activePill) {
-          activeVariantId = activePill.getAttribute('data-variant-id');
+
+        // QTY 1 vs 2 switcher
+        function setQuantity(qty) {
+          currentQty = qty;
+          if (qtyCard1 && qtyCard2) {
+            if (qty === 1) {
+              qtyCard1.classList.add('active');
+              qtyCard2.classList.remove('active');
+            } else {
+              qtyCard2.classList.add('active');
+              qtyCard1.classList.remove('active');
+            }
+          }
+          updateUpsellPricingAndCTA();
+        }
+
+        if (qtyCard1) {
+          qtyCard1.addEventListener('click', function(e) {
+            e.preventDefault();
+            setQuantity(1);
+          });
+        }
+        if (qtyCard2) {
+          qtyCard2.addEventListener('click', function(e) {
+            e.preventDefault();
+            setQuantity(2);
+          });
         }
         
-        // Size pills click selection
-        pillsContainer.addEventListener('click', function(event) {
-          var pill = event.target.closest('.checkout-upsell-size-pill');
-          if (pill) {
-            pillsContainer.querySelectorAll('.checkout-upsell-size-pill').forEach(function(p) {
-              p.classList.remove('active');
-            });
-            pill.classList.add('active');
-            activeVariantId = pill.getAttribute('data-variant-id');
+        // Initialize Dog 1 variant ID
+        if (pillsContainer1) {
+          var activePill1 = pillsContainer1.querySelector('.checkout-upsell-size-pill.active');
+          if (activePill1) {
+            activeVariantId1 = activePill1.getAttribute('data-variant-id');
+            activeSize1 = activePill1.getAttribute('data-size') || 'S';
           }
-        });
+          
+          pillsContainer1.addEventListener('click', function(event) {
+            var pill = event.target.closest('.checkout-upsell-size-pill');
+            if (pill) {
+              pillsContainer1.querySelectorAll('.checkout-upsell-size-pill').forEach(function(p) {
+                p.classList.remove('active');
+              });
+              pill.classList.add('active');
+              activeVariantId1 = pill.getAttribute('data-variant-id');
+              activeSize1 = pill.getAttribute('data-size') || 'S';
+              updateUpsellPricingAndCTA();
+            }
+          });
+        }
+
+        // Initialize Dog 2 variant ID
+        if (pillsContainer2) {
+          var activePill2 = pillsContainer2.querySelector('.checkout-upsell-size-pill.active');
+          if (activePill2) {
+            activeVariantId2 = activePill2.getAttribute('data-variant-id');
+            activeSize2 = activePill2.getAttribute('data-size') || 'M';
+          }
+          
+          pillsContainer2.addEventListener('click', function(event) {
+            var pill = event.target.closest('.checkout-upsell-size-pill');
+            if (pill) {
+              pillsContainer2.querySelectorAll('.checkout-upsell-size-pill').forEach(function(p) {
+                p.classList.remove('active');
+              });
+              pill.classList.add('active');
+              activeVariantId2 = pill.getAttribute('data-variant-id');
+              activeSize2 = pill.getAttribute('data-size') || 'M';
+              updateUpsellPricingAndCTA();
+            }
+          });
+        }
+
+        updateUpsellPricingAndCTA();
         
 
 
@@ -880,20 +1188,31 @@
         
         // Add to Order & Checkout
         addBtn.addEventListener('click', function() {
-          if (!activeVariantId) return;
+          if (!activeVariantId1) return;
           
           addBtn.disabled = true;
           addBtn.innerHTML = '<span class="checkout-upsell-spinner"></span> ADDING TO ORDER...';
           
-          var data = {
-            id: activeVariantId,
-            quantity: 1
-          };
+          var itemsToAdd = [];
+          if (currentQty === 1) {
+            itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 1 });
+          } else {
+            if (activeVariantId1 === activeVariantId2) {
+              itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 2 });
+            } else {
+              itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 1 });
+              if (activeVariantId2) {
+                itemsToAdd.push({ id: parseInt(activeVariantId2, 10), quantity: 1 });
+              } else {
+                itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 1 });
+              }
+            }
+          }
           
           fetch(window.Shopify.routes.root + 'cart/add.js', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify({ items: itemsToAdd })
           })
           .then(function(res) { return res.json(); })
           .then(function() {
