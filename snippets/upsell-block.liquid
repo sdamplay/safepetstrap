@@ -170,6 +170,10 @@
                   </div>
                 {% endif %}
               {% endif %}
+              {%- assign is_deal_block = false -%}
+              {%- if type == 'cart-drawer' and block.settings.style == 'add_button' -%}
+                {%- assign is_deal_block = true -%}
+              {%- endif -%}
               <div class='upsell__content{% if block.settings.hide_compare_price %} hide-compare-price{% endif %}'>
                 <div class='upsell__title'>
                   <h3>
@@ -177,18 +181,14 @@
                       {{ product.title }}
                     {% if block.settings.title_link %}</a>{% endif %}
                   </h3>
-                  {% if block.settings.price_position == 'next_to_title' %}
-                    <div class='upsell__price upsell-pro-deal-price' data-price-drop-ready='true'>
-                      <span class='upsell-price-was compare-price{% unless compare_price > price %} hidden{% endunless %}'>
-                        <span class='upsell-price-was-val'>{{ compare_price | money }}</span>
-                        <span class='upsell-strikethrough-bar'></span>
-                      </span>
-                      <span class='upsell-price-now regular-price'>{{ price | money }}</span>
-                      {% if savings_pct > 0 %}
-                        <span class='upsell-deal-badge'>-{{ savings_pct }}%</span>
-                      {% endif %}
-                    </div>
-                  {% endif %}
+                  {% unless is_deal_block %}
+                    {% if block.settings.price_position == 'next_to_title' %}
+                      <div class='upsell__price'>
+                        <span class='regular-price'>{{ price | money }}</span>
+                        <span class='compare-price{% unless compare_price > price %} hidden{% endunless %}'>{{ compare_price | money }}</span>
+                      </div>
+                    {% endif %}
+                  {% endunless %}
                 </div>
                 {%- unless description == blank -%}
                   <p class="upsell__desc">
@@ -257,16 +257,24 @@
                     </div>
                   {% endif %}
                 {% endunless %}
-                {% if block.settings.price_position == 'separate' %}
+                {% if is_deal_block %}
                   <div class='upsell__price upsell__price--separate upsell-pro-deal-price' data-price-drop-ready='true'>
-                    <span class='upsell-price-was compare-price{% unless compare_price > price %} hidden{% endunless %}'>
-                      <span class='upsell-price-was-val'>{{ compare_price | money }}</span>
-                      <span class='upsell-strikethrough-bar'></span>
-                    </span>
-                    <span class='upsell-price-now regular-price'>{{ price | money }}</span>
-                    {% if savings_pct > 0 %}
-                      <span class='upsell-deal-badge'>-{{ savings_pct }}%</span>
-                    {% endif %}
+                    {%- if compare_price > price -%}
+                      <span class='upsell-price-was compare-price'>
+                        <span class='upsell-price-was-val'>{{ compare_price | money }}</span>
+                        <span class='upsell-strikethrough-bar'></span>
+                      </span>
+                      <span class='upsell-price-now regular-price'>{{ price | money }}</span>
+                    {%- else -%}
+                      <span class='upsell-price-was regular-price'>
+                        <span class='upsell-price-was-val'>{{ price | money }}</span>
+                      </span>
+                    {%- endif -%}
+                  </div>
+                {% elsif block.settings.price_position == 'separate' %}
+                  <div class='upsell__price upsell__price--separate'>
+                    <span class='regular-price'>{{ price | money }}</span>
+                    <span class='compare-price{% unless compare_price > price %} hidden{% endunless %}'>{{ compare_price | money }}</span>
                   </div>
                 {% endif %}
               </div>
@@ -292,7 +300,7 @@
                 <button
                   type="submit"
                   name="add"
-                  class="upsell__add-btn button button--has-spinner{% if is_personalized %} upsell__customize-btn{% endif %}"
+                  class="upsell__add-btn button--has-spinner{% if is_personalized %} upsell__customize-btn{% endif %}"
                   form="{{ product_form_id }}"
                   id="DisplayedSubmitBtn-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}"
                   {% if is_personalized %}data-personalized-trigger="true"{% endif %}
@@ -427,7 +435,7 @@
     font-weight: 700 !important;
     color: #111827 !important;
     text-align: left !important;
-    margin: 16px 0 8px 2px !important;
+    margin: 14px 0 8px 2px !important;
     padding: 0 !important;
     letter-spacing: -0.01em !important;
     display: flex !important;
@@ -440,63 +448,183 @@
     display: none !important;
   }
 
-  .cart-drawer .upsell {
+  /* Target ONLY add_button upsell cards (⚡ One-Time Cart Deals)
+     This completely leaves the warranty toggle_switch 100% native, compact, and untouched */
+  .cart-drawer .upsell--add_button {
     margin-bottom: 8px !important;
   }
 
-  .cart-drawer .upsell__container {
+  .cart-drawer .upsell--add_button .upsell__container {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 10px !important;
+    gap: 12px !important;
     padding: 10px 12px !important;
     border-radius: 8px !important;
     background: #ffffff !important;
     border: 1px solid #e5e7eb !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
     transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
   }
 
-  .cart-drawer .upsell__container:hover {
+  .cart-drawer .upsell--add_button .upsell__container:hover {
     border-color: #d1d5db !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06) !important;
   }
 
-  .cart-drawer .upsell__image {
+  .cart-drawer .upsell--add_button .upsell__image {
     flex-shrink: 0 !important;
     width: 52px !important;
     height: 52px !important;
     border-radius: 6px !important;
     overflow: hidden !important;
     background: #f9fafb !important;
+    margin-right: 0 !important;
+    align-self: center !important;
   }
 
-  .cart-drawer .upsell__image img,
-  .cart-drawer .upsell__image .upsell__image__img {
+  .cart-drawer .upsell--add_button .upsell__image img,
+  .cart-drawer .upsell--add_button .upsell__image .upsell__image__img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
+    display: block !important;
   }
 
-  .cart-drawer .upsell__content {
+  /* Combined into a single vertical column: Title on line 1, Price on line 2 */
+  .cart-drawer .upsell--add_button .upsell__content {
     flex: 1 1 auto !important;
     min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    padding: 0 !important;
+    gap: 3px !important;
   }
 
-  .cart-drawer .upsell__title h3 {
-    font-size: 13px !important;
+  /* Product Title: guaranteed full width and visibility, zero collapse */
+  .cart-drawer .upsell--add_button .upsell__title {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .cart-drawer .upsell--add_button .upsell__title h3 {
+    display: block !important;
+    font-size: 13.5px !important;
     font-weight: 600 !important;
     line-height: 1.3 !important;
-    margin: 0 0 4px 0 !important;
     color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
     white-space: normal !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
+    word-break: break-word !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
   }
 
-  /* Single Line Button Guarantee (+ Add or Customize) */
-  .cart-drawer .upsell__add-btn {
+  .cart-drawer .upsell--add_button .upsell__title a {
+    color: #111827 !important;
+    text-decoration: none !important;
+  }
+
+  /* Pro Price Display (Line 2 below title): Old price first, then smooth pro discount effect */
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price {
+    display: inline-flex !important;
+    align-items: center !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  /* 1. Was / Old Price (visible immediately when customer lands on drawer) */
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-price-was {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    transition: color 0.3s ease !important;
+    line-height: 1 !important;
+  }
+
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar {
+    position: absolute !important;
+    left: 0 !important;
+    top: 50% !important;
+    width: 0% !important;
+    height: 1.5px !important;
+    background: #dc2626 !important;
+    transform: translateY(-50%) !important;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    pointer-events: none !important;
+  }
+
+  /* 2. Now / Deal Price (initially 0 width & hidden, expands smoothly) */
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-price-now {
+    display: inline-block !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: #dc2626 !important;
+    opacity: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+    margin-left: 0 !important;
+    white-space: nowrap !important;
+    transform: scale(0.9) translateX(-4px) !important;
+    transition: opacity 0.35s ease, max-width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), margin-left 0.35s ease !important;
+    will-change: transform, opacity, max-width !important;
+    line-height: 1 !important;
+  }
+
+  /* --- TRIGGERED DISCOUNT STATE (Cascaded via JS) --- */
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-price-was {
+    color: #9ca3af !important;
+  }
+
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-strikethrough-bar {
+    width: 100% !important;
+  }
+
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-price-now {
+    opacity: 1 !important;
+    max-width: 80px !important;
+    margin-left: 6px !important;
+    transform: scale(1) translateX(0) !important;
+  }
+
+  /* Variant picker inside deal card */
+  .cart-drawer .upsell--add_button .upsell__variant-picker {
+    margin-top: 4px !important;
+  }
+
+  /* Button: Pure Dark Solid, Single Line, Zero Red Artifacts */
+  .cart-drawer .upsell--add_button .upsell__add-btn,
+  .cart-drawer .upsell--add_button .upsell__add-btn:hover,
+  .cart-drawer .upsell--add_button .upsell__add-btn:focus,
+  .cart-drawer .upsell--add_button .upsell__add-btn:active {
+    --color-button: 17, 24, 39 !important;
+    --color-button-text: 255, 255, 255 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+  }
+
+  .cart-drawer .upsell--add_button .upsell__add-btn:before,
+  .cart-drawer .upsell--add_button .upsell__add-btn:after {
+    content: none !important;
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+
+  .cart-drawer .upsell--add_button .upsell__add-btn {
     white-space: nowrap !important;
     word-break: keep-all !important;
     flex-shrink: 0 !important;
@@ -505,7 +633,8 @@
     justify-content: center !important;
     min-width: 72px !important;
     width: auto !important;
-    padding: 8px 14px !important;
+    height: 32px !important;
+    padding: 0 14px !important;
     font-size: 13px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
@@ -513,135 +642,56 @@
     border-radius: 6px !important;
     cursor: pointer !important;
     background: #111827 !important;
+    background-color: #111827 !important;
     color: #ffffff !important;
     border: none !important;
-    transition: background-color 0.2s ease, transform 0.15s ease !important;
+    position: relative !important;
+    z-index: 2 !important;
+    transition: background-color 0.15s ease, transform 0.15s ease !important;
   }
 
-  .cart-drawer .upsell__add-btn:hover:not([disabled]) {
+  .cart-drawer .upsell--add_button .upsell__add-btn:hover:not([disabled]) {
     background: #000000 !important;
+    background-color: #000000 !important;
+    color: #ffffff !important;
     transform: translateY(-1px) !important;
   }
 
-  .cart-drawer .upsell__add-btn:active:not([disabled]) {
+  .cart-drawer .upsell--add_button .upsell__add-btn:active:not([disabled]) {
     transform: translateY(0) !important;
   }
 
-  .cart-drawer .upsell__btn-text {
+  .cart-drawer .upsell--add_button .upsell__add-btn:hover:not([disabled]) .upsell__btn-text,
+  .cart-drawer .upsell--add_button .upsell__add-btn:focus .upsell__btn-text,
+  .cart-drawer .upsell--add_button .upsell__add-btn:active .upsell__btn-text {
+    color: #ffffff !important;
+  }
+
+  .cart-drawer .upsell--add_button .upsell__btn-text {
+    color: #ffffff !important;
     white-space: nowrap !important;
     word-break: keep-all !important;
     display: inline !important;
     line-height: 1 !important;
   }
 
-  .cart-drawer .upsell__customize-btn {
-    background: #111827 !important;
+  .cart-drawer .upsell--add_button .upsell__customize-btn {
     min-width: 86px !important;
   }
 
-  /* --- Pro Price Drop Animation --- */
-  .upsell-pro-deal-price {
-    display: flex !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    gap: 6px !important;
-    line-height: 1 !important;
-    position: relative !important;
-  }
-
-  /* 1. Was / Old Price (initially prominent, then struck through) */
-  .upsell-pro-deal-price .upsell-price-was {
-    position: relative !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    font-size: 12.5px !important;
-    font-weight: 500 !important;
-    color: #6b7280 !important;
-    transition: color 0.3s ease, transform 0.3s ease !important;
-    order: 1 !important;
-  }
-
-  .upsell-pro-deal-price .upsell-strikethrough-bar {
-    position: absolute !important;
-    left: 0 !important;
-    top: 50% !important;
-    width: 0% !important;
-    height: 1.5px !important;
-    background: #dc2626 !important;
-    transform: translateY(-50%) !important;
-    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    pointer-events: none !important;
-  }
-
-  /* 2. Now / Deal Price (initially prepared, then drops and pops) */
-  .upsell-pro-deal-price .upsell-price-now {
-    display: inline-block !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    color: #dc2626 !important;
-    order: 2 !important;
-    opacity: 0 !important;
-    transform: translateY(-6px) scale(0.92) !important;
-    transition: opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    will-change: transform, opacity !important;
-  }
-
-  /* 3. Deal Badge Pill */
-  .upsell-pro-deal-price .upsell-deal-badge {
-    display: inline-flex !important;
-    align-items: center !important;
-    order: 3 !important;
-    background: #fef2f2 !important;
-    color: #dc2626 !important;
-    border: 1px solid #fecaca !important;
-    font-size: 10px !important;
-    font-weight: 700 !important;
-    padding: 1px 5px !important;
-    border-radius: 4px !important;
-    line-height: 1.2 !important;
-    letter-spacing: 0.02em !important;
-    opacity: 0 !important;
-    transform: scale(0.7) !important;
-    transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-  }
-
-  /* --- TRIGGERED DISCOUNT STATE (Cascaded via JS) --- */
-  .upsell-pro-deal-price.is-discounted .upsell-price-was {
-    color: #9ca3af !important;
-    transform: scale(0.95) !important;
-  }
-
-  .upsell-pro-deal-price.is-discounted .upsell-strikethrough-bar {
-    width: 100% !important;
-  }
-
-  .upsell-pro-deal-price.is-discounted .upsell-price-now {
-    opacity: 1 !important;
-    transform: translateY(0) scale(1) !important;
-  }
-
-  .upsell-pro-deal-price.is-discounted .upsell-deal-badge {
-    opacity: 1 !important;
-    transform: scale(1) !important;
-  }
-
-  /* Fallback: if product has no compare price or reduced motion */
-  .upsell-pro-deal-price .upsell-price-was.hidden ~ .upsell-price-now,
   @media (prefers-reduced-motion: reduce) {
-    .upsell-pro-deal-price .upsell-price-now {
+    .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-price-now {
       opacity: 1 !important;
+      max-width: 80px !important;
+      margin-left: 6px !important;
       transform: none !important;
     }
-    .upsell-pro-deal-price .upsell-price-was {
+    .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-price-was {
       color: #9ca3af !important;
       text-decoration: line-through !important;
     }
-    .upsell-pro-deal-price .upsell-strikethrough-bar {
+    .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar {
       width: 100% !important;
-    }
-    .upsell-pro-deal-price .upsell-deal-badge {
-      opacity: 1 !important;
-      transform: none !important;
     }
   }
 </style>
@@ -652,7 +702,7 @@
     window.__safepetPriceDropInit = true;
 
     function runPriceDropAnimation() {
-      var drawer = document.querySelector('cart-drawer, #CartDrawer');
+      var drawer = document.querySelector('cart-drawer, #CartDrawer, .drawer');
       if (!drawer) return;
 
       var isDrawerOpen = drawer.classList.contains('active') || 
@@ -680,7 +730,7 @@
     }
 
     function attachPriceDropObserver() {
-      var drawer = document.querySelector('cart-drawer, #CartDrawer');
+      var drawer = document.querySelector('cart-drawer, #CartDrawer, .drawer');
       if (!drawer) return;
 
       if (drawer.__priceDropObserverAttached) return;
@@ -694,9 +744,9 @@
         });
       });
 
-      observer.observe(drawer, { attributes: true });
+      observer.observe(drawer, { attributes: true, attributeFilter: ['class', 'aria-hidden'] });
 
-      // Run on initial check
+      // Run on initial check if drawer is already open
       runPriceDropAnimation();
     }
 
@@ -708,6 +758,14 @@
 
     document.addEventListener('cart-drawer:open', runPriceDropAnimation);
     document.addEventListener('cart:open', runPriceDropAnimation);
+    document.addEventListener('cart:refresh', function() {
+      attachPriceDropObserver();
+      runPriceDropAnimation();
+    });
+    document.addEventListener('cart:updated', function() {
+      attachPriceDropObserver();
+      runPriceDropAnimation();
+    });
     document.addEventListener('shopify:section:load', function() {
       attachPriceDropObserver();
       runPriceDropAnimation();
