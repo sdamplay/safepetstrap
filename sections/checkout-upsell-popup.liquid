@@ -985,7 +985,8 @@
         if (currentQty === 1) {
           if (sizeLabel1) sizeLabel1.textContent = "Select Your Dog's Size:";
           if (dog2Wrap) dog2Wrap.style.display = 'none';
-          if (addBtnMain) addBtnMain.textContent = "{{ section.settings.add_btn_text | escape }} ($" + totalPrice + ")";
+          var baseBtnText = {{ section.settings.add_btn_text | json }};
+          if (addBtnMain) addBtnMain.textContent = baseBtnText + " ($" + totalPrice + ")";
           if (addBtnSub) addBtnSub.textContent = "✓ Size " + activeSize1 + " Selected • 100% Perfect Fit Guarantee";
         } else {
           if (sizeLabel1) sizeLabel1.textContent = "🐶 Dog #1 Size:";

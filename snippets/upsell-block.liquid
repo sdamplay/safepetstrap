@@ -549,7 +549,7 @@
     font-size: 13px !important;
     font-weight: 600 !important;
     color: #374151 !important;
-    transition: color 0.3s ease !important;
+    transition: color 0.4s ease !important;
     line-height: 1 !important;
   }
 
@@ -561,7 +561,7 @@
     height: 1.5px !important;
     background: #dc2626 !important;
     transform: translateY(-50%) !important;
-    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     pointer-events: none !important;
   }
 
@@ -577,7 +577,7 @@
     margin-left: 0 !important;
     white-space: nowrap !important;
     transform: scale(0.9) translateX(-4px) !important;
-    transition: opacity 0.35s ease, max-width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), margin-left 0.35s ease !important;
+    transition: opacity 0.4s ease, max-width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), margin-left 0.4s ease !important;
     will-change: transform, opacity, max-width !important;
     line-height: 1 !important;
   }
@@ -701,6 +701,19 @@
     if (window.__safepetPriceDropInit) return;
     window.__safepetPriceDropInit = true;
 
+    var animationTimer = null;
+
+    function applyDiscountEffect() {
+      var priceElements = document.querySelectorAll('.upsell-pro-deal-price:not(.is-discounted)');
+      if (!priceElements.length) return;
+
+      priceElements.forEach(function(el, index) {
+        setTimeout(function() {
+          el.classList.add('is-discounted');
+        }, index * 95); // Domino cascade across deals
+      });
+    }
+
     function runPriceDropAnimation() {
       var drawer = document.querySelector('cart-drawer, #CartDrawer, .drawer');
       if (!drawer) return;
@@ -710,6 +723,7 @@
                          drawer.getAttribute('aria-hidden') === 'false';
 
       if (!isDrawerOpen) {
+        if (animationTimer) clearTimeout(animationTimer);
         // Reset when drawer closes so next open animates freshly
         var activeElements = document.querySelectorAll('.upsell-pro-deal-price.is-discounted');
         for (var i = 0; i < activeElements.length; i++) {
@@ -718,15 +732,14 @@
         return;
       }
 
-      // Micro-delay (420ms) after drawer slide-in finishes
-      setTimeout(function() {
-        var priceElements = document.querySelectorAll('.upsell-pro-deal-price:not(.is-discounted)');
-        priceElements.forEach(function(el, index) {
-          setTimeout(function() {
-            el.classList.add('is-discounted');
-          }, index * 75); // Domino cascade across deals
-        });
-      }, 420);
+      if (animationTimer) clearTimeout(animationTimer);
+
+      // Strategic CRO delay (1350ms): Gives customers ample time to absorb the top cart items/progress bar,
+      // move their gaze down to "⚡ One-Time Cart Deals", clearly register the original prices,
+      // and then watch the prices actively slash down in real-time.
+      animationTimer = setTimeout(function() {
+        applyDiscountEffect();
+      }, 1350);
     }
 
     function attachPriceDropObserver() {
