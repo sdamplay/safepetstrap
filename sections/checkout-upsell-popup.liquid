@@ -104,13 +104,13 @@
           <div class="checkout-upsell-qty-grid">
             <!-- 1x Harness -->
             <button type="button" class="checkout-upsell-qty-card active" id="checkoutUpsellQty1" data-qty="1">
+              <span class="checkout-upsell-qty-check">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
               <div class="checkout-upsell-qty-card-row">
                 <span class="checkout-upsell-qty-card-title">1x Harness</span>
-                <span class="checkout-upsell-qty-check">
-                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
               </div>
               <div class="checkout-upsell-qty-price-row">
                 <span class="checkout-upsell-qty-unit-price" id="checkoutUpsellQty1Price">$24.95</span>
@@ -122,13 +122,13 @@
             <!-- 2x Harnesses -->
             <button type="button" class="checkout-upsell-qty-card" id="checkoutUpsellQty2" data-qty="2">
               <span class="checkout-upsell-qty-badge checkout-upsell-badge-green">POPULAR</span>
+              <span class="checkout-upsell-qty-check">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
               <div class="checkout-upsell-qty-card-row">
                 <span class="checkout-upsell-qty-card-title">2x Harnesses</span>
-                <span class="checkout-upsell-qty-check">
-                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
               </div>
               <div class="checkout-upsell-qty-price-row">
                 <span class="checkout-upsell-qty-unit-price text-green" id="checkoutUpsellQty2Price">$22.95</span>
@@ -140,13 +140,13 @@
             <!-- 3x Harnesses -->
             <button type="button" class="checkout-upsell-qty-card" id="checkoutUpsellQty3" data-qty="3">
               <span class="checkout-upsell-qty-badge checkout-upsell-badge-green">BEST VALUE</span>
+              <span class="checkout-upsell-qty-check">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
               <div class="checkout-upsell-qty-card-row">
                 <span class="checkout-upsell-qty-card-title">3x Harnesses</span>
-                <span class="checkout-upsell-qty-check">
-                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </span>
               </div>
               <div class="checkout-upsell-qty-price-row">
                 <span class="checkout-upsell-qty-unit-price text-green" id="checkoutUpsellQty3Price">$19.95</span>
@@ -767,20 +767,25 @@
     .checkout-upsell-qty-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 5px;
+      gap: 6px;
+      margin-top: 5px;
+      padding-top: 4px;
+      overflow: visible;
     }
     .checkout-upsell-qty-card {
       background: #ffffff;
       border: 1.5px solid #e5e7eb;
       border-radius: 9px;
-      padding: 7px 5px;
+      padding: 8px 4px;
       cursor: pointer;
-      text-align: left;
+      text-align: center;
       position: relative;
+      overflow: visible;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      align-items: center;
+      justify-content: center;
       outline: none;
       min-width: 0;
     }
@@ -791,19 +796,21 @@
     .checkout-upsell-qty-card.active {
       border: 2px solid #16a34a !important;
       background: #f0fdf4 !important;
-      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.18);
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.18) !important;
     }
     .checkout-upsell-qty-card-row {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      margin-bottom: 1px;
+      width: 100%;
+      margin-bottom: 2px;
     }
     .checkout-upsell-qty-card-title {
-      font-size: 11px;
-      font-weight: 800;
+      font-size: 12.5px;
+      font-weight: 850;
       color: #111827;
       line-height: 1.2;
+      text-align: center;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -812,44 +819,44 @@
       color: #15803d;
     }
     .checkout-upsell-qty-check {
-      width: 15px;
-      height: 15px;
+      display: none;
+      position: absolute;
+      top: -6px;
+      right: -5px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
-      border: 1.5px solid #cbd5e1;
-      background-color: #ffffff;
-      display: flex;
+      background-color: #16a34a;
+      color: #ffffff;
       align-items: center;
       justify-content: center;
-      position: relative;
       flex-shrink: 0;
-      transition: all 0.2s ease;
-      color: #ffffff;
-    }
-    .checkout-upsell-qty-check svg {
-      display: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      z-index: 3;
     }
     .checkout-upsell-qty-card.active .checkout-upsell-qty-check {
-      border-color: #16a34a;
-      background-color: #16a34a;
-      box-shadow: 0 1px 3px rgba(22, 163, 74, 0.35);
+      display: flex;
     }
-    .checkout-upsell-qty-card.active .checkout-upsell-qty-check svg {
+    .checkout-upsell-qty-check svg {
       display: block;
     }
     .checkout-upsell-qty-price-row {
       display: flex;
       align-items: baseline;
+      justify-content: center;
       gap: 2px;
       margin-top: 3px;
+      width: 100%;
     }
     .checkout-upsell-qty-unit-price {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 900;
       color: #111827;
       line-height: 1;
+      text-align: center;
     }
     .checkout-upsell-qty-unit-label {
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 700;
       color: #6b7280;
       line-height: 1;
@@ -860,6 +867,8 @@
       font-weight: 600;
       line-height: 1.2;
       margin-top: 2px;
+      text-align: center;
+      width: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -873,15 +882,17 @@
     .checkout-upsell-qty-badge {
       position: absolute;
       top: -7px;
-      right: 4px;
+      left: 50%;
+      transform: translateX(-50%);
       font-size: 7.5px;
       font-weight: 900;
       padding: 1px 5px;
       border-radius: 9999px;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
       white-space: nowrap;
+      z-index: 2;
     }
     .checkout-upsell-badge-green {
       background-color: #16a34a;
@@ -1235,25 +1246,32 @@
       .checkout-upsell-qty-header {
         margin-bottom: 3px !important;
       }
+      .checkout-upsell-qty-grid {
+        gap: 5px !important;
+        margin-top: 4px !important;
+        padding-top: 5px !important;
+      }
       .checkout-upsell-qty-card {
-        padding: 6px 4px !important;
+        padding: 6px 2px !important;
       }
       .checkout-upsell-qty-card-title {
-        font-size: 10px !important;
+        font-size: 11.5px !important;
       }
       .checkout-upsell-qty-check {
-        width: 13px !important;
-        height: 13px !important;
+        top: -5px !important;
+        right: -4px !important;
+        width: 14px !important;
+        height: 14px !important;
       }
       .checkout-upsell-qty-check svg {
         width: 8px !important;
         height: 8px !important;
       }
       .checkout-upsell-qty-unit-price {
-        font-size: 13.5px !important;
+        font-size: 14px !important;
       }
       .checkout-upsell-qty-unit-label {
-        font-size: 9px !important;
+        font-size: 9.5px !important;
       }
       .checkout-upsell-qty-card-sub {
         font-size: 8.5px !important;
