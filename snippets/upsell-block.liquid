@@ -582,20 +582,45 @@
     line-height: 1 !important;
   }
 
-  /* --- TRIGGERED DISCOUNT STATE (Cascaded via JS) --- */
-  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-price-was {
+  /* --- TRIGGERED DISCOUNT STATE (Cascaded via JS & Persistent Drawer Session) --- */
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-price-was,
+  cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-price-was,
+  .cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-price-was,
+  cart-drawer[data-deals-discounted="true"] .upsell--add_button .upsell-pro-deal-price .upsell-price-was,
+  #CartDrawer[data-deals-discounted="true"] .upsell--add_button .upsell-pro-deal-price .upsell-price-was,
+  body.cart-deals-discounted .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-price-was {
     color: #9ca3af !important;
   }
 
-  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-strikethrough-bar {
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-strikethrough-bar,
+  cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar,
+  .cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar,
+  cart-drawer[data-deals-discounted="true"] .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar,
+  #CartDrawer[data-deals-discounted="true"] .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar,
+  body.cart-deals-discounted .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar {
     width: 100% !important;
   }
 
-  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-price-now {
+  .cart-drawer .upsell--add_button .upsell-pro-deal-price.is-discounted .upsell-price-now,
+  cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-price-now,
+  .cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-price-now,
+  cart-drawer[data-deals-discounted="true"] .upsell--add_button .upsell-pro-deal-price .upsell-price-now,
+  #CartDrawer[data-deals-discounted="true"] .upsell--add_button .upsell-pro-deal-price .upsell-price-now,
+  body.cart-deals-discounted .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-price-now {
     opacity: 1 !important;
     max-width: 80px !important;
     margin-left: 6px !important;
     transform: scale(1) translateX(0) !important;
+  }
+
+  /* Instant persistence on re-render: When already discounted during the open drawer session, newly injected AJAX items show discount with zero delay or flicker */
+  cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar,
+  .cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar,
+  cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-price-now,
+  .cart-drawer.deals-discounted .upsell--add_button .upsell-pro-deal-price .upsell-price-now,
+  body.cart-deals-discounted .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-strikethrough-bar,
+  body.cart-deals-discounted .cart-drawer .upsell--add_button .upsell-pro-deal-price .upsell-price-now {
+    transition: none !important;
   }
 
   /* Variant picker inside deal card */
@@ -698,90 +723,206 @@
 
 <script>
   (function() {
+    // If deals are already discounted in this open session, immediately sync any newly re-rendered DOM elements
+    if (window.__safepetDealsDiscounted && typeof window.__safepetSyncDeals === 'function') {
+      window.__safepetSyncDeals(true);
+    }
+
     if (window.__safepetPriceDropInit) return;
     window.__safepetPriceDropInit = true;
 
     var animationTimer = null;
+    window.__safepetDealsDiscounted = false;
 
-    function applyDiscountEffect() {
-      var priceElements = document.querySelectorAll('.upsell-pro-deal-price:not(.is-discounted)');
-      if (!priceElements.length) return;
-
-      priceElements.forEach(function(el, index) {
-        setTimeout(function() {
-          el.classList.add('is-discounted');
-        }, index * 95); // Domino cascade across deals
-      });
+    function getDrawerElements() {
+      var cartDrawerTag = document.querySelector('cart-drawer');
+      var cartDrawerDiv = document.querySelector('#CartDrawer, .cart-drawer');
+      return {
+        tag: cartDrawerTag,
+        div: cartDrawerDiv,
+        primary: cartDrawerTag || cartDrawerDiv || document.querySelector('.drawer')
+      };
     }
 
-    function runPriceDropAnimation() {
-      var drawer = document.querySelector('cart-drawer, #CartDrawer, .drawer');
-      if (!drawer) return;
+    function isDrawerOpen() {
+      var drawers = getDrawerElements();
+      var isOpenTag = drawers.tag && (
+        drawers.tag.classList.contains('active') ||
+        drawers.tag.classList.contains('is-active') ||
+        drawers.tag.getAttribute('aria-hidden') === 'false'
+      );
 
-      var isDrawerOpen = drawer.classList.contains('active') || 
-                         drawer.classList.contains('is-active') || 
-                         drawer.getAttribute('aria-hidden') === 'false';
+      var isOpenDiv = drawers.div && (
+        drawers.div.classList.contains('active') ||
+        drawers.div.classList.contains('is-active') ||
+        drawers.div.getAttribute('aria-hidden') === 'false'
+      );
 
-      if (!isDrawerOpen) {
-        if (animationTimer) clearTimeout(animationTimer);
-        // Reset when drawer closes so next open animates freshly
-        var activeElements = document.querySelectorAll('.upsell-pro-deal-price.is-discounted');
-        for (var i = 0; i < activeElements.length; i++) {
-          activeElements[i].classList.remove('is-discounted');
+      return Boolean(isOpenTag || isOpenDiv);
+    }
+
+    function markDrawerDiscounted(isDiscounted) {
+      var drawers = getDrawerElements();
+      var tag = drawers.tag;
+      var div = drawers.div;
+
+      if (isDiscounted) {
+        window.__safepetDealsDiscounted = true;
+        document.body.classList.add('cart-deals-discounted');
+        if (tag) {
+          tag.classList.add('deals-discounted');
+          tag.setAttribute('data-deals-discounted', 'true');
         }
+        if (div) {
+          div.classList.add('deals-discounted');
+          div.setAttribute('data-deals-discounted', 'true');
+        }
+      } else {
+        window.__safepetDealsDiscounted = false;
+        document.body.classList.remove('cart-deals-discounted');
+        if (tag) {
+          tag.classList.remove('deals-discounted');
+          tag.removeAttribute('data-deals-discounted');
+        }
+        if (div) {
+          div.classList.remove('deals-discounted');
+          div.removeAttribute('data-deals-discounted');
+        }
+      }
+    }
+
+    function syncDeals(immediate) {
+      var priceElements = document.querySelectorAll('.upsell-pro-deal-price');
+      if (!priceElements.length) return;
+
+      markDrawerDiscounted(true);
+
+      if (immediate) {
+        priceElements.forEach(function(el) {
+          el.classList.add('is-discounted');
+        });
+      } else {
+        var unDiscounted = document.querySelectorAll('.upsell-pro-deal-price:not(.is-discounted)');
+        if (!unDiscounted.length) return;
+        unDiscounted.forEach(function(el, index) {
+          setTimeout(function() {
+            el.classList.add('is-discounted');
+          }, index * 95); // Domino cascade across deals
+        });
+      }
+    }
+    window.__safepetSyncDeals = syncDeals;
+
+    function resetDeals() {
+      if (animationTimer) {
+        clearTimeout(animationTimer);
+        animationTimer = null;
+      }
+      markDrawerDiscounted(false);
+      var activeElements = document.querySelectorAll('.upsell-pro-deal-price.is-discounted');
+      for (var i = 0; i < activeElements.length; i++) {
+        activeElements[i].classList.remove('is-discounted');
+      }
+    }
+
+    function onDrawerStateChange() {
+      var open = isDrawerOpen();
+
+      if (!open) {
+        resetDeals();
         return;
       }
 
-      if (animationTimer) clearTimeout(animationTimer);
+      // If drawer is open and deals were ALREADY discounted in this open session,
+      // immediately ensure newly rendered items remain discounted (e.g. after adding an add-on)
+      if (window.__safepetDealsDiscounted) {
+        syncDeals(true);
+        return;
+      }
 
-      // Strategic CRO delay (1350ms): Gives customers ample time to absorb the top cart items/progress bar,
-      // move their gaze down to "⚡ One-Time Cart Deals", clearly register the original prices,
-      // and then watch the prices actively slash down in real-time.
+      // Fresh drawer open: set the 1350ms delay for high-converting price drop animation
+      if (animationTimer) clearTimeout(animationTimer);
       animationTimer = setTimeout(function() {
-        applyDiscountEffect();
+        if (isDrawerOpen()) {
+          syncDeals(false);
+        }
       }, 1350);
     }
 
-    function attachPriceDropObserver() {
-      var drawer = document.querySelector('cart-drawer, #CartDrawer, .drawer');
-      if (!drawer) return;
+    function attachObservers() {
+      var drawers = getDrawerElements();
+      var target = drawers.tag || drawers.div;
+      if (!target) return;
 
-      if (drawer.__priceDropObserverAttached) return;
-      drawer.__priceDropObserverAttached = true;
+      if (target.__priceDropObserverAttached) return;
+      target.__priceDropObserverAttached = true;
 
       var observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(m) {
+        var hasChildMutation = false;
+        var hasAttributeMutation = false;
+
+        for (var i = 0; i < mutations.length; i++) {
+          var m = mutations[i];
           if (m.type === 'attributes' && (m.attributeName === 'class' || m.attributeName === 'aria-hidden')) {
-            runPriceDropAnimation();
+            hasAttributeMutation = true;
+          } else if (m.type === 'childList') {
+            hasChildMutation = true;
           }
-        });
+        }
+
+        if (hasAttributeMutation) {
+          onDrawerStateChange();
+        } else if (hasChildMutation) {
+          // If childList mutated (AJAX re-render when an add-on is added) while drawer is open:
+          if (isDrawerOpen()) {
+            if (window.__safepetDealsDiscounted) {
+              syncDeals(true); // Keep discounted with ZERO delay or flicker!
+            } else {
+              // Customer interacted with cart before 1350ms -> immediate discount
+              syncDeals(true);
+            }
+          }
+        }
       });
 
-      observer.observe(drawer, { attributes: true, attributeFilter: ['class', 'aria-hidden'] });
+      observer.observe(target, {
+        attributes: true,
+        attributeFilter: ['class', 'aria-hidden'],
+        childList: true,
+        subtree: true
+      });
 
-      // Run on initial check if drawer is already open
-      runPriceDropAnimation();
+      onDrawerStateChange();
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', attachPriceDropObserver);
+      document.addEventListener('DOMContentLoaded', attachObservers);
     } else {
-      attachPriceDropObserver();
+      attachObservers();
     }
 
-    document.addEventListener('cart-drawer:open', runPriceDropAnimation);
-    document.addEventListener('cart:open', runPriceDropAnimation);
-    document.addEventListener('cart:refresh', function() {
-      attachPriceDropObserver();
-      runPriceDropAnimation();
+    // Comprehensive event listeners for cart lifecycle
+    var cartEvents = ['cart-drawer:open', 'cart:open', 'cart:refresh', 'cart:update', 'cart:updated', 'cartQuantityUpdated', 'shopify:section:load'];
+    cartEvents.forEach(function(evtName) {
+      document.addEventListener(evtName, function() {
+        attachObservers();
+        if (isDrawerOpen()) {
+          if (window.__safepetDealsDiscounted) {
+            syncDeals(true);
+          } else {
+            onDrawerStateChange();
+          }
+        }
+      });
     });
-    document.addEventListener('cart:updated', function() {
-      attachPriceDropObserver();
-      runPriceDropAnimation();
-    });
-    document.addEventListener('shopify:section:load', function() {
-      attachPriceDropObserver();
-      runPriceDropAnimation();
-    });
+
+    // Also support theme pubsub if present
+    if (typeof window.subscribe === 'function' && window.PUB_SUB_EVENTS) {
+      window.subscribe(PUB_SUB_EVENTS.cartUpdate, function() {
+        if (isDrawerOpen() && window.__safepetDealsDiscounted) {
+          syncDeals(true);
+        }
+      });
+    }
   })();
 </script>
