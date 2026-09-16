@@ -163,30 +163,43 @@
             
             <div class="size-pills-row" id="checkoutUpsellVariantCards1">
               {%- if upsell_product != blank -%}
-                {%- assign active_set = false -%}
+                {%- assign active_card_1 = false -%}
                 {%- for variant in upsell_product.variants -%}
-                  {%- assign title_upper = variant.title | upcase -%}
-                  {%- if title_upper != 'XS' and title_upper != 'EXTRA SMALL' -%}
-                    {%- assign weight_str = '10–28 Lbs' -%}
+                  {%- assign title_clean = variant.title | strip | upcase -%}
+                  {%- assign prefix_2 = title_clean | slice: 0, 2 -%}
+                  {%- assign prefix_1 = title_clean | slice: 0, 1 -%}
+                  {%- assign first_word = title_clean | split: ' ' | first -%}
+                  {%- assign is_valid_size = false -%}
+                  {%- assign display_size = '' -%}
+                  {%- assign weight_str = '' -%}
+
+                  {%- if prefix_2 == 'XS' or first_word == 'XS' or title_clean contains 'EXTRA SMALL' -%}
+                    {%- assign is_valid_size = false -%}
+                  {%- elsif prefix_2 == 'XL' or prefix_1 == 'X' or first_word == 'XL' or first_word == 'X-LARGE' or title_clean contains 'EXTRA LARGE' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'XL' -%}
+                    {%- assign weight_str = '70–132 Lbs' -%}
+                  {%- elsif prefix_1 == 'S' or first_word == 'S' or first_word == 'SMALL' -%}
+                    {%- assign is_valid_size = true -%}
                     {%- assign display_size = 'S' -%}
-                    {%- case title_upper -%}
-                      {%- when 'S', 'SMALL' -%}
-                        {%- assign weight_str = '10–28 Lbs' -%}
-                        {%- assign display_size = 'S' -%}
-                      {%- when 'M', 'MEDIUM' -%}
-                        {%- assign weight_str = '28–50 Lbs' -%}
-                        {%- assign display_size = 'M' -%}
-                      {%- when 'L', 'LARGE' -%}
-                        {%- assign weight_str = '45–70 Lbs' -%}
-                        {%- assign display_size = 'L' -%}
-                      {%- when 'XL', 'X-LARGE', 'EXTRA LARGE' -%}
-                        {%- assign weight_str = '70–132 Lbs' -%}
-                        {%- assign display_size = 'XL' -%}
-                      {%- else -%}
-                        {%- assign weight_str = '10–28 Lbs' -%}
-                        {%- assign display_size = title_upper -%}
-                    {%- endcase -%}
-                    <div class="size-pill-card{% if display_size == 'S' or active_set == false %} active{% endif %}" 
+                    {%- assign weight_str = '10–28 Lbs' -%}
+                  {%- elsif prefix_1 == 'M' or first_word == 'M' or first_word == 'MEDIUM' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'M' -%}
+                    {%- assign weight_str = '28–50 Lbs' -%}
+                  {%- elsif prefix_1 == 'L' or first_word == 'L' or first_word == 'LARGE' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'L' -%}
+                    {%- assign weight_str = '45–70 Lbs' -%}
+                  {%- endif -%}
+
+                  {%- if is_valid_size -%}
+                    {%- assign is_active1 = false -%}
+                    {%- if display_size == 'S' and active_card_1 == false -%}
+                      {%- assign is_active1 = true -%}
+                      {%- assign active_card_1 = true -%}
+                    {%- endif -%}
+                    <div class="size-pill-card{% if is_active1 %} active{% endif %}" 
                          data-dog="1"
                          data-variant-id="{{ variant.id }}"
                          data-size="{{ display_size }}"
@@ -201,7 +214,6 @@
                       </div>
                       <div class="size-weight">{{ weight_str }}</div>
                     </div>
-                    {%- if display_size == 'S' -%}{%- assign active_set = true -%}{%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- else -%}
@@ -256,30 +268,43 @@
             
             <div class="size-pills-row" id="checkoutUpsellVariantCards2">
               {%- if upsell_product != blank -%}
-                {%- assign active_set2 = false -%}
+                {%- assign active_card_2 = false -%}
                 {%- for variant in upsell_product.variants -%}
-                  {%- assign title_upper = variant.title | upcase -%}
-                  {%- if title_upper != 'XS' and title_upper != 'EXTRA SMALL' -%}
+                  {%- assign title_clean = variant.title | strip | upcase -%}
+                  {%- assign prefix_2 = title_clean | slice: 0, 2 -%}
+                  {%- assign prefix_1 = title_clean | slice: 0, 1 -%}
+                  {%- assign first_word = title_clean | split: ' ' | first -%}
+                  {%- assign is_valid_size = false -%}
+                  {%- assign display_size = '' -%}
+                  {%- assign weight_str = '' -%}
+
+                  {%- if prefix_2 == 'XS' or first_word == 'XS' or title_clean contains 'EXTRA SMALL' -%}
+                    {%- assign is_valid_size = false -%}
+                  {%- elsif prefix_2 == 'XL' or prefix_1 == 'X' or first_word == 'XL' or first_word == 'X-LARGE' or title_clean contains 'EXTRA LARGE' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'XL' -%}
+                    {%- assign weight_str = '70–132 Lbs' -%}
+                  {%- elsif prefix_1 == 'S' or first_word == 'S' or first_word == 'SMALL' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'S' -%}
                     {%- assign weight_str = '10–28 Lbs' -%}
+                  {%- elsif prefix_1 == 'M' or first_word == 'M' or first_word == 'MEDIUM' -%}
+                    {%- assign is_valid_size = true -%}
                     {%- assign display_size = 'M' -%}
-                    {%- case title_upper -%}
-                      {%- when 'S', 'SMALL' -%}
-                        {%- assign weight_str = '10–28 Lbs' -%}
-                        {%- assign display_size = 'S' -%}
-                      {%- when 'M', 'MEDIUM' -%}
-                        {%- assign weight_str = '28–50 Lbs' -%}
-                        {%- assign display_size = 'M' -%}
-                      {%- when 'L', 'LARGE' -%}
-                        {%- assign weight_str = '45–70 Lbs' -%}
-                        {%- assign display_size = 'L' -%}
-                      {%- when 'XL', 'X-LARGE', 'EXTRA LARGE' -%}
-                        {%- assign weight_str = '70–132 Lbs' -%}
-                        {%- assign display_size = 'XL' -%}
-                      {%- else -%}
-                        {%- assign weight_str = '10–28 Lbs' -%}
-                        {%- assign display_size = title_upper -%}
-                    {%- endcase -%}
-                    <div class="size-pill-card{% if display_size == 'M' or active_set2 == false %} active{% endif %}" 
+                    {%- assign weight_str = '28–50 Lbs' -%}
+                  {%- elsif prefix_1 == 'L' or first_word == 'L' or first_word == 'LARGE' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'L' -%}
+                    {%- assign weight_str = '45–70 Lbs' -%}
+                  {%- endif -%}
+
+                  {%- if is_valid_size -%}
+                    {%- assign is_active2 = false -%}
+                    {%- if display_size == 'M' and active_card_2 == false -%}
+                      {%- assign is_active2 = true -%}
+                      {%- assign active_card_2 = true -%}
+                    {%- endif -%}
+                    <div class="size-pill-card{% if is_active2 %} active{% endif %}" 
                          data-dog="2"
                          data-variant-id="{{ variant.id }}"
                          data-size="{{ display_size }}"
@@ -294,7 +319,6 @@
                       </div>
                       <div class="size-weight">{{ weight_str }}</div>
                     </div>
-                    {%- if display_size == 'M' -%}{%- assign active_set2 = true -%}{%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- else -%}
@@ -341,30 +365,43 @@
             
             <div class="size-pills-row" id="checkoutUpsellVariantCards3">
               {%- if upsell_product != blank -%}
-                {%- assign active_set3 = false -%}
+                {%- assign active_card_3 = false -%}
                 {%- for variant in upsell_product.variants -%}
-                  {%- assign title_upper = variant.title | upcase -%}
-                  {%- if title_upper != 'XS' and title_upper != 'EXTRA SMALL' -%}
+                  {%- assign title_clean = variant.title | strip | upcase -%}
+                  {%- assign prefix_2 = title_clean | slice: 0, 2 -%}
+                  {%- assign prefix_1 = title_clean | slice: 0, 1 -%}
+                  {%- assign first_word = title_clean | split: ' ' | first -%}
+                  {%- assign is_valid_size = false -%}
+                  {%- assign display_size = '' -%}
+                  {%- assign weight_str = '' -%}
+
+                  {%- if prefix_2 == 'XS' or first_word == 'XS' or title_clean contains 'EXTRA SMALL' -%}
+                    {%- assign is_valid_size = false -%}
+                  {%- elsif prefix_2 == 'XL' or prefix_1 == 'X' or first_word == 'XL' or first_word == 'X-LARGE' or title_clean contains 'EXTRA LARGE' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'XL' -%}
+                    {%- assign weight_str = '70–132 Lbs' -%}
+                  {%- elsif prefix_1 == 'S' or first_word == 'S' or first_word == 'SMALL' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'S' -%}
                     {%- assign weight_str = '10–28 Lbs' -%}
+                  {%- elsif prefix_1 == 'M' or first_word == 'M' or first_word == 'MEDIUM' -%}
+                    {%- assign is_valid_size = true -%}
+                    {%- assign display_size = 'M' -%}
+                    {%- assign weight_str = '28–50 Lbs' -%}
+                  {%- elsif prefix_1 == 'L' or first_word == 'L' or first_word == 'LARGE' -%}
+                    {%- assign is_valid_size = true -%}
                     {%- assign display_size = 'L' -%}
-                    {%- case title_upper -%}
-                      {%- when 'S', 'SMALL' -%}
-                        {%- assign weight_str = '10–28 Lbs' -%}
-                        {%- assign display_size = 'S' -%}
-                      {%- when 'M', 'MEDIUM' -%}
-                        {%- assign weight_str = '28–50 Lbs' -%}
-                        {%- assign display_size = 'M' -%}
-                      {%- when 'L', 'LARGE' -%}
-                        {%- assign weight_str = '45–70 Lbs' -%}
-                        {%- assign display_size = 'L' -%}
-                      {%- when 'XL', 'X-LARGE', 'EXTRA LARGE' -%}
-                        {%- assign weight_str = '70–132 Lbs' -%}
-                        {%- assign display_size = 'XL' -%}
-                      {%- else -%}
-                        {%- assign weight_str = '10–28 Lbs' -%}
-                        {%- assign display_size = title_upper -%}
-                    {%- endcase -%}
-                    <div class="size-pill-card{% if display_size == 'L' or active_set3 == false %} active{% endif %}" 
+                    {%- assign weight_str = '45–70 Lbs' -%}
+                  {%- endif -%}
+
+                  {%- if is_valid_size -%}
+                    {%- assign is_active3 = false -%}
+                    {%- if display_size == 'L' and active_card_3 == false -%}
+                      {%- assign is_active3 = true -%}
+                      {%- assign active_card_3 = true -%}
+                    {%- endif -%}
+                    <div class="size-pill-card{% if is_active3 %} active{% endif %}" 
                          data-dog="3"
                          data-variant-id="{{ variant.id }}"
                          data-size="{{ display_size }}"
@@ -379,7 +416,6 @@
                       </div>
                       <div class="size-weight">{{ weight_str }}</div>
                     </div>
-                    {%- if display_size == 'L' -%}{%- assign active_set3 = true -%}{%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- else -%}
@@ -600,10 +636,10 @@
     }
     @media screen and (max-width: 480px) {
       .checkout-upsell-product-row {
-        flex-direction: row;
-        gap: 10px;
+        flex-direction: column;
+        gap: 12px;
         align-items: center;
-        text-align: left;
+        text-align: center;
       }
     }
     
@@ -1123,19 +1159,20 @@
         font-size: 10.5px !important;
       }
       .checkout-upsell-product-media {
-        width: 52px !important;
-        height: 52px !important;
-        min-width: 52px !important;
-        border-radius: 8px !important;
+        width: min({{ section.settings.image_size }}px, 250px) !important;
+        height: min({{ section.settings.image_size }}px, 250px) !important;
+        max-width: 100% !important;
+        border-radius: 12px !important;
+        margin: 0 auto;
       }
       .checkout-upsell-product-title {
-        font-size: 12.5px !important;
-        margin-bottom: 2px !important;
+        font-size: {{ section.settings.font_size_title }}px !important;
+        margin-bottom: 4px !important;
       }
       .checkout-upsell-price-row {
-        justify-content: flex-start !important;
-        margin-bottom: 0 !important;
-        gap: 6px !important;
+        justify-content: center !important;
+        margin-bottom: 8px !important;
+        gap: 8px !important;
       }
       .checkout-upsell-price-sale {
         font-size: 15px !important;
@@ -1331,9 +1368,13 @@
         if (displayDiscountEl) displayDiscountEl.textContent = tier.discount;
         if (savingsHintEl) savingsHintEl.textContent = tier.hint;
         
-        var size1Display = activeSize1 + (activeWeight1 ? ' (' + activeWeight1 + ')' : '');
-        var size2Display = activeSize2 + (activeWeight2 ? ' (' + activeWeight2 + ')' : '');
-        var size3Display = activeSize3 + (activeWeight3 ? ' (' + activeWeight3 + ')' : '');
+        var cleanSize1 = (activeSize1 || 'S').split('(')[0].trim();
+        var cleanSize2 = (activeSize2 || 'M').split('(')[0].trim();
+        var cleanSize3 = (activeSize3 || 'L').split('(')[0].trim();
+
+        var size1Display = cleanSize1 + (activeWeight1 ? ' (' + activeWeight1 + ')' : '');
+        var size2Display = cleanSize2 + (activeWeight2 ? ' (' + activeWeight2 + ')' : '');
+        var size3Display = cleanSize3 + (activeWeight3 ? ' (' + activeWeight3 + ')' : '');
 
         if (selectedSizeText1) selectedSizeText1.textContent = size1Display;
         if (selectedSizeText2) selectedSizeText2.textContent = size2Display;
@@ -1344,19 +1385,19 @@
           if (dog2Wrap) dog2Wrap.style.display = 'none';
           if (dog3Wrap) dog3Wrap.style.display = 'none';
           if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD TO MY ORDER — $" + tier.total.toFixed(2);
-          if (addBtnSub) addBtnSub.textContent = "✓ Size " + activeSize1 + " Selected • 100% Perfect Fit Guarantee";
+          if (addBtnSub) addBtnSub.textContent = "✓ Size " + cleanSize1 + " Selected • 100% Perfect Fit Guarantee";
         } else if (currentQty === 2) {
           if (sizeLabel1) sizeLabel1.innerHTML = '🐶 Harness #1 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">' + size1Display + '</span>';
           if (dog2Wrap) dog2Wrap.style.display = 'block';
           if (dog3Wrap) dog3Wrap.style.display = 'none';
           if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 2x TO MY ORDER — $" + tier.total.toFixed(2) + " (SAVE $4)";
-          if (addBtnSub) addBtnSub.textContent = "✓ Sizes: " + activeSize1 + " & " + activeSize2 + " • 100% Perfect Fit Guarantee";
+          if (addBtnSub) addBtnSub.textContent = "✓ Sizes: " + cleanSize1 + " & " + cleanSize2 + " • 100% Perfect Fit Guarantee";
         } else {
           if (sizeLabel1) sizeLabel1.innerHTML = '🐶 Harness #1 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">' + size1Display + '</span>';
           if (dog2Wrap) dog2Wrap.style.display = 'block';
           if (dog3Wrap) dog3Wrap.style.display = 'block';
           if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 3x TO MY ORDER — $" + tier.total.toFixed(2) + " (SAVE $15)";
-          if (addBtnSub) addBtnSub.textContent = "✓ Sizes: " + activeSize1 + ", " + activeSize2 + ", " + activeSize3 + " • 100% Perfect Fit Guarantee";
+          if (addBtnSub) addBtnSub.textContent = "✓ Sizes: " + cleanSize1 + ", " + cleanSize2 + ", " + cleanSize3 + " • 100% Perfect Fit Guarantee";
         }
       }
       
@@ -1440,20 +1481,38 @@
         // Bind size card selection for a dog container
         function bindCards(container, dogIndex) {
           if (!container) return;
-          var activeCard = container.querySelector('.size-pill-card.active');
-          if (activeCard) {
-            var vid = activeCard.getAttribute('data-variant-id');
-            var s = activeCard.getAttribute('data-size') || 'S';
-            var w = activeCard.getAttribute('data-weight') || '';
-            if (dogIndex === 1) { activeVariantId1 = vid; activeSize1 = s; activeWeight1 = w; }
-            if (dogIndex === 2) { activeVariantId2 = vid; activeSize2 = s; activeWeight2 = w; }
-            if (dogIndex === 3) { activeVariantId3 = vid; activeSize3 = s; activeWeight3 = w; }
+          var cards = container.querySelectorAll('.size-pill-card');
+          if (!cards || cards.length === 0) return;
+          
+          var preferredSize = dogIndex === 1 ? 'S' : (dogIndex === 2 ? 'M' : 'L');
+          var targetCard = null;
+          
+          cards.forEach(function(c) {
+            if (c.getAttribute('data-size') === preferredSize && !targetCard) {
+              targetCard = c;
+            }
+          });
+          
+          if (!targetCard) {
+            targetCard = container.querySelector('.size-pill-card.active') || cards[0];
           }
+          
+          cards.forEach(function(c) {
+            c.classList.remove('active');
+          });
+          targetCard.classList.add('active');
+          
+          var vid = targetCard.getAttribute('data-variant-id');
+          var s = targetCard.getAttribute('data-size') || preferredSize;
+          var w = targetCard.getAttribute('data-weight') || '';
+          if (dogIndex === 1) { activeVariantId1 = vid; activeSize1 = s; activeWeight1 = w; }
+          if (dogIndex === 2) { activeVariantId2 = vid; activeSize2 = s; activeWeight2 = w; }
+          if (dogIndex === 3) { activeVariantId3 = vid; activeSize3 = s; activeWeight3 = w; }
           
           container.addEventListener('click', function(event) {
             var card = event.target.closest('.size-pill-card');
             if (card) {
-              container.querySelectorAll('.size-pill-card').forEach(function(c) {
+              cards.forEach(function(c) {
                 c.classList.remove('active');
               });
               card.classList.add('active');
