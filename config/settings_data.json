@@ -1045,7 +1045,9 @@
           "font_size_add_btn": 14,
           "add_btn_subtext": "✓ Size S Selected • Free Exchanges",
           "skip_btn_text": "No thanks, I will take the risk of neck strain with a collar >",
-          "font_size_skip_btn": 11
+          "font_size_skip_btn": 11,
+          "discount_code_2x": "HARNESS2X",
+          "discount_code_3x": "HARNESS3X"
         }
       }
     },
