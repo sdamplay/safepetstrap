@@ -493,7 +493,7 @@
             {%- if section.settings.add_btn_subtext != blank -%}
               {{ section.settings.add_btn_subtext | escape }}
             {%- else -%}
-              ✓ Size S Selected • Free Exchanges
+              ✓ Size S Selected • Protects Neck & Spine From Sudden Brakes
             {%- endif -%}
           </span>
         </button>
@@ -1475,19 +1475,19 @@
           if (dog2Wrap) dog2Wrap.style.display = 'none';
           if (dog3Wrap) dog3Wrap.style.display = 'none';
           if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD TO MY ORDER — $" + tier.total.toFixed(2);
-          if (addBtnSub) addBtnSub.textContent = "✓ Size " + cleanSize1 + " Selected • Free Exchanges";
+          if (addBtnSub) addBtnSub.textContent = "✓ Size " + cleanSize1 + " Selected • Protects Neck & Spine From Sudden Brakes";
         } else if (currentQty === 2) {
           if (sizeLabel1) sizeLabel1.innerHTML = '🐶 Harness #1 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">' + size1Display + '</span>';
           if (dog2Wrap) dog2Wrap.style.display = 'block';
           if (dog3Wrap) dog3Wrap.style.display = 'none';
           if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 2x TO MY ORDER — $" + tier.total.toFixed(2);
-          if (addBtnSub) addBtnSub.textContent = "✓ Sizes (" + cleanSize1 + " & " + cleanSize2 + ") Selected • Free Exchanges";
+          if (addBtnSub) addBtnSub.textContent = "✓ Sizes (" + cleanSize1 + " & " + cleanSize2 + ") • Complete No-Choke Protection For Both Pups";
         } else {
           if (sizeLabel1) sizeLabel1.innerHTML = '🐶 Harness #1 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">' + size1Display + '</span>';
           if (dog2Wrap) dog2Wrap.style.display = 'block';
           if (dog3Wrap) dog3Wrap.style.display = 'block';
           if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 3x TO MY ORDER — $" + tier.total.toFixed(2);
-          if (addBtnSub) addBtnSub.textContent = "✓ Sizes (" + cleanSize1 + ", " + cleanSize2 + ", " + cleanSize3 + ") Selected • Free Exchanges";
+          if (addBtnSub) addBtnSub.textContent = "✓ Sizes (" + cleanSize1 + ", " + cleanSize2 + ", " + cleanSize3 + ") • Total Protection For All Your Fur Babies";
         }
       }
       
@@ -2001,7 +2001,7 @@
       "type": "text",
       "id": "add_btn_subtext",
       "label": "Add Button Subtext",
-      "default": "✓ Size S Selected • Free Exchanges"
+      "default": "✓ Size S Selected • Protects Neck & Spine From Sudden Brakes"
     },
     {
       "type": "text",
