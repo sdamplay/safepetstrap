@@ -94,10 +94,11 @@
           </div>
         </div>
 
-        <!-- Quantity Selection (1x vs 2x) -->
+        <!-- Quantity Selection (1x, 2x, 3x) -->
         <div class="checkout-upsell-qty-wrap">
           <div class="checkout-upsell-qty-header">
             <span class="checkout-upsell-qty-label">1. Choose Quantity:</span>
+            <span class="checkout-upsell-savings-hint" id="checkoutUpsellSavingsHint">Standard Offer</span>
           </div>
           <div class="checkout-upsell-qty-grid">
             <button type="button" class="checkout-upsell-qty-card active" id="checkoutUpsellQty1" data-qty="1">
@@ -107,130 +108,276 @@
               </div>
               <div class="checkout-upsell-qty-card-sub">
                 <span class="checkout-upsell-qty-card-desc">Single Pup</span>
-                <span class="checkout-upsell-qty-card-price" id="checkoutUpsellQty1Price">{{ product_price }}</span>
+                <span class="checkout-upsell-qty-card-price" id="checkoutUpsellQty1Price">{{ product_price | default: '$24.95' }}</span>
               </div>
+              <div class="checkout-upsell-qty-card-unit">$24.95/ea</div>
             </button>
             
             <button type="button" class="checkout-upsell-qty-card" id="checkoutUpsellQty2" data-qty="2">
-              <span class="checkout-upsell-qty-badge">POPULAR DEAL</span>
+              <span class="checkout-upsell-qty-badge checkout-upsell-badge-green">POPULAR</span>
               <div class="checkout-upsell-qty-card-row">
                 <span class="checkout-upsell-qty-card-title">2x Harnesses</span>
                 <span class="checkout-upsell-qty-radio"></span>
               </div>
               <div class="checkout-upsell-qty-card-sub">
                 <span class="checkout-upsell-qty-card-desc">2 Dogs / Backup</span>
-                <span class="checkout-upsell-qty-card-price" id="checkoutUpsellQty2Price">$49.90</span>
+                <span class="checkout-upsell-qty-card-price checkout-upsell-price-highlight" id="checkoutUpsellQty2Price">$45.90</span>
               </div>
+              <div class="checkout-upsell-qty-card-unit text-green">$22.95/ea</div>
+            </button>
+
+            <button type="button" class="checkout-upsell-qty-card" id="checkoutUpsellQty3" data-qty="3">
+              <span class="checkout-upsell-qty-badge checkout-upsell-badge-red">BEST VALUE</span>
+              <div class="checkout-upsell-qty-card-row">
+                <span class="checkout-upsell-qty-card-title">3x Harnesses</span>
+                <span class="checkout-upsell-qty-radio"></span>
+              </div>
+              <div class="checkout-upsell-qty-card-sub">
+                <span class="checkout-upsell-qty-card-desc">Full Protection</span>
+                <span class="checkout-upsell-qty-card-price checkout-upsell-price-best" id="checkoutUpsellQty3Price">$59.85</span>
+              </div>
+              <div class="checkout-upsell-qty-card-unit text-red">$19.95/ea</div>
             </button>
           </div>
         </div>
         
-        <!-- Variant / Size Selection (Moved above benefits bullets for mobile viewability) -->
+        <!-- Custom Size Selection Cards with Green Check Badge (Matching Reference Screenshot) -->
         <div class="checkout-upsell-variants-wrap">
-          <div class="checkout-upsell-variants-header">
-            <span class="checkout-upsell-variants-label" id="checkoutUpsellSizeLabel1">Select Your Dog's Size:</span>
-            <span class="size-chart__integrated-inline">
-              <button type="button" class="checkout-upsell-size-chart-trigger" id="checkoutUpsellSizeChartTrigger">
-                📏 View Sizing Table
-              </button>
-            </span>
-          </div>
           
-          <!-- Dog 1 Size Pills -->
-          <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills1">
-            {%- if upsell_product != blank -%}
-              {%- assign active_set = false -%}
-              {%- for variant in upsell_product.variants -%}
-                {%- assign title_upper = variant.title | upcase -%}
-                {%- if title_upper != 'XS' -%}
-                  {%- assign weight_sub = '' -%}
-                  {%- case title_upper -%}
-                    {%- when 'S' -%}{%- assign weight_sub = '10–28 lbs' -%}
-                    {%- when 'M' -%}{%- assign weight_sub = '28–50 lbs' -%}
-                    {%- when 'L' -%}{%- assign weight_sub = '45–70 lbs' -%}
-                    {%- when 'XL' -%}{%- assign weight_sub = '70–132 lbs' -%}
-                  {%- endcase -%}
-                  <button type="button" 
-                          class="checkout-upsell-size-pill{% if active_set == false %} active{% endif %}" 
-                          data-variant-id="{{ variant.id }}"
-                          data-size="{{ title_upper }}">
-                    <span class="checkout-pill-title">{{ variant.title }}</span>
-                    {%- if weight_sub != blank -%}
-                      <span class="checkout-pill-weight">{{ weight_sub }}</span>
-                    {%- endif -%}
-                  </button>
-                  {%- assign active_set = true -%}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- else -%}
-              <button type="button" class="checkout-upsell-size-pill active" data-variant-id="48139846418662" data-size="S">
-                <span class="checkout-pill-title">S</span>
-                <span class="checkout-pill-weight">10–28 lbs</span>
-              </button>
-              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846484198" data-size="M">
-                <span class="checkout-pill-title">M</span>
-                <span class="checkout-pill-weight">28–50 lbs</span>
-              </button>
-              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846516966" data-size="L">
-                <span class="checkout-pill-title">L</span>
-                <span class="checkout-pill-weight">45–70 lbs</span>
-              </button>
-              <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846549734" data-size="XL">
-                <span class="checkout-pill-title">XL</span>
-                <span class="checkout-pill-weight">70–132 lbs</span>
-              </button>
-            {%- endif -%}
-          </div>
-
-          <!-- Dog 2 Size Selector (Expands dynamically when 2x is chosen) -->
-          <div class="checkout-upsell-dog2-wrap" id="checkoutUpsellDog2Wrap" style="display: none;">
-            <div class="checkout-upsell-variants-header checkout-upsell-dog2-header">
-              <span class="checkout-upsell-variants-label">🐶 Dog #2 Size:</span>
-              <span class="checkout-upsell-dog2-hint">Mix & match any size</span>
+          <!-- Harness #1 Section -->
+          <div class="checkout-upsell-dog-section" id="checkoutUpsellDog1Wrap">
+            <div class="checkout-upsell-variants-header">
+              <span class="checkout-upsell-variants-label" id="checkoutUpsellSizeLabel1">
+                1. Select Your Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">Small</span>
+              </span>
+              <span class="size-chart__integrated-inline">
+                <button type="button" class="checkout-upsell-size-chart-trigger" id="checkoutUpsellSizeChartTrigger">
+                  Unsure What Size To Get?
+                </button>
+              </span>
             </div>
             
-            <div class="checkout-upsell-pills-row" id="checkoutUpsellVariantPills2">
+            <div class="size-options-container" id="checkoutUpsellVariantCards1">
+              {%- if upsell_product != blank -%}
+                {%- assign active_set = false -%}
+                {%- for variant in upsell_product.variants -%}
+                  {%- assign title_upper = variant.title | upcase -%}
+                  {%- if title_upper != 'XS' -%}
+                    {%- assign inches_str = '16X24 Inches' -%}
+                    {%- assign cm_str = '(40X60cm)' -%}
+                    {%- case title_upper -%}
+                      {%- when 'S' -%}
+                        {%- assign inches_str = '16X24 Inches' -%}
+                        {%- assign cm_str = '(40X60cm)' -%}
+                      {%- when 'M' -%}
+                        {%- assign inches_str = '28X32 Inches' -%}
+                        {%- assign cm_str = '(70x80cm)' -%}
+                      {%- when 'L' -%}
+                        {%- assign inches_str = '32X35 Inches' -%}
+                        {%- assign cm_str = '(80x90cm)' -%}
+                      {%- when 'XL' -%}
+                        {%- assign inches_str = '35X40 Inches' -%}
+                        {%- assign cm_str = '(90x100cm)' -%}
+                    {%- endcase -%}
+                    <div class="size-option{% if active_set == false %} active{% endif %}" 
+                         data-dog="1"
+                         data-variant-id="{{ variant.id }}"
+                         data-size="{{ variant.title }}">
+                      <div class="size-check-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <span class="size-label">{{ variant.title }}</span>
+                      <div class="size-inches">{{ inches_str }}</div>
+                      <div class="size-cm">{{ cm_str }}</div>
+                    </div>
+                    {%- assign active_set = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- else -%}
+                <div class="size-option active" data-dog="1" data-variant-id="48139846418662" data-size="Small">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span class="size-label">SMALL</span>
+                  <div class="size-inches">16X24 Inches</div>
+                  <div class="size-cm">(40X60cm)</div>
+                </div>
+                <div class="size-option" data-dog="1" data-variant-id="48139846484198" data-size="Medium">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span class="size-label">MEDIUM</span>
+                  <div class="size-inches">28X32 Inches</div>
+                  <div class="size-cm">(70x80cm)</div>
+                </div>
+                <div class="size-option" data-dog="1" data-variant-id="48139846516966" data-size="Large">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
+                  <span class="size-label">LARGE</span>
+                  <div class="size-inches">32X35 Inches</div>
+                  <div class="size-cm">(80x90cm)</div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <!-- Dog 2 Size Selector (Expands dynamically when 2x or 3x is chosen) -->
+          <div class="checkout-upsell-dog-section checkout-upsell-dog-expand" id="checkoutUpsellDog2Wrap" style="display: none;">
+            <div class="checkout-upsell-variants-header checkout-upsell-dog-header">
+              <span class="checkout-upsell-variants-label">
+                🐶 Harness #2 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText2">Medium</span>
+              </span>
+              <span class="checkout-upsell-dog-hint">Mix & match any size</span>
+            </div>
+            
+            <div class="size-options-container" id="checkoutUpsellVariantCards2">
               {%- if upsell_product != blank -%}
                 {%- assign active_set2 = false -%}
                 {%- for variant in upsell_product.variants -%}
                   {%- assign title_upper = variant.title | upcase -%}
                   {%- if title_upper != 'XS' -%}
-                    {%- assign weight_sub = '' -%}
+                    {%- assign inches_str = '16X24 Inches' -%}
+                    {%- assign cm_str = '(40X60cm)' -%}
                     {%- case title_upper -%}
-                      {%- when 'S' -%}{%- assign weight_sub = '10–28 lbs' -%}
-                      {%- when 'M' -%}{%- assign weight_sub = '28–50 lbs' -%}
-                      {%- when 'L' -%}{%- assign weight_sub = '45–70 lbs' -%}
-                      {%- when 'XL' -%}{%- assign weight_sub = '70–132 lbs' -%}
+                      {%- when 'S' -%}
+                        {%- assign inches_str = '16X24 Inches' -%}
+                        {%- assign cm_str = '(40X60cm)' -%}
+                      {%- when 'M' -%}
+                        {%- assign inches_str = '28X32 Inches' -%}
+                        {%- assign cm_str = '(70x80cm)' -%}
+                      {%- when 'L' -%}
+                        {%- assign inches_str = '32X35 Inches' -%}
+                        {%- assign cm_str = '(80x90cm)' -%}
+                      {%- when 'XL' -%}
+                        {%- assign inches_str = '35X40 Inches' -%}
+                        {%- assign cm_str = '(90x100cm)' -%}
                     {%- endcase -%}
-                    <button type="button" 
-                            class="checkout-upsell-size-pill{% if title_upper == 'M' or active_set2 == false %} active{% endif %}" 
-                            data-variant-id="{{ variant.id }}"
-                            data-size="{{ title_upper }}">
-                      <span class="checkout-pill-title">{{ variant.title }}</span>
-                      {%- if weight_sub != blank -%}
-                        <span class="checkout-pill-weight">{{ weight_sub }}</span>
-                      {%- endif -%}
-                    </button>
+                    <div class="size-option{% if title_upper == 'M' or active_set2 == false %} active{% endif %}" 
+                         data-dog="2"
+                         data-variant-id="{{ variant.id }}"
+                         data-size="{{ variant.title }}">
+                      <div class="size-check-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <span class="size-label">{{ variant.title }}</span>
+                      <div class="size-inches">{{ inches_str }}</div>
+                      <div class="size-cm">{{ cm_str }}</div>
+                    </div>
                     {%- if title_upper == 'M' -%}{%- assign active_set2 = true -%}{%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
               {%- else -%}
-                <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846418662" data-size="S">
-                  <span class="checkout-pill-title">S</span>
-                  <span class="checkout-pill-weight">10–28 lbs</span>
-                </button>
-                <button type="button" class="checkout-upsell-size-pill active" data-variant-id="48139846484198" data-size="M">
-                  <span class="checkout-pill-title">M</span>
-                  <span class="checkout-pill-weight">28–50 lbs</span>
-                </button>
-                <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846516966" data-size="L">
-                  <span class="checkout-pill-title">L</span>
-                  <span class="checkout-pill-weight">45–70 lbs</span>
-                </button>
-                <button type="button" class="checkout-upsell-size-pill" data-variant-id="48139846549734" data-size="XL">
-                  <span class="checkout-pill-title">XL</span>
-                  <span class="checkout-pill-weight">70–132 lbs</span>
-                </button>
+                <div class="size-option" data-dog="2" data-variant-id="48139846418662" data-size="Small">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span class="size-label">SMALL</span>
+                  <div class="size-inches">16X24 Inches</div>
+                  <div class="size-cm">(40X60cm)</div>
+                </div>
+                <div class="size-option active" data-dog="2" data-variant-id="48139846484198" data-size="Medium">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span class="size-label">MEDIUM</span>
+                  <div class="size-inches">28X32 Inches</div>
+                  <div class="size-cm">(70x80cm)</div>
+                </div>
+                <div class="size-option" data-dog="2" data-variant-id="48139846516966" data-size="Large">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span class="size-label">LARGE</span>
+                  <div class="size-inches">32X35 Inches</div>
+                  <div class="size-cm">(80x90cm)</div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          <!-- Dog 3 Size Selector (Expands dynamically when 3x is chosen) -->
+          <div class="checkout-upsell-dog-section checkout-upsell-dog-expand" id="checkoutUpsellDog3Wrap" style="display: none;">
+            <div class="checkout-upsell-variants-header checkout-upsell-dog-header">
+              <span class="checkout-upsell-variants-label">
+                🐶 Harness #3 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText3">Large</span>
+              </span>
+              <span class="checkout-upsell-dog-hint">Mix & match any size</span>
+            </div>
+            
+            <div class="size-options-container" id="checkoutUpsellVariantCards3">
+              {%- if upsell_product != blank -%}
+                {%- assign active_set3 = false -%}
+                {%- for variant in upsell_product.variants -%}
+                  {%- assign title_upper = variant.title | upcase -%}
+                  {%- if title_upper != 'XS' -%}
+                    {%- assign inches_str = '16X24 Inches' -%}
+                    {%- assign cm_str = '(40X60cm)' -%}
+                    {%- case title_upper -%}
+                      {%- when 'S' -%}
+                        {%- assign inches_str = '16X24 Inches' -%}
+                        {%- assign cm_str = '(40X60cm)' -%}
+                      {%- when 'M' -%}
+                        {%- assign inches_str = '28X32 Inches' -%}
+                        {%- assign cm_str = '(70x80cm)' -%}
+                      {%- when 'L' -%}
+                        {%- assign inches_str = '32X35 Inches' -%}
+                        {%- assign cm_str = '(80x90cm)' -%}
+                      {%- when 'XL' -%}
+                        {%- assign inches_str = '35X40 Inches' -%}
+                        {%- assign cm_str = '(90x100cm)' -%}
+                    {%- endcase -%}
+                    <div class="size-option{% if title_upper == 'L' or active_set3 == false %} active{% endif %}" 
+                         data-dog="3"
+                         data-variant-id="{{ variant.id }}"
+                         data-size="{{ variant.title }}">
+                      <div class="size-check-badge">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <span class="size-label">{{ variant.title }}</span>
+                      <div class="size-inches">{{ inches_str }}</div>
+                      <div class="size-cm">{{ cm_str }}</div>
+                    </div>
+                    {%- if title_upper == 'L' -%}{%- assign active_set3 = true -%}{%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- else -%}
+                <div class="size-option" data-dog="3" data-variant-id="48139846418662" data-size="Small">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span class="size-label">SMALL</span>
+                  <div class="size-inches">16X24 Inches</div>
+                  <div class="size-cm">(40X60cm)</div>
+                </div>
+                <div class="size-option" data-dog="3" data-variant-id="48139846484198" data-size="Medium">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span class="size-label">MEDIUM</span>
+                  <div class="size-inches">28X32 Inches</div>
+                  <div class="size-cm">(70x80cm)</div>
+                </div>
+                <div class="size-option active" data-dog="3" data-variant-id="48139846516966" data-size="Large">
+                  <div class="size-check-badge">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span class="size-label">LARGE</span>
+                  <div class="size-inches">32X35 Inches</div>
+                  <div class="size-cm">(80x90cm)</div>
+                </div>
               {%- endif -%}
             </div>
           </div>
@@ -508,7 +655,7 @@
       display: none;
     }
     
-    /* Quantity Selection Grid */
+    /* Quantity Selection Grid (3-Tiers: 1x, 2x, 3x) */
     .checkout-upsell-qty-wrap {
       margin-bottom: 12px;
     }
@@ -525,16 +672,21 @@
       text-transform: uppercase;
       letter-spacing: 0.02em;
     }
+    .checkout-upsell-savings-hint {
+      font-size: 11px;
+      font-weight: 700;
+      color: #16a34a;
+    }
     .checkout-upsell-qty-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
     }
     .checkout-upsell-qty-card {
       background: #ffffff;
       border: 1.5px solid #e5e7eb;
       border-radius: 10px;
-      padding: 8px 10px;
+      padding: 8px 6px;
       cursor: pointer;
       text-align: left;
       position: relative;
@@ -543,6 +695,7 @@
       flex-direction: column;
       justify-content: space-between;
       outline: none;
+      min-width: 0;
     }
     .checkout-upsell-qty-card:hover {
       border-color: #9ca3af;
@@ -556,20 +709,23 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .checkout-upsell-qty-card-title {
-      font-size: 12.5px;
+      font-size: 11px;
       font-weight: 800;
       color: #111827;
       line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .checkout-upsell-qty-card.active .checkout-upsell-qty-card-title {
       color: #dc2626;
     }
     .checkout-upsell-qty-radio {
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
       border: 1.5px solid #d1d5db;
       display: flex;
@@ -585,122 +741,195 @@
     }
     .checkout-upsell-qty-card.active .checkout-upsell-qty-radio::after {
       content: '';
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
       background: #ffffff;
     }
     .checkout-upsell-qty-card-sub {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
+      flex-direction: column;
+      margin-top: 2px;
     }
     .checkout-upsell-qty-card-desc {
-      font-size: 10.5px;
+      font-size: 9.5px;
       color: #6b7280;
       font-weight: 500;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .checkout-upsell-qty-card-price {
-      font-size: 12.5px;
-      font-weight: 800;
+      font-size: 12px;
+      font-weight: 900;
       color: #111827;
+      line-height: 1.2;
+      margin-top: 3px;
+    }
+    .checkout-upsell-price-highlight {
+      color: #15803d !important;
+    }
+    .checkout-upsell-price-best {
+      color: #dc2626 !important;
+    }
+    .checkout-upsell-qty-card-unit {
+      font-size: 9px;
+      font-weight: 700;
+      color: #6b7280;
+      margin-top: 1px;
+    }
+    .checkout-upsell-qty-card-unit.text-green {
+      color: #16a34a;
+    }
+    .checkout-upsell-qty-card-unit.text-red {
+      color: #dc2626;
     }
     .checkout-upsell-qty-badge {
       position: absolute;
       top: -7px;
-      right: 8px;
-      background-color: #16a34a;
-      color: #ffffff;
-      font-size: 8.5px;
-      font-weight: 800;
-      padding: 1px 6px;
+      right: 4px;
+      font-size: 8px;
+      font-weight: 900;
+      padding: 1px 5px;
       border-radius: 9999px;
       text-transform: uppercase;
       letter-spacing: 0.03em;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+      white-space: nowrap;
+    }
+    .checkout-upsell-badge-green {
+      background-color: #16a34a;
+      color: #ffffff;
+    }
+    .checkout-upsell-badge-red {
+      background-color: #dc2626;
+      color: #ffffff;
     }
 
-    /* Dog 2 Size Container */
-    .checkout-upsell-dog2-wrap {
-      margin-top: 10px;
-      padding-top: 8px;
-      border-top: 1px dashed #e5e7eb;
+    /* Variant Selection Wrap */
+    .checkout-upsell-variants-wrap {
+      margin-bottom: 8px;
     }
-    .checkout-upsell-dog2-header {
+    .checkout-upsell-dog-section {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px 10px 12px 10px;
+      margin-bottom: 8px;
+    }
+    .checkout-upsell-dog-expand {
+      margin-top: 8px;
+      border-top: 1px dashed #cbd5e1;
+    }
+    .checkout-upsell-variants-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 6px;
     }
-    .checkout-upsell-dog2-hint {
-      font-size: 10.5px;
-      color: #6b7280;
-      font-style: italic;
-    }
-
-    /* Variant Selection */
-    .checkout-upsell-variants-wrap {
-      margin-bottom: 8px;
-    }
     .checkout-upsell-variants-label {
-      font-size: 13px;
-      font-weight: 750;
-      color: #374151;
-      margin-bottom: 8px;
-      display: block;
-      text-align: center;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #002244;
       text-transform: uppercase;
       letter-spacing: 0.02em;
     }
-    .checkout-upsell-pills-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
+    .checkout-upsell-active-size-name {
+      color: #15803d;
+      font-weight: 900;
     }
-    .checkout-upsell-size-pill {
-      background-color: #ffffff;
-      border: 1.5px solid #e5e7eb;
-      color: #111827;
-      padding: 7px 12px;
-      border-radius: 8px;
+    .checkout-upsell-size-chart-trigger {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 11px;
+      font-weight: 700;
+      color: #002244;
+      text-decoration: underline;
       cursor: pointer;
-      transition: all 0.2s ease;
-      outline: none;
+      font-family: inherit;
+    }
+    .checkout-upsell-size-chart-trigger:hover {
+      color: #dc2626;
+    }
+    .checkout-upsell-dog-hint {
+      font-size: 10px;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    /* Custom Size Options Container & Green Check Cards (Reference Screenshot Match) */
+    .size-options-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .size-option {
+      position: relative;
+      background: #ffffff;
+      border: 1.5px solid #002244;
+      border-radius: 8px;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-width: 68px;
-      gap: 2px;
-      text-decoration: none;
+      user-select: none;
+      outline: none;
     }
-    .checkout-upsell-size-pill .checkout-pill-title {
-      font-size: 13.5px;
-      font-weight: 800;
-      line-height: 1;
+    .size-option:hover {
+      border-color: #00162e;
+      box-shadow: 0 2px 8px rgba(0, 34, 68, 0.08);
     }
-    .checkout-upsell-size-pill .checkout-pill-weight {
-      font-size: 10px;
+    .size-option.active {
+      background: #FFF7EE !important; /* Soft warm cream/peach as in screenshot */
+      border: 2.5px solid #002244 !important;
+      box-shadow: 0 3px 10px rgba(0, 34, 68, 0.12);
+    }
+    .size-option .size-check-badge {
+      display: none;
+      position: absolute;
+      top: -8px;
+      right: -6px;
+      width: 22px;
+      height: 22px;
+      background-color: #16a34a;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+    .size-option.active .size-check-badge {
+      display: flex;
+    }
+    .size-label {
+      font-size: 14px;
+      font-weight: 900;
+      color: #002244;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+    .size-inches {
+      font-size: 11px;
       font-weight: 600;
-      color: #6b7280;
-      line-height: 1;
-      white-space: nowrap;
+      color: #002244;
+      line-height: 1.25;
     }
-    .checkout-upsell-size-pill:hover {
-      border-color: #9ca3af;
-    }
-    .checkout-upsell-size-pill.active {
-      border-color: #dc2626;
-      background-color: #fef2f2;
-      color: #dc2626;
-    }
-    .checkout-upsell-size-pill.active .checkout-pill-title {
-      color: #dc2626;
-    }
-    .checkout-upsell-size-pill.active .checkout-pill-weight {
-      color: #b91c1c;
-      font-weight: 700;
+    .size-cm {
+      font-size: 10px;
+      font-weight: 500;
+      color: #002244;
+      opacity: 0.85;
+      line-height: 1.2;
     }
     
     /* Size Guide Toggle */
@@ -919,33 +1148,6 @@
       border-radius: 6px;
       display: block;
     }
-    .checkout-upsell-size-chart-trigger {
-      font-size: 12px;
-      font-weight: 700;
-      color: #dc2626;
-      cursor: pointer;
-      background: none;
-      border: none;
-      text-decoration: underline;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .checkout-upsell-variants-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-    .checkout-upsell-variants-header .checkout-upsell-variants-label {
-      margin-bottom: 0 !important;
-      text-transform: uppercase;
-      font-size: 13px;
-      font-weight: 750;
-      color: #374151;
-    }
     .size-chart__integrated-inline {
       display: inline-block;
     }
@@ -960,10 +1162,17 @@
       var currentQty = 1;
       var activeVariantId1 = null;
       var activeVariantId2 = null;
-      var activeSize1 = 'S';
-      var activeSize2 = 'M';
-      var unitPrice = parseFloat("{{ product_price }}".replace(/[^0-9.]/g, '')) || 24.95;
-      var unitCompare = parseFloat("{{ compare_price }}".replace(/[^0-9.]/g, '')) || 42.99;
+      var activeVariantId3 = null;
+      var activeSize1 = 'Small';
+      var activeSize2 = 'Medium';
+      var activeSize3 = 'Large';
+
+      var pricingTiers = {
+        1: { total: 24.95, unit: 24.95, compare: 42.99, discount: 'Save 42%', hint: 'Standard Offer' },
+        2: { total: 45.90, unit: 22.95, compare: 85.98, discount: 'Save 47%', hint: 'Save $4.00 ($22.95/ea)' },
+        3: { total: 59.85, unit: 19.95, compare: 128.97, discount: 'Save 54%', hint: 'Save $15.00 ($19.95/ea)' }
+      };
+
       var interceptedCheckoutBtn = null;
       var bypassPopup = false;
       var timerInterval = null;
@@ -971,28 +1180,46 @@
       function updateUpsellPricingAndCTA() {
         var displayPriceEl = document.getElementById('checkoutUpsellDisplayPrice');
         var displayCompareEl = document.getElementById('checkoutUpsellDisplayCompare');
+        var displayDiscountEl = document.getElementById('checkoutUpsellDisplayDiscount');
+        var savingsHintEl = document.getElementById('checkoutUpsellSavingsHint');
         var addBtnMain = document.getElementById('checkoutUpsellAddBtnText');
         var addBtnSub = document.getElementById('checkoutUpsellAddBtnSubtext');
         var sizeLabel1 = document.getElementById('checkoutUpsellSizeLabel1');
+        var selectedSizeText1 = document.getElementById('selectedSizeText1');
+        var selectedSizeText2 = document.getElementById('selectedSizeText2');
+        var selectedSizeText3 = document.getElementById('selectedSizeText3');
         var dog2Wrap = document.getElementById('checkoutUpsellDog2Wrap');
+        var dog3Wrap = document.getElementById('checkoutUpsellDog3Wrap');
         
-        var totalPrice = (unitPrice * currentQty).toFixed(2);
-        var totalCompare = (unitCompare * currentQty).toFixed(2);
+        var tier = pricingTiers[currentQty] || pricingTiers[1];
         
-        if (displayPriceEl) displayPriceEl.textContent = '$' + totalPrice;
-        if (displayCompareEl) displayCompareEl.textContent = '$' + totalCompare;
+        if (displayPriceEl) displayPriceEl.textContent = '$' + tier.total.toFixed(2);
+        if (displayCompareEl) displayCompareEl.textContent = '$' + tier.compare.toFixed(2);
+        if (displayDiscountEl) displayDiscountEl.textContent = tier.discount;
+        if (savingsHintEl) savingsHintEl.textContent = tier.hint;
+        
+        if (selectedSizeText1) selectedSizeText1.textContent = activeSize1;
+        if (selectedSizeText2) selectedSizeText2.textContent = activeSize2;
+        if (selectedSizeText3) selectedSizeText3.textContent = activeSize3;
         
         if (currentQty === 1) {
-          if (sizeLabel1) sizeLabel1.textContent = "Select Your Dog's Size:";
+          if (sizeLabel1) sizeLabel1.innerHTML = '1. Select Your Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">' + activeSize1 + '</span>';
           if (dog2Wrap) dog2Wrap.style.display = 'none';
-          var baseBtnText = {{ section.settings.add_btn_text | json }};
-          if (addBtnMain) addBtnMain.textContent = baseBtnText + " ($" + totalPrice + ")";
+          if (dog3Wrap) dog3Wrap.style.display = 'none';
+          if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD TO MY ORDER ($" + tier.total.toFixed(2) + ")";
           if (addBtnSub) addBtnSub.textContent = "✓ Size " + activeSize1 + " Selected • 100% Perfect Fit Guarantee";
-        } else {
-          if (sizeLabel1) sizeLabel1.textContent = "🐶 Dog #1 Size:";
+        } else if (currentQty === 2) {
+          if (sizeLabel1) sizeLabel1.innerHTML = '🐶 Harness #1 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">' + activeSize1 + '</span>';
           if (dog2Wrap) dog2Wrap.style.display = 'block';
-          if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 2x HARNESSES TO ORDER ($" + totalPrice + ")";
+          if (dog3Wrap) dog3Wrap.style.display = 'none';
+          if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 2x TO MY ORDER ($" + tier.total.toFixed(2) + ")";
           if (addBtnSub) addBtnSub.textContent = "✓ Sizes (" + activeSize1 + " & " + activeSize2 + ") Selected • 100% Perfect Fit Guarantee";
+        } else {
+          if (sizeLabel1) sizeLabel1.innerHTML = '🐶 Harness #1 Size: <span class="checkout-upsell-active-size-name" id="selectedSizeText1">' + activeSize1 + '</span>';
+          if (dog2Wrap) dog2Wrap.style.display = 'block';
+          if (dog3Wrap) dog3Wrap.style.display = 'block';
+          if (addBtnMain) addBtnMain.textContent = "⚡ YES! ADD 3x TO MY ORDER ($" + tier.total.toFixed(2) + ")";
+          if (addBtnSub) addBtnSub.textContent = "✓ Sizes (" + activeSize1 + ", " + activeSize2 + ", " + activeSize3 + ") Selected • 100% Perfect Fit Guarantee";
         }
       }
       
@@ -1028,8 +1255,10 @@
         var skipBtn = document.getElementById('checkoutUpsellSkipBtn');
         var qtyCard1 = document.getElementById('checkoutUpsellQty1');
         var qtyCard2 = document.getElementById('checkoutUpsellQty2');
-        var pillsContainer1 = document.getElementById('checkoutUpsellVariantPills1');
-        var pillsContainer2 = document.getElementById('checkoutUpsellVariantPills2');
+        var qtyCard3 = document.getElementById('checkoutUpsellQty3');
+        var cardsContainer1 = document.getElementById('checkoutUpsellVariantCards1');
+        var cardsContainer2 = document.getElementById('checkoutUpsellVariantCards2');
+        var cardsContainer3 = document.getElementById('checkoutUpsellVariantCards3');
         
         if (!modal) return;
         
@@ -1038,18 +1267,17 @@
           startCountdown();
         }
 
-        // QTY 1 vs 2 switcher
+        // QTY 1 vs 2 vs 3 switcher
         function setQuantity(qty) {
           currentQty = qty;
-          if (qtyCard1 && qtyCard2) {
-            if (qty === 1) {
-              qtyCard1.classList.add('active');
-              qtyCard2.classList.remove('active');
+          [qtyCard1, qtyCard2, qtyCard3].forEach(function(card, idx) {
+            if (!card) return;
+            if (idx + 1 === qty) {
+              card.classList.add('active');
             } else {
-              qtyCard2.classList.add('active');
-              qtyCard1.classList.remove('active');
+              card.classList.remove('active');
             }
-          }
+          });
           updateUpsellPricingAndCTA();
         }
 
@@ -1065,54 +1293,47 @@
             setQuantity(2);
           });
         }
+        if (qtyCard3) {
+          qtyCard3.addEventListener('click', function(e) {
+            e.preventDefault();
+            setQuantity(3);
+          });
+        }
         
-        // Initialize Dog 1 variant ID
-        if (pillsContainer1) {
-          var activePill1 = pillsContainer1.querySelector('.checkout-upsell-size-pill.active');
-          if (activePill1) {
-            activeVariantId1 = activePill1.getAttribute('data-variant-id');
-            activeSize1 = activePill1.getAttribute('data-size') || 'S';
+        // Bind size card selection for a dog container
+        function bindCards(container, dogIndex) {
+          if (!container) return;
+          var activeCard = container.querySelector('.size-option.active');
+          if (activeCard) {
+            var vid = activeCard.getAttribute('data-variant-id');
+            var s = activeCard.getAttribute('data-size') || 'Small';
+            if (dogIndex === 1) { activeVariantId1 = vid; activeSize1 = s; }
+            if (dogIndex === 2) { activeVariantId2 = vid; activeSize2 = s; }
+            if (dogIndex === 3) { activeVariantId3 = vid; activeSize3 = s; }
           }
           
-          pillsContainer1.addEventListener('click', function(event) {
-            var pill = event.target.closest('.checkout-upsell-size-pill');
-            if (pill) {
-              pillsContainer1.querySelectorAll('.checkout-upsell-size-pill').forEach(function(p) {
-                p.classList.remove('active');
+          container.addEventListener('click', function(event) {
+            var card = event.target.closest('.size-option');
+            if (card) {
+              container.querySelectorAll('.size-option').forEach(function(c) {
+                c.classList.remove('active');
               });
-              pill.classList.add('active');
-              activeVariantId1 = pill.getAttribute('data-variant-id');
-              activeSize1 = pill.getAttribute('data-size') || 'S';
+              card.classList.add('active');
+              var vid = card.getAttribute('data-variant-id');
+              var s = card.getAttribute('data-size') || 'Small';
+              if (dogIndex === 1) { activeVariantId1 = vid; activeSize1 = s; }
+              if (dogIndex === 2) { activeVariantId2 = vid; activeSize2 = s; }
+              if (dogIndex === 3) { activeVariantId3 = vid; activeSize3 = s; }
               updateUpsellPricingAndCTA();
             }
           });
         }
 
-        // Initialize Dog 2 variant ID
-        if (pillsContainer2) {
-          var activePill2 = pillsContainer2.querySelector('.checkout-upsell-size-pill.active');
-          if (activePill2) {
-            activeVariantId2 = activePill2.getAttribute('data-variant-id');
-            activeSize2 = activePill2.getAttribute('data-size') || 'M';
-          }
-          
-          pillsContainer2.addEventListener('click', function(event) {
-            var pill = event.target.closest('.checkout-upsell-size-pill');
-            if (pill) {
-              pillsContainer2.querySelectorAll('.checkout-upsell-size-pill').forEach(function(p) {
-                p.classList.remove('active');
-              });
-              pill.classList.add('active');
-              activeVariantId2 = pill.getAttribute('data-variant-id');
-              activeSize2 = pill.getAttribute('data-size') || 'M';
-              updateUpsellPricingAndCTA();
-            }
-          });
-        }
+        bindCards(cardsContainer1, 1);
+        bindCards(cardsContainer2, 2);
+        bindCards(cardsContainer3, 3);
 
         updateUpsellPricingAndCTA();
-        
-
 
         // Sizing Modal Popup Toggle Events
         var sizeChartTrigger = document.getElementById('checkoutUpsellSizeChartTrigger');
@@ -1194,19 +1415,20 @@
           addBtn.disabled = true;
           addBtn.innerHTML = '<span class="checkout-upsell-spinner"></span> ADDING TO ORDER...';
           
+          var selectedVariants = [];
+          if (currentQty >= 1 && activeVariantId1) selectedVariants.push(parseInt(activeVariantId1, 10));
+          if (currentQty >= 2 && activeVariantId2) selectedVariants.push(parseInt(activeVariantId2, 10));
+          if (currentQty >= 3 && activeVariantId3) selectedVariants.push(parseInt(activeVariantId3, 10));
+          
+          var counts = {};
+          selectedVariants.forEach(function(id) {
+            counts[id] = (counts[id] || 0) + 1;
+          });
+          
           var itemsToAdd = [];
-          if (currentQty === 1) {
-            itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 1 });
-          } else {
-            if (activeVariantId1 === activeVariantId2) {
-              itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 2 });
-            } else {
-              itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 1 });
-              if (activeVariantId2) {
-                itemsToAdd.push({ id: parseInt(activeVariantId2, 10), quantity: 1 });
-              } else {
-                itemsToAdd.push({ id: parseInt(activeVariantId1, 10), quantity: 1 });
-              }
+          for (var id in counts) {
+            if (counts.hasOwnProperty(id)) {
+              itemsToAdd.push({ id: parseInt(id, 10), quantity: counts[id] });
             }
           }
           
