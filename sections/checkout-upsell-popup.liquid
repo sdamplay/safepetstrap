@@ -76,8 +76,8 @@
         <!-- Product Display Info -->
         <div class="checkout-upsell-product-row">
           <div class="checkout-upsell-product-media">
-            {%- if upsell_product != blank and upsell_product.featured_image != blank -%}
-              <img src="{{ product_image | image_url: width: 350 }}" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
+            {%- if section.settings.custom_product_image != blank -%}
+              <img src="{{ section.settings.custom_product_image | image_url: width: 500 }}" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
             {%- else -%}
               <img src="{{ 'harness-car-safety-hero.jpg' | asset_url }}" alt="{{ product_title }}" class="checkout-upsell-product-img" loading="lazy">
             {%- endif -%}
@@ -662,16 +662,19 @@
     .checkout-upsell-product-media {
       width: {{ section.settings.image_size }}px;
       height: {{ section.settings.image_size }}px;
+      aspect-ratio: 1 / 1;
       flex-shrink: 0;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid #e5e7eb;
       background-color: #f9fafb;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
     .checkout-upsell-product-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
     
     .checkout-upsell-product-info {
@@ -1218,11 +1221,13 @@
         font-size: 10.5px !important;
       }
       .checkout-upsell-product-media {
-        width: min({{ section.settings.image_size }}px, 250px) !important;
-        height: min({{ section.settings.image_size }}px, 250px) !important;
+        width: min({{ section.settings.image_size }}px, 240px) !important;
+        height: min({{ section.settings.image_size }}px, 240px) !important;
+        aspect-ratio: 1 / 1 !important;
         max-width: 100% !important;
         border-radius: 12px !important;
-        margin: 0 auto;
+        margin: 0 auto 6px auto !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
       }
       .checkout-upsell-product-title {
         font-size: {{ section.settings.font_size_title }}px !important;
@@ -1832,6 +1837,12 @@
     {
       "type": "header",
       "content": "Image & Layout Customization"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_product_image",
+      "label": "Custom Product Image",
+      "info": "Upload an override image for the upsell product. If blank, uses the high-converting in-car safety hero asset."
     },
     {
       "type": "image_picker",
