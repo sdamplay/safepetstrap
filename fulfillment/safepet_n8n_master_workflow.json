@@ -1,0 +1,257 @@
+{
+  "name": "SafePet Strap - Ultimate AliExpress Dropshipping Fulfillment Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "safepet-fulfill",
+        "options": {}
+      },
+      "id": "webhook-shopify-flow",
+      "name": "Webhook: Shopify Flow / Manual Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [180, 240],
+      "webhookId": "safepet-fulfill"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10,18 * * *"
+            }
+          ]
+        }
+      },
+      "id": "cron-daily-check",
+      "name": "Schedule: Daily 10 AM & 6 PM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [180, 480]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 */4 * * *"
+            }
+          ]
+        }
+      },
+      "id": "cron-tracking-sync",
+      "name": "Schedule: Tracking Sync (Every 4h)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [180, 720]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "http://127.0.0.1:3005/status",
+        "options": {}
+      },
+      "id": "check-queue-status",
+      "name": "Check Unfulfilled Queue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [420, 480]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-orders",
+              "leftValue": "={{ $json.unfulfilledOrdersInQueue }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-orders-pending",
+      "name": "Any Orders Pending?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [660, 480]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:3005/fulfill",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"order_id\": {{ $json.body?.order_id || $json.body?.id || null }},\n  \"tag\": {{ $json.body?.tag ? JSON.stringify($json.body.tag) : '\"fulfill-ali\"' }},\n  \"force\": {{ Boolean($json.body?.force) }}\n}",
+        "options": {}
+      },
+      "id": "execute-fulfillment-webhook",
+      "name": "Execute AliExpress Placement",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [480, 240]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:3005/sync-tracking",
+        "options": {}
+      },
+      "id": "execute-tracking-sync",
+      "name": "Execute Tracking Sync",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [480, 720]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "alertTitle",
+              "value": "🚨 SafePet Strap: Orders Placed on AliExpress!"
+            },
+            {
+              "name": "paymentUrl",
+              "value": "https://www.aliexpress.com/orderList.htm?status=wait_buyer_pay"
+            },
+            {
+              "name": "summaryText",
+              "value": "=✅ Successfully placed {{ $json.processed }} order(s) on AliExpress!\n\n⏰ IMPORTANT: AliExpress payment window expires in 2 hours!\n👉 Click below to pay for all orders in 1-Click:\nhttps://www.aliexpress.com/orderList.htm\n\nOrder Details:\n{{ ($json.results || []).map(r => '• #' + r.order_number + ' (' + (r.customer || 'Customer') + ') -> AE Order: ' + (r.aliOrderId || 'Success')).join('\\n') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "format-payment-alert",
+      "name": "Format 1-Click Pay Alert",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [760, 240]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": {{ $json.success }},\n  \"processed\": {{ $json.processed }},\n  \"payment_url\": \"https://www.aliexpress.com/orderList.htm\",\n  \"results\": {{ JSON.stringify($json.results) }}\n}"
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Shopify Flow",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1020, 240]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "trackingAlert",
+              "value": "=🚚 SafePet Strap Tracking Sync Summary:\n• Orders Fulfilled in Shopify: {{ $json.fulfilledCount }}\n• Orders Still Processing at Supplier: {{ $json.pendingCount }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "format-tracking-alert",
+      "name": "Format Tracking Alert",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [760, 720]
+    }
+  ],
+  "connections": {
+    "Webhook: Shopify Flow / Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Execute AliExpress Placement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute AliExpress Placement": {
+      "main": [
+        [
+          {
+            "node": "Format 1-Click Pay Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format 1-Click Pay Alert": {
+      "main": [
+        [
+          {
+            "node": "Respond to Shopify Flow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule: Daily 10 AM & 6 PM": {
+      "main": [
+        [
+          {
+            "node": "Check Unfulfilled Queue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Unfulfilled Queue": {
+      "main": [
+        [
+          {
+            "node": "Any Orders Pending?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule: Tracking Sync (Every 4h)": {
+      "main": [
+        [
+          {
+            "node": "Execute Tracking Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Tracking Sync": {
+      "main": [
+        [
+          {
+            "node": "Format Tracking Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

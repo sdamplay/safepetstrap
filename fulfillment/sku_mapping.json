@@ -1,0 +1,27 @@
+{
+  "productId": "3256811984485167",
+  "variants": {
+    "SPS-01": {
+      "title": "1 Seat Belt — Starter Pack",
+      "quantityPerOrder": 1,
+      "skuId": "12000057675967261"
+    },
+    "SPS-02": {
+      "title": "2 Seat Belts — Double Safety",
+      "quantityPerOrder": 2,
+      "skuId": "12000057675967261"
+    },
+    "SPS-03": {
+      "title": "3 Seat Belts — SafePet Bundle",
+      "quantityPerOrder": 3,
+      "skuId": "12000057675967261"
+    }
+  },
+  "availableAliExpressSkus": [
+    {
+      "skuId": "12000057675967261",
+      "attribute": "Color: black, Size: M",
+      "price": "2.04"
+    }
+  ]
+}

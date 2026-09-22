@@ -4,3 +4,11 @@ scratch/
 *.log
 config/settings_data.json.bak
 n8n-*.json
+.env
+.env.*
+tokens.json
+fulfillment/.env
+fulfillment/.env.*
+fulfillment/tokens.json
+fulfillment/node_modules/
+node_modules/

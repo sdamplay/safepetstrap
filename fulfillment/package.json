@@ -1,0 +1,20 @@
+{
+  "name": "safepet-aliexpress-fulfillment",
+  "version": "1.0.0",
+  "description": "Automated order fulfillment engine connecting SafePet Strap Shopify store with AliExpress Dropshipping Open Service API",
+  "main": "order_sync.js",
+  "scripts": {
+    "auth": "node auth_setup.js",
+    "inspect:product": "node sku_mapper.js",
+    "fulfill:dry-run": "node order_sync.js --dry-run",
+    "fulfill:orders": "node order_sync.js",
+    "fulfill:selected": "node order_sync.js --tag=fulfill-ali",
+    "fulfill:force": "node order_sync.js --force",
+    "reset:tags": "node order_sync.js --reset-tags",
+    "start:server": "node server.js",
+    "sync:tracking": "node tracking_sync.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
