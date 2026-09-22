@@ -90,10 +90,10 @@ function resolveProductItem(item) {
     aliProductId = '3256805685101130';
     skuAttr = '14:496#black with battery'; // Black with battery
   }
-  // 3. Dog Tag: Black M
+  // 3. Dog Tag: ALWAYS Silver M (Cheapest variant - $3.02)
   else if (titleLower.includes('tag')) {
     aliProductId = '3256808705434116';
-    skuAttr = '5:361386#M3.09X5.19cm;14:193#GP-G-P8-Black';
+    skuAttr = '5:361386#M3.09X5.19cm;14:29#GP-G-P8-Sliver';
   }
   // 4. Sticker
   else if (titleLower.includes('sticker')) {
