@@ -177,19 +177,24 @@ async function resetTags() {
   for (const order of orders) {
     const tags = (order.tags || '').split(',').map(t => t.trim());
     const cleaned = tags.filter(t => t.toLowerCase() !== 'ali-placed' && !t.toLowerCase().startsWith('ali-id:') && t.toLowerCase() !== 'fulfill-ali');
-    if (cleaned.length !== tags.length) {
+    const noteHasAli = order.note && order.note.toLowerCase().includes('aliexpress');
+    if (cleaned.length !== tags.length || noteHasAli) {
+      const updatePayload = {
+        id: order.id,
+        tags: cleaned.join(', ')
+      };
+      if (noteHasAli) {
+        updatePayload.note = '';
+      }
       await shopifyClient.makeRequest(`/orders/${order.id}.json`, 'PUT', {
-        order: {
-          id: order.id,
-          tags: cleaned.join(', ')
-        }
+        order: updatePayload
       });
-      console.log(`  ✨ Cleared tags on Shopify Order #${order.order_number} (${order.name})`);
+      console.log(`  ✨ Cleared tags/notes on Shopify Order #${order.order_number} (${order.name})`);
       resetCount++;
     }
   }
 
-  console.log(`\n✅ Finished! Cleared fulfillment tags on ${resetCount} order(s). All orders are ready to be processed fresh.\n`);
+  console.log(`\n✅ Finished! Cleared fulfillment tags/notes on ${resetCount} order(s). All orders are ready to be processed fresh.\n`);
 }
 
 async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } = {}) {

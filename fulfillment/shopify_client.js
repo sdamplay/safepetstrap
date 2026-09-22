@@ -155,9 +155,15 @@ class ShopifyClient {
     }
     existingTags.push(`ali-id:${aliOrderId}`);
 
-    const newNote = order.note 
-      ? `${order.note}\n[AliExpress Order Placed: ${aliOrderId} at ${new Date().toISOString()}]`
-      : `[AliExpress Order Placed: ${aliOrderId} at ${new Date().toISOString()}]`;
+    const dateStr = new Date().toISOString().split('T')[0];
+    const noteEntry = `Order ID: ${aliOrderId} - ${dateStr}`;
+
+    // Clean out any legacy mentions if present in note
+    const cleanExisting = order.note
+      ? order.note.split('\n').filter(line => !line.toLowerCase().includes('aliexpress') && line.trim().length > 0).join('\n')
+      : '';
+
+    const newNote = cleanExisting ? `${cleanExisting}\n${noteEntry}` : noteEntry;
 
     return this.makeRequest(`/orders/${order.id}.json`, 'PUT', {
       order: {
