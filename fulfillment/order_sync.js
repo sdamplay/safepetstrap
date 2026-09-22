@@ -139,10 +139,26 @@ function resolveProductItem(item) {
     }
   }
 
+  let finalCount = item.quantity * multiplier;
+
+  // BUSINESS FUNNEL RULE:
+  // For SPS-01 ("1 Seat Belt" Free + Shipping offer), even if the customer ordered 2x, 3x, etc.,
+  // always process strictly 1 pcs to protect store margins.
+  const isSps01 = sku === 'SPS-01' || 
+                  vTitle.includes('1 SEAT BELT') || 
+                  (titleLower.includes('seat belt') && !sku.includes('SPS-02') && !sku.includes('SPS-03') && !titleLower.includes('2 seat belt') && !titleLower.includes('3 seat belt'));
+
+  if (isSps01) {
+    if (item.quantity > 1) {
+      console.log(`  🛡️ Margin Protection: Order requested ${item.quantity}x for SPS-01. Capped to 1 pcs.`);
+    }
+    finalCount = 1;
+  }
+
   return {
     product_id: String(aliProductId),
     sku_attr: skuAttr,
-    product_count: item.quantity * multiplier,
+    product_count: finalCount,
     title: item.title,
     variant: item.variant_title || 'Standard',
     order_memo: orderMemo
