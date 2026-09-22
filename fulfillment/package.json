@@ -13,6 +13,7 @@
     "fulfill:force": "node order_sync.js --force",
     "reset:tags": "node order_sync.js --reset-tags",
     "start:server": "node server.js",
+    "watch": "node watcher.js",
     "sync:tracking": "node tracking_sync.js"
   },
   "dependencies": {
