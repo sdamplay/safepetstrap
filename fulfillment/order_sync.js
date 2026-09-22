@@ -334,6 +334,22 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
 
       console.log(`  🎉 Created on AliExpress! Combined Order ID(s): ${createdAliOrderIds.join(', ')}`);
 
+      for (const aliId of createdAliOrderIds) {
+        try {
+          const detail = await aliClient.getOrderDetail(aliId);
+          const r = detail?.result;
+          if (r) {
+            const store = r.store_info?.store_name || 'AliExpress Supplier';
+            const total = r.user_order_amount?.amount || r.order_amount?.amount || '0.00';
+            const child = r.child_order_list?.[0];
+            const shipping = child?.actual_shipping_fee?.amount || '0.00';
+            console.log(`     💵 Sub-Order ${aliId} (${store}): $${total} USD (Actual Shipping: $${shipping} USD)`);
+          }
+        } catch (e) {
+          // non-critical
+        }
+      }
+
       await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
       console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
       return { status: 'success', aliOrderIds: createdAliOrderIds };

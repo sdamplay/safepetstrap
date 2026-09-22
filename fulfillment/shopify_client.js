@@ -162,9 +162,9 @@ class ShopifyClient {
     const dateStr = new Date().toISOString().split('T')[0];
     const noteEntry = `Order ID: ${idList.join(', ')} - ${dateStr}`;
 
-    // Clean out any legacy mentions if present in note
+    // Clean out any legacy mentions or stale order IDs if present in note
     const cleanExisting = order.note
-      ? order.note.split('\n').filter(line => !line.toLowerCase().includes('aliexpress') && line.trim().length > 0).join('\n')
+      ? order.note.split('\n').filter(line => !line.toLowerCase().includes('aliexpress') && !line.toLowerCase().startsWith('order id:') && line.trim().length > 0).join('\n')
       : '';
 
     const newNote = cleanExisting ? `${cleanExisting}\n${noteEntry}` : noteEntry;
