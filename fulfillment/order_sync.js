@@ -291,72 +291,109 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
   console.log(`  📍 Ship To: ${logisticsAddress.contact_person}, ${logisticsAddress.address}, ${logisticsAddress.city}, ${logisticsAddress.province} ${logisticsAddress.country} ${logisticsAddress.zip}`);
   console.log(`  📞 Phone: ${logisticsAddress.phone_country} ${logisticsAddress.mobile_no}`);
 
+  // 1. COMBINED ORDER (Choice / Bundle Free Shipping Optimization)
+  // Placing all items together in one placeOrder call lets AliExpress apply free shipping
+  // when the subtotal exceeds $10 across Choice products!
+  const uniqueOutOrderId = `SPS-${order.id}-${Math.floor(Date.now() / 1000)}`;
+  const combinedPayload = {
+    logistics_address: logisticsAddress,
+    product_items: consolidatedItems.map(ci => {
+      const itemDto = {
+        product_id: ci.product_id,
+        sku_attr: ci.sku_attr,
+        product_count: ci.product_count
+      };
+      if (ci.order_memo) {
+        itemDto.order_memo = ci.order_memo;
+      }
+      return itemDto;
+    }),
+    out_order_id: uniqueOutOrderId
+  };
+
+  if (memoParts.length > 0) {
+    combinedPayload.order_memo = memoParts.join('; ');
+  }
+
   if (isDryRun) {
-    console.log(`  [DRY-RUN] Will place ${consolidatedItems.length} distinct order(s) on AliExpress:`);
+    console.log(`  [DRY-RUN] Will place 1 combined checkout order on AliExpress (Free Shipping & Choice bundle):`);
     consolidatedItems.forEach((ci, idx) => {
-      console.log(`    Order #${idx + 1}: ${ci.title} (${ci.variant}) -> AE Product: ${ci.product_id} [attr: ${ci.sku_attr}] x${ci.product_count}${ci.order_memo ? ` (Note: "${ci.order_memo}")` : ''}`);
+      console.log(`    Item #${idx + 1}: ${ci.title} (${ci.variant}) -> AE Product: ${ci.product_id} [attr: ${ci.sku_attr}] x${ci.product_count}${ci.order_memo ? ` (Note: "${ci.order_memo}")` : ''}`);
     });
     console.log(`  ✅ Dry-run simulation successful for Order #${order.order_number || order.id}`);
     return { status: 'success', dryRun: true };
   }
 
-  // LIVE ORDER PLACEMENT
-  // AliExpress Dropshipping API requires orders from different supplier stores to be placed independently.
-  // We place each distinct physical item / supplier order individually so ZERO items are dropped.
-  const createdAliOrderIds = [];
-  let hasFailure = false;
+  console.log(`  🚀 Placing combined order on AliExpress (${consolidatedItems.length} item(s))...`);
+  try {
+    const res = await aliClient.placeOrder(combinedPayload);
 
-  for (let i = 0; i < consolidatedItems.length; i++) {
-    const ci = consolidatedItems[i];
-    const uniqueOutOrderId = `SPS-${order.id}-${i + 1}-${Math.floor(Date.now() / 1000)}`;
+    if (res && (res.result?.is_success || res.order_list || res.result?.order_list || res.is_success)) {
+      const orderList = res.result?.order_list || res.order_list || (res.result?.order_id ? [res.result.order_id] : []);
+      const createdAliOrderIds = orderList.map(String);
 
-    const placeOrderPayload = {
-      logistics_address: logisticsAddress,
-      product_items: [{
-        product_id: ci.product_id,
-        sku_attr: ci.sku_attr,
-        product_count: ci.product_count
-      }],
-      out_order_id: uniqueOutOrderId
-    };
+      console.log(`  🎉 Created on AliExpress! Combined Order ID(s): ${createdAliOrderIds.join(', ')}`);
 
-    if (ci.order_memo) {
-      placeOrderPayload.order_memo = ci.order_memo;
-    }
+      await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
+      console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
+      return { status: 'success', aliOrderIds: createdAliOrderIds };
+    } else {
+      console.warn(`  ⚠️ Combined order placement returned error:`, JSON.stringify(res, null, 2));
+      console.log(`  🔄 Attempting fallback: placing items individually...`);
 
-    console.log(`  🚀 Placing item ${i + 1}/${consolidatedItems.length} on AliExpress: ${ci.title} (${ci.variant}) x${ci.product_count}...`);
+      // Fallback: place items individually if combined checkout is not accepted
+      const createdAliOrderIds = [];
+      let hasFailure = false;
 
-    try {
-      const res = await aliClient.placeOrder(placeOrderPayload);
+      for (let i = 0; i < consolidatedItems.length; i++) {
+        const ci = consolidatedItems[i];
+        const itemOrderId = `SPS-${order.id}-${i + 1}-${Math.floor(Date.now() / 1000)}`;
 
-      if (res && (res.result?.is_success || res.order_list || res.result?.order_list || res.is_success)) {
-        const orderList = res.result?.order_list || res.order_list || [];
-        const aliOrderId = orderList.length > 0 ? orderList[0] : (res.result?.order_id || 'SUCCESS');
-        createdAliOrderIds.push(String(aliOrderId));
-        console.log(`  🎉 Created on AliExpress! Item ${i + 1}: Order ID: ${aliOrderId}`);
-      } else {
-        console.error(`  ❌ Failed to place item ${i + 1} on AliExpress:`, JSON.stringify(res, null, 2));
-        hasFailure = true;
+        const itemPayload = {
+          logistics_address: logisticsAddress,
+          product_items: [{
+            product_id: ci.product_id,
+            sku_attr: ci.sku_attr,
+            product_count: ci.product_count
+          }],
+          out_order_id: itemOrderId
+        };
+        if (ci.order_memo) itemPayload.order_memo = ci.order_memo;
+
+        try {
+          const itemRes = await aliClient.placeOrder(itemPayload);
+          if (itemRes && (itemRes.result?.is_success || itemRes.order_list || itemRes.result?.order_list || itemRes.is_success)) {
+            const list = itemRes.result?.order_list || itemRes.order_list || [itemRes.result?.order_id];
+            createdAliOrderIds.push(String(list[0]));
+            console.log(`  🎉 Fallback created item ${i + 1}: Order ID: ${list[0]}`);
+          } else {
+            console.error(`  ❌ Fallback item ${i + 1} failed:`, JSON.stringify(itemRes, null, 2));
+            hasFailure = true;
+          }
+        } catch (err) {
+          console.error(`  ❌ Fallback item ${i + 1} exception:`, err.message);
+          hasFailure = true;
+        }
+
+        if (i < consolidatedItems.length - 1) {
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        }
       }
-    } catch (err) {
-      console.error(`  ❌ Order placement exception for item ${i + 1}:`, err.message);
-      hasFailure = true;
+
+      if (createdAliOrderIds.length > 0) {
+        await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
+        console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
+      }
+
+      return {
+        status: hasFailure ? (createdAliOrderIds.length > 0 ? 'partial' : 'failed') : 'success',
+        aliOrderIds: createdAliOrderIds
+      };
     }
-
-    if (i < consolidatedItems.length - 1) {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-    }
+  } catch (err) {
+    console.error(`  ❌ Order placement exception:`, err.message);
+    return { status: 'failed', error: err.message };
   }
-
-  if (createdAliOrderIds.length > 0) {
-    await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
-    console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
-  }
-
-  return {
-    status: hasFailure ? (createdAliOrderIds.length > 0 ? 'partial' : 'failed') : 'success',
-    aliOrderIds: createdAliOrderIds
-  };
 }
 
 async function syncOrders() {
