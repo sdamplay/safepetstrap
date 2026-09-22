@@ -63,3 +63,28 @@ Shopify Flow is the free official automation app by Shopify:
    Shopify Flow pings n8n $\rightarrow$ n8n creates the orders on AliExpress $\rightarrow$ removes `fulfill-ali` $\rightarrow$ tags order `ali-placed, ali-id:<order_id>`.
 3. **1-Click Payment**:
    You receive the alert with the direct link. Click it, check **"Select All"**, and click **"Pay for All Orders"**!
+
+---
+
+## 5. How to Add New Products in the Future (Zero-Code)
+
+When you launch a new product on your store (e.g. Pet Brush, Shammy Towel, Dog Water Bottle, Pet Bed), you can onboard it into the fulfillment engine in **1 single command**:
+
+```bash
+node fulfillment/add_product.js <AliExpress_URL_or_ID> "<Keyword_in_Shopify>"
+```
+
+### Real Examples:
+```bash
+# Add Pet Brush from AliExpress
+node fulfillment/add_product.js 3256801234567890 "brush"
+
+# Add Shammy Towel using full URL
+node fulfillment/add_product.js https://www.aliexpress.us/item/3256809876543210.html "towel"
+```
+
+### What Happens Automatically:
+1. **Live SKU Inspection**: It queries the AliExpress Open API, retrieves the product title, wholesale pricing, and all variants (colors, sizes, `sku_attr`).
+2. **Auto-Catalog Registration**: It writes the product directly into `fulfillment/catalog.json`.
+3. **Zero Code Changes**: The engine dynamically checks `catalog.json`—any future Shopify order containing that keyword (e.g. "brush", "towel") will automatically be fulfilled to that supplier on AliExpress!
+

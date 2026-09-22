@@ -26,11 +26,25 @@ function parsePhone(rawPhone, countryCode = 'US') {
   return { phoneCountry, mobileNo: digits };
 }
 
+const fs = require('fs');
+const path = require('path');
+const CATALOG_PATH = path.join(__dirname, 'catalog.json');
+
+function getCatalog() {
+  if (fs.existsSync(CATALOG_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(CATALOG_PATH, 'utf8'));
+    } catch (e) {
+      // fallback
+    }
+  }
+  return {};
+}
+
 function resolveProductItem(item) {
   const titleLower = (item.title || '').toLowerCase();
   const vTitle = (item.variant_title || '').toUpperCase();
   const sku = (item.sku || '').toUpperCase();
-  const productsCatalog = config.aliexpress.products;
 
   // Skip digital items, warranties, tips, and intangible services
   if (
@@ -53,40 +67,43 @@ function resolveProductItem(item) {
     }
   }
 
-  let aliProductId = productsCatalog.seatBelt;
-  let skuAttr = '5:361386;14:193'; // Black M Seat Belt
+  let aliProductId = config.aliexpress.productId;
+  let skuAttr = '5:361386;14:193'; // Black M Seat Belt default
   let multiplier = 1;
 
-  if (titleLower.includes('harness')) {
-    aliProductId = productsCatalog.harness;
-    if (vTitle.includes('XL')) {
-      skuAttr = '5:100014065;14:193#Black'; // Black XL
-    } else if (vTitle.includes('L')) {
-      skuAttr = '5:361385;14:193#Black'; // Black L
-    } else if (vTitle.includes('S')) {
-      skuAttr = '5:100014064;14:193#Black'; // Black S
-    } else {
-      skuAttr = '5:361386;14:193#Black'; // Black M
+  // Check dynamic catalog first
+  const catalog = getCatalog();
+  let matchedEntry = null;
+
+  for (const [name, cat] of Object.entries(catalog)) {
+    const keywords = cat.keywords || [name.toLowerCase()];
+    if (keywords.some(kw => titleLower.includes(kw.toLowerCase()))) {
+      matchedEntry = cat;
+      break;
     }
-  } else if (titleLower.includes('gps')) {
-    aliProductId = productsCatalog.gps;
-    skuAttr = '14:1254#pink with battery'; // Sky Blue
-  } else if (titleLower.includes('tag') || titleLower.includes('id tag')) {
-    aliProductId = productsCatalog.tag;
-    skuAttr = '5:361386#M3.09X5.19cm;14:193#GP-G-P8-Black'; // Black M
-  } else if (titleLower.includes('sticker')) {
-    aliProductId = productsCatalog.sticker;
-    skuAttr = ''; // Default
-  } else {
-    // Seat belt tiers
-    aliProductId = productsCatalog.seatBelt;
-    skuAttr = '5:361386;14:193'; // Black M
+  }
+
+  if (matchedEntry) {
+    aliProductId = matchedEntry.product_id;
+    if (matchedEntry.skus && matchedEntry.skus.length > 0) {
+      let matchedSku = matchedEntry.skus[0];
+      for (const s of matchedEntry.skus) {
+        const attrUpper = (s.attr || '').toUpperCase();
+        if (vTitle && attrUpper.includes(vTitle)) {
+          matchedSku = s;
+          break;
+        }
+      }
+      skuAttr = matchedSku.sku_attr || '';
+    }
+  }
+
+  // Handle seat belt bundles
+  if (titleLower.includes('seat belt') || sku.startsWith('SPS-')) {
     if (sku === 'SPS-02' || titleLower.includes('2 seat belt')) {
       multiplier = 2;
     } else if (sku === 'SPS-03' || titleLower.includes('3 seat belt')) {
       multiplier = 3;
-    } else {
-      multiplier = 1;
     }
   }
 

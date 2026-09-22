@@ -6,6 +6,7 @@
   "scripts": {
     "auth": "node auth_setup.js",
     "inspect:product": "node sku_mapper.js",
+    "add:product": "node add_product.js",
     "fulfill:dry-run": "node order_sync.js --dry-run",
     "fulfill:orders": "node order_sync.js",
     "fulfill:selected": "node order_sync.js --tag=fulfill-ali",
