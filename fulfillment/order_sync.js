@@ -68,42 +68,74 @@ function resolveProductItem(item) {
   }
 
   let aliProductId = config.aliexpress.productId;
-  let skuAttr = '5:361386;14:193'; // Black M Seat Belt default
+  let skuAttr = '5:361386;14:193';
   let multiplier = 1;
 
-  // Check dynamic catalog first
-  const catalog = getCatalog();
-  let matchedEntry = null;
-
-  for (const [name, cat] of Object.entries(catalog)) {
-    const keywords = cat.keywords || [name.toLowerCase()];
-    if (keywords.some(kw => titleLower.includes(kw.toLowerCase()))) {
-      matchedEntry = cat;
-      break;
+  // SPECIFIC PRODUCT COLOR & VARIANT RULES:
+  // 1. Harness: ALWAYS Black, with size (S, M, L, XL) from variant title
+  if (titleLower.includes('harness')) {
+    aliProductId = '3256806663780528';
+    if (vTitle.includes('XL')) {
+      skuAttr = '5:100014065;14:193#Black'; // Black XL
+    } else if (vTitle.includes('L')) {
+      skuAttr = '5:361385;14:193#Black'; // Black L
+    } else if (vTitle.includes('S')) {
+      skuAttr = '5:100014064;14:193#Black'; // Black S
+    } else {
+      skuAttr = '5:361386;14:193#Black'; // Black M (Default)
     }
   }
-
-  if (matchedEntry) {
-    aliProductId = matchedEntry.product_id;
-    if (matchedEntry.skus && matchedEntry.skus.length > 0) {
-      let matchedSku = matchedEntry.skus[0];
-      for (const s of matchedEntry.skus) {
-        const attrUpper = (s.attr || '').toUpperCase();
-        if (vTitle && attrUpper.includes(vTitle)) {
-          matchedSku = s;
-          break;
-        }
-      }
-      skuAttr = matchedSku.sku_attr || '';
-    }
+  // 2. GPS Tracker: ALWAYS Black
+  else if (titleLower.includes('gps')) {
+    aliProductId = '3256805685101130';
+    skuAttr = '14:496#black with battery'; // Black with battery
   }
-
-  // Handle seat belt bundles
-  if (titleLower.includes('seat belt') || sku.startsWith('SPS-')) {
+  // 3. Dog Tag: Black M
+  else if (titleLower.includes('tag')) {
+    aliProductId = '3256808705434116';
+    skuAttr = '5:361386#M3.09X5.19cm;14:193#GP-G-P8-Black';
+  }
+  // 4. Sticker
+  else if (titleLower.includes('sticker')) {
+    aliProductId = '2255800752212310';
+    skuAttr = '';
+  }
+  // 5. Seat Belt & Bundles
+  else if (titleLower.includes('seat belt') || sku.startsWith('SPS-')) {
+    aliProductId = '3256811984485167';
+    skuAttr = '5:361386;14:193'; // Black M
     if (sku === 'SPS-02' || titleLower.includes('2 seat belt')) {
       multiplier = 2;
     } else if (sku === 'SPS-03' || titleLower.includes('3 seat belt')) {
       multiplier = 3;
+    }
+  }
+  // 6. Dynamic Catalog Match for any other future products
+  else {
+    const catalog = getCatalog();
+    let matchedEntry = null;
+
+    for (const [name, cat] of Object.entries(catalog)) {
+      const keywords = cat.keywords || [name.toLowerCase()];
+      if (keywords.some(kw => titleLower.includes(kw.toLowerCase()))) {
+        matchedEntry = cat;
+        break;
+      }
+    }
+
+    if (matchedEntry) {
+      aliProductId = matchedEntry.product_id;
+      if (matchedEntry.skus && matchedEntry.skus.length > 0) {
+        let matchedSku = matchedEntry.skus[0];
+        for (const s of matchedEntry.skus) {
+          const attrUpper = (s.attr || '').toUpperCase();
+          if (vTitle && attrUpper.includes(vTitle)) {
+            matchedSku = s;
+            break;
+          }
+        }
+        skuAttr = matchedSku.sku_attr || '';
+      }
     }
   }
 
