@@ -120,9 +120,9 @@ class ShopifyClient {
     return orders.filter(order => {
       const tags = (order.tags || '').split(',').map(t => t.trim().toLowerCase());
       
-      // If filtering by a specific trigger tag (e.g. 'fulfill-ali' or 'send-to-ali')
+      // If filtering by a specific trigger tag (e.g. 'fulfill-ali' or 'ae-placed')
       if (tagFilter) {
-        return tags.includes(tagFilter.toLowerCase());
+        return tags.includes(tagFilter.toLowerCase()) && !tags.some(t => t.startsWith('ali-id:'));
       }
 
       // If forcing, return all unfulfilled orders regardless of 'ali-placed' tag
@@ -131,7 +131,7 @@ class ShopifyClient {
       }
 
       // Default: skip orders already placed
-      return !tags.includes(tagPlaced);
+      return !tags.includes(tagPlaced) && !tags.includes('ae-placed') && !tags.includes('ali-placed') && !tags.some(t => t.startsWith('ali-id:'));
     });
   }
 
@@ -142,16 +142,16 @@ class ShopifyClient {
     const tagPlaced = config.shopify.tagPlaced;
     let existingTags = order.tags ? order.tags.split(',').map(t => t.trim()) : [];
     
-    // Remove trigger tag if specified (e.g. 'fulfill-ali')
-    if (tagToRemove) {
+    // Remove trigger tag if specified (e.g. 'fulfill-ali'), but keep 'ae-placed' if used as status tag
+    if (tagToRemove && tagToRemove.toLowerCase() !== 'ae-placed') {
       existingTags = existingTags.filter(t => t.toLowerCase() !== tagToRemove.toLowerCase());
     }
 
     // Clean out previous ali-id tags if retrying
     existingTags = existingTags.filter(t => !t.toLowerCase().startsWith('ali-id:'));
 
-    if (!existingTags.includes(tagPlaced)) {
-      existingTags.push(tagPlaced);
+    if (!existingTags.includes(tagPlaced) && !existingTags.includes('ae-placed')) {
+      existingTags.push('ae-placed');
     }
     existingTags.push(`ali-id:${aliOrderId}`);
 

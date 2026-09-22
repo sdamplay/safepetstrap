@@ -27,7 +27,8 @@ async function syncTracking() {
 
     orders = (allUnfulfilled.orders || []).filter(order => {
       const tags = (order.tags || '').split(',').map(t => t.trim().toLowerCase());
-      return tags.includes(tagPlaced) && !tags.includes(tagShipped);
+      const hasPlacedMarker = tags.includes(tagPlaced) || tags.includes('ae-placed') || tags.includes('ali-placed') || tags.some(t => t.startsWith('ali-id:'));
+      return hasPlacedMarker && !tags.includes(tagShipped);
     });
   } catch (err) {
     console.error('❌ Error querying Shopify orders:', err.message);
