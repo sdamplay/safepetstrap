@@ -49,45 +49,51 @@ async function syncTracking() {
     console.log(`------------------------------------------------------`);
     console.log(`Checking Shopify Order #${order.order_number || order.id} (${order.name})`);
 
-    // Extract AliExpress Order ID from tags
+    // Extract AliExpress Order IDs from tags
     const tags = (order.tags || '').split(',').map(t => t.trim());
-    const idTag = tags.find(t => t.startsWith('ali-id:'));
+    const idTags = tags.filter(t => t.startsWith('ali-id:'));
 
-    if (!idTag) {
+    if (idTags.length === 0) {
       console.warn(`⚠️ Could not find "ali-id:<id>" tag on order #${order.order_number}. Skipping.`);
       continue;
     }
 
-    const aliOrderId = idTag.replace('ali-id:', '').trim();
-    console.log(`  🔍 Querying AliExpress Order ID: ${aliOrderId}...`);
+    const aliOrderIds = idTags.map(t => t.replace('ali-id:', '').trim());
+    console.log(`  🔍 Order #${order.order_number} has ${aliOrderIds.length} AliExpress Order(s): ${aliOrderIds.join(', ')}`);
 
-    try {
-      const trackingRes = await aliClient.getTrackingInfo(aliOrderId);
+    let orderFulfilledAny = false;
 
-      // Extract tracking details from response
-      const trackingDetails = trackingRes.result?.details || trackingRes.result || trackingRes;
-      const trackingNo = trackingDetails.mail_no || 
-                         trackingDetails.tracking_number || 
-                         trackingDetails.logistics_no ||
-                         (Array.isArray(trackingDetails) && trackingDetails[0]?.mail_no);
+    for (const aliOrderId of aliOrderIds) {
+      try {
+        const trackingRes = await aliClient.getTrackingInfo(aliOrderId);
 
-      const carrier = trackingDetails.logistics_service_name || 
-                      trackingDetails.carrier || 
-                      'AliExpress Standard Shipping';
+        // Extract tracking details from response
+        const trackingDetails = trackingRes.result?.details || trackingRes.result || trackingRes;
+        const trackingNo = trackingDetails.mail_no || 
+                           trackingDetails.tracking_number || 
+                           trackingDetails.logistics_no ||
+                           (Array.isArray(trackingDetails) && trackingDetails[0]?.mail_no);
 
-      if (trackingNo) {
-        console.log(`  🚚 Shipped! Tracking Number: ${trackingNo} (${carrier})`);
-        console.log(`  📤 Updating Shopify Fulfillment & notifying customer...`);
+        const carrier = trackingDetails.logistics_service_name || 
+                        trackingDetails.carrier || 
+                        'AliExpress Standard Shipping';
 
-        await shopifyClient.fulfillOrder(order.id, trackingNo, carrier);
-        console.log(`  ✅ Shopify Order #${order.order_number} marked as FULFILLED!`);
-        fulfilledCount++;
-      } else {
-        console.log(`  ⏳ Status: Supplier has not generated tracking yet (order is still processing).`);
-        pendingCount++;
+        if (trackingNo) {
+          console.log(`  🚚 Order #${aliOrderId} Shipped! Tracking Number: ${trackingNo} (${carrier})`);
+          await shopifyClient.fulfillOrder(order.id, trackingNo, carrier);
+          console.log(`  ✅ Shopify Order #${order.order_number} updated with tracking: ${trackingNo}`);
+          orderFulfilledAny = true;
+        } else {
+          console.log(`  ⏳ Order #${aliOrderId}: Supplier has not generated tracking yet.`);
+        }
+      } catch (err) {
+        console.error(`  ❌ Error querying tracking for AE Order #${aliOrderId}:`, err.message);
       }
-    } catch (err) {
-      console.error(`  ❌ Error querying tracking for AE Order #${aliOrderId}:`, err.message);
+    }
+
+    if (orderFulfilledAny) {
+      fulfilledCount++;
+    } else {
       pendingCount++;
     }
   }

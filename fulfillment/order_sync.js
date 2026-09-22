@@ -41,6 +41,25 @@ function getCatalog() {
   return {};
 }
 
+function extractHarnessSize(variantTitle) {
+  const v = (variantTitle || '').trim().toUpperCase();
+  // Strip out weight indicators in parentheses like (28–50 LBS), (70–132 LBS), (10–28 LBS)
+  const clean = v.replace(/\([^)]*\)/g, '').replace(/\b\d+[-–—\s\d]*LBS?\b/gi, '').trim();
+
+  // Check for XL first
+  if (/\bXL\b/.test(clean) || /\bEXTRA\s*LARGE\b/.test(clean) || clean.startsWith('XL') || /^XL[\s-(/]/.test(v)) return 'XL';
+  // Check for XS
+  if (/\bXS\b/.test(clean) || /\bEXTRA\s*SMALL\b/.test(clean) || clean.startsWith('XS') || /^XS[\s-(/]/.test(v)) return 'XS';
+  // Check for L
+  if (/\bL\b/.test(clean) || /\bLARGE\b/.test(clean) || clean.startsWith('L') || /^L[\s-(/]/.test(v)) return 'L';
+  // Check for M
+  if (/\bM\b/.test(clean) || /\bMEDIUM\b/.test(clean) || clean.startsWith('M') || /^M[\s-(/]/.test(v)) return 'M';
+  // Check for S
+  if (/\bS\b/.test(clean) || /\bSMALL\b/.test(clean) || clean.startsWith('S') || /^S[\s-(/]/.test(v)) return 'S';
+
+  return 'M'; // Default fallback
+}
+
 function resolveProductItem(item) {
   const titleLower = (item.title || '').toLowerCase();
   const vTitle = (item.variant_title || '').toUpperCase();
@@ -75,14 +94,15 @@ function resolveProductItem(item) {
   // 1. Harness: ALWAYS Black, with size (S, M, L, XL) from variant title
   if (titleLower.includes('harness')) {
     aliProductId = '3256806663780528';
-    if (vTitle.includes('XL')) {
-      skuAttr = '5:100014065;14:193#Black'; // Black XL
-    } else if (vTitle.includes('L')) {
-      skuAttr = '5:361385;14:193#Black'; // Black L
-    } else if (vTitle.includes('S')) {
-      skuAttr = '5:100014064;14:193#Black'; // Black S
+    const size = extractHarnessSize(item.variant_title);
+    if (size === 'XL') {
+      skuAttr = '5:100014065;14:193#Black'; // Black XL (sku: 12000038510776202)
+    } else if (size === 'L') {
+      skuAttr = '5:361385;14:193#Black';   // Black L  (sku: 12000038510776201)
+    } else if (size === 'S') {
+      skuAttr = '5:100014064;14:193#Black'; // Black S  (sku: 12000038510776199)
     } else {
-      skuAttr = '5:361386;14:193#Black'; // Black M (Default)
+      skuAttr = '5:361386;14:193#Black';   // Black M  (sku: 12000038510776200)
     }
   }
   // 2. GPS Tracker: ALWAYS Black
@@ -216,7 +236,9 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
       const itemObj = {
         product_id: resolved.product_id,
         sku_attr: resolved.sku_attr,
-        product_count: resolved.product_count
+        product_count: resolved.product_count,
+        title: resolved.title,
+        variant: resolved.variant
       };
 
       if (resolved.order_memo) {
@@ -251,53 +273,90 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
     mobile_no: mobileNo
   };
 
-  // Timestamp ensures re-tried / re-placed orders get fresh AliExpress transaction IDs
-  const uniqueOutOrderId = `SPS-${order.id}-${Math.floor(Date.now() / 1000)}`;
-
-  const placeOrderPayload = {
-    logistics_address: logisticsAddress,
-    product_items: productItems,
-    out_order_id: uniqueOutOrderId
-  };
-
-  if (memoParts.length > 0) {
-    placeOrderPayload.order_memo = memoParts.join('; ');
-    console.log(`  📝 Seller Order Note: "${placeOrderPayload.order_memo}"`);
+  // Consolidate identical items (same product_id, sku_attr, and order_memo)
+  const consolidatedItems = [];
+  for (const item of productItems) {
+    const existing = consolidatedItems.find(ci => 
+      ci.product_id === item.product_id && 
+      ci.sku_attr === item.sku_attr && 
+      ci.order_memo === item.order_memo
+    );
+    if (existing) {
+      existing.product_count += item.product_count;
+    } else {
+      consolidatedItems.push({ ...item });
+    }
   }
 
   console.log(`  📍 Ship To: ${logisticsAddress.contact_person}, ${logisticsAddress.address}, ${logisticsAddress.city}, ${logisticsAddress.province} ${logisticsAddress.country} ${logisticsAddress.zip}`);
   console.log(`  📞 Phone: ${logisticsAddress.phone_country} ${logisticsAddress.mobile_no}`);
 
   if (isDryRun) {
-    console.log(`  [DRY-RUN] Prepared AliExpress Payload:`);
-    console.log(JSON.stringify(placeOrderPayload, null, 2));
+    console.log(`  [DRY-RUN] Will place ${consolidatedItems.length} distinct order(s) on AliExpress:`);
+    consolidatedItems.forEach((ci, idx) => {
+      console.log(`    Order #${idx + 1}: ${ci.title} (${ci.variant}) -> AE Product: ${ci.product_id} [attr: ${ci.sku_attr}] x${ci.product_count}${ci.order_memo ? ` (Note: "${ci.order_memo}")` : ''}`);
+    });
     console.log(`  ✅ Dry-run simulation successful for Order #${order.order_number || order.id}`);
     return { status: 'success', dryRun: true };
   }
 
   // LIVE ORDER PLACEMENT
-  console.log(`  🚀 Placing order on AliExpress via Dropshipping API...`);
-  try {
-    const res = await aliClient.placeOrder(placeOrderPayload);
+  // AliExpress Dropshipping API requires orders from different supplier stores to be placed independently.
+  // We place each distinct physical item / supplier order individually so ZERO items are dropped.
+  const createdAliOrderIds = [];
+  let hasFailure = false;
 
-    if (res && (res.result?.is_success || res.order_list || res.result?.order_list || res.is_success)) {
-      const orderList = res.result?.order_list || res.order_list || [];
-      const aliOrderId = orderList.length > 0 ? orderList[0] : (res.result?.order_id || 'SUCCESS');
+  for (let i = 0; i < consolidatedItems.length; i++) {
+    const ci = consolidatedItems[i];
+    const uniqueOutOrderId = `SPS-${order.id}-${i + 1}-${Math.floor(Date.now() / 1000)}`;
 
-      console.log(`  🎉 Created on AliExpress! Order ID: ${aliOrderId}`);
+    const placeOrderPayload = {
+      logistics_address: logisticsAddress,
+      product_items: [{
+        product_id: ci.product_id,
+        sku_attr: ci.sku_attr,
+        product_count: ci.product_count
+      }],
+      out_order_id: uniqueOutOrderId
+    };
 
-      // Tag order in Shopify
-      await shopifyClient.tagOrderAsPlaced(order, aliOrderId, tagToRemove);
-      console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ali-placed" and Order Note updated.`);
-      return { status: 'success', aliOrderId };
-    } else {
-      console.error(`  ❌ Failed to place order on AliExpress:`, JSON.stringify(res, null, 2));
-      return { status: 'failed', error: res };
+    if (ci.order_memo) {
+      placeOrderPayload.order_memo = ci.order_memo;
     }
-  } catch (err) {
-    console.error(`  ❌ Order placement exception:`, err.message);
-    return { status: 'failed', error: err.message };
+
+    console.log(`  🚀 Placing item ${i + 1}/${consolidatedItems.length} on AliExpress: ${ci.title} (${ci.variant}) x${ci.product_count}...`);
+
+    try {
+      const res = await aliClient.placeOrder(placeOrderPayload);
+
+      if (res && (res.result?.is_success || res.order_list || res.result?.order_list || res.is_success)) {
+        const orderList = res.result?.order_list || res.order_list || [];
+        const aliOrderId = orderList.length > 0 ? orderList[0] : (res.result?.order_id || 'SUCCESS');
+        createdAliOrderIds.push(String(aliOrderId));
+        console.log(`  🎉 Created on AliExpress! Item ${i + 1}: Order ID: ${aliOrderId}`);
+      } else {
+        console.error(`  ❌ Failed to place item ${i + 1} on AliExpress:`, JSON.stringify(res, null, 2));
+        hasFailure = true;
+      }
+    } catch (err) {
+      console.error(`  ❌ Order placement exception for item ${i + 1}:`, err.message);
+      hasFailure = true;
+    }
+
+    if (i < consolidatedItems.length - 1) {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+    }
   }
+
+  if (createdAliOrderIds.length > 0) {
+    await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
+    console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
+  }
+
+  return {
+    status: hasFailure ? (createdAliOrderIds.length > 0 ? 'partial' : 'failed') : 'success',
+    aliOrderIds: createdAliOrderIds
+  };
 }
 
 async function syncOrders() {

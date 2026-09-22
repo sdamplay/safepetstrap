@@ -147,16 +147,20 @@ class ShopifyClient {
       existingTags = existingTags.filter(t => t.toLowerCase() !== tagToRemove.toLowerCase());
     }
 
+    const idList = Array.isArray(aliOrderId) ? aliOrderId : [aliOrderId];
+
     // Clean out previous ali-id tags if retrying
     existingTags = existingTags.filter(t => !t.toLowerCase().startsWith('ali-id:'));
 
     if (!existingTags.includes(tagPlaced) && !existingTags.includes('ae-placed')) {
       existingTags.push('ae-placed');
     }
-    existingTags.push(`ali-id:${aliOrderId}`);
+    for (const id of idList) {
+      existingTags.push(`ali-id:${id}`);
+    }
 
     const dateStr = new Date().toISOString().split('T')[0];
-    const noteEntry = `Order ID: ${aliOrderId} - ${dateStr}`;
+    const noteEntry = `Order ID: ${idList.join(', ')} - ${dateStr}`;
 
     // Clean out any legacy mentions if present in note
     const cleanExisting = order.note
