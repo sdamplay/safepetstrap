@@ -1026,7 +1026,7 @@
             "dog-seat-belt"
           ],
           "size_chart_image": "shopify://shop_images/harness-size-chart_db83cd8e-d7f3-4b61-99b7-52096babc334.jpg",
-          "image_size": 275,
+          "image_size": 250,
           "heading": "🚨 WAIT! ONE-TIME PRE-CHECKOUT UPGRADE (SAVE 60%)",
           "font_size_banner": 12,
           "subheading": "⚠️ WARNING: Never Attach A Car Seatbelt To Your Dog's Collar!",
@@ -1051,7 +1051,14 @@
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "11753626725791430220": {
+        "type": "shopify://apps/one-click-upsell/blocks/cart-drawer/bfe6e378-b73a-4871-b8d3-7d6ede22678e",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Default": {
