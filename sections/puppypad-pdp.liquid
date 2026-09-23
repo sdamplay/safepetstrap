@@ -10,30 +10,38 @@
   assign medium_img = 'puppy-pad-size-m.jpg' | asset_url
   assign large_img = 'puppy-pad-size-l.jpg' | asset_url
 
-  # Build JSON variant mapping if on a Shopify product
-  assign variant_map_json = '{}'
-  if product
-    assign map_parts = ''
-    for variant in product.variants
-      assign title_lower = variant.title | downcase
-      if title_lower contains 'small' or title_lower contains 's'
-        assign map_parts = map_parts | append: '"small":' | append: variant.id | append: ','
-      elsif title_lower contains 'medium' or title_lower contains 'm'
-        assign map_parts = map_parts | append: '"medium":' | append: variant.id | append: ','
-      elsif title_lower contains 'large' or title_lower contains 'l'
-        assign map_parts = map_parts | append: '"large":' | append: variant.id | append: ','
-      endif
-    endfor
-    if map_parts != ''
-      assign map_clean = map_parts | slice: 0, -1
-      assign variant_map_json = '{' | append: map_clean | append: '}'
+  # Robust variant ID resolution: product -> all_products['safepet-ultrapad'] -> fallback IDs
+  assign pdp_product = product
+  if pdp_product == blank or pdp_product.handle != 'safepet-ultrapad'
+    if all_products['safepet-ultrapad'] != blank
+      assign pdp_product = all_products['safepet-ultrapad']
     endif
   endif
+
+  # Fallback to the live product variant IDs created in Shopify
+  assign small_variant_id = 50496435618022
+  assign medium_variant_id = 50496438534374
+  assign large_variant_id = 50496438567142
+
+  if pdp_product != blank
+    for v in pdp_product.variants
+      assign title_l = v.title | downcase
+      if title_l contains 'small'
+        assign small_variant_id = v.id
+      elsif title_l contains 'medium'
+        assign medium_variant_id = v.id
+      elsif title_l contains 'large'
+        assign large_variant_id = v.id
+      endif
+    endfor
+  endif
+
+  assign variant_map_json = '{"small":' | append: small_variant_id | append: ',"medium":' | append: medium_variant_id | append: ',"large":' | append: large_variant_id | append: '}'
 -%}
 
 {%- if section.settings.distraction_free_mode -%}
 <style>
-  /* Distraction-Free Landing Mode: Hide default theme header & footer on this page */
+  /* Distraction-Free Landing Mode: Hide default theme header & footer */
   .shopify-section-group-header-group,
   .shopify-section-group-footer-group,
   #shopify-section-header,
@@ -42,6 +50,13 @@
   .announcement-bar,
   .header-wrapper,
   .site-header {
+    display: none !important;
+  }
+</style>
+{%- else -%}
+<style>
+  /* Standard Shrine PRO Theme Mode: Hide duplicate floating nav to prevent header overlap */
+  .pp-floating-nav {
     display: none !important;
   }
 </style>
@@ -841,8 +856,8 @@
       "type": "checkbox",
       "id": "distraction_free_mode",
       "label": "Distraction-Free Landing Mode",
-      "default": true,
-      "info": "Hides standard theme header and footer to maximize conversion rate (same as shop.puppypad.co)."
+      "default": false,
+      "info": "Optionally hides standard theme header and footer for standalone lander style."
     },
     {
       "type": "text",

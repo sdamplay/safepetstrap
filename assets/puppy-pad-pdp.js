@@ -388,11 +388,72 @@
   }
 
   /* --------------------------------------------------------------------------
-     10. Add to Cart Handler (Shopify AJAX Integration)
+     10. Add to Cart Handler (Shrine PRO Cart Drawer Integration)
      -------------------------------------------------------------------------- */
   function setupAddToCart() {
     const atcBtn = document.getElementById('ppAddToCartBtn');
     const mobileAtcBtn = document.getElementById('ppMobileAtcBtn');
+
+    // Safe fallbacks to live variant IDs on safepetstrap.com
+    const FALLBACK_VARIANT_MAP = {
+      small: 50496435618022,
+      medium: 50496438534374,
+      large: 50496438567142
+    };
+
+    function openShrineCartDrawer(cartData) {
+      // 1. Try Shrine PRO custom-cart-drawer component
+      const customDrawer = document.querySelector('custom-cart-drawer');
+      if (customDrawer) {
+        if (typeof customDrawer.fetchAndRenderDrawer === 'function') {
+          customDrawer.fetchAndRenderDrawer();
+        }
+        if (typeof customDrawer.open === 'function') {
+          customDrawer.open();
+          triggerCartEvents(cartData);
+          return;
+        }
+      }
+
+      // 2. Try cart-drawer-component
+      const drawerComp = document.querySelector('cart-drawer-component');
+      if (drawerComp && typeof drawerComp.open === 'function') {
+        drawerComp.open();
+        triggerCartEvents(cartData);
+        return;
+      }
+
+      // 3. Try standard cart-drawer custom element
+      const cartDrawerEl = document.querySelector('cart-drawer');
+      if (cartDrawerEl) {
+        cartDrawerEl.classList.remove('is-empty');
+        cartDrawerEl.classList.add('active', 'is-active');
+        if (typeof cartDrawerEl.open === 'function') {
+          cartDrawerEl.open();
+          triggerCartEvents(cartData);
+          return;
+        }
+      }
+
+      // 4. Try clicking header cart trigger button
+      const drawerTrigger = document.querySelector(
+        '[data-testid="cart-drawer-trigger"], [data-drawer-trigger], #cart-icon-bubble, .header__icon--cart, .cart-icon'
+      );
+      if (drawerTrigger) {
+        drawerTrigger.click();
+        triggerCartEvents(cartData);
+        return;
+      }
+
+      // Fallback: If no drawer element exists on current template, redirect to checkout
+      window.location.href = '/checkout';
+    }
+
+    function triggerCartEvents(cartData) {
+      document.dispatchEvent(new CustomEvent('cart:updated', { detail: cartData }));
+      document.dispatchEvent(new CustomEvent('cart:refresh'));
+      document.dispatchEvent(new CustomEvent('cart:open'));
+    }
 
     function handleAdd(btn) {
       if (!btn) return;
@@ -401,16 +462,17 @@
       btn.style.opacity = '0.85';
       btn.disabled = true;
 
-      // Extract variant ID if provided on container
+      // Extract variant ID if provided on container or use fallback
       const container = document.querySelector('.pp-page-wrapper');
       const variantMapAttr = container ? container.getAttribute('data-variant-map') : null;
-      let variantId = null;
+      let variantId = FALLBACK_VARIANT_MAP[currentSize];
 
       if (variantMapAttr) {
         try {
           const map = JSON.parse(variantMapAttr);
-          // Look for matching size
-          variantId = map[currentSize] || null;
+          if (map[currentSize]) {
+            variantId = map[currentSize];
+          }
         } catch (e) {}
       }
 
@@ -419,32 +481,60 @@
       if (currentTier === '3-pack') quantity = 3;
       if (currentTier === '6-pack') quantity = 6;
 
-      // If we have a Shopify variant ID, post to /cart/add.js
-      if (variantId) {
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            items: [{ id: variantId, quantity: quantity }]
-          })
+      // Post to /cart/add.js with section rendering API support
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          items: [{ id: variantId, quantity: quantity }],
+          sections: 'cart-drawer'
         })
-          .then(res => res.json())
-          .then(() => {
-            window.location.href = '/checkout';
+      })
+        .then(res => {
+          if (!res.ok) throw new Error('Network response was not ok');
+          return res.json();
+        })
+        .then(data => {
+          btn.innerHTML = `<span>✓ ADDED TO CART!</span>`;
+          btn.style.backgroundColor = '#15803d';
+
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.opacity = '1';
+            btn.style.backgroundColor = '';
+            btn.disabled = false;
+          }, 1500);
+
+          openShrineCartDrawer(data);
+        })
+        .catch(err => {
+          console.warn('Direct cart add note:', err);
+          // Fallback: try standard add without sections param
+          fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: [{ id: variantId, quantity: quantity }] })
           })
-          .catch(() => {
-            window.location.href = '/checkout';
-          });
-      } else {
-        // Fallback: Check if there's a default form or direct link
-        const fallbackForm = document.querySelector('form[action*="/cart/add"]');
-        if (fallbackForm) {
-          fallbackForm.submit();
-        } else {
-          // Redirect to checkout or cart
-          window.location.href = '/cart';
-        }
-      }
+            .then(res => res.json())
+            .then(data => {
+              btn.innerHTML = `<span>✓ ADDED TO CART!</span>`;
+              setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+                btn.disabled = false;
+              }, 1500);
+              openShrineCartDrawer(data);
+            })
+            .catch(() => {
+              btn.innerHTML = originalText;
+              btn.style.opacity = '1';
+              btn.disabled = false;
+              window.location.href = `/cart/${variantId}:${quantity}`;
+            });
+        });
     }
 
     if (atcBtn) {

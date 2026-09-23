@@ -1,10 +1,19 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "puppypad-pdp",
       "settings": {
-        "distraction_free_mode": true,
-        "product_title": "SafePet™ UltraPad — The Washable, Leak-Proof Pee Pad Dogs Are Naturally Drawn To"
+        "distraction_free_mode": false,
+        "product_title": "SafePet™ UltraPad — Washable Leak-Proof Dog Pee Pad"
       }
     }
   },
