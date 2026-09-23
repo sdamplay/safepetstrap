@@ -351,6 +351,39 @@
     {%- assign kls_grow_body = "Engineered to redirect pulling forces from the throat to the chest area, protecting your dog's delicate windpipe and neck joints." -%}
     {%- assign kls_grow_quote = "Choking your dog with a collar can cause permanent tracheal damage. A chest harness distributes the force safely across their body." -%}
     {%- assign kls_faq_heading = "No-Pull Harness Frequently Asked Questions" -%}
+  {%- elsif product.handle == 'safepet-ultrapad' or product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+    {%- assign kls_hero_headline = "The Washable, Leak-Proof Pee Pad Dogs Are Naturally Drawn To. 300+ Washes, Zero Floor Leaks." -%}
+    {%- assign kls_hero_price_sale = "$29.95" -%}
+    {%- assign kls_hero_price_original = "$59.95" -%}
+    {%- assign kls_hero_save_pill = "SAVE 50%" -%}
+    {%- assign kls_hero_benefit_1 = "Instant Odor & Liquid Lock — 4-layer multi-quilted core traps up to 8 cups" -%}
+    {%- assign kls_hero_benefit_2 = "100% Leak-Proof & Slip-Proof — Waterproof TPU barrier + silicone paw traction" -%}
+    {%- assign kls_hero_benefit_3 = "Save $400+/Year On Waste — Machine washable for 300+ cycles, eco-friendly" -%}
+    {%- assign kls_hero_cta_label = "CLAIM MY ULTRAPAD NOW →" -%}
+    {%- assign kls_hero_trust_text = "Over 150,000+ happy pups & clean floors worldwide." -%}
+    {%- assign kls_hero_testimonial_name = "Sarah Jenkins & Charlie (Golden Retriever)" -%}
+    {%- assign kls_hero_testimonial_quote = "Disposable pads were costing me $45 a month, and Charlie would shred them to pieces or pee on the edges, ruining my hardwood floors. SafePet UltraPad completely saved my home. The liquid absorbs instantly, never leaks through, and washes clean in the machine. No odor, no mess, no shredded paper!" -%}
+    {%- assign kls_stats_heading = "Trusted By 150,000+ Smart Dog Parents" -%}
+    {%- assign kls_stat_1_value = "99%" -%}
+    {%- assign kls_stat_1_desc = "<p>Odor elimination & zero floor leak satisfaction rate</p>" -%}
+    {%- assign kls_stat_2_value = "300+" -%}
+    {%- assign kls_stat_2_desc = "<p>Machine washes per pad without losing waterproof seal</p>" -%}
+    {%- assign kls_stat_3_value = "$400+" -%}
+    {%- assign kls_stat_3_desc = "<p>Average annual savings vs throwaway disposable pee pads</p>" -%}
+    {%- assign kls_ready_heading = "Stop Throwing Money Away On Leaky Disposable Pads" -%}
+    {%- assign kls_ready_body = "Tired of wet dog paws tracking urine onto carpets, soaked subfloors, and endless boxes of smelly disposable pads? SafePet UltraPad locks liquids instantly, traps foul odors, and washes clean in your home washing machine for years of reliable protection." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Protect My Floors Now" -%}
+    {%- assign kls_comparison_heading = "Why Dog Parents Choose SafePet UltraPad Over Disposable Pads" -%}
+    {%- assign kls_comparison_brand_label = "SafePet UltraPad" -%}
+    {%- assign kls_comparison_others_label = "Disposable Paper Pads" -%}
+    {%- assign kls_comparison_features = "Instant liquid absorption (up to 8 cups)\n100% waterproof TPU leak-proof bottom\nSilicone paw grip anti-slip backing\nOdor-neutralizing breathable core\nChew & tear resistant durable fabric\nMachine washable 300+ times\nSaves $400+ every single year\n90-Day leak-proof guarantee" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 90 Days" -%}
+    {%- assign kls_guarantee_body = "Put the SafePet UltraPad down in your puppy's playpen, crate, or living room. Wash it as many times as you want. If it leaks onto your floor or doesn't eliminate odors within 90 days, let us know and we'll issue an immediate 100% refund. No hassle." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY ULTRAPAD RISK-FREE" -%}
+    {%- assign kls_grow_heading = "4-Layer Quilted Matrix 🐾 Zero Leak Technology" -%}
+    {%- assign kls_grow_body = "Engineered with a quick-dry soft quilted top sheet, super-absorbent high-density polymer core, 100% waterproof TPU barrier, and anti-slip silicone paw grips that keep the pad securely in place." -%}
+    {%- assign kls_grow_quote = "Disposable pads leak around the edges and tear into toxic shreds. A heavy-duty, machine-washable pad gives puppies confidence and keeps your floors safe." -%}
+    {%- assign kls_faq_heading = "SafePet UltraPad Frequently Asked Questions" -%}
   {%- endif -%}
 {%- endif -%}
 {%- comment -%} SAFE PET DYNAMIC COPY OVERRIDES END {%- endcomment -%}
@@ -380,33 +413,41 @@
             {%- endif -%}
           </div>
           <div class="kls-hero-thumbs">
-            {%- if section.settings.hero_thumb_1 != blank -%}
-              <div class="kls-hero-thumb" data-wld-thumb>
-                {{ section.settings.hero_thumb_1 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 1' }}
-              </div>
+            {%- if template.name == 'product' and product.media.size > 1 and section.settings.hero_thumb_1 == blank -%}
+              {%- for media in product.media limit: 5 -%}
+                <div class="kls-hero-thumb" data-wld-thumb>
+                  {{ media | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: media.alt | default: 'Gallery thumbnail' }}
+                </div>
+              {%- endfor -%}
             {%- else -%}
-              <div class="kls-hero-thumb" data-wld-thumb></div>
-            {%- endif -%}
-            {%- if section.settings.hero_thumb_2 != blank -%}
-              <div class="kls-hero-thumb" data-wld-thumb>
-                {{ section.settings.hero_thumb_2 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 2' }}
-              </div>
-            {%- else -%}
-              <div class="kls-hero-thumb" data-wld-thumb></div>
-            {%- endif -%}
-            {%- if section.settings.hero_thumb_3 != blank -%}
-              <div class="kls-hero-thumb" data-wld-thumb>
-                {{ section.settings.hero_thumb_3 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 3' }}
-              </div>
-            {%- else -%}
-              <div class="kls-hero-thumb" data-wld-thumb></div>
-            {%- endif -%}
-            {%- if section.settings.hero_thumb_4 != blank -%}
-              <div class="kls-hero-thumb" data-wld-thumb>
-                {{ section.settings.hero_thumb_4 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 4' }}
-              </div>
-            {%- else -%}
-              <div class="kls-hero-thumb" data-wld-thumb></div>
+              {%- if section.settings.hero_thumb_1 != blank -%}
+                <div class="kls-hero-thumb" data-wld-thumb>
+                  {{ section.settings.hero_thumb_1 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 1' }}
+                </div>
+              {%- else -%}
+                <div class="kls-hero-thumb" data-wld-thumb></div>
+              {%- endif -%}
+              {%- if section.settings.hero_thumb_2 != blank -%}
+                <div class="kls-hero-thumb" data-wld-thumb>
+                  {{ section.settings.hero_thumb_2 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 2' }}
+                </div>
+              {%- else -%}
+                <div class="kls-hero-thumb" data-wld-thumb></div>
+              {%- endif -%}
+              {%- if section.settings.hero_thumb_3 != blank -%}
+                <div class="kls-hero-thumb" data-wld-thumb>
+                  {{ section.settings.hero_thumb_3 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 3' }}
+                </div>
+              {%- else -%}
+                <div class="kls-hero-thumb" data-wld-thumb></div>
+              {%- endif -%}
+              {%- if section.settings.hero_thumb_4 != blank -%}
+                <div class="kls-hero-thumb" data-wld-thumb>
+                  {{ section.settings.hero_thumb_4 | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: 'Gallery thumbnail 4' }}
+                </div>
+              {%- else -%}
+                <div class="kls-hero-thumb" data-wld-thumb></div>
+              {%- endif -%}
             {%- endif -%}
           </div>
         </div>
@@ -491,10 +532,18 @@
               data-type: 'add-to-cart-form'
             -%}
               <div class="hidden product-form__variants" id="product-form-{{ section.id }}__variants" data-values=""></div>
+              {%- assign default_var_id = product.selected_or_first_available_variant.id -%}
+              {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+                {%- for v in product.variants -%}
+                  {%- if v.title contains 'Medium' or v.title contains '28x32' -%}
+                    {%- assign default_var_id = v.id -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
               <input
                 type="hidden"
                 name="id"
-                value="{{ product.selected_or_first_available_variant.id }}"
+                value="{{ default_var_id }}"
                 class="product-variant-id"
               >
               <input type="hidden" name="quantity" value="1">
@@ -713,6 +762,23 @@
                   {%- assign faq_question = "What is your return policy?" -%}
                   {%- assign faq_answer = "<p>We offer a 30-day 100% money back guarantee. If you don't absolutely love the harness, let us know for a full refund.</p>" -%}
                 {%- endif -%}
+              {%- elsif product.handle == 'safepet-ultrapad' or product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "How does the 4-layer leak-proof technology work?" -%}
+                  {%- assign faq_answer = "<p>Layer 1 is a soft, quilted quick-dry surface dogs love. Layer 2 is a super-absorbent high-density core that locks up to 8 cups of liquid. Layer 3 is a 100% waterproof TPU impermeable barrier. Layer 4 features anti-slip silicone paw grips to prevent sliding.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "How do I wash and dry the SafePet UltraPad?" -%}
+                  {%- assign faq_answer = "<p>Simply toss it in your washing machine on warm or cold cycle with regular detergent (no bleach or fabric softener). Tumble dry on low heat or hang dry. It dries quickly and comes out fresh and odor-free every time!</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "Will my dog chew or tear this pad?" -%}
+                  {%- assign faq_answer = "<p>Unlike paper disposable pads that tear into hazardous shreds, SafePet UltraPad is built with reinforced double-stitched hem edges and heavy-duty ripstop polyester that withstands puppy claws and chewing impulses.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "Which size should I pick for my dog?" -%}
+                  {%- assign faq_answer = "<p><strong>Small (16x24 in / 40x60cm):</strong> Great for puppies, small breeds under 25 lbs, crates, and car seats.<br><strong>Medium (28x32 in / 70x80cm):</strong> Our most popular size! Perfect for dogs 25–55 lbs, playpens, and living rooms.<br><strong>Large (32x35 in / 80x90cm):</strong> Ideal for large dogs 55+ lbs, multiple dogs, or maximum coverage under food and water bowls.</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "What if my dog doesn't use it or it leaks?" -%}
+                  {%- assign faq_answer = "<p>We offer an ironclad 90-Day Money-Back Guarantee. If the UltraPad doesn't completely stop leaks and keep your home odor-free, simply email our customer support for a prompt, 100% refund. No questions asked!</p>" -%}
+                {%- endif -%}
               {%- endif -%}
             {%- endif -%}
             <details class="kls-faq-row" {{ block.shopify_attributes }}>
@@ -878,6 +944,23 @@
                   {%- assign test_body = "Tracheal collapse is common in pulling dogs. I recommend this chest harness design to all my patients to protect their breathing." -%}
                   {%- assign test_author_name = "Sarah T." -%}
                   {%- assign test_author_tag = "Veterinarian" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'safepet-ultrapad' or product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "Saved my hardwood floors from ruin!" -%}
+                  {%- assign test_body = "Our puppy would pee right on the edge of paper pads, soaking into the hardwood seams. SafePet UltraPad absorbs liquid on contact so it never puddles or runs off. We bought 3 of them and rotate them in the wash. Absolute lifesaver." -%}
+                  {%- assign test_author_name = "Sarah Jenkins" -%}
+                  {%- assign test_author_tag = "Golden Retriever Mom" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "PAYS FOR ITSELF IN 6 WEEKS!" -%}
+                  {%- assign test_body = "I was spending $50/month on disposable pads that tore into shredded confetti all over the house. These pads don't shred, don't smell, and don't slide around because of the rubber grips underneath. Worth every single penny." -%}
+                  {%- assign test_author_name = "David & Maya" -%}
+                  {%- assign test_author_tag = "French Bulldog Parent" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "Recommended by our vet tech." -%}
+                  {%- assign test_body = "We adopted a senior dog with incontinence. Disposable pads always leaked through the bottom plastic. The TPU barrier on this pad is 100% waterproof—not a single drop has ever leaked onto our rugs." -%}
+                  {%- assign test_author_name = "Dr. Linda H." -%}
+                  {%- assign test_author_tag = "Veterinary Technician" -%}
                 {%- endif -%}
               {%- endif -%}
             {%- endif -%}

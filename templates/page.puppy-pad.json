@@ -9,15 +9,258 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "puppypad-pdp",
+    "kids_life_skills_pMNmYd": {
+      "type": "kids-life-skills",
+      "blocks": {
+        "faq_TkDYTA": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🛡️",
+            "question": "How does the 4-layer leak-proof technology work?",
+            "answer": "<p>Layer 1 is a soft, quilted quick-dry surface dogs love. Layer 2 is a super-absorbent high-density core that locks up to 8 cups of liquid. Layer 3 is a 100% waterproof TPU impermeable barrier. Layer 4 features anti-slip silicone paw grips to prevent sliding.</p>"
+          }
+        },
+        "faq_RHjUTa": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🧺",
+            "question": "How do I wash and dry the SafePet UltraPad?",
+            "answer": "<p>Simply toss it in your washing machine on warm or cold cycle with regular detergent (no bleach or fabric softener). Tumble dry on low heat or hang dry. It dries quickly and comes out fresh and odor-free every time!</p>"
+          }
+        },
+        "faq_xfQdDW": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🐾",
+            "question": "Will my dog chew or tear this pad?",
+            "answer": "<p>Unlike paper disposable pads that tear into hazardous shreds, SafePet UltraPad is built with reinforced double-stitched hem edges and heavy-duty ripstop polyester that withstands puppy claws and chewing impulses.</p>"
+          }
+        },
+        "faq_3m4wGU": {
+          "type": "faq",
+          "settings": {
+            "emoji": "📏",
+            "question": "Which size should I pick for my dog?",
+            "answer": "<p><strong>Small (16x24 in / 40x60cm):</strong> Great for puppies, small breeds under 25 lbs, crates, and car seats.<br><strong>Medium (28x32 in / 70x80cm):</strong> Our most popular size! Perfect for dogs 25–55 lbs, playpens, and living rooms.<br><strong>Large (32x35 in / 80x90cm):</strong> Ideal for large dogs 55+ lbs, multiple dogs, or maximum coverage under food and water bowls.</p>"
+          }
+        },
+        "faq_ktMHfj": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🤝",
+            "question": "What if my dog doesn't use it or it leaks?",
+            "answer": "<p>We offer an ironclad 90-Day Money-Back Guarantee. If the UltraPad doesn't completely stop leaks and keep your home odor-free, simply email our customer support for a prompt, 100% refund. No questions asked!</p>"
+          }
+        },
+        "testimonial_JEwrYm": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Saved my hardwood floors from ruin!",
+            "body": "Our puppy would pee right on the edge of paper pads, soaking into the hardwood seams. SafePet UltraPad absorbs liquid on contact so it never puddles or runs off. We bought 3 of them and rotate them in the wash. Absolute lifesaver.",
+            "author_name": "Sarah Jenkins",
+            "author_tag": "Golden Retriever Mom"
+          }
+        },
+        "testimonial_AQJbh3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "PAYS FOR ITSELF IN 6 WEEKS!",
+            "body": "I was spending $50/month on disposable pads that tore into shredded confetti all over the house. These pads don't shred, don't smell, and don't slide around because of the rubber grips underneath. Worth every single penny.",
+            "author_name": "David & Maya",
+            "author_tag": "French Bulldog Parent"
+          }
+        },
+        "testimonial_EiyaeU": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Recommended by our vet tech.",
+            "body": "We adopted a senior dog with incontinence. Disposable pads always leaked through the bottom plastic. The TPU barrier on this pad is 100% waterproof—not a single drop has ever leaked onto our rugs.",
+            "author_name": "Dr. Linda H.",
+            "author_tag": "Veterinary Technician"
+          }
+        }
+      },
+      "block_order": [
+        "faq_TkDYTA",
+        "faq_RHjUTa",
+        "faq_xfQdDW",
+        "faq_3m4wGU",
+        "faq_ktMHfj",
+        "testimonial_JEwrYm",
+        "testimonial_AQJbh3",
+        "testimonial_EiyaeU"
+      ],
+      "custom_css": [],
+      "name": "SafePet Landing Copy",
       "settings": {
-        "distraction_free_mode": false,
-        "product_title": "SafePet™ UltraPad — Washable Leak-Proof Dog Pee Pad"
+        "product": "safepet-ultrapad",
+        "hero_main_image": "",
+        "hero_badge_tl": "4-Layer Quilted",
+        "hero_badge_tc": "300+ Washes",
+        "hero_badge_tr": "100% Leak-Proof",
+        "hero_rating_text": "(3,420+ verified reviews)",
+        "hero_headline": "The Washable, Leak-Proof Pee Pad Dogs Are Naturally Drawn To. 300+ Washes, Zero Floor Leaks.",
+        "hero_price_sale": "",
+        "hero_price_original": "",
+        "hero_save_pill": "",
+        "hero_benefit_1": "Instant Odor & Liquid Lock — 4-layer multi-quilted core traps up to 8 cups",
+        "hero_benefit_2": "100% Leak-Proof & Slip-Proof — Waterproof TPU barrier + silicone paw traction",
+        "hero_benefit_3": "Save $400+/Year On Waste — Machine washable for 300+ cycles, eco-friendly",
+        "hero_cta_label": "CLAIM MY ULTRAPAD NOW →",
+        "hero_trust_text": "Over 150,000+ happy pups & clean floors worldwide.",
+        "hero_guarantee_pill": "90-Day Money-Back Guarantee",
+        "hero_testimonial_avatar": "",
+        "hero_testimonial_quote": "Disposable pads were costing me $45 a month, and Charlie would shred them to pieces or pee on the edges, ruining my hardwood floors. SafePet UltraPad completely saved my home. The liquid absorbs instantly, never leaks through, and washes clean in the machine. No odor, no mess, no shredded paper!",
+        "hero_testimonial_name": "Sarah Jenkins & Charlie (Golden Retriever)",
+        "faq_heading": "SafePet UltraPad Frequently Asked Questions",
+        "ready_heading": "Stop Throwing Money Away On Leaky Disposable Pads",
+        "ready_body": "Tired of wet dog paws tracking urine onto carpets, soaked subfloors, and endless boxes of smelly disposable pads? SafePet UltraPad locks liquids instantly, traps foul odors, and washes clean in your home washing machine for years of reliable protection.",
+        "ready_cta_label": "👉 Yes, Protect My Floors Now",
+        "ready_cta_url": "",
+        "grow_heading": "4-Layer Quilted Matrix 🐾 Zero Leak Technology",
+        "grow_body": "Engineered with a quick-dry soft quilted top sheet, super-absorbent high-density polymer core, 100% waterproof TPU barrier, and anti-slip silicone paw grips that keep the pad securely in place.",
+        "grow_quote": "Disposable pads leak around the edges and tear into toxic shreds. A heavy-duty, machine-washable pad gives puppies confidence and keeps your floors safe.",
+        "testimonials_heading": "Real Dog Parents. Real Clean Floors.",
+        "stats_heading": "Trusted By 150,000+ Smart Dog Parents",
+        "stat_1_value": "99%",
+        "stat_1_desc": "<p>Odor elimination & zero floor leak satisfaction rate</p>",
+        "stat_2_value": "300+",
+        "stat_2_desc": "<p>Machine washes per pad without losing waterproof seal</p>",
+        "stat_3_value": "$400+",
+        "stat_3_desc": "<p>Average annual savings vs throwaway disposable pee pads</p>",
+        "stats_footnote": "*Individual results vary by dog size and frequency.",
+        "comparison_heading": "Why Dog Parents Choose SafePet UltraPad Over Disposable Pads",
+        "comparison_brand_label": "SafePet UltraPad",
+        "comparison_others_label": "Disposable Paper Pads",
+        "comparison_features": "Instant liquid absorption (up to 8 cups)\n100% waterproof TPU leak-proof bottom\nSilicone paw grip anti-slip backing\nOdor-neutralizing breathable core\nChew & tear resistant durable fabric\nMachine washable 300+ times\nSaves $400+ every single year\n90-Day leak-proof guarantee",
+        "guarantee_heading": "Try It Risk-Free For 90 Days",
+        "guarantee_body": "Put the SafePet UltraPad down in your puppy's playpen, crate, or living room. Wash it as many times as you want. If it leaks onto your floor or doesn't eliminate odors within 90 days, let us know and we'll issue an immediate 100% refund. No hassle.",
+        "guarantee_cta_label": "GET MY ULTRAPAD RISK-FREE",
+        "guarantee_cta_url": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "margin_top": -40,
+        "margin_bottom": 0,
+        "font_size_base": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#2d2d2d",
+        "headline_font_size": 20,
+        "headline_color": "#2d2d2d",
+        "headline_margin_top": -14,
+        "headline_margin_bottom": 0,
+        "rating_font_size": 16,
+        "rating_color": "#6b6b6b",
+        "rating_star_color": "#f5b800",
+        "rating_margin_top": 0,
+        "rating_margin_bottom": 0,
+        "price_sale_font_size": 32,
+        "price_sale_color": "#d0021b",
+        "price_original_font_size": 18,
+        "price_original_color": "#6b6b6b",
+        "price_margin_top": -10,
+        "price_margin_bottom": 0,
+        "benefits_font_size": 16,
+        "benefits_color": "#2d2d2d",
+        "benefits_icon_color": "#e53935",
+        "benefits_margin_top": -10,
+        "benefits_margin_bottom": 0,
+        "cta_font_size": 18,
+        "cta_bg_color": "#e53935",
+        "cta_text_color": "#ffffff",
+        "cta_margin_top": 0,
+        "cta_margin_bottom": 0,
+        "testimonial_bg_color": "#fff5f5",
+        "testimonial_text_color": "#2d2d2d",
+        "testimonial_margin_top": 0,
+        "testimonial_margin_bottom": 0
+      }
+    },
+    "b321ab88-2b59-4dba-bade-54885c874ca5": {
+      "type": "section-divider",
+      "settings": {
+        "visibility": "always-display",
+        "shape": "waves_3",
+        "flip_horizontal": false,
+        "flip_vertical": false,
+        "shape_color": "accent-1",
+        "custom_shape_color": "#dd1d1d",
+        "background_color": "background-1",
+        "custom_background_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "social_proof_toast_m3B7bY": {
+      "type": "social-proof-toast",
+      "blocks": {
+        "toast_block_0": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "S",
+            "name_descriptor": "Sarah J. | Golden Retriever Mom",
+            "quote": "Charlie used to shred disposable pads. UltraPad holds up completely and zero floor leaks!"
+          }
+        },
+        "toast_block_1": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "D",
+            "name_descriptor": "David & Maya | Frenchie Parent",
+            "quote": "Saves me $50 every month. Toss it in the washer and it dries fast and fresh."
+          }
+        },
+        "toast_block_2": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "L",
+            "name_descriptor": "Dr. Linda H. | Vet Assistant",
+            "quote": "The 100% waterproof TPU barrier protects carpets and hardwoods completely. Highly recommended."
+          }
+        },
+        "toast_block_3": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "M",
+            "name_descriptor": "Marcus D. | Senior Boxer Parent",
+            "quote": "Our senior dog has nighttime accidents. This pad saved our expensive rugs!"
+          }
+        },
+        "toast_block_4": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "A",
+            "name_descriptor": "Amanda K. | Corgi Puppy Owner",
+            "quote": "The silicone rubber grips keep it locked in place. No more sliding across tile floors!"
+          }
+        }
+      },
+      "block_order": [
+        "toast_block_0",
+        "toast_block_1",
+        "toast_block_2",
+        "toast_block_3",
+        "toast_block_4"
+      ],
+      "name": "Social Proof Toast",
+      "settings": {
+        "enable": true,
+        "position": "bottom-left",
+        "bg_color": "#fff5f5",
+        "accent_color": "#e53935",
+        "text_color": "#2d2d2d",
+        "text_secondary_color": "#6b6b6b",
+        "star_color": "#f5b800",
+        "font_size_quote": 13,
+        "font_size_author": 11,
+        "first_show_delay": 6,
+        "between_delay": 10,
+        "show_duration": 5
       }
     }
   },
   "order": [
-    "main"
+    "kids_life_skills_pMNmYd",
+    "b321ab88-2b59-4dba-bade-54885c874ca5",
+    "social_proof_toast_m3B7bY"
   ]
 }
