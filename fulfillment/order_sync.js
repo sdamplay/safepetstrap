@@ -196,7 +196,7 @@ async function resetTags() {
 
   for (const order of orders) {
     const tags = (order.tags || '').split(',').map(t => t.trim());
-    const cleaned = tags.filter(t => t.toLowerCase() !== 'ali-placed' && !t.toLowerCase().startsWith('ali-id:') && t.toLowerCase() !== 'fulfill-ali');
+    const cleaned = tags.filter(t => t.toLowerCase() !== 'ali-placed' && !t.toLowerCase().startsWith('ali-id:') && t.toLowerCase() !== 'fulfill-ali' && t.toLowerCase() !== 'fulfill-ae');
     const noteHasAli = order.note && order.note.toLowerCase().includes('aliexpress');
     if (cleaned.length !== tags.length || noteHasAli) {
       const updatePayload = {

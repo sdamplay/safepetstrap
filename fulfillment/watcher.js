@@ -3,7 +3,7 @@ const shopifyClient = require('./shopify_client');
 const { placeSingleOrder } = require('./order_sync');
 
 const POLL_INTERVAL_MS = parseInt(process.env.WATCHER_INTERVAL_MS, 10) || 15000;
-const TRIGGER_TAG = process.env.TRIGGER_TAG || 'fulfill-ali';
+const TRIGGER_TAG = process.env.TRIGGER_TAG || 'fulfill-ae';
 
 let isProcessing = false;
 
@@ -12,12 +12,21 @@ async function checkAndFulfill() {
   isProcessing = true;
 
   try {
-    const orders = await shopifyClient.getUnfulfilledOrders({ tagFilter: TRIGGER_TAG });
+    let orders = await shopifyClient.getUnfulfilledOrders({ tagFilter: TRIGGER_TAG });
+    let activeTag = TRIGGER_TAG;
+    if (orders.length === 0 && TRIGGER_TAG === 'fulfill-ae') {
+      const legacyOrders = await shopifyClient.getUnfulfilledOrders({ tagFilter: 'fulfill-ali' });
+      if (legacyOrders.length > 0) {
+        orders = legacyOrders;
+        activeTag = 'fulfill-ali';
+      }
+    }
+
     if (orders.length > 0) {
-      console.log(`\n🔔 [BOT] Found ${orders.length} order(s) tagged "${TRIGGER_TAG}"! Starting fulfillment...`);
+      console.log(`\n🔔 [BOT] Found ${orders.length} order(s) tagged "${activeTag}"! Starting fulfillment...`);
       for (const order of orders) {
         console.log(`\n🤖 Auto-fulfilling Order #${order.order_number} (${order.name})...`);
-        const res = await placeSingleOrder(order, { tagToRemove: TRIGGER_TAG });
+        const res = await placeSingleOrder(order, { tagToRemove: activeTag });
         if (res.status === 'success') {
           console.log(`✅ Order #${order.order_number} fulfilled on AliExpress: ${res.aliOrderIds.join(', ')}`);
         } else {

@@ -142,7 +142,8 @@ class ShopifyClient {
     const tagPlaced = config.shopify.tagPlaced;
     let existingTags = order.tags ? order.tags.split(',').map(t => t.trim()) : [];
     
-    // Remove trigger tag if specified (e.g. 'fulfill-ali'), but keep 'ae-placed' if used as status tag
+    // Remove trigger tags (fulfill-ae, fulfill-ali, or custom tagToRemove)
+    existingTags = existingTags.filter(t => t.toLowerCase() !== 'fulfill-ae' && t.toLowerCase() !== 'fulfill-ali');
     if (tagToRemove && tagToRemove.toLowerCase() !== 'ae-placed') {
       existingTags = existingTags.filter(t => t.toLowerCase() !== tagToRemove.toLowerCase());
     }

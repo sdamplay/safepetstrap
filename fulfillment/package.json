@@ -9,7 +9,7 @@
     "add:product": "node add_product.js",
     "fulfill:dry-run": "node order_sync.js --dry-run",
     "fulfill:orders": "node order_sync.js",
-    "fulfill:selected": "node order_sync.js --tag=fulfill-ali",
+    "fulfill:selected": "node order_sync.js --tag=fulfill-ae",
     "fulfill:force": "node order_sync.js --force",
     "reset:tags": "node order_sync.js --reset-tags",
     "start:server": "node server.js",
