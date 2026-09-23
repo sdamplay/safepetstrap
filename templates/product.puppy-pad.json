@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "puppypad-pdp",
+      "settings": {
+        "distraction_free_mode": true,
+        "product_title": "SafePet™ UltraPad — The Washable, Leak-Proof Pee Pad Dogs Are Naturally Drawn To"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

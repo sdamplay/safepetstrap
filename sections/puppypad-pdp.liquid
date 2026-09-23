@@ -1,0 +1,861 @@
+{%- comment -%}
+  SafePet™ UltraPad - 12/10 High-Converting DTC Landing & Product Section
+{%- endcomment -%}
+
+{{ 'puppy-pad-pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'puppy-pad-pdp.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign small_img = 'puppy-pad-size-s.jpg' | asset_url
+  assign medium_img = 'puppy-pad-size-m.jpg' | asset_url
+  assign large_img = 'puppy-pad-size-l.jpg' | asset_url
+
+  # Build JSON variant mapping if on a Shopify product
+  assign variant_map_json = '{}'
+  if product
+    assign map_parts = ''
+    for variant in product.variants
+      assign title_lower = variant.title | downcase
+      if title_lower contains 'small' or title_lower contains 's'
+        assign map_parts = map_parts | append: '"small":' | append: variant.id | append: ','
+      elsif title_lower contains 'medium' or title_lower contains 'm'
+        assign map_parts = map_parts | append: '"medium":' | append: variant.id | append: ','
+      elsif title_lower contains 'large' or title_lower contains 'l'
+        assign map_parts = map_parts | append: '"large":' | append: variant.id | append: ','
+      endif
+    endfor
+    if map_parts != ''
+      assign map_clean = map_parts | slice: 0, -1
+      assign variant_map_json = '{' | append: map_clean | append: '}'
+    endif
+  endif
+-%}
+
+{%- if section.settings.distraction_free_mode -%}
+<style>
+  /* Distraction-Free Landing Mode: Hide default theme header & footer on this page */
+  .shopify-section-group-header-group,
+  .shopify-section-group-footer-group,
+  #shopify-section-header,
+  #shopify-section-footer,
+  #shopify-section-announcement-bar,
+  .announcement-bar,
+  .header-wrapper,
+  .site-header {
+    display: none !important;
+  }
+</style>
+{%- endif -%}
+
+<div class="pp-page-wrapper" data-variant-map='{{ variant_map_json }}'>
+
+  <!-- 1. FLOATING DTC NAVIGATION -->
+  <header class="pp-floating-nav pp-nav-hidden" id="ppFloatingNav">
+    <a href="#ppHeroSection" class="pp-nav-logo">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+      </svg>
+      SafePet<span class="pp-logo-highlight">UltraPad™</span>
+    </a>
+    <ul class="pp-nav-links">
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#breakdown">4-Layer Tech</a></li>
+      <li><a href="#comparison">UltraPad Vs. Cheap Pads</a></li>
+      <li><a href="#guarantee">90-Day Guarantee</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+    </ul>
+    <a href="#ppHeroSection" class="pp-nav-cta">
+      <span>CHOOSE BUNDLE</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </a>
+  </header>
+
+  <!-- 2. MAIN HERO PRODUCT SECTION -->
+  <section class="pp-hero-section" id="ppHeroSection">
+    <div class="pp-container">
+      <div class="pp-hero-grid">
+
+        <!-- Left Column: Gallery & Proof -->
+        <div class="pp-gallery-column">
+          <div class="pp-gallery-sticky">
+            <div class="pp-gallery-main">
+              <div class="pp-badge-overlay">
+                <span class="pp-live-dot"></span>
+                <span>43 pet parents looking right now</span>
+              </div>
+              <div class="pp-gallery-main-img-wrap">
+                <img
+                  id="ppMainGalleryImg"
+                  class="pp-gallery-main-img"
+                  src="{{ medium_img }}"
+                  alt="SafePet UltraPad Washable Pee Pad"
+                  width="800"
+                  height="800"
+                  loading="eager"
+                >
+              </div>
+            </div>
+
+            <!-- 3 Free Gifts Banner -->
+            <div class="pp-gift-banner">
+              <div class="pp-gift-icon">🎁</div>
+              <div class="pp-gift-content">
+                <h4>3 FREE GIFTS INCLUDED TODAY ONLY</h4>
+                <p>Order today & receive instant download access to: <em>The 7-Day Puppy Potty Blueprint</em>, <em>Dog Body Language Guide</em>, and <em>Pet First Aid Manual</em> ($79 Value — 100% FREE).</p>
+              </div>
+            </div>
+
+            <!-- Thumbnail Slider -->
+            <div class="pp-gallery-thumbnails">
+              <button type="button" class="pp-thumb-btn" data-full-img="{{ small_img }}" title="Small Size (16x24 in)">
+                <img src="{{ small_img }}" alt="Small Size Preview" width="76" height="76">
+              </button>
+              <button type="button" class="pp-thumb-btn pp-active" data-full-img="{{ medium_img }}" title="Medium Size (28x32 in)">
+                <img src="{{ medium_img }}" alt="Medium Size Preview" width="76" height="76">
+              </button>
+              <button type="button" class="pp-thumb-btn" data-full-img="{{ large_img }}" title="Large Size (32x35 in)">
+                <img src="{{ large_img }}" alt="Large Size Preview" width="76" height="76">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Conversion Buy Box -->
+        <div class="pp-buybox">
+
+          <!-- Quick Objection FAQ Carousel Pills -->
+          <div class="pp-objection-tabs-wrap">
+            <div class="pp-objection-scroll">
+              <button type="button" class="pp-obj-pill pp-active" data-answer="Our natural scent attractant triggers your dog's canine territory instinct to pee right here. No training required.">
+                <span>✦ How does it work?</span>
+              </button>
+              <button type="button" class="pp-obj-pill" data-answer="Yes! Over 150,000 dogs use it successfully. The scent signature is irresistible to dogs yet 100% odorless to human noses.">
+                <span>✦ Will my dog use it?</span>
+              </button>
+              <button type="button" class="pp-obj-pill" data-answer="Guaranteed for 300+ machine washes — that is over a full year of daily use. One UltraPad replaces over 1,500 disposable pads.">
+                <span>✦ How long does it last?</span>
+              </button>
+              <button type="button" class="pp-obj-pill" data-answer="Zero smell. The antimicrobial core locks moisture in 3 seconds and eliminates ammonia odors on contact.">
+                <span>✦ Will it smell?</span>
+              </button>
+              <button type="button" class="pp-obj-pill" data-answer="Tough military-grade reinforced edging resists chewing, scratching, and shredding unlike flimsy paper pads.">
+                <span>✦ Is it chew-proof?</span>
+              </button>
+              <button type="button" class="pp-obj-pill" data-answer="Simply throw it in the washing machine on normal cycle with cold or warm water, then tumble dry low or hang dry. Easy!">
+                <span>✦ How do I wash it?</span>
+              </button>
+              <button type="button" class="pp-obj-pill" data-answer="We back every order with a 90-Day Money-Back Risk-Free Guarantee. If your dog doesn't use it, you get a full refund!">
+                <span>✦ What if I don't like it?</span>
+              </button>
+            </div>
+            <div class="pp-obj-answer-box" id="ppObjAnswerBox">
+              <strong>💡 Answer:</strong> Our natural scent attractant triggers your dog's canine territory instinct to pee right here. No training required.
+            </div>
+          </div>
+
+          <!-- Social Proof Stars & Live Viewer Tag -->
+          <div class="pp-social-proof-bar">
+            <div class="pp-stars-badge">
+              <span class="pp-stars">★★★★★</span>
+              <span>4.9 / 5.0 (18,450+ Verified Pups)</span>
+            </div>
+            <div class="pp-live-viewers">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>High Demand Today</span>
+            </div>
+          </div>
+
+          <!-- Product Title -->
+          <h1 class="pp-main-title">
+            {{ section.settings.product_title | default: "SafePet™ UltraPad — The Washable, Leak-Proof Pee Pad Dogs Are Naturally Drawn To" }}
+          </h1>
+
+          <!-- Core Benefits Checklist -->
+          <div class="pp-benefits-checklist">
+            <div class="pp-benefit-item">
+              <span class="pp-check-icon">✓</span>
+              <span>No Training Required</span>
+            </div>
+            <div class="pp-benefit-item">
+              <span class="pp-check-icon">✓</span>
+              <span>100% Leak & Odor Proof</span>
+            </div>
+            <div class="pp-benefit-item">
+              <span class="pp-check-icon">✓</span>
+              <span>300+ Reusable Washes</span>
+            </div>
+            <div class="pp-benefit-item">
+              <span class="pp-check-icon">✓</span>
+              <span>Saves $1,200/Year vs Disposables</span>
+            </div>
+          </div>
+
+          <hr class="pp-divider">
+
+          <!-- STEP 1: SELECT SIZE -->
+          <div class="pp-selector-block">
+            <div class="pp-selector-header">
+              <div class="pp-selector-title">
+                1. Select Size:
+                <span class="pp-selected-val" id="ppSelectedSizeLabel">Medium (28x32 Inches)</span>
+              </div>
+              <a href="#" class="pp-size-guide-trigger" id="ppSizeGuideTrigger">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Unsure what size to get?
+              </a>
+            </div>
+
+            <div class="pp-size-options">
+              <!-- Small Card -->
+              <div class="pp-size-card" data-size="small" data-img="{{ small_img }}">
+                <span class="pp-size-name">SMALL</span>
+                <span class="pp-size-dim">16x24 Inches</span>
+                <span class="pp-size-cm">(40x60 cm)</span>
+                <span class="pp-size-price-tag">$24.95</span>
+              </div>
+
+              <!-- Medium Card (Default Active) -->
+              <div class="pp-size-card pp-active" data-size="medium" data-img="{{ medium_img }}">
+                <span class="pp-size-name">MEDIUM</span>
+                <span class="pp-size-dim">28x32 Inches</span>
+                <span class="pp-size-cm">(70x80 cm)</span>
+                <span class="pp-size-price-tag">$29.95</span>
+              </div>
+
+              <!-- Large Card -->
+              <div class="pp-size-card" data-size="large" data-img="{{ large_img }}">
+                <span class="pp-size-name">LARGE</span>
+                <span class="pp-size-dim">32x35 Inches</span>
+                <span class="pp-size-cm">(80x90 cm)</span>
+                <span class="pp-size-price-tag">$34.95</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="pp-divider">
+
+          <!-- STEP 2: SELECT COLOR -->
+          <div class="pp-selector-block">
+            <div class="pp-selector-header">
+              <div class="pp-selector-title">
+                2. Select Color:
+                <span class="pp-selected-val" id="ppSelectedColorLabel">Bone Gray (Quilted Pattern)</span>
+              </div>
+            </div>
+            <div class="pp-color-options">
+              <div class="pp-color-card pp-active" data-color="Bone Gray">
+                <span class="pp-swatch-circle" style="background: #94a3b8; border: 2px solid #64748b;"></span>
+                <span>Bone Gray</span>
+              </div>
+              <div class="pp-color-card" data-color="Warm Beige">
+                <span class="pp-swatch-circle" style="background: #e2d9cc; border: 2px solid #c7b9a7;"></span>
+                <span>Warm Beige</span>
+              </div>
+              <div class="pp-color-card" data-color="Midnight Slate">
+                <span class="pp-swatch-circle" style="background: #334155; border: 2px solid #1e293b;"></span>
+                <span>Midnight Slate</span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="pp-divider">
+
+          <!-- STEP 3: SELECT OFFER / BUNDLE TIERS -->
+          <div class="pp-selector-block">
+            <div class="pp-selector-header">
+              <div class="pp-selector-title">
+                3. Select Your Package & Save:
+              </div>
+            </div>
+
+            <div class="pp-offer-tiers">
+
+              <!-- Tier 1: 1 Pad -->
+              <div class="pp-tier-card" data-tier="1-pack">
+                <div class="pp-tier-left">
+                  <div class="pp-tier-radio"></div>
+                  <div class="pp-tier-info">
+                    <h4>1 UltraPad — Starter Pack</h4>
+                    <p>Ideal for travel or testing 1 room</p>
+                  </div>
+                </div>
+                <div class="pp-tier-right">
+                  <div class="pp-tier-pricing">
+                    <span class="pp-tier-price" id="ppTier1Price">$29.95</span>
+                    <span class="pp-tier-compare" id="ppTier1Compare">$59.95</span>
+                    <span class="pp-tier-unit">Save 50%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tier 2: Buy 2 Get 1 FREE (Default Active) -->
+              <div class="pp-tier-card pp-featured pp-active" data-tier="3-pack">
+                <span class="pp-tier-badge" id="ppTier2Badge">🔥 MOST POPULAR (BUY 2 GET 1 FREE)</span>
+                <div class="pp-tier-left">
+                  <div class="pp-tier-radio"></div>
+                  <div class="pp-tier-info">
+                    <h4>3 UltraPads — Perfect 3-Pad Rotation</h4>
+                    <p>1 in living room, 1 in bedroom, 1 in the wash</p>
+                  </div>
+                </div>
+                <div class="pp-tier-right">
+                  <div class="pp-tier-pricing">
+                    <span class="pp-tier-price" id="ppTier2Price">$59.90</span>
+                    <span class="pp-tier-compare" id="ppTier2Compare">$89.85</span>
+                    <span class="pp-tier-unit" id="ppTier2Unit">$19.96/each</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tier 3: Buy 3 Get 3 FREE (Best Value) -->
+              <div class="pp-tier-card" data-tier="6-pack">
+                <span class="pp-tier-badge pp-badge-gold" id="ppTier3Badge">⭐ BEST VALUE: BUY 3 GET 3 FREE</span>
+                <div class="pp-tier-left">
+                  <div class="pp-tier-radio"></div>
+                  <div class="pp-tier-info">
+                    <h4>6 UltraPads — Full Whole-Home Coverage</h4>
+                    <p>Complete multi-floor rotation + never run out on laundry day</p>
+                  </div>
+                </div>
+                <div class="pp-tier-right">
+                  <div class="pp-tier-pricing">
+                    <span class="pp-tier-price" id="ppTier3Price">$89.85</span>
+                    <span class="pp-tier-compare" id="ppTier3Compare">$179.70</span>
+                    <span class="pp-tier-unit" id="ppTier3Unit">$14.97/each</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Add to Cart CTA -->
+          <div class="pp-atc-container">
+            <button type="button" class="pp-atc-btn" id="ppAddToCartBtn">
+              <span id="ppAtcBtnText">CLAIM OFFER — JUST $59.90 →</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Trust Guarantees -->
+          <div class="pp-post-purchase-guarantees">
+            <div class="pp-guarantee-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>90-Day Money-Back Guarantee</span>
+            </div>
+            <div class="pp-guarantee-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              <span>Fast 2-5 Day Tracked US Shipping</span>
+            </div>
+            <div class="pp-guarantee-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>256-Bit SSL Encrypted Checkout</span>
+            </div>
+          </div>
+
+          <!-- Stock Urgency Progress Bar -->
+          <div class="pp-urgency-box">
+            <div class="pp-urgency-title">
+              <span>⚠️ Limited Stock:</span>
+              <span class="pp-urgency-alert">Selling fast! 88% of this month's batch claimed</span>
+            </div>
+            <div class="pp-progress-track">
+              <div class="pp-progress-fill"></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. UGC VIDEO & CUSTOMER PROOF SECTION -->
+  <section class="pp-ugc-section" id="reviews">
+    <div class="pp-container">
+      <span class="pp-section-meta">150,000+ Dog Parents Love Us</span>
+      <h2 class="pp-section-title">See Why We're The #1 Most Shared Pee Pad On Social Media</h2>
+      <p class="pp-section-subtitle">Real dogs, real accidents, and 100% dry, pristine hardwood floors. Watch the UltraPad in action below:</p>
+
+      <div class="pp-ugc-grid">
+        <!-- UGC 1 -->
+        <div class="pp-ugc-card">
+          <img src="{{ medium_img }}" alt="Customer dog using pad" loading="lazy">
+          <div class="pp-ugc-overlay">
+            <div class="pp-ugc-user">Milo (French Bulldog, 2 yrs)</div>
+            <div class="pp-ugc-tag">✓ Walked straight to it day 1</div>
+          </div>
+        </div>
+        <!-- UGC 2 -->
+        <div class="pp-ugc-card">
+          <img src="{{ small_img }}" alt="Absorption demonstration" loading="lazy">
+          <div class="pp-ugc-overlay">
+            <div class="pp-ugc-user">Instant 3-Sec Absorption</div>
+            <div class="pp-ugc-tag">✓ Holds 10x its weight in liquid</div>
+          </div>
+        </div>
+        <!-- UGC 3 -->
+        <div class="pp-ugc-card">
+          <img src="{{ large_img }}" alt="Wash cycle proof" loading="lazy">
+          <div class="pp-ugc-overlay">
+            <div class="pp-ugc-user">Toss In Washing Machine</div>
+            <div class="pp-ugc-tag">✓ Came out fresh like new</div>
+          </div>
+        </div>
+        <!-- UGC 4 -->
+        <div class="pp-ugc-card">
+          <img src="{{ medium_img }}" alt="Hardwood floor test" loading="lazy">
+          <div class="pp-ugc-overlay">
+            <div class="pp-ugc-user">Zero Leaks On Wood Floors</div>
+            <div class="pp-ugc-tag">✓ Anti-slip grip never moves</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CONTINUOUS SCROLLING MARQUEE BANNER -->
+  <div class="pp-marquee-ribbon">
+    <div class="pp-marquee-track">
+      <span>ANTI-SLIP BASE</span>
+      <span>RAPID 3-SEC ABSORPTION</span>
+      <span>NATURAL SCENT ATTRACTANT</span>
+      <span>NO TRAINING REQUIRED</span>
+      <span>300+ REUSABLE WASHES</span>
+      <span>ZERO URINE SMELL</span>
+      <span>MILITARY-GRADE TEAR RESISTANT</span>
+      <span>90-DAY RISK FREE TRIAL</span>
+      <span>SAVES $1,200/YEAR</span>
+      <!-- Repeated for smooth infinite loop -->
+      <span>ANTI-SLIP BASE</span>
+      <span>RAPID 3-SEC ABSORPTION</span>
+      <span>NATURAL SCENT ATTRACTANT</span>
+      <span>NO TRAINING REQUIRED</span>
+      <span>300+ REUSABLE WASHES</span>
+      <span>ZERO URINE SMELL</span>
+      <span>MILITARY-GRADE TEAR RESISTANT</span>
+      <span>90-DAY RISK FREE TRIAL</span>
+      <span>SAVES $1,200/YEAR</span>
+    </div>
+  </div>
+
+  <!-- 5. THE PROBLEM SECTION: The Dirty Truth About Disposables -->
+  <section class="pp-problem-section" id="how-it-works">
+    <div class="pp-container">
+      <div class="pp-problem-grid">
+        <div class="pp-problem-text">
+          <span class="pp-section-meta" style="background: #fee2e2; color: #dc2626;">THE DIRTY TRUTH</span>
+          <h2>Why Disposable Pee Pads Are A $2 Billion Trap That Ruins Your Home</h2>
+          <p>
+            Dogs have over <strong>300 million scent receptors</strong>. To a dog, disposable pee pads smell like toxic bleach and synthetic plastic. That’s why they either miss the pad entirely, chew it into dangerous white fluff, or track wet urine footprints all over your rugs.
+          </p>
+          <p>
+            And even when they do use them, you throw them into the trash bin where they stink up your entire kitchen until garbage day.
+          </p>
+        </div>
+
+        <div class="pp-problem-cards">
+          <div class="pp-problem-card">
+            <div class="pp-problem-icon">✕</div>
+            <div>
+              <h4>They Leak Through & Warp Hardwood Floors</h4>
+              <p>Cheap paper linings cannot contain volume. Urine seeps straight into your floorboards, leaving permanent stains and subfloor rot.</p>
+            </div>
+          </div>
+          <div class="pp-problem-card">
+            <div class="pp-problem-icon">✕</div>
+            <div>
+              <h4>Dangerous Shredding & Ingestion Risk</h4>
+              <p>Curious pups tear plastic pads into wet rags, swallowing chemical absorbent beads that can cause life-threatening intestinal blockage.</p>
+            </div>
+          </div>
+          <div class="pp-problem-card">
+            <div class="pp-problem-icon">✕</div>
+            <div>
+              <h4>You Spend $80 to $100 Every Single Month</h4>
+              <p>Disposable pads lock you into an endless subscription loop. Pet owners throw away over $1,200 in paper trash every year.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. THE SOLUTION: 4-Layer Engineering Breakthrough -->
+  <section class="pp-solution-section" id="breakdown">
+    <div class="pp-container">
+      <div class="pp-solution-header">
+        <span class="pp-section-meta">ENGINEERED TO PERFECTION</span>
+        <h2 class="pp-section-title">The 4-Layer Breakthrough That Protects Your Home</h2>
+        <p class="pp-section-subtitle">
+          Unlike paper pads that soak and tear, the SafePet UltraPad utilizes high-density layered textile engineering tested to endure over 300 washing cycles:
+        </p>
+      </div>
+
+      <div class="pp-layer-architecture">
+        <div class="pp-layer-card">
+          <span class="pp-layer-number">LAYER 1</span>
+          <div class="pp-layer-icon">🐕</div>
+          <h4>Pheromone Quilted Top</h4>
+          <p>Infused with natural canine scent attractants undetectable to humans. Soft quilted knit pulls moisture away instantly so paws stay bone dry.</p>
+        </div>
+
+        <div class="pp-layer-card">
+          <span class="pp-layer-number">LAYER 2</span>
+          <div class="pp-layer-icon">⚡</div>
+          <h4>Ultra-Dense Moisture Lock</h4>
+          <p>Traps up to 10x its weight in liquid in under 3 seconds. Antimicrobial molecular structure neutralizes ammonia so your house smells fresh.</p>
+        </div>
+
+        <div class="pp-layer-card">
+          <span class="pp-layer-number">LAYER 3</span>
+          <div class="pp-layer-icon">🛡️</div>
+          <h4>100% Waterproof TPU Barrier</h4>
+          <p>Military-grade thermoplastic polyurethane membrane guarantees zero leaks, zero moisture transfer, and zero damp stains on floors.</p>
+        </div>
+
+        <div class="pp-layer-card">
+          <span class="pp-layer-number">LAYER 4</span>
+          <div class="pp-layer-icon">🔒</div>
+          <h4>Joint-Safe Non-Slip Studs</h4>
+          <p>Hundreds of silicone grip dots lock the pad firmly onto tile, hardwood, and carpet. Never slides or bunches when your dog steps on it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. COMPARISON MATRIX: SafePet UltraPad vs Disposables -->
+  <section class="pp-comparison-section" id="comparison">
+    <div class="pp-container">
+      <div style="text-align: center;">
+        <span class="pp-section-meta">SIDE-BY-SIDE PROOF</span>
+        <h2 class="pp-section-title">SafePet™ UltraPad Vs. Flimsy Disposable Pads</h2>
+        <p class="pp-section-subtitle">See why thousands of dog parents make the switch and never buy disposables again:</p>
+      </div>
+
+      <div class="pp-comp-table-wrap">
+        <table class="pp-comp-table">
+          <thead>
+            <tr>
+              <th>Feature Comparison</th>
+              <th class="pp-comp-col-featured">SafePet™ UltraPad</th>
+              <th>Cheap Disposable Pads</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pp-comp-feature">Training Required</td>
+              <td class="pp-comp-cell-good"><span>✓</span> <strong>None</strong> — Natural scent attraction built-in</td>
+              <td class="pp-comp-cell-bad"><span>✕</span> Weeks of stressful training & missed accidents</td>
+            </tr>
+            <tr>
+              <td class="pp-comp-feature">Leak Protection</td>
+              <td class="pp-comp-cell-good"><span>✓</span> <strong>100% Leak-Proof</strong> (4-layer TPU shield)</td>
+              <td class="pp-comp-cell-bad"><span>✕</span> Soaks through onto subfloors & rugs</td>
+            </tr>
+            <tr>
+              <td class="pp-comp-feature">Chew & Tear Durability</td>
+              <td class="pp-comp-cell-good"><span>✓</span> <strong>Reinforced Edges</strong> (Chew-resistant)</td>
+              <td class="pp-comp-cell-bad"><span>✕</span> Shredded into toxic paper fluff in seconds</td>
+            </tr>
+            <tr>
+              <td class="pp-comp-feature">Odor Control</td>
+              <td class="pp-comp-cell-good"><span>✓</span> <strong>Antimicrobial Core</strong> (Zero smell)</td>
+              <td class="pp-comp-cell-bad"><span>✕</span> Sour, lingering ammonia stink</td>
+            </tr>
+            <tr>
+              <td class="pp-comp-feature">Annual Cost</td>
+              <td class="pp-comp-cell-good"><span>✓</span> <strong>$24 - $74 Once</strong> (Lasts 1+ years)</td>
+              <td class="pp-comp-cell-bad"><span>✕</span> <strong>$960 - $1,200 every year forever</strong></td>
+            </tr>
+            <tr>
+              <td class="pp-comp-feature">Lifespan & Reusability</td>
+              <td class="pp-comp-cell-good"><span>✓</span> <strong>300+ Machine Washes</strong></td>
+              <td class="pp-comp-cell-bad"><span>✕</span> 1 Single Use then thrown into landfill</td>
+            </tr>
+            <tr>
+              <td class="pp-comp-feature">Satisfaction Guarantee</td>
+              <td class="pp-comp-cell-good"><span>✓</span> <strong>90-Day 100% Money-Back Guarantee</strong></td>
+              <td class="pp-comp-cell-bad"><span>✕</span> Non-refundable once opened</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. INTERACTIVE ANNUAL SAVINGS CALCULATOR -->
+  <section class="pp-calc-section">
+    <div class="pp-container">
+      <div class="pp-calc-card">
+        <h3>💰 Calculate Your Annual Savings</h3>
+        <p style="color: #94a3b8; font-size: 0.95rem;">Drag the slider below to see how much money you waste throwing disposable pads in the trash:</p>
+
+        <div class="pp-calc-slider-wrap">
+          <label class="pp-calc-slider-label">
+            How many disposable pads does your dog use per day?
+            <br>
+            <span id="ppSliderVal">3 pads / day</span>
+          </label>
+          <input type="range" min="1" max="8" value="3" class="pp-slider-input" id="ppPadsPerDaySlider">
+        </div>
+
+        <div class="pp-calc-results-grid">
+          <div class="pp-calc-result-box">
+            <span class="pp-calc-stat-label">You currently throw away:</span>
+            <span class="pp-calc-stat-num" id="ppDisposableYearlyCost">$438</span>
+            <span style="display:block; font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">in single-use disposables every year</span>
+          </div>
+
+          <div class="pp-calc-result-box pp-savings-highlight">
+            <span class="pp-calc-stat-label">Net cash back in your pocket:</span>
+            <span class="pp-calc-stat-num" id="ppNetYearlySavings">+$378 / year</span>
+            <span style="display:block; font-size: 0.75rem; color: #86efac; margin-top: 4px;">after getting your SafePet UltraPads!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. 90-DAY RISK-FREE GUARANTEE SECTION -->
+  <section class="pp-guarantee-section" id="guarantee">
+    <div class="pp-container">
+      <div class="pp-guarantee-card">
+        <div class="pp-guarantee-seal">
+          <span class="pp-seal-days">90</span>
+          <span class="pp-seal-text">Day Risk-Free<br>Money-Back</span>
+        </div>
+        <div class="pp-guarantee-details">
+          <h3>Try SafePet™ UltraPad Risk-Free For A Full 90 Days</h3>
+          <p>
+            Put the UltraPad to the test in your living room, bedroom, or crate. Wash it dozens of times. Let your puppy or senior dog test the absorption on real accidents.
+          </p>
+          <p>
+            If your dog doesn’t naturally take to it on day one, if you ever see a single drop leak through, or if you aren't completely thrilled, simply email us at <strong>support@safepetstrap.com</strong> and we will refund 100% of your purchase immediately. No hassles, no questions asked.
+          </p>
+          <a href="#ppHeroSection" class="pp-nav-cta" style="padding: 12px 24px; font-size: 0.95rem;">
+            <span>TRY RISK-FREE FOR 90 DAYS</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. REAL CUSTOMER REVIEWS GRID -->
+  <section class="pp-reviews-section">
+    <div class="pp-container">
+      <div style="text-align: center;">
+        <span class="pp-section-meta">VERIFIED PET PARENTS</span>
+        <h2 class="pp-section-title">Over 18,450+ 5-Star Reviews Nationwide</h2>
+        <p class="pp-section-subtitle">Read real stories from dog owners who saved their floors, their wallets, and their peace of mind:</p>
+      </div>
+
+      <div class="pp-reviews-grid">
+        <!-- Review 1 -->
+        <div class="pp-review-card">
+          <div>
+            <div class="pp-review-stars">★★★★★</div>
+            <h4>My Frenchie Used It In 3 Minutes Flat!</h4>
+            <p>"I was so tired of cleaning yellow puddles off our hardwood floors every morning. When the UltraPad arrived, I put it down and my French Bulldog walked over, sniffed it, and peed right in the middle! It absorbed instantly and didn't smell AT ALL. Ordered the 3-pack and I'm obsessed!"</p>
+          </div>
+          <div class="pp-review-author">
+            <span class="pp-author-name">Jessica R. — Austin, TX</span>
+            <span class="pp-verified-badge">✓ Verified Buyer</span>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="pp-review-card">
+          <div>
+            <div class="pp-review-stars">★★★★★</div>
+            <h4>Saved Me Over $80 A Month In Trash!</h4>
+            <p>"We foster rescue puppies and were buying disposable pads in bulk at Costco every two weeks. These pads paid for themselves in our first month. We toss them in the washer with regular detergent, hang them to dry, and they look brand new every time."</p>
+          </div>
+          <div class="pp-review-author">
+            <span class="pp-author-name">David & Karen M. — Denver, CO</span>
+            <span class="pp-verified-badge">✓ Verified Buyer</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="pp-review-card">
+          <div>
+            <div class="pp-review-stars">★★★★★</div>
+            <h4>Chew-Proof & Truly Anti-Slip</h4>
+            <p>"Our golden retriever puppy used to shred every single paper pad into tiny bits of soggy confetti. He tried biting the edge of the UltraPad, couldn't tear the seam, and gave up. Plus the rubber dots keep it locked to our slick kitchen tile. 12 out of 10 stars!"</p>
+          </div>
+          <div class="pp-review-author">
+            <span class="pp-author-name">Brandon L. — Charlotte, NC</span>
+            <span class="pp-verified-badge">✓ Verified Buyer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. DETAILED ACCORDION FAQ SECTION -->
+  <section class="pp-faq-section" id="faq">
+    <div class="pp-container">
+      <div style="text-align: center;">
+        <span class="pp-section-meta">HAVE QUESTIONS?</span>
+        <h2 class="pp-section-title">Frequently Asked Questions</h2>
+        <p class="pp-section-subtitle">Everything you need to know about using, washing, and sizing your SafePet UltraPad:</p>
+      </div>
+
+      <div class="pp-faq-list">
+        <!-- FAQ 1 -->
+        <div class="pp-faq-item pp-open">
+          <div class="pp-faq-question">
+            <span>How does the pheromone attractant work? Is it safe?</span>
+            <span class="pp-faq-icon">+</span>
+          </div>
+          <div class="pp-faq-answer">
+            Our pads are infused with an organic, non-toxic pheromone formula that mimics canine scent markers. To humans, the pad is 100% odorless. To your dog, it signals a welcoming, designated bathroom spot, triggering their natural instinct to pee on the pad without needing clickers, treats, or weeks of frustrating potty training.
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="pp-faq-item">
+          <div class="pp-faq-question">
+            <span>How do I wash the pad? Can it go in the dryer?</span>
+            <span class="pp-faq-icon">+</span>
+          </div>
+          <div class="pp-faq-answer">
+            It is super simple! Machine wash on normal cycle with cold or warm water using any regular laundry detergent. You can tumble dry on low heat or hang dry (they dry remarkably fast due to the breathable microfiber top). We recommend having at least 3 pads so you always have a clean one ready while others are in the laundry!
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="pp-faq-item">
+          <div class="pp-faq-question">
+            <span>Why do you recommend the Buy 2 Get 1 FREE (3-Pad) bundle?</span>
+            <span class="pp-faq-icon">+</span>
+          </div>
+          <div class="pp-faq-answer">
+            Over 85% of our customers choose the 3-pad bundle because it enables the perfect stress-free rotation: keep 1 pad in the living room, 1 pad in the bedroom or near the door, and 1 pad in the wash. You never have to rush laundry or leave your dog without a pad.
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="pp-faq-item">
+          <div class="pp-faq-question">
+            <span>Is it really 100% leak-proof on hardwood floors?</span>
+            <span class="pp-faq-icon">+</span>
+          </div>
+          <div class="pp-faq-answer">
+            Yes, absolutely. The third layer is a seamless medical-grade TPU (thermoplastic polyurethane) membrane that is completely impermeable to liquids. Urine cannot penetrate through to your floors or carpets.
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="pp-faq-item">
+          <div class="pp-faq-question">
+            <span>How long does shipping take?</span>
+            <span class="pp-faq-icon">+</span>
+          </div>
+          <div class="pp-faq-answer">
+            All orders are processed within 24 hours. Domestic US shipping typically arrives in 2 to 5 business days with full online door-to-door tracking provided via email.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. INTERACTIVE SIZE GUIDE MODAL -->
+  <div class="pp-modal-overlay" id="ppSizeGuideModal">
+    <div class="pp-modal-box">
+      <button type="button" class="pp-modal-close" id="ppModalCloseBtn">✕</button>
+      <h3 style="font-family: var(--pp-font-heading); font-size: 1.5rem; font-weight: 800; margin: 0 0 6px 0; color: var(--pp-navy);">
+        UltraPad Size Comparison & Breed Guide
+      </h3>
+      <p style="font-size: 0.9rem; color: var(--pp-text-muted); margin: 0 0 16px 0;">
+        Select a size tab below to see exact dimensions and breed recommendations:
+      </p>
+
+      <div class="pp-modal-tabs">
+        <button type="button" class="pp-modal-tab" data-modal-size="small">SMALL (16x24")</button>
+        <button type="button" class="pp-modal-tab pp-active" data-modal-size="medium">MEDIUM (28x32")</button>
+        <button type="button" class="pp-modal-tab" data-modal-size="large">LARGE (32x35")</button>
+      </div>
+
+      <img
+        id="ppModalSizeImg"
+        class="pp-modal-img-preview"
+        src="{{ medium_img }}"
+        data-img-s="{{ small_img }}"
+        data-img-m="{{ medium_img }}"
+        data-img-l="{{ large_img }}"
+        alt="Size illustration"
+      >
+
+      <table class="pp-modal-table">
+        <tbody>
+          <tr>
+            <th style="width: 35%;">Dimensions:</th>
+            <td id="ppModalDimText">28x32 Inches (70x80cm)</td>
+          </tr>
+          <tr>
+            <th>Ideal Weight:</th>
+            <td id="ppModalWeightText">15 - 40 lbs</td>
+          </tr>
+          <tr>
+            <th>Recommended Breeds:</th>
+            <td id="ppModalBreedText">French Bulldog, Beagle, Cocker Spaniel, Corgi, Shih Tzu, Pug, Boston Terrier</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="button" class="pp-atc-btn" style="margin-top: 20px; padding: 14px 20px; font-size: 1rem;" onclick="document.getElementById('ppSizeGuideModal').classList.remove('pp-modal-open');">
+        CONFIRM THIS SIZE & CLOSE
+      </button>
+    </div>
+  </div>
+
+  <!-- 13. MOBILE STICKY ADD-TO-CART BAR -->
+  <div class="pp-mobile-sticky-bar" id="ppMobileStickyBar">
+    <div class="pp-sticky-info">
+      <span class="pp-sticky-title">SafePet™ UltraPad</span>
+      <span class="pp-sticky-price" id="ppStickyPrice">$59.90</span>
+      <span style="font-size: 0.72rem; color: #64748b;" id="ppStickySubtitle">Medium (3 Pads)</span>
+    </div>
+    <button type="button" class="pp-sticky-cta" id="ppMobileAtcBtn">
+      CLAIM OFFER →
+    </button>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "SafePet UltraPad PDP",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "distraction_free_mode",
+      "label": "Distraction-Free Landing Mode",
+      "default": true,
+      "info": "Hides standard theme header and footer to maximize conversion rate (same as shop.puppypad.co)."
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product Title",
+      "default": "SafePet™ UltraPad — The Washable, Leak-Proof Pee Pad Dogs Are Naturally Drawn To"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SafePet UltraPad PDP",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
