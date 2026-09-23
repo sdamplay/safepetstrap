@@ -430,6 +430,9 @@
               <div class="kls-hero-thumb" data-wld-thumb>
                 <img src="{{ 'ultrapad-machine-washable.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="100% Machine Washable">
               </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'ultrapad-product-white.png' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="SafePet UltraPad Studio Product">
+              </div>
             {%- elsif template.name == 'product' and product.media.size > 1 and section.settings.hero_thumb_1 == blank -%}
               {%- for media in product.media limit: 5 -%}
                 <div class="kls-hero-thumb" data-wld-thumb>
