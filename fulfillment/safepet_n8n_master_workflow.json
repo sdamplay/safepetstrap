@@ -51,7 +51,7 @@
     {
       "parameters": {
         "method": "GET",
-        "url": "http://127.0.0.1:3005/status",
+        "url": "http://172.18.0.1:3006/status",
         "options": {}
       },
       "id": "check-queue-status",
@@ -92,10 +92,10 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://127.0.0.1:3005/fulfill",
+        "url": "http://172.18.0.1:3006/fulfill",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"order_id\": {{ $json.body?.order_id || $json.body?.id || null }},\n  \"tag\": {{ $json.body?.tag ? JSON.stringify($json.body.tag) : '\"fulfill-ali\"' }},\n  \"force\": {{ Boolean($json.body?.force) }}\n}",
+        "jsonBody": "={\n  \"order_id\": {{ $json.body?.order_id || $json.body?.id || null }},\n  \"tag\": {{ $json.body?.tag ? JSON.stringify($json.body.tag) : '\"fulfill-ae\"' }},\n  \"force\": {{ Boolean($json.body?.force) }}\n}",
         "options": {}
       },
       "id": "execute-fulfillment-webhook",
@@ -107,7 +107,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "http://127.0.0.1:3005/sync-tracking",
+        "url": "http://172.18.0.1:3006/sync-tracking",
         "options": {}
       },
       "id": "execute-tracking-sync",
