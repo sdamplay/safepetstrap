@@ -59,10 +59,20 @@ class AliExpressClient {
     };
 
     if (requiresAuth) {
-      const tokens = config.getTokens();
+      let tokens = config.getTokens();
       if (!tokens || !tokens.access_token) {
         throw new Error('Access token not found. Please run "npm run auth" first.');
       }
+
+      // Proactive auto-refresh if token is within 2 minutes of expiration or already expired
+      if (tokens.expire_time && Date.now() > (tokens.expire_time - 120000)) {
+        try {
+          tokens = await this.refreshToken();
+        } catch (e) {
+          console.warn('⚠️ Pre-expiry token refresh failed, proceeding with current token:', e.message);
+        }
+      }
+
       systemParams.session = tokens.access_token;
     }
 
@@ -72,7 +82,7 @@ class AliExpressClient {
 
     const bodyData = new URLSearchParams(allParams).toString();
 
-    return new Promise((resolve, reject) => {
+    const response = await new Promise((resolve, reject) => {
       const options = {
         hostname: 'api-sg.aliexpress.com',
         path: '/sync',
@@ -101,6 +111,140 @@ class AliExpressClient {
       req.write(bodyData);
       req.end();
     });
+
+    // Reactive auto-refresh if AliExpress returns IllegalAccessToken
+    if (
+      requiresAuth &&
+      response &&
+      response.error_response &&
+      (response.error_response.code === 'IllegalAccessToken' || 
+       response.error_response.msg?.toLowerCase().includes('expired') ||
+       response.error_response.msg?.toLowerCase().includes('invalid'))
+    ) {
+      console.warn('⚠️ AliExpress returned IllegalAccessToken. Auto-refreshing access token and retrying...');
+      await this.refreshToken();
+      return this.execute(methodName, businessParams, requiresAuth);
+    }
+
+    return response;
+  }
+
+  /**
+   * OAuth API: Exchange authorization code for initial tokens
+   */
+  async createToken(authCode) {
+    const apiMethod = '/auth/token/create';
+    const timestamp = Date.now().toString();
+    const params = {
+      app_key: this.appKey,
+      timestamp: timestamp,
+      sign_method: 'sha256',
+      code: authCode
+    };
+
+    const signature = this.generateSignature(params, apiMethod);
+    params.sign = signature;
+
+    const bodyData = new URLSearchParams(params).toString();
+
+    return new Promise((resolve, reject) => {
+      const options = {
+        hostname: 'api-sg.aliexpress.com',
+        path: '/rest' + apiMethod,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+          'Content-Length': Buffer.byteLength(bodyData),
+          'User-Agent': this.partnerId
+        }
+      };
+
+      const req = https.request(options, (res) => {
+        let raw = '';
+        res.on('data', chunk => raw += chunk);
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(raw));
+          } catch (e) {
+            resolve({ raw, statusCode: res.statusCode });
+          }
+        });
+      });
+      req.on('error', err => reject(err));
+      req.write(bodyData);
+      req.end();
+    });
+  }
+
+  /**
+   * OAuth API: Refresh AliExpress access token using refresh_token
+   */
+  async refreshToken() {
+    const tokens = config.getTokens();
+    if (!tokens || !tokens.refresh_token) {
+      throw new Error('Cannot refresh token: No refresh_token found in tokens.json');
+    }
+
+    console.log('🔄 Refreshing AliExpress access token via Open Platform...');
+    const apiMethod = '/auth/token/refresh';
+    const timestamp = Date.now().toString();
+    const params = {
+      app_key: this.appKey,
+      timestamp: timestamp,
+      sign_method: 'sha256',
+      refresh_token: tokens.refresh_token
+    };
+
+    const signature = this.generateSignature(params, apiMethod);
+    params.sign = signature;
+
+    const bodyData = new URLSearchParams(params).toString();
+
+    const response = await new Promise((resolve, reject) => {
+      const options = {
+        hostname: 'api-sg.aliexpress.com',
+        path: '/rest' + apiMethod,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+          'Content-Length': Buffer.byteLength(bodyData),
+          'User-Agent': this.partnerId
+        }
+      };
+
+      const req = https.request(options, (res) => {
+        let raw = '';
+        res.on('data', chunk => raw += chunk);
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(raw));
+          } catch (e) {
+            resolve({ raw, statusCode: res.statusCode });
+          }
+        });
+      });
+      req.on('error', err => reject(err));
+      req.write(bodyData);
+      req.end();
+    });
+
+    if (response && response.access_token) {
+      const updatedTokens = {
+        ...tokens,
+        access_token: response.access_token,
+        refresh_token: response.refresh_token || tokens.refresh_token,
+        expires_in: response.expires_in,
+        expire_time: response.expire_time || (Date.now() + (response.expires_in || 2592000) * 1000),
+        refresh_token_valid_time: response.refresh_token_valid_time || tokens.refresh_token_valid_time,
+        updated_at: new Date().toISOString()
+      };
+      config.saveTokens(updatedTokens);
+      console.log('✅ Successfully refreshed AliExpress access token!');
+      return updatedTokens;
+    } else {
+      console.error('❌ Failed to refresh AliExpress token:', JSON.stringify(response));
+      throw new Error(`AliExpress token refresh failed: ${response.msg || response.sub_msg || JSON.stringify(response)}`);
+    }
   }
 
   /**
