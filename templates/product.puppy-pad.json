@@ -80,6 +80,8 @@
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "button_color_scheme": "accent-1",
             "margin_top": 0,
             "margin_bottom": 18
           }
