@@ -92,16 +92,51 @@ const server = http.createServer(async (req, res) => {
       const orderIdentifier = payload.order_id || payload.order_number || payload.id;
       if (orderIdentifier) {
         const cleanId = String(orderIdentifier).replace(/^[#SPS]+/, '').replace(/[^0-9]/g, '');
-        const allOrders = await shopifyClient.makeRequest(
-          '/orders.json?status=open&financial_status=paid&fulfillment_status=unfulfilled&limit=100'
-        );
-        ordersToProcess = (allOrders.orders || []).filter(o => 
-          String(o.id) === cleanId || String(o.order_number) === cleanId || (o.name && o.name.includes(cleanId))
-        );
+        let targetOrder = null;
+
+        // Try direct lookup by order ID first (fast & reliable)
+        try {
+          const direct = await shopifyClient.makeRequest(`/orders/${cleanId}.json`);
+          if (direct && direct.order) {
+            targetOrder = direct.order;
+          }
+        } catch (e) {
+          // If cleanId was order_number rather than order.id, direct lookup might 404
+        }
+
+        // Fallback to searching open unfulfilled orders
+        if (!targetOrder) {
+          const allOrders = await shopifyClient.makeRequest(
+            '/orders.json?status=open&financial_status=paid&fulfillment_status=unfulfilled&limit=100'
+          );
+          targetOrder = (allOrders.orders || []).find(o => 
+            String(o.id) === cleanId || String(o.order_number) === cleanId || (o.name && o.name.includes(cleanId))
+          );
+        }
+
+        if (targetOrder) {
+          // Safeguard: Check if order was already placed on AliExpress
+          const tags = (targetOrder.tags || '').split(',').map(t => t.trim().toLowerCase());
+          const isAlreadyPlaced = tags.includes('ae-placed') || tags.includes('ali-placed') || tags.some(t => t.startsWith('ali-id:'));
+
+          if (isAlreadyPlaced && !payload.force) {
+            console.log(`  🛡️ Safeguard: Order #${targetOrder.order_number} already has fulfillment tags. Skipping duplicate.`);
+            sendJson(res, 200, {
+              success: true,
+              message: `Order #${targetOrder.order_number} (${targetOrder.name}) is already fulfilled on AliExpress.`,
+              order_id: targetOrder.id,
+              order_number: targetOrder.order_number,
+              status: 'already_placed'
+            });
+            return;
+          }
+
+          ordersToProcess = [targetOrder];
+        }
       } 
       // Case 2: Filter by Tag (e.g. 'fulfill-ali' added in Shopify Admin)
       else if (payload.tag) {
-        ordersToProcess = await shopifyClient.getUnfulfilledOrders({ tagFilter: payload.tag });
+        ordersToProcess = await shopifyClient.getUnfulfilledOrders({ tagFilter: payload.tag, force: Boolean(payload.force) });
       } 
       // Case 3: Process all unfulfilled orders
       else {
