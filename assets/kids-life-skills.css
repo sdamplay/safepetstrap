@@ -173,3 +173,182 @@
   .wld-kls-root .kls-comparison-feature { font-size: 14px; padding: 10px 12px; }
   .wld-kls-root .kls-comparison-row { grid-template-columns: 1fr 70px 70px; }
 }
+
+/* SafePet Global Package Card & Variant Selector Styles */
+.safepet-variant-selector-wrapper {
+  width: 100%;
+  margin: 1.25rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+.safepet-packages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.safepet-pkg-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 2px solid #e5e7eb;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  user-select: none;
+}
+.safepet-pkg-card:hover {
+  border-color: #cbd5e1;
+  background-color: #fafafc;
+}
+.safepet-pkg-main-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+}
+.safepet-pkg-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.safepet-pkg-radio-circle {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #94a3b8;
+  border-radius: 50%;
+  background-color: #ffffff;
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease;
+}
+.safepet-pkg-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.safepet-pkg-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.25;
+  transition: color 0.15s ease;
+}
+.safepet-pkg-subtitle {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.35;
+}
+.safepet-pkg-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.safepet-pkg-price {
+  font-size: 15px;
+  font-weight: 900;
+  color: #111827;
+  line-height: 1;
+}
+.safepet-price-free {
+  color: #dc2626;
+}
+.safepet-pkg-compare {
+  font-size: 11px;
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+.safepet-pkg-unit-badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: #16a34a;
+  background-color: #e8f5e9;
+  padding: 2px 6px;
+  border-radius: 9999px;
+}
+input[name="safepet_variant_tier"]:checked + .safepet-pkg-card {
+  border: 2px solid #dc2626 !important;
+  background-color: #fff5f5 !important;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.08);
+}
+input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle {
+  border-color: #dc2626;
+}
+input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #dc2626;
+}
+input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-title {
+  color: #dc2626;
+}
+.safepet-pkg-badge {
+  position: absolute;
+  top: -11px;
+  left: 20px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #ffffff;
+  padding: 2px 9px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+.safepet-badge-orange {
+  background-color: #d97706;
+}
+.safepet-badge-red {
+  background-color: #dc2626;
+}
+.safepet-pkg-featured {
+  background-color: #fffdf0;
+  border: 2px solid #fde047;
+}
+.safepet-pkg-featured:hover {
+  background-color: #fffdeb;
+}
+input[name="safepet_variant_tier"]:checked + .safepet-pkg-featured {
+  background-color: #fffde0 !important;
+  border: 2px solid #dc2626 !important;
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.1);
+}
+.safepet-step-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.safepet-step-pill {
+  background-color: #dc2626;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+}
+.safepet-step-pill-secondary {
+  background-color: #111827;
+}
+.safepet-step-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}

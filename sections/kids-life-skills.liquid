@@ -395,12 +395,16 @@
       <div class="kls-hero-left">
         <div class="kls-hero-gallery" data-wld-gallery>
           <div class="kls-hero-image" data-wld-main>
-            {%- assign hero_image = section.settings.hero_main_image -%}
-            {%- if template.name == 'product' and product.featured_image != blank -%}
-              {%- assign hero_image = product.featured_image -%}
-            {%- endif -%}
-            {%- if hero_image != blank -%}
-              {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: hero_image.alt | default: kls_hero_headline }}
+            {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+              <img src="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}" loading="eager" class="kls-gallery-img" alt="{{ kls_hero_headline }}" width="1200" height="1200">
+            {%- else -%}
+              {%- assign hero_image = section.settings.hero_main_image -%}
+              {%- if template.name == 'product' and product.featured_image != blank -%}
+                {%- assign hero_image = product.featured_image -%}
+              {%- endif -%}
+              {%- if hero_image != blank -%}
+                {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: hero_image.alt | default: kls_hero_headline }}
+              {%- endif -%}
             {%- endif -%}
             {%- if section.settings.hero_badge_tl != blank -%}
               <span class="kls-hero-badge kls-hero-badge-tl">{{ section.settings.hero_badge_tl }}</span>
@@ -413,7 +417,20 @@
             {%- endif -%}
           </div>
           <div class="kls-hero-thumbs">
-            {%- if template.name == 'product' and product.media.size > 1 and section.settings.hero_thumb_1 == blank -%}
+            {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="SafePet UltraPad Hero">
+              </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'ultrapad-layer-breakdown.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="4-Layer Exploded View">
+              </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'ultrapad-size-guide.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="UltraPad Sizing Guide">
+              </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'ultrapad-machine-washable.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="100% Machine Washable">
+              </div>
+            {%- elsif template.name == 'product' and product.media.size > 1 and section.settings.hero_thumb_1 == blank -%}
               {%- for media in product.media limit: 5 -%}
                 <div class="kls-hero-thumb" data-wld-thumb>
                   {{ media | image_url: width: 200 | image_tag: widths: '200,400', sizes: '80px', loading: 'lazy', class: 'kls-thumb-img', alt: media.alt | default: 'Gallery thumbnail' }}
@@ -603,14 +620,21 @@
         <div class="kls-hero-testimonial">
           <!-- Emotion Architecture: Badge Alerts -->
           <div class="kls-hero-testimonial-badges">
-            <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🚨 REAL ACCIDENT SURVIVOR</span>
-            <span class="kls-badge-verified">✓ Verified Life Saved</span>
+            {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+              <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🐾 ZERO LEAKS GUARANTEED</span>
+              <span class="kls-badge-verified">✓ Verified Floor Saved</span>
+            {%- else -%}
+              <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🚨 REAL ACCIDENT SURVIVOR</span>
+              <span class="kls-badge-verified">✓ Verified Life Saved</span>
+            {%- endif -%}
           </div>
 
           {%- capture testimonial_image -%}
             <div class="kls-hero-testimonial-image">
               {%- if section.settings.hero_testimonial_image != blank -%}
                 {{ section.settings.hero_testimonial_image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-hero-testimonial-img', alt: 'Testimonial review proof' }}
+              {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+                <img src="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}" alt="SafePet UltraPad Customer Review Proof" class="kls-hero-testimonial-img" loading="lazy">
               {%- else -%}
                 {%- if template.name != 'product' or product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
                   <img src="{{ 'hero-testimonial-proof.jpg' | asset_url }}" alt="Car crash safety proof" class="kls-hero-testimonial-img" loading="lazy">
@@ -802,6 +826,8 @@
       <div class="kls-ready-image">
         {%- if section.settings.ready_image != blank -%}
           {{ section.settings.ready_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-ready-img', alt: kls_ready_heading }}
+        {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+          <img src="{{ 'ultrapad-machine-washable.jpg' | asset_url }}" loading="lazy" class="kls-ready-img" alt="{{ kls_ready_heading }}">
         {%- endif -%}
       </div>
       <div class="kls-ready-content">
@@ -824,6 +850,8 @@
           <div class="kls-grow-thumb">
             {%- if section.settings.grow_thumb_1 != blank -%}
               {{ section.settings.grow_thumb_1 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 1' }}
+            {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+              <img src="{{ 'ultrapad-layer-breakdown.jpg' | asset_url }}" loading="lazy" class="kls-grow-thumb-img" alt="{{ kls_grow_heading }}">
             {%- endif -%}
           </div>
         </div>

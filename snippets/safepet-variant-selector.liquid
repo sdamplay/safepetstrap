@@ -390,14 +390,12 @@
 {%- assign var_l = null -%}
 {%- for v in product.variants -%}
   {%- assign t_down = v.title | downcase -%}
-  {%- if t_down contains 'small' or t_down contains '16x24' or forloop.index == 1 -%}
-    {%- if var_s == null -%}{%- assign var_s = v -%}{%- endif -%}
-  {%- endif -%}
-  {%- if t_down contains 'medium' or t_down contains '28x32' or forloop.index == 2 -%}
-    {%- if var_m == null -%}{%- assign var_m = v -%}{%- endif -%}
-  {%- endif -%}
-  {%- if t_down contains 'large' or t_down contains '32x35' or forloop.index == 3 -%}
-    {%- if var_l == null -%}{%- assign var_l = v -%}{%- endif -%}
+  {%- if t_down contains 'small' or t_down contains '16x24' -%}
+    {%- assign var_s = v -%}
+  {%- elsif t_down contains 'medium' or t_down contains '28x32' -%}
+    {%- assign var_m = v -%}
+  {%- elsif t_down contains 'large' or t_down contains '32x35' -%}
+    {%- assign var_l = v -%}
   {%- endif -%}
 {%- endfor -%}
 {%- assign var_s = var_s | default: product.variants[0] -%}
@@ -407,10 +405,19 @@
 <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
   <div class="safepet-color-banner">
     <div class="safepet-color-badge-dot"></div>
-    <span class="safepet-color-text">Colorway: <strong>Cloud Gray</strong> (Universal Stain-Resistant Charcoal/Gray)</span>
+    <span class="safepet-color-text">Colorway: <strong>Cloud Gray</strong> (Universal Stain-Resistant Charcoal)</span>
+    <span class="safepet-color-check">✓ Pre-Selected</span>
   </div>
 
-  <h3 class="safepet-selector-heading">1. Select your UltraPad size:</h3>
+  <div class="safepet-size-header-row">
+    <div class="safepet-step-header">
+      <span class="safepet-step-pill">STEP 1</span>
+      <span class="safepet-step-title">SELECT YOUR ULTRAPAD SIZE:</span>
+    </div>
+    <button type="button" class="safepet-size-guide-trigger" id="safepetSizeGuideTrigger-{{ section.id }}">
+      📏 View Size & Breed Chart
+    </button>
+  </div>
 
   <div class="safepet-packages-list">
     
@@ -424,7 +431,7 @@
       data-unit-price="{{ var_s.price | money_without_trailing_zeros }}"
       data-compare-price="{{ var_s.compare_at_price | default: 4995 | money_without_trailing_zeros }}"
       data-save-percent="50"
-      data-variant-img="{% if var_s.image != blank %}{{ var_s.image | image_url: width: 1200 }}{% endif %}"
+      data-variant-img="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}"
       style="display: none;"
     >
     <label class="safepet-pkg-card" for="safepet-tier-s-{{ section.id }}">
@@ -439,6 +446,7 @@
         <div class="safepet-pkg-right">
           <span class="safepet-pkg-price">{{ var_s.price | money }}</span>
           <span class="safepet-pkg-compare">Normally {{ var_s.compare_at_price | default: 4995 | money }}</span>
+          <span class="safepet-pkg-unit-badge">SAVE 50%</span>
         </div>
       </div>
     </label>
@@ -454,7 +462,7 @@
       data-unit-price="{{ var_m.price | money_without_trailing_zeros }}"
       data-compare-price="{{ var_m.compare_at_price | default: 5995 | money_without_trailing_zeros }}"
       data-save-percent="50"
-      data-variant-img="{% if var_m.image != blank %}{{ var_m.image | image_url: width: 1200 }}{% endif %}"
+      data-variant-img="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}"
       style="display: none;"
     >
     <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-m-{{ section.id }}">
@@ -472,6 +480,7 @@
         <div class="safepet-pkg-right">
           <span class="safepet-pkg-price">{{ var_m.price | money }}</span>
           <span class="safepet-pkg-compare">Normally {{ var_m.compare_at_price | default: 5995 | money }}</span>
+          <span class="safepet-pkg-unit-badge">SAVE 50%</span>
         </div>
       </div>
     </label>
@@ -486,7 +495,7 @@
       data-unit-price="{{ var_l.price | money_without_trailing_zeros }}"
       data-compare-price="{{ var_l.compare_at_price | default: 6995 | money_without_trailing_zeros }}"
       data-save-percent="50"
-      data-variant-img="{% if var_l.image != blank %}{{ var_l.image | image_url: width: 1200 }}{% endif %}"
+      data-variant-img="{{ 'ultrapad-size-guide.jpg' | asset_url }}"
       style="display: none;"
     >
     <label class="safepet-pkg-card" for="safepet-tier-l-{{ section.id }}">
@@ -503,6 +512,7 @@
         <div class="safepet-pkg-right">
           <span class="safepet-pkg-price">{{ var_l.price | money }}</span>
           <span class="safepet-pkg-compare">Normally {{ var_l.compare_at_price | default: 6995 | money }}</span>
+          <span class="safepet-pkg-unit-badge">SAVE 50%</span>
         </div>
       </div>
     </label>
@@ -512,8 +522,9 @@
   <!-- 2. BUNDLE QUANTITY SELECTOR (One In Wash / One In Use) -->
   <div class="safepet-bundle-box">
     <div class="safepet-bundle-box-header">
-      <div class="safepet-bundle-box-title">
-        <span>2. Choose Quantity:</span>
+      <div class="safepet-step-header" style="margin: 0 0 4px 0;">
+        <span class="safepet-step-pill safepet-step-pill-secondary">STEP 2</span>
+        <span class="safepet-step-title">CHOOSE QUANTITY (SAVE MORE):</span>
         <span class="safepet-bundle-recommend-tag">Recommended: 2–3 Pads</span>
       </div>
       <span class="safepet-bundle-wash-hint">💡 <em>Rotate pads on wash days so floors are never unprotected.</em></span>
@@ -550,6 +561,12 @@
 </div>
 
 <style>
+  .safepet-variant-selector-wrapper {
+    width: 100%;
+    margin: 1.25rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
   .safepet-color-banner {
     display: inline-flex;
     align-items: center;
@@ -558,7 +575,7 @@
     border: 1px solid #e5e7eb;
     border-radius: 999px;
     padding: 6px 14px;
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     font-size: 12px;
     color: #374151;
   }
@@ -566,10 +583,249 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #6b7280;
+    background-color: #4b5563;
     box-shadow: 0 0 0 2px #ffffff;
     flex-shrink: 0;
   }
+  .safepet-color-check {
+    font-size: 11px;
+    font-weight: 700;
+    color: #16a34a;
+  }
+
+  .safepet-size-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .safepet-step-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .safepet-step-pill {
+    background-color: #dc2626;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .safepet-step-pill-secondary {
+    background-color: #111827;
+  }
+
+  .safepet-step-title {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #111827;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .safepet-size-guide-trigger {
+    background: none;
+    border: none;
+    color: #4b5563;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s ease;
+  }
+  .safepet-size-guide-trigger:hover {
+    color: #dc2626;
+  }
+
+  .safepet-packages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* Package Card Base */
+  .safepet-pkg-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 2px solid #e5e7eb;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    user-select: none;
+  }
+
+  .safepet-pkg-card:hover {
+    border-color: #cbd5e1;
+    background-color: #fafafc;
+  }
+
+  .safepet-pkg-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .safepet-pkg-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  /* Radio Circle Indicator */
+  .safepet-pkg-radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #94a3b8;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color 0.15s ease;
+  }
+
+  .safepet-pkg-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .safepet-pkg-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1f2937;
+    line-height: 1.25;
+    transition: color 0.15s ease;
+  }
+
+  .safepet-pkg-subtitle {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.35;
+  }
+
+  .safepet-pkg-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+
+  .safepet-pkg-price {
+    font-size: 15px;
+    font-weight: 900;
+    color: #111827;
+    line-height: 1;
+  }
+
+  .safepet-price-free {
+    color: #dc2626;
+  }
+
+  .safepet-pkg-compare {
+    font-size: 11px;
+    text-decoration: line-through;
+    color: #9ca3af;
+  }
+
+  .safepet-pkg-unit-badge {
+    font-size: 10px;
+    font-weight: 800;
+    color: #16a34a;
+    background-color: #e8f5e9;
+    padding: 2px 6px;
+    border-radius: 9999px;
+  }
+
+  /* SELECTED CARD STATES */
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card {
+    border: 2px solid #dc2626 !important;
+    background-color: #fff5f5 !important;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.08);
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle {
+    border-color: #dc2626;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #dc2626;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-title {
+    color: #dc2626;
+  }
+
+  /* Badges positioning */
+  .safepet-pkg-badge {
+    position: absolute;
+    top: -11px;
+    left: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    padding: 2px 9px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    z-index: 3;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  }
+
+  .safepet-badge-orange {
+    background-color: #d97706;
+  }
+
+  .safepet-badge-red {
+    background-color: #dc2626;
+  }
+
+  /* Featured Yellow Card styling */
+  .safepet-pkg-featured {
+    background-color: #fffdf0;
+    border: 2px solid #fde047;
+  }
+
+  .safepet-pkg-featured:hover {
+    background-color: #fffdeb;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-featured {
+    background-color: #fffde0 !important;
+    border: 2px solid #dc2626 !important;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.1);
+  }
+
+  /* Bundle Box */
   .safepet-bundle-box {
     margin-top: 18px;
     padding: 16px;
@@ -582,16 +838,6 @@
     flex-direction: column;
     gap: 4px;
     margin-bottom: 12px;
-  }
-  .safepet-bundle-box-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-    font-weight: 800;
-    color: #111827;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
   }
   .safepet-bundle-recommend-tag {
     font-size: 11px;
@@ -614,6 +860,18 @@
     .safepet-bundle-pills {
       grid-template-columns: 1fr;
       gap: 8px;
+    }
+    .safepet-pkg-card {
+      padding: 12px 14px;
+    }
+    .safepet-pkg-title {
+      font-size: 13px;
+    }
+    .safepet-pkg-subtitle {
+      font-size: 11px;
+    }
+    .safepet-pkg-price {
+      font-size: 13.5px;
     }
   }
   .safepet-bundle-pill {
@@ -735,7 +993,7 @@
           var heroImg = document.querySelector('.kls-hero-image img.kls-gallery-img') || document.querySelector('.kls-hero-image img');
           if (heroImg) {
             heroImg.src = variantImg;
-            heroImg.srcset = variantImg;
+            heroImg.removeAttribute('srcset');
           }
         }
 
@@ -782,6 +1040,19 @@
           updateSelector();
         });
       });
+
+      var sizeGuideBtn = container.querySelector('#safepetSizeGuideTrigger-{{ section.id }}');
+      if (sizeGuideBtn) {
+        sizeGuideBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var heroImg = document.querySelector('.kls-hero-image img.kls-gallery-img') || document.querySelector('.kls-hero-image img');
+          if (heroImg) {
+            heroImg.src = "{{ 'ultrapad-size-guide.jpg' | asset_url }}";
+            heroImg.removeAttribute('srcset');
+            heroImg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      }
 
       // Initial execution
       updateSelector();
