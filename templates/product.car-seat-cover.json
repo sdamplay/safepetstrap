@@ -1,0 +1,395 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "text_size": "h1",
+            "title_alignment": "left",
+            "uppercase_title": false,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        },
+        "rating_stars": {
+          "type": "rating_stars",
+          "settings": {
+            "rating": 4.9,
+            "star_color": "#ffcc00",
+            "bg_stars_style": "full",
+            "bg_star_color": "#ececec",
+            "label": "⭐ 4.9/5 (45,000+ Clean Vehicles)",
+            "size": 16,
+            "alignment": "flex-start",
+            "scroll_id": "",
+            "margin_top": 0,
+            "margin_bottom": 9
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "layout": "price_first",
+            "price_color": "accent-1",
+            "compare_price_color": "text",
+            "displayed_badge": "sale",
+            "icon_scale": 140,
+            "custom_badge_text": "🚨 50% OFF TODAY",
+            "icon_1": "redeem",
+            "filled_icon_1": false,
+            "icon_2": "check_circle",
+            "filled_icon_2": false,
+            "margin_top": 0,
+            "margin_bottom": 12
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {
+            "full_width_classic": false,
+            "atc_append": "none",
+            "atc_append_heights": "stretch-quantity",
+            "enable_quantity_discounts": false,
+            "style": "normal",
+            "headline": "BUNDLE & SAVE",
+            "preselected": "option_1",
+            "display_selected_indicator": true,
+            "border_radius": 10,
+            "border_width": 2,
+            "color_scheme": "accent-1",
+            "margin_top": 0,
+            "margin_bottom": 18
+          }
+        },
+        "safepet_variant_selector": {
+          "type": "safepet_variant_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "button_color_scheme": "accent-1",
+            "margin_top": 0,
+            "margin_bottom": 18
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "rating_stars",
+        "price",
+        "quantity_selector",
+        "safepet_variant_selector",
+        "buy_buttons"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_id": false,
+        "enable_sticky_info": true,
+        "display_variant_image_first": false,
+        "disable_prepend": false,
+        "hide_variants": false,
+        "variant_image_filtering": "none",
+        "image_zoom": "none",
+        "thumbnails_ratio": "square",
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": false,
+        "dots_color_scheme": "inverse",
+        "video_player": "play_btn",
+        "enable_video_looping": false,
+        "autoplay_videos_pause_btn": false,
+        "video_sound_btn": false,
+        "video_timeline": false,
+        "play_btn_color_scheme": "accent-1",
+        "sound_btn_color_scheme": "inverse",
+        "timeline_color": "accent-1",
+        "media_size": "medium",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "desktop_thumbnails_position": "bottom",
+        "desktop_thumbnails_count": 5,
+        "desktop_vertical_thumbnails_width": 16,
+        "desktop_vertical_thumbnails_hide_arrows": false,
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "desktop_arrows_position": "hidden",
+        "mobile_media_corner_radius": 12,
+        "mobile_spacing_pixels": 0,
+        "mobile_arrows_position": "sides",
+        "mobile_pagination": "dots_overlay",
+        "mobile_thumbnails_position": "hidden",
+        "mobile_thumbnails_count": 5,
+        "mobile_vertical_thumbnails_width": 22,
+        "mobile_vertical_thumbnails_hide_arrows": true,
+        "mobile_scroll_padding_percentage": 0,
+        "mobile_scroll_padding_pixels": 16,
+        "enable_mobile_outher_spacing": false,
+        "mobile_slides_container_width": 100,
+        "mobile_slides_inner_width": 100,
+        "trust_badge_position": "top-right",
+        "trust_badge_size": "medium",
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 16,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36
+      }
+    },
+    "kids_life_skills_pMNmYd": {
+      "type": "kids-life-skills",
+      "blocks": {
+        "faq_TkDYTA": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🚗",
+            "question": "Will this fit my car, SUV, or truck?",
+            "answer": "<p>Yes! The SafePet Rear Seat Cover is engineered with universal 53″ × 51″ dimensions (20″ seat depth + 26.5″ backrest + 4.5″ front drop) designed to fit virtually all standard sedans, midsize/full-size SUVs, and pickup trucks. Adjustable headrest straps and tuck-in seat anchors ensure a custom snug fit.</p>"
+          }
+        },
+        "faq_RHjUTa": {
+          "type": "faq",
+          "settings": {
+            "emoji": "⚡",
+            "question": "Can I still use the center armrest or fold down seats?",
+            "answer": "<p>Yes! Built with heavy-duty split center zippers, you can easily unzip the center section to lower your vehicle's center armrest and cup holders, or share the backseat comfortably with human passengers.</p>"
+          }
+        },
+        "faq_xfQdDW": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🔒",
+            "question": "Does this work with the SafePet Dog Seatbelt?",
+            "answer": "<p>Absolutely! It features reinforced velcro pass-through slits that line up with standard vehicle seatbelt buckles, allowing you to easily click in your SafePet Dog Seatbelt to keep your pup securely tethered.</p>"
+          }
+        },
+        "faq_3m4wGU": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🧼",
+            "question": "How do I clean and wash it?",
+            "answer": "<p>For everyday dirt, dog hair, or drool, simply wipe clean with a damp cloth or vacuum in seconds. For muddy paws and spills, it is 100% machine washable on cold/gentle cycle (air dry or tumble dry low).</p>"
+          }
+        },
+        "faq_ktMHfj": {
+          "type": "faq",
+          "settings": {
+            "emoji": "🛡️",
+            "question": "Will it slip around on smooth leather seats?",
+            "answer": "<p>No! The bottom is lined with a high-traction non-slip rubber mesh, paired with quick-insert seat anchors that tuck deeply into the seat cushion crevice to prevent shifting during sharp turns or sudden braking.</p>"
+          }
+        },
+        "testimonial_JEwrYm": {
+          "type": "testimonial",
+          "settings": {
+            "title": "SAVED MY BEIGE LEATHER SEATS!",
+            "body": "We have two German Shepherds who love muddy trail hikes. My previous cover was thin, bunched up, and allowed mud to soak right into the perforated leather. SafePet's diamond quilting is thick, 100% waterproof, and doesn't budge even when the dogs jump in soaking wet. Absolute 10/10.",
+            "author_name": "Tyler & Jess",
+            "author_tag": "German Shepherd Owners"
+          }
+        },
+        "testimonial_AQJbh3": {
+          "type": "testimonial",
+          "settings": {
+            "title": "The center armrest zipper is pure genius.",
+            "body": "Most seat covers block the middle armrest completely. This one lets me unzip the center to drop down the cup holders for my kids, while our Lab sits happily on the side. Plus, the seatbelt slits let us click in the SafePet strap easily.",
+            "author_name": "Rachel M.",
+            "author_tag": "Mom of 2 & Golden Lab Parent"
+          }
+        },
+        "testimonial_EiyaeU": {
+          "type": "testimonial",
+          "settings": {
+            "title": "Installs in 2 minutes & cleans with a wipe.",
+            "body": "I commute with my dog every day. The seat anchors keep it locked into place so it never shifts. When it gets full of fur or dirt, I just take a damp microfiber cloth and wipe it clean in 30 seconds.",
+            "author_name": "Carlos D.",
+            "author_tag": "Toyota RAV4 Owner"
+          }
+        }
+      },
+      "block_order": [
+        "faq_TkDYTA",
+        "faq_RHjUTa",
+        "faq_xfQdDW",
+        "faq_3m4wGU",
+        "faq_ktMHfj",
+        "testimonial_JEwrYm",
+        "testimonial_AQJbh3",
+        "testimonial_EiyaeU"
+      ],
+      "name": "SafePet Landing Copy",
+      "settings": {
+        "product": "safepet-car-seat-cover",
+        "hero_main_image": "",
+        "hero_badge_tl": "600D Quilted Oxford",
+        "hero_badge_tc": "Universal Fit",
+        "hero_badge_tr": "100% Waterproof",
+        "hero_rating_text": "(4,890+ verified reviews)",
+        "hero_headline": "Say Goodbye To Dog Hair, Mud & Scratched Seats. The 100% Waterproof, Heavy-Duty Rear Seat Cover Built For Pet Travel.",
+        "hero_price_sale": "",
+        "hero_price_original": "",
+        "hero_save_pill": "",
+        "hero_benefit_1": "100% Waterproof & Stain-Proof — Heavy-duty 600D quilted Oxford fabric stops mud, drool & accidents",
+        "hero_benefit_2": "Center Zipper Armrest Access — Unzip middle section for center cup holders or passenger seating",
+        "hero_benefit_3": "Claw & Scratch Resistant — Multi-layer ripstop weave prevents costly leather & upholstery damage",
+        "hero_cta_label": "CLAIM MY SEAT COVER NOW →",
+        "hero_trust_text": "Over 45,000+ happy dogs & pristine backseats worldwide.",
+        "hero_guarantee_pill": "90-Day Clean-Car Guarantee",
+        "hero_testimonial_avatar": "",
+        "hero_testimonial_quote": "Cooper sheds like crazy and loves jumping into muddy lakes. My car's leather back seats used to be full of claw scratches and dog hair that took hours to vacuum. This cover changed everything. It took 2 minutes to install, fits my Ford Explorer like a glove, and the center zipper lets my daughter sit in the back with Cooper. Best car accessory I've ever bought!",
+        "hero_testimonial_name": "Mark & Cooper (Golden Retriever)",
+        "faq_heading": "SafePet Rear Seat Cover Frequently Asked Questions",
+        "ready_heading": "Never Dread Bringing Your Dog In The Car Again",
+        "ready_body": "No more blankets that slide off, endless vacuuming of stubborn pet hair, or expensive leather repair bills. SafePet Rear Seat Cover installs in seconds, stays rock-solid in place, and keeps your vehicle pristine on every adventure.",
+        "ready_cta_label": "👉 Yes, Protect My Car Seats Now",
+        "ready_cta_url": "",
+        "grow_heading": "Heavy-Duty Quilted Protection 🐾 Full Bench Coverage",
+        "grow_body": "Engineered with durable diamond-quilted 600D Oxford top layer, waterproof TPU barrier, non-slip rubber backing, and side/front flaps for complete back seat protection.",
+        "grow_quote": "Your dog deserves to ride comfortably and safely with you, without ruining your vehicle's interior. A heavy-duty waterproof seat cover gives you total peace of mind on every trip.",
+        "testimonials_heading": "Real Dog Parents. Real Clean Rides.",
+        "stats_heading": "Trusted By 45,000+ Smart Dog Parents",
+        "stat_1_value": "100%",
+        "stat_1_desc": "<p>Waterproof seal & total seat upholstery protection</p>",
+        "stat_2_value": "2 Min",
+        "stat_2_desc": "<p>Quick snap headrest buckle & seat anchor installation</p>",
+        "stat_3_value": "$500+",
+        "stat_3_desc": "<p>Saved on auto detailing and leather scratch repairs</p>",
+        "stats_footnote": "*Based on customer survey of auto detailing savings.",
+        "comparison_heading": "Why Pet Parents Choose SafePet Seat Cover Over Cheap Blankets & Generic Covers",
+        "comparison_brand_label": "SafePet Rear Seat Cover",
+        "comparison_others_label": "Ordinary Blankets / Cheap Covers",
+        "comparison_features": "100% Waterproof TPU impermeable layer\nHeavy-duty 600D scratch-resistant Oxford\nCenter zipper for armrest & passenger access\nSeatbelt pass-through velcro for Dog Seatbelt\nNon-slip rubber backing + tuck-in anchors\nWipe-clean in seconds or machine washable\nUniversal fit (Sedans, SUVs, Pickups)\n90-Day clean-car guarantee",
+        "guarantee_heading": "Try It Risk-Free For 90 Days",
+        "guarantee_body": "Install the SafePet Seat Cover in your car, SUV, or truck. Take your dog to the beach, dog park, or on road trips. If it doesn't keep your seats 100% clean, hair-free, and scratch-free, simply email us for an immediate 100% refund. No hassle.",
+        "guarantee_cta_label": "GET MY SEAT COVER RISK-FREE",
+        "guarantee_cta_url": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "margin_top": -40,
+        "margin_bottom": 0,
+        "font_size_base": 16,
+        "bg_color": "#ffffff",
+        "text_color": "#2d2d2d",
+        "headline_font_size": 20,
+        "headline_color": "#2d2d2d",
+        "headline_margin_top": -14,
+        "headline_margin_bottom": 0,
+        "rating_font_size": 16,
+        "rating_color": "#6b6b6b",
+        "rating_star_color": "#f5b800",
+        "rating_margin_top": 0,
+        "rating_margin_bottom": 0,
+        "price_sale_font_size": 32,
+        "price_sale_color": "#d0021b",
+        "price_original_font_size": 18,
+        "price_original_color": "#6b6b6b",
+        "price_margin_top": -10,
+        "price_margin_bottom": 0,
+        "benefits_font_size": 16,
+        "benefits_color": "#2d2d2d",
+        "benefits_icon_color": "#e53935",
+        "benefits_margin_top": -10,
+        "benefits_margin_bottom": 0,
+        "cta_font_size": 18,
+        "cta_bg_color": "#e53935",
+        "cta_text_color": "#ffffff",
+        "cta_margin_top": 0,
+        "cta_margin_bottom": 0,
+        "testimonial_bg_color": "#fff5f5",
+        "testimonial_text_color": "#2d2d2d",
+        "testimonial_margin_top": 0,
+        "testimonial_margin_bottom": 0
+      }
+    },
+    "b321ab88-2b59-4dba-bade-54885c874ca5": {
+      "type": "section-divider",
+      "settings": {
+        "visibility": "always-display",
+        "shape": "waves_3",
+        "flip_horizontal": false,
+        "flip_vertical": false,
+        "shape_color": "accent-1",
+        "custom_shape_color": "#dd1d1d",
+        "background_color": "background-1",
+        "custom_background_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "social_proof_toast_m3B7bY": {
+      "type": "social-proof-toast",
+      "blocks": {
+        "toast_block_0": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "T",
+            "name_descriptor": "Tyler & Jess | German Shepherd Owners",
+            "quote": "Our dogs jump in soaking wet after lake hikes. Not a single drop gets through to our leather seats!"
+          }
+        },
+        "toast_block_1": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "R",
+            "name_descriptor": "Rachel M. | Golden Lab Mom",
+            "quote": "The center armrest zipper is amazing! Unzips in seconds so my daughter has her cup holders."
+          }
+        },
+        "toast_block_2": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "C",
+            "name_descriptor": "Carlos D. | Toyota RAV4 Owner",
+            "quote": "Tuck-in anchors keep it completely locked in place. Takes 30 seconds to wipe clean."
+          }
+        },
+        "toast_block_3": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "D",
+            "name_descriptor": "David S. | Ford F-150 Owner",
+            "quote": "Fits the full back bench of my truck perfectly. Heavy duty and scratch proof."
+          }
+        },
+        "toast_block_4": {
+          "type": "testimonial_notification",
+          "settings": {
+            "initial": "E",
+            "name_descriptor": "Emma W. | Australian Shepherd Parent",
+            "quote": "Pairs perfectly with the SafePet seatbelt strap through the velcro slits. 10/10 safety."
+          }
+        }
+      },
+      "block_order": [
+        "toast_block_0",
+        "toast_block_1",
+        "toast_block_2",
+        "toast_block_3",
+        "toast_block_4"
+      ],
+      "name": "Social Proof Toast",
+      "settings": {
+        "enable": true,
+        "position": "bottom-left",
+        "bg_color": "#fff5f5",
+        "accent_color": "#e53935",
+        "text_color": "#2d2d2d",
+        "text_secondary_color": "#6b6b6b",
+        "star_color": "#f5b800",
+        "font_size_quote": 13,
+        "font_size_author": 11,
+        "first_show_delay": 6,
+        "between_delay": 10,
+        "show_duration": 5
+      }
+    }
+  },
+  "order": [
+    "main",
+    "kids_life_skills_pMNmYd",
+    "b321ab88-2b59-4dba-bade-54885c874ca5",
+    "social_proof_toast_m3B7bY"
+  ]
+}

@@ -384,6 +384,39 @@
     {%- assign kls_grow_body = "Engineered with a quick-dry soft quilted top sheet, super-absorbent high-density polymer core, 100% waterproof TPU barrier, and anti-slip silicone paw grips that keep the pad securely in place." -%}
     {%- assign kls_grow_quote = "Disposable pads leak around the edges and tear into toxic shreds. A heavy-duty, machine-washable pad gives puppies confidence and keeps your floors safe." -%}
     {%- assign kls_faq_heading = "SafePet UltraPad Frequently Asked Questions" -%}
+  {%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+    {%- assign kls_hero_headline = "Say Goodbye To Dog Hair, Mud & Scratched Seats. The 100% Waterproof, Heavy-Duty Rear Seat Cover Built For Pet Travel." -%}
+    {%- assign kls_hero_price_sale = "$39.95" -%}
+    {%- assign kls_hero_price_original = "$79.95" -%}
+    {%- assign kls_hero_save_pill = "SAVE 50%" -%}
+    {%- assign kls_hero_benefit_1 = "100% Waterproof & Stain-Proof — Heavy-duty 600D quilted Oxford fabric stops mud, drool & accidents" -%}
+    {%- assign kls_hero_benefit_2 = "Center Zipper Armrest Access — Unzip middle section for center cup holders or passenger seating" -%}
+    {%- assign kls_hero_benefit_3 = "Claw & Scratch Resistant — Multi-layer ripstop weave prevents costly leather & upholstery damage" -%}
+    {%- assign kls_hero_cta_label = "CLAIM MY SEAT COVER NOW →" -%}
+    {%- assign kls_hero_trust_text = "Over 45,000+ happy dogs & pristine backseats worldwide." -%}
+    {%- assign kls_hero_testimonial_name = "Mark & Cooper (Golden Retriever)" -%}
+    {%- assign kls_hero_testimonial_quote = "Cooper sheds like crazy and loves jumping into muddy lakes. My car's leather back seats used to be full of claw scratches and dog hair that took hours to vacuum. This cover changed everything. It took 2 minutes to install, fits my Ford Explorer like a glove, and the center zipper lets my daughter sit in the back with Cooper. Best car accessory I've ever bought!" -%}
+    {%- assign kls_stats_heading = "Trusted By 45,000+ Smart Dog Parents" -%}
+    {%- assign kls_stat_1_value = "100%" -%}
+    {%- assign kls_stat_1_desc = "<p>Waterproof seal & total seat upholstery protection</p>" -%}
+    {%- assign kls_stat_2_value = "2 Min" -%}
+    {%- assign kls_stat_2_desc = "<p>Quick snap headrest buckle & seat anchor installation</p>" -%}
+    {%- assign kls_stat_3_value = "$500+" -%}
+    {%- assign kls_stat_3_desc = "<p>Saved on auto detailing and leather scratch repairs</p>" -%}
+    {%- assign kls_ready_heading = "Never Dread Bringing Your Dog In The Car Again" -%}
+    {%- assign kls_ready_body = "No more blankets that slide off, endless vacuuming of stubborn pet hair, or expensive leather repair bills. SafePet Rear Seat Cover installs in seconds, stays rock-solid in place, and keeps your vehicle pristine on every adventure." -%}
+    {%- assign kls_ready_cta_label = "👉 Yes, Protect My Car Seats Now" -%}
+    {%- assign kls_comparison_heading = "Why Pet Parents Choose SafePet Seat Cover Over Cheap Blankets & Generic Covers" -%}
+    {%- assign kls_comparison_brand_label = "SafePet Rear Seat Cover" -%}
+    {%- assign kls_comparison_others_label = "Ordinary Blankets / Cheap Covers" -%}
+    {%- assign kls_comparison_features = "100% Waterproof TPU impermeable layer\nHeavy-duty 600D scratch-resistant Oxford\nCenter zipper for armrest & passenger access\nSeatbelt pass-through velcro for Dog Seatbelt\nNon-slip rubber backing + tuck-in anchors\nWipe-clean in seconds or machine washable\nUniversal fit (Sedans, SUVs, Pickups)\n90-Day clean-car guarantee" -%}
+    {%- assign kls_guarantee_heading = "Try It Risk-Free For 90 Days" -%}
+    {%- assign kls_guarantee_body = "Install the SafePet Seat Cover in your car, SUV, or truck. Take your dog to the beach, dog park, or on road trips. If it doesn't keep your seats 100% clean, hair-free, and scratch-free, simply email us for an immediate 100% refund. No hassle." -%}
+    {%- assign kls_guarantee_cta_label = "GET MY SEAT COVER RISK-FREE" -%}
+    {%- assign kls_grow_heading = "Heavy-Duty Quilted Protection 🐾 Full Bench Coverage" -%}
+    {%- assign kls_grow_body = "Engineered with durable diamond-quilted 600D Oxford top layer, waterproof TPU barrier, non-slip rubber backing, and side/front flaps for complete back seat protection." -%}
+    {%- assign kls_grow_quote = "Your dog deserves to ride comfortably and safely with you, without ruining your vehicle's interior. A heavy-duty waterproof seat cover gives you total peace of mind on every trip." -%}
+    {%- assign kls_faq_heading = "SafePet Rear Seat Cover Frequently Asked Questions" -%}
   {%- endif -%}
 {%- endif -%}
 {%- comment -%} SAFE PET DYNAMIC COPY OVERRIDES END {%- endcomment -%}
@@ -397,6 +430,8 @@
           <div class="kls-hero-image" data-wld-main>
             {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
               <img src="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}" loading="eager" class="kls-gallery-img" alt="{{ kls_hero_headline }}" width="1200" height="1200">
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+              <img src="{{ 'car-seat-cover-dimensions-features.jpg' | asset_url }}" loading="eager" class="kls-gallery-img" alt="{{ kls_hero_headline }}" width="1200" height="1200">
             {%- else -%}
               {%- assign hero_image = section.settings.hero_main_image -%}
               {%- if template.name == 'product' and product.featured_image != blank -%}
@@ -432,6 +467,22 @@
               </div>
               <div class="kls-hero-thumb" data-wld-thumb>
                 <img src="{{ 'ultrapad-product-white.png' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="SafePet UltraPad Studio Product">
+              </div>
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'car-seat-cover-dimensions-features.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="Dimensions & Overview">
+              </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'car-seat-cover-waterproof-scratch-clean.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="Waterproof & Scratch Proof">
+              </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'car-seat-cover-why-choose.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="Why Pet Owners Choose It">
+              </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'car-seat-cover-installation-guide.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="Install in Minutes">
+              </div>
+              <div class="kls-hero-thumb" data-wld-thumb>
+                <img src="{{ 'car-seat-cover-coverage-cars.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="Universal Fit for Cars, SUVs, Trucks">
               </div>
             {%- elsif template.name == 'product' and product.media.size > 1 and section.settings.hero_thumb_1 == blank -%}
               {%- for media in product.media limit: 5 -%}
@@ -626,6 +677,9 @@
             {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
               <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🐾 ZERO LEAKS GUARANTEED</span>
               <span class="kls-badge-verified">✓ Verified Floor Saved</span>
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+              <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🚗 100% CAR INTERIOR PROTECTED</span>
+              <span class="kls-badge-verified">✓ Verified Clean Ride</span>
             {%- else -%}
               <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🚨 REAL ACCIDENT SURVIVOR</span>
               <span class="kls-badge-verified">✓ Verified Life Saved</span>
@@ -638,6 +692,8 @@
                 {{ section.settings.hero_testimonial_image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-hero-testimonial-img', alt: 'Testimonial review proof' }}
               {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
                 <img src="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}" alt="SafePet UltraPad Customer Review Proof" class="kls-hero-testimonial-img" loading="lazy">
+              {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+                <img src="{{ 'car-seat-cover-why-choose.jpg' | asset_url }}" alt="SafePet Car Seat Cover Review Proof" class="kls-hero-testimonial-img" loading="lazy">
               {%- else -%}
                 {%- if template.name != 'product' or product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
                   <img src="{{ 'hero-testimonial-proof.jpg' | asset_url }}" alt="Car crash safety proof" class="kls-hero-testimonial-img" loading="lazy">
@@ -806,6 +862,23 @@
                   {%- assign faq_question = "What if my dog doesn't use it or it leaks?" -%}
                   {%- assign faq_answer = "<p>We offer an ironclad 90-Day Money-Back Guarantee. If the UltraPad doesn't completely stop leaks and keep your home odor-free, simply email our customer support for a prompt, 100% refund. No questions asked!</p>" -%}
                 {%- endif -%}
+              {%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign faq_question = "Will this fit my car, SUV, or truck?" -%}
+                  {%- assign faq_answer = "<p>Yes! The SafePet Rear Seat Cover is engineered with universal 53″ × 51″ dimensions (20″ seat depth + 26.5″ backrest + 4.5″ front drop) designed to fit virtually all standard sedans, midsize/full-size SUVs, and pickup trucks. Adjustable headrest straps and tuck-in seat anchors ensure a custom snug fit.</p>" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign faq_question = "Can I still use the center armrest or fold down seats?" -%}
+                  {%- assign faq_answer = "<p>Yes! Built with heavy-duty split center zippers, you can easily unzip the center section to lower your vehicle's center armrest and cup holders, or share the backseat comfortably with human passengers.</p>" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign faq_question = "Does this work with the SafePet Dog Seatbelt?" -%}
+                  {%- assign faq_answer = "<p>Absolutely! It features reinforced velcro pass-through slits that line up with standard vehicle seatbelt buckles, allowing you to easily click in your SafePet Dog Seatbelt to keep your pup securely tethered.</p>" -%}
+                {%- elsif loop_idx == 4 -%}
+                  {%- assign faq_question = "How do I clean and wash it?" -%}
+                  {%- assign faq_answer = "<p>For everyday dirt, dog hair, or drool, simply wipe clean with a damp cloth or vacuum in seconds. For muddy paws and spills, it is 100% machine washable on cold/gentle cycle (air dry or tumble dry low).</p>" -%}
+                {%- elsif loop_idx == 5 -%}
+                  {%- assign faq_question = "Will it slip around on smooth leather seats?" -%}
+                  {%- assign faq_answer = "<p>No! The bottom is lined with a high-traction non-slip rubber mesh, paired with quick-insert seat anchors that tuck deeply into the seat cushion crevice to prevent shifting during sharp turns or sudden braking.</p>" -%}
+                {%- endif -%}
               {%- endif -%}
             {%- endif -%}
             <details class="kls-faq-row" {{ block.shopify_attributes }}>
@@ -831,6 +904,8 @@
           {{ section.settings.ready_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-ready-img', alt: kls_ready_heading }}
         {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
           <img src="{{ 'ultrapad-machine-washable.jpg' | asset_url }}" loading="lazy" class="kls-ready-img" alt="{{ kls_ready_heading }}">
+        {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+          <img src="{{ 'car-seat-cover-waterproof-scratch-clean.jpg' | asset_url }}" loading="lazy" class="kls-ready-img" alt="{{ kls_ready_heading }}">
         {%- endif -%}
       </div>
       <div class="kls-ready-content">
@@ -855,6 +930,8 @@
               {{ section.settings.grow_thumb_1 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 1' }}
             {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
               <img src="{{ 'ultrapad-layer-breakdown.jpg' | asset_url }}" loading="lazy" class="kls-grow-thumb-img" alt="{{ kls_grow_heading }}">
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+              <img src="{{ 'car-seat-cover-installation-guide.jpg' | asset_url }}" loading="lazy" class="kls-grow-thumb-img" alt="{{ kls_grow_heading }}">
             {%- endif -%}
           </div>
         </div>
@@ -992,6 +1069,23 @@
                   {%- assign test_body = "We adopted a senior dog with incontinence. Disposable pads always leaked through the bottom plastic. The TPU barrier on this pad is 100% waterproof—not a single drop has ever leaked onto our rugs." -%}
                   {%- assign test_author_name = "Dr. Linda H." -%}
                   {%- assign test_author_tag = "Veterinary Technician" -%}
+                {%- endif -%}
+              {%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+                {%- if loop_idx == 1 -%}
+                  {%- assign test_title = "SAVED MY BEIGE LEATHER SEATS!" -%}
+                  {%- assign test_body = "We have two German Shepherds who love muddy trail hikes. My previous cover was thin, bunched up, and allowed mud to soak right into the perforated leather. SafePet's diamond quilting is thick, 100% waterproof, and doesn't budge even when the dogs jump in soaking wet. Absolute 10/10." -%}
+                  {%- assign test_author_name = "Tyler & Jess" -%}
+                  {%- assign test_author_tag = "German Shepherd Owners" -%}
+                {%- elsif loop_idx == 2 -%}
+                  {%- assign test_title = "The center armrest zipper is pure genius." -%}
+                  {%- assign test_body = "Most seat covers block the middle armrest completely. This one lets me unzip the center to drop down the cup holders for my kids, while our Lab sits happily on the side. Plus, the seatbelt slits let us click in the SafePet strap easily." -%}
+                  {%- assign test_author_name = "Rachel M." -%}
+                  {%- assign test_author_tag = "Mom of 2 & Golden Lab Parent" -%}
+                {%- elsif loop_idx == 3 -%}
+                  {%- assign test_title = "Installs in 2 minutes & cleans with a wipe." -%}
+                  {%- assign test_body = "I commute with my dog every day. The seat anchors keep it locked into place so it never shifts. When it gets full of fur or dirt, I just take a damp microfiber cloth and wipe it clean in 30 seconds." -%}
+                  {%- assign test_author_name = "Carlos D." -%}
+                  {%- assign test_author_tag = "Toyota RAV4 Owner" -%}
                 {%- endif -%}
               {%- endif -%}
             {%- endif -%}
