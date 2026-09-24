@@ -129,7 +129,11 @@
 {%- assign is_seatbelt = false -%}
 {%- assign handle_lower = product.handle | downcase -%}
 {%- if handle_lower contains 'seat-belt' or handle_lower contains 'seatbelt' or handle_lower == 'safepet-strap' or handle_lower == 'safe-pet-strap' or product.handle == blank -%}
-  {%- assign is_seatbelt = true -%}
+  {%- if template.suffix != 'car-seat-cover' and template.suffix != 'puppy-pad' and template contains 'product' -%}
+    {%- assign is_seatbelt = true -%}
+  {%- elsif template.name != 'product' -%}
+    {%- assign is_seatbelt = true -%}
+  {%- endif -%}
 {%- endif -%}
 
 {%- assign kls_hero_headline = section.settings.hero_headline -%}
@@ -428,9 +432,9 @@
       <div class="kls-hero-left">
         <div class="kls-hero-gallery" data-wld-gallery>
           <div class="kls-hero-image" data-wld-main>
-            {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+            {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' or template.suffix == 'puppy-pad' -%}
               <img src="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}" loading="eager" class="kls-gallery-img" alt="{{ kls_hero_headline }}" width="1200" height="1200">
-            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
               <img src="{{ 'car-seat-cover-dimensions-features.jpg' | asset_url }}" loading="eager" class="kls-gallery-img" alt="{{ kls_hero_headline }}" width="1200" height="1200">
             {%- else -%}
               {%- assign hero_image = section.settings.hero_main_image -%}
@@ -468,7 +472,7 @@
               <div class="kls-hero-thumb" data-wld-thumb>
                 <img src="{{ 'ultrapad-product-white.png' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="SafePet UltraPad Studio Product">
               </div>
-            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
               <div class="kls-hero-thumb" data-wld-thumb>
                 <img src="{{ 'car-seat-cover-dimensions-features.jpg' | asset_url }}" loading="lazy" class="kls-thumb-img" alt="Dimensions & Overview">
               </div>
@@ -674,10 +678,10 @@
         <div class="kls-hero-testimonial">
           <!-- Emotion Architecture: Badge Alerts -->
           <div class="kls-hero-testimonial-badges">
-            {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+            {%- if product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' or template.suffix == 'puppy-pad' -%}
               <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🐾 ZERO LEAKS GUARANTEED</span>
               <span class="kls-badge-verified">✓ Verified Floor Saved</span>
-            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
               <span class="kls-badge-alert"><span class="kls-badge-dot"></span>🚗 100% CAR INTERIOR PROTECTED</span>
               <span class="kls-badge-verified">✓ Verified Clean Ride</span>
             {%- else -%}
@@ -690,9 +694,9 @@
             <div class="kls-hero-testimonial-image">
               {%- if section.settings.hero_testimonial_image != blank -%}
                 {{ section.settings.hero_testimonial_image | image_url: width: 800 | image_tag: widths: '400,600,800', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-hero-testimonial-img', alt: 'Testimonial review proof' }}
-              {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+              {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' or template.suffix == 'puppy-pad' -%}
                 <img src="{{ 'ultrapad-hero-frenchie.jpg' | asset_url }}" alt="SafePet UltraPad Customer Review Proof" class="kls-hero-testimonial-img" loading="lazy">
-              {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+              {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
                 <img src="{{ 'car-seat-cover-why-choose.jpg' | asset_url }}" alt="SafePet Car Seat Cover Review Proof" class="kls-hero-testimonial-img" loading="lazy">
               {%- else -%}
                 {%- if template.name != 'product' or product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
@@ -862,7 +866,7 @@
                   {%- assign faq_question = "What if my dog doesn't use it or it leaks?" -%}
                   {%- assign faq_answer = "<p>We offer an ironclad 90-Day Money-Back Guarantee. If the UltraPad doesn't completely stop leaks and keep your home odor-free, simply email our customer support for a prompt, 100% refund. No questions asked!</p>" -%}
                 {%- endif -%}
-              {%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+              {%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
                 {%- if loop_idx == 1 -%}
                   {%- assign faq_question = "Will this fit my car, SUV, or truck?" -%}
                   {%- assign faq_answer = "<p>Yes! The SafePet Rear Seat Cover is engineered with universal 53″ × 51″ dimensions (20″ seat depth + 26.5″ backrest + 4.5″ front drop) designed to fit virtually all standard sedans, midsize/full-size SUVs, and pickup trucks. Adjustable headrest straps and tuck-in seat anchors ensure a custom snug fit.</p>" -%}
@@ -902,9 +906,9 @@
       <div class="kls-ready-image">
         {%- if section.settings.ready_image != blank -%}
           {{ section.settings.ready_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'lazy', class: 'kls-ready-img', alt: kls_ready_heading }}
-        {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+        {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' or template.suffix == 'puppy-pad' -%}
           <img src="{{ 'ultrapad-machine-washable.jpg' | asset_url }}" loading="lazy" class="kls-ready-img" alt="{{ kls_ready_heading }}">
-        {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+        {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
           <img src="{{ 'car-seat-cover-waterproof-scratch-clean.jpg' | asset_url }}" loading="lazy" class="kls-ready-img" alt="{{ kls_ready_heading }}">
         {%- endif -%}
       </div>
@@ -928,9 +932,9 @@
           <div class="kls-grow-thumb">
             {%- if section.settings.grow_thumb_1 != blank -%}
               {{ section.settings.grow_thumb_1 | image_url: width: 400 | image_tag: widths: '200,400', sizes: '150px', loading: 'lazy', class: 'kls-grow-thumb-img', alt: 'Worksheet 1' }}
-            {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+            {%- elsif product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' or template.suffix == 'puppy-pad' -%}
               <img src="{{ 'ultrapad-layer-breakdown.jpg' | asset_url }}" loading="lazy" class="kls-grow-thumb-img" alt="{{ kls_grow_heading }}">
-            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+            {%- elsif product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
               <img src="{{ 'car-seat-cover-installation-guide.jpg' | asset_url }}" loading="lazy" class="kls-grow-thumb-img" alt="{{ kls_grow_heading }}">
             {%- endif -%}
           </div>
@@ -1070,7 +1074,7 @@
                   {%- assign test_author_name = "Dr. Linda H." -%}
                   {%- assign test_author_tag = "Veterinary Technician" -%}
                 {%- endif -%}
-              {%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+              {%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' or template.suffix == 'car-seat-cover' -%}
                 {%- if loop_idx == 1 -%}
                   {%- assign test_title = "SAVED MY BEIGE LEATHER SEATS!" -%}
                   {%- assign test_body = "We have two German Shepherds who love muddy trail hikes. My previous cover was thin, bunched up, and allowed mud to soak right into the perforated leather. SafePet's diamond quilting is thick, 100% waterproof, and doesn't budge even when the dogs jump in soaking wet. Absolute 10/10." -%}
