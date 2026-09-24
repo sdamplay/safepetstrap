@@ -1,23 +1,39 @@
-{%- if product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
-{% assign v0_id = product.variants[0].id | default: '' %}
-{% assign v1_id = product.variants[1].id | default: v0_id %}
-{% assign v2_id = product.variants[2].id | default: v0_id %}
+{%- if template.suffix == 'car-seat-cover' or template contains 'car-seat-cover' or product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
+{%- assign v0 = product.variants[0] -%}
+{%- assign v1 = product.variants[1] | default: v0 -%}
+{%- assign v2 = product.variants[2] | default: v0 -%}
 
 <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
-  <h3 class="safepet-selector-heading">Select the best package for your dog:</h3>
-  
+  <div class="safepet-color-banner">
+    <div class="safepet-color-badge-dot" style="background-color: #111827;"></div>
+    <span class="safepet-color-text">Design: <strong>Diamond-Quilted Heavy-Duty Oxford Black</strong> (53" × 51")</span>
+    <span class="safepet-color-check">✓ Universal Vehicle Fit</span>
+  </div>
+
+  <div class="safepet-size-header-row">
+    <div class="safepet-step-header">
+      <span class="safepet-step-pill">SELECT PACKAGE</span>
+      <span class="safepet-step-title">CHOOSE YOUR VEHICLE BUNDLE:</span>
+    </div>
+    <button type="button" class="safepet-size-guide-trigger" id="safepetCarSeatGuideTrigger-{{ section.id }}">
+      📏 Dimensions & Fit Guide
+    </button>
+  </div>
+
   <div class="safepet-packages-list">
     
-    <!-- TIER 1: 1 Seat Belt -->
+    <!-- TIER 1: 1 Seat Cover -->
     <input 
       type="radio" 
       id="safepet-tier-1-{{ section.id }}" 
       name="safepet_variant_tier" 
       value="1"
-      data-variant-id="{{ v0_id }}"
+      data-variant-id="{{ v0.id }}"
       data-quantity="1"
-      data-price="0.00"
-      data-variant-img="{% if product.variants[0].image != blank %}{{ product.variants[0].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
+      data-price="$39.95"
+      data-compare="$79.95"
+      data-save="SAVE 50%"
+      data-variant-img="{{ 'car-seat-cover-dimensions-features.jpg' | asset_url }}"
       style="display: none;"
     >
     <label class="safepet-pkg-card" for="safepet-tier-1-{{ section.id }}">
@@ -25,76 +41,79 @@
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">1 Seat Belt — Starter Pack</span>
-            <span class="safepet-pkg-subtitle">Perfect to protect one pup</span>
+            <span class="safepet-pkg-title">1 Rear Seat Cover — Single Car Pack</span>
+            <span class="safepet-pkg-subtitle">Full waterproof & scratch protection for your primary vehicle</span>
           </div>
         </div>
         <div class="safepet-pkg-right">
-          <span class="safepet-pkg-price safepet-price-free">FREE</span>
-          <span class="safepet-pkg-compare">Normally $29.95</span>
+          <span class="safepet-pkg-price">$39.95</span>
+          <span class="safepet-pkg-compare">Normally $79.95</span>
+          <span class="safepet-pkg-unit-badge">SAVE 50%</span>
         </div>
       </div>
     </label>
 
-    <!-- TIER 2: 2 Seat Belts -->
+    <!-- TIER 2: 2 Seat Covers (Default Selected) -->
     <input 
       type="radio" 
       id="safepet-tier-2-{{ section.id }}" 
       name="safepet_variant_tier" 
       value="2"
-      data-variant-id="{{ v1_id }}"
-      data-quantity="1"
-      data-price="17.95"
-      data-variant-img="{% if product.variants[1].image != blank %}{{ product.variants[1].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
+      checked
+      data-variant-id="{% if product.variants.size > 1 %}{{ v1.id }}{% else %}{{ v0.id }}{% endif %}"
+      data-quantity="{% if product.variants.size > 1 %}1{% else %}2{% endif %}"
+      data-price="$59.95"
+      data-compare="$159.90"
+      data-save="SAVE 60%"
+      data-variant-img="{{ 'car-seat-cover-why-choose.jpg' | asset_url }}"
       style="display: none;"
     >
-    <label class="safepet-pkg-card" for="safepet-tier-2-{{ section.id }}">
-      <!-- Top Badge -->
-      <span class="safepet-pkg-badge safepet-badge-orange">MOST ORDERED</span>
-      
+    <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-2-{{ section.id }}">
+      <span class="safepet-pkg-badge safepet-badge-orange">🔥 MOST POPULAR • SAVE 60%</span>
       <div class="safepet-pkg-main-row">
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">2 Seat Belts — Double Safety</span>
-            <span class="safepet-pkg-subtitle">Keep both family cars equipped</span>
+            <span class="safepet-pkg-title">2 Rear Seat Covers — 2-Car Family Pack</span>
+            <span class="safepet-pkg-subtitle">Equip both family cars • Only $29.97/each</span>
           </div>
         </div>
         <div class="safepet-pkg-right">
-          <span class="safepet-pkg-price">$17.95</span>
-          <span class="safepet-pkg-unit-badge">$8.97/each</span>
+          <span class="safepet-pkg-price">$59.95</span>
+          <span class="safepet-pkg-compare">Normally $159.90</span>
+          <span class="safepet-pkg-unit-badge">$29.97/each</span>
         </div>
       </div>
     </label>
 
-    <!-- TIER 3: 3 Seat Belts (Default Selected) -->
+    <!-- TIER 3: 3 Seat Covers -->
     <input 
       type="radio" 
       id="safepet-tier-3-{{ section.id }}" 
       name="safepet_variant_tier" 
-      value="3" 
-      checked
-      data-variant-id="{{ v2_id }}"
-      data-quantity="1"
-      data-price="24.95"
-      data-variant-img="{% if product.variants[2].image != blank %}{{ product.variants[2].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
+      value="3"
+      data-variant-id="{% if product.variants.size > 2 %}{{ v2.id }}{% else %}{{ v0.id }}{% endif %}"
+      data-quantity="{% if product.variants.size > 2 %}1{% else %}3{% endif %}"
+      data-price="$79.95"
+      data-compare="$239.85"
+      data-save="SAVE 67%"
+      data-variant-img="{{ 'car-seat-cover-coverage-cars.jpg' | asset_url }}"
       style="display: none;"
     >
-    <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-3-{{ section.id }}">
-      <!-- Top Badge -->
-      <span class="safepet-pkg-badge safepet-badge-red">🔥 BEST VALUE + FREE $29 E-BOOK</span>
-      
+    <label class="safepet-pkg-card" for="safepet-tier-3-{{ section.id }}">
+      <span class="safepet-pkg-badge safepet-badge-red">⭐ BEST VALUE + FREE $29 E-BOOK</span>
       <div class="safepet-pkg-main-row">
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">3 Seat Belts + Free E-Book</span>
-            <span class="safepet-pkg-subtitle">Full Protection + "The Calm Car Rider" E-Book ($29 Value)</span>
+            <span class="safepet-pkg-title">3 Rear Seat Covers — Ultimate Travel Pack</span>
+            <span class="safepet-pkg-subtitle">Family Cars + SUV/Truck + FREE "The Calm Car Rider" E-Book</span>
           </div>
         </div>
         <div class="safepet-pkg-right">
-          <span class="safepet-pkg-price">$24.95</span>
-          <span class="safepet-pkg-unit-badge">$8.31/each</span>
+          <span class="safepet-pkg-price">$79.95</span>
+          <span class="safepet-pkg-compare">Normally $239.85</span>
+          <span class="safepet-pkg-unit-badge">$26.65/each</span>
         </div>
       </div>
     </label>
@@ -102,220 +121,9 @@
   </div>
 </div>
 
-<style>
-  .safepet-variant-selector-wrapper {
-    width: 100%;
-    margin: 1.5rem 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  .safepet-selector-heading {
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: #111827;
-    margin: 0 0 1rem 0;
-    text-align: left;
-  }
-
-  .safepet-packages-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-  }
-
-  /* Package Card Base */
-  .safepet-pkg-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 16px 20px;
-    border-radius: 16px;
-    border: 2px solid #e5e7eb;
-    background-color: #fbfbfd;
-    cursor: pointer;
-    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    user-select: none;
-  }
-
-  .safepet-pkg-card:hover {
-    border-color: #cbd5e1;
-    background-color: #fafafc;
-  }
-
-  .safepet-pkg-main-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    gap: 12px;
-  }
-
-  .safepet-pkg-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  /* Radio Circle Indicator */
-  .safepet-pkg-radio-circle {
-    width: 22px;
-    height: 22px;
-    border: 2px solid #94a3b8;
-    border-radius: 50%;
-    background-color: #ffffff;
-    position: relative;
-    flex-shrink: 0;
-    transition: border-color 0.15s ease;
-  }
-
-  .safepet-pkg-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .safepet-pkg-title {
-    font-size: 14px;
-    font-weight: 800;
-    color: #1f2937;
-    line-height: 1.2;
-    transition: color 0.15s ease;
-  }
-
-  .safepet-pkg-subtitle {
-    font-size: 13px;
-    color: #6b7280;
-    line-height: 1.3;
-  }
-
-  .safepet-pkg-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-    flex-shrink: 0;
-  }
-
-  .safepet-pkg-price {
-    font-size: 14px;
-    font-weight: 900;
-    color: #111827;
-    line-height: 1;
-  }
-
-  .safepet-price-free {
-    color: #e53935;
-  }
-
-  .safepet-pkg-compare {
-    font-size: 11px;
-    text-decoration: line-through;
-    color: #9ca3af;
-  }
-
-  /* Green Unit Price Badge */
-  .safepet-pkg-unit-badge {
-    font-size: 11px;
-    font-weight: 700;
-    color: #16a34a;
-    background-color: #e8f5e9;
-    padding: 2px 6px;
-    border-radius: 9999px;
-  }
-
-  /* SELECTED CARD STATES */
-  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card {
-    border: 2px solid #e53935 !important;
-    background-color: #fff5f5 !important; /* Soft red tint */
-    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.08);
-  }
-
-  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle {
-    border-color: #e53935;
-  }
-
-  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #e53935;
-  }
-
-  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-title {
-    color: #e53935;
-  }
-
-  /* Badges positioning */
-  .safepet-pkg-badge {
-    position: absolute;
-    top: -12px;
-    left: 24px;
-    font-size: 0.68rem;
-    font-weight: 800;
-    color: #ffffff;
-    padding: 3px 10px;
-    border-radius: 6px;
-    letter-spacing: 0.5px;
-    z-index: 3;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
-
-  .safepet-badge-orange {
-    background-color: #d97706; /* Muted Gold / Orange */
-  }
-
-  .safepet-badge-red {
-    background-color: #dc2626; /* Vibrant Red */
-  }
-
-  /* Card 3: Featured Yellow Card styling */
-  .safepet-pkg-featured {
-    background-color: #fffdf0;
-    border: 2px solid #fef08a;
-  }
-
-  .safepet-pkg-featured:hover {
-    background-color: #fffdeb;
-    border-color: #fde047;
-  }
-
-  input[name="safepet_variant_tier"]:checked + .safepet-pkg-featured {
-    background-color: #ffffdd !important; /* Brighter yellow when selected */
-    border: 2px solid #e53935 !important;
-    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.1);
-  }
-
-  /* Responsive Adjustments */
-  @media (max-width: 480px) {
-    .safepet-pkg-card {
-      padding: 12px 14px;
-    }
-    .safepet-pkg-title {
-      font-size: 13px;
-    }
-    .safepet-pkg-subtitle {
-      font-size: 11px;
-    }
-    .safepet-pkg-price {
-      font-size: 13px;
-    }
-    .safepet-pkg-radio-circle {
-      width: 18px;
-      height: 18px;
-    }
-  }
-</style>
-
 <script>
   (function() {
-    function initVariantSelector() {
+    function initCarSeatSelector() {
       var container = document.getElementById('safepet-variant-selector-{{ section.id }}');
       if (!container) return;
 
@@ -323,12 +131,15 @@
       
       function updateForm(radio) {
         var variantId = radio.getAttribute('data-variant-id');
-        var quantity = radio.getAttribute('data-quantity');
-        
+        var quantity = radio.getAttribute('data-quantity') || '1';
+        var price = radio.getAttribute('data-price');
+        var compare = radio.getAttribute('data-compare');
+        var save = radio.getAttribute('data-save');
+
         var form = radio.closest('form') || document.querySelector('form[action*="/cart/add"]');
         if (form) {
           var variantInput = form.querySelector('input[name="id"]');
-          if (variantInput && variantId && variantId !== '') {
+          if (variantInput && variantId) {
             variantInput.value = variantId;
           }
           var quantityInput = form.querySelector('input[name="quantity"]');
@@ -337,33 +148,21 @@
           }
         }
 
+        // Update hero pricing displays
+        var salePriceEl = document.querySelector('.kls-hero-price-sale');
+        var origPriceEl = document.querySelector('.kls-hero-price-original');
+        var savePillEl = document.querySelector('.kls-hero-save-pill');
+
+        if (salePriceEl && price) salePriceEl.textContent = price;
+        if (origPriceEl && compare) origPriceEl.textContent = compare;
+        if (savePillEl && save) savePillEl.textContent = save;
+
+        // Switch main image if variant image provided
         var variantImg = radio.getAttribute('data-variant-img');
         var heroImg = document.querySelector('.kls-hero-image img.kls-gallery-img') || document.querySelector('.kls-hero-image img');
-        if (heroImg && variantImg && variantImg !== '') {
+        if (heroImg && variantImg) {
           heroImg.src = variantImg;
-          heroImg.srcset = variantImg;
-        }
-
-        // Update landing page pricing texts
-        var salePriceText = document.querySelector('.kls-hero-price-sale');
-        var originalPriceText = document.querySelector('.kls-hero-price-original');
-        var savePillText = document.querySelector('.kls-hero-save-pill');
-
-        if (salePriceText) {
-          var tier = radio.value;
-          if (tier === '1') {
-            salePriceText.textContent = 'FREE';
-            if (originalPriceText) originalPriceText.textContent = '$29.95';
-            if (savePillText) savePillText.textContent = 'SAVE 100%';
-          } else if (tier === '2') {
-            salePriceText.textContent = '$17.95';
-            if (originalPriceText) originalPriceText.textContent = '$60.00';
-            if (savePillText) savePillText.textContent = 'SAVE 70%';
-          } else if (tier === '3') {
-            salePriceText.textContent = '$24.95';
-            if (originalPriceText) originalPriceText.textContent = '$120.00';
-            if (savePillText) savePillText.textContent = 'SAVE 80%';
-          }
+          heroImg.removeAttribute('srcset');
         }
       }
 
@@ -375,16 +174,28 @@
           updateForm(radio);
         }
       });
+
+      // Guide trigger
+      var trigger = document.getElementById('safepetCarSeatGuideTrigger-{{ section.id }}');
+      if (trigger) {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          var gallery = document.querySelector('.kls-hero-gallery') || document.querySelector('.kls-hero-image');
+          if (gallery) {
+            gallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+      }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initVariantSelector);
+      document.addEventListener('DOMContentLoaded', initCarSeatSelector);
     } else {
-      initVariantSelector();
+      initCarSeatSelector();
     }
   })();
 </script>
-{%- elsif product.handle == 'safepet-ultrapad' or product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
+{%- elsif template.suffix == 'puppy-pad' or template contains 'puppy-pad' or product.handle == 'safepet-ultrapad' or product.handle contains 'ultrapad' or product.handle contains 'puppy-pad' -%}
 {%- assign var_s = null -%}
 {%- assign var_m = null -%}
 {%- assign var_l = null -%}
@@ -1065,42 +876,26 @@
     }
   })();
 </script>
-{%- elsif product.handle == 'safepet-car-seat-cover' or product.handle contains 'seat-cover' or product.handle contains 'car-cover' or product.handle contains 'rear-seat-cover' -%}
-{%- assign v0 = product.variants[0] -%}
-{%- assign v1 = product.variants[1] | default: v0 -%}
-{%- assign v2 = product.variants[2] | default: v0 -%}
+{%- elsif product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
+{% assign v0_id = product.variants[0].id | default: '' %}
+{% assign v1_id = product.variants[1].id | default: v0_id %}
+{% assign v2_id = product.variants[2].id | default: v0_id %}
 
 <div class="safepet-variant-selector-wrapper" id="safepet-variant-selector-{{ section.id }}">
-  <div class="safepet-color-banner">
-    <div class="safepet-color-badge-dot" style="background-color: #111827;"></div>
-    <span class="safepet-color-text">Design: <strong>Diamond-Quilted Heavy-Duty Oxford Black</strong> (53" × 51")</span>
-    <span class="safepet-color-check">✓ Universal Vehicle Fit</span>
-  </div>
-
-  <div class="safepet-size-header-row">
-    <div class="safepet-step-header">
-      <span class="safepet-step-pill">SELECT PACKAGE</span>
-      <span class="safepet-step-title">CHOOSE YOUR VEHICLE BUNDLE:</span>
-    </div>
-    <button type="button" class="safepet-size-guide-trigger" id="safepetCarSeatGuideTrigger-{{ section.id }}">
-      📏 Dimensions & Fit Guide
-    </button>
-  </div>
-
+  <h3 class="safepet-selector-heading">Select the best package for your dog:</h3>
+  
   <div class="safepet-packages-list">
     
-    <!-- TIER 1: 1 Seat Cover -->
+    <!-- TIER 1: 1 Seat Belt -->
     <input 
       type="radio" 
       id="safepet-tier-1-{{ section.id }}" 
       name="safepet_variant_tier" 
       value="1"
-      data-variant-id="{{ v0.id }}"
+      data-variant-id="{{ v0_id }}"
       data-quantity="1"
-      data-price="$39.95"
-      data-compare="$79.95"
-      data-save="SAVE 50%"
-      data-variant-img="{{ 'car-seat-cover-dimensions-features.jpg' | asset_url }}"
+      data-price="0.00"
+      data-variant-img="{% if product.variants[0].image != blank %}{{ product.variants[0].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
       style="display: none;"
     >
     <label class="safepet-pkg-card" for="safepet-tier-1-{{ section.id }}">
@@ -1108,79 +903,76 @@
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">1 Rear Seat Cover — Single Car Pack</span>
-            <span class="safepet-pkg-subtitle">Full waterproof & scratch protection for your primary vehicle</span>
+            <span class="safepet-pkg-title">1 Seat Belt — Starter Pack</span>
+            <span class="safepet-pkg-subtitle">Perfect to protect one pup</span>
           </div>
         </div>
         <div class="safepet-pkg-right">
-          <span class="safepet-pkg-price">$39.95</span>
-          <span class="safepet-pkg-compare">Normally $79.95</span>
-          <span class="safepet-pkg-unit-badge">SAVE 50%</span>
+          <span class="safepet-pkg-price safepet-price-free">FREE</span>
+          <span class="safepet-pkg-compare">Normally $29.95</span>
         </div>
       </div>
     </label>
 
-    <!-- TIER 2: 2 Seat Covers (Default Selected) -->
+    <!-- TIER 2: 2 Seat Belts -->
     <input 
       type="radio" 
       id="safepet-tier-2-{{ section.id }}" 
       name="safepet_variant_tier" 
       value="2"
-      checked
-      data-variant-id="{% if product.variants.size > 1 %}{{ v1.id }}{% else %}{{ v0.id }}{% endif %}"
-      data-quantity="{% if product.variants.size > 1 %}1{% else %}2{% endif %}"
-      data-price="$59.95"
-      data-compare="$159.90"
-      data-save="SAVE 60%"
-      data-variant-img="{{ 'car-seat-cover-why-choose.jpg' | asset_url }}"
+      data-variant-id="{{ v1_id }}"
+      data-quantity="1"
+      data-price="17.95"
+      data-variant-img="{% if product.variants[1].image != blank %}{{ product.variants[1].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
       style="display: none;"
     >
-    <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-2-{{ section.id }}">
-      <span class="safepet-pkg-badge safepet-badge-orange">🔥 MOST POPULAR • SAVE 60%</span>
+    <label class="safepet-pkg-card" for="safepet-tier-2-{{ section.id }}">
+      <!-- Top Badge -->
+      <span class="safepet-pkg-badge safepet-badge-orange">MOST ORDERED</span>
+      
       <div class="safepet-pkg-main-row">
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">2 Rear Seat Covers — 2-Car Family Pack</span>
-            <span class="safepet-pkg-subtitle">Equip both family cars • Only $29.97/each</span>
+            <span class="safepet-pkg-title">2 Seat Belts — Double Safety</span>
+            <span class="safepet-pkg-subtitle">Keep both family cars equipped</span>
           </div>
         </div>
         <div class="safepet-pkg-right">
-          <span class="safepet-pkg-price">$59.95</span>
-          <span class="safepet-pkg-compare">Normally $159.90</span>
-          <span class="safepet-pkg-unit-badge">$29.97/each</span>
+          <span class="safepet-pkg-price">$17.95</span>
+          <span class="safepet-pkg-unit-badge">$8.97/each</span>
         </div>
       </div>
     </label>
 
-    <!-- TIER 3: 3 Seat Covers -->
+    <!-- TIER 3: 3 Seat Belts (Default Selected) -->
     <input 
       type="radio" 
       id="safepet-tier-3-{{ section.id }}" 
       name="safepet_variant_tier" 
-      value="3"
-      data-variant-id="{% if product.variants.size > 2 %}{{ v2.id }}{% else %}{{ v0.id }}{% endif %}"
-      data-quantity="{% if product.variants.size > 2 %}1{% else %}3{% endif %}"
-      data-price="$79.95"
-      data-compare="$239.85"
-      data-save="SAVE 67%"
-      data-variant-img="{{ 'car-seat-cover-coverage-cars.jpg' | asset_url }}"
+      value="3" 
+      checked
+      data-variant-id="{{ v2_id }}"
+      data-quantity="1"
+      data-price="24.95"
+      data-variant-img="{% if product.variants[2].image != blank %}{{ product.variants[2].image | image_url: width: 1200 }}{% elsif product.featured_image != blank %}{{ product.featured_image | image_url: width: 1200 }}{% endif %}"
       style="display: none;"
     >
-    <label class="safepet-pkg-card" for="safepet-tier-3-{{ section.id }}">
-      <span class="safepet-pkg-badge safepet-badge-red">⭐ BEST VALUE + FREE $29 E-BOOK</span>
+    <label class="safepet-pkg-card safepet-pkg-featured" for="safepet-tier-3-{{ section.id }}">
+      <!-- Top Badge -->
+      <span class="safepet-pkg-badge safepet-badge-red">🔥 BEST VALUE + FREE $29 E-BOOK</span>
+      
       <div class="safepet-pkg-main-row">
         <div class="safepet-pkg-left">
           <div class="safepet-pkg-radio-circle"></div>
           <div class="safepet-pkg-info">
-            <span class="safepet-pkg-title">3 Rear Seat Covers — Ultimate Travel Pack</span>
-            <span class="safepet-pkg-subtitle">Family Cars + SUV/Truck + FREE "The Calm Car Rider" E-Book</span>
+            <span class="safepet-pkg-title">3 Seat Belts + Free E-Book</span>
+            <span class="safepet-pkg-subtitle">Full Protection + "The Calm Car Rider" E-Book ($29 Value)</span>
           </div>
         </div>
         <div class="safepet-pkg-right">
-          <span class="safepet-pkg-price">$79.95</span>
-          <span class="safepet-pkg-compare">Normally $239.85</span>
-          <span class="safepet-pkg-unit-badge">$26.65/each</span>
+          <span class="safepet-pkg-price">$24.95</span>
+          <span class="safepet-pkg-unit-badge">$8.31/each</span>
         </div>
       </div>
     </label>
@@ -1188,9 +980,220 @@
   </div>
 </div>
 
+<style>
+  .safepet-variant-selector-wrapper {
+    width: 100%;
+    margin: 1.5rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .safepet-selector-heading {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 1rem 0;
+    text-align: left;
+  }
+
+  .safepet-packages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  /* Package Card Base */
+  .safepet-pkg-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 2px solid #e5e7eb;
+    background-color: #fbfbfd;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    user-select: none;
+  }
+
+  .safepet-pkg-card:hover {
+    border-color: #cbd5e1;
+    background-color: #fafafc;
+  }
+
+  .safepet-pkg-main-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .safepet-pkg-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Radio Circle Indicator */
+  .safepet-pkg-radio-circle {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #94a3b8;
+    border-radius: 50%;
+    background-color: #ffffff;
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color 0.15s ease;
+  }
+
+  .safepet-pkg-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .safepet-pkg-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1f2937;
+    line-height: 1.2;
+    transition: color 0.15s ease;
+  }
+
+  .safepet-pkg-subtitle {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.3;
+  }
+
+  .safepet-pkg-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .safepet-pkg-price {
+    font-size: 14px;
+    font-weight: 900;
+    color: #111827;
+    line-height: 1;
+  }
+
+  .safepet-price-free {
+    color: #e53935;
+  }
+
+  .safepet-pkg-compare {
+    font-size: 11px;
+    text-decoration: line-through;
+    color: #9ca3af;
+  }
+
+  /* Green Unit Price Badge */
+  .safepet-pkg-unit-badge {
+    font-size: 11px;
+    font-weight: 700;
+    color: #16a34a;
+    background-color: #e8f5e9;
+    padding: 2px 6px;
+    border-radius: 9999px;
+  }
+
+  /* SELECTED CARD STATES */
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card {
+    border: 2px solid #e53935 !important;
+    background-color: #fff5f5 !important; /* Soft red tint */
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.08);
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle {
+    border-color: #e53935;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-radio-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e53935;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-card .safepet-pkg-title {
+    color: #e53935;
+  }
+
+  /* Badges positioning */
+  .safepet-pkg-badge {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    z-index: 3;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .safepet-badge-orange {
+    background-color: #d97706; /* Muted Gold / Orange */
+  }
+
+  .safepet-badge-red {
+    background-color: #dc2626; /* Vibrant Red */
+  }
+
+  /* Card 3: Featured Yellow Card styling */
+  .safepet-pkg-featured {
+    background-color: #fffdf0;
+    border: 2px solid #fef08a;
+  }
+
+  .safepet-pkg-featured:hover {
+    background-color: #fffdeb;
+    border-color: #fde047;
+  }
+
+  input[name="safepet_variant_tier"]:checked + .safepet-pkg-featured {
+    background-color: #ffffdd !important; /* Brighter yellow when selected */
+    border: 2px solid #e53935 !important;
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.1);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 480px) {
+    .safepet-pkg-card {
+      padding: 12px 14px;
+    }
+    .safepet-pkg-title {
+      font-size: 13px;
+    }
+    .safepet-pkg-subtitle {
+      font-size: 11px;
+    }
+    .safepet-pkg-price {
+      font-size: 13px;
+    }
+    .safepet-pkg-radio-circle {
+      width: 18px;
+      height: 18px;
+    }
+  }
+</style>
+
 <script>
   (function() {
-    function initCarSeatSelector() {
+    function initVariantSelector() {
       var container = document.getElementById('safepet-variant-selector-{{ section.id }}');
       if (!container) return;
 
@@ -1198,15 +1201,12 @@
       
       function updateForm(radio) {
         var variantId = radio.getAttribute('data-variant-id');
-        var quantity = radio.getAttribute('data-quantity') || '1';
-        var price = radio.getAttribute('data-price');
-        var compare = radio.getAttribute('data-compare');
-        var save = radio.getAttribute('data-save');
-
+        var quantity = radio.getAttribute('data-quantity');
+        
         var form = radio.closest('form') || document.querySelector('form[action*="/cart/add"]');
         if (form) {
           var variantInput = form.querySelector('input[name="id"]');
-          if (variantInput && variantId) {
+          if (variantInput && variantId && variantId !== '') {
             variantInput.value = variantId;
           }
           var quantityInput = form.querySelector('input[name="quantity"]');
@@ -1215,21 +1215,33 @@
           }
         }
 
-        // Update hero pricing displays
-        var salePriceEl = document.querySelector('.kls-hero-price-sale');
-        var origPriceEl = document.querySelector('.kls-hero-price-original');
-        var savePillEl = document.querySelector('.kls-hero-save-pill');
-
-        if (salePriceEl && price) salePriceEl.textContent = price;
-        if (origPriceEl && compare) origPriceEl.textContent = compare;
-        if (savePillEl && save) savePillEl.textContent = save;
-
-        // Switch main image if variant image provided
         var variantImg = radio.getAttribute('data-variant-img');
         var heroImg = document.querySelector('.kls-hero-image img.kls-gallery-img') || document.querySelector('.kls-hero-image img');
-        if (heroImg && variantImg) {
+        if (heroImg && variantImg && variantImg !== '') {
           heroImg.src = variantImg;
-          heroImg.removeAttribute('srcset');
+          heroImg.srcset = variantImg;
+        }
+
+        // Update landing page pricing texts
+        var salePriceText = document.querySelector('.kls-hero-price-sale');
+        var originalPriceText = document.querySelector('.kls-hero-price-original');
+        var savePillText = document.querySelector('.kls-hero-save-pill');
+
+        if (salePriceText) {
+          var tier = radio.value;
+          if (tier === '1') {
+            salePriceText.textContent = 'FREE';
+            if (originalPriceText) originalPriceText.textContent = '$29.95';
+            if (savePillText) savePillText.textContent = 'SAVE 100%';
+          } else if (tier === '2') {
+            salePriceText.textContent = '$17.95';
+            if (originalPriceText) originalPriceText.textContent = '$60.00';
+            if (savePillText) savePillText.textContent = 'SAVE 70%';
+          } else if (tier === '3') {
+            salePriceText.textContent = '$24.95';
+            if (originalPriceText) originalPriceText.textContent = '$120.00';
+            if (savePillText) savePillText.textContent = 'SAVE 80%';
+          }
         }
       }
 
@@ -1241,24 +1253,12 @@
           updateForm(radio);
         }
       });
-
-      // Guide trigger
-      var trigger = document.getElementById('safepetCarSeatGuideTrigger-{{ section.id }}');
-      if (trigger) {
-        trigger.addEventListener('click', function(e) {
-          e.preventDefault();
-          var gallery = document.querySelector('.kls-hero-gallery') || document.querySelector('.kls-hero-image');
-          if (gallery) {
-            gallery.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        });
-      }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initCarSeatSelector);
+      document.addEventListener('DOMContentLoaded', initVariantSelector);
     } else {
-      initCarSeatSelector();
+      initVariantSelector();
     }
   })();
 </script>
