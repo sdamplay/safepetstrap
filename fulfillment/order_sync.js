@@ -26,6 +26,45 @@ function parsePhone(rawPhone, countryCode = 'US') {
   return { phoneCountry, mobileNo: digits };
 }
 
+function normalizeCity(rawCity, zip = '', province = '') {
+  let city = (rawCity || '').trim();
+  const cleanZip = String(zip || '').trim().slice(0, 5);
+
+  // Specific ZIP/abbreviation mapping for known problem locations
+  const zipCityMap = {
+    '98584': 'Shelton' // Skok / Skokomish reservation -> Shelton, WA
+  };
+
+  if (zipCityMap[cleanZip]) {
+    return zipCityMap[cleanZip];
+  }
+
+  // Exact / word boundary abbreviation expansions
+  const cityReplacements = [
+    { regex: /\bSpokane\s*Vly\b/i, replace: 'Spokane Valley' },
+    { regex: /^Skok$/i, replace: 'Shelton' },
+    { regex: /\bNYC\b/i, replace: 'New York' },
+    { regex: /^N\.Y\.C\.?$/i, replace: 'New York' },
+    { regex: /^L\.?A\.?$/i, replace: 'Los Angeles' },
+    { regex: /\bSt\.?\s+/gi, replace: 'Saint ' },
+    { regex: /\bFt\.?\s+/gi, replace: 'Fort ' },
+    { regex: /\bMt\.?\s+/gi, replace: 'Mount ' },
+    { regex: /\bVly\b/gi, replace: 'Valley' },
+    { regex: /\bHts\b/gi, replace: 'Heights' },
+    { regex: /\bTwp\b/gi, replace: 'Township' },
+    { regex: /\bBch\b/gi, replace: 'Beach' },
+    { regex: /\bSpgs\b/gi, replace: 'Springs' }
+  ];
+
+  for (const { regex, replace } of cityReplacements) {
+    if (regex.test(city)) {
+      city = city.replace(regex, replace).trim();
+    }
+  }
+
+  return city;
+}
+
 const fs = require('fs');
 const path = require('path');
 const CATALOG_PATH = path.join(__dirname, 'catalog.json');
@@ -260,12 +299,14 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
   const countryCode = shipping.country_code || 'US';
   const { phoneCountry, mobileNo } = parsePhone(shipping.phone || order.phone, countryCode);
 
+  const sanitizedCity = normalizeCity(shipping.city, shipping.zip, shipping.province || shipping.province_code);
+
   const logisticsAddress = {
     contact_person: shipping.name || `${shipping.first_name || ''} ${shipping.last_name || ''}`.trim(),
     full_name: shipping.name || `${shipping.first_name || ''} ${shipping.last_name || ''}`.trim(),
     address: shipping.address1,
     address2: shipping.address2 || '',
-    city: shipping.city,
+    city: sanitizedCity,
     province: shipping.province || shipping.province_code || '',
     zip: shipping.zip,
     country: countryCode,
