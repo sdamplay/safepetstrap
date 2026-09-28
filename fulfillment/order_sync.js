@@ -159,7 +159,17 @@ function resolveProductItem(item) {
     aliProductId = '2255800752212310';
     skuAttr = '';
   }
-  // 5. Seat Belt & Bundles
+  // 5. Car Seat Cover (Shopify Product ID: 10304202506470 -> AliExpress Product ID: 3256812546492770)
+  else if (String(item.product_id) === '10304202506470' || titleLower.includes('seat cover') || titleLower.includes('car-cover') || titleLower.includes('rear-seat-cover')) {
+    aliProductId = config.aliexpress.products?.carSeatCover || '3256812546492770';
+    skuAttr = '14:193#black';
+    if (vTitle.includes('2 REAR') || vTitle.includes('2 SEAT') || vTitle.includes('2-CAR') || titleLower.includes('2 rear seat cover')) {
+      multiplier = 2;
+    } else if (vTitle.includes('3 REAR') || vTitle.includes('3 SEAT') || vTitle.includes('3-PACK') || vTitle.includes('ULTIMATE') || titleLower.includes('3 rear seat cover')) {
+      multiplier = 3;
+    }
+  }
+  // 6. Seat Belt & Bundles
   else if (titleLower.includes('seat belt') || sku.startsWith('SPS-')) {
     aliProductId = '3256811984485167';
     skuAttr = '5:361386;14:193'; // Black M

@@ -46,7 +46,8 @@ module.exports = {
       harness: process.env.ALI_PRODUCT_ID_HARNESS || '3256806663780528',
       sticker: process.env.ALI_PRODUCT_ID_STICKER || '2255800752212310',
       tag: process.env.ALI_PRODUCT_ID_TAG || '3256808705434116',
-      gps: process.env.ALI_PRODUCT_ID_GPS || '3256805685101130'
+      gps: process.env.ALI_PRODUCT_ID_GPS || '3256805685101130',
+      carSeatCover: process.env.ALI_PRODUCT_ID_CAR_SEAT_COVER || '3256812546492770'
     },
     defaultPhone: process.env.DEFAULT_FALLBACK_PHONE || '18005550199',
     gateways: {

@@ -289,5 +289,24 @@
         "attr": "Color: PURPLE"
       }
     ]
+  },
+  "Car Seat Cover": {
+    "product_id": "3256812546492770",
+    "shopify_product_id": "10304202506470",
+    "keywords": [
+      "car seat cover",
+      "seat cover",
+      "rear car seat cover",
+      "all-weather rear car seat cover"
+    ],
+    "title": "Waterproof Dog Car Seat Cover for Back Seat, Non-Slip Pet Hammock with Zippered Center Armrest Opening",
+    "skus": [
+      {
+        "sku_id": "12000059181219575",
+        "sku_attr": "14:193#black",
+        "price": "13.10",
+        "attr": "Color: black"
+      }
+    ]
   }
 }
