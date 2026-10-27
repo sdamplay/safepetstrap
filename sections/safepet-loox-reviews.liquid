@@ -667,6 +667,78 @@
     flex-grow: 1;
   }
 
+  /* Loox AI Animated Review Highlights ("main-text highlighted-text is-animated") */
+  @keyframes highlight-sweep {
+    from { background-position: 100% 0; }
+    to   { background-position:   0% 0; }
+  }
+
+  mark.invisible-marker {
+    background-color: transparent;
+    color: inherit;
+    font-weight: inherit;
+    font-style: normal;
+    text-decoration: none;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .highlighted-text {
+    position: relative;
+    font-weight: 700; 
+    font-style: normal; 
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin: 0 -2px;
+    white-space: pre-line;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .highlighted-text.is-animated {
+    background-image: 
+      linear-gradient(90deg, #091218 50%, #000000 50%),
+      linear-gradient(90deg, #FFF2D3 50%, #FFFFFF 50%);
+    background-repeat: no-repeat, no-repeat;
+    background-position: 100% 0, 100% 0;
+    background-size: 200% 100%, 200% 100%;
+    -webkit-background-clip: text, padding-box;
+    background-clip: text, padding-box;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: highlight-sweep 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  @supports (-moz-appearance: none) {
+    .highlighted-text.is-animated {
+      color: #0f172a;
+      -webkit-text-fill-color: #0f172a;
+      background-image: linear-gradient(90deg, #FFF2D3 50%, #FFFFFF 50%);
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      animation: highlight-sweep 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+    }
+  }
+
+  .highlighted-text-static { 
+    color: #091218; 
+    font-weight: 700; 
+    font-style: normal; 
+    text-decoration: none;
+    border-radius: 3px;
+    background-color: #FFF2D3;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    white-space: pre-line;
+    padding: 1px 5px;
+  }
+
+
   .safepet-card-footer {
     display: flex;
     justify-content: space-between;
@@ -1382,7 +1454,7 @@
         <h3 class="safepet-card-headline">"Spun on black ice into a concrete median and a semi. This strap saved his life."</h3>
         
         <p class="safepet-card-body">
-          On 2/8 my service dog Kona and I were in a horrific winter accident. We hit black ice on the highway at 50 mph, spun violently into a concrete median, bounced off a semi-truck, and smashed back into the barrier. My car was completely totaled. I was wearing my seatbelt and had Kona secured with the SafePet Strap clipped to his crash harness. Thanks to the bungee damper absorbing the kinetic impact, he was NOT ejected through the window and walked away with only a small paw bruise. The state trooper and my vet both said this strap kept him inside the survival cell. I owe everything to this strap.
+          On 2/8 my service dog Kona and I were in a horrific winter accident. We hit black ice on the highway at 50 mph, spun violently into a concrete median, bounced off a semi-truck, and smashed back into the barrier. My car was completely totaled. I was wearing my seatbelt and had Kona secured with the SafePet Strap clipped to his crash harness. <mark class="main-text highlighted-text invisible-marker">Thanks to the bungee damper absorbing the kinetic impact, he was NOT ejected through the window and walked away with only a small paw bruise.</mark> The state trooper and my vet both said this strap kept him inside the survival cell. I owe everything to this strap.
         </p>
 
         <div class="safepet-card-footer">
@@ -1427,7 +1499,7 @@
         <h3 class="safepet-card-headline">"He lunged out the window at 50 mph after a motorcycle. The strap caught him instantly."</h3>
         
         <p class="safepet-card-body">
-          This strap literally saved my rescue dog's life. I was cruising at 50 mph with Scruffy in the passenger seat wearing his doggles and sniffing the breeze. Suddenly a loud Harley zoomed past us—I had no idea he had an intense phobia of motorcycles. He lunged headfirst straight out the window! My heart stopped, but the SafePet Strap locked tight and caught him instantly, holding him safely inside the door frame. Without this buckled to his harness, he would have hit the asphalt at highway speed. Best peace-of-mind purchase I will ever make.
+          <mark class="main-text highlighted-text invisible-marker">This strap literally saved my rescue dog's life.</mark> I was cruising at 50 mph with Scruffy in the passenger seat wearing his doggles and sniffing the breeze. Suddenly a loud Harley zoomed past us—I had no idea he had an intense phobia of motorcycles. He lunged headfirst straight out the window! My heart stopped, but the SafePet Strap locked tight and caught him instantly, holding him safely inside the door frame. Without this buckled to his harness, he would have hit the asphalt at highway speed. Best peace-of-mind purchase I will ever make.
         </p>
 
         <div class="safepet-card-footer">
@@ -1472,7 +1544,7 @@
         <h3 class="safepet-card-headline">"Full windows down, zero tangles, and our pups love standing up for the breeze!"</h3>
         
         <p class="safepet-card-body">
-          Just received these and immediately took both our babies (Maltipoo and Cavapoo) on a weekend road trip. The metal buckle snapped into the seat belt receiver with a satisfying, snug click. What amazed us most is the 360 swivel snap—our dogs constantly switch positions to look out opposite windows, and regular leashes always got them tangled like pretzels. With SafePet, the strap swivels freely and the accordion bungee lets them stand comfortably with their ears flapping in the wind without any danger of jumping. Ready for cross-country road tripping!
+          Just received these and immediately took both our babies (Maltipoo and Cavapoo) on a weekend road trip. The metal buckle snapped into the seat belt receiver with a satisfying, snug click. <mark class="main-text highlighted-text invisible-marker">What amazed us most is the 360 swivel snap—our dogs constantly switch positions to look out opposite windows, and regular leashes always got them tangled like pretzels.</mark> With SafePet, the strap swivels freely and the accordion bungee lets them stand comfortably with their ears flapping in the wind without any danger of jumping. Ready for cross-country road tripping!
         </p>
 
         <div class="safepet-card-footer">
@@ -1517,7 +1589,7 @@
         <h3 class="safepet-card-headline">"The only safe solution for an 8lb Pomeranian who insists on front-seat views."</h3>
         
         <p class="safepet-card-body">
-          Bella is tiny (only 8 pounds) but she has huge FOMO and refuses to sit quietly unless she can see out the window. My old setup was terrifying because every time I tapped the brakes, she would tumble onto the floorboard or try to scramble into my lap while steering. The SafePet Strap adjusted down to the exact right length: she can stand on her hind legs on the passenger seat looking outside, but she cannot reach my steering wheel or fall forward if I stop abruptly. The lightweight zinc snap is gentle on her small harness.
+          Bella is tiny (only 8 pounds) but she has huge FOMO and refuses to sit quietly unless she can see out the window. My old setup was terrifying because every time I tapped the brakes, she would tumble onto the floorboard or try to scramble into my lap while steering. <mark class="main-text highlighted-text invisible-marker">The SafePet Strap adjusted down to the exact right length: she can stand on her hind legs on the passenger seat looking outside, but she cannot reach my steering wheel or fall forward if I stop abruptly.</mark> The lightweight zinc snap is gentle on her small harness.
         </p>
 
         <div class="safepet-card-footer">
@@ -1562,7 +1634,7 @@
         <h3 class="safepet-card-headline">"Bandit no longer tries to leap into the front seat or distract me while driving!"</h3>
         
         <p class="safepet-card-body">
-          Bandit used to think he was the co-pilot and would constantly launch himself from the backseat onto the center console, blocking my gear shifter and whining. We clipped this into the backseat seatbelt receptacle and attached it to his existing walking harness. Instant transformation! He settled down within 3 minutes because he felt grounded. He can sit, curl up on his blanket, or sit tall to watch traffic, but the boundary is set. Arrived fast in 3 days with standard postage.
+          Bandit used to think he was the co-pilot and would constantly launch himself from the backseat onto the center console, blocking my gear shifter and whining. We clipped this into the backseat seatbelt receptacle and attached it to his existing walking harness. Instant transformation! <mark class="main-text highlighted-text invisible-marker">He settled down within 3 minutes because he felt grounded.</mark> He can sit, curl up on his blanket, or sit tall to watch traffic, but the boundary is set. Arrived fast in 3 days with standard postage.
         </p>
 
         <div class="safepet-card-footer">
@@ -1607,7 +1679,7 @@
         <h3 class="safepet-card-headline">"Diesel is 65 lbs of pure muscle—this strap holds strong with zero strain."</h3>
         
         <p class="safepet-card-body">
-          Finding heavy-duty gear for a powerful bully breed is tough. Cheap leashes snap at the clips. The SafePet strap has thick rip-resistant military nylon webbing and a reinforced metal buckle latch that clicks directly into my Ram truck buckle just like human seatbelts. Diesel loves riding shotgun, and the elastic bungee absorbs all the forward inertia when stopping at red lights so his chest doesn't get bruised. He is happy, secure, and I can drive with both hands on the wheel.
+          Finding heavy-duty gear for a powerful bully breed is tough. Cheap leashes snap at the clips. <mark class="main-text highlighted-text invisible-marker">The SafePet strap has thick rip-resistant military nylon webbing and a reinforced metal buckle latch that clicks directly into my Ram truck buckle just like human seatbelts.</mark> Diesel loves riding shotgun, and the elastic bungee absorbs all the forward inertia when stopping at red lights so his chest doesn't get bruised. He is happy, secure, and I can drive with both hands on the wheel.
         </p>
 
         <div class="safepet-card-footer">
@@ -1652,7 +1724,7 @@
         <h3 class="safepet-card-headline">"The built-in bungee acts as an instant shock absorber. Having one in each car is essential."</h3>
         
         <p class="safepet-card-body">
-          I love how thoughtful the engineering is. The elastic bungee section acts like a progressive shock absorber—if you have to slam the brakes on the highway, it dampens the sudden jerk instead of jarring your dog's spine like rigid leashes do. We bought the 2-pack so we never have to swap belts between my Subaru and my wife's CR-V. Bailey hops in, we hear the solid *click*, and we're on our way. A must-have for any responsible dog owner.
+          I love how thoughtful the engineering is. <mark class="main-text highlighted-text invisible-marker">The elastic bungee section acts like a progressive shock absorber—if you have to slam the brakes on the highway, it dampens the sudden jerk instead of jarring your dog's spine like rigid leashes do.</mark> We bought the 2-pack so we never have to swap belts between my Subaru and my wife's CR-V. Bailey hops in, we hear the solid *click*, and we're on our way. A must-have for any responsible dog owner.
         </p>
 
         <div class="safepet-card-footer">
@@ -1697,7 +1769,7 @@
         <h3 class="safepet-card-headline">"Keeps my 120lb Mastiff and pup safely in the back seat instead of crushing my lap!"</h3>
         
         <p class="safepet-card-body">
-          When you have a 120lb English Mastiff and a spirited young pitbull in the back of a truck cab, you CANNOT have them wandering around while navigating mountain roads. Before SafePet, my mastiff would literally lean his entire upper body onto my shoulder while driving. Now both dogs have their own dedicated tether clipped to the bench seatbelts. They look out the rear window happily and I can actually focus on the road. The latch is rock solid steel.
+          When you have a 120lb English Mastiff and a spirited young pitbull in the back of a truck cab, you CANNOT have them wandering around while navigating mountain roads. Before SafePet, my mastiff would literally lean his entire upper body onto my shoulder while driving. <mark class="main-text highlighted-text invisible-marker">Now both dogs have their own dedicated tether clipped to the bench seatbelts.</mark> They look out the rear window happily and I can actually focus on the road. The latch is rock solid steel.
         </p>
 
         <div class="safepet-card-footer">
@@ -1742,7 +1814,7 @@
         <h3 class="safepet-card-headline">"Winston used to slide across the leather seats on every turn. Now he sits calm!"</h3>
         
         <p class="safepet-card-body">
-          Frenchies have compact bodies and low centers of gravity, so Winston was always sliding across my leather backseats during turns. Paired with our backseat cover and his harness, this strap keeps him comfortably centered in his spot. He doesn't get anxious or pant heavily anymore because he feels anchored. High quality swivel prevents the strap from twisting up when he shifts around. Love this product!
+          Frenchies have compact bodies and low centers of gravity, so Winston was always sliding across my leather backseats during turns. <mark class="main-text highlighted-text invisible-marker">Paired with our backseat cover and his harness, this strap keeps him comfortably centered in his spot.</mark> He doesn't get anxious or pant heavily anymore because he feels anchored. High quality swivel prevents the strap from twisting up when he shifts around. Love this product!
         </p>
 
         <div class="safepet-card-footer">
@@ -1787,7 +1859,7 @@
         <h3 class="safepet-card-headline">"Works flawlessly in my 2012 Jeep Wrangler. He sleeps like a baby on trails."</h3>
         
         <p class="safepet-card-body">
-          Easy to click into the car seat buckle, easy to adjust length, and the bungee is high quality. I drive a 2012 Jeep Wrangler and was worried about buckle compatibility since Jeep latches can sometimes be picky—this clicked in perfectly on the first try. As you can see in the photo, Copper curled up and fell fast asleep in the back seat hammock while we drove through mountain roads. Looks and functions exactly as described.
+          Easy to click into the car seat buckle, easy to adjust length, and the bungee is high quality. I drive a 2012 Jeep Wrangler and was worried about buckle compatibility since Jeep latches can sometimes be picky—this clicked in perfectly on the first try. As you can see in the photo, <mark class="main-text highlighted-text invisible-marker">Copper curled up and fell fast asleep in the back seat hammock while we drove through mountain roads.</mark> Looks and functions exactly as described.
         </p>
 
         <div class="safepet-card-footer">
@@ -1832,7 +1904,7 @@
         <h3 class="safepet-card-headline">"Cross-country road trip with our 10-year-old Samoyed—total peace of mind!"</h3>
         
         <p class="safepet-card-body">
-          We just finished an 1,800-mile road trip across 4 states with our Samoyed. I bought one originally to test the quality, and after seeing how durable the stitching was, I ordered another couple for our second vehicle. The buckle clicks in tight without rattling, and the elastic damper lets Ghost stand up at gas stations without choking. Very satisfied with the build quality and prompt delivery.
+          We just finished an 1,800-mile road trip across 4 states with our Samoyed. I bought one originally to test the quality, and after seeing how durable the stitching was, I ordered another couple for our second vehicle. <mark class="main-text highlighted-text invisible-marker">The buckle clicks in tight without rattling, and the elastic damper lets Ghost stand up at gas stations without choking.</mark> Very satisfied with the build quality and prompt delivery.
         </p>
 
         <div class="safepet-card-footer">
@@ -1877,7 +1949,7 @@
         <h3 class="safepet-card-headline">"Lightweight enough for my senior 9lb pup without weighing down his harness."</h3>
         
         <p class="safepet-card-body">
-          Barnaby is my senior best friend and requires extra gentle care in the car. Heavy duty leashes often have heavy iron clips that pull down awkwardly on his neck. The zinc alloy snap on SafePet is strong yet pleasantly lightweight, so he barely notices it clipped to his harness. He stays safely in his padded seat booster without any risk of tumbling. Worth every penny for our vet visits.
+          Barnaby is my senior best friend and requires extra gentle care in the car. Heavy duty leashes often have heavy iron clips that pull down awkwardly on his neck. <mark class="main-text highlighted-text invisible-marker">The zinc alloy snap on SafePet is strong yet pleasantly lightweight, so he barely notices it clipped to his harness.</mark> He stays safely in his padded seat booster without any risk of tumbling. Worth every penny for our vet visits.
         </p>
 
         <div class="safepet-card-footer">
@@ -1922,7 +1994,7 @@
         <h3 class="safepet-card-headline">"Snapped right into our Honda seat belt buckle with zero fuss or sticking."</h3>
         
         <p class="safepet-card-body">
-          Here is a close-up photo of the latch clicked into our seat buckle. It operates with the same red release button as a standard human seatbelt. Very smooth, easy to adjust the length, and the bungee is thick. I feel a hundred times safer bringing my girl for rides now instead of worrying about sudden highway stops. Highly recommend to all dog parents!
+          Here is a close-up photo of the latch clicked into our seat buckle. It operates with the same red release button as a standard human seatbelt. Very smooth, easy to adjust the length, and the bungee is thick. <mark class="main-text highlighted-text invisible-marker">I feel a hundred times safer bringing my girl for rides now instead of worrying about sudden highway stops.</mark> Highly recommend to all dog parents!
         </p>
 
         <div class="safepet-card-footer">
@@ -1967,7 +2039,7 @@
         <h3 class="safepet-card-headline">"Keeps my young puppy secure on the passenger seat without falling forward!"</h3>
         
         <p class="safepet-card-body">
-          Mocha is only 4 months old and loves curling up on his blanket in the front passenger seat. Previously, even a gentle brake at 25 mph would send him sliding forward into the dashboard. With this strap adjusted to his harness, he is gently restrained so he can nap peacefully while I drive. The bungee has just enough give to be comfortable without being too loose. Will definitely order more as he grows!
+          Mocha is only 4 months old and loves curling up on his blanket in the front passenger seat. Previously, even a gentle brake at 25 mph would send him sliding forward into the dashboard. <mark class="main-text highlighted-text invisible-marker">With this strap adjusted to his harness, he is gently restrained so he can nap peacefully while I drive.</mark> The bungee has just enough give to be comfortable without being too loose. Will definitely order more as he grows!
         </p>
 
         <div class="safepet-card-footer">
@@ -2012,7 +2084,7 @@
         <h3 class="safepet-card-headline">"First time I felt 100% comfortable letting the back window down for her!"</h3>
         
         <p class="safepet-card-body">
-          Rosie is an active little girl who loves sniffing every scent in the air. For the first time ever, I feel completely comfortable rolling down the backseat windows so she can enjoy the fresh air. The strap keeps her securely bounded on the seat, preventing any chance of an accidental jump or fall. Easy to use and clips in seconds.
+          Rosie is an active little girl who loves sniffing every scent in the air. For the first time ever, I feel completely comfortable rolling down the backseat windows so she can enjoy the fresh air. <mark class="main-text highlighted-text invisible-marker">The strap keeps her securely bounded on the seat, preventing any chance of an accidental jump or fall.</mark> Easy to use and clips in seconds.
         </p>
 
         <div class="safepet-card-footer">
@@ -2057,7 +2129,7 @@
         <h3 class="safepet-card-headline">"Ordered the 2-pack for both cars—reflective stitching and buckles are top grade!"</h3>
         
         <p class="safepet-card-body">
-          Here are both straps laid out on our table right after opening the package. The reflective double stitching is bright, the bungee has strong tension, and the metal buckle feels very substantial. We plugged them into our Subaru buckles and they fit like a glove. Really glad we grabbed the multi-pack to keep both family vehicles protected.
+          Here are both straps laid out on our table right after opening the package. <mark class="main-text highlighted-text invisible-marker">The reflective double stitching is bright, the bungee has strong tension, and the metal buckle feels very substantial.</mark> We plugged them into our Subaru buckles and they fit like a glove. Really glad we grabbed the multi-pack to keep both family vehicles protected.
         </p>
 
         <div class="safepet-card-footer">
@@ -2102,7 +2174,7 @@
         <h3 class="safepet-card-headline">"Safely co-exists in the back seat right next to our toddler's car seat."</h3>
         
         <p class="safepet-card-body">
-          With a toddler in the car, I cannot have a rambunctious puppy climbing all over the car seat or knocking over bottles. SafePet holds our puppy safely and calmly in her designated half of the back bench. She can stand up and sit down easily, and the 360 swivel means she never gets twisted up. Essential safety gear for families with pets and kids!
+          With a toddler in the car, I cannot have a rambunctious puppy climbing all over the car seat or knocking over bottles. <mark class="main-text highlighted-text invisible-marker">SafePet holds our puppy safely and calmly in her designated half of the back bench.</mark> She can stand up and sit down easily, and the 360 swivel means she never gets twisted up. Essential safety gear for families with pets and kids!
         </p>
 
         <div class="safepet-card-footer">
@@ -2147,7 +2219,7 @@
         <h3 class="safepet-card-headline">"Gives just enough give to put his nose out the window without choking!"</h3>
         
         <p class="safepet-card-body">
-          Great product! Keeps our dogs contained to their seat yet lets them be free to put their noses out the window to catch the breeze. The accordion bungee has just a little bit of elastic give so they aren't being violently choked if you touch the brakes. Really enjoying our daily park rides knowing Otis is 100% safe.
+          Great product! Keeps our dogs contained to their seat yet lets them be free to put their noses out the window to catch the breeze. <mark class="main-text highlighted-text invisible-marker">The accordion bungee has just a little bit of elastic give so they aren't being violently choked if you touch the brakes.</mark> Really enjoying our daily park rides knowing Otis is 100% safe.
         </p>
 
         <div class="safepet-card-footer">
@@ -2192,7 +2264,7 @@
         <h3 class="safepet-card-headline">"Gives me total confidence traveling solo with Echo on long road trips."</h3>
         
         <p class="safepet-card-body">
-          Echo is a very alert dog and likes to sit upright on the back seat watching the road. With this tether attached to his harness, he stays squarely on his seat cover. It gives me enormous confidence knowing that in the event of an emergency swerve, he won't go airborne through the car. High quality craftsmanship and fast shipping.
+          Echo is a very alert dog and likes to sit upright on the back seat watching the road. With this tether attached to his harness, he stays squarely on his seat cover. <mark class="main-text highlighted-text invisible-marker">It gives me enormous confidence knowing that in the event of an emergency swerve, he won't go airborne through the car.</mark> High quality craftsmanship and fast shipping.
         </p>
 
         <div class="safepet-card-footer">
@@ -2237,7 +2309,7 @@
         <h3 class="safepet-card-headline">"Emma rides shotgun with me every morning—couldn't ask for better protection."</h3>
         
         <p class="safepet-card-body">
-          Emma is my 5-year-old lab and rides out to our farm with me every single morning. I love having this protection for her. It's super easy to click in, doesn't get jammed in the Cadillac buckle, and holds her steady when making turns. Cost was extremely reasonable on the free promotion. Ordering a second one for my husband's pickup.
+          Emma is my 5-year-old lab and rides out to our farm with me every single morning. I love having this protection for her. <mark class="main-text highlighted-text invisible-marker">It's super easy to click in, doesn't get jammed in the Cadillac buckle, and holds her steady when making turns.</mark> Cost was extremely reasonable on the free promotion. Ordering a second one for my husband's pickup.
         </p>
 
         <div class="safepet-card-footer">
@@ -2282,7 +2354,7 @@
         <h3 class="safepet-card-headline">"Enough flex to enjoy the window breeze, but remains securely fastened!"</h3>
         
         <p class="safepet-card-body">
-          This dog seat belt is AWESOME. Has enough flex so my buddy can move around and stick his head out the truck window to let his ears fly in the wind, but he remains securely fastened in place. Took this photo in my side mirror during our mountain drive. Sturdy hardware and durable nylon.
+          This dog seat belt is AWESOME. <mark class="main-text highlighted-text invisible-marker">Has enough flex so my buddy can move around and stick his head out the truck window to let his ears fly in the wind, but he remains securely fastened in place.</mark> Took this photo in my side mirror during our mountain drive. Sturdy hardware and durable nylon.
         </p>
 
         <div class="safepet-card-footer">
@@ -2327,7 +2399,7 @@
         <h3 class="safepet-card-headline">"Totally effortless installation. Just click it into the seat belt buckle!"</h3>
         
         <p class="safepet-card-body">
-          No complex mounting brackets, no tools, no hassle. You literally just click the metal tongue directly into your existing car seatbelt buckle and snap the swivel hook onto your pup's harness. Teddy sits quietly on his towel and doesn't slide or try to jump onto the dashboard anymore. 10/10 product.
+          No complex mounting brackets, no tools, no hassle. <mark class="main-text highlighted-text invisible-marker">You literally just click the metal tongue directly into your existing car seatbelt buckle and snap the swivel hook onto your pup's harness.</mark> Teddy sits quietly on his towel and doesn't slide or try to jump onto the dashboard anymore. 10/10 product.
         </p>
 
         <div class="safepet-card-footer">
@@ -2372,7 +2444,7 @@
         <h3 class="safepet-card-headline">"He was driving me crazy pacing back and forth. Total game changer!"</h3>
         
         <p class="safepet-card-body">
-          Rocky was driving me crazy going back and forth from the back seat to the front seat every time we stopped at a traffic light. Here is the belt showing the double reflective threading—great for late evening drives when opening the doors. Rocky stays safely in his back seat spot and I can drive with peace of mind.
+          Rocky was driving me crazy going back and forth from the back seat to the front seat every time we stopped at a traffic light. Here is the belt showing the double reflective threading—great for late evening drives when opening the doors. <mark class="main-text highlighted-text invisible-marker">Rocky stays safely in his back seat spot and I can drive with peace of mind.</mark>
         </p>
 
         <div class="safepet-card-footer">
@@ -2417,7 +2489,7 @@
         <h3 class="safepet-card-headline">"Heavy-duty metal hardware and super smooth 360 swivel clip."</h3>
         
         <p class="safepet-card-body">
-          Photo of the strap right out of the box. You can feel the quality immediately—the metal buckle is heavy and genuine steel, not cheap painted tin. The swivel clasp spins freely so leashes don't twist up. Excellent quality for the price.
+          Photo of the strap right out of the box. <mark class="main-text highlighted-text invisible-marker">You can feel the quality immediately—the metal buckle is heavy and genuine steel, not cheap painted tin.</mark> The swivel clasp spins freely so leashes don't twist up. Excellent quality for the price.
         </p>
 
         <div class="safepet-card-footer">
@@ -2462,7 +2534,7 @@
         <h3 class="safepet-card-headline">"I volunteer in rescue transport—this is mandatory equipment for every run."</h3>
         
         <p class="safepet-card-body">
-          I'm a volunteer rescue transporter and for dogs needing tethering rather than crating, this seat belt is ideal. No worry about a flight risk when opening car doors at rest stops, and I know they are comfortable riding. Here is the full strap extended on our table—the length adjustment is generous and locks tight.
+          I'm a volunteer rescue transporter and for dogs needing tethering rather than crating, this seat belt is ideal. <mark class="main-text highlighted-text invisible-marker">No worry about a flight risk when opening car doors at rest stops, and I know they are comfortable riding.</mark> Here is the full strap extended on our table—the length adjustment is generous and locks tight.
         </p>
 
         <div class="safepet-card-footer">
@@ -2507,7 +2579,7 @@
         <h3 class="safepet-card-headline">"Our pug Barnaby sits happily in his backseat hammock tethered with the blue strap!"</h3>
         
         <p class="safepet-card-body">
-          Look at this happy face! Barnaby loves riding in his hammock and the blue SafePet strap clicks right into the Mazda buckle. He has enough room to lay down or sit up and smile, and the bungee absorbs the bumps. Best safety upgrade we ever made for our little buddy.
+          Look at this happy face! Barnaby loves riding in his hammock and the blue SafePet strap clicks right into the Mazda buckle. <mark class="main-text highlighted-text invisible-marker">He has enough room to lay down or sit up and smile, and the bungee absorbs the bumps.</mark> Best safety upgrade we ever made for our little buddy.
         </p>
 
         <div class="safepet-card-footer">
@@ -2552,7 +2624,7 @@
         <h3 class="safepet-card-headline">"Tested the extension length in the front seat—keeps her safely off the dash!"</h3>
         
         <p class="safepet-card-body">
-          Because I drive a regular cab truck with no rear seats, Sadie has to ride in the front passenger seat. I tested the length it extends in the event of sudden braking. It adequately prevents her from hitting the dashboard or windshield, while still letting her sit comfortably. The bright red strap also looks great.
+          Because I drive a regular cab truck with no rear seats, Sadie has to ride in the front passenger seat. I tested the length it extends in the event of sudden braking. <mark class="main-text highlighted-text invisible-marker">It adequately prevents her from hitting the dashboard or windshield, while still letting her sit comfortably.</mark> The bright red strap also looks great.
         </p>
 
         <div class="safepet-card-footer">
@@ -2597,7 +2669,7 @@
         <h3 class="safepet-card-headline">"Arrived in 3 days. Vibrant royal blue color and military grade nylon!"</h3>
         
         <p class="safepet-card-body">
-          Photo of our royal blue strap right as it came out of the delivery envelope. The color is rich, stitching is tight, and the buckle clicked into my GMC with a crisp snap. Thank you for helping me keep my best friend safe in the car!
+          Photo of our royal blue strap right as it came out of the delivery envelope. <mark class="main-text highlighted-text invisible-marker">The color is rich, stitching is tight, and the buckle clicked into my GMC with a crisp snap.</mark> Thank you for helping me keep my best friend safe in the car!
         </p>
 
         <div class="safepet-card-footer">
@@ -2642,7 +2714,7 @@
         <h3 class="safepet-card-headline">"Ordered 5 for all our dogs—couldn't pass up the incredible promotional value!"</h3>
         
         <p class="safepet-card-body">
-          With 5 rescue dogs, outfitting everyone with safe vehicle restraints used to cost a fortune. SafePet made it accessible for our entire pack. The cyan blue strap is bright and the bungee action works like a charm. All 5 buckles click in cleanly across all rows of our Expedition.
+          With 5 rescue dogs, outfitting everyone with safe vehicle restraints used to cost a fortune. <mark class="main-text highlighted-text invisible-marker">SafePet made it accessible for our entire pack.</mark> The cyan blue strap is bright and the bungee action works like a charm. All 5 buckles click in cleanly across all rows of our Expedition.
         </p>
 
         <div class="safepet-card-footer">
@@ -2687,7 +2759,7 @@
         <h3 class="safepet-card-headline">"Solid steel buckle feels substantial in hand—no flimsy plastic or thin metal."</h3>
         
         <p class="safepet-card-body">
-          Close-up photo of the strap in my hand. You can see how sturdy the slide adjuster and solid steel buckle tongue are. It clipped into the car buckle immediately. Attaching it to her harness gives total protection during sudden highway maneuvers. Great overall!
+          Close-up photo of the strap in my hand. <mark class="main-text highlighted-text invisible-marker">You can see how sturdy the slide adjuster and solid steel buckle tongue are.</mark> It clipped into the car buckle immediately. Attaching it to her harness gives total protection during sudden highway maneuvers. Great overall!
         </p>
 
         <div class="safepet-card-footer">
@@ -2732,7 +2804,7 @@
         <h3 class="safepet-card-headline">"Bonnie loves her rides and we love not having to hold her collar at stops!"</h3>
         
         <p class="safepet-card-body">
-          Bonnie used to pace frantically whenever we approached stoplights. With the SafePet Strap, she knows she has her designated comfort zone and immediately curls up. The latch releases with one finger push when we reach the dog park. Flawless execution.
+          Bonnie used to pace frantically whenever we approached stoplights. <mark class="main-text highlighted-text invisible-marker">With the SafePet Strap, she knows she has her designated comfort zone and immediately curls up.</mark> The latch releases with one finger push when we reach the dog park. Flawless execution.
         </p>
 
         <div class="safepet-card-footer">
@@ -2777,7 +2849,7 @@
         <h3 class="safepet-card-headline">"Bungee element lets him shift positions comfortably while staying 100% secure."</h3>
         
         <p class="safepet-card-body">
-          I love how sturdy this seat belt is. The bungee element lets him stand up, look out the window, or stretch out on the seat, but never allows him to fall into the footwell when braking. Works well, looks premium, and gives us complete peace of mind.
+          I love how sturdy this seat belt is. <mark class="main-text highlighted-text invisible-marker">The bungee element lets him stand up, look out the window, or stretch out on the seat, but never allows him to fall into the footwell when braking.</mark> Works well, looks premium, and gives us complete peace of mind.
         </p>
 
         <div class="safepet-card-footer">
@@ -2950,6 +3022,7 @@
               card.classList.add('revealed');
             });
             updateProgress();
+            if (typeof window.safepetObserveHighlights === "function") { window.safepetObserveHighlights(); }
           }
         });
       }
@@ -3012,6 +3085,52 @@
           this.classList.add('voted');
         });
       });
+
+      // Loox AI Animated Highlights Observer ("main-text highlighted-text is-animated")
+      function initHighlightedTextObserver() {
+        var elements = section.querySelectorAll('.highlighted-text');
+        if (!elements.length) return;
+
+        if (!('IntersectionObserver' in window)) {
+          elements.forEach(function(el) {
+            el.classList.remove('invisible-marker');
+            el.classList.add('highlighted-text-static');
+          });
+          return;
+        }
+
+        var highlightObserver = new IntersectionObserver(function(entries, obs) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove('invisible-marker');
+              entry.target.classList.add('is-animated');
+              entry.target.dataset.animated = 'true';
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          root: null,
+          threshold: 0.15,
+          rootMargin: '0px 0px -5% 0px'
+        });
+
+        elements.forEach(function(el) {
+          if (el.dataset.animated !== 'true') {
+            highlightObserver.observe(el);
+          }
+        });
+
+        window.safepetObserveHighlights = function() {
+          var allEls = section.querySelectorAll('.highlighted-text');
+          allEls.forEach(function(el) {
+            if (el.dataset.animated !== 'true') {
+              highlightObserver.observe(el);
+            }
+          });
+        };
+      }
+
+      initHighlightedTextObserver();
 
       // LIGHTBOX MODAL
       function openLightbox(fullSrc, card) {
