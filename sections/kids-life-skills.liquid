@@ -442,7 +442,7 @@
                 {%- assign hero_image = product.featured_image -%}
               {%- endif -%}
               {%- if hero_image != blank -%}
-                {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: hero_image.alt | default: kls_hero_headline }}
+                {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', fetchpriority: 'high', class: 'kls-gallery-img', alt: hero_image.alt | default: kls_hero_headline }}
               {%- endif -%}
             {%- endif -%}
             {%- if product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' or template.name != 'product' -%}
@@ -947,6 +947,9 @@
     </div>
   </section>
 
+  {%- if is_seatbelt -%}
+    {%- render 'safepet-loox-reviews', section: section -%}
+  {%- else -%}
   <section class="kls-testimonials">
     <div class="kls-testimonials-inner">
       <h2 class="kls-testimonials-heading">{{ section.settings.testimonials_heading }}</h2>
@@ -1109,6 +1112,7 @@
       </div>
     </div>
   </section>
+  {%- endif -%}
 
   <section class="kls-stats">
     <div class="kls-stats-inner">

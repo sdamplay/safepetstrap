@@ -147,6 +147,8 @@
   .wld-kls-root .kls-grow-inner,
   .wld-kls-root .kls-stats-inner,
   .wld-kls-root .kls-comparison-inner { grid-template-columns: 1fr; gap: 0px; }
+  .wld-kls-root .kls-hero-thumbs,
+  .kls-hero-thumbs { display: none !important; }
   .wld-kls-root .kls-testimonials-grid { grid-template-columns: 1fr; }
   .wld-kls-root .kls-hero-headline { font-size: 32px; }
   .wld-kls-root .kls-hero-price-sale { font-size: 28px; }
@@ -159,7 +161,8 @@
 @media (max-width: 540px) {
   .wld-kls-root .kls-hero, .wld-kls-root .kls-faq, .wld-kls-root .kls-ready, .wld-kls-root .kls-grow, .wld-kls-root .kls-testimonials, .wld-kls-root .kls-stats, .wld-kls-root .kls-comparison, .wld-kls-root .kls-guarantee { padding: 48px 20px; }
   .wld-kls-root .kls-hero-headline { font-size: 28px; }
-  .wld-kls-root .kls-hero-thumb { width: 64px; height: 64px; }
+  .wld-kls-root .kls-hero-thumbs,
+  .kls-hero-thumbs { display: none !important; }
   .wld-kls-root .kls-hero-badge { font-size: 10px; padding: 4px 8px; }
   .wld-kls-root .kls-hero-badge-tl { top: 10px; left: 10px; }
   .wld-kls-root .kls-hero-badge-tr { top: 10px; right: 10px; }
