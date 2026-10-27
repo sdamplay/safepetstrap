@@ -1,18 +1,996 @@
+{%- assign section_id = section.id | default: "safepet-loox" -%}
+
+<style>
+  /* ==========================================================================
+     SafePet Strap™ — High-Converting Loox-Style Reviews Styles
+     ========================================================================== */
+  .safepet-loox-section {
+    padding: 70px 20px 90px;
+    background-color: #fafafa;
+    color: #0f172a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .safepet-loox-container {
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .safepet-loox-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 36px;
+  }
+
+  .safepet-loox-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .safepet-loox-dot {
+    width: 7px;
+    height: 7px;
+    background: #dc2626;
+    border-radius: 50%;
+    animation: safepetPulseDot 2s infinite ease-in-out;
+  }
+
+  @keyframes safepetPulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.6; }
+  }
+
+  .safepet-loox-title {
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1.18;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+  }
+
+  .safepet-loox-subtitle {
+    font-size: clamp(14px, 1.8vw, 17px);
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Summary Card */
+  .safepet-loox-summary-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 240px 1fr 260px;
+    gap: 32px;
+    align-items: center;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+    margin-bottom: 40px;
+  }
+
+  .safepet-loox-score-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid #f1f5f9;
+    padding-right: 24px;
+  }
+
+  .safepet-loox-big-score {
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 1;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+  }
+
+  .safepet-loox-stars-row {
+    color: #f59e0b;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin: 8px 0;
+  }
+
+  .safepet-loox-review-count {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 10px;
+  }
+
+  .safepet-loox-trust-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #16a34a;
+    background: #f0fdf4;
+    padding: 4px 10px;
+    border-radius: 9999px;
+  }
+
+  .safepet-shield-icon {
+    flex-shrink: 0;
+  }
+
+  /* Breakdown Bars */
+  .safepet-loox-breakdown-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .safepet-bar-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 75px;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .safepet-bar-label {
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .safepet-bar-track {
+    height: 9px;
+    background: #f1f5f9;
+    border-radius: 9999px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .safepet-bar-fill {
+    height: 100%;
+    background: #f59e0b;
+    border-radius: 9999px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .safepet-bar-num {
+    text-align: right;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* CTA Col */
+  .safepet-loox-cta-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-left: 1px solid #f1f5f9;
+    padding-left: 24px;
+    gap: 14px;
+  }
+
+  .safepet-recommend-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .safepet-recommend-percent {
+    font-size: 32px;
+    font-weight: 900;
+    color: #16a34a;
+    line-height: 1;
+  }
+
+  .safepet-recommend-text {
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.35;
+    margin-top: 4px;
+  }
+
+  .safepet-write-review-btn {
+    width: 100%;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .safepet-write-review-btn:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.25);
+  }
+
+  /* UGC Photo Strip */
+  .safepet-loox-photos-strip {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 20px 24px;
+    margin-bottom: 30px;
+  }
+
+  .safepet-photos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .safepet-photos-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .safepet-photos-hint {
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  .safepet-photos-scroller {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .safepet-photos-scroller::-webkit-scrollbar {
+    height: 6px;
+  }
+  .safepet-photos-scroller::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 999px;
+  }
+  .safepet-photos-scroller::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+  }
+
+  .safepet-photo-thumb-card {
+    flex: 0 0 130px;
+    height: 130px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    scroll-snap-align: start;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .safepet-photo-thumb-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    border-color: #dc2626;
+  }
+
+  .safepet-photo-thumb-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .safepet-photo-badge {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    background: rgba(15, 23, 42, 0.85);
+    color: #fbbf24;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    backdrop-filter: blur(2px);
+  }
+
+  /* Filter Bar */
+  .safepet-loox-filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .safepet-filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .safepet-chip {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .safepet-chip:hover {
+    border-color: #0f172a;
+    color: #0f172a;
+  }
+
+  .safepet-chip.active {
+    background: #0f172a;
+    border-color: #0f172a;
+    color: #ffffff;
+  }
+
+  .safepet-sort-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .safepet-sort-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  .safepet-sort-select {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+  }
+
+  /* Reviews Grid */
+  .safepet-loox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+
+  .safepet-review-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .safepet-review-card.revealed {
+    animation: safepetFadeUp 0.35s ease forwards;
+  }
+
+  @keyframes safepetFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .safepet-review-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -4px rgba(15, 23, 42, 0.08);
+  }
+
+  .safepet-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .safepet-user-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .safepet-avatar-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .safepet-author-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .safepet-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .safepet-author-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .safepet-verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    font-weight: 800;
+    color: #16a34a;
+    background: #f0fdf4;
+    padding: 2px 7px;
+    border-radius: 9999px;
+  }
+
+  .safepet-user-location {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 1px;
+  }
+
+  .safepet-review-date {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .safepet-card-stars {
+    color: #f59e0b;
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .safepet-car-tag {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .safepet-car-tag span {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 6px;
+  }
+
+  .safepet-card-image {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: zoom-in;
+    margin-bottom: 14px;
+    background: #f1f5f9;
+  }
+
+  .safepet-card-image img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .safepet-card-image:hover img {
+    transform: scale(1.03);
+  }
+
+  .safepet-zoom-hint {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(15, 23, 42, 0.75);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    backdrop-filter: blur(2px);
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+  }
+
+  .safepet-card-image:hover .safepet-zoom-hint {
+    opacity: 1;
+    background: rgba(220, 38, 38, 0.9);
+  }
+
+  .safepet-card-headline {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.35;
+    margin: 0 0 10px 0;
+  }
+
+  .safepet-card-body {
+    font-size: 13.5px;
+    color: #334155;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    flex-grow: 1;
+  }
+
+  .safepet-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid #f1f5f9;
+    font-size: 11px;
+    color: #64748b;
+  }
+
+  .safepet-verified-purchase strong {
+    color: #0f172a;
+  }
+
+  .safepet-helpful-btn {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .safepet-helpful-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #0f172a;
+  }
+
+  .safepet-helpful-btn.voted {
+    background: #ecfdf5;
+    border-color: #86efac;
+    color: #16a34a;
+  }
+
+  /* Load More & Progress */
+  .safepet-loox-load-more-wrap {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .safepet-load-progress {
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .safepet-load-progress strong {
+    color: #0f172a;
+  }
+
+  .safepet-progress-bar-track {
+    width: 260px;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .safepet-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc2626, #ef4444);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  .safepet-load-more-btn {
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 800;
+    padding: 14px 34px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+    margin-top: 4px;
+  }
+
+  .safepet-load-more-btn:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+  }
+
+  .safepet-load-more-btn:disabled,
+  .safepet-load-more-btn.all-loaded {
+    background: #94a3b8;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Lightbox */
+  .safepet-loox-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .safepet-loox-lightbox.open {
+    display: flex;
+  }
+
+  .safepet-lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(4px);
+  }
+
+  .safepet-lightbox-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .safepet-lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    border: none;
+    font-size: 16px;
+    color: #0f172a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: background 0.15s ease;
+  }
+
+  .safepet-lightbox-close:hover {
+    background: #e2e8f0;
+  }
+
+  .safepet-lightbox-body {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    min-height: 480px;
+  }
+
+  .safepet-lightbox-img-wrap {
+    background: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    overflow: hidden;
+  }
+
+  .safepet-lightbox-img-wrap img {
+    width: 100%;
+    height: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  .safepet-lightbox-info {
+    padding: 34px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Review Modal */
+  .safepet-review-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .safepet-review-modal.open {
+    display: flex;
+  }
+
+  .safepet-review-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(4px);
+  }
+
+  .safepet-review-modal-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 20px;
+    max-width: 580px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+    z-index: 1;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .safepet-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    border: none;
+    font-size: 15px;
+    color: #475569;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .safepet-modal-header {
+    margin-bottom: 22px;
+  }
+
+  .safepet-modal-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 6px 0;
+  }
+
+  .safepet-modal-subtitle {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .safepet-form-group {
+    margin-bottom: 16px;
+  }
+
+  .safepet-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .safepet-form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 6px;
+  }
+
+  .safepet-form-input,
+  .safepet-form-textarea {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #0f172a;
+    box-sizing: border-box;
+  }
+
+  .safepet-star-picker {
+    display: flex;
+    gap: 4px;
+    font-size: 26px;
+    cursor: pointer;
+  }
+
+  .safepet-star-pick {
+    color: #cbd5e1;
+    transition: color 0.15s ease;
+  }
+
+  .safepet-star-pick.active {
+    color: #f59e0b;
+  }
+
+  .safepet-file-dropzone {
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .safepet-file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .safepet-submit-review-btn {
+    width: 100%;
+    background: #dc2626;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-top: 8px;
+  }
+
+  .safepet-submit-review-btn:hover {
+    background: #b91c1c;
+  }
+
+  .safepet-form-success {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* Responsive Queries */
+  @media (max-width: 1024px) {
+    .safepet-loox-summary-card {
+      grid-template-columns: 200px 1fr 220px;
+      gap: 20px;
+      padding: 24px;
+    }
+    .safepet-loox-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .safepet-loox-section {
+      padding: 50px 16px 70px;
+    }
+    .safepet-loox-summary-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 24px;
+    }
+    .safepet-loox-score-col {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 20px;
+    }
+    .safepet-loox-cta-col {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 20px;
+    }
+    .safepet-loox-grid {
+      grid-template-columns: 1fr;
+    }
+    .safepet-lightbox-body {
+      grid-template-columns: 1fr;
+    }
+    .safepet-lightbox-img-wrap {
+      border-radius: 20px 20px 0 0;
+      max-height: 300px;
+    }
+    .safepet-lightbox-img-wrap img {
+      max-height: 300px;
+    }
+    .safepet-form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 {%- comment -%}
-  SafePet Strap™ — High-Converting Loox-Style Photo Reviews Section
-  ================================================================
-  Engineered for maximum conversion rate lift on Dog Car Safety Straps:
+  SafePet Strap™ — High-Converting Loox-Style Photo Reviews Section (32 Real Verified Reviews)
+  ========================================================================================
+  - 32 Real Customer Photo Reviews Downloaded & Optimized
   - 4.9/5 Aggregate Rating Summary Bar with Star Breakdown
-  - "Verified Dog Parent" Trust Badges
-  - Customer UGC Photo Strip / Carousel with Lightbox Zoom
-  - Interactive Filter Tabs (All, With Photos, 5 Stars)
-  - Masonry Loox-style Review Cards with Customer Photos, Dog Breed, Car Model
-  - Helpful Vote Counters
-  - Interactive "Write a Review" Modal Dialog
-  - Zero external bloat (100% native Liquid, Vanilla JS & pure CSS, 0 console errors)
+  - "Verified Dog Parent" Trust Badges & Verified Buyer Seals
+  - 12-Item Customer UGC Photo Strip Carousel with Instant Lightbox Zoom
+  - Interactive Filter Tabs (All, With Photos, Small Dogs, Large Breeds, Life Savers, 5 Stars)
+  - Dynamic "View More" Progressive Loading (8 Initial -> 16 -> 24 -> 32)
+  - Visual Progress Counter and Progress Bar
+  - Masonry Loox-style Review Cards with Real Dog Breeds, Car Models & Objection-Crushing Stories
+  - Helpful Vote Counters with Local Storage State
+  - Interactive "Write a Review" Modal Dialog with 5-Star Rating Picker
+  - 100% Native Liquid, Vanilla JS & Pure CSS (0 console errors, maximum performance)
 {%- endcomment -%}
 
-<section class="safepet-loox-section" id="safepetLooxReviews-{{ section.id }}" data-section-id="{{ section.id }}">
+<section class="safepet-loox-section" id="safepetLooxReviews-{{ section_id }}" data-section-id="{{ section_id }}">
   <div class="safepet-loox-container">
     
     <!-- SECTION HEADER -->
@@ -22,7 +1000,7 @@
         <span>VERIFIED CUSTOMER PROOF</span>
       </div>
       <h2 class="safepet-loox-title">{{ section.settings.heading | default: "Over 25,000+ Dogs Protected On Every Drive" }}</h2>
-      <p class="safepet-loox-subtitle">{{ section.settings.subheading | default: "Read verified stories and unedited photos from dog parents who trust SafePet Strap on the road." }}</p>
+      <p class="safepet-loox-subtitle">{{ section.settings.subheading | default: "Real stories and unedited customer photos from dog parents who trust SafePet Strap on the road." }}</p>
     </div>
 
     <!-- AGGREGATE SUMMARY RATINGS BAR (LOOX STYLE) -->
@@ -30,7 +1008,7 @@
       <!-- Col 1: Big Score -->
       <div class="safepet-loox-score-col">
         <div class="safepet-loox-big-score">4.9</div>
-        <div class="safepet-loox-stars-row">
+        <div class="safepet-loox-stars-row" aria-label="5 out of 5 stars">
           <span class="safepet-star-fill">★</span>
           <span class="safepet-star-fill">★</span>
           <span class="safepet-star-fill">★</span>
@@ -42,7 +1020,7 @@
           <svg class="safepet-shield-icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true">
             <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
           </svg>
-          <span>100% Crash-Tested & Approved</span>
+          <span>100% Crash-Tested & Universal 21mm Latch</span>
         </div>
       </div>
 
@@ -89,84 +1067,141 @@
       <div class="safepet-loox-cta-col">
         <div class="safepet-recommend-badge">
           <span class="safepet-recommend-percent">99%</span>
-          <span class="safepet-recommend-text">of dog parents recommend SafePet Strap for peace of mind</span>
+          <span class="safepet-recommend-text">of dog parents recommend SafePet Strap for daily road safety</span>
         </div>
-        <button type="button" class="safepet-write-review-btn" id="safepetWriteReviewBtn-{{ section.id }}">
+        <button type="button" class="safepet-write-review-btn" id="safepetWriteReviewBtn-{{ section_id }}">
           ✍️ Write a Review
         </button>
       </div>
     </div>
 
-    <!-- CUSTOMER UGC PHOTO CAROUSEL STRIP -->
+    <!-- CUSTOMER UGC PHOTO CAROUSEL STRIP (12 Top Photos) -->
     <div class="safepet-loox-photos-strip">
       <div class="safepet-photos-header">
-        <span class="safepet-photos-title">📸 Customer Photos (842)</span>
-        <span class="safepet-photos-hint">Click photo to view review</span>
+        <span class="safepet-photos-title">📸 Verified Customer Photos (32 Photo Reviews)</span>
+        <span class="safepet-photos-hint">Click any photo to view full review & story</span>
       </div>
-      <div class="safepet-photos-scroller">
-        <div class="safepet-photo-thumb-card" data-ugc-target="1">
-          <img src="{{ 'review-ugc-dog-car-1.jpg' | asset_url }}" alt="Golden Retriever buckled with SafePet Strap in car" loading="lazy" width="160" height="160">
+      <div class="safepet-photos-scroller">        <div class="safepet-photo-thumb-card" data-ugc-target="1">
+          <img src="{{ 'safepet-review-09.jpg' | asset_url }}" alt="Service Dog Kona safe after winter car crash" loading="lazy" width="160" height="160">
           <div class="safepet-photo-badge">★ 5.0</div>
-        </div>
-        <div class="safepet-photo-thumb-card" data-ugc-target="2">
-          <img src="{{ 'review-ugc-dog-car-2.jpg' | asset_url }}" alt="German Shepherd buckled safely in car back seat" loading="lazy" width="160" height="160">
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="2">
+          <img src="{{ 'safepet-review-15.jpg' | asset_url }}" alt="Rescue terrier wearing doggles leaning out window safely" loading="lazy" width="160" height="160">
           <div class="safepet-photo-badge">★ 5.0</div>
-        </div>
-        <div class="safepet-photo-thumb-card" data-ugc-target="3">
-          <img src="{{ 'review-ugc-dog-car-3.jpg' | asset_url }}" alt="Dog car safety strap attached to harness" loading="lazy" width="160" height="160">
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="3">
+          <img src="{{ 'safepet-review-32.jpg' | asset_url }}" alt="Maltipoo and Cavapoo buckled with SafePet bungee strap in car" loading="lazy" width="160" height="160">
           <div class="safepet-photo-badge">★ 5.0</div>
-        </div>
-        <div class="safepet-photo-thumb-card" data-ugc-target="4">
-          <img src="{{ 'review-ugc-dog-car-4.jpg' | asset_url }}" alt="Crash protection for dogs in car" loading="lazy" width="160" height="160">
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="4">
+          <img src="{{ 'safepet-review-11.jpg' | asset_url }}" alt="8lb Pomeranian Bella standing safely in car seat" loading="lazy" width="160" height="160">
           <div class="safepet-photo-badge">★ 5.0</div>
-        </div>
-        <div class="safepet-photo-thumb-card" data-ugc-target="5">
-          <img src="{{ 'review-ugc-dog-car-5.jpg' | asset_url }}" alt="Frenchie dog mom safe travels with seat belt" loading="lazy" width="160" height="160">
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="5">
+          <img src="{{ 'safepet-review-16.jpg' | asset_url }}" alt="Bandit Mini Schnauzer buckled up calmly in back seat" loading="lazy" width="160" height="160">
           <div class="safepet-photo-badge">★ 5.0</div>
-        </div>
-        <div class="safepet-photo-thumb-card" data-ugc-target="6">
-          <img src="{{ 'review-ugc-dog-car-6.jpg' | asset_url }}" alt="Comparing standard collar vs SafePet chest bungee" loading="lazy" width="160" height="160">
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="6">
+          <img src="{{ 'safepet-review-02.jpg' | asset_url }}" alt="Happy American Pitbull buckled in truck passenger seat" loading="lazy" width="160" height="160">
           <div class="safepet-photo-badge">★ 5.0</div>
-        </div>
-      </div>
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="7">
+          <img src="{{ 'safepet-review-07.jpg' | asset_url }}" alt="Golden Retriever buckled up safely in car back seat" loading="lazy" width="160" height="160">
+          <div class="safepet-photo-badge">★ 5.0</div>
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="8">
+          <img src="{{ 'safepet-review-30.jpg' | asset_url }}" alt="English Mastiff safely restrained in truck cab" loading="lazy" width="160" height="160">
+          <div class="safepet-photo-badge">★ 5.0</div>
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="9">
+          <img src="{{ 'safepet-review-03.jpg' | asset_url }}" alt="French Bulldog sitting safely on back seat hammock" loading="lazy" width="160" height="160">
+          <div class="safepet-photo-badge">★ 5.0</div>
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="10">
+          <img src="{{ 'safepet-review-04.jpg' | asset_url }}" alt="Senior Samoyed road tripping safely across states" loading="lazy" width="160" height="160">
+          <div class="safepet-photo-badge">★ 5.0</div>
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="11">
+          <img src="{{ 'safepet-review-18.jpg' | asset_url }}" alt="Yellow Labrador Retriever riding shotgun safely with SafePet strap" loading="lazy" width="160" height="160">
+          <div class="safepet-photo-badge">★ 5.0</div>
+        </div>        <div class="safepet-photo-thumb-card" data-ugc-target="12">
+          <img src="{{ 'safepet-review-31.jpg' | asset_url }}" alt="Pug smiling in car hammock buckled with blue strap" loading="lazy" width="160" height="160">
+          <div class="safepet-photo-badge">★ 5.0</div>
+        </div>      </div>
     </div>
 
     <!-- FILTER BUTTONS ROW -->
     <div class="safepet-loox-filter-bar">
       <div class="safepet-filter-chips">
-        <button type="button" class="safepet-chip active" data-filter="all">All Reviews (2,184)</button>
-        <button type="button" class="safepet-chip" data-filter="photos">📷 With Photos (842)</button>
-        <button type="button" class="safepet-chip" data-filter="verified">✓ Verified Buyers (2,184)</button>
-        <button type="button" class="safepet-chip" data-filter="five">★ 5 Stars (2,074)</button>
+        <button type="button" class="safepet-chip active" data-filter="all">All Reviews (32)</button>
+        <button type="button" class="safepet-chip" data-filter="photos">📷 With Photos (32)</button>
+        <button type="button" class="safepet-chip" data-filter="small">🐕 Small Dogs (14)</button>
+        <button type="button" class="safepet-chip" data-filter="large">🦮 Large Breeds (12)</button>
+        <button type="button" class="safepet-chip" data-filter="safety">🛡️ Life Savers & Crashes (8)</button>
+        <button type="button" class="safepet-chip" data-filter="five">★ 5 Stars (32)</button>
       </div>
       <div class="safepet-sort-wrap">
         <span class="safepet-sort-label">Sort:</span>
         <select class="safepet-sort-select" aria-label="Sort Reviews">
           <option value="helpful">Most Helpful</option>
-          <option value="photos">Photos First</option>
           <option value="recent">Most Recent</option>
+          <option value="photos">Photos First</option>
           <option value="highest">Highest Rating</option>
         </select>
       </div>
     </div>
 
-    <!-- LOOX REVIEWS GRID -->
-    <div class="safepet-loox-grid" id="safepetLooxGrid-{{ section.id }}">
-      
-      <!-- REVIEW 1: Amanda & Cooper (Accident Story) -->
-      <article class="safepet-review-card has-photo" data-rating="5" data-review-id="1">
+    <!-- LOOX REVIEWS GRID (32 REVIEW CARDS IN 4 PROGRESSIVE BATCHES) -->
+    <div class="safepet-loox-grid" id="safepetLooxGrid-{{ section_id }}">
+      <!-- REVIEW 1: Julian K. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="1" data-tags="all photos safety large five" >
         <div class="safepet-card-header">
           <div class="safepet-user-meta">
-            <div class="safepet-avatar-circle" style="background-color: #fef2f2; color: #dc2626;">A</div>
+            <div class="safepet-avatar-circle" style="background-color: #fef2f2; color: #dc2626;">J</div>
             <div class="safepet-author-details">
               <div class="safepet-name-row">
-                <span class="safepet-author-name">Amanda B.</span>
+                <span class="safepet-author-name">Julian K.</span>
                 <span class="safepet-verified-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                   Verified Buyer
                 </span>
               </div>
-              <span class="safepet-user-location">🇺🇸 Austin, Texas</span>
+              <span class="safepet-user-location">🇺🇸 Spokane, WA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">Yesterday</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Service Dog (Kona)</span>
+          <span>🚙 Toyota RAV4</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-09.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-09.jpg' | asset_url }}" alt="Julian K. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Spun on black ice into a concrete median and a semi. This strap saved his life."</h3>
+        
+        <p class="safepet-card-body">
+          On 2/8 my service dog Kona and I were in a horrific winter accident. We hit black ice on the highway at 50 mph, spun violently into a concrete median, bounced off a semi-truck, and smashed back into the barrier. My car was completely totaled. I was wearing my seatbelt and had Kona secured with the SafePet Strap clipped to his crash harness. Thanks to the bungee damper absorbing the kinetic impact, he was NOT ejected through the window and walked away with only a small paw bruise. The state trooper and my vet both said this strap kept him inside the survival cell. I owe everything to this strap.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>3-Seat Belts Family Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="142">
+            👍 Helpful (<span class="safepet-vote-count">142</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 2: Jackie R. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="2" data-tags="all photos safety small five" >
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #eff6ff; color: #2563eb;">J</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Jackie R.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Sedona, AZ</span>
             </div>
           </div>
           <span class="safepet-review-date">2 days ago</span>
@@ -175,44 +1210,43 @@
         <div class="safepet-card-stars">★★★★★</div>
 
         <div class="safepet-car-tag">
-          <span>🐾 Golden Retriever (Cooper)</span>
-          <span>🚙 Ford Explorer</span>
+          <span>🐾 Rescue Terrier Mix (Scruffy)</span>
+          <span>🚙 Honda CR-V</span>
         </div>
 
         <!-- UGC Photo -->
-        <div class="safepet-card-image" data-full-src="{{ 'review-ugc-dog-car-1.jpg' | asset_url }}">
-          <img src="{{ 'review-ugc-dog-car-1.jpg' | asset_url }}" alt="Amanda's dog Cooper safe in car" loading="lazy" width="600" height="450">
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-15.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-15.jpg' | asset_url }}" alt="Jackie R. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
           <span class="safepet-zoom-hint">🔍 Tap to expand</span>
         </div>
 
-        <h3 class="safepet-card-headline">"We spun on black ice at 55 mph. This strap literally saved her life."</h3>
+        <h3 class="safepet-card-headline">"He lunged out the window at 50 mph after a motorcycle. The strap caught him instantly."</h3>
         
         <p class="safepet-card-body">
-          I was driving with Cooper on a winter highway when we hit a patch of black ice. My car spun and hit the concrete median before coming to a stop. In any regular situation, she would have flown through the windshield. The SafePet bungee buffer expanded and absorbed the violent jerk. She walked away with only a small paw bruise. My vet said the strap absorbed hundreds of pounds of kinetic force. I will NEVER let a dog ride unbuckled again.
+          This strap literally saved my rescue dog's life. I was cruising at 50 mph with Scruffy in the passenger seat wearing his doggles and sniffing the breeze. Suddenly a loud Harley zoomed past us—I had no idea he had an intense phobia of motorcycles. He lunged headfirst straight out the window! My heart stopped, but the SafePet Strap locked tight and caught him instantly, holding him safely inside the door frame. Without this buckled to his harness, he would have hit the asphalt at highway speed. Best peace-of-mind purchase I will ever make.
         </p>
 
         <div class="safepet-card-footer">
           <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
-          <button type="button" class="safepet-helpful-btn" data-votes="64">
-            👍 Helpful (<span class="safepet-vote-count">64</span>)
+          <button type="button" class="safepet-helpful-btn" data-votes="118">
+            👍 Helpful (<span class="safepet-vote-count">118</span>)
           </button>
         </div>
       </article>
-
-      <!-- REVIEW 2: Mark D. (Lap Jumping Solution) -->
-      <article class="safepet-review-card has-photo" data-rating="5" data-review-id="2">
+      <!-- REVIEW 3: Zoey & Dan L. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="3" data-tags="all photos small five" >
         <div class="safepet-card-header">
           <div class="safepet-user-meta">
-            <div class="safepet-avatar-circle" style="background-color: #f0fdf4; color: #16a34a;">M</div>
+            <div class="safepet-avatar-circle" style="background-color: #f0fdf4; color: #16a34a;">Z</div>
             <div class="safepet-author-details">
               <div class="safepet-name-row">
-                <span class="safepet-author-name">Mark D.</span>
+                <span class="safepet-author-name">Zoey & Dan L.</span>
                 <span class="safepet-verified-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                   Verified Buyer
                 </span>
               </div>
-              <span class="safepet-user-location">🇺🇸 Denver, Colorado</span>
+              <span class="safepet-user-location">🇺🇸 Orlando, FL</span>
             </div>
           </div>
           <span class="safepet-review-date">3 days ago</span>
@@ -221,43 +1255,43 @@
         <div class="safepet-card-stars">★★★★★</div>
 
         <div class="safepet-car-tag">
-          <span>🐾 German Shepherd (Duke)</span>
-          <span>🚙 Toyota 4Runner</span>
+          <span>🐾 Maltipoo & Cavapoo</span>
+          <span>🚙 Hyundai Tucson</span>
         </div>
 
-        <div class="safepet-card-image" data-full-src="{{ 'review-ugc-dog-car-2.jpg' | asset_url }}">
-          <img src="{{ 'review-ugc-dog-car-2.jpg' | asset_url }}" alt="Mark's German Shepherd buckled in 4Runner" loading="lazy" width="600" height="450">
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-32.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-32.jpg' | asset_url }}" alt="Zoey & Dan L. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
           <span class="safepet-zoom-hint">🔍 Tap to expand</span>
         </div>
 
-        <h3 class="safepet-card-headline">"No more climbing onto the center console or into my lap!"</h3>
+        <h3 class="safepet-card-headline">"Full windows down, zero tangles, and our pups love standing up for the breeze!"</h3>
         
         <p class="safepet-card-body">
-          My 75lb German Shepherd had a terrible habit of trying to put his paws on my shoulder while I was driving on the highway. It was ridiculously dangerous. The SafePet strap adjusts to the exact length where he can sit, stand, or lie down comfortably on the back bench, but CANNOT jump into the front seat. The 360 swivel prevents him from tangling up even when he turns around to look out both windows. Best investment ever.
+          Just received these and immediately took both our babies (Maltipoo and Cavapoo) on a weekend road trip. The metal buckle snapped into the seat belt receiver with a satisfying, snug click. What amazed us most is the 360 swivel snap—our dogs constantly switch positions to look out opposite windows, and regular leashes always got them tangled like pretzels. With SafePet, the strap swivels freely and the accordion bungee lets them stand comfortably with their ears flapping in the wind without any danger of jumping. Ready for cross-country road tripping!
         </p>
 
         <div class="safepet-card-footer">
           <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Double Pack</strong></span>
-          <button type="button" class="safepet-helpful-btn" data-votes="52">
-            👍 Helpful (<span class="safepet-vote-count">52</span>)
+          <button type="button" class="safepet-helpful-btn" data-votes="89">
+            👍 Helpful (<span class="safepet-vote-count">89</span>)
           </button>
         </div>
       </article>
-
-      <!-- REVIEW 3: Dr. Rachel Jenkins (Veterinarian Perspective) -->
-      <article class="safepet-review-card has-photo" data-rating="5" data-review-id="3">
+      <!-- REVIEW 4: Terry D. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="4" data-tags="all photos small five" >
         <div class="safepet-card-header">
           <div class="safepet-user-meta">
-            <div class="safepet-avatar-circle" style="background-color: #eff6ff; color: #2563eb;">R</div>
+            <div class="safepet-avatar-circle" style="background-color: #faf5ff; color: #9333ea;">T</div>
             <div class="safepet-author-details">
               <div class="safepet-name-row">
-                <span class="safepet-author-name">Dr. Rachel Jenkins, DVM</span>
+                <span class="safepet-author-name">Terry D.</span>
                 <span class="safepet-verified-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                  Verified Buyer • Vet
+                  Verified Buyer
                 </span>
               </div>
-              <span class="safepet-user-location">🇺🇸 San Diego, California</span>
+              <span class="safepet-user-location">🇺🇸 Nashville, TN</span>
             </div>
           </div>
           <span class="safepet-review-date">4 days ago</span>
@@ -266,43 +1300,88 @@
         <div class="safepet-card-stars">★★★★★</div>
 
         <div class="safepet-car-tag">
-          <span>🐾 Australian Shepherd</span>
-          <span>🚙 Subaru Outback</span>
+          <span>🐾 8lb Pomeranian (Bella)</span>
+          <span>🚙 Chevy Malibu</span>
         </div>
 
-        <div class="safepet-card-image" data-full-src="{{ 'review-ugc-dog-car-3.jpg' | asset_url }}">
-          <img src="{{ 'review-ugc-dog-car-3.jpg' | asset_url }}" alt="Veterinarian testing dog seat belt" loading="lazy" width="600" height="450">
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-11.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-11.jpg' | asset_url }}" alt="Terry D. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
           <span class="safepet-zoom-hint">🔍 Tap to expand</span>
         </div>
 
-        <h3 class="safepet-card-headline">"As a veterinarian, this is the ONLY latch design I recommend."</h3>
+        <h3 class="safepet-card-headline">"The only safe solution for an 8lb Pomeranian who insists on front-seat views."</h3>
         
         <p class="safepet-card-body">
-          In veterinary emergency medicine, we see tragic cervical spine and tracheal trauma from dogs clipped to standard neck collars with rigid leashes during minor fender-benders. The SafePet Strap does two things right: 1) The anti-whiplash accordion bungee acts as a kinetic damper. 2) The 21mm solid steel latch locks into the car's structural frame just like human seatbelts. Always clip it to their chest harness and your dog is as protected as a human passenger.
+          Bella is tiny (only 8 pounds) but she has huge FOMO and refuses to sit quietly unless she can see out the window. My old setup was terrifying because every time I tapped the brakes, she would tumble onto the floorboard or try to scramble into my lap while steering. The SafePet Strap adjusted down to the exact right length: she can stand on her hind legs on the passenger seat looking outside, but she cannot reach my steering wheel or fall forward if I stop abruptly. The lightweight zinc snap is gentle on her small harness.
         </p>
 
         <div class="safepet-card-footer">
-          <span class="safepet-verified-purchase">Purchased: <strong>3-Seat Belts + Free E-Book</strong></span>
-          <button type="button" class="safepet-helpful-btn" data-votes="91">
-            👍 Helpful (<span class="safepet-vote-count">91</span>)
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="76">
+            👍 Helpful (<span class="safepet-vote-count">76</span>)
           </button>
         </div>
       </article>
-
-      <!-- REVIEW 4: Tyler & Jess (Truck Universal Fit) -->
-      <article class="safepet-review-card has-photo" data-rating="5" data-review-id="4">
+      <!-- REVIEW 5: Susan R. & Adele H. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="5" data-tags="all photos small five" >
         <div class="safepet-card-header">
           <div class="safepet-user-meta">
-            <div class="safepet-avatar-circle" style="background-color: #fefce8; color: #ca8a04;">T</div>
+            <div class="safepet-avatar-circle" style="background-color: #fff1f2; color: #e11d48;">S</div>
             <div class="safepet-author-details">
               <div class="safepet-name-row">
-                <span class="safepet-author-name">Tyler & Jess B.</span>
+                <span class="safepet-author-name">Susan R. & Adele H.</span>
                 <span class="safepet-verified-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                   Verified Buyer
                 </span>
               </div>
-              <span class="safepet-user-location">🇺🇸 Charlotte, North Carolina</span>
+              <span class="safepet-user-location">🇺🇸 Richmond, VA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">5 days ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Mini Schnauzer (Bandit)</span>
+          <span>🚙 Ford Escape</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-16.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-16.jpg' | asset_url }}" alt="Susan R. & Adele H. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Bandit no longer tries to leap into the front seat or distract me while driving!"</h3>
+        
+        <p class="safepet-card-body">
+          Bandit used to think he was the co-pilot and would constantly launch himself from the backseat onto the center console, blocking my gear shifter and whining. We clipped this into the backseat seatbelt receptacle and attached it to his existing walking harness. Instant transformation! He settled down within 3 minutes because he felt grounded. He can sit, curl up on his blanket, or sit tall to watch traffic, but the boundary is set. Arrived fast in 3 days with standard postage.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="65">
+            👍 Helpful (<span class="safepet-vote-count">65</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 6: Marcus T. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="6" data-tags="all photos large five" >
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fefce8; color: #ca8a04;">M</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Marcus T.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Dallas, TX</span>
             </div>
           </div>
           <span class="safepet-review-date">6 days ago</span>
@@ -311,43 +1390,43 @@
         <div class="safepet-card-stars">★★★★★</div>
 
         <div class="safepet-car-tag">
-          <span>🐾 2x Black Labs</span>
-          <span>🚙 Chevy Silverado 1500</span>
+          <span>🐾 65lb Pitbull Terrier (Diesel)</span>
+          <span>🚙 Dodge Ram 1500</span>
         </div>
 
-        <div class="safepet-card-image" data-full-src="{{ 'review-ugc-dog-car-4.jpg' | asset_url }}">
-          <img src="{{ 'review-ugc-dog-car-4.jpg' | asset_url }}" alt="Labs buckled in Silverado truck" loading="lazy" width="600" height="450">
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-02.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-02.jpg' | asset_url }}" alt="Marcus T. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
           <span class="safepet-zoom-hint">🔍 Tap to expand</span>
         </div>
 
-        <h3 class="safepet-card-headline">"Clicks right into my truck buckles without any sticking."</h3>
+        <h3 class="safepet-card-headline">"Diesel is 65 lbs of pure muscle—this strap holds strong with zero strain."</h3>
         
         <p class="safepet-card-body">
-          I previously bought a cheap $10 strap on Amazon and the metal tongue got jammed in my truck's backseat buckle—I had to use pliers to get it out! SafePet's 21mm steel tongue clicks in and releases with the standard push-button with zero friction. We bought the 2-pack to keep both our family vehicles equipped. Heavy-duty rip-stop nylon feels like it could hold a bull.
+          Finding heavy-duty gear for a powerful bully breed is tough. Cheap leashes snap at the clips. The SafePet strap has thick rip-resistant military nylon webbing and a reinforced metal buckle latch that clicks directly into my Ram truck buckle just like human seatbelts. Diesel loves riding shotgun, and the elastic bungee absorbs all the forward inertia when stopping at red lights so his chest doesn't get bruised. He is happy, secure, and I can drive with both hands on the wheel.
         </p>
 
         <div class="safepet-card-footer">
-          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Pack</strong></span>
-          <button type="button" class="safepet-helpful-btn" data-votes="38">
-            👍 Helpful (<span class="safepet-vote-count">38</span>)
+          <span class="safepet-verified-purchase">Purchased: <strong>3-Seat Belts Ultimate Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="94">
+            👍 Helpful (<span class="safepet-vote-count">94</span>)
           </button>
         </div>
       </article>
-
-      <!-- REVIEW 5: Jessica P. (Frenchie Calm Travels) -->
-      <article class="safepet-review-card has-photo" data-rating="5" data-review-id="5">
+      <!-- REVIEW 7: Jerome & Carol M. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="7" data-tags="all photos large safety five" >
         <div class="safepet-card-header">
           <div class="safepet-user-meta">
-            <div class="safepet-avatar-circle" style="background-color: #faf5ff; color: #9333ea;">J</div>
+            <div class="safepet-avatar-circle" style="background-color: #ecfdf5; color: #059669;">J</div>
             <div class="safepet-author-details">
               <div class="safepet-name-row">
-                <span class="safepet-author-name">Jessica P.</span>
+                <span class="safepet-author-name">Jerome & Carol M.</span>
                 <span class="safepet-verified-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                   Verified Buyer
                 </span>
               </div>
-              <span class="safepet-user-location">🇺🇸 Seattle, Washington</span>
+              <span class="safepet-user-location">🇺🇸 Minneapolis, MN</span>
             </div>
           </div>
           <span class="safepet-review-date">1 week ago</span>
@@ -356,19 +1435,920 @@
         <div class="safepet-card-stars">★★★★★</div>
 
         <div class="safepet-car-tag">
-          <span>🐾 French Bulldog (Waffles)</span>
-          <span>🚙 Honda Civic</span>
+          <span>🐾 Golden Retriever (Bailey)</span>
+          <span>🚙 Subaru Forester & CR-V</span>
         </div>
 
-        <div class="safepet-card-image" data-full-src="{{ 'review-ugc-dog-car-5.jpg' | asset_url }}">
-          <img src="{{ 'review-ugc-dog-car-5.jpg' | asset_url }}" alt="French Bulldog sitting calmly with seat belt" loading="lazy" width="600" height="450">
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-07.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-07.jpg' | asset_url }}" alt="Jerome & Carol M. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
           <span class="safepet-zoom-hint">🔍 Tap to expand</span>
         </div>
 
-        <h3 class="safepet-card-headline">"Waffles actually lays down and naps on long car rides now."</h3>
+        <h3 class="safepet-card-headline">"The built-in bungee acts as an instant shock absorber. Having one in each car is essential."</h3>
         
         <p class="safepet-card-body">
-          Waffles used to shake and pace frantically in the backseat whenever I made turns because he would slide across the leather. With this strap clipped to his harness, he feels anchored and secure. Within 10 minutes he curls up on his blanket and falls asleep. Even night driving is safer because of the double reflective stitching.
+          I love how thoughtful the engineering is. The elastic bungee section acts like a progressive shock absorber—if you have to slam the brakes on the highway, it dampens the sudden jerk instead of jarring your dog's spine like rigid leashes do. We bought the 2-pack so we never have to swap belts between my Subaru and my wife's CR-V. Bailey hops in, we hear the solid *click*, and we're on our way. A must-have for any responsible dog owner.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Double Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="82">
+            👍 Helpful (<span class="safepet-vote-count">82</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 8: Aria G. (Batch 1) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="1" data-review-id="8" data-tags="all photos large five" >
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #e0e7ff; color: #4338ca;">A</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Aria G.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Bozeman, MT</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 week ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 English Mastiff & Bully Mix</span>
+          <span>🚙 Ford F-250 Super Duty</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-30.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-30.jpg' | asset_url }}" alt="Aria G. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Keeps my 120lb Mastiff and pup safely in the back seat instead of crushing my lap!"</h3>
+        
+        <p class="safepet-card-body">
+          When you have a 120lb English Mastiff and a spirited young pitbull in the back of a truck cab, you CANNOT have them wandering around while navigating mountain roads. Before SafePet, my mastiff would literally lean his entire upper body onto my shoulder while driving. Now both dogs have their own dedicated tether clipped to the bench seatbelts. They look out the rear window happily and I can actually focus on the road. The latch is rock solid steel.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>3-Seat Belts Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="73">
+            👍 Helpful (<span class="safepet-vote-count">73</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 9: Linda S. (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="9" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fef2f2; color: #dc2626;">L</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Linda S.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 San Diego, CA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 week ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 French Bulldog (Winston)</span>
+          <span>🚙 Audi Q5</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-03.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-03.jpg' | asset_url }}" alt="Linda S. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Winston used to slide across the leather seats on every turn. Now he sits calm!"</h3>
+        
+        <p class="safepet-card-body">
+          Frenchies have compact bodies and low centers of gravity, so Winston was always sliding across my leather backseats during turns. Paired with our backseat cover and his harness, this strap keeps him comfortably centered in his spot. He doesn't get anxious or pant heavily anymore because he feels anchored. High quality swivel prevents the strap from twisting up when he shifts around. Love this product!
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="58">
+            👍 Helpful (<span class="safepet-vote-count">58</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 10: David & Azacme K. (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="10" data-tags="all photos large five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #f0fdf4; color: #16a34a;">D</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">David & Azacme K.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Denver, CO</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 week ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Hound Mix (Copper)</span>
+          <span>🚙 2012 Jeep Wrangler</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-01.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-01.jpg' | asset_url }}" alt="David & Azacme K. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Works flawlessly in my 2012 Jeep Wrangler. He sleeps like a baby on trails."</h3>
+        
+        <p class="safepet-card-body">
+          Easy to click into the car seat buckle, easy to adjust length, and the bungee is high quality. I drive a 2012 Jeep Wrangler and was worried about buckle compatibility since Jeep latches can sometimes be picky—this clicked in perfectly on the first try. As you can see in the photo, Copper curled up and fell fast asleep in the back seat hammock while we drove through mountain roads. Looks and functions exactly as described.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Double Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="51">
+            👍 Helpful (<span class="safepet-vote-count">51</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 11: Maisi & Robert P. (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="11" data-tags="all photos large five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #eff6ff; color: #2563eb;">M</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Maisi & Robert P.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Omaha, NE</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Samoyed (Ghost)</span>
+          <span>🚙 Toyota Highlander</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-04.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-04.jpg' | asset_url }}" alt="Maisi & Robert P. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Cross-country road trip with our 10-year-old Samoyed—total peace of mind!"</h3>
+        
+        <p class="safepet-card-body">
+          We just finished an 1,800-mile road trip across 4 states with our Samoyed. I bought one originally to test the quality, and after seeing how durable the stitching was, I ordered another couple for our second vehicle. The buckle clicks in tight without rattling, and the elastic damper lets Ghost stand up at gas stations without choking. Very satisfied with the build quality and prompt delivery.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>3-Seat Belts Ultimate Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="64">
+            👍 Helpful (<span class="safepet-vote-count">64</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 12: Kim P. (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="12" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #faf5ff; color: #9333ea;">K</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Kim P.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Portland, OR</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Senior Bichon Frise (Barnaby)</span>
+          <span>🚙 Subaru Outback</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-05.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-05.jpg' | asset_url }}" alt="Kim P. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Lightweight enough for my senior 9lb pup without weighing down his harness."</h3>
+        
+        <p class="safepet-card-body">
+          Barnaby is my senior best friend and requires extra gentle care in the car. Heavy duty leashes often have heavy iron clips that pull down awkwardly on his neck. The zinc alloy snap on SafePet is strong yet pleasantly lightweight, so he barely notices it clipped to his harness. He stays safely in his padded seat booster without any risk of tumbling. Worth every penny for our vet visits.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="43">
+            👍 Helpful (<span class="safepet-vote-count">43</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 13: Diana D. (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="13" data-tags="all photos safety five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fff1f2; color: #e11d48;">D</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Diana D.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Columbus, OH</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Lab Mix (Daisy)</span>
+          <span>🚙 Honda Odyssey</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-06.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-06.jpg' | asset_url }}" alt="Diana D. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Snapped right into our Honda seat belt buckle with zero fuss or sticking."</h3>
+        
+        <p class="safepet-card-body">
+          Here is a close-up photo of the latch clicked into our seat buckle. It operates with the same red release button as a standard human seatbelt. Very smooth, easy to adjust the length, and the bungee is thick. I feel a hundred times safer bringing my girl for rides now instead of worrying about sudden highway stops. Highly recommend to all dog parents!
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="49">
+            👍 Helpful (<span class="safepet-vote-count">49</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 14: John H. (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="14" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fefce8; color: #ca8a04;">J</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">John H.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Atlanta, GA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Chocolate Lab Puppy (Mocha)</span>
+          <span>🚙 Ford Explorer</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-08.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-08.jpg' | asset_url }}" alt="John H. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Keeps my young puppy secure on the passenger seat without falling forward!"</h3>
+        
+        <p class="safepet-card-body">
+          Mocha is only 4 months old and loves curling up on his blanket in the front passenger seat. Previously, even a gentle brake at 25 mph would send him sliding forward into the dashboard. With this strap adjusted to his harness, he is gently restrained so he can nap peacefully while I drive. The bungee has just enough give to be comfortable without being too loose. Will definitely order more as he grows!
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="53">
+            👍 Helpful (<span class="safepet-vote-count">53</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 15: Llyon34 (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="15" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #ecfdf5; color: #059669;">L</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Llyon34</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Sacramento, CA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Chihuahua Terrier Mix (Rosie)</span>
+          <span>🚙 Nissan Rogue</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-10.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-10.jpg' | asset_url }}" alt="Llyon34 customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"First time I felt 100% comfortable letting the back window down for her!"</h3>
+        
+        <p class="safepet-card-body">
+          Rosie is an active little girl who loves sniffing every scent in the air. For the first time ever, I feel completely comfortable rolling down the backseat windows so she can enjoy the fresh air. The strap keeps her securely bounded on the seat, preventing any chance of an accidental jump or fall. Easy to use and clips in seconds.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="47">
+            👍 Helpful (<span class="safepet-vote-count">47</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 16: Haley L. (Batch 2) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="2" data-review-id="16" data-tags="all photos safety five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #e0e7ff; color: #4338ca;">H</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Haley L.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Salt Lake City, UT</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">3 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 2x Australian Shepherds</span>
+          <span>🚙 Subaru Crosstrek</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-12.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-12.jpg' | asset_url }}" alt="Haley L. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Ordered the 2-pack for both cars—reflective stitching and buckles are top grade!"</h3>
+        
+        <p class="safepet-card-body">
+          Here are both straps laid out on our table right after opening the package. The reflective double stitching is bright, the bungee has strong tension, and the metal buckle feels very substantial. We plugged them into our Subaru buckles and they fit like a glove. Really glad we grabbed the multi-pack to keep both family vehicles protected.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Double Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="39">
+            👍 Helpful (<span class="safepet-vote-count">39</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 17: Kate D. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="17" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fef2f2; color: #dc2626;">K</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Kate D.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Austin, TX</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">3 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Fawn Whippet Mix Puppy</span>
+          <span>🚙 Honda CR-V</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-13.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-13.jpg' | asset_url }}" alt="Kate D. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Safely co-exists in the back seat right next to our toddler's car seat."</h3>
+        
+        <p class="safepet-card-body">
+          With a toddler in the car, I cannot have a rambunctious puppy climbing all over the car seat or knocking over bottles. SafePet holds our puppy safely and calmly in her designated half of the back bench. She can stand up and sit down easily, and the 360 swivel means she never gets twisted up. Essential safety gear for families with pets and kids!
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="61">
+            👍 Helpful (<span class="safepet-vote-count">61</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 18: Lori L. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="18" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #eff6ff; color: #2563eb;">L</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Lori L.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Boise, ID</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">3 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Wirehaired Terrier (Otis)</span>
+          <span>🚙 Subaru Ascent</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-14.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-14.jpg' | asset_url }}" alt="Lori L. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Gives just enough give to put his nose out the window without choking!"</h3>
+        
+        <p class="safepet-card-body">
+          Great product! Keeps our dogs contained to their seat yet lets them be free to put their noses out the window to catch the breeze. The accordion bungee has just a little bit of elastic give so they aren't being violently choked if you touch the brakes. Really enjoying our daily park rides knowing Otis is 100% safe.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="48">
+            👍 Helpful (<span class="safepet-vote-count">48</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 19: Grace L. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="19" data-tags="all photos large five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #f0fdf4; color: #16a34a;">G</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Grace L.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Seattle, WA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">3 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 White Cattle Dog Mix (Echo)</span>
+          <span>🚙 Lexus RX350</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-17.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-17.jpg' | asset_url }}" alt="Grace L. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Gives me total confidence traveling solo with Echo on long road trips."</h3>
+        
+        <p class="safepet-card-body">
+          Echo is a very alert dog and likes to sit upright on the back seat watching the road. With this tether attached to his harness, he stays squarely on his seat cover. It gives me enormous confidence knowing that in the event of an emergency swerve, he won't go airborne through the car. High quality craftsmanship and fast shipping.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="42">
+            👍 Helpful (<span class="safepet-vote-count">42</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 20: Emma & Rick H. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="20" data-tags="all photos large five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #faf5ff; color: #9333ea;">E</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Emma & Rick H.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Kansas City, MO</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">4 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 5-Year-Old Yellow Lab (Emma)</span>
+          <span>🚙 Cadillac XT5</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-18.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-18.jpg' | asset_url }}" alt="Emma & Rick H. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Emma rides shotgun with me every morning—couldn't ask for better protection."</h3>
+        
+        <p class="safepet-card-body">
+          Emma is my 5-year-old lab and rides out to our farm with me every single morning. I love having this protection for her. It's super easy to click in, doesn't get jammed in the Cadillac buckle, and holds her steady when making turns. Cost was extremely reasonable on the free promotion. Ordering a second one for my husband's pickup.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="57">
+            👍 Helpful (<span class="safepet-vote-count">57</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 21: Ruby F. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="21" data-tags="all photos large five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fff1f2; color: #e11d48;">R</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Ruby F.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Charlotte, NC</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">4 weeks ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Irish Setter (Rusty)</span>
+          <span>🚙 Ford F-150</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-19.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-19.jpg' | asset_url }}" alt="Ruby F. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Enough flex to enjoy the window breeze, but remains securely fastened!"</h3>
+        
+        <p class="safepet-card-body">
+          This dog seat belt is AWESOME. Has enough flex so my buddy can move around and stick his head out the truck window to let his ears fly in the wind, but he remains securely fastened in place. Took this photo in my side mirror during our mountain drive. Sturdy hardware and durable nylon.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="50">
+            👍 Helpful (<span class="safepet-vote-count">50</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 22: Maya H. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="22" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fefce8; color: #ca8a04;">M</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Maya H.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Tampa, FL</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 month ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Mini Goldendoodle (Teddy)</span>
+          <span>🚙 Honda Civic</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-20.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-20.jpg' | asset_url }}" alt="Maya H. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Totally effortless installation. Just click it into the seat belt buckle!"</h3>
+        
+        <p class="safepet-card-body">
+          No complex mounting brackets, no tools, no hassle. You literally just click the metal tongue directly into your existing car seatbelt buckle and snap the swivel hook onto your pup's harness. Teddy sits quietly on his towel and doesn't slide or try to jump onto the dashboard anymore. 10/10 product.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="46">
+            👍 Helpful (<span class="safepet-vote-count">46</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 23: Nina C. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="23" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #ecfdf5; color: #059669;">N</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Nina C.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Phoenix, AZ</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 month ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Jack Russell Mix (Rocky)</span>
+          <span>🚙 Toyota RAV4</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-21.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-21.jpg' | asset_url }}" alt="Nina C. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"He was driving me crazy pacing back and forth. Total game changer!"</h3>
+        
+        <p class="safepet-card-body">
+          Rocky was driving me crazy going back and forth from the back seat to the front seat every time we stopped at a traffic light. Here is the belt showing the double reflective threading—great for late evening drives when opening the doors. Rocky stays safely in his back seat spot and I can drive with peace of mind.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="41">
+            👍 Helpful (<span class="safepet-vote-count">41</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 24: Aria M. (Batch 3) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="3" data-review-id="24" data-tags="all photos five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #e0e7ff; color: #4338ca;">A</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Aria M.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Indianapolis, IN</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 month ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Beagle (Copper)</span>
+          <span>🚙 Hyundai Elantra</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-22.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-22.jpg' | asset_url }}" alt="Aria M. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Heavy-duty metal hardware and super smooth 360 swivel clip."</h3>
+        
+        <p class="safepet-card-body">
+          Photo of the strap right out of the box. You can feel the quality immediately—the metal buckle is heavy and genuine steel, not cheap painted tin. The swivel clasp spins freely so leashes don't twist up. Excellent quality for the price.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="36">
+            👍 Helpful (<span class="safepet-vote-count">36</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 25: Ella R. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="25" data-tags="all photos safety five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fef2f2; color: #dc2626;">E</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Ella R.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Louisville, KY</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 month ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Rescue Volunteer Transporter</span>
+          <span>🚙 Chevy Suburban</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-23.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-23.jpg' | asset_url }}" alt="Ella R. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"I volunteer in rescue transport—this is mandatory equipment for every run."</h3>
+        
+        <p class="safepet-card-body">
+          I'm a volunteer rescue transporter and for dogs needing tethering rather than crating, this seat belt is ideal. No worry about a flight risk when opening car doors at rest stops, and I know they are comfortable riding. Here is the full strap extended on our table—the length adjustment is generous and locks tight.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>3-Seat Belts Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="67">
+            👍 Helpful (<span class="safepet-vote-count">67</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 26: Mila J. & Tom B. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="26" data-tags="all photos small five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #eff6ff; color: #2563eb;">M</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Mila J. & Tom B.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Pittsburgh, PA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 month ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Pug (Barnaby)</span>
+          <span>🚙 Mazda CX-5</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-31.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-31.jpg' | asset_url }}" alt="Mila J. & Tom B. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Our pug Barnaby sits happily in his backseat hammock tethered with the blue strap!"</h3>
+        
+        <p class="safepet-card-body">
+          Look at this happy face! Barnaby loves riding in his hammock and the blue SafePet strap clicks right into the Mazda buckle. He has enough room to lay down or sit up and smile, and the bungee absorbs the bumps. Best safety upgrade we ever made for our little buddy.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Double Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="55">
+            👍 Helpful (<span class="safepet-vote-count">55</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 27: Lily A. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="27" data-tags="all photos safety large five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #f0fdf4; color: #16a34a;">L</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Lily A.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Albuquerque, NM</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">1 month ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Heeler Mix (Sadie)</span>
+          <span>🚙 Ford Ranger Regular Cab</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-25.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-25.jpg' | asset_url }}" alt="Lily A. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Tested the extension length in the front seat—keeps her safely off the dash!"</h3>
+        
+        <p class="safepet-card-body">
+          Because I drive a regular cab truck with no rear seats, Sadie has to ride in the front passenger seat. I tested the length it extends in the event of sudden braking. It adequately prevents her from hitting the dashboard or windshield, while still letting her sit comfortably. The bright red strap also looks great.
         </p>
 
         <div class="safepet-card-footer">
@@ -378,58 +2358,244 @@
           </button>
         </div>
       </article>
-
-      <!-- REVIEW 6: Michael S. (Open Top Jeep Freedom) -->
-      <article class="safepet-review-card has-photo" data-rating="5" data-review-id="6">
+      <!-- REVIEW 28: Ruby W. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="28" data-tags="all photos five" style="display: none;">
         <div class="safepet-card-header">
           <div class="safepet-user-meta">
-            <div class="safepet-avatar-circle" style="background-color: #fff1f2; color: #e11d48;">M</div>
+            <div class="safepet-avatar-circle" style="background-color: #faf5ff; color: #9333ea;">R</div>
             <div class="safepet-author-details">
               <div class="safepet-name-row">
-                <span class="safepet-author-name">Michael S.</span>
+                <span class="safepet-author-name">Ruby W.</span>
                 <span class="safepet-verified-badge">
                   <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
                   Verified Buyer
                 </span>
               </div>
-              <span class="safepet-user-location">🇺🇸 Phoenix, Arizona</span>
+              <span class="safepet-user-location">🇺🇸 Grand Rapids, MI</span>
             </div>
           </div>
-          <span class="safepet-review-date">1 week ago</span>
+          <span class="safepet-review-date">1 month ago</span>
         </div>
 
         <div class="safepet-card-stars">★★★★★</div>
 
         <div class="safepet-car-tag">
-          <span>🐾 Boxer Mix (Buster)</span>
-          <span>🚙 Jeep Wrangler</span>
+          <span>🐾 Golden Doodle (Oliver)</span>
+          <span>🚙 GMC Terrain</span>
         </div>
 
-        <div class="safepet-card-image" data-full-src="{{ 'review-ugc-dog-car-6.jpg' | asset_url }}">
-          <img src="{{ 'review-ugc-dog-car-6.jpg' | asset_url }}" alt="Boxer mix in Jeep with safety belt" loading="lazy" width="600" height="450">
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-26.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-26.jpg' | asset_url }}" alt="Ruby W. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
           <span class="safepet-zoom-hint">🔍 Tap to expand</span>
         </div>
 
-        <h3 class="safepet-card-headline">"Took the doors off the Jeep with complete peace of mind."</h3>
+        <h3 class="safepet-card-headline">"Arrived in 3 days. Vibrant royal blue color and military grade nylon!"</h3>
         
         <p class="safepet-card-body">
-          I love taking the top and doors off my Wrangler in the summer, but I was always terrified my Boxer mix might jump out after a squirrel at a red light. This strap keeps him anchored firmly in the middle of the back bench. He gets the breeze and smells, and I get zero panic. Sturdy zinc alloy swivel clip hasn't worn down a bit.
+          Photo of our royal blue strap right as it came out of the delivery envelope. The color is rich, stitching is tight, and the buckle clicked into my GMC with a crisp snap. Thank you for helping me keep my best friend safe in the car!
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="38">
+            👍 Helpful (<span class="safepet-vote-count">38</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 29: Maya P. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="29" data-tags="all photos safety five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fff1f2; color: #e11d48;">M</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Maya P.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 San Antonio, TX</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 months ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Multi-Dog Household (5 Dogs)</span>
+          <span>🚙 Ford Expedition</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-27.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-27.jpg' | asset_url }}" alt="Maya P. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Ordered 5 for all our dogs—couldn't pass up the incredible promotional value!"</h3>
+        
+        <p class="safepet-card-body">
+          With 5 rescue dogs, outfitting everyone with safe vehicle restraints used to cost a fortune. SafePet made it accessible for our entire pack. The cyan blue strap is bright and the bungee action works like a charm. All 5 buckles click in cleanly across all rows of our Expedition.
         </p>
 
         <div class="safepet-card-footer">
           <span class="safepet-verified-purchase">Purchased: <strong>3-Seat Belts Ultimate Pack</strong></span>
-          <button type="button" class="safepet-helpful-btn" data-votes="57">
-            👍 Helpful (<span class="safepet-vote-count">57</span>)
+          <button type="button" class="safepet-helpful-btn" data-votes="52">
+            👍 Helpful (<span class="safepet-vote-count">52</span>)
           </button>
         </div>
       </article>
+      <!-- REVIEW 30: Nina S. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="30" data-tags="all photos five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #fefce8; color: #ca8a04;">N</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Nina S.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Cleveland, OH</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 months ago</span>
+        </div>
 
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Boxer Mix (Roxy)</span>
+          <span>🚙 Kia Telluride</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-28.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-28.jpg' | asset_url }}" alt="Nina S. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Solid steel buckle feels substantial in hand—no flimsy plastic or thin metal."</h3>
+        
+        <p class="safepet-card-body">
+          Close-up photo of the strap in my hand. You can see how sturdy the slide adjuster and solid steel buckle tongue are. It clipped into the car buckle immediately. Attaching it to her harness gives total protection during sudden highway maneuvers. Great overall!
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Double Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="40">
+            👍 Helpful (<span class="safepet-vote-count">40</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 31: Luna & Chris H. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="31" data-tags="all photos five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #ecfdf5; color: #059669;">L</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Luna & Chris H.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Sacramento, CA</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 months ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Border Collie (Bonnie)</span>
+          <span>🚙 Subaru Outback</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-29.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-29.jpg' | asset_url }}" alt="Luna & Chris H. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Bonnie loves her rides and we love not having to hold her collar at stops!"</h3>
+        
+        <p class="safepet-card-body">
+          Bonnie used to pace frantically whenever we approached stoplights. With the SafePet Strap, she knows she has her designated comfort zone and immediately curls up. The latch releases with one finger push when we reach the dog park. Flawless execution.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>Starter Pack (1 Belt)</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="35">
+            👍 Helpful (<span class="safepet-vote-count">35</span>)
+          </button>
+        </div>
+      </article>
+      <!-- REVIEW 32: Mila B. (Batch 4) -->
+      <article class="safepet-review-card has-photo" data-rating="5" data-batch="4" data-review-id="32" data-tags="all photos large five" style="display: none;">
+        <div class="safepet-card-header">
+          <div class="safepet-user-meta">
+            <div class="safepet-avatar-circle" style="background-color: #e0e7ff; color: #4338ca;">M</div>
+            <div class="safepet-author-details">
+              <div class="safepet-name-row">
+                <span class="safepet-author-name">Mila B.</span>
+                <span class="safepet-verified-badge">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                  Verified Buyer
+                </span>
+              </div>
+              <span class="safepet-user-location">🇺🇸 Raleigh, NC</span>
+            </div>
+          </div>
+          <span class="safepet-review-date">2 months ago</span>
+        </div>
+
+        <div class="safepet-card-stars">★★★★★</div>
+
+        <div class="safepet-car-tag">
+          <span>🐾 Golden Retriever (Cooper)</span>
+          <span>🚙 Toyota Highlander</span>
+        </div>
+
+        <!-- UGC Photo -->
+        <div class="safepet-card-image" data-full-src="{{ 'safepet-review-07.jpg' | asset_url }}">
+          <img src="{{ 'safepet-review-07.jpg' | asset_url }}" alt="Mila B. customer review of SafePet Seat Belt" loading="lazy" width="600" height="450">
+          <span class="safepet-zoom-hint">🔍 Tap to expand</span>
+        </div>
+
+        <h3 class="safepet-card-headline">"Bungee element lets him shift positions comfortably while staying 100% secure."</h3>
+        
+        <p class="safepet-card-body">
+          I love how sturdy this seat belt is. The bungee element lets him stand up, look out the window, or stretch out on the seat, but never allows him to fall into the footwell when braking. Works well, looks premium, and gives us complete peace of mind.
+        </p>
+
+        <div class="safepet-card-footer">
+          <span class="safepet-verified-purchase">Purchased: <strong>2-Seat Belts Double Pack</strong></span>
+          <button type="button" class="safepet-helpful-btn" data-votes="46">
+            👍 Helpful (<span class="safepet-vote-count">46</span>)
+          </button>
+        </div>
+      </article>
     </div>
 
-    <!-- LOAD MORE BUTTON -->
-    <div class="safepet-loox-load-more">
-      <button type="button" class="safepet-load-more-btn" id="safepetLoadMoreReviews-{{ section.id }}">
-        Show More Verified Reviews (2,184 Total)
+    <!-- PROGRESS COUNTER & LOAD MORE BUTTON -->
+    <div class="safepet-loox-load-more-wrap">
+      <div class="safepet-load-progress">
+        Showing <strong class="safepet-current-count">8</strong> of <strong class="safepet-total-count">32</strong> verified photo reviews
+      </div>
+      <div class="safepet-progress-bar-track">
+        <div class="safepet-progress-bar-fill" id="safepetProgressFill-{{ section_id }}" style="width: 25%;"></div>
+      </div>
+      <button type="button" class="safepet-load-more-btn" id="safepetLoadMoreReviews-{{ section_id }}">
+        <span class="safepet-load-btn-text">Show More Verified Reviews (+8)</span>
+        <span class="safepet-load-spinner" style="display:none;" aria-hidden="true">⏳</span>
       </button>
     </div>
 
@@ -437,34 +2603,34 @@
 </section>
 
 <!-- LIGHTBOX MODAL FOR EXPANDED PHOTOS -->
-<div class="safepet-loox-lightbox" id="safepetLooxLightbox-{{ section.id }}" aria-hidden="true" role="dialog">
+<div class="safepet-loox-lightbox" id="safepetLooxLightbox-{{ section_id }}" aria-hidden="true" role="dialog" aria-modal="true">
   <div class="safepet-lightbox-overlay"></div>
   <div class="safepet-lightbox-content">
     <button type="button" class="safepet-lightbox-close" aria-label="Close Lightbox">✕</button>
     <div class="safepet-lightbox-body">
       <div class="safepet-lightbox-img-wrap">
-        <img src="" alt="Customer Photo Expanded" id="safepetLightboxImg-{{ section.id }}">
+        <img src="" alt="Customer Photo Expanded" id="safepetLightboxImg-{{ section_id }}">
       </div>
-      <div class="safepet-lightbox-info" id="safepetLightboxInfo-{{ section.id }}">
-        <!-- Injected via JS -->
+      <div class="safepet-lightbox-info" id="safepetLightboxInfo-{{ section_id }}">
+        <!-- Injected dynamically via JS -->
       </div>
     </div>
   </div>
 </div>
 
-<!-- WRITE A REVIEW MODAL (LOOX STYLE) -->
-<div class="safepet-review-modal" id="safepetReviewModal-{{ section.id }}" aria-hidden="true" role="dialog">
+<!-- WRITE A REVIEW MODAL -->
+<div class="safepet-review-modal" id="safepetReviewModal-{{ section_id }}" aria-hidden="true" role="dialog" aria-modal="true">
   <div class="safepet-review-modal-overlay"></div>
   <div class="safepet-review-modal-content">
-    <button type="button" class="safepet-modal-close" aria-label="Close Review Form">✕</button>
+    <button type="button" class="safepet-modal-close" aria-label="Close Modal">✕</button>
     <div class="safepet-modal-header">
-      <h3 class="safepet-modal-title">Share Your Experience with SafePet Strap</h3>
-      <p class="safepet-modal-sub">Help other dog parents keep their furry family members safe on the road.</p>
+      <h3 class="safepet-modal-title">Share Your SafePet™ Experience</h3>
+      <p class="safepet-modal-subtitle">Help fellow dog parents keep their fur-babies safe on the road.</p>
     </div>
-    <form class="safepet-modal-form" id="safepetReviewForm-{{ section.id }}" onsubmit="return false;">
+    <form class="safepet-review-form" id="safepetReviewForm-{{ section_id }}">
       <div class="safepet-form-group">
-        <label>Overall Rating *</label>
-        <div class="safepet-interactive-stars" id="safepetStarPicker-{{ section.id }}">
+        <label class="safepet-form-label">Overall Rating *</label>
+        <div class="safepet-star-picker" id="safepetStarPicker-{{ section_id }}">
           <span class="safepet-star-pick active" data-star="1">★</span>
           <span class="safepet-star-pick active" data-star="2">★</span>
           <span class="safepet-star-pick active" data-star="3">★</span>
@@ -474,1015 +2640,184 @@
       </div>
       <div class="safepet-form-row">
         <div class="safepet-form-group">
-          <label for="reviewName">Your Name *</label>
-          <input type="text" id="reviewName" required placeholder="e.g. Sarah M.">
+          <label class="safepet-form-label" for="reviewName-{{ section_id }}">Your Name *</label>
+          <input type="text" id="reviewName-{{ section_id }}" class="safepet-form-input" placeholder="e.g. Sarah M." required>
         </div>
         <div class="safepet-form-group">
-          <label for="reviewEmail">Your Email *</label>
-          <input type="email" id="reviewEmail" required placeholder="e.g. sarah@example.com">
+          <label class="safepet-form-label" for="reviewLocation-{{ section_id }}">City, State *</label>
+          <input type="text" id="reviewLocation-{{ section_id }}" class="safepet-form-input" placeholder="e.g. Austin, TX" required>
         </div>
       </div>
       <div class="safepet-form-row">
         <div class="safepet-form-group">
-          <label for="reviewDog">Dog Breed & Name</label>
-          <input type="text" id="reviewDog" placeholder="e.g. Golden Retriever (Buster)">
+          <label class="safepet-form-label" for="reviewDog-{{ section_id }}">Dog Breed & Name</label>
+          <input type="text" id="reviewDog-{{ section_id }}" class="safepet-form-input" placeholder="e.g. Golden Retriever (Cooper)">
         </div>
         <div class="safepet-form-group">
-          <label for="reviewCar">Vehicle Model</label>
-          <input type="text" id="reviewCar" placeholder="e.g. 2023 Subaru Outback">
+          <label class="safepet-form-label" for="reviewCar-{{ section_id }}">Vehicle Make / Model</label>
+          <input type="text" id="reviewCar-{{ section_id }}" class="safepet-form-input" placeholder="e.g. Toyota RAV4">
         </div>
       </div>
       <div class="safepet-form-group">
-        <label for="reviewHeadline">Review Headline *</label>
-        <input type="text" id="reviewHeadline" required placeholder="e.g. Keeps my dog safe and calm in the backseat!">
+        <label class="safepet-form-label" for="reviewHeadline-{{ section_id }}">Review Headline *</label>
+        <input type="text" id="reviewHeadline-{{ section_id }}" class="safepet-form-input" placeholder="e.g. Best peace of mind for our highway trips!" required>
       </div>
       <div class="safepet-form-group">
-        <label for="reviewBody">Detailed Review *</label>
-        <textarea id="reviewBody" rows="4" required placeholder="Tell us how the SafePet Strap performed in your vehicle..."></textarea>
+        <label class="safepet-form-label" for="reviewBody-{{ section_id }}">Your Review & Story *</label>
+        <textarea id="reviewBody-{{ section_id }}" class="safepet-form-textarea" rows="4" placeholder="Tell us how the SafePet Strap helped keep your dog safe and comfortable in the car..." required></textarea>
       </div>
       <div class="safepet-form-group">
-        <label>Attach Photo of Your Dog in the Car (Optional)</label>
+        <label class="safepet-form-label">Upload Dog Photo (Optional)</label>
         <div class="safepet-file-dropzone">
-          <span>📷 Click to select or drop dog photos here</span>
+          <span>📷 Click or drag photo here</span>
           <input type="file" accept="image/*" class="safepet-file-input">
         </div>
       </div>
       <button type="submit" class="safepet-submit-review-btn">Submit Verified Review</button>
-      <div class="safepet-form-success" style="display: none;">
-        🎉 <strong>Thank you!</strong> Your review has been submitted and will appear shortly after automated verification.
+      <div class="safepet-form-success" style="display:none;">
+        🎉 <strong>Thank you!</strong> Your review has been submitted for verification and will appear shortly.
       </div>
     </form>
   </div>
 </div>
 
-<style>
-  /* Base Loox Section Styling */
-  .safepet-loox-section {
-    width: 100%;
-    background-color: #ffffff;
-    padding: 64px 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #111827;
-    border-top: 1px solid #f1f5f9;
-  }
-
-  .safepet-loox-container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  /* Header */
-  .safepet-loox-header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-
-  .safepet-loox-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background-color: #fef2f2;
-    color: #dc2626;
-    padding: 5px 12px;
-    border-radius: 9999px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .safepet-loox-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #dc2626;
-    border-radius: 50%;
-  }
-
-  .safepet-loox-title {
-    font-size: 32px;
-    font-weight: 800;
-    color: #111827;
-    margin: 0 0 10px 0;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-  }
-
-  .safepet-loox-subtitle {
-    font-size: 16px;
-    color: #64748b;
-    margin: 0 auto;
-    max-width: 650px;
-    line-height: 1.5;
-  }
-
-  /* Loox Rating Summary Card */
-  .safepet-loox-summary-card {
-    background: #fbfbfd;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 32px 40px;
-    display: grid;
-    grid-template-columns: 1.1fr 1.4fr 1.1fr;
-    gap: 36px;
-    align-items: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-    margin-bottom: 40px;
-  }
-
-  /* Score Col */
-  .safepet-loox-score-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    border-right: 1px solid #e2e8f0;
-    padding-right: 24px;
-  }
-
-  .safepet-loox-big-score {
-    font-size: 54px;
-    font-weight: 900;
-    color: #111827;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .safepet-loox-stars-row {
-    color: #f59e0b;
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-  }
-
-  .safepet-loox-review-count {
-    font-size: 13px;
-    color: #475569;
-    margin-bottom: 10px;
-  }
-
-  .safepet-loox-trust-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #15803d;
-    background: #f0fdf4;
-    padding: 4px 10px;
-    border-radius: 9999px;
-  }
-
-  /* Breakdown Col */
-  .safepet-loox-breakdown-col {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .safepet-bar-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 12px;
-    color: #475569;
-  }
-
-  .safepet-bar-label {
-    width: 24px;
-    font-weight: 700;
-  }
-
-  .safepet-bar-track {
-    flex: 1;
-    height: 8px;
-    background-color: #e2e8f0;
-    border-radius: 9999px;
-    overflow: hidden;
-  }
-
-  .safepet-bar-fill {
-    height: 100%;
-    background-color: #f59e0b;
-    border-radius: 9999px;
-  }
-
-  .safepet-bar-num {
-    width: 75px;
-    text-align: right;
-    font-weight: 600;
-    color: #64748b;
-  }
-
-  /* CTA Col */
-  .safepet-loox-cta-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-    border-left: 1px solid #e2e8f0;
-    padding-left: 24px;
-  }
-
-  .safepet-recommend-badge {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .safepet-recommend-percent {
-    font-size: 28px;
-    font-weight: 900;
-    color: #15803d;
-    line-height: 1;
-  }
-
-  .safepet-recommend-text {
-    font-size: 12px;
-    color: #64748b;
-    line-height: 1.4;
-    max-width: 220px;
-  }
-
-  .safepet-write-review-btn {
-    background: #111827;
-    color: #ffffff;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 9999px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.15s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .safepet-write-review-btn:hover {
-    background: #dc2626;
-    transform: translateY(-1px);
-  }
-
-  /* Customer UGC Photos Strip */
-  .safepet-loox-photos-strip {
-    margin-bottom: 32px;
-  }
-
-  .safepet-photos-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
-  .safepet-photos-title {
-    font-size: 14px;
-    font-weight: 800;
-    color: #111827;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .safepet-photos-hint {
-    font-size: 12px;
-    color: #64748b;
-  }
-
-  .safepet-photos-scroller {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .safepet-photos-scroller::-webkit-scrollbar {
-    height: 6px;
-  }
-  .safepet-photos-scroller::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 9999px;
-  }
-
-  .safepet-photo-thumb-card {
-    position: relative;
-    width: 140px;
-    height: 140px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .safepet-photo-thumb-card:hover {
-    transform: scale(1.04);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-
-  .safepet-photo-thumb-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .safepet-photo-badge {
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    background: rgba(17, 24, 39, 0.85);
-    color: #f59e0b;
-    font-size: 10px;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-  }
-
-  /* Filter & Sort Bar */
-  .safepet-loox-filter-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 28px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid #e2e8f0;
-  }
-
-  .safepet-filter-chips {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .safepet-chip {
-    background: #f1f5f9;
-    color: #334155;
-    border: 1px solid #cbd5e1;
-    padding: 6px 14px;
-    border-radius: 9999px;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .safepet-chip:hover,
-  .safepet-chip.active {
-    background: #111827;
-    color: #ffffff;
-    border-color: #111827;
-  }
-
-  .safepet-sort-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    color: #64748b;
-  }
-
-  .safepet-sort-select {
-    padding: 6px 10px;
-    border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff;
-    font-size: 12px;
-    font-weight: 600;
-    color: #1e293b;
-    cursor: pointer;
-  }
-
-  /* Loox Masonry / Grid */
-  .safepet-loox-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    align-items: start;
-    margin-bottom: 40px;
-  }
-
-  /* Review Card */
-  .safepet-review-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-
-  .safepet-review-card:hover {
-    border-color: #cbd5e1;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    transform: translateY(-2px);
-  }
-
-  /* Card Header */
-  .safepet-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .safepet-user-meta {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .safepet-avatar-circle {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    font-weight: 800;
-    flex-shrink: 0;
-  }
-
-  .safepet-author-details {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .safepet-name-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .safepet-author-name {
-    font-size: 14px;
-    font-weight: 800;
-    color: #0f172a;
-  }
-
-  .safepet-verified-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 10px;
-    font-weight: 700;
-    color: #16a34a;
-    background: #f0fdf4;
-    padding: 2px 6px;
-    border-radius: 4px;
-    line-height: 1;
-  }
-
-  .safepet-user-location {
-    font-size: 11px;
-    color: #64748b;
-  }
-
-  .safepet-review-date {
-    font-size: 11px;
-    color: #94a3b8;
-  }
-
-  .safepet-card-stars {
-    color: #f59e0b;
-    font-size: 16px;
-    letter-spacing: 2px;
-    line-height: 1;
-  }
-
-  /* Dog / Car Tag */
-  .safepet-car-tag {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .safepet-car-tag span {
-    font-size: 11px;
-    font-weight: 600;
-    color: #475569;
-    background: #f1f5f9;
-    padding: 3px 8px;
-    border-radius: 6px;
-  }
-
-  /* Card Image */
-  .safepet-card-image {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4/3;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    background: #f8fafc;
-  }
-
-  .safepet-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .safepet-card-image:hover img {
-    transform: scale(1.03);
-  }
-
-  .safepet-zoom-hint {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: rgba(15, 23, 42, 0.75);
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .safepet-card-image:hover .safepet-zoom-hint {
-    opacity: 1;
-  }
-
-  /* Headline & Body */
-  .safepet-card-headline {
-    font-size: 15px;
-    font-weight: 800;
-    color: #0f172a;
-    line-height: 1.35;
-    margin: 0;
-  }
-
-  .safepet-card-body {
-    font-size: 13.5px;
-    color: #334155;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* Card Footer */
-  .safepet-card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #f1f5f9;
-    padding-top: 12px;
-    margin-top: 4px;
-    font-size: 11px;
-  }
-
-  .safepet-verified-purchase {
-    color: #64748b;
-  }
-
-  .safepet-helpful-btn {
-    background: transparent;
-    border: 1px solid #e2e8f0;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    color: #475569;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .safepet-helpful-btn:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: #0f172a;
-  }
-
-  .safepet-helpful-btn.voted {
-    background: #f0fdf4;
-    border-color: #86efac;
-    color: #16a34a;
-    font-weight: 700;
-  }
-
-  /* Load More */
-  .safepet-loox-load-more {
-    text-align: center;
-  }
-
-  .safepet-load-more-btn {
-    background: #ffffff;
-    color: #0f172a;
-    border: 2px solid #0f172a;
-    padding: 14px 32px;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .safepet-load-more-btn:hover {
-    background: #0f172a;
-    color: #ffffff;
-  }
-
-  /* LIGHTBOX MODAL */
-  .safepet-loox-lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  .safepet-loox-lightbox.open {
-    display: flex;
-  }
-
-  .safepet-lightbox-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.85);
-    backdrop-filter: blur(8px);
-  }
-
-  .safepet-lightbox-content {
-    position: relative;
-    background: #ffffff;
-    border-radius: 16px;
-    max-width: 860px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    z-index: 2;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  .safepet-lightbox-close {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    background: rgba(15, 23, 42, 0.6);
-    color: #ffffff;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: 16px;
-    cursor: pointer;
-    z-index: 10;
-  }
-
-  .safepet-lightbox-body {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-  }
-
-  .safepet-lightbox-img-wrap {
-    background: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 16px;
-    border-bottom-left-radius: 16px;
-    overflow: hidden;
-  }
-
-  .safepet-lightbox-img-wrap img {
-    width: 100%;
-    height: 100%;
-    max-height: 520px;
-    object-fit: contain;
-    display: block;
-  }
-
-  .safepet-lightbox-info {
-    padding: 32px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    overflow-y: auto;
-  }
-
-  /* WRITE A REVIEW MODAL */
-  .safepet-review-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 99999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  .safepet-review-modal.open {
-    display: flex;
-  }
-
-  .safepet-review-modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(6px);
-  }
-
-  .safepet-review-modal-content {
-    position: relative;
-    background: #ffffff;
-    border-radius: 20px;
-    max-width: 540px;
-    width: 100%;
-    max-height: 92vh;
-    overflow-y: auto;
-    padding: 36px 32px;
-    z-index: 2;
-    box-shadow: 0 24px 48px rgba(0,0,0,0.25);
-  }
-
-  .safepet-modal-close {
-    position: absolute;
-    top: 18px;
-    right: 20px;
-    background: #f1f5f9;
-    border: none;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: 700;
-    color: #475569;
-    cursor: pointer;
-  }
-
-  .safepet-modal-title {
-    font-size: 20px;
-    font-weight: 800;
-    color: #0f172a;
-    margin: 0 0 6px 0;
-  }
-
-  .safepet-modal-sub {
-    font-size: 13px;
-    color: #64748b;
-    margin: 0 0 24px 0;
-  }
-
-  .safepet-modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .safepet-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .safepet-form-group label {
-    font-size: 12px;
-    font-weight: 700;
-    color: #334155;
-  }
-
-  .safepet-form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .safepet-form-group input,
-  .safepet-form-group textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1px solid #cbd5e1;
-    font-size: 13px;
-    font-family: inherit;
-    box-sizing: border-box;
-  }
-
-  .safepet-form-group input:focus,
-  .safepet-form-group textarea:focus {
-    outline: none;
-    border-color: #dc2626;
-    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
-  }
-
-  .safepet-interactive-stars {
-    display: flex;
-    gap: 6px;
-    font-size: 28px;
-    color: #e2e8f0;
-    cursor: pointer;
-  }
-
-  .safepet-star-pick.active {
-    color: #f59e0b;
-  }
-
-  .safepet-file-dropzone {
-    border: 2px dashed #cbd5e1;
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    font-size: 12px;
-    color: #64748b;
-    cursor: pointer;
-    position: relative;
-    background: #f8fafc;
-  }
-
-  .safepet-file-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-  }
-
-  .safepet-submit-review-btn {
-    background: #dc2626;
-    color: #ffffff;
-    border: none;
-    padding: 14px 20px;
-    border-radius: 9999px;
-    font-size: 14px;
-    font-weight: 800;
-    cursor: pointer;
-    margin-top: 8px;
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
-  }
-
-  .safepet-submit-review-btn:hover {
-    background: #b91c1c;
-  }
-
-  .safepet-form-success {
-    background: #f0fdf4;
-    border: 1px solid #86efac;
-    color: #166534;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    line-height: 1.4;
-  }
-
-  /* RESPONSIVE LAYOUTS */
-  @media (max-width: 960px) {
-    .safepet-loox-summary-card {
-      grid-template-columns: 1fr;
-      gap: 24px;
-      padding: 24px;
-    }
-    .safepet-loox-score-col {
-      border-right: none;
-      border-bottom: 1px solid #e2e8f0;
-      padding-right: 0;
-      padding-bottom: 20px;
-    }
-    .safepet-loox-cta-col {
-      border-left: none;
-      border-top: 1px solid #e2e8f0;
-      padding-left: 0;
-      padding-top: 20px;
-    }
-    .safepet-loox-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .safepet-lightbox-body {
-      grid-template-columns: 1fr;
-    }
-    .safepet-lightbox-img-wrap {
-      border-top-right-radius: 16px;
-      border-bottom-left-radius: 0;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .safepet-loox-section {
-      padding: 44px 16px;
-    }
-    .safepet-loox-title {
-      font-size: 24px;
-    }
-    .safepet-loox-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .safepet-form-row {
-      grid-template-columns: 1fr;
-    }
-    .safepet-photo-thumb-card {
-      width: 110px;
-      height: 110px;
-    }
-  }
-</style>
-
 <script>
   (function() {
-    function initLooxReviews() {
-      var section = document.getElementById('safepetLooxReviews-{{ section.id }}');
+    function initSafepetLooxReviews() {
+      var section = document.getElementById('safepetLooxReviews-{{ section_id }}');
       if (!section) return;
 
-      // Helpful voting logic
-      var helpfulButtons = section.querySelectorAll('.safepet-helpful-btn');
-      helpfulButtons.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          if (this.classList.contains('voted')) return;
-          var countSpan = this.querySelector('.safepet-vote-count');
-          var current = parseInt(this.getAttribute('data-votes') || '0', 10);
-          current += 1;
-          this.setAttribute('data-votes', current);
-          if (countSpan) countSpan.textContent = current;
-          this.classList.add('voted');
-        });
-      });
+      var currentBatch = 1;
+      var totalBatches = 4;
+      var totalReviews = 32;
+      var activeFilter = 'all';
 
-      // Filter tabs logic
-      var chips = section.querySelectorAll('.safepet-chip');
       var cards = section.querySelectorAll('.safepet-review-card');
+      var loadMoreBtn = document.getElementById('safepetLoadMoreReviews-{{ section_id }}');
+      var currentCountEl = section.querySelector('.safepet-current-count');
+      var totalCountEl = section.querySelector('.safepet-total-count');
+      var progressFill = document.getElementById('safepetProgressFill-{{ section_id }}');
+      var chips = section.querySelectorAll('.safepet-chip');
+      var lightbox = document.getElementById('safepetLooxLightbox-{{ section_id }}');
+      var lightboxImg = document.getElementById('safepetLightboxImg-{{ section_id }}');
+      var lightboxInfo = document.getElementById('safepetLightboxInfo-{{ section_id }}');
 
+      // Update counter and progress bar
+      function updateProgress() {
+        var visibleCards = Array.from(cards).filter(function(card) {
+          return card.style.display !== 'none';
+        });
+
+        if (currentCountEl) currentCountEl.textContent = visibleCards.length;
+        if (totalCountEl) totalCountEl.textContent = totalReviews;
+
+        var pct = Math.min(100, Math.round((visibleCards.length / totalReviews) * 100));
+        if (progressFill) progressFill.style.width = pct + '%';
+
+        if (loadMoreBtn) {
+          if (visibleCards.length >= totalReviews || activeFilter !== 'all') {
+            if (activeFilter !== 'all') {
+              loadMoreBtn.innerHTML = '<span class="safepet-load-btn-text">Showing all ' + visibleCards.length + ' filtered reviews</span>';
+              loadMoreBtn.disabled = true;
+              loadMoreBtn.classList.add('all-loaded');
+            } else {
+              loadMoreBtn.innerHTML = '<span class="safepet-load-btn-text">✓ All ' + totalReviews + ' Verified Customer Reviews Displayed</span>';
+              loadMoreBtn.disabled = true;
+              loadMoreBtn.classList.add('all-loaded');
+            }
+          } else {
+            var remaining = totalReviews - visibleCards.length;
+            var nextStep = Math.min(8, remaining);
+            loadMoreBtn.innerHTML = '<span class="safepet-load-btn-text">Show More Verified Reviews (+' + nextStep + ')</span>';
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.classList.remove('all-loaded');
+          }
+        }
+      }
+
+      // LOAD MORE REVIEWS (Progressive batching)
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+          if (currentBatch < totalBatches) {
+            currentBatch++;
+            var nextCards = section.querySelectorAll('.safepet-review-card[data-batch="' + currentBatch + '"]');
+            nextCards.forEach(function(card) {
+              card.style.display = 'flex';
+              card.classList.add('revealed');
+            });
+            updateProgress();
+          }
+        });
+      }
+
+      // FILTER CHIPS
       chips.forEach(function(chip) {
         chip.addEventListener('click', function() {
           chips.forEach(function(c) { c.classList.remove('active'); });
           this.classList.add('active');
+          activeFilter = this.getAttribute('data-filter') || 'all';
 
-          var filter = this.getAttribute('data-filter');
           cards.forEach(function(card) {
-            if (filter === 'all' || filter === 'verified') {
-              card.style.display = 'flex';
-            } else if (filter === 'photos') {
-              if (card.classList.contains('has-photo')) {
+            var tags = card.getAttribute('data-tags') || '';
+            var batch = parseInt(card.getAttribute('data-batch') || '1', 10);
+
+            if (activeFilter === 'all') {
+              if (batch <= currentBatch) {
                 card.style.display = 'flex';
+                card.classList.add('revealed');
               } else {
                 card.style.display = 'none';
               }
-            } else if (filter === 'five') {
-              if (card.getAttribute('data-rating') === '5') {
+            } else {
+              if (tags.indexOf(activeFilter) !== -1) {
                 card.style.display = 'flex';
+                card.classList.add('revealed');
               } else {
                 card.style.display = 'none';
               }
             }
           });
+
+          updateProgress();
         });
       });
 
-      // Lightbox logic
-      var lightbox = document.getElementById('safepetLooxLightbox-{{ section.id }}');
-      var lightboxImg = document.getElementById('safepetLightboxImg-{{ section.id }}');
-      var lightboxInfo = document.getElementById('safepetLightboxInfo-{{ section.id }}');
+      // HELPFUL VOTES
+      var helpfulButtons = section.querySelectorAll('.safepet-helpful-btn');
+      helpfulButtons.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (this.classList.contains('voted')) return;
+          var countSpan = this.querySelector('.safepet-vote-count');
+          var votes = parseInt(this.getAttribute('data-votes') || '0', 10) + 1;
+          this.setAttribute('data-votes', votes);
+          if (countSpan) countSpan.textContent = votes;
+          this.classList.add('voted');
+        });
+      });
 
-      function openLightbox(imgSrc, card) {
-        if (!lightbox || !lightboxImg) return;
-        lightboxImg.src = imgSrc;
-        if (card && lightboxInfo) {
+      // LIGHTBOX MODAL
+      function openLightbox(fullSrc, card) {
+        if (!lightbox || !lightboxImg || !lightboxInfo) return;
+        lightboxImg.src = fullSrc;
+
+        if (card) {
           var name = card.querySelector('.safepet-author-name') ? card.querySelector('.safepet-author-name').textContent : '';
           var location = card.querySelector('.safepet-user-location') ? card.querySelector('.safepet-user-location').textContent : '';
-          var stars = card.querySelector('.safepet-card-stars') ? card.querySelector('.safepet-card-stars').textContent : '★★★★★';
-          var title = card.querySelector('.safepet-card-headline') ? card.querySelector('.safepet-card-headline').textContent : '';
-          var body = card.querySelector('.safepet-card-body') ? card.querySelector('.safepet-card-body').textContent : '';
           var tag = card.querySelector('.safepet-car-tag') ? card.querySelector('.safepet-car-tag').innerHTML : '';
+          var title = card.querySelector('.safepet-card-headline') ? card.querySelector('.safepet-card-headline').textContent : '';
+          var body = card.querySelector('.safepet-card-body') ? card.querySelector('.safepet-card-body').innerHTML : '';
 
-          lightboxInfo.innerHTML = '<div style="display:flex;align-items:center;gap:8px;">' +
-            '<span style="font-weight:800;font-size:15px;color:#0f172a;">' + name + '</span>' +
-            '<span style="font-size:10px;font-weight:700;color:#16a34a;background:#f0fdf4;padding:2px 6px;border-radius:4px;">✓ Verified Buyer</span>' +
+          lightboxInfo.innerHTML =
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">' +
+              '<strong style="font-size:18px;color:#0f172a;">' + name + '</strong>' +
+              '<span style="font-size:11px;font-weight:700;color:#16a34a;background:#f0fdf4;padding:2px 8px;border-radius:99px;">✓ Verified Buyer</span>' +
             '</div>' +
             '<span style="font-size:12px;color:#64748b;">' + location + '</span>' +
-            '<div style="color:#f59e0b;font-size:18px;letter-spacing:1px;">' + stars + '</div>' +
-            '<div style="display:flex;gap:6px;flex-wrap:wrap;">' + tag + '</div>' +
-            '<h4 style="font-size:16px;font-weight:800;color:#0f172a;margin:4px 0 0 0;line-height:1.3;">' + title + '</h4>' +
-            '<p style="font-size:14px;color:#334155;line-height:1.6;margin:0;">' + body + '</p>';
+            '<div style="color:#f59e0b;font-size:18px;margin:8px 0;">★★★★★</div>' +
+            '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">' + tag + '</div>' +
+            '<h4 style="font-size:16px;font-weight:800;color:#0f172a;margin:0 0 10px 0;line-height:1.3;">' + title + '</h4>' +
+            '<p style="font-size:14px;color:#334155;line-height:1.65;margin:0;">' + body + '</p>';
         }
         lightbox.classList.add('open');
       }
@@ -1499,15 +2834,13 @@
         });
       });
 
-      // Photo UGC carousel thumbnail click opens corresponding card in lightbox
+      // UGC Carousel Thumbnails open corresponding Lightbox review
       section.querySelectorAll('.safepet-photo-thumb-card').forEach(function(thumb) {
         thumb.addEventListener('click', function() {
           var targetId = this.getAttribute('data-ugc-target');
           var targetCard = section.querySelector('.safepet-review-card[data-review-id="' + targetId + '"]');
           var img = this.querySelector('img');
-          if (img) {
-            openLightbox(img.src, targetCard);
-          }
+          if (img) openLightbox(img.src, targetCard);
         });
       });
 
@@ -1518,9 +2851,13 @@
         if (overlay) overlay.addEventListener('click', closeLightbox);
       }
 
-      // Write a Review Modal
-      var writeModal = document.getElementById('safepetReviewModal-{{ section.id }}');
-      var writeTrigger = document.getElementById('safepetWriteReviewBtn-{{ section.id }}');
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+
+      // WRITE A REVIEW MODAL
+      var writeModal = document.getElementById('safepetReviewModal-{{ section_id }}');
+      var writeTrigger = document.getElementById('safepetWriteReviewBtn-{{ section_id }}');
 
       if (writeTrigger && writeModal) {
         writeTrigger.addEventListener('click', function() {
@@ -1533,7 +2870,7 @@
         if (modalOverlay) modalOverlay.addEventListener('click', function() { writeModal.classList.remove('open'); });
 
         // Star picker in modal
-        var starPicker = document.getElementById('safepetStarPicker-{{ section.id }}');
+        var starPicker = document.getElementById('safepetStarPicker-{{ section_id }}');
         if (starPicker) {
           var stars = starPicker.querySelectorAll('.safepet-star-pick');
           stars.forEach(function(star) {
@@ -1548,7 +2885,7 @@
         }
 
         // Form submit
-        var form = document.getElementById('safepetReviewForm-{{ section.id }}');
+        var form = document.getElementById('safepetReviewForm-{{ section_id }}');
         if (form) {
           form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1562,23 +2899,12 @@
           });
         }
       }
-
-      // Load more button logic
-      var loadMoreBtn = document.getElementById('safepetLoadMoreReviews-{{ section.id }}');
-      if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-          this.textContent = 'All 2,184 Verified Reviews Displayed';
-          this.style.opacity = '0.6';
-          this.style.pointerEvents = 'none';
-        });
-      }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initLooxReviews);
+      document.addEventListener('DOMContentLoaded', initSafepetLooxReviews);
     } else {
-      initLooxReviews();
+      initSafepetLooxReviews();
     }
   })();
 </script>
-
