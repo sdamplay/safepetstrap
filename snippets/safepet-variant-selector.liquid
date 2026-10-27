@@ -886,12 +886,13 @@
   
   <div class="safepet-packages-list">
     
-    <!-- TIER 1: 1 Seat Belt -->
+    <!-- TIER 1: 1 Seat Belt (Default Selected) -->
     <input 
       type="radio" 
       id="safepet-tier-1-{{ section.id }}" 
       name="safepet_variant_tier" 
       value="1"
+      checked
       data-variant-id="{{ v0_id }}"
       data-quantity="1"
       data-price="0.00"
@@ -945,13 +946,12 @@
       </div>
     </label>
 
-    <!-- TIER 3: 3 Seat Belts (Default Selected) -->
+    <!-- TIER 3: 3 Seat Belts -->
     <input 
       type="radio" 
       id="safepet-tier-3-{{ section.id }}" 
       name="safepet_variant_tier" 
       value="3" 
-      checked
       data-variant-id="{{ v2_id }}"
       data-quantity="1"
       data-price="24.95"
