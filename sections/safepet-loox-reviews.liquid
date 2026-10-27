@@ -162,9 +162,11 @@
     white-space: nowrap;
   }
 
-  /* Neutral Track Trough */
+  /* Rating Breakdown Track — Base Neutral Trough */
   .safepet-bar-track {
+    display: block;
     height: 10px;
+    background-color: #edf2f7;
     background: #edf2f7;
     border-radius: 9999px;
     overflow: hidden;
@@ -172,11 +174,33 @@
     width: 100%;
   }
 
-  /* Review-Star Orange Fill based on percentage of reviews */
+  /* Fill safepet-bar-track with orange review color based on rating percentage (e.g. 5★ is 93% orange, 7% neutral color) */
+  .safepet-bar-row[data-filter-stars="5"] .safepet-bar-track {
+    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 93%, #edf2f7 93%, #edf2f7 100%) !important;
+  }
+  .safepet-bar-row[data-filter-stars="4"] .safepet-bar-track {
+    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 5%, #edf2f7 5%, #edf2f7 100%) !important;
+  }
+  .safepet-bar-row[data-filter-stars="3"] .safepet-bar-track {
+    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 1.5%, #edf2f7 1.5%, #edf2f7 100%) !important;
+  }
+  .safepet-bar-row[data-filter-stars="2"] .safepet-bar-track {
+    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.3%, #edf2f7 0.3%, #edf2f7 100%) !important;
+  }
+  .safepet-bar-row[data-filter-stars="1"] .safepet-bar-track {
+    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.2%, #edf2f7 0.2%, #edf2f7 100%) !important;
+  }
+
+  /* Review-Star Orange Fill element inside .safepet-bar-track */
   .safepet-bar-fill {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
     height: 100%;
-    background-color: #ffa41c;
-    background: linear-gradient(90deg, #f59e0b 0%, #ffa41c 100%);
+    background-color: #ffa41c !important;
+    background: linear-gradient(90deg, #f59e0b 0%, #ffa41c 100%) !important;
     border-radius: 9999px;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -1207,36 +1231,36 @@
       <div class="safepet-loox-breakdown-col">
         <div class="safepet-bar-row" data-filter-stars="5" title="Filter to 5-star reviews">
           <span class="safepet-bar-label">5 ★</span>
-          <div class="safepet-bar-track">
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 93%, #edf2f7 93%, #edf2f7 100%);">
             <div class="safepet-bar-fill" style="width: 93%;"></div>
           </div>
           <span class="safepet-bar-num">93% (2,031)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="4" title="Filter to 4-star reviews">
           <span class="safepet-bar-label">4 ★</span>
-          <div class="safepet-bar-track">
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 5%, #edf2f7 5%, #edf2f7 100%);">
             <div class="safepet-bar-fill" style="width: 5%;"></div>
           </div>
           <span class="safepet-bar-num">5% (109)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="3" title="Filter to 3-star reviews">
           <span class="safepet-bar-label">3 ★</span>
-          <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 1.5%; min-width: 4px;"></div>
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 1.5%, #edf2f7 1.5%, #edf2f7 100%);">
+            <div class="safepet-bar-fill" style="width: 1.5%;"></div>
           </div>
           <span class="safepet-bar-num">1.5% (33)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="2" title="Filter to 2-star reviews">
           <span class="safepet-bar-label">2 ★</span>
-          <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 0.3%; min-width: 3px;"></div>
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.3%, #edf2f7 0.3%, #edf2f7 100%);">
+            <div class="safepet-bar-fill" style="width: 0.3%;"></div>
           </div>
           <span class="safepet-bar-num">0.3% (7)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="1" title="Filter to 1-star reviews">
           <span class="safepet-bar-label">1 ★</span>
-          <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 0.2%; min-width: 2px;"></div>
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.2%, #edf2f7 0.2%, #edf2f7 100%);">
+            <div class="safepet-bar-fill" style="width: 0.2%;"></div>
           </div>
           <span class="safepet-bar-num">0.2% (4)</span>
         </div>
