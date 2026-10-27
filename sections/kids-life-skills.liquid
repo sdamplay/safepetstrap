@@ -1173,12 +1173,27 @@
 
   
 
+  <!-- High-Converting Mobile Sticky Floating ATC Bar -->
+  <div class="safepet-mobile-sticky-bar" id="safepetMobileStickyBar-{{ section.id }}" aria-hidden="true">
+    <div class="safepet-sticky-prod-info">
+      {%- assign sticky_img = product.featured_image | default: section.settings.hero_main_image -%}
+      {%- if sticky_img != blank -%}
+        <img src="{{ sticky_img | image_url: width: 100 }}" alt="{{ product.title | default: 'SafePet Strap' }}" class="safepet-sticky-thumb" loading="lazy" width="44" height="44">
+      {%- endif -%}
+      <div class="safepet-sticky-meta">
+        <span class="safepet-sticky-title">{{ product.title | default: 'SafePet Dog Seat Belt' }}</span>
+        <div class="safepet-sticky-price-row">
+          <span class="safepet-sticky-price">FREE Today</span>
+          <span class="safepet-sticky-compare">$29.95</span>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="safepet-sticky-cta-btn" id="safepetStickyCtaBtn-{{ section.id }}">
+      CLAIM FREE →
+    </button>
+  </div>
+
 </div>
-
-
-
-
-
 
 <script>
 (function(){
@@ -1204,6 +1219,50 @@
   }
   initWldGalleries();
   document.addEventListener('shopify:section:load', initWldGalleries);
+
+  // Mobile Sticky Bar Intersection Observer
+  function initStickyMobileAtc() {
+    var stickyBar = document.getElementById('safepetMobileStickyBar-{{ section.id }}');
+    var heroCta = document.getElementById('ProductSubmitButton-{{ section.id }}') || document.querySelector('.kls-hero-cta');
+    if (!stickyBar || !heroCta) return;
+
+    var stickyBtn = document.getElementById('safepetStickyCtaBtn-{{ section.id }}');
+    if (stickyBtn) {
+      stickyBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var form = document.getElementById('ProductForm-{{ section.id }}') || document.querySelector('.main-product-form');
+        if (form) {
+          form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var submitBtn = form.querySelector('button[type="submit"]');
+          if (submitBtn) {
+            submitBtn.focus();
+          }
+        }
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+            stickyBar.classList.add('visible');
+            stickyBar.setAttribute('aria-hidden', 'false');
+          } else {
+            stickyBar.classList.remove('visible');
+            stickyBar.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(heroCta);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStickyMobileAtc);
+  } else {
+    initStickyMobileAtc();
+  }
+  document.addEventListener('shopify:section:load', initStickyMobileAtc);
 })();
 </script>
 

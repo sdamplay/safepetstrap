@@ -1,4 +1,4 @@
-{%- assign section_id = section.id | default: "safepet-loox" -%}
+{%- assign section_id = section.id | default: 'safepet-loox' -%}
 
 <style>
   /* ==========================================================================
@@ -130,46 +130,156 @@
     flex-shrink: 0;
   }
 
-  /* Breakdown Bars */
+  /* Breakdown Bars - Highlighted & High Contrast */
   .safepet-loox-breakdown-col {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 9px;
+    width: 100%;
+    background: #fbfbfd;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+  }
+
+  .safepet-breakdown-header-pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #475569;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e2e8f0;
+    margin-bottom: 2px;
+  }
+
+  .safepet-breakdown-title-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #1e293b;
+    font-weight: 800;
+  }
+
+  .safepet-breakdown-rec-tag {
+    color: #15803d;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 10.5px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
 
   .safepet-bar-row {
     display: grid;
-    grid-template-columns: 36px 1fr 75px;
+    grid-template-columns: 36px 1fr 88px;
     align-items: center;
     gap: 12px;
     font-size: 12px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+
+  .safepet-bar-row:hover {
+    background-color: #f1f5f9;
+    transform: translateX(2px);
+  }
+
+  /* Specially Highlighted 5-Star Row */
+  .safepet-bar-row.safepet-bar-row-5star {
+    background: linear-gradient(90deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1.5px solid #fde047;
+    border-radius: 10px;
+    padding: 6px 10px;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.16);
+  }
+
+  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-label {
+    color: #92400e;
+    font-weight: 900;
+  }
+
+  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-num {
+    color: #92400e;
+    font-weight: 900;
   }
 
   .safepet-bar-label {
-    font-weight: 700;
-    color: #334155;
+    font-weight: 800;
+    color: #1e293b;
+    font-size: 12px;
+    white-space: nowrap;
   }
 
+  /* Highlighted Track - Substantial Depth & High Visibility */
   .safepet-bar-track {
-    height: 9px;
-    background: #f1f5f9;
+    height: 16px;
+    background: #e9eef5;
+    border: 1.5px solid #cbd5e1;
     border-radius: 9999px;
     overflow: hidden;
     position: relative;
+    box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.08);
   }
 
+  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-track {
+    background: #fef9c3;
+    border: 1.5px solid #facc15;
+    box-shadow: inset 0 2px 4px rgba(202, 138, 4, 0.2), 0 0 10px rgba(250, 204, 21, 0.35);
+  }
+
+  /* Vibrant Fill with Gloss & Glow */
   .safepet-bar-fill {
     height: 100%;
-    background: #f59e0b;
+    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #fde047 100%);
     border-radius: 9999px;
+    box-shadow: 0 1px 4px rgba(245, 158, 11, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.75);
+    position: relative;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .safepet-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    border-radius: 9999px 9999px 0 0;
+  }
+
+  /* Active animated pulse shimmer on 5-star bar fill */
+  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: safepetTrackShimmer 3s infinite ease-in-out;
+  }
+
+  @keyframes safepetTrackShimmer {
+    0% { left: -100%; }
+    50%, 100% { left: 150%; }
   }
 
   .safepet-bar-num {
     text-align: right;
-    color: #64748b;
-    font-size: 11px;
-    font-weight: 600;
+    color: #475569;
+    font-size: 11.5px;
+    font-weight: 700;
+    white-space: nowrap;
   }
 
   /* CTA Col */
@@ -937,37 +1047,127 @@
 
   @media (max-width: 768px) {
     .safepet-loox-section {
-      padding: 50px 16px 70px;
+      padding: 36px 14px 50px;
+    }
+    .safepet-loox-header {
+      margin-bottom: 22px;
+    }
+    .safepet-loox-title {
+      font-size: clamp(22px, 5.5vw, 28px);
+    }
+    .safepet-loox-subtitle {
+      font-size: 13.5px;
     }
     .safepet-loox-summary-card {
       grid-template-columns: 1fr;
-      text-align: center;
-      gap: 24px;
+      gap: 18px;
+      padding: 20px 16px;
+      border-radius: 16px;
+      margin-bottom: 22px;
     }
     .safepet-loox-score-col {
       border-right: none;
       padding-right: 0;
       border-bottom: 1px solid #f1f5f9;
-      padding-bottom: 20px;
+      padding-bottom: 16px;
+    }
+    .safepet-loox-big-score {
+      font-size: 48px;
     }
     .safepet-loox-cta-col {
       border-left: none;
       padding-left: 0;
       border-top: 1px solid #f1f5f9;
-      padding-top: 20px;
+      padding-top: 16px;
     }
+    .safepet-loox-breakdown-col {
+      padding: 12px 10px;
+    }
+    .safepet-bar-row {
+      grid-template-columns: 32px 1fr 78px;
+      gap: 8px;
+      font-size: 11px;
+      padding: 4px 6px;
+    }
+    .safepet-bar-track {
+      height: 14px;
+    }
+    /* Mobile horizontally scrollable filter chips */
+    .safepet-loox-filter-bar {
+      margin-bottom: 18px;
+    }
+    .safepet-filter-chips {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+      gap: 6px;
+      width: 100%;
+    }
+    .safepet-chip {
+      flex-shrink: 0;
+      padding: 7px 13px;
+      font-size: 12px;
+    }
+    .safepet-sort-wrap {
+      display: none;
+    }
+    /* Mobile UGC carousel */
+    .safepet-photos-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      margin-bottom: 10px;
+    }
+    .safepet-photos-title {
+      font-size: 13px;
+    }
+    .safepet-photo-thumb-card {
+      flex: 0 0 110px;
+      height: 110px;
+      border-radius: 10px;
+    }
+    /* Mobile review cards */
     .safepet-loox-grid {
       grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .safepet-review-card {
+      padding: 16px 14px;
+      border-radius: 14px;
+    }
+    .safepet-card-image img {
+      height: 220px;
+    }
+    .safepet-card-headline {
+      font-size: 14.5px;
+    }
+    .safepet-card-body {
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    /* Mobile Load more */
+    .safepet-load-more-btn {
+      width: 100%;
+      max-width: 320px;
+      min-height: 48px;
+      font-size: 14px;
+      padding: 13px 20px;
+    }
+    .safepet-progress-bar-track {
+      width: 100%;
+      max-width: 260px;
     }
     .safepet-lightbox-body {
       grid-template-columns: 1fr;
     }
     .safepet-lightbox-img-wrap {
       border-radius: 20px 20px 0 0;
-      max-height: 300px;
+      max-height: 260px;
     }
     .safepet-lightbox-img-wrap img {
-      max-height: 300px;
+      max-height: 260px;
     }
     .safepet-form-row {
       grid-template-columns: 1fr;
@@ -1026,40 +1226,44 @@
 
       <!-- Col 2: Breakdown Bars -->
       <div class="safepet-loox-breakdown-col">
-        <div class="safepet-bar-row">
+        <div class="safepet-breakdown-header-pill">
+          <span class="safepet-breakdown-title-text">⭐ Rating Distribution</span>
+          <span class="safepet-breakdown-rec-tag">✓ 98% Recommend</span>
+        </div>
+        <div class="safepet-bar-row safepet-bar-row-5star" data-filter-stars="5" title="Filter to 5-star reviews">
           <span class="safepet-bar-label">5 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 95%;"></div>
+            <div class="safepet-bar-fill" style="width: 93%;"></div>
           </div>
-          <span class="safepet-bar-num">95% (2,074)</span>
+          <span class="safepet-bar-num">93% (2,031)</span>
         </div>
-        <div class="safepet-bar-row">
+        <div class="safepet-bar-row" data-filter-stars="4" title="Filter to 4-star reviews">
           <span class="safepet-bar-label">4 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 4%;"></div>
+            <div class="safepet-bar-fill" style="width: 5%; min-width: 14px;"></div>
           </div>
-          <span class="safepet-bar-num">4% (87)</span>
+          <span class="safepet-bar-num">5% (109)</span>
         </div>
-        <div class="safepet-bar-row">
+        <div class="safepet-bar-row" data-filter-stars="3" title="Filter to 3-star reviews">
           <span class="safepet-bar-label">3 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 1%;"></div>
+            <div class="safepet-bar-fill" style="width: 1.5%; min-width: 10px;"></div>
           </div>
-          <span class="safepet-bar-num">1% (23)</span>
+          <span class="safepet-bar-num">1.5% (33)</span>
         </div>
-        <div class="safepet-bar-row">
+        <div class="safepet-bar-row" data-filter-stars="2" title="Filter to 2-star reviews">
           <span class="safepet-bar-label">2 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 0%;"></div>
+            <div class="safepet-bar-fill" style="width: 0.3%; min-width: 8px;"></div>
           </div>
-          <span class="safepet-bar-num">0% (0)</span>
+          <span class="safepet-bar-num">0.3% (7)</span>
         </div>
-        <div class="safepet-bar-row">
+        <div class="safepet-bar-row" data-filter-stars="1" title="Filter to 1-star reviews">
           <span class="safepet-bar-label">1 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 0%;"></div>
+            <div class="safepet-bar-fill" style="width: 0.2%; min-width: 6px;"></div>
           </div>
-          <span class="safepet-bar-num">0% (0)</span>
+          <span class="safepet-bar-num">0.2% (4)</span>
         </div>
       </div>
 
@@ -2749,6 +2953,19 @@
           }
         });
       }
+
+      // Click bar row to filter by star rating
+      section.querySelectorAll('.safepet-bar-row[data-filter-stars]').forEach(function(row) {
+        row.addEventListener('click', function() {
+          var starVal = this.getAttribute('data-filter-stars');
+          var targetChip = (starVal === '5') ? section.querySelector('.safepet-chip[data-filter="five"]') : section.querySelector('.safepet-chip[data-filter="all"]');
+          if (targetChip) {
+            targetChip.click();
+            var grid = document.getElementById('safepetLooxGrid-{{ section_id }}');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
 
       // FILTER CHIPS
       chips.forEach(function(chip) {
