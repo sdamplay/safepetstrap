@@ -130,148 +130,55 @@
     flex-shrink: 0;
   }
 
-  /* Breakdown Bars - Highlighted & High Contrast */
+  /* Breakdown Bars */
   .safepet-loox-breakdown-col {
     display: flex;
     flex-direction: column;
-    gap: 9px;
-    width: 100%;
-    background: #fbfbfd;
-    border: 1px solid #e2e8f0;
-    border-radius: 14px;
-    padding: 14px 16px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
-  }
-
-  .safepet-breakdown-header-pill {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 11.5px;
-    font-weight: 700;
-    color: #475569;
-    padding-bottom: 8px;
-    border-bottom: 1px dashed #e2e8f0;
-    margin-bottom: 2px;
-  }
-
-  .safepet-breakdown-title-text {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: #1e293b;
-    font-weight: 800;
-  }
-
-  .safepet-breakdown-rec-tag {
-    color: #15803d;
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    padding: 2px 8px;
-    border-radius: 9999px;
-    font-size: 10.5px;
-    font-weight: 800;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    gap: 8px;
+    justify-content: center;
   }
 
   .safepet-bar-row {
     display: grid;
-    grid-template-columns: 36px 1fr 88px;
+    grid-template-columns: 36px 1fr 82px;
     align-items: center;
     gap: 12px;
     font-size: 12px;
-    padding: 5px 8px;
-    border-radius: 8px;
-    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    padding: 2px 4px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
     cursor: pointer;
   }
 
   .safepet-bar-row:hover {
-    background-color: #f1f5f9;
+    background-color: #f8fafc;
     transform: translateX(2px);
   }
 
-  /* Specially Highlighted 5-Star Row */
-  .safepet-bar-row.safepet-bar-row-5star {
-    background: linear-gradient(90deg, #fffbeb 0%, #fef3c7 100%);
-    border: 1.5px solid #fde047;
-    border-radius: 10px;
-    padding: 6px 10px;
-    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.16);
-  }
-
-  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-label {
-    color: #92400e;
-    font-weight: 900;
-  }
-
-  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-num {
-    color: #92400e;
-    font-weight: 900;
-  }
-
   .safepet-bar-label {
-    font-weight: 800;
+    font-weight: 700;
     color: #1e293b;
     font-size: 12px;
     white-space: nowrap;
   }
 
-  /* Highlighted Track - Substantial Depth & High Visibility */
+  /* Neutral Track Trough */
   .safepet-bar-track {
-    height: 16px;
-    background: #e9eef5;
-    border: 1.5px solid #cbd5e1;
+    height: 10px;
+    background: #edf2f7;
     border-radius: 9999px;
     overflow: hidden;
     position: relative;
-    box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.08);
+    width: 100%;
   }
 
-  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-track {
-    background: #fef9c3;
-    border: 1.5px solid #facc15;
-    box-shadow: inset 0 2px 4px rgba(202, 138, 4, 0.2), 0 0 10px rgba(250, 204, 21, 0.35);
-  }
-
-  /* Vibrant Fill with Gloss & Glow */
+  /* Review-Star Orange Fill based on percentage of reviews */
   .safepet-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #fde047 100%);
+    background-color: #ffa41c;
+    background: linear-gradient(90deg, #f59e0b 0%, #ffa41c 100%);
     border-radius: 9999px;
-    box-shadow: 0 1px 4px rgba(245, 158, 11, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.75);
-    position: relative;
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .safepet-bar-fill::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
-    border-radius: 9999px 9999px 0 0;
-  }
-
-  /* Active animated pulse shimmer on 5-star bar fill */
-  .safepet-bar-row.safepet-bar-row-5star .safepet-bar-fill::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-    animation: safepetTrackShimmer 3s infinite ease-in-out;
-  }
-
-  @keyframes safepetTrackShimmer {
-    0% { left: -100%; }
-    50%, 100% { left: 150%; }
   }
 
   .safepet-bar-num {
@@ -1153,16 +1060,16 @@
       padding-top: 16px;
     }
     .safepet-loox-breakdown-col {
-      padding: 12px 10px;
+      padding: 4px 0;
     }
     .safepet-bar-row {
       grid-template-columns: 32px 1fr 78px;
       gap: 8px;
       font-size: 11px;
-      padding: 4px 6px;
+      padding: 2px 0;
     }
     .safepet-bar-track {
-      height: 14px;
+      height: 9px;
     }
     /* Mobile horizontally scrollable filter chips */
     .safepet-loox-filter-bar {
@@ -1298,11 +1205,7 @@
 
       <!-- Col 2: Breakdown Bars -->
       <div class="safepet-loox-breakdown-col">
-        <div class="safepet-breakdown-header-pill">
-          <span class="safepet-breakdown-title-text">⭐ Rating Distribution</span>
-          <span class="safepet-breakdown-rec-tag">✓ 98% Recommend</span>
-        </div>
-        <div class="safepet-bar-row safepet-bar-row-5star" data-filter-stars="5" title="Filter to 5-star reviews">
+        <div class="safepet-bar-row" data-filter-stars="5" title="Filter to 5-star reviews">
           <span class="safepet-bar-label">5 ★</span>
           <div class="safepet-bar-track">
             <div class="safepet-bar-fill" style="width: 93%;"></div>
@@ -1312,28 +1215,28 @@
         <div class="safepet-bar-row" data-filter-stars="4" title="Filter to 4-star reviews">
           <span class="safepet-bar-label">4 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 5%; min-width: 14px;"></div>
+            <div class="safepet-bar-fill" style="width: 5%;"></div>
           </div>
           <span class="safepet-bar-num">5% (109)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="3" title="Filter to 3-star reviews">
           <span class="safepet-bar-label">3 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 1.5%; min-width: 10px;"></div>
+            <div class="safepet-bar-fill" style="width: 1.5%; min-width: 4px;"></div>
           </div>
           <span class="safepet-bar-num">1.5% (33)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="2" title="Filter to 2-star reviews">
           <span class="safepet-bar-label">2 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 0.3%; min-width: 8px;"></div>
+            <div class="safepet-bar-fill" style="width: 0.3%; min-width: 3px;"></div>
           </div>
           <span class="safepet-bar-num">0.3% (7)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="1" title="Filter to 1-star reviews">
           <span class="safepet-bar-label">1 ★</span>
           <div class="safepet-bar-track">
-            <div class="safepet-bar-fill" style="width: 0.2%; min-width: 6px;"></div>
+            <div class="safepet-bar-fill" style="width: 0.2%; min-width: 2px;"></div>
           </div>
           <span class="safepet-bar-num">0.2% (4)</span>
         </div>
