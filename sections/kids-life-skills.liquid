@@ -445,8 +445,12 @@
                 {{ hero_image | image_url: width: 1200 | image_tag: widths: '400,600,900,1200', sizes: '(min-width: 900px) 500px, 100vw', loading: 'eager', class: 'kls-gallery-img', alt: hero_image.alt | default: kls_hero_headline }}
               {%- endif -%}
             {%- endif -%}
-            {%- if section.settings.hero_badge_tl != blank -%}
-              <span class="kls-hero-badge kls-hero-badge-tl">{{ section.settings.hero_badge_tl }}</span>
+            {%- if product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' or template.name != 'product' -%}
+              {%- render 'safepet-graffiti-badge', section: section -%}
+            {%- else -%}
+              {%- if section.settings.hero_badge_tl != blank -%}
+                <span class="kls-hero-badge kls-hero-badge-tl">{{ section.settings.hero_badge_tl }}</span>
+              {%- endif -%}
             {%- endif -%}
             {%- if section.settings.hero_badge_tc != blank -%}
               <span class="kls-hero-badge kls-hero-badge-tc">{{ section.settings.hero_badge_tc }}</span>
