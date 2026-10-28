@@ -17,6 +17,11 @@
     font-size: {{ section.settings.font_size_base | default: 16 }}px;
   }
 
+  #wld-kls-{{ section.id }} .kls-hero-right,
+  .wld-kls-root .kls-hero-right {
+    gap: 5px !important;
+  }
+
   /* Headline styling overrides */
   #wld-kls-{{ section.id }} .kls-hero-headline {
     font-size: {{ section.settings.headline_font_size | default: 42 }}px;
