@@ -161,7 +161,7 @@
 
 @media (max-width: 540px) {
   .wld-kls-root { overflow-x: hidden !important; width: 100% !important; max-width: 100vw !important; -webkit-font-smoothing: antialiased; }
-  .wld-kls-root .kls-hero { padding: 20px 14px 28px !important; }
+  .wld-kls-root .kls-hero { padding: 50px 14px 28px !important; }
   .wld-kls-root .kls-faq, .wld-kls-root .kls-ready, .wld-kls-root .kls-grow, .wld-kls-root .kls-testimonials, .wld-kls-root .kls-stats, .wld-kls-root .kls-comparison, .wld-kls-root .kls-guarantee { padding: 28px 14px !important; }
   
   /* Hero Typography & Elements */
