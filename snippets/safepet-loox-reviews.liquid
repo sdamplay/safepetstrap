@@ -246,21 +246,22 @@
 
   .safepet-write-review-btn {
     width: 100%;
-    background: #0f172a;
+    background: #dc2626;
     color: #ffffff;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 13.5px;
+    font-weight: 800;
     padding: 12px 20px;
     border-radius: 12px;
     border: none;
     cursor: pointer;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.28);
     transition: all 0.2s ease;
   }
 
   .safepet-write-review-btn:hover {
-    background: #dc2626;
+    background: #b91c1c;
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.25);
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.38);
   }
 
   /* UGC Photo Strip */
@@ -378,14 +379,15 @@
   }
 
   .safepet-chip:hover {
-    border-color: #0f172a;
-    color: #0f172a;
+    border-color: #dc2626;
+    color: #dc2626;
   }
 
   .safepet-chip.active {
-    background: #0f172a;
-    border-color: #0f172a;
+    background: #dc2626;
+    border-color: #dc2626;
     color: #ffffff;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
   }
 
   .safepet-sort-wrap {
@@ -409,6 +411,13 @@
     font-weight: 600;
     color: #0f172a;
     cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+
+  .safepet-sort-select:focus {
+    outline: none;
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
   }
 
   /* Reviews Grid */
@@ -697,15 +706,15 @@
   }
 
   .safepet-helpful-btn:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: #0f172a;
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #dc2626;
   }
 
   .safepet-helpful-btn.voted {
-    background: #ecfdf5;
-    border-color: #86efac;
-    color: #16a34a;
+    background: #fef2f2;
+    border-color: #f87171;
+    color: #dc2626;
   }
 
   /* Load More & Progress */
@@ -743,23 +752,23 @@
   }
 
   .safepet-load-more-btn {
-    background: #0f172a;
+    background: #dc2626;
     color: #ffffff;
     font-size: 15px;
     font-weight: 800;
-    padding: 14px 34px;
+    padding: 14px 36px;
     border-radius: 9999px;
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.28);
     margin-top: 4px;
   }
 
   .safepet-load-more-btn:hover {
-    background: #dc2626;
+    background: #b91c1c;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+    box-shadow: 0 8px 22px rgba(220, 38, 38, 0.38);
   }
 
   .safepet-load-more-btn:disabled,
