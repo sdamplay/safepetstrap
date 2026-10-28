@@ -102,10 +102,11 @@
   }
 
   .safepet-loox-stars-row {
-    color: #f59e0b;
+    color: #dc2626;
     font-size: 22px;
     letter-spacing: 2px;
     margin: 8px 0;
+    text-shadow: 0 1px 3px rgba(220, 38, 38, 0.2);
   }
 
   .safepet-loox-review-count {
@@ -174,24 +175,24 @@
     width: 100%;
   }
 
-  /* Fill safepet-bar-track with orange review color based on rating percentage (e.g. 5★ is 93% orange, 7% neutral color) */
+  /* Fill safepet-bar-track with branding red review color based on rating percentage (e.g. 5★ is 93% red, 7% neutral color) */
   .safepet-bar-row[data-filter-stars="5"] .safepet-bar-track {
-    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 93%, #edf2f7 93%, #edf2f7 100%) !important;
+    background: linear-gradient(90deg, #dc2626 0%, #dc2626 93%, #edf2f7 93%, #edf2f7 100%) !important;
   }
   .safepet-bar-row[data-filter-stars="4"] .safepet-bar-track {
-    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 5%, #edf2f7 5%, #edf2f7 100%) !important;
+    background: linear-gradient(90deg, #dc2626 0%, #dc2626 5%, #edf2f7 5%, #edf2f7 100%) !important;
   }
   .safepet-bar-row[data-filter-stars="3"] .safepet-bar-track {
-    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 1.5%, #edf2f7 1.5%, #edf2f7 100%) !important;
+    background: linear-gradient(90deg, #dc2626 0%, #dc2626 1.5%, #edf2f7 1.5%, #edf2f7 100%) !important;
   }
   .safepet-bar-row[data-filter-stars="2"] .safepet-bar-track {
-    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.3%, #edf2f7 0.3%, #edf2f7 100%) !important;
+    background: linear-gradient(90deg, #dc2626 0%, #dc2626 0.3%, #edf2f7 0.3%, #edf2f7 100%) !important;
   }
   .safepet-bar-row[data-filter-stars="1"] .safepet-bar-track {
-    background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.2%, #edf2f7 0.2%, #edf2f7 100%) !important;
+    background: linear-gradient(90deg, #dc2626 0%, #dc2626 0.2%, #edf2f7 0.2%, #edf2f7 100%) !important;
   }
 
-  /* Review-Star Orange Fill element inside .safepet-bar-track */
+  /* Review-Star Branding Red Fill element inside .safepet-bar-track */
   .safepet-bar-fill {
     display: block;
     position: absolute;
@@ -199,9 +200,10 @@
     left: 0;
     bottom: 0;
     height: 100%;
-    background-color: #ffa41c !important;
-    background: linear-gradient(90deg, #f59e0b 0%, #ffa41c 100%) !important;
+    background-color: #dc2626 !important;
+    background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%) !important;
     border-radius: 9999px;
+    box-shadow: 0 1px 4px rgba(220, 38, 38, 0.25);
     transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -341,13 +343,15 @@
     position: absolute;
     bottom: 6px;
     left: 6px;
-    background: rgba(15, 23, 42, 0.85);
-    color: #fbbf24;
+    background: rgba(15, 23, 42, 0.88);
+    color: #ff4d4d;
     font-size: 10px;
     font-weight: 800;
     padding: 2px 7px;
     border-radius: 9999px;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
 
   /* Filter Bar */
@@ -526,10 +530,11 @@
   }
 
   .safepet-card-stars {
-    color: #f59e0b;
+    color: #dc2626;
     font-size: 16px;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
     margin-bottom: 10px;
+    text-shadow: 0 1px 2px rgba(220, 38, 38, 0.2);
   }
 
   .safepet-car-tag {
@@ -637,8 +642,8 @@
 
   .highlighted-text.is-animated {
     background-image: 
-      linear-gradient(90deg, #091218 50%, #000000 50%),
-      linear-gradient(90deg, #FFF2D3 50%, #FFFFFF 50%);
+      linear-gradient(90deg, #991b1b 50%, #1e293b 50%),
+      linear-gradient(90deg, rgba(254, 226, 226, 0.92) 50%, rgba(255, 255, 255, 0) 50%);
     background-repeat: no-repeat, no-repeat;
     background-position: 100% 0, 100% 0;
     background-size: 200% 100%, 200% 100%;
@@ -646,36 +651,39 @@
     background-clip: text, padding-box;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    animation: highlight-sweep 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+    animation: highlight-sweep 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
     text-decoration: none;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
+    box-shadow: inset 0 -3px 0 rgba(220, 38, 38, 0.45);
   }
 
   @supports (-moz-appearance: none) {
     .highlighted-text.is-animated {
-      color: #0f172a;
-      -webkit-text-fill-color: #0f172a;
-      background-image: linear-gradient(90deg, #FFF2D3 50%, #FFFFFF 50%);
+      color: #991b1b;
+      -webkit-text-fill-color: #991b1b;
+      background-image: linear-gradient(90deg, rgba(254, 226, 226, 0.92) 50%, rgba(255, 255, 255, 0) 50%);
       background-size: 200% 100%;
       background-position: 100% 0;
       -webkit-background-clip: padding-box;
       background-clip: padding-box;
-      animation: highlight-sweep 2.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
+      animation: highlight-sweep 2.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+      box-shadow: inset 0 -3px 0 rgba(220, 38, 38, 0.45);
     }
   }
 
   .highlighted-text-static { 
-    color: #091218; 
+    color: #991b1b; 
     font-weight: 700; 
     font-style: normal; 
     text-decoration: none;
-    border-radius: 3px;
-    background-color: #FFF2D3;
+    border-radius: 4px;
+    background: linear-gradient(180deg, rgba(254, 242, 242, 0.8) 0%, rgba(254, 226, 226, 0.95) 100%);
+    box-shadow: inset 0 -3px 0 rgba(220, 38, 38, 0.45);
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     white-space: pre-line;
-    padding: 1px 5px;
+    padding: 2px 6px;
   }
 
 
@@ -991,7 +999,7 @@
   }
 
   .safepet-star-pick.active {
-    color: #f59e0b;
+    color: #dc2626;
   }
 
   .safepet-file-dropzone {
@@ -1240,35 +1248,35 @@
       <div class="safepet-loox-breakdown-col">
         <div class="safepet-bar-row" data-filter-stars="5" title="Filter to 5-star reviews">
           <span class="safepet-bar-label">5 ★</span>
-          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 93%, #edf2f7 93%, #edf2f7 100%);">
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #dc2626 0%, #dc2626 93%, #edf2f7 93%, #edf2f7 100%);">
             <div class="safepet-bar-fill" style="width: 93%;"></div>
           </div>
           <span class="safepet-bar-num">93% (2,031)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="4" title="Filter to 4-star reviews">
           <span class="safepet-bar-label">4 ★</span>
-          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 5%, #edf2f7 5%, #edf2f7 100%);">
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #dc2626 0%, #dc2626 5%, #edf2f7 5%, #edf2f7 100%);">
             <div class="safepet-bar-fill" style="width: 5%;"></div>
           </div>
           <span class="safepet-bar-num">5% (109)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="3" title="Filter to 3-star reviews">
           <span class="safepet-bar-label">3 ★</span>
-          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 1.5%, #edf2f7 1.5%, #edf2f7 100%);">
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #dc2626 0%, #dc2626 1.5%, #edf2f7 1.5%, #edf2f7 100%);">
             <div class="safepet-bar-fill" style="width: 1.5%;"></div>
           </div>
           <span class="safepet-bar-num">1.5% (33)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="2" title="Filter to 2-star reviews">
           <span class="safepet-bar-label">2 ★</span>
-          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.3%, #edf2f7 0.3%, #edf2f7 100%);">
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #dc2626 0%, #dc2626 0.3%, #edf2f7 0.3%, #edf2f7 100%);">
             <div class="safepet-bar-fill" style="width: 0.3%;"></div>
           </div>
           <span class="safepet-bar-num">0.3% (7)</span>
         </div>
         <div class="safepet-bar-row" data-filter-stars="1" title="Filter to 1-star reviews">
           <span class="safepet-bar-label">1 ★</span>
-          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #ffa41c 0%, #ffa41c 0.2%, #edf2f7 0.2%, #edf2f7 100%);">
+          <div class="safepet-bar-track" style="background: linear-gradient(90deg, #dc2626 0%, #dc2626 0.2%, #edf2f7 0.2%, #edf2f7 100%);">
             <div class="safepet-bar-fill" style="width: 0.2%;"></div>
           </div>
           <span class="safepet-bar-num">0.2% (4)</span>
@@ -3086,7 +3094,7 @@
               '<span style="font-size:11px;font-weight:700;color:#16a34a;background:#f0fdf4;padding:2px 8px;border-radius:99px;">✓ Verified Buyer</span>' +
             '</div>' +
             '<span style="font-size:12px;color:#64748b;">' + location + '</span>' +
-            '<div style="color:#f59e0b;font-size:18px;margin:8px 0;">★★★★★</div>' +
+            '<div style="color:#dc2626;font-size:18px;margin:8px 0;">★★★★★</div>' +
             '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">' + tag + '</div>' +
             '<h4 style="font-size:16px;font-weight:800;color:#0f172a;margin:0 0 10px 0;line-height:1.3;">' + title + '</h4>' +
             '<p style="font-size:14px;color:#334155;line-height:1.65;margin:0;">' + body + '</p>';
