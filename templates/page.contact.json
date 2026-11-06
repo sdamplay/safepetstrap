@@ -23,15 +23,15 @@
         "template--18407212810569__60910267-55e8-4e0d-a9f9-79b26b3533dc-16795881913b1fb5f3-0": {
           "type": "heading",
           "settings": {
-            "title": "Talk about your brand",
-            "title_highlight_color": "#6d388b",
+            "title": "Contact SafePet Strap™",
+            "title_highlight_color": "#dd1d1d",
             "heading_size": "h1"
           }
         },
         "template--18407212810569__60910267-55e8-4e0d-a9f9-79b26b3533dc-16795881913b1fb5f3-1": {
           "type": "text",
           "settings": {
-            "text": "<p>At [Your company], your satisfaction is our top priority. We encourage you to reach out with any questions, concerns, or feedback, as our dedicated team is always eager to assist you. Whether you need help with product inquiries or simply want to share your experience with us, we're just a message away. </p>"
+            "text": "<p>We are here to help you and your dog! Whether you have questions regarding your order, shipping, product compatibility, or returns, please reach out to our dedicated support team using the form below or via our direct contact channels.</p><p><strong>SafePet Strap™</strong><br>Operated by <strong>OUSI PLAY LLC</strong><br><strong>Registered Business Address:</strong> 30 N Gould St, Ste R, Sheridan, WY 82801, USA<br><strong>Customer Support Phone:</strong> <a href=\"tel:+13073551993\">(307) 355-1993</a><br><strong>Customer Support Email:</strong> <a href=\"mailto:support@safepetstrap.com\">support@safepetstrap.com</a><br><strong>Support Hours:</strong> Monday – Friday, 9:00 AM – 5:00 PM EST (Typical response time: under 24 business hours)</p>"
           }
         }
       },
@@ -39,7 +39,7 @@
         "template--18407212810569__60910267-55e8-4e0d-a9f9-79b26b3533dc-16795881913b1fb5f3-0",
         "template--18407212810569__60910267-55e8-4e0d-a9f9-79b26b3533dc-16795881913b1fb5f3-1"
       ],
-      "disabled": true,
+      "disabled": false,
       "settings": {
         "display_id": false,
         "visibility": "always-display",

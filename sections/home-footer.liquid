@@ -248,10 +248,10 @@
             <!-- Business Info with LLC and Address -->
             <div class="home-footer-business-info">
               Operated by <strong>OUSI PLAY LLC</strong><br>
-              {%- if section.settings.business_address != blank -%}
-                Business Address: {{ section.settings.business_address }}<br>
-              {%- endif -%}
-              Support Email: {{ section.settings.support_email }}
+              Business Address: {{ section.settings.business_address | default: '30 N Gould St, Ste R, Sheridan, WY 82801, USA' }}<br>
+              Support Phone: <a href="tel:+13073551993" style="color: inherit; text-decoration: underline;">{{ section.settings.support_phone | default: '(307) 355-1993' }}</a><br>
+              Support Email: <a href="mailto:{{ section.settings.support_email | default: 'support@safepetstrap.com' }}" style="color: inherit; text-decoration: underline;">{{ section.settings.support_email | default: 'support@safepetstrap.com' }}</a><br>
+              Hours: Monday – Friday, 9:00 AM – 5:00 PM EST
             </div>
           </div>
         </div>
@@ -331,7 +331,13 @@
       "type": "text",
       "id": "business_address",
       "label": "Business address",
-      "default": "SafePet Strap, safepetstrap.com"
+      "default": "30 N Gould St, Ste R, Sheridan, WY 82801, USA"
+    },
+    {
+      "type": "text",
+      "id": "support_phone",
+      "label": "Support phone",
+      "default": "(307) 355-1993"
     },
     {
       "type": "text",

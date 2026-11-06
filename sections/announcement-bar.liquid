@@ -123,6 +123,10 @@
       endif
     endfor
   endif
+
+  if section.settings.only_product_page and template.name != 'product'
+    assign displayed = false
+  endif
 %}
 
 {% if displayed %}
@@ -350,6 +354,12 @@
   "max_blocks": 12,
   "class": "announcement-bar-section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "only_product_page",
+      "label": "Show on product pages only",
+      "default": false
+    },
     {
       "type": "header",
       "content": "Layout"
