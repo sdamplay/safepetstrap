@@ -573,7 +573,7 @@
             "type": "custom_liquid",
             "settings": {
               "position": "body",
-              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 10px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}\n.drawer.active .drawer__inner {\n    background: white !important;}\n.drawer__header,\n.cart-drawer .drawer__header,\n#CartDrawer .drawer__header,\n.drawer__inner .drawer__header {\n  padding: 5px !important;\n}\n\n.drawer__heading {\n  font-size: 20px !important; /* Font size on mobile */\n}\n@media screen and (min-width: 750px) {\n  .drawer__heading {\n    font-size: 24px !important; /* Font size on desktop */\n  }\n}\n\n.cart-drawer__totals__row,\n.cart-drawer__totals__row--spaced,\n.cart-drawer__totals__row--center,\n.cart-drawer__total-savings {\n  margin: 2px !important;\n}\n\n.cart-drawer__footer,\n.drawer__footer {\n  margin-bottom: 0px !important;\n}\n\n.cart-drawer__body {\n    padding: 0 1rem !important;\n}\n</style>"
+              "custom_liquid": "<style>.upsell~.upsell {\n    margin-top: 10px !important;\n}\n.upsell__container {\n    padding: 5px !important;\n}\n.drawer.active .drawer__inner {\n    background: white !important;}\n.drawer__header,\n.cart-drawer .drawer__header,\n#CartDrawer .drawer__header,\n.drawer__inner .drawer__header {\n  padding: 5px !important;\n}\n\n.drawer__heading {\n  font-size: 20px !important; /* Font size on mobile */\n}\n@media screen and (min-width: 750px) {\n  .drawer__heading {\n    font-size: 24px !important; /* Font size on desktop */\n  }\n}\n\n.cart-drawer__totals__row,\n.cart-drawer__totals__row--spaced,\n.cart-drawer__totals__row--center,\n.cart-drawer__total-savings {\n  margin: 2px !important;\n}\n\n.cart-drawer__footer,\n.drawer__footer {\n  margin-bottom: 0px !important;\n}\n\n.cart-drawer__body {\n    padding: 0 1rem !important;\n}\n.cart-drawer .upsell__variant-picker {\n    display: none !important;\n}\n</style>"
             }
           },
           "6269cf6e-8e24-4068-8e2a-35bb4addad4e": {
@@ -666,7 +666,7 @@
               "price_position": "next_to_title",
               "price_size": "1.4",
               "hide_compare_price": false,
-              "show_variant_picker": true,
+              "show_variant_picker": false,
               "update_prices": false,
               "skip_unavailable": false,
               "container_title": "",
@@ -818,7 +818,7 @@
               "price_position": "next_to_title",
               "price_size": "1.4",
               "hide_compare_price": false,
-              "show_variant_picker": true,
+              "show_variant_picker": false,
               "update_prices": false,
               "skip_unavailable": false,
               "container_title": "",
