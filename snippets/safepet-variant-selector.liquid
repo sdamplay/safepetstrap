@@ -876,7 +876,7 @@
     }
   })();
 </script>
-{%- elsif product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' -%}
+{%- elsif product.handle == 'dog-seat-belt' or product.handle == 'safepet-strap' or product.handle == 'safe-pet-strap' or product.handle == 'get-fdsb' or template.suffix == 'safepet-strap' -%}
 {% assign v0_id = product.variants[0].id | default: '' %}
 {% assign v1_id = product.variants[1].id | default: v0_id %}
 {% assign v2_id = product.variants[2].id | default: v0_id %}

@@ -12,3 +12,10 @@ fulfillment/.env.*
 fulfillment/tokens.json
 fulfillment/node_modules/
 node_modules/
+
+# Local compliance and orders backup
+compliance-docs/
+ad-creatives/
+*.pdf
+.vscode/
+
