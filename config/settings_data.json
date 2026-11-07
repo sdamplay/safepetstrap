@@ -1023,7 +1023,8 @@
           "enable": true,
           "upsell_product": "harness",
           "trigger_products": [
-            "dog-seat-belt"
+            "dog-seat-belt",
+            "get-fdsb"
           ],
           "size_chart_image": "shopify://shop_images/harness-size-chart_db83cd8e-d7f3-4b61-99b7-52096babc334.jpg",
           "image_size": 250,
