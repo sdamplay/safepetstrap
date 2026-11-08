@@ -28,7 +28,7 @@ function saveTokens(tokensData) {
 
 module.exports = {
   shopify: {
-    domain: process.env.SHOPIFY_STORE_DOMAIN || 'safepet-strap.myshopify.com',
+    domain: process.env.SHOPIFY_STORE_DOMAIN || 'ezuam5-nq.myshopify.com',
     clientId: process.env.SHOPIFY_CLIENT_ID || '',
     clientSecret: process.env.SHOPIFY_CLIENT_SECRET || '',
     token: process.env.SHOPIFY_ADMIN_API_TOKEN || '',
