@@ -463,7 +463,7 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
 
       savePlacedOrder(order.name, order.id, createdAliOrderIds);
       await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
-      console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
+      console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "PLAY", ${createdAliOrderIds.length} Order ID(s), and Note updated.`);
       return { status: 'success', aliOrderIds: createdAliOrderIds };
     } else {
       console.warn(`  ⚠️ Combined order placement returned error:`, JSON.stringify(res, null, 2));
@@ -511,7 +511,7 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
       if (createdAliOrderIds.length > 0) {
         savePlacedOrder(order.name, order.id, createdAliOrderIds);
         await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
-        console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
+        console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "PLAY", ${createdAliOrderIds.length} Order ID(s), and Note updated.`);
       }
 
       return {

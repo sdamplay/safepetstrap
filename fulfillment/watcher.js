@@ -3,7 +3,7 @@ const shopifyClient = require('./shopify_client');
 const { placeSingleOrder } = require('./order_sync');
 
 const POLL_INTERVAL_MS = parseInt(process.env.WATCHER_INTERVAL_MS, 10) || 15000;
-const TRIGGER_TAG = process.env.TRIGGER_TAG || 'fulfill-ae';
+const TRIGGER_TAG = process.env.TRIGGER_TAG || 'fulfill-play';
 
 let isProcessing = false;
 
@@ -14,11 +14,11 @@ async function checkAndFulfill() {
   try {
     let orders = await shopifyClient.getUnfulfilledOrders({ tagFilter: TRIGGER_TAG });
     let activeTag = TRIGGER_TAG;
-    if (orders.length === 0 && TRIGGER_TAG === 'fulfill-ae') {
-      const legacyOrders = await shopifyClient.getUnfulfilledOrders({ tagFilter: 'fulfill-ali' });
+    if (orders.length === 0) {
+      const legacyOrders = await shopifyClient.getUnfulfilledOrders({ tagFilter: 'fulfill-ae' });
       if (legacyOrders.length > 0) {
         orders = legacyOrders;
-        activeTag = 'fulfill-ali';
+        activeTag = 'fulfill-ae';
       }
     }
 

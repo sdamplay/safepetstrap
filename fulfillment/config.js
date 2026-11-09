@@ -33,8 +33,8 @@ module.exports = {
     clientSecret: process.env.SHOPIFY_CLIENT_SECRET || '',
     token: process.env.SHOPIFY_ADMIN_API_TOKEN || '',
     apiVersion: process.env.SHOPIFY_API_VERSION || '2024-01',
-    tagPlaced: process.env.TAG_PLACED || 'ali-placed',
-    tagShipped: process.env.TAG_SHIPPED || 'ali-shipped'
+    tagPlaced: process.env.TAG_PLACED || 'PLAY',
+    tagShipped: process.env.TAG_SHIPPED || 'shipped'
   },
   aliexpress: {
     appKey: process.env.ALI_APP_KEY || '',

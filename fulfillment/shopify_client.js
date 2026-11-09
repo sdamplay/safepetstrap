@@ -72,6 +72,7 @@ class ShopifyClient {
         headers: {
           'X-Shopify-Access-Token': token,
           'Content-Type': 'application/json',
+          'Connection': 'close',
           'User-Agent': 'SafePetStrap-Fulfillment/1.0'
         }
       };
@@ -100,7 +101,17 @@ class ShopifyClient {
         });
       });
 
-      req.on('error', err => reject(err));
+      req.on('error', async (err) => {
+        if (!isRetry && (err.code === 'ECONNRESET' || err.code === 'ETIMEDOUT')) {
+          await new Promise(r => setTimeout(r, 1000));
+          try {
+            return resolve(await this.makeRequest(path, method, body, true));
+          } catch (retryErr) {
+            return reject(retryErr);
+          }
+        }
+        reject(err);
+      });
 
       if (body) {
         req.write(JSON.stringify(body));
@@ -131,41 +142,38 @@ class ShopifyClient {
       }
 
       // Default: skip orders already placed
-      return !tags.includes(tagPlaced) && !tags.includes('ae-placed') && !tags.includes('ali-placed') && !tags.some(t => t.startsWith('ali-id:'));
+      return !tags.includes('play') && !tags.includes(tagPlaced) && !tags.includes('ae-placed') && !tags.includes('ali-placed') && !tags.some(t => t.startsWith('ali-id:'));
     });
   }
 
   /**
-   * Tag order and append order note with AliExpress Order ID
+   * Tag order and append order note with Order ID (sanitized with 'PLAY')
    */
   async tagOrderAsPlaced(order, aliOrderId, tagToRemove = null) {
-    const tagPlaced = config.shopify.tagPlaced;
     let existingTags = order.tags ? order.tags.split(',').map(t => t.trim()) : [];
     
-    // Remove trigger tags (fulfill-ae, fulfill-ali, or custom tagToRemove)
-    existingTags = existingTags.filter(t => t.toLowerCase() !== 'fulfill-ae' && t.toLowerCase() !== 'fulfill-ali');
-    if (tagToRemove && tagToRemove.toLowerCase() !== 'ae-placed') {
+    // Remove trigger tags and any legacy ae/ali tags
+    existingTags = existingTags.filter(t => 
+      !['fulfill-play', 'fulfill-ae', 'fulfill-ali', 'ae-placed', 'ali-placed'].includes(t.toLowerCase()) &&
+      !t.toLowerCase().startsWith('ali-id:')
+    );
+    if (tagToRemove) {
       existingTags = existingTags.filter(t => t.toLowerCase() !== tagToRemove.toLowerCase());
     }
 
     const idList = Array.isArray(aliOrderId) ? aliOrderId : [aliOrderId];
 
-    // Clean out previous ali-id tags if retrying
-    existingTags = existingTags.filter(t => !t.toLowerCase().startsWith('ali-id:'));
-
-    if (!existingTags.includes(tagPlaced) && !existingTags.includes('ae-placed')) {
-      existingTags.push('ae-placed');
-    }
-    for (const id of idList) {
-      existingTags.push(`ali-id:${id}`);
+    // Always use PLAY tag
+    if (!existingTags.includes('PLAY')) {
+      existingTags.push('PLAY');
     }
 
     const dateStr = new Date().toISOString().split('T')[0];
     const noteEntry = `Order ID: ${idList.join(', ')} - ${dateStr}`;
 
-    // Clean out any legacy mentions or stale order IDs if present in note
+    // Clean out any legacy mentions of aliexpress or stale order IDs
     const cleanExisting = order.note
-      ? order.note.split('\n').filter(line => !line.toLowerCase().includes('aliexpress') && !line.toLowerCase().startsWith('order id:') && line.trim().length > 0).join('\n')
+      ? order.note.split('\n').filter(line => !line.toLowerCase().includes('aliexpress') && !line.toLowerCase().includes('dropship') && !line.toLowerCase().startsWith('order id:') && line.trim().length > 0).join('\n')
       : '';
 
     const newNote = cleanExisting ? `${cleanExisting}\n${noteEntry}` : noteEntry;
@@ -195,7 +203,7 @@ class ShopifyClient {
   /**
    * Fulfill order in Shopify with tracking number and company
    */
-  async fulfillOrder(orderId, trackingNumber, trackingCompany = 'AliExpress Standard Shipping', trackingUrl = '') {
+  async fulfillOrder(orderId, trackingNumber, trackingCompany = 'Standard Shipping', trackingUrl = '') {
     try {
       const fulfillmentOrders = await this.getFulfillmentOrders(orderId);
       const openFulfillmentOrder = fulfillmentOrders.find(fo => fo.status === 'open' || fo.status === 'in_progress');

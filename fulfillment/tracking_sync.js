@@ -42,10 +42,8 @@ async function syncTracking() {
 
     orders = (allUnfulfilled.orders || []).filter(order => {
       const tags = (order.tags || '').split(',').map(t => t.trim().toLowerCase());
-      const hasPlacedMarker = tags.includes(tagPlaced) || 
-                              tags.includes('ae-placed') || 
-                              tags.includes('ali-placed') || 
-                              tags.some(t => t.startsWith('ali-id:')) ||
+      const hasPlacedMarker = tags.includes('play') || 
+                              tags.includes(tagPlaced) ||
                               !!placedMap[order.name] ||
                               !!placedMap[String(order.id)];
       return hasPlacedMarker && !tags.includes(tagShipped);
@@ -78,11 +76,18 @@ async function syncTracking() {
       aliOrderIds = placedMap[order.name].ali_order_ids.map(String);
     }
 
+    if (aliOrderIds.length === 0 && order.note) {
+      const match = order.note.match(/Order ID:\s*([\d, ]+)/i);
+      if (match) {
+        aliOrderIds = match[1].split(',').map(s => s.trim()).filter(Boolean);
+      }
+    }
+
     if (aliOrderIds.length === 0) {
-      console.warn(`⚠️ Could not find AliExpress Order IDs for order #${order.order_number}. Skipping.`);
+      console.warn(`⚠️ Could not find Order IDs for order #${order.order_number}. Skipping.`);
       continue;
     }
-    console.log(`  🔍 Order #${order.order_number} has ${aliOrderIds.length} AliExpress Order(s): ${aliOrderIds.join(', ')}`);
+    console.log(`  🔍 Order #${order.order_number} has ${aliOrderIds.length} Order ID(s): ${aliOrderIds.join(', ')}`);
 
     let orderFulfilledAny = false;
 
@@ -97,9 +102,13 @@ async function syncTracking() {
                            trackingDetails.logistics_no ||
                            (Array.isArray(trackingDetails) && trackingDetails[0]?.mail_no);
 
-        const carrier = trackingDetails.logistics_service_name || 
-                        trackingDetails.carrier || 
-                        'AliExpress Standard Shipping';
+        let carrier = trackingDetails.logistics_service_name || 
+                      trackingDetails.carrier || 
+                      'Standard Shipping';
+
+        if (carrier.toLowerCase().includes('aliexpress') || carrier.toLowerCase().includes('cainiao')) {
+          carrier = 'Standard Shipping';
+        }
 
         if (trackingNo) {
           console.log(`  🚚 Order #${aliOrderId} Shipped! Tracking Number: ${trackingNo} (${carrier})`);
