@@ -6,6 +6,7 @@
 
 PORT=8765
 URL="http://localhost:$PORT"
+EDITS_DIR="/Users/imacm1/SafePet/edits"
 
 echo "========================================================"
 echo "  SAFEPET UGC-FLOW-PRO | LOCAL REVIEW STUDIO"
@@ -16,7 +17,7 @@ if lsof -i :$PORT >/dev/null 2>&1; then
     echo "✓ Review server is already active on port $PORT."
 else
     echo "Starting local review server on port $PORT..."
-    nohup python3 /Users/imacm1/.gemini/config/skills/ugc-flow-pro/scripts/review_server.py > /tmp/ugc_review_server.log 2>&1 &
+    nohup python3 /Users/imacm1/.gemini/config/skills/ugc-flow-pro/scripts/review_server.py --port $PORT --root "$EDITS_DIR" > /tmp/ugc_review_server.log 2>&1 &
     sleep 1.2
 fi
 
