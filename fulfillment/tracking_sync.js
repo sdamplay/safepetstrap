@@ -1,6 +1,20 @@
 const config = require('./config');
 const aliClient = require('./aliexpress_client');
 const shopifyClient = require('./shopify_client');
+const fs = require('fs');
+const path = require('path');
+const PLACED_FILE = path.join(__dirname, 'placed_orders.json');
+
+function getPlacedOrders() {
+  if (fs.existsSync(PLACED_FILE)) {
+    try {
+      return JSON.parse(fs.readFileSync(PLACED_FILE, 'utf8'));
+    } catch (e) {
+      return {};
+    }
+  }
+  return {};
+}
 
 async function syncTracking() {
   console.log('\n======================================================');
@@ -24,10 +38,16 @@ async function syncTracking() {
     );
     const tagPlaced = config.shopify.tagPlaced.toLowerCase();
     const tagShipped = config.shopify.tagShipped.toLowerCase();
+    const placedMap = getPlacedOrders();
 
     orders = (allUnfulfilled.orders || []).filter(order => {
       const tags = (order.tags || '').split(',').map(t => t.trim().toLowerCase());
-      const hasPlacedMarker = tags.includes(tagPlaced) || tags.includes('ae-placed') || tags.includes('ali-placed') || tags.some(t => t.startsWith('ali-id:'));
+      const hasPlacedMarker = tags.includes(tagPlaced) || 
+                              tags.includes('ae-placed') || 
+                              tags.includes('ali-placed') || 
+                              tags.some(t => t.startsWith('ali-id:')) ||
+                              !!placedMap[order.name] ||
+                              !!placedMap[String(order.id)];
       return hasPlacedMarker && !tags.includes(tagShipped);
     });
   } catch (err) {
@@ -49,16 +69,19 @@ async function syncTracking() {
     console.log(`------------------------------------------------------`);
     console.log(`Checking Shopify Order #${order.order_number || order.id} (${order.name})`);
 
-    // Extract AliExpress Order IDs from tags
+    // Extract AliExpress Order IDs from tags or placed_orders.json
     const tags = (order.tags || '').split(',').map(t => t.trim());
     const idTags = tags.filter(t => t.startsWith('ali-id:'));
+    let aliOrderIds = idTags.map(t => t.replace('ali-id:', '').trim());
 
-    if (idTags.length === 0) {
-      console.warn(`⚠️ Could not find "ali-id:<id>" tag on order #${order.order_number}. Skipping.`);
-      continue;
+    if (aliOrderIds.length === 0 && placedMap[order.name]?.ali_order_ids) {
+      aliOrderIds = placedMap[order.name].ali_order_ids.map(String);
     }
 
-    const aliOrderIds = idTags.map(t => t.replace('ali-id:', '').trim());
+    if (aliOrderIds.length === 0) {
+      console.warn(`⚠️ Could not find AliExpress Order IDs for order #${order.order_number}. Skipping.`);
+      continue;
+    }
     console.log(`  🔍 Order #${order.order_number} has ${aliOrderIds.length} AliExpress Order(s): ${aliOrderIds.join(', ')}`);
 
     let orderFulfilledAny = false;
