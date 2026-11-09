@@ -170,13 +170,18 @@ class ShopifyClient {
 
     const newNote = cleanExisting ? `${cleanExisting}\n${noteEntry}` : noteEntry;
 
-    return this.makeRequest(`/orders/${order.id}.json`, 'PUT', {
-      order: {
-        id: order.id,
-        tags: existingTags.join(', '),
-        note: newNote
-      }
-    });
+    try {
+      return await this.makeRequest(`/orders/${order.id}.json`, 'PUT', {
+        order: {
+          id: order.id,
+          tags: existingTags.join(', '),
+          note: newNote
+        }
+      });
+    } catch (e) {
+      console.warn(`  ⚠️ Notice: Shopify order tag could not be written on ${this.domain} (${e.message}). Order is safely tracked in placed_orders.json.`);
+      return null;
+    }
   }
 
   /**

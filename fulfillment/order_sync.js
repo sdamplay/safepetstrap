@@ -14,9 +14,11 @@ function parsePhone(rawPhone, countryCode = 'US') {
   } else if (countryCode === 'GB' || countryCode === 'UK') {
     phoneCountry = '+44';
     if (digits.startsWith('44')) digits = digits.slice(2);
+    if (digits.startsWith('0')) digits = digits.slice(1);
   } else if (countryCode === 'AU') {
     phoneCountry = '+61';
     if (digits.startsWith('61')) digits = digits.slice(2);
+    if (digits.startsWith('0')) digits = digits.slice(1);
   }
 
   if (!digits || digits.length < 7) {
@@ -39,16 +41,15 @@ function normalizeCity(rawCity, zip = '', province = '') {
     return zipCityMap[cleanZip];
   }
 
+  // Remove periods from city names (e.g. "St. Petersburg" -> "St Petersburg", "N.Y.C." -> "NYC")
+  city = city.replace(/\./g, '').replace(/\s+/g, ' ').trim();
+
   // Exact / word boundary abbreviation expansions
   const cityReplacements = [
     { regex: /\bSpokane\s*Vly\b/i, replace: 'Spokane Valley' },
     { regex: /^Skok$/i, replace: 'Shelton' },
-    { regex: /\bNYC\b/i, replace: 'New York' },
-    { regex: /^N\.Y\.C\.?$/i, replace: 'New York' },
-    { regex: /^L\.?A\.?$/i, replace: 'Los Angeles' },
-    { regex: /\bSt\.?\s+/gi, replace: 'Saint ' },
-    { regex: /\bFt\.?\s+/gi, replace: 'Fort ' },
-    { regex: /\bMt\.?\s+/gi, replace: 'Mount ' },
+    { regex: /^NYC$/i, replace: 'New York' },
+    { regex: /^LA$/i, replace: 'Los Angeles' },
     { regex: /\bVly\b/gi, replace: 'Valley' },
     { regex: /\bHts\b/gi, replace: 'Heights' },
     { regex: /\bTwp\b/gi, replace: 'Township' },
@@ -65,9 +66,62 @@ function normalizeCity(rawCity, zip = '', province = '') {
   return city;
 }
 
+function sanitizeAddressLine(rawAddress) {
+  let addr = (rawAddress || '').trim();
+  if (addr.length <= 35) return addr;
+
+  // If customer or autofill put full address in address1: "6100 22nd Avenue North, St. Petersburg, FL, USA"
+  if (addr.includes(',')) {
+    const parts = addr.split(',');
+    const firstPart = parts[0].trim();
+    if (firstPart.length >= 5 && firstPart.length <= 35) {
+      return firstPart;
+    }
+  }
+
+  // If still > 35 characters, try truncating at the last space before 35 chars
+  if (addr.length > 35) {
+    const truncated = addr.slice(0, 35);
+    const lastSpace = truncated.lastIndexOf(' ');
+    if (lastSpace > 10) {
+      return truncated.slice(0, lastSpace).trim();
+    }
+    return truncated.trim();
+  }
+
+  return addr;
+}
+
 const fs = require('fs');
 const path = require('path');
 const CATALOG_PATH = path.join(__dirname, 'catalog.json');
+const PLACED_FILE = path.join(__dirname, 'placed_orders.json');
+
+function getPlacedOrders() {
+  if (fs.existsSync(PLACED_FILE)) {
+    try {
+      return JSON.parse(fs.readFileSync(PLACED_FILE, 'utf8'));
+    } catch (e) {
+      return {};
+    }
+  }
+  return {};
+}
+
+function savePlacedOrder(orderName, orderId, aliOrderIds) {
+  const placed = getPlacedOrders();
+  placed[orderName] = {
+    order_id: String(orderId),
+    order_name: orderName,
+    ali_order_ids: aliOrderIds,
+    placed_at: new Date().toISOString()
+  };
+  try {
+    fs.writeFileSync(PLACED_FILE, JSON.stringify(placed, null, 2), 'utf8');
+  } catch (e) {
+    console.warn('⚠️ Could not write to placed_orders.json:', e.message);
+  }
+}
 
 function getCatalog() {
   if (fs.existsSync(CATALOG_PATH)) {
@@ -270,6 +324,12 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
   console.log(`------------------------------------------------------`);
   console.log(`Processing Shopify Order #${order.order_number || order.id} (${order.name})`);
 
+  const placed = getPlacedOrders();
+  if (placed[order.name] || placed[String(order.id)] || order.name === '#SPS941227') {
+    console.log(`  ⏭️ Skipping: ${order.name} is already fulfilled/placed (recorded in placed_orders.json).`);
+    return { status: 'skipped', reason: 'Already placed' };
+  }
+
   const shipping = order.shipping_address;
   if (!shipping) {
     console.warn(`⚠️ Skipping: Order has no shipping address.`);
@@ -314,8 +374,8 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
   const logisticsAddress = {
     contact_person: shipping.name || `${shipping.first_name || ''} ${shipping.last_name || ''}`.trim(),
     full_name: shipping.name || `${shipping.first_name || ''} ${shipping.last_name || ''}`.trim(),
-    address: shipping.address1,
-    address2: shipping.address2 || '',
+    address: sanitizeAddressLine(shipping.address1),
+    address2: sanitizeAddressLine(shipping.address2 || ''),
     city: sanitizedCity,
     province: shipping.province || shipping.province_code || '',
     zip: shipping.zip,
@@ -401,6 +461,7 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
         }
       }
 
+      savePlacedOrder(order.name, order.id, createdAliOrderIds);
       await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
       console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
       return { status: 'success', aliOrderIds: createdAliOrderIds };
@@ -448,6 +509,7 @@ async function placeSingleOrder(order, { isDryRun = false, tagToRemove = null } 
       }
 
       if (createdAliOrderIds.length > 0) {
+        savePlacedOrder(order.name, order.id, createdAliOrderIds);
         await shopifyClient.tagOrderAsPlaced(order, createdAliOrderIds, tagToRemove);
         console.log(`  🏷️  Shopify Order #${order.order_number} tagged with "ae-placed", ${createdAliOrderIds.length} AE Order ID(s), and Note updated.`);
       }
@@ -515,6 +577,13 @@ async function syncOrders() {
       (o.name && o.name.includes(orderFilter))
     );
   }
+
+  // Filter out orders recorded as placed or manually fulfilled
+  const placedMap = getPlacedOrders();
+  orders = orders.filter(o => !placedMap[o.name] && !placedMap[String(o.id)] && o.name !== '#SPS941227');
+
+  // Sort orders oldest first (ascending) so orders are processed in sequence
+  orders.sort((a, b) => (a.order_number || a.id) - (b.order_number || b.id));
 
   if (limit && limit > 0) {
     orders = orders.slice(0, limit);

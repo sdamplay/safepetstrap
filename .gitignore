@@ -10,6 +10,7 @@ tokens.json
 fulfillment/.env
 fulfillment/.env.*
 fulfillment/tokens.json
+fulfillment/placed_orders.json
 fulfillment/node_modules/
 node_modules/
 
