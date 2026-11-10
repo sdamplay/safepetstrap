@@ -122,13 +122,16 @@ def create_order_on_target(src_order):
 
         key = (t, vt)
         if key in VARIANT_MAP:
-            line_items_payload.append({
+            li_entry = {
                 'variant_id': VARIANT_MAP[key],
                 'quantity': qty,
                 'price': price,
                 'requires_shipping': item.get('requires_shipping', True),
                 'taxable': item.get('taxable', False)
-            })
+            }
+            if item.get('properties'):
+                li_entry['properties'] = item['properties']
+            line_items_payload.append(li_entry)
         elif t == 'Tip':
             line_items_payload.append({
                 'title': 'Tip',
@@ -137,13 +140,16 @@ def create_order_on_target(src_order):
                 'requires_shipping': False
             })
         else:
-            line_items_payload.append({
+            li_entry = {
                 'title': t,
                 'variant_title': vt,
                 'quantity': qty,
                 'price': price,
                 'sku': item.get('sku', '')
-            })
+            }
+            if item.get('properties'):
+                li_entry['properties'] = item['properties']
+            line_items_payload.append(li_entry)
 
     payload = {
         'order': {
@@ -184,12 +190,23 @@ def create_order_on_target(src_order):
 
     if src_order.get('customer'):
         cust = src_order['customer']
+        ship = src_order.get('shipping_address') or {}
         payload['order']['customer'] = {
-            'first_name': cust.get('first_name', ''),
-            'last_name': cust.get('last_name', ''),
+            'first_name': cust.get('first_name') or ship.get('first_name', ''),
+            'last_name': cust.get('last_name') or ship.get('last_name', ''),
             'email': cust.get('email') or src_order.get('email'),
-            'phone': cust.get('phone') or src_order.get('phone')
+            'phone': cust.get('phone') or ship.get('phone') or src_order.get('phone')
         }
+
+    if src_order.get('financial_status') == 'paid':
+        payload['order']['transactions'] = [
+            {
+                'kind': 'sale',
+                'status': 'success',
+                'amount': src_order.get('total_price'),
+                'gateway': 'shopify_payments'
+            }
+        ]
 
     if src_order.get('shipping_address'):
         payload['order']['shipping_address'] = src_order['shipping_address']
