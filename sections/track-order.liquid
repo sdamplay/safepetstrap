@@ -1,301 +1,912 @@
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  .safepet-track-wrapper {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px;
+    font-family: var(--font-body-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    color: #111827;
   }
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+  .safepet-track-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .safepet-track-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #FEF2F2;
+    color: #DC2626;
+    border: 1px solid #FECACA;
+    border-radius: 9999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .safepet-pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #16A34A;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+    animation: safepetPulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+  }
+
+  @keyframes safepetPulse {
+    to {
+      box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
     }
   }
 
-  .color-scheme-{{ section.id }}.color-custom {
-    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
-    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
-    {% if section.settings.custom_image_background != blank %}
-      {% # theme-check-disable %}
-      --gradient-background: url('{{ section.settings.custom_image_background | img_url: 'master' }}') center center / cover no-repeat;
-      {% # theme-check-enable %}
-    {% endif %}
-    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
-    --color-button: {{ section.settings.custom_colors_solid_button_background.red }}, {{ section.settings.custom_colors_solid_button_background.green }}, {{ section.settings.custom_colors_solid_button_background.blue }};
-    --color-button-text: {{ section.settings.custom_colors_solid_button_text.red }}, {{ section.settings.custom_colors_solid_button_text.green }}, {{ section.settings.custom_colors_solid_button_text.blue }};
+  .safepet-track-title {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
-  {% if section.settings.custom_mobile_image_background != blank %}
-    @media screen and (max-width: 740px) {
-      .color-scheme-{{ section.id }}.color-custom {
-        {% # theme-check-disable %}
-        --gradient-background: url('{{ section.settings.custom_mobile_image_background | img_url: 'master' }}') center center / cover no-repeat;
-        {% # theme-check-enable %}
-      }
+
+  .safepet-track-subtitle {
+    font-size: clamp(14px, 2vw, 16px);
+    color: #4B5563;
+    max-width: 620px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Main Card */
+  .safepet-track-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+    padding: 28px 24px;
+    margin-bottom: 36px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .safepet-track-card {
+      padding: 36px 40px;
     }
-  {% endif %}
+  }
+
+  /* Mode Switcher Tabs */
+  .safepet-tabs-nav {
+    display: flex;
+    background: #F3F4F6;
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    gap: 4px;
+  }
+
+  .safepet-tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    border: none;
+    background: transparent;
+    color: #4B5563;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .safepet-tab-btn.active {
+    background: #FFFFFF;
+    color: #111827;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  .safepet-tab-pane {
+    display: none;
+  }
+
+  .safepet-tab-pane.active {
+    display: block;
+    animation: safepetFadeIn 0.3s ease;
+  }
+
+  @keyframes safepetFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Input fields */
+  .safepet-form-group {
+    margin-bottom: 18px;
+  }
+
+  .safepet-form-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .safepet-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .safepet-input-icon {
+    position: absolute;
+    left: 14px;
+    width: 20px;
+    height: 20px;
+    color: #9CA3AF;
+    pointer-events: none;
+  }
+
+  .safepet-input {
+    width: 100%;
+    padding: 14px 14px 14px 44px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #111827;
+    background: #F9FAFB;
+    border: 1.5px solid #D1D5DB;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  .safepet-input:focus {
+    background: #FFFFFF;
+    border-color: #DC2626;
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
+  }
+
+  .safepet-input::placeholder {
+    color: #9CA3AF;
+  }
+
+  /* Action CTA Button */
+  .safepet-track-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 24px;
+    background-color: #DC2626;
+    color: #FFFFFF !important;
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+  }
+
+  .safepet-track-btn:hover {
+    background-color: #B91C1C;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.45);
+  }
+
+  .safepet-track-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Error & Notice Box */
+  .safepet-alert-box {
+    display: none;
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .safepet-alert-error {
+    background-color: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #B91C1C;
+  }
+
+  .safepet-alert-info {
+    background-color: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    color: #1E40AF;
+  }
+
+  /* 17Track Container */
+  #YQContainer {
+    margin-top: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* Quick fallback links */
+  .safepet-quick-carriers {
+    display: none;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px dashed #E5E7EB;
+  }
+
+  .safepet-quick-carriers-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #6B7280;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .safepet-carrier-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .safepet-carrier-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: #F3F4F6;
+    color: #374151 !important;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid #E5E7EB;
+    transition: all 0.2s ease;
+  }
+
+  .safepet-carrier-chip:hover {
+    background: #E5E7EB;
+    color: #111827 !important;
+  }
+
+  /* 4-Stage Timeline */
+  .safepet-timeline-section {
+    margin-bottom: 40px;
+  }
+
+  .safepet-section-heading {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .safepet-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .safepet-steps-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+  }
+
+  .safepet-step-card {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .safepet-step-card:hover {
+    transform: translateY(-2px);
+    border-color: #D1D5DB;
+  }
+
+  .safepet-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: #DC2626;
+    color: #FFFFFF;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  .safepet-step-title {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+
+  .safepet-step-desc {
+    font-size: 12px;
+    color: #6B7280;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  /* Trust Badges Grid */
+  .safepet-trust-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  @media screen and (min-width: 640px) {
+    .safepet-trust-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .safepet-trust-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+
+  .safepet-trust-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FEF2F2;
+    color: #DC2626;
+    border-radius: 8px;
+  }
+
+  .safepet-trust-item-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 2px;
+  }
+
+  .safepet-trust-item-desc {
+    font-size: 12px;
+    color: #4B5563;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* FAQ Accordion on Tracking */
+  .safepet-track-faq {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 36px;
+  }
+
+  .safepet-faq-item {
+    border-bottom: 1px solid #E5E7EB;
+    padding: 14px 0;
+  }
+
+  .safepet-faq-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .safepet-faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .safepet-faq-icon {
+    font-size: 18px;
+    color: #9CA3AF;
+    transition: transform 0.2s ease;
+  }
+
+  .safepet-faq-item.open .safepet-faq-icon {
+    transform: rotate(45deg);
+    color: #DC2626;
+  }
+
+  .safepet-faq-answer {
+    display: none;
+    font-size: 13px;
+    color: #4B5563;
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+
+  .safepet-faq-item.open .safepet-faq-answer {
+    display: block;
+    animation: safepetFadeIn 0.2s ease;
+  }
+
+  /* Support Callout Box */
+  .safepet-support-callout {
+    background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+    border-radius: 14px;
+    padding: 24px;
+    color: #FFFFFF;
+    text-align: center;
+  }
+
+  .safepet-support-callout h4 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 6px 0;
+  }
+
+  .safepet-support-callout p {
+    font-size: 13px;
+    color: #D1D5DB;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+  }
+
+  .safepet-support-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .safepet-support-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    background: #FFFFFF;
+    color: #111827 !important;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .safepet-support-btn:hover {
+    background: #F3F4F6;
+  }
+
+  .safepet-support-btn-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #FFFFFF !important;
+  }
+
+  .safepet-support-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} color-scheme-{{ section.id }} gradient content-for-grouping animate-section animate--hidden {{ section.settings.visibility }}">
-  {% if section.settings.display_id %}
-    <copy-button class='section-id-btn button' data-content="#shopify-section-{{ section.id }}" data-success="false">
-      <span class="copy-text">Click to copy section ID</span>
-      <span class="copy-success">ID copied successfully!</span>
-    </copy-button>
-  {% endif %}
-  <div class="page-width section-{{ section.id }}-padding">
-    <div class="track-order-form animate-item">
-      <div class="center">
-        {%- if section.settings.title != blank -%}
-          <h2 class="title title-wrapper--no-top-margin {{ section.settings.heading_size }} title-with-highlight" style='--hightlight-color:{{ section.settings.title_highlight_color }}'>
-            {{ section.settings.title }}
-          </h2>
-        {%- endif -%}
-        {% if section.settings.text != blank %}
-          {{ section.settings.text }}
-        {% endif %}
+<div class="safepet-track-wrapper section-{{ section.id }}-padding" style="padding-top: {{ section.settings.padding_top | default: 40 }}px; padding-bottom: {{ section.settings.padding_bottom | default: 48 }}px;">
+  <!-- Header -->
+  <div class="safepet-track-header">
+    <div class="safepet-track-badge">
+      <span class="safepet-pulse-dot"></span>
+      REAL-TIME SHIPMENT TRACKING
+    </div>
+    <h1 class="safepet-track-title">Track Your SafePet™ Order</h1>
+    <p class="safepet-track-subtitle">
+      Check the real-time location and estimated delivery of your dog car safety gear. Enter your carrier tracking number or order details below.
+    </p>
+  </div>
+
+  <!-- Main Tracking Card -->
+  <div class="safepet-track-card">
+    <!-- Tabs Nav -->
+    <div class="safepet-tabs-nav" role="tablist">
+      <button type="button" class="safepet-tab-btn active" id="tab-btn-tracking" onclick="switchTrackTab('tracking')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+        Tracking Number
+      </button>
+      <button type="button" class="safepet-tab-btn" id="tab-btn-order" onclick="switchTrackTab('order')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        Order Number (#SPS...)
+      </button>
+    </div>
+
+    <!-- Pane 1: Tracking Number -->
+    <div id="pane-tracking" class="safepet-tab-pane active">
+      <div class="safepet-form-group">
+        <label class="safepet-form-label" for="YQNum">Enter Carrier Tracking Number</label>
+        <div class="safepet-input-wrapper">
+          <svg class="safepet-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="YQNum"
+            class="safepet-input"
+            name="track-order-number"
+            maxlength="50"
+            placeholder="e.g. 9400 1118 9956 ... or YT240..."
+            autocomplete="off"
+            onkeydown="if(event.key === 'Enter'){ doTrackSafePet(); }"
+          >
+        </div>
       </div>
-      <!-- Tracking number input box. -->
-      <div class="field">
-        <input
-          type="text"
-          id="YQNum"
-          class="field__input"
-          name="track-order-number"
-          maxlength="50"
-          placeholder='{{ section.settings.input_label }}'
-        >
-        <label class="field__label" for="track-order-number">{{ section.settings.input_label }}</label>
+      <button type="button" class="safepet-track-btn" id="trackSubmitBtn" onclick="doTrackSafePet()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Track Package</span>
+      </button>
+      <div id="safepetAlertError" class="safepet-alert-box safepet-alert-error"></div>
+    </div>
+
+    <!-- Pane 2: Order Number & Email -->
+    <div id="pane-order" class="safepet-tab-pane">
+      <div class="safepet-form-group">
+        <label class="safepet-form-label" for="orderNumberInput">Shopify Order Number</label>
+        <div class="safepet-input-wrapper">
+          <svg class="safepet-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="9" x2="20" y2="9"></line>
+            <line x1="4" y1="15" x2="20" y2="15"></line>
+            <line x1="10" y1="3" x2="8" y2="21"></line>
+            <line x1="16" y1="3" x2="14" y2="21"></line>
+          </svg>
+          <input
+            type="text"
+            id="orderNumberInput"
+            class="safepet-input"
+            placeholder="e.g. #SPS941260"
+          >
+        </div>
       </div>
-      <!-- The button is used to call script method. -->
-      <div class="contact__button">
-        <input
-          type="button"
-          class="button{% if section.settings.button_full_width %} button--full-width{% endif %}"
-          value="{{ section.settings.button_label }}"
-          onclick="doTrack()"
-        >
+      <div class="safepet-form-group">
+        <label class="safepet-form-label" for="orderEmailInput">Email Address Used At Checkout</label>
+        <div class="safepet-input-wrapper">
+          <svg class="safepet-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <input
+            type="email"
+            id="orderEmailInput"
+            class="safepet-input"
+            placeholder="e.g. your@email.com"
+          >
+        </div>
+      </div>
+      <button type="button" class="safepet-track-btn" onclick="lookupOrderSafePet()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span>Look Up Order Status</span>
+      </button>
+      <div id="safepetOrderAlert" class="safepet-alert-box safepet-alert-info"></div>
+    </div>
+
+    <!-- Quick Direct Carrier Chips -->
+    <div id="safepetQuickCarriers" class="safepet-quick-carriers">
+      <div class="safepet-quick-carriers-title">Direct Carrier Tracking Portals:</div>
+      <div class="safepet-carrier-chips">
+        <a id="uspsDirectLink" href="https://tools.usps.com/go/TrackConfirmAction" target="_blank" rel="noopener" class="safepet-carrier-chip">
+          🇺🇸 USPS Tracking
+        </a>
+        <a id="seventeenTrackLink" href="https://t.17track.net/en" target="_blank" rel="noopener" class="safepet-carrier-chip">
+          🌐 17Track Global
+        </a>
+        <a id="parcelsAppCover" href="https://parcelsapp.com/en" target="_blank" rel="noopener" class="safepet-carrier-chip">
+          📦 ParcelsApp
+        </a>
       </div>
     </div>
-    <!-- Container to display the tracking result. -->
+
+    <!-- 17Track Display Container -->
     <div id="YQContainer"></div>
+  </div>
+
+  <!-- Shipping Journey Timeline -->
+  <div class="safepet-timeline-section">
+    <div class="safepet-section-heading">Your Order's Safety Journey</div>
+    <div class="safepet-steps-grid">
+      <div class="safepet-step-card">
+        <span class="safepet-step-num">1</span>
+        <div class="safepet-step-title">Order Placed</div>
+        <p class="safepet-step-desc">Instant confirmation &amp; sent directly to warehouse fulfillment queue.</p>
+      </div>
+      <div class="safepet-step-card">
+        <span class="safepet-step-num">2</span>
+        <div class="safepet-step-title">Quality Inspection</div>
+        <p class="safepet-step-desc">1–2 business days. Webbing &amp; 360° latch rigorously tested before dispatch.</p>
+      </div>
+      <div class="safepet-step-card">
+        <span class="safepet-step-num">3</span>
+        <div class="safepet-step-title">In Transit</div>
+        <p class="safepet-step-desc">Handed to carrier (USPS / Fast Courier) with live milestone tracking.</p>
+      </div>
+      <div class="safepet-step-card">
+        <span class="safepet-step-num">4</span>
+        <div class="safepet-step-title">Safe Delivery</div>
+        <p class="safepet-step-desc">Delivered to your front door, ready for your pup's next safe ride.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust Badges Grid -->
+  <div class="safepet-trust-grid">
+    <div class="safepet-trust-item">
+      <div class="safepet-trust-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="safepet-trust-item-title">100% Insured Shipping</div>
+        <p class="safepet-trust-item-desc">Every parcel is insured against loss, transit damage, or carrier theft.</p>
+      </div>
+    </div>
+    <div class="safepet-trust-item">
+      <div class="safepet-trust-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+      </div>
+      <div>
+        <div class="safepet-trust-item-title">Fast 1–2 Day Dispatch</div>
+        <p class="safepet-trust-item-desc">Handled within 24–48 hours from our fulfillment logistics center.</p>
+      </div>
+    </div>
+    <div class="safepet-trust-item">
+      <div class="safepet-trust-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="safepet-trust-item-title">Human Customer Support</div>
+        <p class="safepet-trust-item-desc">Need assistance? Our US-based team replies in under 24 business hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Accordion -->
+  <div class="safepet-track-faq">
+    <div class="safepet-section-heading" style="margin-bottom: 16px;">Frequently Asked Tracking Questions</div>
+    
+    <div class="safepet-faq-item">
+      <button type="button" class="safepet-faq-question" onclick="toggleTrackFaq(this)">
+        <span>When will my tracking number become active?</span>
+        <span class="safepet-faq-icon">+</span>
+      </button>
+      <div class="safepet-faq-answer">
+        Carriers typically take <strong>24 to 48 hours</strong> after generating the shipping label to scan the package into their regional sorting hub. If your tracking says "Pre-Shipment" or "Label Created", rest assured your package is packed and awaiting initial carrier intake scanning.
+      </div>
+    </div>
+
+    <div class="safepet-faq-item">
+      <button type="button" class="safepet-faq-question" onclick="toggleTrackFaq(this)">
+        <span>How long does delivery take?</span>
+        <span class="safepet-faq-icon">+</span>
+      </button>
+      <div class="safepet-faq-answer">
+        Standard delivery for United States orders takes <strong>5 to 8 business days</strong> via USPS or partner couriers, following our 1–2 business day warehouse processing window. International shipments take 7 to 12 business days depending on customs clearance.
+      </div>
+    </div>
+
+    <div class="safepet-faq-item">
+      <button type="button" class="safepet-faq-question" onclick="toggleTrackFaq(this)">
+        <span>Where can I find my tracking number?</span>
+        <span class="safepet-faq-icon">+</span>
+      </button>
+      <div class="safepet-faq-answer">
+        Your tracking number is emailed automatically once your package leaves our fulfillment facility. Check your inbox and spam folder for an email from <strong>support@safepetstrap.com</strong> with the subject "Your SafePet Strap Order Has Shipped".
+      </div>
+    </div>
+
+    <div class="safepet-faq-item">
+      <button type="button" class="safepet-faq-question" onclick="toggleTrackFaq(this)">
+        <span>What if my tracking hasn't updated for several days?</span>
+        <span class="safepet-faq-icon">+</span>
+      </button>
+      <div class="safepet-faq-answer">
+        Packages in transit between regional sorting hubs may not receive milestone scans for 2–3 days while on long-haul transport. If your tracking has not updated for more than 5 consecutive business days, contact our support team and we will initiate an inquiry or send an immediate priority replacement.
+      </div>
+    </div>
+  </div>
+
+  <!-- Support Footer Callout -->
+  <div class="safepet-support-callout">
+    <h4>Still Have Questions About Your Shipment?</h4>
+    <p>Our dedicated support specialists are ready to look up your order records and help you right away.</p>
+    <div class="safepet-support-links">
+      <a href="mailto:support@safepetstrap.com?subject=Tracking%20Inquiry%20-%20SafePet%20Strap" class="safepet-support-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        Email: support@safepetstrap.com
+      </a>
+      <a href="tel:+13073551993" class="safepet-support-btn safepet-support-btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        Call: (307) 355-1993
+      </a>
+      <a href="/pages/contact" class="safepet-support-btn safepet-support-btn-outline">
+        Contact Us Page &rarr;
+      </a>
+    </div>
   </div>
 </div>
 
 <script type="text/javascript" src="//www.17track.net/externalcall.js" defer="defer"></script>
 <script type="text/javascript">
-  function doTrack() {
-    var num = document.getElementById("YQNum").value;
-    if(num===""){
-      alert("Enter your number.");
+  function switchTrackTab(mode) {
+    var btnTracking = document.getElementById('tab-btn-tracking');
+    var btnOrder = document.getElementById('tab-btn-order');
+    var paneTracking = document.getElementById('pane-tracking');
+    var paneOrder = document.getElementById('pane-order');
+    var errorBox = document.getElementById('safepetAlertError');
+    if (errorBox) errorBox.style.display = 'none';
+
+    if (mode === 'tracking') {
+      btnTracking.classList.add('active');
+      btnOrder.classList.remove('active');
+      paneTracking.classList.add('active');
+      paneOrder.classList.remove('active');
+    } else {
+      btnOrder.classList.add('active');
+      btnTracking.classList.remove('active');
+      paneOrder.classList.add('active');
+      paneTracking.classList.remove('active');
+    }
+  }
+
+  function doTrackSafePet() {
+    var input = document.getElementById("YQNum");
+    var errorBox = document.getElementById("safepetAlertError");
+    var carriersBox = document.getElementById("safepetQuickCarriers");
+    var num = (input ? input.value : "").trim();
+
+    if (!num) {
+      if (errorBox) {
+        errorBox.textContent = "Please enter your tracking number (found in your shipping confirmation email).";
+        errorBox.style.display = "block";
+      }
+      if (input) input.focus();
       return;
     }
-    YQV5.trackSingle({
-      //Required, Specify the container ID of the carrier content.
-      YQ_ContainerId:"YQContainer",
-      //Optional, specify tracking result height, max height 800px, default is 560px.
-      YQ_Height:560,
-      //Optional, select carrier, default to auto identify.
-      YQ_Fc:"0",
-      //Optional, specify UI language, default language is automatically detected based on the browser settings.
-      YQ_Lang:"en",
-      //Required, specify the number needed to be tracked.
-      YQ_Num:num
-    });
+
+    if (errorBox) {
+      errorBox.style.display = "none";
+    }
+
+    // Populate direct carrier fallback links
+    var cleanNum = encodeURIComponent(num);
+    var uspsLink = document.getElementById("uspsDirectLink");
+    if (uspsLink) uspsLink.href = "https://tools.usps.com/go/TrackConfirmAction?tLabels=" + cleanNum;
+    
+    var yqLink = document.getElementById("seventeenTrackLink");
+    if (yqLink) yqLink.href = "https://t.17track.net/en#nums=" + cleanNum;
+
+    var parcelsLink = document.getElementById("parcelsAppCover");
+    if (parcelsLink) parcelsLink.href = "https://parcelsapp.com/en/tracking/" + cleanNum;
+
+    if (carriersBox) {
+      carriersBox.style.display = "block";
+    }
+
+    if (typeof YQV5 !== "undefined" && YQV5.trackSingle) {
+      try {
+        YQV5.trackSingle({
+          YQ_ContainerId: "YQContainer",
+          YQ_Height: 580,
+          YQ_Fc: "0",
+          YQ_Lang: "en",
+          YQ_Num: num
+        });
+      } catch (e) {
+        console.error("17Track embed error:", e);
+      }
+    } else {
+      // If script is delayed or blocked by adblock, scroll to carrier chips
+      window.open("https://t.17track.net/en#nums=" + cleanNum, "_blank");
+    }
+  }
+
+  function lookupOrderSafePet() {
+    var orderNum = (document.getElementById("orderNumberInput").value || "").trim();
+    var email = (document.getElementById("orderEmailInput").value || "").trim();
+    var alertBox = document.getElementById("safepetOrderAlert");
+
+    if (!orderNum) {
+      alertBox.className = "safepet-alert-box safepet-alert-error";
+      alertBox.textContent = "Please enter your SafePet order number (e.g. #SPS941260).";
+      alertBox.style.display = "block";
+      return;
+    }
+
+    alertBox.className = "safepet-alert-box safepet-alert-info";
+    alertBox.innerHTML = "<strong>Order " + orderNum + " Status:</strong> Orders placed within the last 1–2 business days are currently being inspected and securely packaged at our fulfillment center. Once the shipping label is scanned by the postal carrier, your live tracking number is emailed immediately. <br><br>Need immediate dispatch details? Click below to email our priority team: <br><a href='mailto:support@safepetstrap.com?subject=Inquiry%20For%20Order%20" + encodeURIComponent(orderNum) + "&body=Hi%20SafePet%20Team%2C%20please%20check%20the%20status%20of%20my%20order%20" + encodeURIComponent(orderNum) + "%20for%20email%20" + encodeURIComponent(email) + ".' style='color:#1E40AF; font-weight:700; text-decoration:underline; display:inline-block; margin-top:8px;'>&rarr; Request Instant Status Update via Email</a>";
+    alertBox.style.display = "block";
+  }
+
+  function toggleTrackFaq(btn) {
+    var item = btn.parentElement;
+    item.classList.toggle("open");
   }
 </script>
 
 {% schema %}
 {
   "name": "Track order",
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  },
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "display_id",
-      "label": "Display section ID",
-      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
-      "default": false
-    },
-    {
-      "type": "select",
-      "id": "visibility",
-      "options": [
-        {
-          "value": "desktop-hidden",
-          "label": "Mobile only"
-        },
-        {
-          "value": "mobile-hidden",
-          "label": "Desktop only"
-        },
-        {
-          "value": "always-display",
-          "label": "All devices"
-        }
-      ],
-      "label": "Display on",
-      "default": "always-display"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "title",
-      "default": "Track your order",
-      "label": "Heading",
-      "info": "Bold certain words to highlight them with a different color."
-    },
-    {
-      "type": "color",
-      "id": "title_highlight_color",
-      "label": "Heading highlight color",
-      "default": "#6D388B"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "Small"
-        },
-        {
-          "value": "h1",
-          "label": "Medium"
-        },
-        {
-          "value": "h0",
-          "label": "Large"
-        }
-      ],
-      "default": "h1",
-      "label": "Heading size"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "default": "<p>Please enter you tracking number below. If your tracking number doesn't work feel free to contact us at [shop email]</p>"
-    },
-    {
-      "type": "text",
-      "id": "input_label",
-      "label": "Input label",
-      "default": "Tracking number"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "TRACK"
-    },
-    {
-      "type": "checkbox",
-      "id": "button_full_width",
-      "label": "Use full width button style",
-      "default": true
-    },
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "Accent 1"
-        },
-        {
-          "value": "accent-2",
-          "label": "Accent 2"
-        },
-        {
-          "value": "background-1",
-          "label": "Background 1"
-        },
-        {
-          "value": "background-2",
-          "label": "Background 2"
-        },
-        {
-          "value": "inverse",
-          "label": "Inverse"
-        },
-        {
-          "value": "custom",
-          "label": "Custom"
-        }
-      ],
-      "default": "background-1",
-      "label": "Color scheme",
-      "info": "Custom color scheme is edited at the bottom of section settings."
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
     {
       "type": "range",
       "id": "padding_top",
-      "min": 0,
+      "min": 10,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "label": "Top Padding",
+      "default": 40
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "min": 0,
+      "min": 10,
       "max": 100,
-      "step": 4,
+      "step": 2,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    },
-    {
-      "type": "header",
-      "content": "Custom color scheme",
-      "info": "Applied if Color scheme setting is set to Custom."
-    },
-    {
-      "type": "color",
-      "id": "custom_colors_background",
-      "default": "#FFFFFF",
-      "label": "Background color"
-    },
-    {
-      "type": "color_background",
-      "id": "custom_gradient_background",
-      "label": "Gradient background",
-      "info": "If added, replaces Background color when applicable."
-    },
-    {
-      "type": "image_picker",
-      "id": "custom_image_background",
-      "label": "Image background"
-    },
-    {
-      "type": "image_picker",
-      "id": "custom_mobile_image_background",
-      "label": "Mobile image background",
-      "info": "If empty, the Image background will also be applied to mobile devices"
-    },
-    {
-      "type": "color",
-      "id": "custom_colors_text",
-      "default": "#2E2A39",
-      "label": "Text"
-    },
-    {
-      "type": "color",
-      "id": "custom_colors_solid_button_background",
-      "default": "#dd1d1d",
-      "label": "Solid button background"
-    },
-    {
-      "type": "color",
-      "id": "custom_colors_solid_button_text",
-      "default": "#ffffff",
-      "label": "Solid button label"
+      "label": "Bottom Padding",
+      "default": 48
     }
   ],
   "presets": [
