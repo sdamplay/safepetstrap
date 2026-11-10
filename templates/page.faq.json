@@ -1,89 +1,136 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "main-page",
       "disabled": true,
       "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     },
-    "9c121ec4-42cd-4c8e-82a2-935e073db7d7": {
+    "faq_content": {
       "type": "collapsible-content",
       "blocks": {
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-0": {
+        "faq_1": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_box",
-            "filled_icon": false,
-            "row_content": "",
+            "heading": "Will the SafePet Strap fit my specific vehicle?",
+            "icon": "directions_car",
+            "filled_icon": true,
+            "row_content": "<p><strong>Yes, absolutely!</strong> The SafePet Strap is engineered with a standard <strong>21mm (0.83-inch) universal seatbelt latch</strong> that fits 99.9% of passenger cars, trucks, SUVs, and vans on the road today.</p><p>Simply click the latch directly into your car's existing seatbelt buckle just like a regular passenger seat belt. It clicks securely in place in less than 3 seconds.</p>",
             "page": ""
           }
         },
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-1": {
+        "faq_2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_box",
-            "filled_icon": false,
-            "row_content": "",
+            "heading": "Should I clip the SafePet Strap to a collar or a harness?",
+            "icon": "pets",
+            "filled_icon": true,
+            "row_content": "<p><strong>Always attach the SafePet Strap to a chest harness, never to a neck collar.</strong></p><p>In the event of sudden braking, sharp turning, or an accident, a harness evenly distributes inertial forces across your dog's strong chest and shoulders. Clipping directly to a neck collar could cause severe strain or injury to your dog's delicate trachea and cervical spine.</p>",
             "page": ""
           }
         },
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-2": {
+        "faq_3": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_box",
-            "filled_icon": false,
-            "row_content": "",
+            "heading": "How does the anti-whiplash bungee buffer protect my dog?",
+            "icon": "shield",
+            "filled_icon": true,
+            "row_content": "<p>The SafePet Strap features an integrated <strong>elastic bungee buffer</strong> woven into military-grade nylon webbing. When you brake hard or take a sudden turn, the elastic buffer absorbs the abrupt shock wave, gently decelerating your pup rather than subjecting them to a sudden, painful jolt.</p>",
             "page": ""
           }
         },
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-3": {
+        "faq_4": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
-            "icon": "check_box",
-            "filled_icon": false,
-            "row_content": "",
+            "heading": "What size dogs is the SafePet Strap suitable for?",
+            "icon": "straighten",
+            "filled_icon": true,
+            "row_content": "<p>The strap is fully adjustable in length from <strong>21 inches to 32 inches (53 cm to 81 cm)</strong>. It is rated to hold dogs of all sizes—from small pups and Frenchies (10+ lbs) to medium breeds like Labs and Poodles, up to large 100+ lb Golden Retrievers, German Shepherds, and Great Danes.</p><p>The adjustable slider allows you to give smaller dogs more room to sit or lie down, or shorten the tether to keep larger dogs steady in the back seat.</p>",
+            "page": ""
+          }
+        },
+        "faq_5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long does shipping take and how do I track my package?",
+            "icon": "local_shipping",
+            "filled_icon": true,
+            "row_content": "<p>All orders are processed and packed within <strong>1–2 business days</strong>.</p><p>• <strong>United States:</strong> 5–8 business days via USPS / Standard Shipping.<br>• <strong>International:</strong> 7–12 business days depending on destination.</p><p>As soon as your package ships, you will receive an automatic dispatch email containing your live tracking number. You can also track your shipment anytime directly on our <a href=\"/pages/track-order\"><strong>Track Your Order</strong></a> page.</p>",
+            "page": ""
+          }
+        },
+        "faq_6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is your 30-Day Money-Back Guarantee & Return Policy?",
+            "icon": "verified",
+            "filled_icon": true,
+            "row_content": "<p>We want you and your pup to ride with total peace of mind. Every SafePet product is backed by our <strong>30-Day 100% Risk-Free Guarantee</strong>.</p><p>If you or your dog are not completely thrilled with the quality, comfort, or fit of your strap, simply contact our support team at <a href=\"mailto:support@safepetstrap.com\"><strong>support@safepetstrap.com</strong></a> within 30 days of delivery, and we'll gladly issue a full refund or free replacement—no hassle, no hard feelings.</p>",
+            "page": ""
+          }
+        },
+        "faq_7": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I use multiple SafePet Straps for multiple dogs?",
+            "icon": "group",
+            "filled_icon": true,
+            "row_content": "<p><strong>Yes!</strong> Each dog in your vehicle should have their own individual SafePet Strap clicked into their respective seatbelt buckle. Having each dog securely anchored prevents them from tangling into each other, distracting the driver, or becoming airborne in a sudden stop.</p><p>We offer discounted <strong>2-Pack</strong> and <strong>3-Pack bundles (with free bonus gifts)</strong> directly on our order page.</p>",
+            "page": ""
+          }
+        },
+        "faq_8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I clean and care for the SafePet Strap?",
+            "icon": "wash",
+            "filled_icon": true,
+            "row_content": "<p>Our strap is crafted from weatherproof, high-density nylon webbing and zinc-alloy hardware designed to withstand mud, dirt, and heavy daily use.</p><p>To clean, simply hand-wash with warm water and mild detergent or wipe down with a damp cloth, then lay flat to air dry. The stainless zinc-alloy buckle will not rust or discolor.</p>",
+            "page": ""
+          }
+        },
+        "faq_9": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How can I contact customer support if I have questions?",
+            "icon": "support_agent",
+            "filled_icon": true,
+            "row_content": "<p>Our customer care team is always here for you and your dog!</p><p>• <strong>Email:</strong> <a href=\"mailto:support@safepetstrap.com\">support@safepetstrap.com</a><br>• <strong>Phone:</strong> (307) 355-1993<br>• <strong>Hours:</strong> Monday – Friday, 9:00 AM – 5:00 PM EST<br>• <strong>Online Form:</strong> Visit our <a href=\"/pages/contact\"><strong>Contact Us</strong></a> page</p><p>We respond to all customer inquiries in under 24 business hours.</p>",
             "page": ""
           }
         }
       },
       "block_order": [
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-0",
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-1",
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-2",
-        "template--19742927749415__9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-3"
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9"
       ],
       "settings": {
-        "caption": "Frequently asked questions",
-        "heading_size": "h0",
+        "caption": "FREQUENTLY ASKED QUESTIONS",
+        "title": "Frequently Asked Questions",
+        "heading_size": "h1",
         "heading_alignment": "center",
         "layout": "none",
         "color_scheme": "background-1",
         "container_color_scheme": "background-2",
-        "open_first_collapsible_row": false,
+        "open_first_collapsible_row": true,
         "image_ratio": "adapt",
         "desktop_layout": "image_second",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
   "order": [
     "main",
-    "9c121ec4-42cd-4c8e-82a2-935e073db7d7"
+    "faq_content"
   ]
 }
