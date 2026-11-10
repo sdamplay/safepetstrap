@@ -282,7 +282,50 @@
     {%- endif -%}
 
     {%- if section.settings.menu != blank and section.settings.menu_type_desktop != 'drawer' -%}
-      {% if section.settings.menu_type_desktop == 'dropdown' %}
+      {%- assign show_custom_safepet_nav = true -%}
+      {%- if section.settings.menu.links.size > 0 -%}
+        {%- assign has_default_catalog = false -%}
+        {%- for link in section.settings.menu.links -%}
+          {%- if link.title == 'Catalog' or link.url == '/collections/all' -%}
+            {%- assign has_default_catalog = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- unless has_default_catalog -%}
+          {%- assign show_custom_safepet_nav = false -%}
+        {%- endunless -%}
+      {%- endif -%}
+
+      {%- if show_custom_safepet_nav -%}
+        <nav class="header__inline-menu">
+          <ul class="list-menu list-menu--inline" role="list">
+            <li>
+              <a href="/" class="header__menu-item header__menu-item--main list-menu__item link link--text focus-inset"{% if request.path == '/' %} aria-current="page"{% endif %}>
+                <span{% if section.settings.highlight_active_link and request.path == '/' %} class="header__active-menu-item-v2 color-{{ section.settings.highlighted_link_color_scheme }}"{% endif %}>Home</span>
+              </a>
+            </li>
+            <li>
+              <a href="/pages/track-order" class="header__menu-item header__menu-item--main list-menu__item link link--text focus-inset"{% if request.path contains 'track' %} aria-current="page"{% endif %}>
+                <span{% if section.settings.highlight_active_link and request.path contains 'track' %} class="header__active-menu-item-v2 color-{{ section.settings.highlighted_link_color_scheme }}"{% endif %}>Track Your Order</span>
+              </a>
+            </li>
+            <li>
+              <a href="/pages/faq" class="header__menu-item header__menu-item--main list-menu__item link link--text focus-inset"{% if request.path contains 'faq' %} aria-current="page"{% endif %}>
+                <span{% if section.settings.highlight_active_link and request.path contains 'faq' %} class="header__active-menu-item-v2 color-{{ section.settings.highlighted_link_color_scheme }}"{% endif %}>FAQ</span>
+              </a>
+            </li>
+            <li>
+              <a href="/pages/about-us" class="header__menu-item header__menu-item--main list-menu__item link link--text focus-inset"{% if request.path == '/pages/about-us' %} aria-current="page"{% endif %}>
+                <span{% if section.settings.highlight_active_link and request.path == '/pages/about-us' %} class="header__active-menu-item-v2 color-{{ section.settings.highlighted_link_color_scheme }}"{% endif %}>About Us</span>
+              </a>
+            </li>
+            <li>
+              <a href="/pages/contact" class="header__menu-item header__menu-item--main list-menu__item link link--text focus-inset"{% if request.path contains 'contact' %} aria-current="page"{% endif %}>
+                <span{% if section.settings.highlight_active_link and request.path contains 'contact' %} class="header__active-menu-item-v2 color-{{ section.settings.highlighted_link_color_scheme }}"{% endif %}>Contact Us</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      {%- elsif section.settings.menu_type_desktop == 'dropdown' -%}
         <nav class="header__inline-menu">
           <ul class="list-menu list-menu--inline" role="list">
             {%- for link in section.settings.menu.links -%}

@@ -28,7 +28,16 @@
           "settings": {
             "heading": "Quick links",
             "menu": "footer",
-            "width_desktop": 4,
+            "width_desktop": 2,
+            "width_mobile": "1"
+          }
+        },
+        "policies_links": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Policies & Legal",
+            "menu": "footer",
+            "width_desktop": 3,
             "width_mobile": "1"
           }
         },
@@ -48,6 +57,7 @@
       "block_order": [
         "text_JFaWEy",
         "1c647602-cc00-4009-a058-976435c8ee9e",
+        "policies_links",
         "24f208fd-0898-43eb-af23-d74f8420ab37"
       ],
       "settings": {
@@ -58,7 +68,7 @@
         "enable_language_selector": true,
         "payment_enable": true,
         "enabled_payment_types": "visa,master,american_express,paypal,apple_pay,google_pay,shopify_pay",
-        "show_policy": false,
+        "show_policy": true,
         "branding_text": "Powered by Shopify",
         "margin_top": 0,
         "padding_top": 32,

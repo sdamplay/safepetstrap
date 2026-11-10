@@ -17,6 +17,46 @@
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- assign show_custom_safepet_drawer_nav = true -%}
+              {%- if section.settings.menu.links.size > 0 -%}
+                {%- assign has_default_catalog = false -%}
+                {%- for link in section.settings.menu.links -%}
+                  {%- if link.title == 'Catalog' or link.url == '/collections/all' -%}
+                    {%- assign has_default_catalog = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- unless has_default_catalog -%}
+                  {%- assign show_custom_safepet_drawer_nav = false -%}
+                {%- endunless -%}
+              {%- endif -%}
+
+              {%- if show_custom_safepet_drawer_nav -%}
+                <li>
+                  <a href="/" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if request.path == '/' %} menu-drawer__menu-item--active{% endif %}"{% if request.path == '/' %} aria-current="page"{% endif %}>
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="/pages/track-order" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if request.path contains 'track' %} menu-drawer__menu-item--active{% endif %}"{% if request.path contains 'track' %} aria-current="page"{% endif %}>
+                    Track Your Order
+                  </a>
+                </li>
+                <li>
+                  <a href="/pages/faq" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if request.path contains 'faq' %} menu-drawer__menu-item--active{% endif %}"{% if request.path contains 'faq' %} aria-current="page"{% endif %}>
+                    FAQ
+                  </a>
+                </li>
+                <li>
+                  <a href="/pages/about-us" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if request.path == '/pages/about-us' %} menu-drawer__menu-item--active{% endif %}"{% if request.path == '/pages/about-us' %} aria-current="page"{% endif %}>
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="/pages/contact" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if request.path contains 'contact' %} menu-drawer__menu-item--active{% endif %}"{% if request.path contains 'contact' %} aria-current="page"{% endif %}>
+                    Contact Us
+                  </a>
+                </li>
+              {%- else -%}
               {%- for link in section.settings.menu.links -%}
                 <li>
                   {%- if link.links != blank -%}
@@ -135,12 +175,14 @@
                   {%- endif -%}
                 </li>
               {%- endfor -%}
+            {%- endif -%}
             </ul>
           </nav>
 <!--                 start secondary nav -->
           {% if section.settings.secondary_menu != blank %}
             <nav class="menu-drawer__navigation menu-drawer__secondary-nav">
               <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+                {%- if section.settings.secondary_menu.links.size > 1 -%}
                 {%- for link in section.settings.secondary_menu.links -%}
                   <li>
                     {%- if link.links != blank -%}
@@ -200,6 +242,28 @@
                     {%- endif -%}
                   </li>
                 {%- endfor -%}
+                {%- else -%}
+                  <li>
+                    <a href="/pages/terms-of-service" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                      Terms of Service
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/pages/privacy-policy" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/pages/refund-policy" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                      Refund Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/pages/shipping-policy" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+                      Shipping Policy
+                    </a>
+                  </li>
+                {%- endif -%}
               </ul>
             </nav>
           {% endif %}
