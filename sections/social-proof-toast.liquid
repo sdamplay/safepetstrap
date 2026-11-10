@@ -2,23 +2,23 @@
   {% style %}
     .social-proof-toast-container {
       position: fixed;
-      z-index: 9990;
+      z-index: 100001;
       max-width: 300px;
       width: 100%;
       pointer-events: none;
-      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease, bottom 0.25s ease-out;
       opacity: 0;
     }
 
     .social-proof-toast--bottom-left {
       left: 20px;
-      bottom: 20px;
+      bottom: calc(20px + var(--sticky-atc-offset, 0px));
       transform: translateY(30px);
     }
 
     .social-proof-toast--bottom-right {
       right: 20px;
-      bottom: 20px;
+      bottom: calc(20px + var(--sticky-atc-offset, 0px));
       transform: translateY(30px);
     }
 
@@ -152,13 +152,14 @@
       color: {{ section.settings.text_color }};
     }
 
-    @media screen and (max-width: 539px) {
+    @media screen and (max-width: 768px) {
       .social-proof-toast-container {
         left: 12px !important;
         right: 12px !important;
         width: calc(100% - 24px) !important;
         max-width: none !important;
         bottom: calc(12px + var(--sticky-atc-offset, 0px)) !important;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease, bottom 0.25s ease-out;
       }
       
       .social-proof-card {
@@ -262,7 +263,7 @@
           const config = { 
             attributes: true, 
             subtree: true, 
-            attributeFilter: ['class', 'open'] 
+            attributeFilter: ['class', 'open', 'aria-hidden', 'style'] 
           };
           
           let lastOpenState = this.isCartDrawerCurrentlyOpen();
@@ -277,21 +278,51 @@
                 this.handleDrawerClose();
               }
             }
+            this.updateStickyOffset();
           });
           
           this.drawerObserver.observe(targetNode, config);
         }
 
         updateStickyOffset() {
-          const stickyAtc = document.querySelector('sticky-atc, .sticky-atc');
-          if (stickyAtc) {
-            const rect = stickyAtc.getBoundingClientRect();
-            if (rect.height > 0 && rect.bottom >= window.innerHeight - 10) {
-              document.documentElement.style.setProperty('--sticky-atc-offset', `${rect.height}px`);
-              return;
-            }
+          const selectors = [
+            '.safepet-mobile-sticky-bar',
+            '.safepet-mobile-sticky-bar.visible',
+            'sticky-atc',
+            '.sticky-atc',
+            '[data-sticky-atc]',
+            '[id*="StickyBar"]',
+            '[id*="sticky-atc"]',
+            '.product-form__buttons--sticky'
+          ];
+
+          let maxOffset = 0;
+
+          for (const sel of selectors) {
+            const elements = document.querySelectorAll(sel);
+            elements.forEach(el => {
+              if (!el) return;
+              const style = window.getComputedStyle(el);
+
+              if (style.display === 'none' || style.visibility === 'hidden') return;
+              if (style.opacity === '0' && !el.classList.contains('visible')) return;
+              if (el.getAttribute('aria-hidden') === 'true' && !el.classList.contains('visible')) return;
+
+              const rect = el.getBoundingClientRect();
+              if (rect.height > 0 && rect.bottom >= window.innerHeight - 25 && rect.top < window.innerHeight) {
+                const visibleHeight = Math.min(rect.height, window.innerHeight - rect.top);
+                if (visibleHeight > maxOffset) {
+                  maxOffset = visibleHeight;
+                }
+              }
+            });
           }
-          document.documentElement.style.setProperty('--sticky-atc-offset', '0px');
+
+          if (maxOffset > 0) {
+            document.documentElement.style.setProperty('--sticky-atc-offset', `${Math.round(maxOffset + 10)}px`);
+          } else {
+            document.documentElement.style.setProperty('--sticky-atc-offset', '0px');
+          }
         }
 
         isCartDrawerCurrentlyOpen() {
