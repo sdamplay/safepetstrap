@@ -22,6 +22,8 @@ ad-creatives/
 
 # Meta Ads Engine local config & logs
 meta_ads_engine/config/meta_config.json
+meta_ads_engine/config/media_cache.json
 meta_ads_engine/logs/
+meta_ads_engine/exports/
 
 

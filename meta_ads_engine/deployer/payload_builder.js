@@ -20,24 +20,19 @@ export class PayloadBuilder {
     this.adAccountId = String(config.adAccountId || '').replace(/^act_/, '');
     this.pageId = String(config.pageId || '');
     this.pixelId = String(config.pixelId || '');
-    this.productUrl = config.productUrl || 'https://safepetstrap.com/products/dog-seat-belt';
+    this.productUrl = config.productUrl || 'https://www.safepetstrap.com/products/dog-seat-belt';
     this.accessToken = config.accessToken || '';
     this.enforcePaused = true; // STRICT CONSTRAINT: NEVER DEPLOY ACTIVE
   }
 
   /**
-   * Helper to execute Graph API POST
+   * Helper to execute Graph API POST (native application/json matching v21.0 spec)
    */
   async _post(endpoint, data) {
-    const postData = new URLSearchParams();
-    for (const [k, v] of Object.entries(data)) {
-      if (typeof v === 'object' && v !== null) {
-        postData.append(k, JSON.stringify(v));
-      } else if (v !== undefined && v !== null) {
-        postData.append(k, String(v));
-      }
-    }
-    postData.append('access_token', this.accessToken);
+    const jsonPayload = JSON.stringify({
+      ...data,
+      access_token: this.accessToken
+    });
 
     return new Promise((resolve, reject) => {
       const options = {
@@ -46,8 +41,8 @@ export class PayloadBuilder {
         path: `/${this.apiVersion}/${endpoint}`,
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': Buffer.byteLength(postData.toString())
+          'Content-Type': 'application/json',
+          'Content-Length': Buffer.byteLength(jsonPayload)
         }
       };
 
@@ -72,7 +67,7 @@ export class PayloadBuilder {
       });
 
       req.on('error', reject);
-      req.write(postData.toString());
+      req.write(jsonPayload);
       req.end();
     });
   }
@@ -80,14 +75,15 @@ export class PayloadBuilder {
   /**
    * 1. Create Campaign (Strictly PAUSED, CBO, OUTCOME_SALES)
    */
-  async createCampaign({ name, dailyBudgetCents = 1500 }) {
+  async createCampaign({ name, dailyBudgetCents = 1500, objective = 'OUTCOME_SALES' }) {
     logger.info(`Building Campaign: "${name}" ($${(dailyBudgetCents / 100).toFixed(2)}/day CBO)...`);
 
     const payload = {
       name,
-      objective: 'OUTCOME_SALES',
+      objective,
       status: 'PAUSED', // ENFORCED
-      special_ad_categories: ['NONE'],
+      special_ad_categories: [],
+      is_adset_budget_sharing_enabled: false,
       daily_budget: dailyBudgetCents,
       bid_strategy: 'LOWEST_COST_WITHOUT_CAP'
     };
@@ -105,8 +101,48 @@ export class PayloadBuilder {
   /**
    * 2. Create Ad Set (Strictly PAUSED, Offsite Conversions / Purchase)
    */
-  async createAdSet({ campaignId, name }) {
+  async createAdSet({
+    campaignId,
+    name,
+    countries = ['US'],
+    ageMin = 21,
+    ageMax = 65,
+    genders = null,
+    interests = null,
+    targeting = null,
+    advantageAudience = null
+  }) {
     logger.info(`Building Ad Set: "${name}" for Campaign ${campaignId}...`);
+
+    const hasExplicitConstraints = Boolean((genders && genders.length > 0) || (interests && interests.length > 0));
+    const resolvedAdvantage = advantageAudience !== null ? advantageAudience : hasExplicitConstraints ? 0 : 1;
+
+    const resolvedTargeting = targeting || {
+      geo_locations: {
+        countries
+      },
+      age_min: ageMin,
+      age_max: ageMax,
+      targeting_automation: {
+        advantage_audience: resolvedAdvantage
+      }
+    };
+
+    if (!targeting) {
+      if (genders && genders.length > 0) {
+        resolvedTargeting.genders = genders;
+      }
+      if (interests && interests.length > 0) {
+        resolvedTargeting.flexible_spec = [
+          {
+            interests: interests.map((item) => ({
+              id: String(item.id),
+              name: String(item.name)
+            }))
+          }
+        ];
+      }
+    }
 
     const payload = {
       campaign_id: campaignId,
@@ -118,16 +154,7 @@ export class PayloadBuilder {
         pixel_id: this.pixelId,
         custom_event_type: 'PURCHASE'
       },
-      targeting: {
-        geo_locations: {
-          countries: ['US']
-        },
-        age_min: 18,
-        age_max: 65,
-        targeting_automation: {
-          advantage_audience: 1
-        }
-      }
+      targeting: resolvedTargeting
     };
 
     try {
@@ -143,7 +170,17 @@ export class PayloadBuilder {
   /**
    * 3. Create Ad Creative (Single Image or Single Video)
    */
-  async createCreative({ name, imageHash, videoId, primaryText, headline, description, linkUrl }) {
+  async createCreative({
+    name,
+    imageHash,
+    videoId,
+    primaryText,
+    headline,
+    description,
+    linkUrl,
+    callToAction = 'GET_OFFER',
+    urlTags = ''
+  }) {
     logger.info(`Building Ad Creative: "${name}"...`);
 
     const destLink = linkUrl || this.productUrl;
@@ -158,7 +195,7 @@ export class PayloadBuilder {
           title: headline,
           message: primaryText,
           call_to_action: {
-            type: 'GET_OFFER',
+            type: callToAction,
             value: {
               link: destLink
             }
@@ -175,7 +212,7 @@ export class PayloadBuilder {
           name: headline,
           description: description || '',
           call_to_action: {
-            type: 'GET_OFFER',
+            type: callToAction,
             value: {
               link: destLink
             }
@@ -188,6 +225,9 @@ export class PayloadBuilder {
       name,
       object_story_spec: objectStorySpec
     };
+    if (urlTags) {
+      payload.url_tags = urlTags;
+    }
 
     try {
       const res = await this._post(`act_${this.adAccountId}/adcreatives`, payload);

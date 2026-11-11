@@ -110,9 +110,17 @@
               "geo_locations": { "type": "object" },
               "age_min": { "type": "integer" },
               "age_max": { "type": "integer" },
+              "genders": { "type": "array", "items": { "type": "integer" } },
+              "flexible_spec": { "type": "array" },
               "targeting_automation": { "type": "object" }
             }
           },
+          "countries": { "type": "array", "items": { "type": "string" }, "default": ["US"] },
+          "age_min": { "type": "integer", "default": 21 },
+          "age_max": { "type": "integer", "default": 65 },
+          "genders": { "type": "array", "items": { "type": "integer" } },
+          "interests": { "type": "array" },
+          "advantage_audience": { "type": "integer" },
           "status": { "type": "string", "enum": ["PAUSED"], "default": "PAUSED" }
         },
         "required": ["ad_account_id", "campaign_id", "name", "status"]
@@ -140,7 +148,8 @@
           "primary_text": { "type": "string" },
           "headline": { "type": "string" },
           "description": { "type": "string" },
-          "call_to_action": { "type": "string", "default": "GET_OFFER" }
+          "call_to_action": { "type": "string", "default": "GET_OFFER" },
+          "url_tags": { "type": "string" }
         },
         "required": ["ad_account_id", "name", "page_id", "link_url", "primary_text", "headline"]
       },

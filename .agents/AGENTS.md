@@ -1,7 +1,8 @@
 # SafePet Strap - Project Brain & Custom Agent Rules
 
 ## 1. Project Memory & Business Overview
-- **Brand Name**: SafePet Strap (`safepetstrap.com`)
+- **Brand Name**: SafePet Strap (`www.safepetstrap.com`)
+- **Primary Domain & Product URL**: Always use `www.safepetstrap.com` (`https://www.safepetstrap.com/products/dog-seat-belt`) in all ads, links, CTAs, and integrations.
 - **Primary Product**: Dog Car Seat Belt (Heavy-duty nylon webbing, 360° zinc alloy swivel snap, elastic anti-whiplash buffer, universal 21mm seatbelt latch).
 - **Core Funnel Mechanics**: "FREE + Shipping" offer.
   - *Crucial Funnel Rule*: Visitors landing on the store must NOT know about the $9.95 shipping fee upfront.

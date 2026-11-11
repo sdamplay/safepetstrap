@@ -5,6 +5,7 @@
   "description": "Meta Marketing API & OAuth automation engine for SafePet Strap",
   "scripts": {
     "deploy": "node deploy_ads.js",
+    "deploy:bf": "node deploy_black_friday_ads.js",
     "auth": "node -e 'import(\"./auth/oauth_manager.js\").then(async ({ OAuthManager })=>{ const o=new OAuthManager(JSON.parse(fs.readFileSync(\"./config/meta_config.json\"))); await o.startOAuthFlow(); })'"
   }
 }

@@ -151,7 +151,8 @@ export class MetaAdsMCPClient {
         // Enforce PAUSED constraint
         const res = await this.payloadBuilder.createCampaign({
           name: args.name,
-          dailyBudgetCents: args.daily_budget || 1500
+          dailyBudgetCents: args.daily_budget || 1500,
+          objective: args.objective || 'OUTCOME_SALES'
         });
         return { id: res.id, name: res.name, status: 'PAUSED' };
       }
@@ -160,7 +161,14 @@ export class MetaAdsMCPClient {
         // Enforce PAUSED constraint
         const res = await this.payloadBuilder.createAdSet({
           campaignId: args.campaign_id,
-          name: args.name
+          name: args.name,
+          targeting: args.targeting || null,
+          genders: args.genders || null,
+          interests: args.interests || null,
+          ageMin: args.age_min || 21,
+          ageMax: args.age_max || 65,
+          countries: args.countries || ['US'],
+          advantageAudience: args.advantage_audience ?? null
         });
         return { id: res.id, name: res.name, status: 'PAUSED' };
       }
@@ -173,7 +181,9 @@ export class MetaAdsMCPClient {
           primaryText: args.primary_text,
           headline: args.headline,
           description: args.description,
-          linkUrl: args.link_url
+          linkUrl: args.link_url,
+          callToAction: args.call_to_action || 'GET_OFFER',
+          urlTags: args.url_tags || ''
         });
         return { id: res.id, name: res.name };
       }

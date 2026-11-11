@@ -33,9 +33,9 @@ function loadConfig() {
 
   // Merge with ENV variables
   config.adAccountId = process.env.META_AD_ACCOUNT_ID || config.adAccountId || '2182816332632833';
-  config.pageId = process.env.META_PAGE_ID || config.pageId || '61592824665463';
+  config.pageId = process.env.META_PAGE_ID || config.pageId || '1169299686277726';
   config.pixelId = process.env.META_PIXEL_ID || config.pixelId || '1062070679630310';
-  config.productUrl = config.productUrl || 'https://safepetstrap.com/products/dog-seat-belt';
+  config.productUrl = config.productUrl || 'https://www.safepetstrap.com/products/dog-seat-belt';
   config.appId = process.env.META_APP_ID || config.appId || '';
   config.appSecret = process.env.META_APP_SECRET || config.appSecret || '';
   config.accessToken = process.env.META_ACCESS_TOKEN || config.accessToken || '';
@@ -103,7 +103,7 @@ function getCampaignSpecifications() {
               primaryText: option1PrimaryText,
               headline: '🚨 FREE Anniversary Giveaway: Claim 1 Today',
               description: '100% FREE • Over 50,000+ Dogs Protected ★★★★★',
-              linkUrl: 'https://safepetstrap.com/products/dog-seat-belt'
+              linkUrl: 'https://www.safepetstrap.com/products/dog-seat-belt'
             },
             {
               name: 'Statics - Look At This Bungee (Vertical 9:16)',
@@ -112,7 +112,7 @@ function getCampaignSpecifications() {
               primaryText: option1PrimaryText,
               headline: '🎉 100% FREE Dog Seatbelt (Today Only)',
               description: 'Claim yours before stock runs out',
-              linkUrl: 'https://safepetstrap.com/products/dog-seat-belt'
+              linkUrl: 'https://www.safepetstrap.com/products/dog-seat-belt'
             },
             {
               name: 'Statics - Sticky Bungee (Square 1:1)',
@@ -121,7 +121,7 @@ function getCampaignSpecifications() {
               primaryText: option1PrimaryText,
               headline: '🚨 Look at this bungee before driving',
               description: 'Free Giveaway • 50,000+ Protected',
-              linkUrl: 'https://safepetstrap.com/products/dog-seat-belt'
+              linkUrl: 'https://www.safepetstrap.com/products/dog-seat-belt'
             }
           ]
         }
@@ -142,7 +142,7 @@ function getCampaignSpecifications() {
               primaryText: option2InCarText,
               headline: '🎁 100% FREE Dog Seatbelt (Anniversary Giveaway)',
               description: 'Claim yours before stock runs out',
-              linkUrl: 'https://safepetstrap.com/products/dog-seat-belt'
+              linkUrl: 'https://www.safepetstrap.com/products/dog-seat-belt'
             },
             {
               name: 'Angle - Split Comparison Danger vs Safe (Square 1:1)',
@@ -151,7 +151,7 @@ function getCampaignSpecifications() {
               primaryText: option2ComparisonText,
               headline: '⚠️ Is Your Dog Protected In The Car?',
               description: 'Free Anniversary Batch • 100% Risk Free',
-              linkUrl: 'https://safepetstrap.com/products/dog-seat-belt'
+              linkUrl: 'https://www.safepetstrap.com/products/dog-seat-belt'
             },
             {
               name: 'Angle - Emotional Protection UGC Review (Square 1:1)',
@@ -160,7 +160,7 @@ function getCampaignSpecifications() {
               primaryText: option2UgcReviewText,
               headline: '⭐⭐⭐⭐⭐ "Saved My Dog On The Highway"',
               description: 'Over 50,000 Happy Pups Protected',
-              linkUrl: 'https://safepetstrap.com/products/dog-seat-belt'
+              linkUrl: 'https://www.safepetstrap.com/products/dog-seat-belt'
             }
           ]
         }
