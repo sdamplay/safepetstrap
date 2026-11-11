@@ -87,7 +87,7 @@
     },
     {
       "name": "create_ad_set",
-      "description": "Creates an ad set defining audience targeting, optimization goal, and pixel association strictly in PAUSED status.",
+      "description": "Creates an ad set defining audience targeting, optimization goal, and pixel association defaulting to ACTIVE status (under a PAUSED campaign).",
       "parameters": {
         "type": "object",
         "properties": {
@@ -121,7 +121,7 @@
           "genders": { "type": "array", "items": { "type": "integer" } },
           "interests": { "type": "array" },
           "advantage_audience": { "type": "integer" },
-          "status": { "type": "string", "enum": ["PAUSED"], "default": "PAUSED" }
+          "status": { "type": "string", "enum": ["ACTIVE", "PAUSED"], "default": "ACTIVE" }
         },
         "required": ["ad_account_id", "campaign_id", "name", "status"]
       },
@@ -163,7 +163,7 @@
     },
     {
       "name": "create_ad",
-      "description": "Binds an Ad Set and Ad Creative together into an executable ad strictly in PAUSED status.",
+      "description": "Binds an Ad Set and Ad Creative together into an ad defaulting to ACTIVE status (under a PAUSED campaign).",
       "parameters": {
         "type": "object",
         "properties": {
@@ -171,7 +171,7 @@
           "adset_id": { "type": "string" },
           "creative_id": { "type": "string" },
           "name": { "type": "string" },
-          "status": { "type": "string", "enum": ["PAUSED"], "default": "PAUSED" }
+          "status": { "type": "string", "enum": ["ACTIVE", "PAUSED"], "default": "ACTIVE" }
         },
         "required": ["ad_account_id", "adset_id", "creative_id", "name", "status"]
       },

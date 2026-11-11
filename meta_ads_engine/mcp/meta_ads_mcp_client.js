@@ -158,10 +158,12 @@ export class MetaAdsMCPClient {
       }
 
       case 'create_ad_set': {
-        // Enforce PAUSED constraint
+        // Keep Ad Set ON while Campaign enforces PAUSED gate
+        const status = args.status || 'ACTIVE';
         const res = await this.payloadBuilder.createAdSet({
           campaignId: args.campaign_id,
           name: args.name,
+          status,
           targeting: args.targeting || null,
           genders: args.genders || null,
           interests: args.interests || null,
@@ -170,7 +172,7 @@ export class MetaAdsMCPClient {
           countries: args.countries || ['US'],
           advantageAudience: args.advantage_audience ?? null
         });
-        return { id: res.id, name: res.name, status: 'PAUSED' };
+        return { id: res.id, name: res.name, status: res.status };
       }
 
       case 'create_ad_creative': {
@@ -189,13 +191,15 @@ export class MetaAdsMCPClient {
       }
 
       case 'create_ad': {
-        // Enforce PAUSED constraint
+        // Keep Ad ON while Campaign enforces PAUSED gate
+        const status = args.status || 'ACTIVE';
         const res = await this.payloadBuilder.createAd({
           adsetId: args.adset_id,
           creativeId: args.creative_id,
-          name: args.name
+          name: args.name,
+          status
         });
-        return { id: res.id, name: res.name, status: 'PAUSED' };
+        return { id: res.id, name: res.name, status: res.status };
       }
 
       default:

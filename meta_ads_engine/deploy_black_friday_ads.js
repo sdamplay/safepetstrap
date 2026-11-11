@@ -10,7 +10,7 @@
  *  - Targeting: US Females Only (genders: [2]), Ages 21-65+, Advantage+ Audience OFF (strict enforcement)
  *  - Audience Structure: 1 Verified Dog-Related Interest per Ad Set (Dogs, Puppy, Dog Grooming)
  *  - Budget: $30.00/day CBO split across Option 1 ($15/day) & Option 2 ($15/day)
- *  - Safety Lock: Strictly PAUSED across all Campaigns, Ad Sets, and Ads
+ *  - Safety Lock: Campaigns strictly PAUSED (OFF), Ad Sets & Ads ACTIVE (ON) -> effective_status: CAMPAIGN_PAUSED
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -229,7 +229,7 @@ function getCreativeLibrary() {
   };
 }
 
-async function verifyEntityPaused(type, id, token, apiVersion) {
+async function verifyEntityStatus(type, id, token, apiVersion) {
   const url = `https://graph.facebook.com/${apiVersion}/${id}?fields=id,name,status,effective_status&access_token=${encodeURIComponent(token)}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -242,7 +242,7 @@ async function verifyEntityPaused(type, id, token, apiVersion) {
 async function main() {
   logger.info('╔══════════════════════════════════════════════════════════════════════════╗');
   logger.info('║  SAFEPET BLACK FRIDAY META ADS DEPLOYMENT (PRO MEDIA BUYER STRUCTURE)    ║');
-  logger.info('║  Targeting: US Females 21-65+ | 1 Interest / AdSet | Strict PAUSED Mode  ║');
+  logger.info('║  Targeting: US Females 21-65+ | 1 Interest/AdSet | Camp OFF, Set/Ad ON   ║');
   logger.info('╚══════════════════════════════════════════════════════════════════════════╝');
 
   const config = loadConfig();
@@ -318,8 +318,8 @@ async function main() {
   }
   logger.success(`✓ Uploaded 10 images & created 10 Meta Ad Creatives cleanly!`);
 
-  // 5. Build Campaigns -> Single-Interest Female AdSets -> Ads (ALL STRICTLY PAUSED)
-  logger.info('\n━━━ PHASE 4: DEPLOYING CAMPAIGNS, SINGLE-INTEREST ADSETS & ADS (PAUSED) ━━━');
+  // 5. Build Campaigns (PAUSED) -> Single-Interest Female AdSets (ACTIVE) -> Ads (ACTIVE)
+  logger.info('\n━━━ PHASE 4: DEPLOYING CAMPAIGNS (PAUSED), SINGLE-INTEREST ADSETS & ADS (ACTIVE) ━━━');
   const campaignsSpec = [
     {
       name: '[BF 2026] SafePet - Opt 1: Top 5 Curated Statics ($15/day CBO)',
@@ -344,7 +344,7 @@ async function main() {
       daily_budget: campSpec.dailyBudgetCents
     });
 
-    const verifiedCamp = await verifyEntityPaused('Campaign', campRes.id, config.accessToken, config.apiVersion);
+    const verifiedCamp = await verifyEntityStatus('Campaign', campRes.id, config.accessToken, config.apiVersion);
     if (verifiedCamp.status !== 'PAUSED') {
       throw new Error(`Safety lock violation: Campaign ${campRes.id} status is ${verifiedCamp.status}`);
     }
@@ -360,12 +360,12 @@ async function main() {
         genders: [2], // Females only
         interests: [intSpec.interest], // Strictly 1 interest per ad set
         advantage_audience: 0, // Strictly lock female & single interest
-        status: 'PAUSED'
+        status: 'ACTIVE'
       });
 
-      const verifiedAdset = await verifyEntityPaused('AdSet', adsetRes.id, config.accessToken, config.apiVersion);
-      if (verifiedAdset.status !== 'PAUSED') {
-        throw new Error(`Safety lock violation: AdSet ${adsetRes.id} status is ${verifiedAdset.status}`);
+      const verifiedAdset = await verifyEntityStatus('AdSet', adsetRes.id, config.accessToken, config.apiVersion);
+      if (verifiedAdset.status !== 'ACTIVE') {
+        throw new Error(`Safety lock violation: AdSet ${adsetRes.id} status is ${verifiedAdset.status} (expected ACTIVE)`);
       }
 
       for (const adSpec of campSpec.ads) {
@@ -374,19 +374,22 @@ async function main() {
           adset_id: adsetRes.id,
           creative_id: adSpec.creativeId,
           name: adSpec.adName,
-          status: 'PAUSED'
+          status: 'ACTIVE'
         });
 
         summary.push({
           campaignId: campRes.id,
           campaign: campSpec.name,
+          campaignStatus: 'PAUSED',
           adsetId: adsetRes.id,
           adset: intSpec.adsetName,
+          adsetStatus: 'ACTIVE',
           interest: intSpec.interest.name,
           adId: adRes.id,
           adName: adSpec.adName,
           creativeId: adSpec.creativeId,
-          status: 'PAUSED'
+          status: 'ACTIVE',
+          effectiveStatus: 'CAMPAIGN_PAUSED'
         });
       }
     }
@@ -407,7 +410,7 @@ async function main() {
   }, null, 2));
 
   logger.info('\n══════════════════════════════════════════════════════════════════════════');
-  logger.success(`🎉 SUCCESS: Deployed ${campaignsSpec.length} Campaigns, ${campaignsSpec.length * INTEREST_ADSETS.length} Single-Interest Female AdSets, and ${summary.length} Ads (ALL PAUSED)!`);
+  logger.success(`🎉 SUCCESS: Deployed ${campaignsSpec.length} Campaigns (PAUSED), ${campaignsSpec.length * INTEREST_ADSETS.length} Single-Interest Female AdSets (ACTIVE), and ${summary.length} Ads (ACTIVE)!`);
   logger.info(`Manifest logged at: ${manifestPath}`);
   logger.info('══════════════════════════════════════════════════════════════════════════');
 }

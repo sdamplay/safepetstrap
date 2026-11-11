@@ -99,11 +99,12 @@ export class PayloadBuilder {
   }
 
   /**
-   * 2. Create Ad Set (Strictly PAUSED, Offsite Conversions / Purchase)
+   * 2. Create Ad Set (Ad Set ON by default while parent Campaign stays PAUSED)
    */
   async createAdSet({
     campaignId,
     name,
+    status = 'ACTIVE',
     countries = ['US'],
     ageMin = 21,
     ageMax = 65,
@@ -147,7 +148,7 @@ export class PayloadBuilder {
     const payload = {
       campaign_id: campaignId,
       name,
-      status: 'PAUSED', // ENFORCED
+      status,
       billing_event: 'IMPRESSIONS',
       optimization_goal: 'OFFSITE_CONVERSIONS',
       promoted_object: {
@@ -159,8 +160,8 @@ export class PayloadBuilder {
 
     try {
       const res = await this._post(`act_${this.adAccountId}/adsets`, payload);
-      logger.success(`✓ Ad Set created in PAUSED state! ID: ${res.id}`);
-      return { id: res.id, name, status: 'PAUSED' };
+      logger.success(`✓ Ad Set created in ${status} state! ID: ${res.id}`);
+      return { id: res.id, name, status };
     } catch (err) {
       logger.decodeMetaError(err, { action: 'Create AdSet', entity: name });
       throw err;
@@ -240,9 +241,9 @@ export class PayloadBuilder {
   }
 
   /**
-   * 4. Create Ad (Strictly PAUSED, links AdSet + Creative)
+   * 4. Create Ad (Ad ON by default while parent Campaign stays PAUSED)
    */
-  async createAd({ adsetId, creativeId, name }) {
+  async createAd({ adsetId, creativeId, name, status = 'ACTIVE' }) {
     logger.info(`Building Ad: "${name}" linking Creative ${creativeId} to AdSet ${adsetId}...`);
 
     const payload = {
@@ -251,13 +252,13 @@ export class PayloadBuilder {
       creative: {
         creative_id: creativeId
       },
-      status: 'PAUSED' // ENFORCED
+      status
     };
 
     try {
       const res = await this._post(`act_${this.adAccountId}/ads`, payload);
-      logger.success(`✓ Ad created in PAUSED state! ID: ${res.id}`);
-      return { id: res.id, name, status: 'PAUSED' };
+      logger.success(`✓ Ad created in ${status} state! ID: ${res.id}`);
+      return { id: res.id, name, status };
     } catch (err) {
       logger.decodeMetaError(err, { action: 'Create Ad', entity: name });
       throw err;
@@ -330,7 +331,7 @@ export class PayloadBuilder {
             'NONE',
             '', // Ad Set ID
             escapeCsv(adsetName),
-            'PAUSED', // Ad Set Status
+            'ACTIVE', // Ad Set Status
             'OFFSITE_CONVERSIONS',
             'IMPRESSIONS',
             escapeCsv(this.pixelId),
@@ -340,7 +341,7 @@ export class PayloadBuilder {
             '65',
             '', // Ad ID
             escapeCsv(ad.name),
-            'PAUSED', // Ad Status
+            'ACTIVE', // Ad Status
             escapeCsv(this.pageId),
             escapeCsv(ad.linkUrl || this.productUrl),
             escapeCsv(ad.headline),

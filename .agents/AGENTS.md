@@ -35,3 +35,9 @@ Before making any file modifications or starting a task in this repository:
 - Homepage DTC Template: `templates/index.json`
 - Header & Announcement Bar: `sections/header-group.json` & `sections/announcement-bar.liquid`
 - Main Product Section: `sections/main-product.liquid`
+
+---
+
+## 5. Meta Ads Launch Status Convention (STRICT RULE)
+- **Campaign Status**: Always deploy new Campaigns as **`PAUSED` (`OFF`)** so zero spend happens until manually toggled on.
+- **Ad Set & Ad Status**: Always keep all **Ad Sets and Ads as `ACTIVE` (`ON`)** inside the paused Campaign so turning the Campaign switch ON launches everything cleanly in 1 click.

@@ -280,8 +280,8 @@ async function main() {
   }
   logger.success('✓ All media assets confirmed on Meta CDN!\n');
 
-  // STEP 5: DEPLOY CAMPAIGN HIERARCHY IN PAUSED STATE
-  logger.info('━━━ STEP 5: DEPLOYING CAMPAIGN HIERARCHY (STRICTLY PAUSED) ━━━');
+  // STEP 5: DEPLOY CAMPAIGN HIERARCHY (Campaign PAUSED, AdSets & Ads ACTIVE)
+  logger.info('━━━ STEP 5: DEPLOYING CAMPAIGN HIERARCHY (CAMPAIGN PAUSED, ADSETS/ADS ACTIVE) ━━━');
   const deploymentReport = [];
 
   for (const camp of campaigns) {
@@ -321,14 +321,15 @@ async function main() {
           adsetId: createdAdSet.id,
           ad: createdAd.name,
           adId: createdAd.id,
-          status: 'PAUSED'
+          status: createdAd.status || 'ACTIVE',
+          effectiveStatus: 'CAMPAIGN_PAUSED'
         });
       }
     }
   }
 
   logger.info('\n════════════════════════════════════════════════════════════════════');
-  logger.success('🎉 DEPLOYMENT COMPLETED SUCCESSFULLY WITH ZERO UNPAUSED ADS!');
+  logger.success('🎉 DEPLOYMENT COMPLETED: CAMPAIGNS PAUSED (OFF), ADSETS & ADS ACTIVE (ON)!');
   logger.info('════════════════════════════════════════════════════════════════════');
   console.table(deploymentReport);
 }

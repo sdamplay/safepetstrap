@@ -297,8 +297,8 @@ async function main() {
   }
   logger.success('✓ All media assets hashed and confirmed on Meta CDN!\n');
 
-  // 6. CONSTRUCT & DEPLOY HIERARCHY IN PAUSED STATE VIA MCP TOOLS
-  logger.info('━━━ PHASE 6: MCP CAMPAIGN DEPLOYMENT (STRICTLY PAUSED) ━━━');
+  // 6. CONSTRUCT & DEPLOY HIERARCHY VIA MCP TOOLS (Campaign PAUSED, AdSets & Ads ACTIVE)
+  logger.info('━━━ PHASE 6: MCP CAMPAIGN DEPLOYMENT (CAMPAIGN PAUSED, ADSETS/ADS ACTIVE) ━━━');
   const report = [];
 
   for (const camp of campaigns) {
@@ -312,16 +312,16 @@ async function main() {
     });
 
     for (const adset of camp.adsets) {
-      logger.info(`[MCP] Deploying Ad Set: "${adset.name}" (PAUSED)...`);
+      logger.info(`[MCP] Deploying Ad Set: "${adset.name}" (ACTIVE under PAUSED campaign)...`);
       const asRes = await mcpClient.callTool('create_ad_set', {
         ad_account_id: config.adAccountId,
         campaign_id: cRes.id,
         name: adset.name,
-        status: 'PAUSED'
+        status: 'ACTIVE'
       });
 
       for (const ad of adset.ads) {
-        logger.info(`[MCP] Deploying Creative & Ad: "${ad.name}" (PAUSED)...`);
+        logger.info(`[MCP] Deploying Creative & Ad: "${ad.name}" (ACTIVE)...`);
         const crRes = await mcpClient.callTool('create_ad_creative', {
           ad_account_id: config.adAccountId,
           name: `Creative - ${ad.name}`,
@@ -339,7 +339,7 @@ async function main() {
           adset_id: asRes.id,
           creative_id: crRes.id,
           name: ad.name,
-          status: 'PAUSED'
+          status: 'ACTIVE'
         });
 
         report.push({
@@ -349,7 +349,8 @@ async function main() {
           adsetId: asRes.id,
           ad: adRes.name,
           adId: adRes.id,
-          status: 'PAUSED'
+          status: 'ACTIVE',
+          effectiveStatus: 'CAMPAIGN_PAUSED'
         });
       }
     }
