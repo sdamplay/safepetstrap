@@ -1,0 +1,179 @@
+{
+  "server": "https://mcp.facebook.com/ads",
+  "protocol": "Model Context Protocol (MCP) JSON-RPC 2.0",
+  "tools": [
+    {
+      "name": "upload_ad_image",
+      "description": "Uploads an image file to the specified Meta Ad Account library and returns a confirmed Meta CDN image hash.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ad_account_id": {
+            "type": "string",
+            "description": "The target ad account ID (with or without 'act_' prefix)."
+          },
+          "file_path": {
+            "type": "string",
+            "description": "Absolute or relative path to the image file (JPG, PNG, WebP)."
+          }
+        },
+        "required": ["ad_account_id", "file_path"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "image_hash": { "type": "string" },
+          "url": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "upload_ad_video",
+      "description": "Executes a 3-phase resumable video upload (Start -> Transfer -> Finish) and polls until encoding status is 'ready'.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ad_account_id": {
+            "type": "string",
+            "description": "The target ad account ID."
+          },
+          "file_path": {
+            "type": "string",
+            "description": "Path to MP4 or MOV video file encoded in H.264 or HEVC."
+          },
+          "title": {
+            "type": "string",
+            "description": "Optional video title."
+          }
+        },
+        "required": ["ad_account_id", "file_path"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "video_id": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "create_campaign",
+      "description": "Initializes a high-level advertising campaign on Meta Ads Manager strictly in PAUSED status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ad_account_id": { "type": "string" },
+          "name": { "type": "string", "description": "Campaign name." },
+          "objective": {
+            "type": "string",
+            "enum": ["OUTCOME_SALES", "OUTCOME_LEADS", "OUTCOME_TRAFFIC", "OUTCOME_ENGAGEMENT"],
+            "default": "OUTCOME_SALES"
+          },
+          "status": { "type": "string", "enum": ["PAUSED"], "default": "PAUSED" },
+          "daily_budget": { "type": "integer", "description": "Daily budget in account cents (e.g. 1500 for $15.00)." },
+          "bid_strategy": { "type": "string", "default": "LOWEST_COST_WITHOUT_CAP" },
+          "special_ad_categories": { "type": "array", "items": { "type": "string" }, "default": ["NONE"] }
+        },
+        "required": ["ad_account_id", "name", "objective", "status"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "create_ad_set",
+      "description": "Creates an ad set defining audience targeting, optimization goal, and pixel association strictly in PAUSED status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ad_account_id": { "type": "string" },
+          "campaign_id": { "type": "string" },
+          "name": { "type": "string" },
+          "optimization_goal": { "type": "string", "default": "OFFSITE_CONVERSIONS" },
+          "billing_event": { "type": "string", "default": "IMPRESSIONS" },
+          "promoted_object": {
+            "type": "object",
+            "properties": {
+              "pixel_id": { "type": "string" },
+              "custom_event_type": { "type": "string", "default": "PURCHASE" }
+            },
+            "required": ["pixel_id"]
+          },
+          "targeting": {
+            "type": "object",
+            "properties": {
+              "geo_locations": { "type": "object" },
+              "age_min": { "type": "integer" },
+              "age_max": { "type": "integer" },
+              "targeting_automation": { "type": "object" }
+            }
+          },
+          "status": { "type": "string", "enum": ["PAUSED"], "default": "PAUSED" }
+        },
+        "required": ["ad_account_id", "campaign_id", "name", "status"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "create_ad_creative",
+      "description": "Constructs an ad creative pairing Facebook Page ID, destination URL, CTA, and uploaded media hash.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ad_account_id": { "type": "string" },
+          "name": { "type": "string" },
+          "page_id": { "type": "string" },
+          "image_hash": { "type": "string" },
+          "video_id": { "type": "string" },
+          "link_url": { "type": "string" },
+          "primary_text": { "type": "string" },
+          "headline": { "type": "string" },
+          "description": { "type": "string" },
+          "call_to_action": { "type": "string", "default": "GET_OFFER" }
+        },
+        "required": ["ad_account_id", "name", "page_id", "link_url", "primary_text", "headline"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "create_ad",
+      "description": "Binds an Ad Set and Ad Creative together into an executable ad strictly in PAUSED status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "ad_account_id": { "type": "string" },
+          "adset_id": { "type": "string" },
+          "creative_id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["PAUSED"], "default": "PAUSED" }
+        },
+        "required": ["ad_account_id", "adset_id", "creative_id", "name", "status"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string" }
+        }
+      }
+    }
+  ]
+}
