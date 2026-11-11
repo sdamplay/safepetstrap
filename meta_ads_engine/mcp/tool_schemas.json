@@ -94,6 +94,8 @@
           "ad_account_id": { "type": "string" },
           "campaign_id": { "type": "string" },
           "name": { "type": "string" },
+          "daily_budget": { "type": "integer", "description": "Optional ABO ad-set daily budget in cents." },
+          "bid_strategy": { "type": "string" },
           "optimization_goal": { "type": "string", "default": "OFFSITE_CONVERSIONS" },
           "billing_event": { "type": "string", "default": "IMPRESSIONS" },
           "promoted_object": {

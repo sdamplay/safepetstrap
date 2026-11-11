@@ -148,10 +148,11 @@ export class MetaAdsMCPClient {
       }
 
       case 'create_campaign': {
-        // Enforce PAUSED constraint
+        // Enforce PAUSED constraint (supports CBO when daily_budget given, ABO when null)
+        const dailyBudgetCents = args.daily_budget === null || args.daily_budget === undefined ? null : args.daily_budget;
         const res = await this.payloadBuilder.createCampaign({
           name: args.name,
-          dailyBudgetCents: args.daily_budget || 1500,
+          dailyBudgetCents,
           objective: args.objective || 'OUTCOME_SALES'
         });
         return { id: res.id, name: res.name, status: 'PAUSED' };
@@ -164,6 +165,8 @@ export class MetaAdsMCPClient {
           campaignId: args.campaign_id,
           name: args.name,
           status,
+          dailyBudgetCents: args.daily_budget ?? null,
+          bidStrategy: args.bid_strategy || 'LOWEST_COST_WITHOUT_CAP',
           targeting: args.targeting || null,
           genders: args.genders || null,
           interests: args.interests || null,

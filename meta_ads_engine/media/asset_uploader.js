@@ -182,12 +182,13 @@ export class AssetUploader {
       access_token: this.accessToken
     }).toString();
 
-    const startRes = await this._postJson(`/${this.apiVersion}/act_${this.adAccountId}/advideos`, startPayload);
+    const startRes = await this._postJson(`/${this.apiVersion}/act_${this.adAccountId}/advideos`, startPayload, 'graph-video.facebook.com');
     const sessionId = startRes.upload_session_id;
+    const startVideoId = startRes.video_id;
     let startOffset = parseInt(startRes.start_offset || '0', 10);
     let endOffset = parseInt(startRes.end_offset || String(fileSize), 10);
 
-    logger.success(`Upload session started! Session ID: ${sessionId}`);
+    logger.success(`Upload session started! Session ID: ${sessionId} (Video ID: ${startVideoId || 'pending'})`);
 
     // Phase 2: Transfer Chunks
     logger.info('Phase 2/3: Streaming chunks (upload_phase=transfer)...');
@@ -218,10 +219,10 @@ export class AssetUploader {
       access_token: this.accessToken
     }).toString();
 
-    const finishRes = await this._postJson(`/${this.apiVersion}/act_${this.adAccountId}/advideos`, finishPayload);
-    const videoId = finishRes.video_id || finishRes.id;
+    const finishRes = await this._postJson(`/${this.apiVersion}/act_${this.adAccountId}/advideos`, finishPayload, 'graph-video.facebook.com');
+    const videoId = finishRes.video_id || finishRes.id || startVideoId;
 
-    if (!videoId) {
+    if (!videoId || finishRes.error) {
       throw new Error(`Video finish failed: ${JSON.stringify(finishRes)}`);
     }
 
@@ -270,7 +271,7 @@ export class AssetUploader {
 
     return new Promise((resolve, reject) => {
       const options = {
-        hostname: 'graph.facebook.com',
+        hostname: 'graph-video.facebook.com',
         port: 443,
         path: `/${this.apiVersion}/act_${this.adAccountId}/advideos`,
         method: 'POST',
@@ -326,10 +327,10 @@ export class AssetUploader {
     return true;
   }
 
-  _postJson(apiPath, formUrlEncoded) {
+  _postJson(apiPath, formUrlEncoded, hostname = 'graph.facebook.com') {
     return new Promise((resolve, reject) => {
       const options = {
-        hostname: 'graph.facebook.com',
+        hostname,
         port: 443,
         path: apiPath,
         method: 'POST',

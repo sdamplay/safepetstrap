@@ -72,21 +72,57 @@ export class PayloadBuilder {
     });
   }
 
+  async _getJson(endpoint) {
+    const sep = endpoint.includes('?') ? '&' : '?';
+    const pathWithToken = `/${endpoint.replace(/^\//, '')}${sep}access_token=${encodeURIComponent(this.accessToken)}`;
+    return new Promise((resolve, reject) => {
+      https
+        .get({ hostname: 'graph.facebook.com', port: 443, path: pathWithToken }, (res) => {
+          let body = '';
+          res.on('data', (c) => (body += c));
+          res.on('end', () => {
+            try {
+              const json = JSON.parse(body);
+              if (res.statusCode >= 200 && res.statusCode < 300) {
+                resolve(json);
+              } else {
+                const err = new Error(`Meta API error: ${json.error?.message || body}`);
+                err.response = json;
+                err.statusCode = res.statusCode;
+                reject(err);
+              }
+            } catch {
+              reject(new Error(`Invalid response: ${body}`));
+            }
+          });
+        })
+        .on('error', reject);
+    });
+  }
+
   /**
-   * 1. Create Campaign (Strictly PAUSED, CBO, OUTCOME_SALES)
+   * 1. Create Campaign (Strictly PAUSED, CBO if dailyBudgetCents provided, else ABO)
    */
   async createCampaign({ name, dailyBudgetCents = 1500, objective = 'OUTCOME_SALES' }) {
-    logger.info(`Building Campaign: "${name}" ($${(dailyBudgetCents / 100).toFixed(2)}/day CBO)...`);
+    const isAbo = dailyBudgetCents === null || dailyBudgetCents === undefined;
+    logger.info(
+      isAbo
+        ? `Building Campaign: "${name}" (ABO - AdSet Level Budgets, PAUSED)...`
+        : `Building Campaign: "${name}" ($${(dailyBudgetCents / 100).toFixed(2)}/day CBO, PAUSED)...`
+    );
 
     const payload = {
       name,
       objective,
       status: 'PAUSED', // ENFORCED
       special_ad_categories: [],
-      is_adset_budget_sharing_enabled: false,
-      daily_budget: dailyBudgetCents,
-      bid_strategy: 'LOWEST_COST_WITHOUT_CAP'
+      is_adset_budget_sharing_enabled: false
     };
+
+    if (!isAbo) {
+      payload.daily_budget = dailyBudgetCents;
+      payload.bid_strategy = 'LOWEST_COST_WITHOUT_CAP';
+    }
 
     try {
       const res = await this._post(`act_${this.adAccountId}/campaigns`, payload);
@@ -105,6 +141,8 @@ export class PayloadBuilder {
     campaignId,
     name,
     status = 'ACTIVE',
+    dailyBudgetCents = null,
+    bidStrategy = 'LOWEST_COST_WITHOUT_CAP',
     countries = ['US'],
     ageMin = 21,
     ageMax = 65,
@@ -158,6 +196,11 @@ export class PayloadBuilder {
       targeting: resolvedTargeting
     };
 
+    if (dailyBudgetCents !== null && dailyBudgetCents !== undefined) {
+      payload.daily_budget = dailyBudgetCents;
+      payload.bid_strategy = bidStrategy;
+    }
+
     try {
       const res = await this._post(`act_${this.adAccountId}/adsets`, payload);
       logger.success(`✓ Ad Set created in ${status} state! ID: ${res.id}`);
@@ -188,20 +231,36 @@ export class PayloadBuilder {
     let objectStorySpec;
 
     if (videoId) {
-      objectStorySpec = {
-        page_id: this.pageId,
-        video_data: {
-          video_id: videoId,
-          image_url: `https://graph.facebook.com/${this.apiVersion}/${videoId}/thumbnails`,
-          title: headline,
-          message: primaryText,
-          call_to_action: {
-            type: callToAction,
-            value: {
-              link: destLink
-            }
+      const videoData = {
+        video_id: videoId,
+        title: headline,
+        message: primaryText,
+        call_to_action: {
+          type: callToAction,
+          value: {
+            link: destLink
           }
         }
+      };
+
+      if (description) {
+        videoData.link_description = description;
+      }
+
+      if (imageHash) {
+        videoData.image_hash = imageHash;
+      } else {
+        const thumbs = await this._getJson(`/${this.apiVersion}/${videoId}/thumbnails`);
+        const thumbUri = thumbs?.data?.find((t) => t.is_preferred)?.uri || thumbs?.data?.[0]?.uri;
+        if (!thumbUri) {
+          throw new Error(`No thumbnail found for video ${videoId}. Pass thumbnail imageHash or retry after processing.`);
+        }
+        videoData.image_url = thumbUri;
+      }
+
+      objectStorySpec = {
+        page_id: this.pageId,
+        video_data: videoData
       };
     } else {
       objectStorySpec = {
