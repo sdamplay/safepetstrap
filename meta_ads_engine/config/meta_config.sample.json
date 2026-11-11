@@ -1,0 +1,17 @@
+{
+  "adAccountId": "2182816332632833",
+  "pageId": "61592824665463",
+  "pixelId": "1062070679630310",
+  "productUrl": "https://safepetstrap.com/products/dog-seat-belt",
+  "appId": "",
+  "appSecret": "",
+  "accessToken": "",
+  "apiVersion": "v21.0",
+  "redirectUri": "http://localhost:8080/callback",
+  "campaignBudgetCents": {
+    "option1": 1500,
+    "option2": 1500
+  },
+  "enforcePaused": true,
+  "generateCsvBackup": true
+}

@@ -20,3 +20,8 @@ ad-creatives/
 *.pdf
 .vscode/
 
+# Meta Ads Engine local config & logs
+meta_ads_engine/config/meta_config.json
+meta_ads_engine/logs/
+
+
