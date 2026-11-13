@@ -8,6 +8,7 @@
     "deploy:bf": "node deploy_black_friday_ads.js",
     "deploy:ugc": "node deploy_ugc_test.js",
     "deploy:dogmom": "node deploy_dogmom_winners.js",
+    "deploy:flexible": "node deploy_flexible_multimedia.js",
     "auth": "node -e 'import(\"./auth/oauth_manager.js\").then(async ({ OAuthManager })=>{ const o=new OAuthManager(JSON.parse(fs.readFileSync(\"./config/meta_config.json\"))); await o.startOAuthFlow(); })'"
   }
 }
