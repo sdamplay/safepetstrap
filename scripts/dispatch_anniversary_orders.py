@@ -250,18 +250,6 @@ def main():
                 print(f"  ⚠️ Error sending to {c['email']}: {e}")
 
             time.sleep(0.5)
-                    dispatched_log.append({
-                        'order_name': res.get('name'),
-                        'order_id': res.get('id'),
-                        'customer_name': f"{c['first_name']} {c['last_name']}",
-                        'email': c['email'],
-                        'dispatched_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
-                    })
-                    print(f"  ✅ Created {res.get('name')} (ID: {res.get('id')})")
-            except Exception as e:
-                print(f"  ⚠️ Error sending to {c['email']}: {e}")
-
-            time.sleep(0.5)
 
         log_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'compliance-docs', 'anniversary_dispatched_orders.json')
         with open(log_path, 'w', encoding='utf-8') as f:
