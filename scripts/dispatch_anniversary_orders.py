@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-SafePet 2-Year Anniversary VIP Gift Order Dispatcher
-Creates 1 $0.00 VIP Gift Voucher order per unique customer on r038b3-ux.myshopify.com
+SafePet 2-Year Anniversary VIP Gift Order Dispatcher (107k Scale Edition)
+Creates $0.00 VIP Gift Voucher orders on r038b3-ux.myshopify.com
 with `send_receipt: True` to deliver the custom Order Confirmation email.
 
-Usage:
-  python3 scripts/dispatch_anniversary_orders.py --dry-run
-  python3 scripts/dispatch_anniversary_orders.py --test-email=your_email@gmail.com
-  python3 scripts/dispatch_anniversary_orders.py --live --confirm
+Features:
+  - SQLite Checkpointing & Resumable Queues (never sends duplicate emails)
+  - Segmentation: all (107k), buyers (orders_count > 0), leads (abandoned checkouts)
+  - Controlled batch sizes (--batch-size=1000)
+  - Automatic 429 rate limit backoff
 """
-import os, sys, json, ssl, time, argparse, urllib.request, urllib.parse, urllib.error
+import os, sys, json, ssl, time, sqlite3, argparse, urllib.request, urllib.parse, urllib.error
 
-# Load environment variables from .env.migration
 env_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env.migration')
 if os.path.exists(env_file):
     with open(env_file, 'r', encoding='utf-8') as f:
@@ -28,8 +28,8 @@ SRC_CLIENT_SECRET = os.environ.get('SHOPIFY_SRC_CLIENT_SECRET', '')
 TGT_DOMAIN = os.environ.get('SHOPIFY_TGT_DOMAIN', 'ezuam5-nq.myshopify.com')
 TGT_CLIENT_ID = os.environ.get('SHOPIFY_TGT_CLIENT_ID', '')
 TGT_CLIENT_SECRET = os.environ.get('SHOPIFY_TGT_CLIENT_SECRET', '')
-BACKUP_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'compliance-docs', 'source_orders_backup.json')
 
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'compliance-docs', 'customers_107k.db')
 ctx = ssl._create_unverified_context()
 
 def get_token(domain, client_id, client_secret):
@@ -48,49 +48,66 @@ def get_token(domain, client_id, client_secret):
         res = json.loads(resp.read().decode('utf-8'))
         return res['access_token']
 
-def extract_unique_customers(token):
-    print(f"Loading customer orders from source store ({SRC_DOMAIN})...")
-    orders = []
-    if os.path.exists(BACKUP_PATH):
-        with open(BACKUP_PATH, 'r', encoding='utf-8') as f:
-            orders = json.load(f)
-        print(f"  Loaded {len(orders)} cached orders from {BACKUP_PATH}")
-    else:
-        since_id = 0
-        while True:
-            url = f"https://{SRC_DOMAIN}/admin/api/2024-01/orders.json?status=any&limit=250&since_id={since_id}"
-            req = urllib.request.Request(url, headers={'X-Shopify-Access-Token': token})
-            with urllib.request.urlopen(req, context=ctx) as resp:
-                batch = json.loads(resp.read().decode('utf-8')).get('orders', [])
-                if not batch: break
-                orders.extend(batch)
-                since_id = batch[-1]['id']
-                if len(batch) < 250: break
-        print(f"  Fetched {len(orders)} orders directly from API")
+def get_db_stats():
+    if not os.path.exists(DB_PATH):
+        return None
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('SELECT COUNT(*) FROM customers')
+    total = c.fetchone()[0]
+    c.execute("SELECT COUNT(*) FROM customers WHERE status = 'pending'")
+    pending = c.fetchone()[0]
+    c.execute("SELECT COUNT(*) FROM customers WHERE status = 'dispatched'")
+    dispatched = c.fetchone()[0]
+    c.execute('SELECT COUNT(*) FROM customers WHERE orders_count > 0')
+    buyers = c.fetchone()[0]
+    c.execute('SELECT COUNT(*) FROM customers WHERE orders_count = 0')
+    leads = c.fetchone()[0]
+    conn.close()
+    return {
+        'total': total,
+        'pending': pending,
+        'dispatched': dispatched,
+        'buyers': buyers,
+        'leads': leads
+    }
 
-    # Group by normalized lowercase email
-    customer_map = {}
-    for o in orders:
-        email = o.get('email') or (o.get('customer') or {}).get('email')
-        if not email or '@' not in email:
-            continue
-        email_clean = email.strip().lower()
-        if email_clean not in customer_map:
-            cust = o.get('customer') or {}
-            ship = o.get('shipping_address') or {}
-            customer_map[email_clean] = {
-                'email': email_clean,
-                'first_name': cust.get('first_name') or ship.get('first_name') or 'VIP Member',
-                'last_name': cust.get('last_name') or ship.get('last_name') or '',
-                'phone': cust.get('phone') or ship.get('phone') or o.get('phone'),
-                'shipping_address': ship,
-                'billing_address': o.get('billing_address') or ship,
-                'latest_order_name': o.get('name'),
-                'latest_order_date': o.get('created_at')
-            }
+def get_customers_queue(segment='all', limit=None):
+    if not os.path.exists(DB_PATH):
+        return []
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    query = "SELECT id, email, first_name, last_name, phone, orders_count FROM customers WHERE status = 'pending'"
+    if segment == 'buyers':
+        query += " AND orders_count > 0"
+    elif segment == 'leads':
+        query += " AND orders_count = 0"
+    if limit:
+        query += f" LIMIT {int(limit)}"
+    c.execute(query)
+    rows = c.fetchall()
+    conn.close()
+    return [{
+        'id': r[0],
+        'email': r[1],
+        'first_name': r[2] or 'VIP Member',
+        'last_name': r[3] or '',
+        'phone': r[4],
+        'orders_count': r[5]
+    } for r in rows]
 
-    print(f"  Found {len(customer_map)} unique customer emails.")
-    return list(customer_map.values())
+def mark_customer_status(email, status, order_name=None, error_msg=None):
+    if not os.path.exists(DB_PATH):
+        return
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('''
+        UPDATE customers
+        SET status = ?, order_name = ?, dispatched_at = ?, error_message = ?
+        WHERE email = ?
+    ''', (status, order_name, time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), error_msg, email))
+    conn.commit()
+    conn.close()
 
 def create_gift_order(domain, token, customer_data, send_receipt=True):
     payload = {
@@ -104,7 +121,6 @@ def create_gift_order(domain, token, customer_data, send_receipt=True):
             "total_price": "0.00",
             "subtotal_price": "0.00",
             "total_tax": "0.00",
-            # Send receipt triggers the custom Order confirmation notification!
             "send_receipt": send_receipt,
             "send_fulfillment_receipt": False,
             "suppress_notifications": not send_receipt,
@@ -128,11 +144,6 @@ def create_gift_order(domain, token, customer_data, send_receipt=True):
             }
         }
     }
-
-    if customer_data.get('shipping_address'):
-        payload['order']['shipping_address'] = customer_data['shipping_address']
-    if customer_data.get('billing_address'):
-        payload['order']['billing_address'] = customer_data['billing_address']
 
     url = f"https://{domain}/admin/api/2024-01/orders.json"
     data = json.dumps(payload).encode('utf-8')
@@ -158,11 +169,13 @@ def create_gift_order(domain, token, customer_data, send_receipt=True):
     return None
 
 def main():
-    parser = argparse.ArgumentParser(description="Dispatch 2-Year Anniversary VIP Gift Orders")
-    parser.add_argument('--dry-run', action='store_true', help="Preview customer list without creating orders")
+    parser = argparse.ArgumentParser(description="Dispatch 2-Year Anniversary VIP Gift Orders (107k Scale Edition)")
+    parser.add_argument('--dry-run', action='store_true', help="Audit database and display status")
     parser.add_argument('--test-email', type=str, help="Send a single test gift order to this email address")
-    parser.add_argument('--live', action='store_true', help="Run live creation across all customers")
+    parser.add_argument('--segment', choices=['all', 'buyers', 'leads'], default='all', help="Target segment: all (107k), buyers (orders>0), leads (orders=0)")
+    parser.add_argument('--batch-size', type=int, default=None, help="Process a specific batch limit (e.g. 1000)")
     parser.add_argument('--store', choices=['old', 'new'], default='old', help="Store to dispatch from ('old': r038b3-ux, 'new': ezuam5-nq)")
+    parser.add_argument('--live', action='store_true', help="Run live creation")
     parser.add_argument('--confirm', action='store_true', help="Confirm live broadcast execution")
     args = parser.parse_args()
 
@@ -177,23 +190,36 @@ def main():
         target_sec = SRC_CLIENT_SECRET
 
     token = get_token(target_domain, target_cid, target_sec)
-    src_token = get_token(SRC_DOMAIN, SRC_CLIENT_ID, SRC_CLIENT_SECRET)
-    customers = extract_unique_customers(src_token)
+    stats = get_db_stats()
 
     if args.dry_run or (not args.test_email and not args.live):
         print("\n" + "="*70)
-        print(f"🔍 DRY-RUN MODE: Customer Broadcast Audit (Target Store: {target_domain})")
+        print(f"🔍 107K DATABASE AUDIT & STATUS (Target Store: {target_domain})")
         print("="*70)
-        print(f"Total Unique Customers Eligible: {len(customers)}")
-        print("\nFirst 10 Customers in Queue:")
-        for idx, c in enumerate(customers[:10], 1):
-            print(f"  [{idx:03d}] {c['first_name']} {c['last_name']} <{c['email']}> (Last Order: {c['latest_order_name']})")
-        if len(customers) > 10:
-            print(f"  ... and {len(customers) - 10} more customers.")
-        print("\nTo send a single test email first:")
-        print("  python3 scripts/dispatch_anniversary_orders.py --test-email=YOUR_EMAIL@gmail.com")
-        print("\nTo trigger the full live broadcast (after pasting template into Shopify):")
-        print("  python3 scripts/dispatch_anniversary_orders.py --live --confirm")
+        if stats:
+            print(f"Total Unique Valid Customers in DB : {stats['total']:,}")
+            print(f"  • Past Buyers (orders_count > 0) : {stats['buyers']:,}")
+            print(f"  • Leads / Checkouts (orders = 0) : {stats['leads']:,}")
+            print(f"  • Pending in Queue               : {stats['pending']:,}")
+            print(f"  • Already Dispatched             : {stats['dispatched']:,}")
+        else:
+            print("Database is currently exporting or not initialized.")
+            print("Run 'python3 scripts/export_all_customers.py' to build the 107k database.")
+
+        queue = get_customers_queue(segment=args.segment, limit=5)
+        if queue:
+            print(f"\nNext 5 Customers in Queue [Segment: {args.segment.upper()}]:")
+            for idx, c in enumerate(queue, 1):
+                role = "BUYER" if c['orders_count'] > 0 else "LEAD"
+                print(f"  [{idx}] [{role}] {c['first_name']} {c['last_name']} <{c['email']}>")
+
+        print("\nCommands:")
+        print("  1. Send Test Email:")
+        print("     python3 scripts/dispatch_anniversary_orders.py --test-email=YOUR_EMAIL@gmail.com")
+        print("  2. Run First Batch (e.g. 500 or 1,000 customers):")
+        print(f"     python3 scripts/dispatch_anniversary_orders.py --live --confirm --segment={args.segment} --batch-size=1000")
+        print("  3. Run Full Unattended Broadcast:")
+        print(f"     python3 scripts/dispatch_anniversary_orders.py --live --confirm --segment={args.segment}")
         return
 
     if args.test_email:
@@ -225,39 +251,49 @@ def main():
             print("Please ensure you have replaced the 'Order confirmation' template in Shopify Admin first!")
             sys.exit(1)
 
-        print("\n" + "="*70)
-        print(f"🚨 STARTING LIVE VIP ANNIVERSARY BROADCAST ({len(customers)} CUSTOMERS via {target_domain})")
-        print("="*70)
-        
-        success_count = 0
-        dispatched_log = []
+        queue = get_customers_queue(segment=args.segment, limit=args.batch_size)
+        if not queue:
+            print("\n✅ Queue is empty! All customers in this segment have already been dispatched.")
+            return
 
-        for idx, c in enumerate(customers, 1):
-            print(f"[{idx}/{len(customers)}] Creating VIP gift order for {c['first_name']} <{c['email']}>...")
+        print("\n" + "="*70)
+        print(f"🚨 STARTING LIVE VIP ANNIVERSARY BROADCAST")
+        print(f"Queue Size: {len(queue):,} customers | Segment: {args.segment.upper()} | Target: {target_domain}")
+        print("="*70)
+
+        success_count = 0
+        error_count = 0
+        start_time = time.time()
+
+        for idx, c in enumerate(queue, 1):
+            em = c['email']
+            role = "BUYER" if c['orders_count'] > 0 else "LEAD"
+            print(f"[{idx:,}/{len(queue):,}] [{role}] Creating order for {c['first_name']} <{em}>...")
             try:
                 res = create_gift_order(target_domain, token, c, send_receipt=True)
                 if res:
                     success_count += 1
-                    dispatched_log.append({
-                        'order_name': res.get('name'),
-                        'order_id': res.get('id'),
-                        'customer_name': f"{c['first_name']} {c['last_name']}",
-                        'email': c['email'],
-                        'dispatched_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
-                    })
-                    print(f"  ✅ Created {res.get('name')} (ID: {res.get('id')})")
+                    order_name = res.get('name')
+                    mark_customer_status(em, 'dispatched', order_name=order_name)
+                    print(f"  ✅ Created {order_name} (ID: {res.get('id')})")
             except Exception as e:
-                print(f"  ⚠️ Error sending to {c['email']}: {e}")
+                error_count += 1
+                mark_customer_status(em, 'error', error_msg=str(e))
+                print(f"  ⚠️ Error sending to {em}: {e}")
 
-            time.sleep(0.5)
+            # 2 requests/sec to respect Shopify standard bucket
+            time.sleep(0.4)
 
-        log_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'compliance-docs', 'anniversary_dispatched_orders.json')
-        with open(log_path, 'w', encoding='utf-8') as f:
-            json.dump(dispatched_log, f, indent=2)
+            if idx % 100 == 0:
+                elapsed = time.time() - start_time
+                rate = idx / elapsed
+                remaining = (len(queue) - idx) / rate if rate > 0 else 0
+                print(f"--- Progress: {idx:,}/{len(queue):,} ({idx/len(queue)*100:.1f}%) | Speed: {rate:.1f} orders/sec | Est. Remaining: {remaining/60:.1f} mins ---")
 
+        total_elapsed = time.time() - start_time
         print("\n" + "="*70)
-        print(f"🎉 BROADCAST COMPLETE: {success_count}/{len(customers)} orders created & emails triggered!")
-        print(f"📄 Log saved to: {log_path}")
+        print(f"🎉 BATCH COMPLETE: {success_count:,} orders created | {error_count:,} errors | Elapsed: {total_elapsed/60:.1f} mins")
+        print(f"Database checkpoint updated: {DB_PATH}")
         print("="*70)
 
 if __name__ == '__main__':
