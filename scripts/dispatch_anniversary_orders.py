@@ -24,6 +24,10 @@ if os.path.exists(env_file):
 SRC_DOMAIN = os.environ.get('SHOPIFY_SRC_DOMAIN', 'r038b3-ux.myshopify.com')
 SRC_CLIENT_ID = os.environ.get('SHOPIFY_SRC_CLIENT_ID', '')
 SRC_CLIENT_SECRET = os.environ.get('SHOPIFY_SRC_CLIENT_SECRET', '')
+
+TGT_DOMAIN = os.environ.get('SHOPIFY_TGT_DOMAIN', 'ezuam5-nq.myshopify.com')
+TGT_CLIENT_ID = os.environ.get('SHOPIFY_TGT_CLIENT_ID', '')
+TGT_CLIENT_SECRET = os.environ.get('SHOPIFY_TGT_CLIENT_SECRET', '')
 BACKUP_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'compliance-docs', 'source_orders_backup.json')
 
 ctx = ssl._create_unverified_context()
@@ -158,15 +162,27 @@ def main():
     parser.add_argument('--dry-run', action='store_true', help="Preview customer list without creating orders")
     parser.add_argument('--test-email', type=str, help="Send a single test gift order to this email address")
     parser.add_argument('--live', action='store_true', help="Run live creation across all customers")
+    parser.add_argument('--store', choices=['old', 'new'], default='old', help="Store to dispatch from ('old': r038b3-ux, 'new': ezuam5-nq)")
     parser.add_argument('--confirm', action='store_true', help="Confirm live broadcast execution")
     args = parser.parse_args()
 
-    token = get_token(SRC_DOMAIN, SRC_CLIENT_ID, SRC_CLIENT_SECRET)
-    customers = extract_unique_customers(token)
+    # Determine target store domain and credentials
+    if args.store == 'new':
+        target_domain = TGT_DOMAIN
+        target_cid = TGT_CLIENT_ID
+        target_sec = TGT_CLIENT_SECRET
+    else:
+        target_domain = SRC_DOMAIN
+        target_cid = SRC_CLIENT_ID
+        target_sec = SRC_CLIENT_SECRET
+
+    token = get_token(target_domain, target_cid, target_sec)
+    src_token = get_token(SRC_DOMAIN, SRC_CLIENT_ID, SRC_CLIENT_SECRET)
+    customers = extract_unique_customers(src_token)
 
     if args.dry_run or (not args.test_email and not args.live):
         print("\n" + "="*70)
-        print("🔍 DRY-RUN MODE: Customer Broadcast Audit")
+        print(f"🔍 DRY-RUN MODE: Customer Broadcast Audit (Target Store: {target_domain})")
         print("="*70)
         print(f"Total Unique Customers Eligible: {len(customers)}")
         print("\nFirst 10 Customers in Queue:")
@@ -182,17 +198,25 @@ def main():
 
     if args.test_email:
         test_email = args.test_email.strip().lower()
-        print(f"\n🚀 Sending TEST Gift Order to: {test_email}...")
+        print(f"\n🚀 Sending TEST Gift Order to: {test_email} (via {target_domain})...")
         test_cust = {
             'email': test_email,
             'first_name': 'Test Dog Mom',
             'last_name': 'SafePet VIP',
             'phone': '+18005550199'
         }
-        res = create_gift_order(SRC_DOMAIN, token, test_cust, send_receipt=True)
-        if res:
-            print(f"✅ Success! Created Order {res.get('name')} (ID: {res.get('id')}).")
-            print(f"👉 Check the inbox of {test_email} to preview the live rendered email!")
+        try:
+            res = create_gift_order(target_domain, token, test_cust, send_receipt=True)
+            if res:
+                print(f"✅ Success! Created Order {res.get('name')} (ID: {res.get('id')}).")
+                print(f"👉 Check the inbox of {test_email} to preview the live rendered email!")
+        except urllib.error.HTTPError as e:
+            if e.code == 403 and 'write_orders' in str(e.read()):
+                print(f"\n❌ [Scope Required]: Your Custom App on '{target_domain}' needs the 'write_orders' permission.")
+                print("👉 In Shopify Admin: Settings > Apps and sales channels > Develop apps")
+                print("   Click your App > Configuration > Admin API > Check 'write_orders' > Save & Install!")
+            else:
+                raise
         return
 
     if args.live:
@@ -202,7 +226,7 @@ def main():
             sys.exit(1)
 
         print("\n" + "="*70)
-        print(f"🚨 STARTING LIVE VIP ANNIVERSARY BROADCAST ({len(customers)} CUSTOMERS)")
+        print(f"🚨 STARTING LIVE VIP ANNIVERSARY BROADCAST ({len(customers)} CUSTOMERS via {target_domain})")
         print("="*70)
         
         success_count = 0
@@ -211,9 +235,21 @@ def main():
         for idx, c in enumerate(customers, 1):
             print(f"[{idx}/{len(customers)}] Creating VIP gift order for {c['first_name']} <{c['email']}>...")
             try:
-                res = create_gift_order(SRC_DOMAIN, token, c, send_receipt=True)
+                res = create_gift_order(target_domain, token, c, send_receipt=True)
                 if res:
                     success_count += 1
+                    dispatched_log.append({
+                        'order_name': res.get('name'),
+                        'order_id': res.get('id'),
+                        'customer_name': f"{c['first_name']} {c['last_name']}",
+                        'email': c['email'],
+                        'dispatched_at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+                    })
+                    print(f"  ✅ Created {res.get('name')} (ID: {res.get('id')})")
+            except Exception as e:
+                print(f"  ⚠️ Error sending to {c['email']}: {e}")
+
+            time.sleep(0.5)
                     dispatched_log.append({
                         'order_name': res.get('name'),
                         'order_id': res.get('id'),
