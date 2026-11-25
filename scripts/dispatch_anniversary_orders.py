@@ -113,11 +113,11 @@ def get_customers_queue(segment='all', limit=None):
     elif segment == 'leads':
         query += " AND orders_count = 0"
 
-    # Order buyers by spent desc, leads by id asc for consistent batches
+    # Order buyers by orders_count desc, leads by id desc so freshest leads go first
     if segment == 'buyers':
-        query += " ORDER BY orders_count DESC, id ASC"
+        query += " ORDER BY orders_count DESC, id DESC"
     else:
-        query += " ORDER BY id ASC"
+        query += " ORDER BY id DESC"
 
     if limit:
         query += f" LIMIT {int(limit)}"
