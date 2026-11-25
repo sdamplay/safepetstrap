@@ -164,8 +164,8 @@ def create_gift_order(domain, token, customer_data, send_receipt=True):
             "note": "SafePet 2-Year Anniversary Free Dog Seat Belt VIP Gift Voucher",
             "tags": "anniversary_gift,vip_promo_2026,free_seat_belt_voucher",
             "customer": {
-                "first_name": customer_data.get('first_name') or 'VIP Member',
-                "last_name": customer_data.get('last_name') or '',
+                "first_name": (customer_data.get('first_name') or 'VIP Member').strip() or 'VIP Member',
+                "last_name": (customer_data.get('last_name') or 'VIP').strip() or 'VIP',
                 "email": customer_data['email']
             },
             "line_items": [
